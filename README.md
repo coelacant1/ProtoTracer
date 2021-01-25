@@ -1,12 +1,19 @@
-# ProtoTracer: Protogen Ray-Tracing and Animation Engine
+# **ProtoTracer: Protogen Ray-Tracing and Animation Engine**
 This project is a 3D ray-tracing and animation engine for pixel matrices, designed to be used for drawing live animations on Protogen style characters from 3D object files (.OBJ).
 
 ## Demonstration:
 As a quick way to showcase the capabilities of this software, here is a recording of a demo uploaded to YouTube:
 [![Protogen Ray-Tracing Engine](https://img.youtube.com/vi/s7G18tx6_nI/0.jpg)](https://www.youtube.com/watch?v=s7G18tx6_nI)
 
+## Recommended platform requirements:
+* 32-bit FPU
+* 200MHz+ processor
+* At least 80KB dynamic memory
+
+This codebase has been tested on an Arduino Mega (smaller .OBJ file with a 89 pixel matrix) and on a Teensy 4.0 (600 triangle scene with a 2,804 pixel matrix).
+
 # Usage:
-To use the ProtoTracing Engine you must first follow a few requirements:
+To use the Protogen Ray-Tracing Engine you must first follow a few requirements:
 ## Have your pixel list ready:
 A pixel list is a list of the XY coordinates (in millimeters, used for all dimensions) of the pixels on a camera. The easiest way to generate a pixel list is to export a Pick and Place file from a PCB design tool. The formatting utilizes a CSV file, each line is a pixel containing the object name, X coordinate, and Y coordinate. Here is an example:
 ```csv
