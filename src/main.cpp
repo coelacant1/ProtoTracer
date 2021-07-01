@@ -3,13 +3,15 @@
 #include "Math\Rotation.h"
 
 //MATRIX SPECIFIC FOR CUSTOM PANELS
-#include "Camera\TemporaryObjCamera.h"
+#include "Flash\CameraObjs.h"
 //END MATRIX SPECIFIC FOR CUSTOM PANELS
+
+#include "Flash\MiscObjs.h"
 
 //TEENSY SPECIFIC FOR WRITING TO LEDS
 #include <OctoWS2811.h>
 
-const int ledsPerStrip = 306;
+const int ledsPerStrip = 571;
 DMAMEM int displayMemory[ledsPerStrip * 6];
 int drawingMemory[ledsPerStrip * 6];
 const int config = WS2811_GRB | WS2811_800kHz;
@@ -20,10 +22,10 @@ Light lights[6];
 Object3D* objects[1];
 Object3D dvdObj = Object3D(dvd, 100, 100);
 Scene* scene;
-Camera camFrontTop = Camera(Vector3D(-45, 0, 180), Vector3D(90, -220, -500), 306, &pixelString, true, false);
-Camera camRearTop = Camera(Rotation(EulerAngles(Vector3D(45, 0, 0), EulerConstants::EulerOrderXYZR)).GetQuaternion(), Vector3D(90, 90, -500), 306, &pixelString, false, false);
-Camera camFrontBottom = Camera(Rotation(EulerAngles(Vector3D(0, 0, 0), EulerConstants::EulerOrderXYZR)).GetQuaternion(), Vector3D(-5, 0, -500), 306, &pixelString, true, false);
-Camera camRearBottom = Camera(Rotation(EulerAngles(Vector3D(0, 0, 180), EulerConstants::EulerOrderXYZR)).GetQuaternion(), Vector3D(-20, -131, -500), 306, &pixelString, false, false);
+Camera camFrontTop = Camera(Vector3D(-45, 0, 180), Vector3D(90, -220, -500), 571, &tertiaryPixelString, true, false);
+Camera camRearTop = Camera(Rotation(EulerAngles(Vector3D(45, 0, 0), EulerConstants::EulerOrderXYZR)).GetQuaternion(), Vector3D(90, 90, -500), 571, &tertiaryPixelString, false, false);
+Camera camFrontBottom = Camera(Rotation(EulerAngles(Vector3D(0, 0, 0), EulerConstants::EulerOrderXYZR)).GetQuaternion(), Vector3D(-5, 0, -500), 571, &tertiaryPixelString, true, false);
+Camera camRearBottom = Camera(Rotation(EulerAngles(Vector3D(0, 0, 180), EulerConstants::EulerOrderXYZR)).GetQuaternion(), Vector3D(-20, -131, -500), 571, &tertiaryPixelString, false, false);
 
 void setup() {
   leds.begin();
@@ -99,7 +101,7 @@ void loop() {
     //END TEENSY SPECIFIC FOR WRITING TO LEDS/COPYING TO MEMORY
 
     Serial.print(dif, 5);
-    Serial.print(" ");
+    Serial.print(" wrote in ");
     Serial.print(((float)(micros() - prev)) / 1000000.0f, 5);
     Serial.println(" seconds.");
   }
