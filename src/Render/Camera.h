@@ -87,10 +87,10 @@ private:
   }
 
 public:
-  Camera(Vector3D q, Vector3D p, unsigned int pixelCount, const String* pixelData, bool flipX, bool flipY) {
+  Camera(Vector3D q, Vector3D p, unsigned int pixelCount, const String* pixelData, bool flipX, bool flipY, bool flipOrder) {
     pixelStorage = new Pixel[pixelCount];
     Vector2D pictureCenter;
-    pixelReader.GetPixels(pixelStorage, pixelCount, pixelData, pictureCenter, flipX, flipY);
+    pixelReader.GetPixels(pixelStorage, pixelCount, pixelData, pictureCenter, flipX, flipY, flipOrder);
 
     this->pictureCenter = Vector3D(pictureCenter.X, pictureCenter.Y, 0);
     
@@ -105,10 +105,10 @@ public:
     this->p.Y = -p.Y;
   }
   
-	Camera(Quaternion q, Vector3D p, unsigned int pixelCount, const String* pixelData, bool flipX, bool flipY) {
+	Camera(Quaternion q, Vector3D p, unsigned int pixelCount, const String* pixelData, bool flipX, bool flipY, bool flipOrder) {
     pixelStorage = new Pixel[pixelCount];
     Vector2D pictureCenter;
-    pixelReader.GetPixels(pixelStorage, pixelCount, pixelData, pictureCenter, flipX, flipY);
+    pixelReader.GetPixels(pixelStorage, pixelCount, pixelData, pictureCenter, flipX, flipY, flipOrder);
     
     this->pictureCenter = Vector3D(pictureCenter.X, pictureCenter.Y, 0);
     

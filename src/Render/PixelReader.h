@@ -37,15 +37,15 @@ private:
 public:
 	PixelReader() {}
 
-	void GetPixels(Pixel* pixels, unsigned int count, const String* value, Vector2D &pictureCenter, bool flipX, bool flipY) {
+	void GetPixels(Pixel* pixels, unsigned int count, const String* value, Vector2D &pictureCenter, bool flipX, bool flipY, bool flipOrder) {
 		String line;
 
-    Vector2D avgCoords;
+    	Vector2D avgCoords;
 
 		for (unsigned int i = 0; i < countChar(*value, '\n') + 1; i++) {
 			line = getValue(*value, '\n', i);
      
-      if (i > count) break;//maxed out pixels available to memory, cancel reading
+      	if (i > count) break;//maxed out pixels available to memory, cancel reading
 
 			if (countChar(line, ',') > 2) {
 				float x, y;
@@ -53,16 +53,21 @@ public:
 				x = getValue(line, ',', 1).toFloat();
 				y = getValue(line, ',', 2).toFloat();
 
-        if (flipX){
-          x = -x;
-        }
-        if (flipY){
-          y = -y;
-        }
+				if (flipX){
+					x = -x;
+				}
+				if (flipY){
+					y = -y;
+				}
 
-        avgCoords = avgCoords + Vector2D(x, y);
+        		avgCoords = avgCoords + Vector2D(x, y);
 
-				pixels[i] = Pixel(x, y);
+				if (flipOrder){
+					pixels[count - i - 1] = Pixel(x, y);
+				}
+				else{
+					pixels[i] = Pixel(x, y);
+				}
 			}
 		}
 
