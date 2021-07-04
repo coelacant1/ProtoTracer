@@ -39,7 +39,7 @@ Scene* scene;
 Camera camRght = Camera(Vector3D(0, 0, 0), Vector3D(0, 0, -500), 571, &tertiaryPixelString, false, false, false);
 Camera camLeft = Camera(Vector3D(0, 0, 0), Vector3D(0, 0, -500), 571, &tertiaryPixelString, false, false, true);
 
-RGBColor spectrum[3] = {RGBColor(255, 0, 0), RGBColor(0, 255, 0), RGBColor(0, 0, 255)};
+RGBColor spectrum[4] = {RGBColor(0, 0, 0), RGBColor(255, 0, 0), RGBColor(0, 255, 0), RGBColor(0, 0, 255)};
 
 SimpleMaterial sMat = SimpleMaterial(RGBColor(128, 0, 0));
 GradientMaterial gMat = GradientMaterial(6, spectrum, 150.0f, true);
@@ -125,7 +125,7 @@ void loop() {
     objects[5]->Disable();
     objects[6]->Disable();
     objects[7]->Disable();
-    objects[8]->Disable();//Background
+    objects[8]->Enable();//Background
 
     //Resets the object back to the original state before any translates/modifications, must be ran once per loop in most cases
     objects[0]->ResetVertices();
@@ -179,8 +179,14 @@ void loop() {
     
     //TEENSY SPECIFIC FOR WRITING TO LEDS/COPYING TO MEMORY
     for (int i = 0; i < ledsPerStrip; i++) {
-      leds.setPixel(i,                camRght.GetPixels()[i].Color.R, camRght.GetPixels()[i].Color.G, camRght.GetPixels()[i].Color.B);
-      leds.setPixel(i + ledsPerStrip, camLeft.GetPixels()[i].Color.R, camLeft.GetPixels()[i].Color.G, camLeft.GetPixels()[i].Color.B);
+      leds.setPixel(i,                    camRght.GetPixels()[i].Color.R, camRght.GetPixels()[i].Color.G, camRght.GetPixels()[i].Color.B);
+      leds.setPixel(i + ledsPerStrip * 1, camLeft.GetPixels()[i].Color.R, camLeft.GetPixels()[i].Color.G, camLeft.GetPixels()[i].Color.B);
+      leds.setPixel(i + ledsPerStrip * 2, camLeft.GetPixels()[i].Color.R, camLeft.GetPixels()[i].Color.G, camLeft.GetPixels()[i].Color.B);
+      leds.setPixel(i + ledsPerStrip * 3, camLeft.GetPixels()[i].Color.R, camLeft.GetPixels()[i].Color.G, camLeft.GetPixels()[i].Color.B);
+      leds.setPixel(i + ledsPerStrip * 4, camLeft.GetPixels()[i].Color.R, camLeft.GetPixels()[i].Color.G, camLeft.GetPixels()[i].Color.B);
+      leds.setPixel(i + ledsPerStrip * 5, camLeft.GetPixels()[i].Color.R, camLeft.GetPixels()[i].Color.G, camLeft.GetPixels()[i].Color.B);
+      leds.setPixel(i + ledsPerStrip * 6, camLeft.GetPixels()[i].Color.R, camLeft.GetPixels()[i].Color.G, camLeft.GetPixels()[i].Color.B);
+      leds.setPixel(i + ledsPerStrip * 7, camLeft.GetPixels()[i].Color.R, camLeft.GetPixels()[i].Color.G, camLeft.GetPixels()[i].Color.B);
     }
 
     leds.show();
