@@ -17,7 +17,7 @@
 //TEENSY SPECIFIC FOR WRITING TO LEDS
 #include <OctoWS2811.h>
 
-const int ledsPerStrip = 571;
+const int ledsPerStrip = 346;
 DMAMEM int displayMemory[ledsPerStrip * 6];
 int drawingMemory[ledsPerStrip * 6];
 const int config = WS2811_GRB | WS2811_800kHz;
@@ -41,9 +41,9 @@ Camera camLeft = Camera(Vector3D(0, 0, 0), Vector3D(0, 0, -500), 571, &tertiaryP
 
 RGBColor spectrum[4] = {RGBColor(0, 0, 0), RGBColor(255, 0, 0), RGBColor(0, 255, 0), RGBColor(0, 0, 255)};
 
-SimpleMaterial sMat = SimpleMaterial(RGBColor(128, 0, 0));
+SimpleMaterial sMat = SimpleMaterial(RGBColor(0, 0, 0));
 GradientMaterial gMat = GradientMaterial(6, spectrum, 150.0f, true);
-GradientMaterial gNoiseMat = GradientMaterial(3, spectrum, 2.0f, false);
+GradientMaterial gNoiseMat = GradientMaterial(4, spectrum, 2.0f, false);
 SimplexNoise sNoise = SimplexNoise(1, &gNoiseMat);
 
 void setup() {
@@ -136,6 +136,7 @@ void loop() {
     objects[5]->ResetVertices();
     objects[6]->ResetVertices();
     objects[7]->ResetVertices();
+    //objects[8]->ResetVertices();
 
     //Objects can be moved to a coordinate or translated by a vector
     objects[0]->MoveRelative(Vector3D(35.0f, 25.0f, 10.0f));
@@ -146,6 +147,7 @@ void loop() {
     objects[5]->MoveRelative(Vector3D(0, 0, -10.0f));
     objects[6]->MoveRelative(Vector3D(0, 0, -10.0f));
     objects[7]->MoveRelative(Vector3D(0, 0, -10.0f));
+    //objects[8]->MoveRelative(Vector3D(0, 0, -10000.0f));//Background
     
     //Objects can be rotated with by any rotation object (quaternion is preferred) and about any coordinate or center
     objects[0]->Rotate(Vector3D(sinf(i * 3.14159f / 180.0f * 2.0f) * 1.0f, sinf(i * 3.14159f / 180.0f * 1.0f) * 1.0f, 1), Vector3D(0, 100, 0));
@@ -171,22 +173,31 @@ void loop() {
 
     long prev = micros();//Used to calculate the render time in seconds
 
-    camRght.Rasterize(scene, 1.0f, 20);
-    camLeft.Rasterize(scene, 1.0f, 20);
+    camRght.Rasterize(scene, 1.0f, 40);
+    camLeft.Rasterize(scene, 1.0f, 40);
 
     float dif = ((float)(micros() - prev)) / 1000000.0f;
     prev = micros();
     
     //TEENSY SPECIFIC FOR WRITING TO LEDS/COPYING TO MEMORY
-    for (int i = 0; i < ledsPerStrip; i++) {
-      leds.setPixel(i,                    camRght.GetPixels()[i].Color.R, camRght.GetPixels()[i].Color.G, camRght.GetPixels()[i].Color.B);
-      leds.setPixel(i + ledsPerStrip * 1, camLeft.GetPixels()[i].Color.R, camLeft.GetPixels()[i].Color.G, camLeft.GetPixels()[i].Color.B);
-      leds.setPixel(i + ledsPerStrip * 2, camLeft.GetPixels()[i].Color.R, camLeft.GetPixels()[i].Color.G, camLeft.GetPixels()[i].Color.B);
-      leds.setPixel(i + ledsPerStrip * 3, camLeft.GetPixels()[i].Color.R, camLeft.GetPixels()[i].Color.G, camLeft.GetPixels()[i].Color.B);
-      leds.setPixel(i + ledsPerStrip * 4, camLeft.GetPixels()[i].Color.R, camLeft.GetPixels()[i].Color.G, camLeft.GetPixels()[i].Color.B);
-      leds.setPixel(i + ledsPerStrip * 5, camLeft.GetPixels()[i].Color.R, camLeft.GetPixels()[i].Color.G, camLeft.GetPixels()[i].Color.B);
-      leds.setPixel(i + ledsPerStrip * 6, camLeft.GetPixels()[i].Color.R, camLeft.GetPixels()[i].Color.G, camLeft.GetPixels()[i].Color.B);
-      leds.setPixel(i + ledsPerStrip * 7, camLeft.GetPixels()[i].Color.R, camLeft.GetPixels()[i].Color.G, camLeft.GetPixels()[i].Color.B);
+    for (int i = 0; i < 571; i++) {
+      //leds.setPixel(i,                    camLeft.GetPixels()[i].Color.R, camLeft.GetPixels()[i].Color.G, camLeft.GetPixels()[i].Color.B);
+      //leds.setPixel(i + ledsPerStrip * 1, camLeft.GetPixels()[i].Color.R, camLeft.GetPixels()[i].Color.G, camLeft.GetPixels()[i].Color.B);
+      //leds.setPixel(i + ledsPerStrip * 2, camLeft.GetPixels()[i].Color.R, camLeft.GetPixels()[i].Color.G, camLeft.GetPixels()[i].Color.B);
+      //leds.setPixel(i + ledsPerStrip * 3, camRght.GetPixels()[i].Color.R, camRght.GetPixels()[i].Color.G, camRght.GetPixels()[i].Color.B);//Pin 7
+      //leds.setPixel(i + ledsPerStrip * 4, camLeft.GetPixels()[i].Color.R, camLeft.GetPixels()[i].Color.G, camLeft.GetPixels()[i].Color.B);
+      //leds.setPixel(i + ledsPerStrip * 5, camLeft.GetPixels()[i].Color.R, camLeft.GetPixels()[i].Color.G, camLeft.GetPixels()[i].Color.B);
+      //leds.setPixel(i + ledsPerStrip * 6, camLeft.GetPixels()[i].Color.R, camLeft.GetPixels()[i].Color.G, camLeft.GetPixels()[i].Color.B);
+      //leds.setPixel(i + ledsPerStrip * 7, camLeft.GetPixels()[i].Color.R, camLeft.GetPixels()[i].Color.G, camLeft.GetPixels()[i].Color.B);//Pin 8
+
+      if (i < 346){
+        leds.setPixel(i + ledsPerStrip * 2, camLeft.GetPixels()[i + 225].Color.R, camLeft.GetPixels()[i + 225].Color.G, camLeft.GetPixels()[i + 225].Color.B);//Pin 7
+        leds.setPixel(i + ledsPerStrip * 7, camRght.GetPixels()[i].Color.R, camRght.GetPixels()[i].Color.G, camRght.GetPixels()[i].Color.B);//Pin 8
+      }
+      else{
+        leds.setPixel(i + ledsPerStrip * 3 - 346, camLeft.GetPixels()[i - 346].Color.R, camLeft.GetPixels()[i - 346].Color.G, camLeft.GetPixels()[i - 346].Color.B);//Pin 8
+        leds.setPixel(i + ledsPerStrip * 6 - 346, camRght.GetPixels()[i].Color.R, camRght.GetPixels()[i].Color.G, camRght.GetPixels()[i].Color.B);//Pin 8
+      }
     }
 
     leds.show();
