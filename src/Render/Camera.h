@@ -163,7 +163,7 @@ public:
 
 	void MoveTo(Vector3D qv, Vector3D p) {
 		qv.Z = -qv.Z;
-		this->q = Rotation(EulerAngles(qv, EulerConstants::EulerOrderXYZS)).GetQuaternion();
+		this->q = Rotation(EulerAngles(qv, EulerConstants::EulerOrderXYZR)).GetQuaternion();
 		this->p = p;
 
 		this->p.X = -p.X;
@@ -247,7 +247,7 @@ public:
       //camV.X = -camV.X;
       //camV.Y = -camV.Y;
       
-      Quaternion temp = Rotation(EulerAngles(Vector3D(0, 0, -15), EulerConstants::EulerOrderXYZS)).GetQuaternion();
+      Quaternion temp = Rotation(EulerAngles(Vector3D(0, 0, -15), EulerConstants::EulerOrderXYZR)).GetQuaternion();
 
       float xpos, ypos, modifier = 1.0f;
 
