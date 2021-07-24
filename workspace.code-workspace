@@ -4,5 +4,10 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"files.associations": {
+			"type_traits": "cpp",
+			"utility": "cpp"
+		}
+	}
 }

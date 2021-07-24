@@ -6,12 +6,11 @@
 #include "Flash\CameraObjs.h"
 //END MATRIX SPECIFIC FOR CUSTOM PANELS
 
+#include "Animation\KeyFrameTrack.h"
 #include "Flash\MiscObjs.h"
-
 #include "Materials\SimpleMaterial.h"
 #include "Materials\GradientMaterial.h"
 #include "Math\SimplexNoise.h"
-
 #include "Morph\KaiborgV1.h"
 
 //TEENSY SPECIFIC FOR WRITING TO LEDS
@@ -25,6 +24,9 @@ OctoWS2811 leds(ledsPerStrip, displayMemory, drawingMemory, config);
 //END TEENSY SPECIFIC FOR WRITING TO LEDS
 
 KaiborgV1 kbFace;
+KeyFrameTrack kbPOGTrack = KeyFrameTrack(kbFace.GetMorphWeightReference(KaiborgV1::POG), 0.0f, 1.0f, 10, KeyFrameTrack::Step);
+KeyFrameTrack kbAngryEyesTrack = KeyFrameTrack(kbFace.GetMorphWeightReference(KaiborgV1::AngryEyes), 0.0f, 1.0f, 10, KeyFrameTrack::Linear);
+KeyFrameTrack kbMouthFrownTrack = KeyFrameTrack(kbFace.GetMorphWeightReference(KaiborgV1::MouthFrown), 0.0f, 1.0f, 10, KeyFrameTrack::Cosine);
 
 Light lights[6];
 Object3D* objects[2];
@@ -34,7 +36,6 @@ Camera camRght = Camera(Vector3D(0, 0, 0), Vector3D(0, 0, -500), 571, &tertiaryP
 Camera camLeft = Camera(Vector3D(0, 0, 0), Vector3D(0, 0, -500), 571, &tertiaryPixelString, false, false, true);
 
 RGBColor spectrum[4] = {RGBColor(0, 0, 0), RGBColor(255, 0, 0), RGBColor(0, 255, 0), RGBColor(0, 0, 255)};
-
 SimpleMaterial sMat = SimpleMaterial(RGBColor(0, 0, 0));
 GradientMaterial gMat = GradientMaterial(6, spectrum, 150.0f, true);
 GradientMaterial gNoiseMat = GradientMaterial(4, spectrum, 2.0f, false);
@@ -63,6 +64,25 @@ void setup() {
   objects[0]->SetMaterial(&sNoise);
   objects[1]->SetMaterial(&sNoise);
 
+  Serial.println("Setting keyframes: ");
+  kbPOGTrack.AddKeyFrame(0.0f, 0.0f);
+  kbPOGTrack.AddKeyFrame(1.0f, 1.0f);
+  kbPOGTrack.AddKeyFrame(2.0f, 0.0f);
+
+  kbAngryEyesTrack.AddKeyFrame(0.0f, 0.0f);
+  kbAngryEyesTrack.AddKeyFrame(0.5f, 1.0f);
+  kbAngryEyesTrack.AddKeyFrame(1.0f, 0.0f);
+  kbAngryEyesTrack.AddKeyFrame(1.5f, 1.0f);
+  kbAngryEyesTrack.AddKeyFrame(2.0f, 0.0f);
+
+  kbMouthFrownTrack.AddKeyFrame(0.0f, 1.0f);
+  kbMouthFrownTrack.AddKeyFrame(0.2f, 0.0f);
+  kbMouthFrownTrack.AddKeyFrame(0.4f, 1.0f);
+  kbMouthFrownTrack.AddKeyFrame(0.6f, 0.0f);
+  kbMouthFrownTrack.AddKeyFrame(0.8f, 1.0f);
+  kbMouthFrownTrack.AddKeyFrame(1.0f, 0.0f);
+  kbMouthFrownTrack.AddKeyFrame(2.0f, 0.0f);
+
   scene = new Scene(objects, lights, 2, 6);
   Serial.println("Objects linked, scene created: ");
   delay(50);
@@ -79,43 +99,20 @@ void loop() {
     float x = sinf(ratio * 3.14159f / 180.0f * 360.0f) * 50.0f;
     float y = cosf(ratio * 3.14159f / 180.0f * 360.0f) * 50.0f;
 
-    
     float linSweep = ratio > 0.5f ? 1.0f - ratio : ratio;
-    //float zShift = linSweep * 500.0f;
     float sShift = linSweep * 0.0075f + 0.01f;
 
     sMat.HueShift(ratio * 360 * 4);
-    //gMat.HueShift(ratio * 360 * 4);
-    //gMat.SetRotationAngle(ratio * 360 * 2);
     gMat.SetGradientPeriod(150.0f + x * 150.0f);
     gMat.SetPositionOffset(Vector2D(x * 2.0f, 100.0f + y * 2.0f));
-    //gMat.SetPositionOffset(Vector2D(0.0f, 100.0f));
-    
     gNoiseMat.HueShift(ratio * 360 * 2);
-
     sNoise.SetScale(Vector3D(sShift, sShift, sShift));
     sNoise.SetZPosition(x * 6.0f);
 
     //Example of Face with slight movement, scaling, and rotation
-    float x1 = sinf(ratio * 3.14159f / 180.0f * 360.0f * 0.5f + 45.0f * 0.0f) / 2.0f + 0.5f;
-    float x2 = sinf(ratio * 3.14159f / 180.0f * 360.0f * 1.0f  + 45.0f * 1.0f) / 2.0f + 0.5f;
-    float x3 = sinf(ratio * 3.14159f / 180.0f * 360.0f * 1.5f  + 45.0f * 2.0f) / 2.0f + 0.5f;
-    float x4 = sinf(ratio * 3.14159f / 180.0f * 360.0f * 2.0f  + 45.0f * 3.0f) / 2.0f + 0.5f;
-    float x5 = sinf(ratio * 3.14159f / 180.0f * 360.0f * 2.5f  + 45.0f * 4.0f) / 2.0f + 0.5f;
-    float x6 = sinf(ratio * 3.14159f / 180.0f * 360.0f * 3.0f  + 45.0f * 5.0f) / 2.0f + 0.5f;
-    float x7 = sinf(ratio * 3.14159f / 180.0f * 360.0f * 3.5f  + 45.0f * 6.0f) / 2.0f + 0.5f;
-    float x8 = sinf(ratio * 3.14159f / 180.0f * 360.0f * 4.0f  + 45.0f * 7.0f) / 2.0f + 0.5f;
-
-    Serial.println(x1);
-    
-    kbFace.SetMorphWeight(KaiborgV1::AddEyebrow, x1);
-    kbFace.SetMorphWeight(KaiborgV1::AlmondEyes, x2);
-    kbFace.SetMorphWeight(KaiborgV1::AltNose, x3);
-    kbFace.SetMorphWeight(KaiborgV1::AngryEyes, x4);
-    kbFace.SetMorphWeight(KaiborgV1::EyeFrown, x5);
-    kbFace.SetMorphWeight(KaiborgV1::HappySquint, x6);
-    kbFace.SetMorphWeight(KaiborgV1::MouthFrown, x7);
-    kbFace.SetMorphWeight(KaiborgV1::POG, x8);
+    kbPOGTrack.Update();
+    kbAngryEyesTrack.Update();
+    kbMouthFrownTrack.Update();
     
     kbFace.Update();
 

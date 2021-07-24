@@ -5,9 +5,9 @@ private:
 	float gain;
 	int memory;
 	float* values;
-  int currentAmount = 0;
+  	int currentAmount = 0;
 
-  float* ShiftArray(float arr[]);
+	float* ShiftArray(float arr[]);
 
 public:
 	KalmanFilter();

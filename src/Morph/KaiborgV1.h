@@ -63,16 +63,18 @@ public:
     }
 
     void SetMorphWeight(Morphs morph, float weight){
-        weight = Mathematics::Constrain(weight, 0.0f, 1.0f);
+        morphs[morph].Weight = weight;
+    }
 
-        morphs[morph].SetWeight(weight);
+    float* GetMorphWeightReference(Morphs morph){
+        return &morphs[morph].Weight;
     }
 
     void Update(){
         basisObj.ResetVertices();
 
         for(int i = 0; i < morphCount; i++){
-            if(morphs[i].GetWeight() > 0.0f){
+            if(morphs[i].Weight > 0.0f){
                 morphs[i].MorphObject3D(&basisObj);
             }
         }
