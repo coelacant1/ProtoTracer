@@ -37,15 +37,15 @@ Rotation::Rotation(YawPitchRoll ypr) {
 }
 
 Quaternion Rotation::AxisAngleToQuaternion(AxisAngle axisAngle) {
-		float rotation = Mathematics::DegreesToRadians(axisAngle.Rotation);
-		float scale = sinf(rotation / 2.0f);
+	float rotation = Mathematics::DegreesToRadians(axisAngle.Rotation);
+	float scale = sinf(rotation / 2.0f);
 
-		return Quaternion(
-			cosf(rotation / 2.0f),
-			axisAngle.Axis.X * scale,
-			axisAngle.Axis.Y * scale,
-			axisAngle.Axis.Z * scale
-		);
+	return Quaternion(
+		cosf(rotation / 2.0f),
+		axisAngle.Axis.X * scale,
+		axisAngle.Axis.Y * scale,
+		axisAngle.Axis.Z * scale
+	);
 }
 
 Quaternion Rotation::DirectionAngleToQuaternion(DirectionAngle directionAngle) {

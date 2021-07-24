@@ -71,7 +71,7 @@ public:
 			}
 		}
 
-    pictureCenter = avgCoords.Divide(count);
+    	pictureCenter = avgCoords.Divide(count);
 	}
 
 	void GetPixels(Pixel* pixels, int width, int height){
@@ -79,7 +79,7 @@ public:
 		for (int i = 0; i < width; i++) {
 			for (int k = 0; k < height; k++) {
 				pixels[currentPixel] = Pixel(i, k);
-        currentPixel++;
+        		currentPixel++;
 			}
 		}
 	}

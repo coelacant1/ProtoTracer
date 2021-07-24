@@ -16,8 +16,8 @@ public:
 	Quaternion(Vector3D vector);
 	Quaternion(float W, float X, float Y, float Z);
 
-  Vector2D RotateVector(Vector2D coordinate);
-  Vector2D UnrotateVector(Vector2D coordinate);
+    Vector2D RotateVector(Vector2D coordinate);
+    Vector2D UnrotateVector(Vector2D coordinate);
 	Vector3D RotateVector(Vector3D coordinate);
 	Vector3D UnrotateVector(Vector3D coordinate);
 	Vector3D GetBiVector();
@@ -29,7 +29,7 @@ public:
 	Quaternion Divide(Quaternion quaternion);
 	Quaternion Divide(float scalar);
 	Quaternion Power(Quaternion quaternion);
-  Quaternion DeltaRotation(Vector3D angularVelocity, float timeDelta);
+    Quaternion DeltaRotation(Vector3D angularVelocity, float timeDelta);
   
 	Quaternion Power(float exponent);
 	Quaternion Permutate(Vector3D permutation);

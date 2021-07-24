@@ -6,20 +6,20 @@
 //Converts gif to RGB XY pixel matrix
 class SimpleMaterial : public Material {
 private:
-  RGBColor rgb;
-  RGBColor baseRGB;
+    RGBColor rgb;
+    RGBColor baseRGB;
   
 public:
-  SimpleMaterial(RGBColor rgb){
-    this->rgb = rgb;
-    this->baseRGB = rgb;
-  }
+    SimpleMaterial(RGBColor rgb){
+        this->rgb = rgb;
+        this->baseRGB = rgb;
+    }
 
-  void HueShift(float hueDeg){
-    rgb = baseRGB.HueShift(hueDeg);
-  }
-  
-  RGBColor GetRGB(Vector2D xyPosition){
-    return rgb;
-  }
+    void HueShift(float hueDeg){
+        rgb = baseRGB.HueShift(hueDeg);
+    }
+    
+    RGBColor GetRGB(Vector2D xyPosition){
+        return rgb;
+    }
 };

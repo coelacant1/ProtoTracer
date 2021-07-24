@@ -40,7 +40,7 @@ bool Mathematics::IsFinite(float value) {
 }
 
 int Mathematics::Sign(float value) {
-		return (0 < value) - (value < 0);
+	return (0 < value) - (value < 0);
 }
 
 
@@ -51,7 +51,7 @@ float Mathematics::CosineInterpolation(float beg, float fin, float ratio){
 }
 
 float Mathematics::Map(float value, float inLow, float inMax, float outMin, float outMax){
-  return (value - inLow) * (outMax - outMin) / (inMax - inLow) + outMin;
+    return (value - inLow) * (outMax - outMin) / (inMax - inLow) + outMin;
 }
 
 int Mathematics::RoundUpWindow(int value, int multiple){

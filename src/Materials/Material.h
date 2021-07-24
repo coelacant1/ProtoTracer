@@ -5,6 +5,6 @@
 
 class Material{
 public:
-  virtual RGBColor GetRGB(Vector2D xyPosition) = 0;
+    virtual RGBColor GetRGB(Vector2D xyPosition) = 0;
   
 };

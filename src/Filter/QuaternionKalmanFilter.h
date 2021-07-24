@@ -4,18 +4,18 @@
 
 class QuaternionKalmanFilter {
 private:
-  float gain;
-  int memory;
-  Quaternion* values;
- 
-  int currentAmount = 0;
- 
-  Quaternion* ShiftArray(Quaternion arr[]);
+    float gain;
+    int memory;
+    Quaternion* values;
+    
+    int currentAmount = 0;
+    
+    Quaternion* ShiftArray(Quaternion arr[]);
 
 public:
-  QuaternionKalmanFilter();
-  QuaternionKalmanFilter(float gain, int memory);
+    QuaternionKalmanFilter();
+    QuaternionKalmanFilter(float gain, int memory);
 
-  Quaternion Filter(Quaternion input);
+    Quaternion Filter(Quaternion input);
 
 };
