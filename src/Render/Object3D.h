@@ -32,6 +32,26 @@ public:
     triangleLength = maxTriangles;
   }
 
+  Object3D(const int maxVertices, const int maxTriangles, Vector3D* vertices, Vector3D* indexes){
+    this->vertices = vertices;
+    verticesOriginal = new Vector3D[maxVertices];
+    triangles = new Triangle3D[maxTriangles];
+    this->triangleVec = indexes;
+
+    vertexLength = maxVertices;
+    triangleLength = maxTriangles;
+
+    for(int i = 0; i < vertexLength; i++){
+      verticesOriginal[i] = vertices[i];
+    }
+
+    for (int i = 0; i < maxTriangles; i++) {
+      triangles[i].p1 = &vertices[(int)indexes[i].X];
+      triangles[i].p2 = &vertices[(int)indexes[i].Y];
+      triangles[i].p3 = &vertices[(int)indexes[i].Z];
+    }
+  }
+
   Object3D(String dataset, const int maxVertices, const int maxTriangles){
     vertices = new Vector3D[maxVertices];
     verticesOriginal = new Vector3D[maxVertices];

@@ -6,13 +6,13 @@
 #include "Flash\CameraObjs.h"
 //END MATRIX SPECIFIC FOR CUSTOM PANELS
 
-#include "Flash\KaiborgFaceObjs.h"
 #include "Flash\MiscObjs.h"
 
 #include "Materials\SimpleMaterial.h"
 #include "Materials\GradientMaterial.h"
 #include "Math\SimplexNoise.h"
 
+#include "Morph\KaiborgV1.h"
 
 //TEENSY SPECIFIC FOR WRITING TO LEDS
 #include <OctoWS2811.h>
@@ -24,16 +24,10 @@ const int config = WS2811_GRB | WS2811_800kHz;
 OctoWS2811 leds(ledsPerStrip, displayMemory, drawingMemory, config);
 //END TEENSY SPECIFIC FOR WRITING TO LEDS
 
+KaiborgV1 kbFace;
+
 Light lights[6];
-Object3D* objects[9];
-Object3D noseObj1 = Object3D(noseString, 10, 10);
-Object3D eyeObj1 = Object3D(eyeString, 10, 10);
-Object3D eyeBrowObj1 = Object3D(eyeBrowString, 10, 10);
-Object3D mouthObj1 = Object3D(mouthString, 10, 10);
-Object3D noseObj2 = Object3D(noseString, 10, 10);
-Object3D eyeObj2 = Object3D(eyeString, 10, 10);
-Object3D eyeBrowObj2 = Object3D(eyeBrowString, 10, 10);
-Object3D mouthObj2 = Object3D(mouthString, 10, 10);
+Object3D* objects[2];
 Object3D backgroundObj = Object3D(triangleString, 4, 2);
 Scene* scene;
 Camera camRght = Camera(Vector3D(0, 0, 0), Vector3D(0, 0, -500), 571, &tertiaryPixelString, false, false, false);
@@ -62,28 +56,14 @@ void setup() {
   lights[5].Set(Vector3D(0, 0, -1000), Vector3D(0, 120, 120), 1000.0f, 0.5f, 0.5f);
 
   Serial.println("Linking objects: ");
-  objects[0] = &noseObj1;
-  objects[1] = &eyeObj1;
-  objects[2] = &eyeBrowObj1;
-  objects[3] = &mouthObj1;
-  objects[4] = &noseObj2;
-  objects[5] = &eyeObj2;
-  objects[6] = &eyeBrowObj2;
-  objects[7] = &mouthObj2;
-  objects[8] = &backgroundObj;
+  objects[0] = kbFace.GetObject();
+  objects[1] = &backgroundObj;
 
   Serial.println("Setting materials: ");
   objects[0]->SetMaterial(&sNoise);
   objects[1]->SetMaterial(&sNoise);
-  objects[2]->SetMaterial(&sNoise);
-  objects[3]->SetMaterial(&sNoise);
-  objects[4]->SetMaterial(&gMat);
-  objects[5]->SetMaterial(&gMat);
-  objects[6]->SetMaterial(&gMat);
-  objects[7]->SetMaterial(&gMat);
-  objects[8]->SetMaterial(&sNoise);
 
-  scene = new Scene(objects, lights, 9, 6);
+  scene = new Scene(objects, lights, 2, 6);
   Serial.println("Objects linked, scene created: ");
   delay(50);
 }
@@ -98,9 +78,10 @@ void loop() {
 
     float x = sinf(ratio * 3.14159f / 180.0f * 360.0f) * 50.0f;
     float y = cosf(ratio * 3.14159f / 180.0f * 360.0f) * 50.0f;
+
     
     float linSweep = ratio > 0.5f ? 1.0f - ratio : ratio;
-    float zShift = linSweep * 500.0f;
+    //float zShift = linSweep * 500.0f;
     float sShift = linSweep * 0.0075f + 0.01f;
 
     sMat.HueShift(ratio * 360 * 4);
@@ -116,58 +97,44 @@ void loop() {
     sNoise.SetZPosition(x * 6.0f);
 
     //Example of Face with slight movement, scaling, and rotation
+    float x1 = sinf(ratio * 3.14159f / 180.0f * 360.0f * 0.5f + 45.0f * 0.0f) / 2.0f + 0.5f;
+    float x2 = sinf(ratio * 3.14159f / 180.0f * 360.0f * 1.0f  + 45.0f * 1.0f) / 2.0f + 0.5f;
+    float x3 = sinf(ratio * 3.14159f / 180.0f * 360.0f * 1.5f  + 45.0f * 2.0f) / 2.0f + 0.5f;
+    float x4 = sinf(ratio * 3.14159f / 180.0f * 360.0f * 2.0f  + 45.0f * 3.0f) / 2.0f + 0.5f;
+    float x5 = sinf(ratio * 3.14159f / 180.0f * 360.0f * 2.5f  + 45.0f * 4.0f) / 2.0f + 0.5f;
+    float x6 = sinf(ratio * 3.14159f / 180.0f * 360.0f * 3.0f  + 45.0f * 5.0f) / 2.0f + 0.5f;
+    float x7 = sinf(ratio * 3.14159f / 180.0f * 360.0f * 3.5f  + 45.0f * 6.0f) / 2.0f + 0.5f;
+    float x8 = sinf(ratio * 3.14159f / 180.0f * 360.0f * 4.0f  + 45.0f * 7.0f) / 2.0f + 0.5f;
+
+    Serial.println(x1);
+    
+    kbFace.SetMorphWeight(KaiborgV1::AddEyebrow, x1);
+    kbFace.SetMorphWeight(KaiborgV1::AlmondEyes, x2);
+    kbFace.SetMorphWeight(KaiborgV1::AltNose, x3);
+    kbFace.SetMorphWeight(KaiborgV1::AngryEyes, x4);
+    kbFace.SetMorphWeight(KaiborgV1::EyeFrown, x5);
+    kbFace.SetMorphWeight(KaiborgV1::HappySquint, x6);
+    kbFace.SetMorphWeight(KaiborgV1::MouthFrown, x7);
+    kbFace.SetMorphWeight(KaiborgV1::POG, x8);
+    
+    kbFace.Update();
+
     //Objects visibility can be enabled and disabled at any point before rasterizing to change its visibility
     objects[0]->Enable();//
-    objects[1]->Enable();//
-    objects[2]->Disable();
-    objects[3]->Enable();//
-    objects[4]->Disable();
-    objects[5]->Disable();
-    objects[6]->Disable();
-    objects[7]->Disable();
-    objects[8]->Enable();//Background
+    objects[1]->Disable();//Background
 
     //Resets the object back to the original state before any translates/modifications, must be ran once per loop in most cases
-    objects[0]->ResetVertices();
     objects[1]->ResetVertices();
-    objects[2]->ResetVertices();
-    objects[3]->ResetVertices();
-    objects[4]->ResetVertices();
-    objects[5]->ResetVertices();
-    objects[6]->ResetVertices();
-    objects[7]->ResetVertices();
-    //objects[8]->ResetVertices();
 
     //Objects can be moved to a coordinate or translated by a vector
     objects[0]->MoveRelative(Vector3D(35.0f, 25.0f, 10.0f));
-    objects[1]->MoveRelative(Vector3D(25.0f, 25.0f, 30.0f));
-    objects[2]->MoveRelative(Vector3D(35.0f, 25.0f, 10.0f));
-    objects[3]->MoveRelative(Vector3D(35.0f, 25.0f, 10.0f));
-    objects[4]->MoveRelative(Vector3D(0, 0, -10.0f));
-    objects[5]->MoveRelative(Vector3D(0, 0, -10.0f));
-    objects[6]->MoveRelative(Vector3D(0, 0, -10.0f));
-    objects[7]->MoveRelative(Vector3D(0, 0, -10.0f));
-    //objects[8]->MoveRelative(Vector3D(0, 0, -10000.0f));//Background
     
     //Objects can be rotated with by any rotation object (quaternion is preferred) and about any coordinate or center
     objects[0]->Rotate(Vector3D(sinf(i * 3.14159f / 180.0f * 2.0f) * 1.0f, sinf(i * 3.14159f / 180.0f * 1.0f) * 1.0f, 1), Vector3D(0, 100, 0));
-    objects[1]->Rotate(Vector3D(sinf(i * 3.14159f / 180.0f * 2.0f) * 1.0f, sinf(i * 3.14159f / 180.0f * 1.0f) * 1.0f, 1), Vector3D(0, 100, 0));
-    objects[2]->Rotate(Vector3D(sinf(i * 3.14159f / 180.0f * 1.0f) * 1.0f, sinf(i * 3.14159f / 180.0f * 1.0f) * 1.0f, 1), Vector3D(0, 100, 0));
-    objects[3]->Rotate(Vector3D(sinf(i * 3.14159f / 180.0f * 2.0f) * 1.0f, sinf(i * 3.14159f / 180.0f * 1.0f) * 1.0f, 1), Vector3D(0, 100, 0));
-    objects[4]->Rotate(Vector3D(sinf(i * 3.14159f / 180.0f * 2.0f) * 1.0f, sinf(i * 3.14159f / 180.0f * 1.0f) * 1.0f, -1), Vector3D(0, 100, 0));
-    objects[5]->Rotate(Vector3D(sinf(i * 3.14159f / 180.0f * 2.0f) * 1.0f, sinf(i * 3.14159f / 180.0f * 1.0f) * 1.0f, -1), Vector3D(0, 100, 0));
-    objects[6]->Rotate(Vector3D(sinf(i * 3.14159f / 180.0f * 2.0f) * 1.0f, sinf(i * 3.14159f / 180.0f * 1.0f) * 1.0f, -1), Vector3D(0, 100, 0));
-    objects[7]->Rotate(Vector3D(sinf(i * 3.14159f / 180.0f * 2.0f) * 1.0f, sinf(i * 3.14159f / 180.0f * 1.0f) * 1.0f, -1), Vector3D(0, 100, 0));
 
     //Objects can be scaled by origin, center, and at a point
     float s = 1.0f + sin(i * 3.14159f / 180.0f * 3.0f) * 0.03f;
     objects[0]->Scale(Vector3D(s, s, s), Vector3D(70, 40, 50));
-    objects[1]->Scale(Vector3D(s+0.2f, s+0.2f, s+0.2f), Vector3D(70, 40, 50));
-    objects[2]->Scale(Vector3D(s, s, s), Vector3D(70, 40, 50));
-    objects[3]->Scale(Vector3D(s, s, s), Vector3D(70, 40, 50));
-    objects[4]->Scale(Vector3D(s, s, s), Vector3D(70, 40, 50));
-    objects[5]->Scale(Vector3D(s, s, s), Vector3D(70, 40, 50));
-    objects[6]->Scale(Vector3D(s, s, s), Vector3D(70, 40, 50));
     lights[4].MoveTo(Vector3D(-sinf(i * 3.14159f / 180.0f * 4.0f) * 1000.0f, cosf(i * 3.14159f / 180.0f * 4.0f) * 1000.0f, 0));
     lights[5].MoveTo(Vector3D(0, sinf(i * 3.14159f / 180.0f * 6.0f) * 1000.0f, -cosf(i * 3.14159f / 180.0f * 6.0f) * 1000.0f));
 
@@ -181,15 +148,6 @@ void loop() {
     
     //TEENSY SPECIFIC FOR WRITING TO LEDS/COPYING TO MEMORY
     for (int i = 0; i < 571; i++) {
-      //leds.setPixel(i,                    camLeft.GetPixels()[i].Color.R, camLeft.GetPixels()[i].Color.G, camLeft.GetPixels()[i].Color.B);
-      //leds.setPixel(i + ledsPerStrip * 1, camLeft.GetPixels()[i].Color.R, camLeft.GetPixels()[i].Color.G, camLeft.GetPixels()[i].Color.B);
-      //leds.setPixel(i + ledsPerStrip * 2, camLeft.GetPixels()[i].Color.R, camLeft.GetPixels()[i].Color.G, camLeft.GetPixels()[i].Color.B);
-      //leds.setPixel(i + ledsPerStrip * 3, camRght.GetPixels()[i].Color.R, camRght.GetPixels()[i].Color.G, camRght.GetPixels()[i].Color.B);//Pin 7
-      //leds.setPixel(i + ledsPerStrip * 4, camLeft.GetPixels()[i].Color.R, camLeft.GetPixels()[i].Color.G, camLeft.GetPixels()[i].Color.B);
-      //leds.setPixel(i + ledsPerStrip * 5, camLeft.GetPixels()[i].Color.R, camLeft.GetPixels()[i].Color.G, camLeft.GetPixels()[i].Color.B);
-      //leds.setPixel(i + ledsPerStrip * 6, camLeft.GetPixels()[i].Color.R, camLeft.GetPixels()[i].Color.G, camLeft.GetPixels()[i].Color.B);
-      //leds.setPixel(i + ledsPerStrip * 7, camLeft.GetPixels()[i].Color.R, camLeft.GetPixels()[i].Color.G, camLeft.GetPixels()[i].Color.B);//Pin 8
-
       if (i < 346){
         leds.setPixel(i + ledsPerStrip * 2, camLeft.GetPixels()[i + 225].Color.R, camLeft.GetPixels()[i + 225].Color.G, camLeft.GetPixels()[i + 225].Color.B);//Pin 7
         leds.setPixel(i + ledsPerStrip * 7, camRght.GetPixels()[i].Color.R, camRght.GetPixels()[i].Color.G, camRght.GetPixels()[i].Color.B);//Pin 8
