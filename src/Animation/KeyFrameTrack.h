@@ -13,16 +13,20 @@ public:
     };
 
 private:
+    const int maxParameters;
     const int maxKeyFrames;
     InterpolationMethod interpMethod;
-    float* parameter;
+    float** parameters;
     KeyFrame** keyFrames;
     float min = 0.0f;
     float max = 0.0f;
     float startFrameTime = 100000.0f;//initialize to out of bounds
     float stopFrameTime = -100000.0f;//initialize to out of bounds
     int currentFrames = 0;
+    int currentParameters = 0;
     long startTime = 0;
+    bool isActive = true;
+    float parameterValue = 0.0f;
 
     //shift array from position
     void ShiftKeyFrameArray(int position){
@@ -32,14 +36,14 @@ private:
     }
 
 public:
-    KeyFrameTrack(float* parameter, float min, float max, int maxKeyFrames, InterpolationMethod interpMethod) : maxKeyFrames(maxKeyFrames){
-        this->parameter = parameter;
+    KeyFrameTrack(int maxParameters, float min, float max, int maxKeyFrames, InterpolationMethod interpMethod) : maxParameters(maxParameters), maxKeyFrames(maxKeyFrames){
         this->min = min;
         this->max = max;
         this->startTime = millis();
         this->interpMethod = interpMethod;
 
         keyFrames = new KeyFrame*[maxKeyFrames];
+        parameters = new float*[maxParameters];
     }
 
     ~KeyFrameTrack(){
@@ -48,6 +52,21 @@ public:
         }
 
         delete keyFrames;
+    }
+
+    void Pause(){
+        isActive = false;
+    }
+
+    void Play(){
+        isActive = true;
+    }
+
+    void AddParameter(float* parameter){
+        if(currentParameters < maxParameters){
+            parameters[currentParameters] = parameter;
+            currentParameters++;
+        }
     }
 
     void AddKeyFrame(float time, float value){
@@ -78,12 +97,22 @@ public:
         }
     }
 
+    float GetParameterValue(){
+        return parameterValue;
+    }
+
+    void Reset(){
+        for(int i = 0; i < currentParameters; i++){
+            *(this->parameters[i]) = min;
+        }
+    }
+
     void Update(){
         float currentTime = fmod(millis() / 1000.0f, stopFrameTime - startFrameTime) + startFrameTime;//normalize time and add offset
         byte previousFrame = 0, nextFrame = 0;
 
         //find current time, find keyframe before and after
-        if(currentFrames > 0){
+        if(currentFrames > 0 && currentParameters > 0 && isActive){
             for (int i = currentFrames - 1; i >= 0; i--){
                 if (currentTime >= keyFrames[i]->Time){
                     previousFrame = i;
@@ -109,7 +138,11 @@ public:
 
             }
 
-            *(this->parameter) = parameter;
+            parameterValue = parameter;
+
+            for(int i = 0; i < currentParameters; i++){
+                *(this->parameters[i]) = parameter;
+            }
         }
     }
 

@@ -19,11 +19,16 @@ public:
         this->vertices = vertices;
     }
 
+    void PrintMorphVertices(){
+        for(int i = 0; i < count; i++){
+            Serial.print(vertices[i].ToString());
+            Serial.print("\t");
+        }
+    }
+
     void MorphObject3D(Object3D* obj){
         for (int i = 0; i < count; i++){
-            if (indexes[i] < obj->GetTriangleAmount()){// make sure the index is within the bounds of available triangles
-                obj->GetVertices()[indexes[i]] = obj->GetVertices()[indexes[i]] + vertices[i] * Mathematics::Constrain(Weight, 0.0f, 1.0f);//add value of morph vertex to original vertex
-            }
+            obj->GetVertices()[indexes[i]] = obj->GetVertices()[indexes[i]] + vertices[i] * Mathematics::Constrain(Weight, 0.0f, 1.0f);//add value of morph vertex to original vertex
         }
     }
 };

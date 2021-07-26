@@ -2,12 +2,6 @@
 
 #include <Arduino.h>
 
-const String triangleString =
-"v 1000.0 -1000.0 0.0\n"
-"v -1000.0 -1000.0 0.0\n"
-"v 0.0 1000.0 0.0\n"
-"f 1 2 3";
-
 const String faceString =
 "v 48.333127 105.135781 93.439837\n"
 "v 15.379387 169.254891 68.146434\n"

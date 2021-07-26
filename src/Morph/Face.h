@@ -5,6 +5,7 @@
 #include "..\Morph\Eye.h"
 #include "..\Morph\Mouth.h"
 #include "..\Flash\FaceObjs.h"
+#include "..\Flash\MiscObjs.h"
 #include "..\Animation\Animation.h"
 #include "..\Materials\SimpleMaterial.h"
 #include "..\Materials\GradientMaterial.h"
@@ -75,7 +76,7 @@ public:
         scene = new Scene(objects, lights, 6, 6);
 
         for (int i=0; i < 12; i++) {  // print the first 20 bins
-        fftData[i] = 0.0f;
+            fftData[i] = 0.0f;
         }
     }
 
@@ -293,7 +294,7 @@ public:
         
 
         float linSweep = ratio > 0.5f ? 1.0f - ratio : ratio;
-        float zShift = linSweep * 500.0f;
+        //float zShift = linSweep * 500.0f;
         float sShift = linSweep * 0.0025f + 0.005f;
 
         gNoiseMat.SetGradientPeriod(0.5f + linSweep * 4.0f);

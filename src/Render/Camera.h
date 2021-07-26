@@ -45,26 +45,26 @@ private:
 
         if(didIntersect){
             if(triangles[triangle]->useMaterial){
-            Vector3D rotateRay = q.RotateVector(Vector3D(pixelRay.X, pixelRay.Y, 0).Subtract(p));
-            
-            pixelRay = Vector2D(-rotateRay.X, rotateRay.Y);
-            
-            RGBColor rgbC = triangles[triangle]->GetMaterial()->GetRGB(pixelRay);
-            color = Vector3D(rgbC.R, rgbC.G, rgbC.B);
+                Vector3D rotateRay = q.RotateVector(Vector3D(pixelRay.X, pixelRay.Y, 0).Subtract(p));
+                
+                pixelRay = Vector2D(-rotateRay.X, rotateRay.Y);
+                
+                RGBColor rgbC = triangles[triangle]->GetMaterial()->GetRGB(pixelRay);
+                color = Vector3D(rgbC.R, rgbC.G, rgbC.B);
             }
             else{
-            for (int l = 0; l < scene->numLights; l++) {
-                Vector3D lVector = scene->lights[l].p;// - tempInt;
+                for (int l = 0; l < scene->numLights; l++) {
+                    Vector3D lVector = scene->lights[l].p;// - tempInt;
+            
+                    float angle = triangles[triangle]->normal.DotProduct(lVector.UnitSphere());
         
-                float angle = triangles[triangle]->normal.DotProduct(lVector.UnitSphere());
-    
-                if (angle > 0) {
-                float lDistance = scene->lights[l].p.CalculateEuclideanDistance(intersect) / scene->lights[l].falloff;
-                float intensity = 1.0f / (1.0f + lDistance * scene->lights[l].a + powf(lDistance / scene->lights[l].falloff, 2.0f) * scene->lights[l].b);
-                
-                color = color + (scene->lights[l].intensity * angle * intensity);//add intensity drop with distance?
+                    if (angle > 0) {
+                        float lDistance = scene->lights[l].p.CalculateEuclideanDistance(intersect) / scene->lights[l].falloff;
+                        float intensity = 1.0f / (1.0f + lDistance * scene->lights[l].a + powf(lDistance / scene->lights[l].falloff, 2.0f) * scene->lights[l].b);
+                        
+                        color = color + (scene->lights[l].intensity * angle * intensity);//add intensity drop with distance?
+                    }
                 }
-            }
             }
         }
         
