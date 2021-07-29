@@ -24,9 +24,9 @@ OctoWS2811 leds(ledsPerStrip, displayMemory, drawingMemory, config);
 //END TEENSY SPECIFIC FOR WRITING TO LEDS
 
 KaiborgV1 kbFace;
-KeyFrameTrack kbPOGTrack = KeyFrameTrack(kbFace.GetMorphWeightReference(KaiborgV1::POG), 0.0f, 1.0f, 10, KeyFrameTrack::Step);
-KeyFrameTrack kbAngryEyesTrack = KeyFrameTrack(kbFace.GetMorphWeightReference(KaiborgV1::AngryEyes), 0.0f, 1.0f, 10, KeyFrameTrack::Linear);
-KeyFrameTrack kbMouthFrownTrack = KeyFrameTrack(kbFace.GetMorphWeightReference(KaiborgV1::MouthFrown), 0.0f, 1.0f, 10, KeyFrameTrack::Cosine);
+KeyFrameTrack kbPOGTrack = KeyFrameTrack(10, 0.0f, 1.0f, 10, KeyFrameTrack::Step);
+KeyFrameTrack kbAngryEyesTrack = KeyFrameTrack(10, 0.0f, 1.0f, 10, KeyFrameTrack::Linear);
+KeyFrameTrack kbMouthFrownTrack = KeyFrameTrack(10, 0.0f, 1.0f, 10, KeyFrameTrack::Cosine);
 
 Light lights[6];
 Object3D* objects[2];
@@ -76,28 +76,32 @@ void setup() {
     objects[0] = kbFace.GetObject();
     objects[1] = &backgroundObj;
 
+    kbPOGTrack.AddParameter(kbFace.GetMorphWeightReference(KaiborgV1::POG));
+    kbAngryEyesTrack.AddParameter(kbFace.GetMorphWeightReference(KaiborgV1::AngryEyes));
+    kbMouthFrownTrack.AddParameter(kbFace.GetMorphWeightReference(KaiborgV1::MouthFrown));
+
     Serial.println("Setting materials: ");
     objects[0]->SetMaterial(&sNoise);
     objects[1]->SetMaterial(&sNoise);
 
     Serial.println("Setting keyframes: ");
     kbPOGTrack.AddKeyFrame(0.0f, 0.0f);
-    kbPOGTrack.AddKeyFrame(1.0f, 1.0f);
+    kbPOGTrack.AddKeyFrame(1.0f, 0.1f);
     kbPOGTrack.AddKeyFrame(2.0f, 0.0f);
 
     kbAngryEyesTrack.AddKeyFrame(0.0f, 0.0f);
-    kbAngryEyesTrack.AddKeyFrame(0.5f, 1.0f);
+    kbAngryEyesTrack.AddKeyFrame(0.5f, 0.25f);
     kbAngryEyesTrack.AddKeyFrame(1.0f, 0.0f);
-    kbAngryEyesTrack.AddKeyFrame(1.5f, 1.0f);
+    kbAngryEyesTrack.AddKeyFrame(1.5f, 0.25f);
     kbAngryEyesTrack.AddKeyFrame(2.0f, 0.0f);
 
-    kbMouthFrownTrack.AddKeyFrame(0.0f, 1.0f);
-    kbMouthFrownTrack.AddKeyFrame(0.2f, 0.0f);
-    kbMouthFrownTrack.AddKeyFrame(0.4f, 1.0f);
-    kbMouthFrownTrack.AddKeyFrame(0.6f, 0.0f);
-    kbMouthFrownTrack.AddKeyFrame(0.8f, 1.0f);
-    kbMouthFrownTrack.AddKeyFrame(1.0f, 0.0f);
-    kbMouthFrownTrack.AddKeyFrame(2.0f, 0.0f);
+    //kbMouthFrownTrack.AddKeyFrame(0.0f, 1.0f);
+    //kbMouthFrownTrack.AddKeyFrame(0.2f, 0.0f);
+    //kbMouthFrownTrack.AddKeyFrame(0.4f, 1.0f);
+    //kbMouthFrownTrack.AddKeyFrame(0.6f, 0.0f);
+    //kbMouthFrownTrack.AddKeyFrame(0.8f, 1.0f);
+    //kbMouthFrownTrack.AddKeyFrame(1.0f, 0.0f);
+    //kbMouthFrownTrack.AddKeyFrame(2.0f, 0.0f);
 
     scene = new Scene(objects, lights, 2, 6);
     Serial.println("Objects linked, scene created: ");
