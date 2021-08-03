@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Object3D.h"
+#include "TriangleGroup.h"
 
-class ObjectDeformer{
+class TriangleGroupDeformer{
 public:
     enum Axis {
         XAxis,
@@ -11,7 +11,7 @@ public:
     };
     
 private:
-    Object3D** objects;
+    TriangleGroup** objects;
     int objectCount = 0;
 
     bool CheckClipAxis(Vector3D base, bool positive, Axis valueCheckAxis){
@@ -39,22 +39,22 @@ private:
     }
     
 public:
-    ObjectDeformer(Object3D* object){
-        objects = new Object3D*[1];
+    TriangleGroupDeformer(TriangleGroup* object){
+        objects = new TriangleGroup*[1];
         
         objects[0] = object;
         
         objectCount = 1;
     }
 
-    ObjectDeformer(Object3D** objects, int objectCount){
+    TriangleGroupDeformer(TriangleGroup** objects, int objectCount){
         this->objects = objects;
         this->objectCount = objectCount;
     }
 
     void SinusoidalDeform(float magnitude, float timeRatio, float periodModifier, float frequencyModifier, Axis axis){
         for(int i = 0; i < objectCount; i++){
-            for(int j = 0; j < objects[i]->GetVertexAmount(); j++){
+            for(int j = 0; j < objects[i]->GetVertexCount(); j++){
                 Vector3D base = objects[i]->GetVertices()[j];
                 
                 switch(axis){
@@ -76,7 +76,7 @@ public:
     
     void DropwaveDeform(float magnitude, float timeRatio, float periodModifier, float frequencyModifier, Axis axis){
         for(int i = 0; i < objectCount; i++){
-            for(int j = 0; j < objects[i]->GetVertexAmount(); j++){
+            for(int j = 0; j < objects[i]->GetVertexCount(); j++){
                 Vector3D base = objects[i]->GetVertices()[j];
                 
                 switch(axis){
@@ -98,7 +98,7 @@ public:
 
     void SineWaveSurfaceDeform(Vector3D offset, float magnitude, float timeRatio, float periodModifier, float frequencyModifier, Axis axis){
         for(int i = 0; i < objectCount; i++){
-            for(int j = 0; j < objects[i]->GetVertexAmount(); j++){
+            for(int j = 0; j < objects[i]->GetVertexCount(); j++){
                 Vector3D base = objects[i]->GetVertices()[j] - offset;
                 
                 switch(axis){
@@ -121,7 +121,7 @@ public:
     void CosineInterpolationDeformer(float* pointMultiplier, int points, float scale, float minAxis, float maxAxis, Axis selectionAxis, Axis deformAxis){
         //map axis offsets based on value range for multiplying vertex coordinates at set intervals spaced evenly across minimum and maximum range of selected axis
         for(int i = 0; i < objectCount; i++){
-            for(int j = 0; j < objects[i]->GetVertexAmount(); j++){
+            for(int j = 0; j < objects[i]->GetVertexCount(); j++){
                 float value;
                 
                 switch(selectionAxis){
@@ -180,7 +180,7 @@ public:
 
     void AxisZeroClipping(bool positive, Axis clipAxis, Axis valueCheckAxis){
         for(int i = 0; i < objectCount; i++){
-            for(int j = 0; j < objects[i]->GetVertexAmount(); j++){
+            for(int j = 0; j < objects[i]->GetVertexCount(); j++){
                 Vector3D base = objects[i]->GetVertices()[j];
                 
                 switch(clipAxis){

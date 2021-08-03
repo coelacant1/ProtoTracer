@@ -24,18 +24,33 @@ public:
 	Vector2D UnitCircle();//unit sphere
 	Vector2D Constrain(float minimum, float maximum);
 	Vector2D Constrain(Vector2D minimum, Vector2D maximum);
-	Vector2D Minimum(Vector2D v1, Vector2D v2);
-	Vector2D Maximum(Vector2D v1, Vector2D v2);
-
+	Vector2D Minimum(Vector2D v);
+	Vector2D Maximum(Vector2D v);
+	bool CheckBounds(Vector2D minimum, Vector2D maximum);
 	float Magnitude();
 	float DotProduct(Vector2D vector);
 	float CalculateEuclideanDistance(Vector2D vector);
 	bool IsEqual(Vector2D vector);
 	String ToString();
+	
+	static Vector2D Minimum(Vector2D v1, Vector2D v2){
+		return Vector2D{
+			v1.X < v2.X ? v1.X : v2.X,
+			v1.Y < v2.Y ? v1.Y : v2.Y
+		};
+	}
+
+	static Vector2D Maximum(Vector2D v1, Vector2D v2){
+		return Vector2D{
+			v1.X > v2.X ? v1.X : v2.X,
+			v1.Y > v2.Y ? v1.Y : v2.Y
+		};
+	}
+
   
-  static Vector2D LERP(Vector2D start, Vector2D finish, float ratio) {
-    return finish * ratio + start * (1.0f - ratio);
-  }
+	static Vector2D LERP(Vector2D start, Vector2D finish, float ratio) {
+		return finish * ratio + start * (1.0f - ratio);
+	}
   
 	static Vector2D DegreesToRadians(Vector2D degrees) {
 		return degrees / (180.0f / Mathematics::MPI);

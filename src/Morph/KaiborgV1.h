@@ -3,6 +3,9 @@
 #include "Arduino.h"
 #include "..\Math\Rotation.h"
 #include "Morph.h"
+#include "..\Materials\SimpleMaterial.h"
+#include "..\Render\IndexGroup.h"
+#include "..\Render\Object3D.h"
 
 class KaiborgV1{
 public:
@@ -19,8 +22,10 @@ public:
 
 private:
     Vector3D basisVertices[38] = {Vector3D(107.9757f,136.2652f,0.2350f),Vector3D(101.6199f,144.7397f,0.2350f),Vector3D(75.1373f,127.5789f,0.2350f),Vector3D(133.8444f,140.6527f,0.2350f),Vector3D(114.7054f,126.9483f,0.2350f),Vector3D(142.0465f,81.8757f,0.2350f),Vector3D(101.1571f,96.1396f,0.2039f),Vector3D(123.1562f,82.9103f,0.2350f),Vector3D(133.5642f,102.9256f,0.2350f),Vector3D(87.2987f,70.7395f,0.2350f),Vector3D(92.8581f,85.4939f,0.2350f),Vector3D(117.0182f,103.1925f,0.2350f),Vector3D(109.6740f,90.1348f,0.2350f),Vector3D(129.3566f,92.8118f,0.2350f),Vector3D(146.7509f,95.2291f,0.2350f),Vector3D(104.3418f,79.8412f,0.2350f),Vector3D(160.4085f,75.6886f,0.2350f),Vector3D(31.0627f,19.4793f,0.2350f),Vector3D(55.8724f,40.2722f,0.2350f),Vector3D(59.6530f,33.4200f,0.2350f),Vector3D(94.2036f,14.9372f,0.2350f),Vector3D(93.5680f,22.9147f,0.2350f),Vector3D(113.5824f,24.9419f,0.2350f),Vector3D(128.8840f,29.8757f,0.1047f),Vector3D(146.1327f,33.4200f,0.2350f),Vector3D(140.9344f,37.9094f,0.1705f),Vector3D(18.7760f,22.0784f,0.2350f),Vector3D(152.5123f,46.4156f,0.2350f),Vector3D(26.3235f,28.5648f,0.2350f),Vector3D(12.5599f,34.5396f,0.2350f),Vector3D(109.0362f,32.4749f,0.1639f),Vector3D(130.7743f,23.0235f,0.2350f),Vector3D(12.6371f,52.0129f,0.2350f),Vector3D(18.9929f,66.8431f,0.2350f),Vector3D(24.5013f,61.7585f,0.2350f),Vector3D(37.6367f,74.0464f,0.2350f),Vector3D(42.0858f,65.9957f,0.2350f),Vector3D(58.9986f,65.2066f,0.2350f)};
-    Vector3D basisIndexes[33] = {Vector3D(1,2,0),Vector3D(0,3,1),Vector3D(4,0,2),Vector3D(4,3,0),Vector3D(12,13,11),Vector3D(13,14,8),Vector3D(7,13,12),Vector3D(6,12,11),Vector3D(11,13,8),Vector3D(6,10,12),Vector3D(10,15,12),Vector3D(10,9,15),Vector3D(7,5,13),Vector3D(15,7,12),Vector3D(13,5,14),Vector3D(5,16,14),Vector3D(19,18,17),Vector3D(19,20,18),Vector3D(20,21,18),Vector3D(20,22,21),Vector3D(21,22,30),Vector3D(25,23,24),Vector3D(22,23,30),Vector3D(18,28,17),Vector3D(24,27,25),Vector3D(28,26,17),Vector3D(28,29,26),Vector3D(22,31,23),Vector3D(23,31,24),Vector3D(34,33,32),Vector3D(34,35,33),Vector3D(36,35,34),Vector3D(36,37,35)};
-    Object3D basisObj = Object3D(38, 33, basisVertices, basisIndexes);
+    IndexGroup basisIndexes[33] = {IndexGroup(1,2,0),IndexGroup(0,3,1),IndexGroup(4,0,2),IndexGroup(4,3,0),IndexGroup(12,13,11),IndexGroup(13,14,8),IndexGroup(7,13,12),IndexGroup(6,12,11),IndexGroup(11,13,8),IndexGroup(6,10,12),IndexGroup(10,15,12),IndexGroup(10,9,15),IndexGroup(7,5,13),IndexGroup(15,7,12),IndexGroup(13,5,14),IndexGroup(5,16,14),IndexGroup(19,18,17),IndexGroup(19,20,18),IndexGroup(20,21,18),IndexGroup(20,22,21),IndexGroup(21,22,30),IndexGroup(25,23,24),IndexGroup(22,23,30),IndexGroup(18,28,17),IndexGroup(24,27,25),IndexGroup(28,26,17),IndexGroup(28,29,26),IndexGroup(22,31,23),IndexGroup(23,31,24),IndexGroup(34,33,32),IndexGroup(34,35,33),IndexGroup(36,35,34),IndexGroup(36,37,35)};
+    TriangleGroup triangleGroup = TriangleGroup(&basisVertices[0], &basisIndexes[0], 38, 33);
+    SimpleMaterial simpleMaterial = SimpleMaterial(RGBColor(128, 128, 128));
+    Object3D basisObj = Object3D(&triangleGroup, &simpleMaterial);
 
     static const byte morphCount = 8;
     int AddEyebrowIndexes[17] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
@@ -52,9 +57,6 @@ private:
         Morph(7, HappySquintIndexes, HappySquintVectors)
     };
 
-    Quaternion offsetRotation = Rotation(EulerAngles(Vector3D(0.0000,-0.0000,0.0000), EulerConstants::EulerOrderXYZR)).GetQuaternion();
-    Vector3D offsetPosition = Vector3D(-3.4957,-2.8601,0.0000);
-
 public:
     KaiborgV1(){}
 
@@ -70,16 +72,19 @@ public:
         return &morphs[morph].Weight;
     }
 
+    void Reset(){
+        for(int i = 0; i < morphCount; i++){
+            morphs[i].Weight = 0.0f;
+        }
+    }
+
     void Update(){
         basisObj.ResetVertices();
 
         for(int i = 0; i < morphCount; i++){
             if(morphs[i].Weight > 0.0f){
-                morphs[i].MorphObject3D(&basisObj);
+                morphs[i].MorphObject3D(basisObj.GetTriangleGroup());
             }
         }
-
-        basisObj.Rotate(offsetRotation);
-        basisObj.MoveRelative(offsetPosition);
     }
 };

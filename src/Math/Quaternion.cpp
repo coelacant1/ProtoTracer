@@ -29,26 +29,34 @@ Quaternion::Quaternion(float w, float x, float y, float z) {
 }
 
 Vector2D Quaternion::RotateVector(Vector2D coordinate) {
- Quaternion current = Quaternion(this->W, this->X, this->Y, this->Z);
-  Quaternion qv = Quaternion(0, coordinate.X, coordinate.Y, 0);
-  Quaternion qr = current * qv * current.MultiplicativeInverse();
+	Quaternion current = Quaternion(this->W, this->X, this->Y, this->Z);
+	
+	if (current.IsClose(Quaternion(), epsilon)) return coordinate;
 
-  return Vector2D {
-    qr.X,
-    qr.Y
-  };
+	Quaternion qv = Quaternion(0, coordinate.X, coordinate.Y, 0);
+	Quaternion qr = current * qv * current.MultiplicativeInverse();
+
+	return Vector2D {
+		qr.X,
+		qr.Y
+	};
 }
 
 Vector2D Quaternion::UnrotateVector(Vector2D coordinate) {
-  Quaternion current = Quaternion(this->W, this->X, this->Y, this->Z);
+	Quaternion current = Quaternion(this->W, this->X, this->Y, this->Z);
 
-  return current.Conjugate().RotateVector(coordinate);
+	if (current.IsClose(Quaternion(), epsilon)) return coordinate;
+
+	return current.Conjugate().RotateVector(coordinate);
 }
 
 Vector3D Quaternion::RotateVector(Vector3D coordinate) {
 	Quaternion current = Quaternion(this->W, this->X, this->Y, this->Z);
+	
+	if (current.IsClose(Quaternion(), epsilon)) return coordinate;
+
 	Quaternion qv = Quaternion(0, coordinate.X, coordinate.Y, coordinate.Z);
-	Quaternion qr = current * qv * current.MultiplicativeInverse();
+	Quaternion qr = current * qv * current.Conjugate();
 
 	return Vector3D {
 		qr.X,
@@ -59,8 +67,10 @@ Vector3D Quaternion::RotateVector(Vector3D coordinate) {
 
 Vector3D Quaternion::UnrotateVector(Vector3D coordinate) {
 	Quaternion current = Quaternion(this->W, this->X, this->Y, this->Z);
+	
+	if (current.IsClose(Quaternion(), epsilon)) return coordinate;
 
-	return current.Conjugate().RotateVector(coordinate);
+	return current.UnitQuaternion().Conjugate().RotateVector(coordinate);
 }
 
 Vector3D Quaternion::GetBiVector() {
@@ -108,7 +118,7 @@ Quaternion Quaternion::DeltaRotation(Vector3D angularVelocity, float timeDelta){
   Vector3D halfAngle = angularVelocity * (timeDelta / 2.0f);
   float halfAngleLength = halfAngle.Magnitude();
 
-  if(halfAngleLength > 0.001f){//exponential map
+  if(halfAngleLength > epsilon){//exponential map
     halfAngle = halfAngle * (sinf(halfAngleLength) / halfAngleLength);
     return (current * Quaternion(cosf(halfAngleLength), halfAngle.X, halfAngle.Y, halfAngle.Z)).UnitQuaternion();
   }
@@ -142,9 +152,10 @@ Quaternion Quaternion::Subtract(Quaternion quaternion) {
 
 Quaternion Quaternion::Multiply(Quaternion quaternion) {
 	Quaternion current = Quaternion(this->W, this->X, this->Y, this->Z);
+
+	if(quaternion.IsClose(Quaternion(), epsilon)) return current;
 	
-	return Quaternion
-	{
+	return Quaternion{
 		current.W * quaternion.W - current.X * quaternion.X - current.Y * quaternion.Y - current.Z * quaternion.Z,
 		current.W * quaternion.X + current.X * quaternion.W + current.Y * quaternion.Z - current.Z * quaternion.Y,
 		current.W * quaternion.Y - current.X * quaternion.Z + current.Y * quaternion.W + current.Z * quaternion.X,
@@ -176,8 +187,11 @@ Quaternion operator  *(Quaternion q, float scalar) {
 }
 
 Quaternion Quaternion::Divide(Quaternion quaternion) {
-	float scale = quaternion.W * quaternion.W + quaternion.X * quaternion.X + quaternion.Y * quaternion.Y + quaternion.Z * quaternion.Z;
 	Quaternion current = Quaternion(this->W, this->X, this->Y, this->Z);
+	
+	if(quaternion.IsClose(Quaternion(), epsilon)) return current;
+
+	float scale = quaternion.W * quaternion.W + quaternion.X * quaternion.X + quaternion.Y * quaternion.Y + quaternion.Z * quaternion.Z;
 
 	return Quaternion
 	{
@@ -296,6 +310,7 @@ Quaternion Quaternion::UnitQuaternion() {
 }
 
 float Quaternion::Magnitude() {
+	//VERIFY
 	return sqrtf(Normal());
 }
 
@@ -307,7 +322,7 @@ float Quaternion::Normal() {
 	Quaternion current = Quaternion(this->W, this->X, this->Y, this->Z);
 
 
-	return powf(current.W, 2.0f) + powf(current.X, 2.0f) + powf(current.Y, 2.0f) + powf(current.Z, 2.0f);
+	return powf(powf(current.W, 2.0f) + powf(current.X, 2.0f) + powf(current.Y, 2.0f) + powf(current.Z, 2.0f), 0.5f);
 }
 
 bool Quaternion::IsNaN() {
@@ -342,6 +357,15 @@ bool Quaternion::IsEqual(Quaternion quaternion) {
 		current.X == quaternion.X &&
 		current.Y == quaternion.Y &&
 		current.Z == quaternion.Z;
+}
+
+bool Quaternion::IsClose(Quaternion quaternion, float epsilon) {
+	Quaternion current = Quaternion(this->W, this->X, this->Y, this->Z);
+
+	return fabs(current.W - quaternion.W) < epsilon &&
+		   fabs(current.X - quaternion.X) < epsilon &&
+		   fabs(current.Y - quaternion.Y) < epsilon &&
+		   fabs(current.Z - quaternion.Z) < epsilon;
 }
 
 String Quaternion::ToString() {

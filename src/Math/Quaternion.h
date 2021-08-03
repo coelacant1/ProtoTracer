@@ -5,6 +5,9 @@
 #include "Vector3D.h"
 
 typedef struct Quaternion {
+private:
+	const float epsilon = 0.001f;
+
 public:
 	float W = 1.0f;
 	float X = 0.0f;
@@ -49,6 +52,7 @@ public:
 	bool IsInfinite();
 	bool IsNonZero();
 	bool IsEqual(Quaternion quaternion);
+	bool IsClose(Quaternion quaternion, float epsilon);
 
 	String ToString();
 

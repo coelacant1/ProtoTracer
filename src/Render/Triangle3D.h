@@ -11,11 +11,9 @@ public:
  
 	Vector3D edge1;
 	Vector3D edge2;
-	Vector3D normal = Vector3D();
+	Vector3D normal;
 
-	Triangle3D(){
-    
-	}
+	Triangle3D(){}
 
 	Triangle3D(Vector3D* p1, Vector3D* p2, Vector3D* p3) {
 		this->p1 = p1;
@@ -25,20 +23,12 @@ public:
 		this->Normal();
 	}
 
-	Vector3D Normal() {
+	Vector3D* Normal() {
 		edge1 = *p2 - *p1;
 		edge2 = *p3 - *p1;
 		normal = edge1.CrossProduct(edge2).UnitSphere();
 		
-		return normal;
-	}
-
-	void Translate(Quaternion q, Vector3D p) {
-		*p1 = q.RotateVector(*p1) + p;
-		*p2 = q.RotateVector(*p2) + p;
-		*p3 = q.RotateVector(*p3) + p;
-
-		Normal();
+		return &normal;
 	}
 
 	bool DidIntersect(Vector3D ray, Vector3D direction, Vector3D* intersect, Vector3D* color) {

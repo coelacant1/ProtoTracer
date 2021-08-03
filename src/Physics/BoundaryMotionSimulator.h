@@ -17,7 +17,7 @@ public:
   
   BoundarySphere(Object3D* object, float radius){
     this->object = object;
-    this->position = object->GetVertexCenter();
+    this->position = object->GetTransform()->GetPosition();
     this->radius = radius;
   }
   
@@ -83,7 +83,7 @@ public:
   Vector3D position = Vector3D(0, 0, 0);
   
   BoundaryCube(Object3D* object){//calculates center position and object size
-    this->centerPosition = object->GetVertexCenter();
+    this->centerPosition = object->GetTransform()->GetPosition() + object->GetCenterOffset();
     object->GetMinMaxDimensions(minimum, maximum);
   }
   
@@ -226,7 +226,7 @@ public:
       bS[i]->velocity = bS[i]->velocity * RandomRatio(0.0005f);
       
       bS[i]->GetObject3D()->ResetVertices();
-      bS[i]->GetObject3D()->MoveRelative(bS[i]->position);
+      bS[i]->GetObject3D()->GetTransform()->SetPosition(bS[i]->position);
       
       //Serial.println(bS[i]->position.ToString());
     }

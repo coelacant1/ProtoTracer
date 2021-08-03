@@ -1,7 +1,8 @@
 #pragma once
 
+#include "..\Render\Light.h"
 #include "..\Render\Object3D.h"
-#include "..\Render\ObjectDeformer.h"
+#include "..\Render\TriangleGroupDeformer.h"
 #include "..\Flash\BootObjs.h"
 #include "Animation.h"
 
@@ -17,7 +18,7 @@ private:
     Object3D cursorObj = Object3D(cursorString, 10, 10);
 
     Object3D planeObj = Object3D(planeString, 150, 250);
-    ObjectDeformer planeDeformer = ObjectDeformer(&planeObj);
+    TriangleGroupDeformer planeDeformer = TriangleGroupDeformer(&planeObj);
     const int frames = 1260;
 
 public:
@@ -37,7 +38,7 @@ public:
         objects[5] = &cursorObj;
         objects[6] = &planeObj;
     
-        scene = new Scene(objects, lights, 7, 6);
+        scene = new Scene(objects, 7);
     }
 
     void FadeIn(float stepRatio){
@@ -92,85 +93,85 @@ public:
         lights[5].MoveTo(Vector3D(0, sinf(i * 3.14159f / 180.0f * 6.0f) * 1000.0f, -cosf(i * 3.14159f / 180.0f * 6.0f) * 1000.0f));
         
         if(i < 180){//protodrv1
-        objects[0]->Enable();
-        objects[1]->Disable();
-        objects[2]->Disable();
-        objects[3]->Disable();
-        objects[4]->Disable();
-        objects[5]->Disable();
-        objects[6]->Disable();
-        
-        objects[0]->Scale(Vector3D(-1, 1, 1));
+            objects[0]->Enable();
+            objects[1]->Disable();
+            objects[2]->Disable();
+            objects[3]->Disable();
+            objects[4]->Disable();
+            objects[5]->Disable();
+            objects[6]->Disable();
+            
+            objects[0]->Scale(Vector3D(-1, 1, 1));
         objects[0]->MoveRelative(Vector3D(120, 70, 0));
         } else if (i < 270){//init
-        objects[0]->Disable();
-        objects[1]->Enable();
-        objects[2]->Disable();
-        objects[3]->Disable();
-        objects[4]->Disable();
-        objects[5]->Disable();
-        objects[6]->Disable();
+            objects[0]->Disable();
+            objects[1]->Enable();
+            objects[2]->Disable();
+            objects[3]->Disable();
+            objects[4]->Disable();
+            objects[5]->Disable();
+            objects[6]->Disable();
 
-        objects[1]->Scale(Vector3D(-1, 1, 1));
-        objects[1]->MoveRelative(Vector3D(120, 70, 0));
+            objects[1]->Scale(Vector3D(-1, 1, 1));
+            objects[1]->MoveRelative(Vector3D(120, 70, 0));
         } else if (i < 360){//done
-        objects[0]->Disable();
-        objects[1]->Disable();
-        objects[2]->Disable();
-        objects[3]->Disable();
-        objects[4]->Enable();
-        objects[5]->Disable();
-        objects[6]->Disable();
+            objects[0]->Disable();
+            objects[1]->Disable();
+            objects[2]->Disable();
+            objects[3]->Disable();
+            objects[4]->Enable();
+            objects[5]->Disable();
+            objects[6]->Disable();
 
-        objects[4]->Scale(Vector3D(-1, 1, 1));
-        objects[4]->MoveRelative(Vector3D(120, 70, 0));
+            objects[4]->Scale(Vector3D(-1, 1, 1));
+            objects[4]->MoveRelative(Vector3D(120, 70, 0));
         } else if (i < 540){//cursor blink and transform
-        objects[0]->Disable();
-        objects[1]->Disable();
-        objects[2]->Disable();
-        objects[3]->Disable();
-        objects[4]->Disable();
-        objects[5]->Enable();
-        objects[6]->Disable();
+            objects[0]->Disable();
+            objects[1]->Disable();
+            objects[2]->Disable();
+            objects[3]->Disable();
+            objects[4]->Disable();
+            objects[5]->Enable();
+            objects[6]->Disable();
 
-        objects[5]->Scale(Vector3D(-1, 1, 1));
-        objects[5]->MoveRelative(Vector3D(120, 82, 0));
+            objects[5]->Scale(Vector3D(-1, 1, 1));
+            objects[5]->MoveRelative(Vector3D(120, 82, 0));
         } else if (i < 900){//cursor blink and transform
-        float ratio = Mathematics::CosineInterpolation(0.0f, 1.0f, ((float)(i - 540)) / 360.0f);
-        
-        Vector3D scale = Vector3D::LERP(Vector3D(-1, 1, 1), Vector3D(-10, 28, 1), ratio);
-        Vector3D pos = Vector3D::LERP(Vector3D(120, 82, 0), Vector3D(-55, 120, 0), ratio);
-        Vector3D rotation = Vector3D::LERP(Vector3D(0, 0, 0), Vector3D(0, 90, 0), ratio);
-        
-        objects[5]->ScaleCenter(scale);
-        objects[5]->MoveRelative(pos);
-        objects[5]->RotateCenter(rotation);
+            float ratio = Mathematics::CosineInterpolation(0.0f, 1.0f, ((float)(i - 540)) / 360.0f);
+            
+            Vector3D scale = Vector3D::LERP(Vector3D(-1, 1, 1), Vector3D(-10, 28, 1), ratio);
+            Vector3D pos = Vector3D::LERP(Vector3D(120, 82, 0), Vector3D(-55, 120, 0), ratio);
+            Vector3D rotation = Vector3D::LERP(Vector3D(0, 0, 0), Vector3D(0, 90, 0), ratio);
+            
+            objects[5]->ScaleCenter(scale);
+            objects[5]->MoveRelative(pos);
+            objects[5]->RotateCenter(rotation);
         } else if (i < 1260){//plane
-        objects[0]->Disable();
-        objects[1]->Disable();
-        objects[2]->Disable();
-        objects[3]->Disable();
-        objects[4]->Disable();
-        objects[5]->Disable();
-        objects[6]->Enable();
+            objects[0]->Disable();
+            objects[1]->Disable();
+            objects[2]->Disable();
+            objects[3]->Disable();
+            objects[4]->Disable();
+            objects[5]->Disable();
+            objects[6]->Enable();
 
-        int iO = i + 90;
+            int iO = i + 90;
+            
+            float def = sinf(iO * 3.14159f / 180.0f * 1.0f) * 0.009f;
+            float freq = sinf(iO * 3.14159f / 180.0f * 1.0f) * 4000.0f;
+            
+            planeDeformer.SineWaveSurfaceDeform(Vector3D(-150, 100, 0), Mathematics::Constrain(sinf(iO * 3.14159f / 180.0f * 1.0f) * 300.0f + 150.0f, 0.0f, 200.0f), sinf(-iO * 3.14159f / 180.0f * 0.1f), 0.01f + def, 7000.0f - freq, ObjectDeformer::ZAxis);
         
-        float def = sinf(iO * 3.14159f / 180.0f * 1.0f) * 0.009f;
-        float freq = sinf(iO * 3.14159f / 180.0f * 1.0f) * 4000.0f;
+            float s1 = 0.3f + sinf(iO * 3.14159f / 180.0f * 2.0f) * 0.1f;
+            float s2 = 0.4f + sinf(iO * 3.14159f / 180.0f * 2.0f) * 0.1f;
+            float s3 = 0.3f + sinf(iO * 3.14159f / 180.0f * 3.0f) * 0.1f;
+            float zs = Mathematics::Constrain(sinf(iO * 3.14159f / 180.0f * 1.0f) * 360.0f + 180.0f, 180.0f, 360.0f + 90.0f);
+            float cs = Mathematics::Constrain(sinf(iO * 3.14159f / 180.0f * 1.0f) * 90.0f + 45.0f, 0, 90);
+            float xs = sinf(iO * 3.14159f / 180.0f * 1.0f) * 225.0f + 45.0f;
         
-        planeDeformer.SineWaveSurfaceDeform(Vector3D(-150, 100, 0), Mathematics::Constrain(sinf(iO * 3.14159f / 180.0f * 1.0f) * 300.0f + 150.0f, 0.0f, 200.0f), sinf(-iO * 3.14159f / 180.0f * 0.1f), 0.01f + def, 7000.0f - freq, ObjectDeformer::ZAxis);
-    
-        float s1 = 0.3f + sinf(iO * 3.14159f / 180.0f * 2.0f) * 0.1f;
-        float s2 = 0.4f + sinf(iO * 3.14159f / 180.0f * 2.0f) * 0.1f;
-        float s3 = 0.3f + sinf(iO * 3.14159f / 180.0f * 3.0f) * 0.1f;
-        float zs = Mathematics::Constrain(sinf(iO * 3.14159f / 180.0f * 1.0f) * 360.0f + 180.0f, 180.0f, 360.0f + 90.0f);
-        float cs = Mathematics::Constrain(sinf(iO * 3.14159f / 180.0f * 1.0f) * 90.0f + 45.0f, 0, 90);
-        float xs = sinf(iO * 3.14159f / 180.0f * 1.0f) * 225.0f + 45.0f;
-    
-        objects[6]->Scale(Vector3D(s1, 1.0f - s2, s3), Vector3D(0, 0, 0));
-        objects[6]->Rotate(Vector3D(cs + 45.0f, xs + 90.0f, zs), Vector3D(0, 100, 0));
-        objects[6]->MoveRelative(Vector3D(-40, 10, 0));
+            objects[6]->Scale(Vector3D(s1, 1.0f - s2, s3), Vector3D(0, 0, 0));
+            objects[6]->Rotate(Vector3D(cs + 45.0f, xs + 90.0f, zs), Vector3D(0, 100, 0));
+            objects[6]->MoveRelative(Vector3D(-40, 10, 0));
         }
     }
 };

@@ -3,12 +3,19 @@
 #include "..\Materials\RGBColor.h"
 
 typedef struct Pixel {
+	Vector2D* position;
+
 public:
-	float X = 0;
-	float Y = 0;
   	RGBColor Color;
 
 	Pixel() {}
-	Pixel(float X, float Y) : X(X), Y(Y){}
+
+	Pixel(Vector2D* position){
+		this->position = position;
+	}
+
+	Vector2D GetPosition(){
+		return *position;
+	}
 
 } Pixel;

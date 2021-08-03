@@ -2,6 +2,19 @@
 
 float Mathematics::MPI = atan(1) * 4;
 
+float Mathematics::Constrain(unsigned int value, unsigned int minimum, unsigned int maximum) {
+	if (value > maximum)
+	{
+		value = maximum;
+	}
+	else if (value < minimum)
+	{
+		value = minimum;
+	}
+
+	return value;
+}
+
 float Mathematics::Constrain(float value, float minimum, float maximum) {
 	if (value > maximum)
 	{

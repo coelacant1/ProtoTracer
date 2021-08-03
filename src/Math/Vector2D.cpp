@@ -113,18 +113,22 @@ Vector2D Vector2D::Constrain(Vector2D minimum, Vector2D maximum) {
 	return vector;
 }
 
-Vector2D Vector2D::Minimum(Vector2D v1, Vector2D v2) {
+Vector2D Vector2D::Minimum(Vector2D v) {
 	return Vector2D{
-		v1.X < v2.X ? v1.X : v2.X,
-		v1.Y < v2.Y ? v1.Y : v2.Y
+		X < v.X ? X : v.X,
+		Y < v.Y ? Y : v.Y
 	};
 }
 
-Vector2D Vector2D::Maximum(Vector2D v1, Vector2D v2) {
+Vector2D Vector2D::Maximum(Vector2D v) {
 	return Vector2D{
-		v1.X > v2.X ? v1.X : v2.X,
-		v1.Y > v2.Y ? v1.Y : v2.Y
+		X > v.X ? X : v.X,
+		Y > v.Y ? Y : v.Y
 	};
+}
+
+bool Vector2D::CheckBounds(Vector2D minimum, Vector2D maximum) {
+	return X > minimum.X && X < maximum.X && Y > minimum.Y && Y < maximum.Y;
 }
 
 float Vector2D::Magnitude() {

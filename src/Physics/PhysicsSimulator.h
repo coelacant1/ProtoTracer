@@ -1,7 +1,6 @@
 #pragma once
 
 #include "BoundaryMotionSimulator.h"
-#include "..\Flash\MiscObjs.h"
 #include "..\Render\Object3D.h"
 #include "..\Math\Quaternion.h"
 #include "..\Render\Scene.h"

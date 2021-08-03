@@ -5,7 +5,7 @@
 #include "ProtoDRMorph.h"
 #include "..\Render\Scene.h"
 #include "..\Materials\GradientMaterial.h"
-#include "..\Math\SimplexNoise.h"
+#include "..\Materials\SimplexNoise.h"
 
 class ProtoDRMorphAnimator : public Animation{
 private:
@@ -134,13 +134,13 @@ public:
     ProtoDRMorphAnimator(){
         scene = new Scene(objects, 1);
 
-        LinkParameters();
+        //LinkParameters();
 
-        AddBlinkKeyFrames();
-        AddTopFinKeyFrames();
-        AddMidFinKeyFrames();
-        AddBotFinKeyFrames();
-        AddMouthKeyFrames();
+        //AddBlinkKeyFrames();
+        //AddTopFinKeyFrames();
+        //AddMidFinKeyFrames();
+        //AddBotFinKeyFrames();
+        //AddMouthKeyFrames();
 
         objects[0] = pM.GetObject();
         objects[0]->SetMaterial(&sNoise);
@@ -164,34 +164,59 @@ public:
         mouth.Update();
     }
 
-    void Circle(){
+    void Default(){
+        pM.Reset();
+        blink.Play();
+        mouth.Play();
+
+    }
+
+    void OwO(){
         pM.Reset();
         blink.Pause();
         blink.Reset();
+        mouth.Pause();
+        mouth.Reset();
 
+        pM.SetMorphWeight(ProtoDR::BlushEye, 1.0f);
+        pM.SetMorphWeight(ProtoDR::HideBlush, 0.0f);
+        pM.SetMorphWeight(ProtoDR::HideEyeBrow, 1.0f);
+        pM.SetMorphWeight(ProtoDR::OwOMouth, 1.0f);
     }
 
     void Sad(){
         pM.Reset();
         blink.Play();
+        mouth.Pause();
+        mouth.Reset();
 
-
+        pM.SetMorphWeight(ProtoDR::SadEye, 1.0f);
+        pM.SetMorphWeight(ProtoDR::SadEyeBrow, 1.0f);
+        pM.SetMorphWeight(ProtoDR::SadMouth, 1.0f);
     }
 
     void Dead(){
         pM.Reset();
         blink.Pause();
         blink.Reset();
+        mouth.Pause();
+        mouth.Reset();
 
-
+        pM.SetMorphWeight(ProtoDR::FlatMouth, 1.0f);
+        pM.SetMorphWeight(ProtoDR::DeadEye, 1.0f);
+        pM.SetMorphWeight(ProtoDR::HideEyeBrow, 1.0f);
     }
 
     void Heart(){
         pM.Reset();
         blink.Pause();
         blink.Reset();
+        mouth.Pause();
+        mouth.Reset();
 
-
+        pM.SetMorphWeight(ProtoDR::HeartEye, 1.0f);
+        pM.SetMorphWeight(ProtoDR::HideEyeBrow, 1.0f);
+        pM.SetMorphWeight(ProtoDR::OwOMouth, 1.0f);
     }
 
     void FadeIn(float stepRatio){
@@ -209,31 +234,29 @@ public:
     void Update(float ratio){
         UpdateKeyFrameTracks();
 
-        pM.SetMorphWeight(ProtoDR::HideBlush, 1.0f);
-        pM.SetMorphWeight(ProtoDR::HideSecondEye, 1.0f);
-
+        if (ratio > 0.8f) OwO();
+        else if (ratio > 0.6f) Sad();
+        else if (ratio > 0.4f) Dead();
+        else if (ratio > 0.2f) Heart();
+        else Default();
         pM.Update();
-
-
-        //pM.Reset();
-
-        Object3D* obj = pM.GetObject();
         
-        float x = sinf(ratio * 3.14159f / 180.0f * 360.0f * 2.0f) * 3.0f;
-        float y = cosf(ratio * 3.14159f / 180.0f * 360.0f * 4.0f) * 3.0f;
+        float x = sinf(ratio * 3.14159f / 180.0f * 360.0f * 4.0f) * 3.0f;
+        float y = cosf(ratio * 3.14159f / 180.0f * 360.0f * 6.0f) * 3.0f;
         
         float linSweep = ratio > 0.5f ? 1.0f - ratio : ratio;
-        float sShift = linSweep * 0.0025f + 0.005f;
+        float sShift = linSweep * 0.002f + 0.005f;
 
-        gNoiseMat.SetGradientPeriod(0.5f + linSweep * 4.0f);
+        gNoiseMat.SetGradientPeriod(0.5f + linSweep * 6.0f);
         gNoiseMat.HueShift(ratio * 360 * 2);
         sNoise.SetScale(Vector3D(sShift, sShift, sShift));
         sNoise.SetZPosition(x * 4.0f);
         
-        //obj->Rotate(Vector3D(0, -x * 0.25f, 0), Vector3D(0, 0, 0));
-        obj->MoveRelative(Vector3D(x - 5.0f, y + 10.0f, 600.0f));
-        //obj->MoveRelative(Vector3D(-5.0f, 10.0f, 600.0f));
-        obj->ScaleCenter(Vector3D(1.0f, 1.0f, 1.0f));
+        pM.GetObject()->GetTransform()->SetRotation(Vector3D(0, 180.0f, 0.0f));
+        pM.GetObject()->GetTransform()->SetPosition(Vector3D(x, y, 600.0f));
+        pM.GetObject()->GetTransform()->Scale(Vector3D(1.0f, 1.0f, 1.0f));
+
+        pM.GetObject()->UpdateTransform();
     }
 
 };

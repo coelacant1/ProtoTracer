@@ -17,18 +17,10 @@ private:
     int yPixels;
     long imagePixels;
     const int displayWidth = 320;
-
-    RGBColor ConvertRGB565(uint16_t color){
-
-        Serial.println("Not done yet");
-
-        return RGBColor();
-    }
   
 public:
     BMP(Vector2D imageSize, Vector2D offsetPosition, const uint8_t* bmpArray, uint8_t padding) : file(bmpArray){
         //this->file = bmpArray;
-        Serial.println("READING BMP FILE");
         this->imageSize = imageSize;
         this->offsetPosition = offsetPosition;
         this->padding = padding;
@@ -79,35 +71,19 @@ public:
     }
 
     //maps XY position to an rgb value on the 
-    RGBColor GetRGB(Vector2D xyPosition){
+    RGBColor GetRGB(Vector3D position, Vector3D normal){
         //convert xyposition to integer position on image plane
         int xPosition, yPosition;
 
-        xPosition = Mathematics::Map(xyPosition.X, offsetPosition.X + shiftPosition.X, imageSize.X + 1 + offsetPosition.X + shiftPosition.X, 0, xPixels);//scale to fit image size
-        yPosition = Mathematics::Map(xyPosition.Y, offsetPosition.Y + shiftPosition.Y, imageSize.Y + 1 + offsetPosition.Y + shiftPosition.Y, 0, yPixels);
-        /*
-        Serial.print(xyPosition.ToString());
-        Serial.print("\t");
-        Serial.print(xPosition);
-        Serial.print("\t");
-        Serial.print(yPosition);
-        */
+        xPosition = Mathematics::Map(position.X, offsetPosition.X + shiftPosition.X, imageSize.X + 1 + offsetPosition.X + shiftPosition.X, 0, xPixels);//scale to fit image size
+        yPosition = Mathematics::Map(position.Y, offsetPosition.Y + shiftPosition.Y, imageSize.Y + 1 + offsetPosition.Y + shiftPosition.Y, 0, yPixels);
+
         //map xy to to imagesize with offset position
         if (xPosition < 0 || xPosition > xPixels - 1) return RGBColor(0, 0, 0);
         if (yPosition < 0 || yPosition > yPixels - 1) return RGBColor(0, 0, 0);
 
-
         long pixelStart = 54 + xPosition * 3 + (xPixels * yPosition * 3 + (yPosition * padding)) + glitch;// + (yPosition) | + (yPosition  * 2)
-        /*
-        Serial.print("\t");
-        Serial.print(pixelStart);
-        Serial.print("\t");
-        Serial.print(file[pixelStart + 2]);
-        Serial.print("\t");
-        Serial.print(file[pixelStart + 1]);
-        Serial.print("\t");
-        Serial.println(file[pixelStart]);
-        */
+
         return RGBColor(file[pixelStart + 2], file[pixelStart + 1], file[pixelStart]);
     }
 };

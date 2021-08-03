@@ -3,6 +3,8 @@
 #include "Arduino.h"
 #include "..\Math\Rotation.h"
 #include "Morph.h"
+#include "..\Materials\SimpleMaterial.h"
+#include "..\Render\IndexGroup.h"
 
 class ProtoDR{
 public:
@@ -41,15 +43,18 @@ public:
         DeadEye,
         HideEyeBrow,
         SadEyeBrow,
-        AngryEyeBrow
+        AngryEyeBrow,
+        OwO
     };
 
 private:
     Vector3D basisVertices[128] = {Vector3D(-180.2830f,22.1568f,-65.0000f),Vector3D(-152.1540f,43.1344f,-65.0000f),Vector3D(-171.2245f,13.0983f,-65.0000f),Vector3D(-148.8166f,31.6921f,-65.0000f),Vector3D(-105.4312f,15.9589f,-65.0000f),Vector3D(-106.3847f,25.9709f,-65.0000f),Vector3D(-59.1851f,40.7506f,-65.0000f),Vector3D(-63.4760f,49.3323f,-65.0000f),Vector3D(-45.3590f,71.7402f,-65.0000f),Vector3D(-41.8793f,56.3165f,-65.0000f),Vector3D(-32.1758f,56.7576f,-65.0000f),Vector3D(-23.4279f,72.2169f,-65.0000f),Vector3D(-16.2765f,48.3788f,-65.0000f),Vector3D(-21.9976f,41.2273f,-65.0000f),Vector3D(-100.9826f,80.5753f,-65.0000f),Vector3D(-83.0233f,63.1584f,-65.0000f),Vector3D(-80.2524f,88.5146f,-65.0000f),Vector3D(-75.8719f,66.0190f,-65.0000f),Vector3D(-70.1507f,68.4028f,-65.0000f),Vector3D(-49.1731f,86.0431f,-65.0000f),Vector3D(-73.1952f,92.0431f,-65.0000f),Vector3D(-59.9632f,97.3360f,-65.0000f),Vector3D(-34.3935f,88.4269f,-65.0000f),Vector3D(-42.4984f,88.9037f,-65.0000f),Vector3D(-50.2596f,100.4235f,-65.0000f),Vector3D(-31.2936f,107.4806f,-65.0000f),Vector3D(-118.7805f,122.2771f,-65.0000f),Vector3D(-125.4552f,97.0086f,-65.0000f),Vector3D(-101.1403f,107.9742f,-65.0000f),Vector3D(-112.5826f,141.3476f,-65.0000f),Vector3D(-77.7789f,117.9862f,-65.0000f),Vector3D(-94.8077f,153.7929f,-65.0000f),Vector3D(-59.6619f,125.6144f,-65.0000f),Vector3D(-74.9183f,167.0928f,-65.0000f),Vector3D(-52.9872f,152.7899f,-65.0000f),Vector3D(-30.1026f,138.4870f,-65.0000f),Vector3D(-129.2693f,113.6953f,-65.0000f),Vector3D(-133.0834f,124.1841f,-65.0000f),Vector3D(-119.7341f,146.1152f,-65.0000f),Vector3D(-124.5017f,154.2202f,-65.0000f),Vector3D(-97.8030f,173.7675f,-65.0000f),Vector3D(-81.5930f,171.3837f,-65.0000f),Vector3D(-197.9232f,58.3908f,-65.0000f),Vector3D(-190.7718f,86.0431f,-65.0000f),Vector3D(-189.3415f,64.5887f,-65.0000f),Vector3D(-185.5274f,79.3684f,-65.0000f),Vector3D(-173.1315f,82.2290f,-65.0000f),Vector3D(-166.9336f,91.2875f,-65.0000f),Vector3D(-4.8341f,133.2426f,-65.0000f),Vector3D(-1.0200f,140.8708f,-65.0000f),Vector3D(-58.2316f,202.8501f,-65.0000f),Vector3D(-21.0441f,196.6521f,-65.0000f),Vector3D(61.9127f,246.7123f,-65.0000f),Vector3D(96.2397f,284.3766f,-65.0000f),Vector3D(-10.0785f,192.8380f,-65.0000f),Vector3D(2.7941f,147.5455f,-65.0000f),Vector3D(20.9111f,166.6161f,-65.0000f),Vector3D(21.8646f,190.9310f,-65.0000f),Vector3D(32.3534f,200.9430f,-65.0000f),Vector3D(53.3310f,230.9791f,-65.0000f),Vector3D(15.6667f,132.2891f,-65.0000f),Vector3D(74.3086f,186.6401f,-65.0000f),Vector3D(48.5633f,145.1617f,-65.0000f),Vector3D(84.7973f,172.3372f,-65.0000f),Vector3D(151.5442f,176.6281f,-65.0000f),Vector3D(186.8247f,185.2098f,-65.0000f),Vector3D(67.1571f,147.5455f,-65.0000f),Vector3D(90.0417f,165.1858f,-65.0000f),Vector3D(107.2052f,147.0688f,-65.0000f),Vector3D(134.8575f,167.0928f,-65.0000f),Vector3D(19.0040f,127.0447f,-65.0000f),Vector3D(52.8542f,139.9173f,-65.0000f),Vector3D(129.6131f,124.6609f,-65.0000f),Vector3D(114.3567f,139.4406f,-65.0000f),Vector3D(153.9280f,171.3837f,-65.0000f),Vector3D(188.2550f,180.4422f,-65.0000f),Vector3D(2.3173f,108.4509f,-65.0000f),Vector3D(12.3293f,96.5319f,-65.0000f),Vector3D(15.6667f,40.2738f,-65.0000f),Vector3D(2.3173f,13.5751f,-65.0000f),Vector3D(30.9231f,37.4132f,-65.0000f),Vector3D(48.5633f,25.9709f,-65.0000f),Vector3D(10.4223f,112.7418f,-65.0000f),Vector3D(48.0866f,110.3580f,-65.0000f),Vector3D(20.9111f,99.3924f,-65.0000f),Vector3D(35.6907f,94.6248f,-65.0000f),Vector3D(41.4119f,46.4717f,-65.0000f),Vector3D(52.3774f,35.5062f,-65.0000f),Vector3D(58.5754f,110.8348f,-65.0000f),Vector3D(70.4944f,101.7763f,-65.0000f),Vector3D(62.3895f,33.1224f,-65.0000f),Vector3D(77.6459f,56.0070f,-65.0000f),Vector3D(90.0417f,53.1464f,-65.0000f),Vector3D(102.9143f,45.9950f,-65.0000f),Vector3D(70.0177f,113.2186f,-65.0000f),Vector3D(105.2982f,110.8348f,-65.0000f),Vector3D(79.5530f,104.6368f,-65.0000f),Vector3D(93.8558f,99.3924f,-65.0000f),Vector3D(100.5305f,58.3908f,-65.0000f),Vector3D(112.4496f,50.7626f,-65.0000f),Vector3D(112.4496f,110.8348f,-65.0000f),Vector3D(124.3687f,103.2065f,-65.0000f),Vector3D(123.4152f,51.7161f,-65.0000f),Vector3D(140.5786f,75.5543f,-65.0000f),Vector3D(160.1259f,74.6008f,-65.0000f),Vector3D(177.7662f,67.4493f,-65.0000f),Vector3D(-123.8090f,93.5348f,-65.0000f),Vector3D(-109.3982f,89.0057f,-65.0000f),Vector3D(-69.8712f,104.0342f,-65.0000f),Vector3D(-71.9299f,112.6807f,-65.0000f),Vector3D(-28.9032f,131.8266f,-65.0000f),Vector3D(-33.4323f,120.0920f,-65.0000f),Vector3D(-296.1408f,194.8713f,-65.0000f),Vector3D(-295.2308f,155.7414f,-65.0000f),Vector3D(-254.2810f,154.8314f,-65.0000f),Vector3D(-255.6460f,193.9613f,-65.0000f),Vector3D(-295.2308f,208.0662f,-65.0000f),Vector3D(-295.2308f,244.0111f,-65.0000f),Vector3D(-256.5560f,244.0111f,-65.0000f),Vector3D(-257.4660f,208.0662f,-65.0000f),Vector3D(-245.1811f,242.6461f,-65.0000f),Vector3D(-244.7261f,207.1562f,-65.0000f),Vector3D(-208.3262f,242.6461f,-65.0000f),Vector3D(-208.3262f,207.6112f,-65.0000f),Vector3D(-242.9061f,192.1413f,-65.0000f),Vector3D(-241.9961f,157.5614f,-65.0000f),Vector3D(-207.4162f,156.1964f,-65.0000f),Vector3D(-206.9612f,192.5963f,-65.0000f)};
-    Vector3D basisIndexes[84] = {Vector3D(2,1,0),Vector3D(3,1,2),Vector3D(3,4,1),Vector3D(4,5,1),Vector3D(4,6,5),Vector3D(6,7,5),Vector3D(9,8,7),Vector3D(9,7,6),Vector3D(9,10,8),Vector3D(10,11,8),Vector3D(10,12,11),Vector3D(10,13,12),Vector3D(14,15,16),Vector3D(15,17,16),Vector3D(18,19,20),Vector3D(19,21,20),Vector3D(24,23,22),Vector3D(22,25,24),Vector3D(26,27,28),Vector3D(28,29,26),Vector3D(28,30,29),Vector3D(30,31,29),Vector3D(30,32,31),Vector3D(32,33,31),Vector3D(32,34,33),Vector3D(32,35,34),Vector3D(38,37,36),Vector3D(38,39,37),Vector3D(38,40,39),Vector3D(38,41,40),Vector3D(44,43,42),Vector3D(44,45,43),Vector3D(45,46,43),Vector3D(46,47,43),Vector3D(48,49,50),Vector3D(49,51,50),Vector3D(50,51,52),Vector3D(52,53,50),Vector3D(54,55,56),Vector3D(57,54,56),Vector3D(58,54,57),Vector3D(54,58,59),Vector3D(62,61,60),Vector3D(63,61,62),Vector3D(63,64,61),Vector3D(64,65,61),Vector3D(68,67,66),Vector3D(68,69,67),Vector3D(72,71,70),Vector3D(72,73,71),Vector3D(72,74,73),Vector3D(72,75,74),Vector3D(78,77,76),Vector3D(76,79,78),Vector3D(79,80,78),Vector3D(79,81,80),Vector3D(84,83,82),Vector3D(84,85,83),Vector3D(86,83,85),Vector3D(86,87,83),Vector3D(90,89,88),Vector3D(90,91,89),Vector3D(90,92,91),Vector3D(90,93,92),Vector3D(96,95,94),Vector3D(96,97,95),Vector3D(97,98,95),Vector3D(95,98,99),Vector3D(102,101,100),Vector3D(102,103,101),Vector3D(102,104,103),Vector3D(102,105,104),Vector3D(106,107,108),Vector3D(108,109,106),Vector3D(108,110,109),Vector3D(108,111,110),Vector3D(112,113,114),Vector3D(114,115,112),Vector3D(118,117,116),Vector3D(116,119,118),Vector3D(120,121,122),Vector3D(121,123,122),Vector3D(124,125,126),Vector3D(126,127,124)};
-    Object3D basisObj = Object3D(128, 84, basisVertices, basisIndexes);
+    IndexGroup basisIndexes[84] = {IndexGroup(2,1,0),IndexGroup(3,1,2),IndexGroup(3,4,1),IndexGroup(4,5,1),IndexGroup(4,6,5),IndexGroup(6,7,5),IndexGroup(9,8,7),IndexGroup(9,7,6),IndexGroup(9,10,8),IndexGroup(10,11,8),IndexGroup(10,12,11),IndexGroup(10,13,12),IndexGroup(14,15,16),IndexGroup(15,17,16),IndexGroup(18,19,20),IndexGroup(19,21,20),IndexGroup(24,23,22),IndexGroup(22,25,24),IndexGroup(26,27,28),IndexGroup(28,29,26),IndexGroup(28,30,29),IndexGroup(30,31,29),IndexGroup(30,32,31),IndexGroup(32,33,31),IndexGroup(32,34,33),IndexGroup(32,35,34),IndexGroup(38,37,36),IndexGroup(38,39,37),IndexGroup(38,40,39),IndexGroup(38,41,40),IndexGroup(44,43,42),IndexGroup(44,45,43),IndexGroup(45,46,43),IndexGroup(46,47,43),IndexGroup(48,49,50),IndexGroup(49,51,50),IndexGroup(50,51,52),IndexGroup(52,53,50),IndexGroup(54,55,56),IndexGroup(57,54,56),IndexGroup(58,54,57),IndexGroup(54,58,59),IndexGroup(62,61,60),IndexGroup(63,61,62),IndexGroup(63,64,61),IndexGroup(64,65,61),IndexGroup(68,67,66),IndexGroup(68,69,67),IndexGroup(72,71,70),IndexGroup(72,73,71),IndexGroup(72,74,73),IndexGroup(72,75,74),IndexGroup(78,77,76),IndexGroup(76,79,78),IndexGroup(79,80,78),IndexGroup(79,81,80),IndexGroup(84,83,82),IndexGroup(84,85,83),IndexGroup(86,83,85),IndexGroup(86,87,83),IndexGroup(90,89,88),IndexGroup(90,91,89),IndexGroup(90,92,91),IndexGroup(90,93,92),IndexGroup(96,95,94),IndexGroup(96,97,95),IndexGroup(97,98,95),IndexGroup(95,98,99),IndexGroup(102,101,100),IndexGroup(102,103,101),IndexGroup(102,104,103),IndexGroup(102,105,104),IndexGroup(106,107,108),IndexGroup(108,109,106),IndexGroup(108,110,109),IndexGroup(108,111,110),IndexGroup(112,113,114),IndexGroup(114,115,112),IndexGroup(118,117,116),IndexGroup(116,119,118),IndexGroup(120,121,122),IndexGroup(121,123,122),IndexGroup(124,125,126),IndexGroup(126,127,124)};
+    TriangleGroup triangleGroup = TriangleGroup(&basisVertices[0], &basisIndexes[0], 128, 84);
+    SimpleMaterial simpleMaterial = SimpleMaterial(RGBColor(128, 128, 128));
+    Object3D basisObj = Object3D(&triangleGroup, &simpleMaterial);
 
-    static const byte morphCount = 35;
+    static const byte morphCount = 36;
     int HideSecondEyeIndexes[6] = {106,107,108,109,110,111};
     int HideBlushIndexes[12] = {14,15,16,17,18,19,20,21,22,23,24,25};
     int TopFinOuterThinIndexes[3] = {49,51,52};
@@ -85,6 +90,7 @@ private:
     int HideEyeBrowIndexes[6] = {36,37,38,39,40,41};
     int SadEyeBrowIndexes[6] = {36,37,38,39,40,41};
     int AngryEyeBrowIndexes[6] = {36,37,38,39,40,41};
+    int OwOIndexes[112] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111};
 
     Vector3D HideSecondEyeVectors[6] = {Vector3D(-71.8897f,149.6944f,0.0000f),Vector3D(-84.6297f,114.6595f,0.0000f),Vector3D(-105.5595f,99.6446f,0.0000f),Vector3D(-102.8296f,131.0395f,0.0172f),Vector3D(-126.0345f,111.4746f,0.0000f),Vector3D(-121.9395f,85.5396f,0.0000f)};
     Vector3D HideBlushVectors[12] = {Vector3D(-192.9192f,211.5741f,0.0000f),Vector3D(-210.2091f,190.1892f,0.0000f),Vector3D(-176.5393f,203.3842f,0.0000f),Vector3D(-181.5443f,189.2792f,0.0000f),Vector3D(-172.4443f,186.5492f,0.0000f),Vector3D(-159.6081f,171.1629f,0.0000f),Vector3D(-170.6243f,199.7442f,0.0000f),Vector3D(-149.6944f,192.9192f,0.0000f),Vector3D(-121.0295f,165.6193f,0.0000f),Vector3D(-148.3294f,166.0743f,0.0000f),Vector3D(-143.3244f,189.7342f,0.0000f),Vector3D(-125.5795f,181.5442f,0.0000f)};
@@ -121,8 +127,9 @@ private:
     Vector3D HideEyeBrowVectors[6] = {Vector3D(-165.9539f,-9.2551f,0.0000f),Vector3D(-161.4860f,20.1060f,0.0000f),Vector3D(-154.7840f,-41.1693f,0.0000f),Vector3D(-149.9968f,-10.8508f,0.0000f),Vector3D(-157.9751f,-30.5427f,0.0000f),Vector3D(-173.9325f,-66.7007f,0.0000f)};
     Vector3D SadEyeBrowVectors[6] = {Vector3D(15.3188f,30.6377f,0.0000f),Vector3D(26.4888f,27.1271f,0.0000f),Vector3D(37.0205f,-3.8297f,0.0000f),Vector3D(37.0205f,-3.8297f,0.0000f),Vector3D(52.6585f,-22.6591f,0.0000f),Vector3D(47.5522f,-24.8931f,0.0000f)};
     Vector3D AngryEyeBrowVectors[6] = {Vector3D(3.8297f,-10.8508f,0.0000f),Vector3D(9.5743f,-9.5743f,0.0000f),Vector3D(17.8720f,-7.6594f,0.0000f),Vector3D(17.8720f,-7.6594f,0.0000f),Vector3D(9.7007f,-9.1705f,0.0000f),Vector3D(3.9561f,-6.9365f,0.0000f)};
+    Vector3D OwOVectors[112] = {Vector3D(18.4569f,83.8868f,0.0000f),Vector3D(19.4900f,-13.0609f,0.0000f),Vector3D(-12.3074f,84.6132f,0.0000f),Vector3D(-5.5531f,-9.9506f,0.0000f),Vector3D(-38.0856f,9.9486f,0.0000f),Vector3D(-4.5735f,12.4346f,0.0000f),Vector3D(-80.1656f,-25.6960f,0.0000f),Vector3D(-47.4822f,-10.9268f,0.0000f),Vector3D(-94.7614f,42.6355f,0.0000f),Vector3D(-54.0600f,-24.5978f,0.0000f),Vector3D(-67.9295f,-14.1860f,0.0000f),Vector3D(-94.9867f,50.4908f,0.0000f),Vector3D(-72.9760f,-1.6412f,0.0000f),Vector3D(-67.2548f,5.5103f,0.0000f),Vector3D(58.9225f,-141.1768f,0.0000f),Vector3D(58.9225f,-141.1768f,0.0000f),Vector3D(58.9225f,-141.1768f,0.0000f),Vector3D(58.9225f,-141.1768f,0.0000f),Vector3D(58.9225f,-141.1768f,0.0000f),Vector3D(58.9225f,-141.1768f,0.0000f),Vector3D(58.9225f,-141.1768f,0.0000f),Vector3D(58.9225f,-141.1768f,0.0000f),Vector3D(-7.2815f,-35.8781f,0.0000f),Vector3D(-20.8822f,-44.6869f,0.0000f),Vector3D(-21.4531f,-34.5009f,0.0000f),Vector3D(-18.7134f,-33.2260f,0.0000f),Vector3D(91.3549f,22.9060f,0.0000f),Vector3D(76.3238f,39.8424f,0.0000f),Vector3D(72.8391f,-25.3875f,0.0000f),Vector3D(105.9871f,-50.4289f,0.0000f),Vector3D(38.6248f,-39.5656f,0.0000f),Vector3D(77.3593f,-67.0402f,0.0000f),Vector3D(28.8398f,-68.8996f,0.0000f),Vector3D(65.8020f,-102.0459f,0.0000f),Vector3D(43.8709f,-87.7430f,0.0000f),Vector3D(-0.7195f,-81.7722f,0.0000f),Vector3D(25.8736f,2.3255f,0.0000f),Vector3D(51.3934f,0.1688f,0.0000f),Vector3D(37.1685f,-84.3587f,0.0000f),Vector3D(63.6418f,-84.1317f,0.0000f),Vector3D(26.0902f,-107.8450f,0.0000f),Vector3D(9.8803f,-105.4612f,0.0000f),Vector3D(25.2442f,43.4868f,0.0000f),Vector3D(13.9268f,26.6874f,0.0000f),Vector3D(27.5154f,41.4549f,0.0000f),Vector3D(23.7013f,26.6752f,0.0000f),Vector3D(43.8640f,36.3127f,0.0000f),Vector3D(33.5001f,38.1071f,0.0000f),Vector3D(-15.9047f,26.9593f,0.0000f),Vector3D(-8.8659f,23.4971f,0.0000f),Vector3D(88.3608f,-110.2862f,0.0000f),Vector3D(11.1582f,-32.2842f,0.0000f),Vector3D(-75.9647f,-71.4914f,0.0000f),Vector3D(-95.2727f,-115.8426f,0.0000f),Vector3D(39.4381f,-0.9531f,0.0000f),Vector3D(-16.8460f,27.6753f,0.0000f),Vector3D(-19.9441f,1.9180f,0.0000f),Vector3D(0.8081f,-14.0649f,0.0000f),Vector3D(1.1722f,-19.9109f,0.0000f),Vector3D(-19.8054f,-49.9470f,0.0000f),Vector3D(28.7118f,52.9090f,0.0000f),Vector3D(-0.7679f,-77.4121f,0.0000f),Vector3D(-25.8906f,31.7044f,0.0000f),Vector3D(-32.9625f,-71.4413f,0.0000f),Vector3D(-99.7093f,-75.7321f,0.0000f),Vector3D(-124.1369f,-80.1478f,0.0000f),Vector3D(-43.7148f,-70.0005f,0.0000f),Vector3D(-70.7655f,-76.7879f,0.0000f),Vector3D(-40.3514f,-52.8596f,0.0000f),Vector3D(-72.1697f,-62.0308f,0.0000f),Vector3D(196.8170f,-1.1365f,0.0000f),Vector3D(196.8170f,-1.1365f,0.0000f),Vector3D(163.9203f,-12.5788f,0.0000f),Vector3D(163.9203f,-12.5788f,0.0000f),Vector3D(163.9203f,-12.5788f,0.0000f),Vector3D(163.9203f,-12.5788f,0.0000f),Vector3D(-23.0561f,51.7510f,0.0000f),Vector3D(17.7998f,-3.9680f,0.0000f),Vector3D(3.6096f,48.1241f,0.0000f),Vector3D(6.1061f,70.6568f,0.0000f),Vector3D(-11.6468f,50.9846f,0.0000f),Vector3D(-40.1399f,58.2609f,0.0000f),Vector3D(108.8270f,-119.2356f,0.0000f),Vector3D(108.8270f,-119.2356f,0.0000f),Vector3D(108.8270f,-119.2356f,0.0000f),Vector3D(111.0363f,-115.4475f,0.0000f),Vector3D(108.8270f,-119.2356f,0.0000f),Vector3D(108.8270f,-119.2356f,0.0000f),Vector3D(196.8065f,-25.3840f,0.0000f),Vector3D(196.8065f,-25.3840f,0.0000f),Vector3D(196.8065f,-25.3840f,0.0000f),Vector3D(196.8065f,-25.3840f,0.0000f),Vector3D(196.8065f,-25.3840f,0.0000f),Vector3D(196.8065f,-25.3840f,0.0000f),Vector3D(137.7277f,-5.0120f,0.0000f),Vector3D(137.7277f,-5.0120f,0.0000f),Vector3D(137.7277f,-5.0120f,0.0000f),Vector3D(137.7277f,-5.0120f,0.0000f),Vector3D(137.7277f,-5.0120f,0.0000f),Vector3D(137.7277f,-5.0120f,0.0000f),Vector3D(75.0486f,-113.9227f,0.0000f),Vector3D(75.0486f,-113.9227f,0.0000f),Vector3D(75.0486f,-113.9227f,0.0000f),Vector3D(75.0486f,-113.9227f,0.0000f),Vector3D(75.0486f,-113.9227f,0.0000f),Vector3D(75.0486f,-113.9227f,0.0000f),Vector3D(73.8020f,-19.2803f,0.0000f),Vector3D(70.2440f,-10.5851f,0.0000f),Vector3D(30.7171f,-25.6136f,0.0000f),Vector3D(21.9229f,-38.4261f,0.0000f),Vector3D(-37.7679f,-14.1605f,0.0000f),Vector3D(-22.3859f,1.7401f,0.0000f)};
 
-    Morph morphs[35] = {
+    Morph morphs[36] = {
         Morph(6, HideSecondEyeIndexes, HideSecondEyeVectors),
         Morph(12, HideBlushIndexes, HideBlushVectors),
         Morph(3, TopFinOuterThinIndexes, TopFinOuterThinVectors),
@@ -157,11 +164,9 @@ private:
         Morph(18, DeadEyeIndexes, DeadEyeVectors),
         Morph(6, HideEyeBrowIndexes, HideEyeBrowVectors),
         Morph(6, SadEyeBrowIndexes, SadEyeBrowVectors),
-        Morph(6, AngryEyeBrowIndexes, AngryEyeBrowVectors)
+        Morph(6, AngryEyeBrowIndexes, AngryEyeBrowVectors),
+        Morph(112, OwOIndexes, OwOVectors)
     };
-
-    Quaternion offsetRotation = Rotation(EulerAngles(Vector3D(0.0f,0.0f,0.0f), EulerConstants::EulerOrderXYZR)).GetQuaternion();
-    Vector3D offsetPosition = Vector3D(0.0f,0.0f,0.0f);
 
 public:
     ProtoDR(){}
@@ -173,7 +178,7 @@ public:
     void SetMorphWeight(Morphs morph, float weight){
         morphs[morph].Weight = weight;
     }
-    
+
     float* GetMorphWeightReference(Morphs morph){
         return &morphs[morph].Weight;
     }
@@ -182,6 +187,9 @@ public:
         for(int i = 0; i < morphCount; i++){
             morphs[i].Weight = 0.0f;
         }
+
+        SetMorphWeight(HideBlush, 1.0f);
+        SetMorphWeight(HideSecondEye, 1.0f);
     }
 
     void Update(){
@@ -189,11 +197,8 @@ public:
 
         for(int i = 0; i < morphCount; i++){
             if(morphs[i].Weight > 0.0f){
-                morphs[i].MorphObject3D(&basisObj);
+                morphs[i].MorphObject3D(basisObj.GetTriangleGroup());
             }
         }
-
-        basisObj.Rotate(offsetRotation);
-        basisObj.MoveRelative(offsetPosition);
     }
 };

@@ -1,7 +1,7 @@
 #pragma once
-#include "..\Math\Vector3D.h"
+
 #include "..\Math\Mathematics.h"
-#include "..\Render\Object3D.h"
+#include "..\Render\TriangleGroup.h"
 
 class Morph{
 private:
@@ -26,7 +26,7 @@ public:
         }
     }
 
-    void MorphObject3D(Object3D* obj){
+    void MorphObject3D(TriangleGroup* obj){
         for (int i = 0; i < count; i++){
             obj->GetVertices()[indexes[i]] = obj->GetVertices()[indexes[i]] + vertices[i] * Mathematics::Constrain(Weight, 0.0f, 1.0f);//add value of morph vertex to original vertex
         }

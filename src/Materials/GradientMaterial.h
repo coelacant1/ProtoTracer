@@ -26,8 +26,8 @@ public:
         this->baseRGBColors = new RGBColor[colorCount];
 
         for(int i = 0; i < colorCount; i++){
-        this->rgbColors[i] = rgbColors[i];
-        this->baseRGBColors[i] = rgbColors[i];
+            this->rgbColors[i] = rgbColors[i];
+            this->baseRGBColors[i] = rgbColors[i];
         }
     }
 
@@ -59,24 +59,24 @@ public:
         }
     }
     
-    RGBColor GetRGB(Vector2D xyPosition){
+    RGBColor GetRGB(Vector3D position, Vector3D normal){
         if(rotationAngle != 0){
-        Quaternion temp = Rotation(EulerAngles(Vector3D(0, 0, rotationAngle), EulerConstants::EulerOrderXYZS)).GetQuaternion();
+            Quaternion temp = Rotation(EulerAngles(Vector3D(0, 0, rotationAngle), EulerConstants::EulerOrderXYZS)).GetQuaternion();
 
-        xyPosition = temp.RotateVector(xyPosition);
+            position = temp.RotateVector(position);
         }
 
         float pos = 0;
-        xyPosition = xyPosition - positionOffset;
+        position = position - Vector3D(positionOffset.X, positionOffset.Y, 0);
         
         if (isRadial){
-        pos = sqrtf(xyPosition.X * xyPosition.X + xyPosition.Y * xyPosition.Y);
-        pos = fabs(fmodf(pos, gradientPeriod));
+            pos = sqrtf(position.X * position.X + position.Y * position.Y);
+            pos = fabs(fmodf(pos, gradientPeriod));
         }
         else{
-        //from x position, fit into bucket ratio
-        //modulo x value into x range from start position to end position
-        pos = fabs(fmodf(xyPosition.X, gradientPeriod));
+            //from x position, fit into bucket ratio
+            //modulo x value into x range from start position to end position
+            pos = fabs(fmodf(position.X, gradientPeriod));
         }
         
         
@@ -89,18 +89,6 @@ public:
 
         RGBColor rgb = RGBColor::InterpolateColors(rgbColors[startBox], rgbColors[endBox], mu);
 
-        /*
-        Serial.print(xyPosition.X);
-        Serial.print(",");
-        Serial.print(ratio);
-        Serial.print(",");
-        Serial.print(startBox);
-        Serial.print(",");
-        Serial.print(endBox);
-        Serial.print(",");
-        Serial.print(mu);
-        Serial.println(",");
-        */
         return rgb;
     }
 };

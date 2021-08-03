@@ -6,6 +6,7 @@ class Mathematics {
 public:
 	static float MPI;
 
+	static float Constrain(unsigned int value, unsigned int minimum, unsigned int maximum);
 	static float Constrain(float value, float minimum, float maximum);
 	static float DegreesToRadians(float degrees);
 	static float RadiansToDegrees(float radians);

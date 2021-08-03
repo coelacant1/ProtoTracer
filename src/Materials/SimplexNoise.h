@@ -2,7 +2,7 @@
 
 #include <Arduino.h>
 #include "..\Materials\GradientMaterial.h"
-#include "Vector3D.h"
+#include "..\Math\Vector3D.h"
 
 class SimplexNoise : public Material{
 private:
@@ -247,17 +247,11 @@ public:
         this->zPosition = zPosition;
     }
     
-    RGBColor GetRGB(Vector2D xyPosition){
-        Vector3D xyz;
+    RGBColor GetRGB(Vector3D position, Vector3D normal){
+        position = position * noiseScale;
 
-        xyz.X = xyPosition.X;
-        xyz.Y = xyPosition.Y;
-        xyz.Z = zPosition;
-
-        xyz = xyz * noiseScale;
-
-        float noise = Noise(xyz.X, xyz.Y, xyz.Z);
+        float noise = Noise(position.X, position.Y, position.Z);
         
-        return gradientMaterial->GetRGB(Vector2D(noise, 0));
+        return gradientMaterial->GetRGB(Vector3D(noise, 0, 0), Vector3D());
     }
 };
