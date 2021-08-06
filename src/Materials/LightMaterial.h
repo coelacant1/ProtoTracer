@@ -20,7 +20,7 @@ public:
         lights[5].Set(Vector3D(0, 0, -1000), Vector3D(0, 120, 120), 1000.0f, 0.5f, 0.5f);
     }
 
-    RGBColor GetRGB(Vector3D position, Vector3D normal){
+    RGBColor GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) override {
         Vector3D color;
 
         for (int l = 0; l < numLights; l++) {

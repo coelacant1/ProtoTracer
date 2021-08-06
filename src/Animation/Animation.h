@@ -8,9 +8,17 @@ protected:
     
     Scene* scene;
 
+    Animation(int numObjects){
+        scene = new Scene(numObjects);
+    }
+
 public:
     Scene* GetScene(){
         return scene;
+    }
+
+    ~Animation(){
+        delete scene;
     }
 
     virtual void FadeIn(float stepRatio) = 0;

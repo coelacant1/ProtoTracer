@@ -46,8 +46,6 @@ private:
         Vector3D rightVector = Vector3D();
 
         if (VerifyTransform()){
-            Serial.println("Verified transform");
-
             switch (upAxis){
                 case XUp:
                     upVector.X = 1;
@@ -93,12 +91,6 @@ private:
             rightVector = upVector.CrossProduct(forwardVector);
 
             rotation = Rotation(rightVector, forwardVector, upVector).GetQuaternion().UnitQuaternion();
-
-            
-            Serial.println(rotation.ToString());
-            Serial.println(rightVector.ToString());
-            Serial.println(forwardVector.ToString());
-            Serial.println(upVector.ToString());
         }
         else{
             Serial.println("Bad transform");

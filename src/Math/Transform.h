@@ -25,8 +25,19 @@ public:
         this->scale = scale;
     }
 
+    Transform(const Transform& transform) {
+        this->baseRotation = transform.baseRotation;
+        this->rotation = transform.rotation;
+        this->position = transform.position;
+        this->scale = transform.scale;
+    }
+
     void SetBaseRotation(Quaternion baseRotation){
         this->baseRotation = baseRotation;
+    }
+
+    const Quaternion GetBaseRotation(){
+        return baseRotation;
     }
 
     void SetRotation(Quaternion rotation){

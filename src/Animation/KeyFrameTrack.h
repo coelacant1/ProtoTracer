@@ -51,7 +51,7 @@ public:
             delete keyFrames[i];
         }
 
-        delete keyFrames;
+        delete[] keyFrames;
     }
 
     void Pause(){
@@ -82,7 +82,6 @@ public:
             else{
                 for(int i = 0; i < currentFrames; i++){
                     if(time < keyFrames[i]->Time){
-                        delay(100);
                         ShiftKeyFrameArray(i);
                         keyFrames[i] = new KeyFrame(time, value);
                         break;

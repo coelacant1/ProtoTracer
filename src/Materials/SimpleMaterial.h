@@ -19,7 +19,7 @@ public:
         rgb = baseRGB.HueShift(hueDeg);
     }
     
-    RGBColor GetRGB(Vector3D position, Vector3D normal){
+    RGBColor GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) override{
         return rgb;
     }
 };

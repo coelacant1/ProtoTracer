@@ -28,7 +28,7 @@ public:
         this->zOffset = zOffset;
     }
     
-    RGBColor GetRGB(Vector3D position, Vector3D normal){
+    RGBColor GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) override{
         float axisValue = 0.0f;
 
         switch(axis){
@@ -47,6 +47,6 @@ public:
 
         float pos = Mathematics::Map(axisValue, -depth / 2.0f + zOffset, depth / 2.0f + zOffset, 0.0f, 1.0f);
         
-        return gNoiseMat.GetRGB(Vector3D(pos, 0, 0), Vector3D());
+        return gNoiseMat.GetRGB(Vector3D(pos, 0, 0), Vector3D(), Vector3D());
     }
 };

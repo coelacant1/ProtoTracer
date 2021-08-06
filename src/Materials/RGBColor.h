@@ -1,12 +1,11 @@
 #pragma once
 
+#include "Material.h"
 #include "..\Math\Mathematics.h"
 #include "..\Math\Quaternion.h"
 #include "..\Math\Vector3D.h"
 
-class RGBColor{
-private:
-
+class RGBColor {
 public:
     uint8_t R = 0;
     uint8_t G = 0;

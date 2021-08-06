@@ -1,15 +1,14 @@
 #pragma once
 
-#include "..\Animation\Animation.h"
-#include "..\Animation\KeyFrameTrack.h"
-#include "ProtoDRMorph.h"
+#include "Animation.h"
+#include "KeyFrameTrack.h"
+#include "..\Morph\ProtoDRMorph.h"
 #include "..\Render\Scene.h"
 #include "..\Materials\GradientMaterial.h"
 #include "..\Materials\SimplexNoise.h"
 
-class ProtoDRMorphAnimator : public Animation{
+class ProtoDRMorphAnimation : public Animation{
 private:
-    Object3D* objects[1];
     ProtoDR pM;
 
     RGBColor spectrum[4] = {RGBColor(0, 255, 0), RGBColor(255, 0, 0), RGBColor(0, 255, 0), RGBColor(0, 0, 255)};
@@ -131,23 +130,18 @@ private:
     }
 
 public:
-    ProtoDRMorphAnimator(){
-        scene = new Scene(objects, 1);
+    ProtoDRMorphAnimation() : Animation(1) {
+        scene->AddObject(pM.GetObject());
 
-        //LinkParameters();
+        LinkParameters();
 
-        //AddBlinkKeyFrames();
-        //AddTopFinKeyFrames();
-        //AddMidFinKeyFrames();
-        //AddBotFinKeyFrames();
-        //AddMouthKeyFrames();
+        AddBlinkKeyFrames();
+        AddTopFinKeyFrames();
+        AddMidFinKeyFrames();
+        AddBotFinKeyFrames();
+        AddMouthKeyFrames();
 
-        objects[0] = pM.GetObject();
-        objects[0]->SetMaterial(&sNoise);
-    }
-
-    ~ProtoDRMorphAnimator(){
-        delete scene;
+        pM.GetObject()->SetMaterial(&sNoise);
     }
 
     void UpdateKeyFrameTracks(){
@@ -219,19 +213,14 @@ public:
         pM.SetMorphWeight(ProtoDR::OwOMouth, 1.0f);
     }
 
-    void FadeIn(float stepRatio){
-        
-    }
-
-    void FadeOut(float stepRatio){
-        
-    }
+    void FadeIn(float stepRatio) override {}
+    void FadeOut(float stepRatio) override {}
 
     Object3D* GetObject(){
         return pM.GetObject();
     }
 
-    void Update(float ratio){
+    void Update(float ratio) override {
         UpdateKeyFrameTracks();
 
         if (ratio > 0.8f) OwO();

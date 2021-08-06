@@ -20,15 +20,16 @@ private:
         float zBuffer = 3.402823466e+38f;
         int triangle = 0;
         bool didIntersect = false;
-        float u = 0.0f, v = 0.0f, w = 0.0f, uf = 0.0f, vf = 0.0f, wf = 0.0f;;
+        float u = 0.0f, v = 0.0f, w = 0.0f;
+        Vector3D uvw;
         RGBColor color;
         
         for (int t = 0; t < numTriangles; t++) {
             if (triangles[t]->DidIntersect(pixelRay.X, pixelRay.Y, u, v, w)){
                 if(triangles[t]->averageDepth < zBuffer){
-                    uf = u;
-                    vf = v;
-                    wf = w;
+                    uvw.X = u;
+                    uvw.Y = v;
+                    uvw.Z = w;
                     zBuffer = triangles[t]->averageDepth;
                     triangle = t;
                     didIntersect = true;
@@ -37,11 +38,11 @@ private:
         }
 
         if(didIntersect){
-            Vector3D intersect = (*triangles[triangle]->t3p1 * uf) + (*triangles[triangle]->t3p2 * vf) + (*triangles[triangle]->t3p3 * wf);
+            Vector3D intersect = (*triangles[triangle]->t3p1 * uvw.X) + (*triangles[triangle]->t3p2 * uvw.Y) + (*triangles[triangle]->t3p3 * uvw.Z);
 
             intersect = rayDirection.UnrotateVector(intersect);
             
-            color = triangles[triangle]->GetMaterial()->GetRGB(intersect, *triangles[triangle]->normal);
+            color = triangles[triangle]->GetMaterial()->GetRGB(intersect, *triangles[triangle]->normal, uvw);
         }
         
         return color;
@@ -68,9 +69,9 @@ public:
         int numTriangles = 0;
     
         //for each object in the scene, get the triangles
-        for(int i = 0; i < scene->numObjects; i++){
-            if(scene->objects[i]->IsEnabled()){
-                numTriangles += scene->objects[i]->GetTriangleGroup()->GetTriangleCount();
+        for(int i = 0; i < scene->GetObjectCount(); i++){
+            if(scene->GetObjects()[i]->IsEnabled()){
+                numTriangles += scene->GetObjects()[i]->GetTriangleGroup()->GetTriangleCount();
             }
         }
         
@@ -81,11 +82,11 @@ public:
         rayDirection  = transform->GetRotation().Multiply(lookDirection);
 
         //for each object in the scene, get the triangles
-        for(int i = 0; i < scene->numObjects; i++){
-            if(scene->objects[i]->IsEnabled()){
+        for(int i = 0; i < scene->GetObjectCount(); i++){
+            if(scene->GetObjects()[i]->IsEnabled()){
                 //for each triangle in object, project onto 2d surface, but pass material
-                for (int j = 0; j < scene->objects[i]->GetTriangleGroup()->GetTriangleCount(); j++) {
-                    triangles[triangleCounter] = new Triangle2D(lookDirection, transform, &scene->objects[i]->GetTriangleGroup()->GetTriangles()[j], scene->objects[i]->GetMaterial());
+                for (int j = 0; j < scene->GetObjects()[i]->GetTriangleGroup()->GetTriangleCount(); j++) {
+                    triangles[triangleCounter] = new Triangle2D(lookDirection, transform, &scene->GetObjects()[i]->GetTriangleGroup()->GetTriangles()[j], scene->GetObjects()[i]->GetMaterial());
                     
                     bool triangleInView = false;
 
@@ -102,19 +103,12 @@ public:
 
                         triangleInView = pixelGroup->Overlaps(&triangleBox);//cull outside camera view
                     }
-
-                    triangleInView = 1;
                     
                     if(triangleInView) triangleCounter++;
                     else delete triangles[triangleCounter];//out of view space remove from array
                 }
             }
         }
-
-        Serial.print(triangleCounter);
-        Serial.print("\t");
-        Serial.print(numTriangles);
-        Serial.print("\t");
 
         for (unsigned int i = 0; i < pixelGroup->GetPixelCount(); i++) {
             Vector2D pixelRay = Vector2D(lookDirection.RotateVector(pixelGroup->GetPixel(i)->GetPosition() * transform->GetScale()));//scale pixel location prior to rotating and moving
