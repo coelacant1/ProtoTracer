@@ -4,11 +4,11 @@
 
 class ExampleImage : public Image{
 private:
-    uint8_t rgbMemory[48] = {};
+    RGBColor rgbMemory[48][48] = {};
 
 public:
-    ExampleImage(Vector2D size, Vector2D offset) : Image(size, offset) {
-        this->rgbData = &rgbMemory[0];
+    ExampleImage(Vector2D size, Vector2D offset) : Image(size, offset, rgbMemory) {
+        this->rgbData = rgbMemory;
         this->xPixels = 16;
         this->yPixels = 16;
     }

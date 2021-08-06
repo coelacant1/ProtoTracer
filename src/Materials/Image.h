@@ -11,11 +11,12 @@ private:
 protected:
     unsigned int xPixels = 0;
     unsigned int yPixels = 0;
-    uint8_t* rgbData;
+    RGBColor** rgbData;
     
-    Image(Vector2D size, Vector2D offset){
+    Image(Vector2D size, Vector2D offset, RGBColor** rgbData){
         this->size = size;
         this->offset = offset;
+        this->rgbData = rgbData;
     }
 
 public:
@@ -23,12 +24,14 @@ public:
         this->offset = offset;
     }
 
-    RGBColor GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) override{
+    RGBColor GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) override {
         unsigned int x = (unsigned int)Mathematics::Map(position.X, offset.X, size.X + offset.X, 0, xPixels);
         unsigned int y = (unsigned int)Mathematics::Map(position.Y, offset.Y, size.Y + offset.Y, 0, yPixels);
 
-        unsigned long pixel = x * 3 + (x * y * 3);
+        if(x < 0 || x > xPixels || y < 0 || y > yPixels){
+            return RGBColor();
+        }
 
-        return RGBColor(rgbData[pixel + 2], rgbData[pixel + 1], rgbData[pixel]);
+        return rgbData[x][y];
     }
 };
