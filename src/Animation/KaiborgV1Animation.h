@@ -54,10 +54,10 @@ public:
     KaiborgV1Animation() : Animation(1){
         scene->AddObject(kbFace.GetObject());
 
-        //LinkParameters();
-        //AddPOGKeyFrames();
-        //AddAngryEyeKeyFrames();
-        //AddMouthFrownKeyFrames();
+        LinkParameters();
+        AddPOGKeyFrames();
+        AddAngryEyeKeyFrames();
+        AddMouthFrownKeyFrames();
         
         kbFace.GetObject()->SetMaterial(&sNoise);
     }

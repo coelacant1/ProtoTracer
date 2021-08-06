@@ -17,7 +17,6 @@ private:
     float minimum = 0.0f;
     float maximum = 0.0f;
     float period = 0.0f;
-    long startTime = 0;
 
     float TriangleWave(float ratio){
         float wave = (ratio > 0.5f ? 1.0f - ratio : ratio) * 2.0f;
@@ -32,7 +31,7 @@ private:
     }
 
     float SineWave(float ratio){
-        float wave = sinf(ratio * 3.14159f / 180.0f);
+        float wave = sinf(ratio * 360.0f * 3.14159f / 180.0f);
 
         return Mathematics::Map(wave, -1.0f, 1.0f, minimum, maximum);
     }
@@ -50,7 +49,7 @@ public:
     }
 
     float Update(){
-        float currentTime = fmod(millis() / 1000.0f, period);
+        float currentTime = fmod(micros() / 1000000.0f, period);
         float ratio = currentTime / period;
         
         switch(function){
@@ -61,6 +60,7 @@ public:
                 return SquareWave(ratio);
                 break;
             case Sine:
+                Serial.print(SineWave(ratio));
                 return SineWave(ratio);
                 break;
             case Sawtooth:
