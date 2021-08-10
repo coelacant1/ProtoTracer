@@ -7,31 +7,42 @@ class Image : public Material{
 private:
     Vector2D size;
     Vector2D offset;
-
-protected:
+    float angle = 0.0f;
     unsigned int xPixels = 0;
     unsigned int yPixels = 0;
-    RGBColor** rgbData;
+    const uint8_t* rgbData;
     
-    Image(Vector2D size, Vector2D offset, RGBColor** rgbData){
-        this->size = size;
-        this->offset = offset;
-        this->rgbData = rgbData;
+protected:
+    Image(const uint8_t* rgbData, unsigned int xPixels, unsigned int yPixels) : rgbData(rgbData) {
+        this->xPixels = xPixels;
+        this->yPixels = yPixels;
     }
 
 public:
+    void SetSize(Vector2D size){
+        this->size = size;
+    }
+
     void SetPosition(Vector2D offset){
         this->offset = offset;
     }
 
-    RGBColor GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) override {
-        unsigned int x = (unsigned int)Mathematics::Map(position.X, offset.X, size.X + offset.X, 0, xPixels);
-        unsigned int y = (unsigned int)Mathematics::Map(position.Y, offset.Y, size.Y + offset.Y, 0, yPixels);
+    void SetRotation(float angle){
+        this->angle = angle;
+    }
 
-        if(x < 0 || x > xPixels || y < 0 || y > yPixels){
+    RGBColor GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) override {
+        Vector2D rPos = angle != 0.0f ? Vector2D(position.X, position.Y).Subtract(size.Divide(2.0f)).Rotate(angle, offset).Add(size.Divide(2.0f)) : Vector2D(position.X, position.Y);
+
+        unsigned int x = (unsigned int)Mathematics::Map(rPos.X, offset.X, size.X + offset.X, xPixels, 0);
+        unsigned int y = (unsigned int)Mathematics::Map(rPos.Y, offset.Y, size.Y + offset.Y, yPixels, 0);
+
+        if(x <= 0 || x >= xPixels || y <= 0 || y >= yPixels){
             return RGBColor();
         }
 
-        return rgbData[x][y];
+        unsigned long pos = x * 3 + y * xPixels * 3;
+
+        return RGBColor(rgbData[pos], rgbData[pos + 1], rgbData[pos + 2]);
     }
 };

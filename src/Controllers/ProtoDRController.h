@@ -4,8 +4,8 @@
 #include <OctoWS2811.h>
 #include "Controller.h"
 #include "Render/Camera.h"
-#include "Flash/ProtoDR.h"
-#include "Flash/ProtoDRMini.h"
+#include "Flash/PixelGroups/ProtoDR.h"
+#include "Flash/PixelGroups/ProtoDRMini.h"
 
 const int ledsPerStrip = 306;
 DMAMEM int displayMemory[306 * 6];

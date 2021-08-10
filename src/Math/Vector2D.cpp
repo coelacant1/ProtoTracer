@@ -127,6 +127,20 @@ Vector2D Vector2D::Maximum(Vector2D v) {
 	};
 }
 
+Vector2D Vector2D::Rotate(float angle, Vector2D offset){
+	Vector2D v = Vector2D(X, Y).Subtract(offset);
+
+	angle = angle * Mathematics::MPI / 180.0f;
+
+	float cs = cosf(angle);
+	float sn = sinf(angle);
+
+	return Vector2D{
+		v.X * cs - v.Y * sn + offset.X,
+		v.X * sn + v.Y * cs + offset.Y
+	};
+}
+
 bool Vector2D::CheckBounds(Vector2D minimum, Vector2D maximum) {
 	return X > minimum.X && X < maximum.X && Y > minimum.Y && Y < maximum.Y;
 }

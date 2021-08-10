@@ -3,7 +3,7 @@
 
 #include "Controller.h"
 #include "Render/Camera.h"
-#include "Flash/KaiborgV1Pixels.h"
+#include "Flash/PixelGroups/KaiborgV1Pixels.h"
 
 const int ledsPerStrip = 346;
 DMAMEM int displayMemory[346 * 6];

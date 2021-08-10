@@ -17,6 +17,7 @@ private:
 public:
     CubeAnimation() : Animation(1) {
         scene->AddObject(cube.GetObject());
+        
         cube.GetObject()->SetMaterial(&dMat);
     }
 

@@ -26,6 +26,7 @@ public:
 	Vector2D Constrain(Vector2D minimum, Vector2D maximum);
 	Vector2D Minimum(Vector2D v);
 	Vector2D Maximum(Vector2D v);
+	Vector2D Rotate(float angle, Vector2D offset);
 	bool CheckBounds(Vector2D minimum, Vector2D maximum);
 	float Magnitude();
 	float DotProduct(Vector2D vector);

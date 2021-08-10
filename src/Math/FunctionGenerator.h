@@ -60,7 +60,6 @@ public:
                 return SquareWave(ratio);
                 break;
             case Sine:
-                Serial.print(SineWave(ratio));
                 return SineWave(ratio);
                 break;
             case Sawtooth:
