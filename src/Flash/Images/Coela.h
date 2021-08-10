@@ -7,7 +7,7 @@ private:
 	static const uint8_t rgbMemory[];
 
 public:
-	Coela(Vector2D size, Vector2D offset) : Image(rgbMemory, 160, 160) {
+	Coela(Vector2D size, Vector2D offset) : Image(Image::RGB, rgbMemory, 160, 160) {
 		SetSize(size);
 		SetPosition(offset);
 	}

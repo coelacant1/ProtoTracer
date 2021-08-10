@@ -7,7 +7,7 @@ private:
 	static const uint8_t rgbMemory[];
 
 public:
-	ExampleImage(Vector2D size, Vector2D offset) : Image(&rgbMemory[0], 2, 1) {
+	ExampleImage(Vector2D size, Vector2D offset) : Image(Image::RGB, rgbMemory, 2, 1) {
 		SetSize(size);
 		SetPosition(size);
 	}

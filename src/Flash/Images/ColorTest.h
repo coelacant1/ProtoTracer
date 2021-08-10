@@ -7,7 +7,7 @@ private:
 	static const uint8_t rgbMemory[];
 
 public:
-	ColorTest(Vector2D size, Vector2D offset) : Image(rgbMemory, 128, 72) {
+	ColorTest(Vector2D size, Vector2D offset) : Image(Image::RGB, rgbMemory, 128, 72) {
 		SetSize(size);
 		SetPosition(offset);
 	}

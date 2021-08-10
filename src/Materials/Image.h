@@ -4,16 +4,25 @@
 #include "..\Math\Vector2D.h"
 
 class Image : public Material{
+public:
+    enum Type{
+        RGB,
+        BW
+    };
+
 private:
+    Type type;
     Vector2D size;
     Vector2D offset;
     float angle = 0.0f;
+    float hueAngle = 0.0f;
     unsigned int xPixels = 0;
     unsigned int yPixels = 0;
-    const uint8_t* rgbData;
+    const uint8_t* data;
     
 protected:
-    Image(const uint8_t* rgbData, unsigned int xPixels, unsigned int yPixels) : rgbData(rgbData) {
+    Image(Type type, const uint8_t* data, unsigned int xPixels, unsigned int yPixels) : data(data) {
+        this->type = type;
         this->xPixels = xPixels;
         this->yPixels = yPixels;
     }
@@ -31,18 +40,29 @@ public:
         this->angle = angle;
     }
 
-    RGBColor GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) override {
-        Vector2D rPos = angle != 0.0f ? Vector2D(position.X, position.Y).Subtract(size.Divide(2.0f)).Rotate(angle, offset).Add(size.Divide(2.0f)) : Vector2D(position.X, position.Y);
+    void SetHueAngle(float hueAngle){
+        this->hueAngle = hueAngle;
+    }
 
-        unsigned int x = (unsigned int)Mathematics::Map(rPos.X, offset.X, size.X + offset.X, xPixels, 0);
-        unsigned int y = (unsigned int)Mathematics::Map(rPos.Y, offset.Y, size.Y + offset.Y, yPixels, 0);
+    RGBColor GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) override {
+        Vector2D rPos = angle != 0.0f ? Vector2D(position.X, position.Y).Rotate(angle, offset) - offset : Vector2D(position.X, position.Y) - offset;
+
+        unsigned int x = (unsigned int)Mathematics::Map(rPos.X, size.X / -2.0f, size.X / 2.0f, xPixels, 0);
+        unsigned int y = (unsigned int)Mathematics::Map(rPos.Y, size.Y / -2.0f, size.Y / 2.0f, yPixels, 0);
 
         if(x <= 0 || x >= xPixels || y <= 0 || y >= yPixels){
             return RGBColor();
         }
 
-        unsigned long pos = x * 3 + y * xPixels * 3;
+        if (type == RGB){//RGB
+            unsigned long pos = x * 3 + y * xPixels * 3;
 
-        return RGBColor(rgbData[pos], rgbData[pos + 1], rgbData[pos + 2]);
+            return RGBColor(data[pos], data[pos + 1], data[pos + 2]).HueShift(hueAngle);
+        }
+        else{//Black and white
+            unsigned long pos = x + y * xPixels;
+
+            return RGBColor(data[pos], data[pos], data[pos]);
+        }
     }
 };

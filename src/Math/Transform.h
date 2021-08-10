@@ -10,6 +10,10 @@ private:
     Vector3D position = Vector3D(0, 0, 0);
     Vector3D scale = Vector3D(1, 1, 1);
 
+    
+    Vector3D scaleOffset = Vector3D(0, 0, 0);
+    Vector3D rotationOffset = Vector3D(0, 0, 0);
+
 public:
     Transform(){}
 
@@ -23,6 +27,22 @@ public:
         this->rotation = rotation;
         this->position = position;
         this->scale = scale;
+    }
+
+    Transform(Vector3D eulerXYZS, Vector3D position, Vector3D scale, Vector3D rotationOffset, Vector3D scaleOffset){
+        this->rotation = Rotation(EulerAngles(eulerXYZS, EulerConstants::EulerOrderXZYS)).GetQuaternion();
+        this->position = position;
+        this->scale = scale;
+        this->rotationOffset = rotationOffset;
+        this->scaleOffset = scaleOffset;
+    }
+
+    Transform(Quaternion rotation, Vector3D position, Vector3D scale, Vector3D rotationOffset, Vector3D scaleOffset){
+        this->rotation = rotation;
+        this->position = position;
+        this->scale = scale;
+        this->rotationOffset = rotationOffset;
+        this->scaleOffset = scaleOffset;
     }
 
     Transform(const Transform& transform) {
@@ -66,6 +86,22 @@ public:
 
     Vector3D GetScale(){
         return scale;
+    }
+
+    void SetRotationOffset(Vector3D rotationOffset){
+        this->rotationOffset = rotationOffset;
+    }
+
+    Vector3D GetRotationOffset(){
+        return rotationOffset;
+    }
+
+    void SetScaleOffset(Vector3D scaleOffset){
+        this->scaleOffset = scaleOffset;
+    }
+
+    Vector3D GetScaleOffset(){
+        return scaleOffset;
     }
 
     void Rotate(Vector3D eulerXYZS){

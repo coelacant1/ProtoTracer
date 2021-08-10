@@ -5,7 +5,7 @@
 //#include "Controllers\KaiborgV1D1Controller.h"
 //#include "Controllers\ProtoDRController.h"
 
-const uint8_t maxBrightness = 10;
+const uint8_t maxBrightness = 20;
 //Controller controller = ProtoDRController(maxBrightness, ProtoDRController::LEFT);
 //Controller controller = ProtoDRController(maxBrightness, ProtoDRController::RIGHT);
 Controller* controller = new KaiborgV1Controller(maxBrightness);

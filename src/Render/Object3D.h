@@ -77,9 +77,9 @@ public:
         for (int i = 0; i < modifiedTriangles->GetVertexCount(); i++) {
             Vector3D modifiedVector = modifiedTriangles->GetVertices()[i];
             
-            modifiedVector = modifiedVector * transform.GetScale();
-            modifiedVector = transform.GetRotation().RotateVector(modifiedVector);
-            modifiedVector = modifiedVector + transform.GetPosition();
+            modifiedVector = (modifiedVector - transform.GetScaleOffset()) * transform.GetScale() + transform.GetScaleOffset();//offset position, scale, reset position
+            modifiedVector = transform.GetRotation().RotateVector(modifiedVector - transform.GetRotationOffset()) + transform.GetRotationOffset();//offset position, rotate, reset position
+            modifiedVector = modifiedVector + transform.GetPosition();//offset posiition
 
             modifiedTriangles->GetVertices()[i] = modifiedVector;
         }
