@@ -20,13 +20,24 @@ protected:
     unsigned int yPixels = 0;
     const uint8_t* data;
 
-    Image(Type type, const uint8_t* data, unsigned int xPixels, unsigned int yPixels) : data(data) {
+    Image(Type type, unsigned int xPixels, unsigned int yPixels) {
         this->type = type;
         this->xPixels = xPixels;
         this->yPixels = yPixels;
     }
 
+    Image(Type type, const uint8_t* data, unsigned int xPixels, unsigned int yPixels) {
+        this->type = type;
+        this->data = data;
+        this->xPixels = xPixels;
+        this->yPixels = yPixels;
+    }
+
 public:
+    void SetData(const uint8_t* data){
+        this->data = data;
+    }
+
     void SetSize(Vector2D size){
         this->size = size;
     }

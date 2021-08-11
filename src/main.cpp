@@ -2,6 +2,7 @@
 #include "Animation\KaiborgV1Animation.h"
 #include "Animation\CoelaCubeAnimation.h"
 #include "Animation\SpyroAnimation.h"
+#include "Animation\CreeperAnimation.h"
 //#include "Controllers\KaiborgV1Controller.h"
 //#include "Controllers\KaiborgV1D1Controller.h"
 #include "Controllers\ProtoDRController.h"
@@ -14,6 +15,7 @@ ProtoDRMorphAnimation protoDRMorph;
 CoelaCubeAnimation cube;
 KaiborgV1Animation kaiborg;
 SpyroAnimation spyro;
+CreeperAnimation creeper;
 
 void setup() {
     Serial.begin(115200);
@@ -26,9 +28,9 @@ void setup() {
 
 void loop() {
     for (float i = 0.0f; i < 1.0f; i += 1.0f / 720.0f) {
-        spyro.Update(i);
+        creeper.Update(i);
 
-        controller->Render(spyro.GetScene());
+        controller->Render(creeper.GetScene());
 
         controller->Display();
 
