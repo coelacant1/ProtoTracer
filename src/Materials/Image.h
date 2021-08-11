@@ -10,7 +10,7 @@ public:
         BW
     };
 
-private:
+protected:
     Type type;
     Vector2D size;
     Vector2D offset;
@@ -19,8 +19,7 @@ private:
     unsigned int xPixels = 0;
     unsigned int yPixels = 0;
     const uint8_t* data;
-    
-protected:
+
     Image(Type type, const uint8_t* data, unsigned int xPixels, unsigned int yPixels) : data(data) {
         this->type = type;
         this->xPixels = xPixels;

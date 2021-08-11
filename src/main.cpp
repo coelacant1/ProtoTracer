@@ -1,17 +1,19 @@
 #include "Animation\ProtoDRMorphAnimation.h"
 #include "Animation\KaiborgV1Animation.h"
 #include "Animation\CoelaCubeAnimation.h"
-#include "Controllers\KaiborgV1Controller.h"
+#include "Animation\SpyroAnimation.h"
+//#include "Controllers\KaiborgV1Controller.h"
 //#include "Controllers\KaiborgV1D1Controller.h"
-//#include "Controllers\ProtoDRController.h"
+#include "Controllers\ProtoDRController.h"
 
 const uint8_t maxBrightness = 20;
 //Controller controller = ProtoDRController(maxBrightness, ProtoDRController::LEFT);
 //Controller controller = ProtoDRController(maxBrightness, ProtoDRController::RIGHT);
-Controller* controller = new KaiborgV1Controller(maxBrightness);
+Controller* controller = new ProtoDRController(maxBrightness, ProtoDRController::RIGHT);
 ProtoDRMorphAnimation protoDRMorph;
 CoelaCubeAnimation cube;
 KaiborgV1Animation kaiborg;
+SpyroAnimation spyro;
 
 void setup() {
     Serial.begin(115200);
@@ -24,9 +26,9 @@ void setup() {
 
 void loop() {
     for (float i = 0.0f; i < 1.0f; i += 1.0f / 720.0f) {
-        cube.Update(i);
+        spyro.Update(i);
 
-        controller->Render(cube.GetScene());
+        controller->Render(spyro.GetScene());
 
         controller->Display();
 

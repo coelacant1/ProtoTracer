@@ -22,7 +22,6 @@ public:
     };
 
 private:
-
     CameraLayout cameraLayout = CameraLayout(CameraLayout::ZForward, CameraLayout::YUp);
 
     Transform camFronTopTransform = Transform(Vector3D(   35.25f, -2.25f, 216.5f), Vector3D(  68.25f, 210.75f, 31.0f), Vector3D(-1, 1, 1));

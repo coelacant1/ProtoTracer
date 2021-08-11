@@ -41,8 +41,13 @@ private:
             Vector3D intersect = (*triangles[triangle]->t3p1 * uvw.X) + (*triangles[triangle]->t3p2 * uvw.Y) + (*triangles[triangle]->t3p3 * uvw.Z);
 
             intersect = rayDirection.UnrotateVector(intersect);
+            Vector2D uv;
+
+            if (triangles[triangle]->hasUV){
+                uv = *triangles[triangle]->p1UV * uvw.X + *triangles[triangle]->p2UV * uvw.Y + *triangles[triangle]->p3UV * uvw.Z;
+            }
             
-            color = triangles[triangle]->GetMaterial()->GetRGB(intersect, *triangles[triangle]->normal, uvw);
+            color = triangles[triangle]->GetMaterial()->GetRGB(intersect, *triangles[triangle]->normal, Vector3D(uv.X, uv.Y, 0));
         }
         
         return color;

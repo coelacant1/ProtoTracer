@@ -6,7 +6,7 @@
 #include "..\Materials\LightMaterial.h"
 #include "..\Math\FunctionGenerator.h"
 
-#include "Flash\Images\CoelaCant.h"
+#include "Flash\Images\ColorTest.h"
 
 class CoelaCubeAnimation : public Animation{
 private:
@@ -19,7 +19,7 @@ private:
     FunctionGenerator fGenMatSize = FunctionGenerator(FunctionGenerator::Sine, 100.0f, 250.0f, 2.1f);
     FunctionGenerator fGenMatRot = FunctionGenerator(FunctionGenerator::Sine, -15.0f, 15.0f, 3.2f);
     FunctionGenerator fGenMatHue = FunctionGenerator(FunctionGenerator::Sawtooth, 0.0f, 360.0f, 2.0f);
-    CoelaCant coela = CoelaCant(Vector2D(200, 145), Vector2D(100, 70));
+    ColorTest coela = ColorTest(Vector2D(200, 145), Vector2D(100, 70));
 
 public:
     CoelaCubeAnimation() : Animation(1) {

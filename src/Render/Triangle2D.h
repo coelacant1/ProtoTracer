@@ -19,6 +19,12 @@ public:
     Vector3D* t3p2;
     Vector3D* t3p3;
 
+	Vector2D* p1UV;
+	Vector2D* p2UV;
+	Vector2D* p3UV;
+
+    bool hasUV = false;
+
     float averageDepth = 0.0f;
 
 	Triangle2D(){}
@@ -41,6 +47,14 @@ public:
 
 	Triangle2D(Quaternion lookDirection, Transform* camT, Triangle3D* t, Material* material) {
         this->material = material;
+
+        if (t->hasUV){
+            this->p1UV = t->p1UV;
+            this->p2UV = t->p2UV;
+            this->p3UV = t->p3UV;
+
+            this->hasUV = true;
+        }
 
         Vector3D p1 = camT->GetRotation().Multiply(lookDirection).UnrotateVector(*t->p1 - camT->GetPosition());// * transform->GetScale()
         Vector3D p2 = camT->GetRotation().Multiply(lookDirection).UnrotateVector(*t->p2 - camT->GetPosition());
