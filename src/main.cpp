@@ -28,9 +28,9 @@ void setup() {
 
 void loop() {
     for (float i = 0.0f; i < 1.0f; i += 1.0f / 720.0f) {
-        creeper.Update(i);
+        spyro.Update(i);
 
-        controller->Render(creeper.GetScene());
+        controller->Render(spyro.GetScene());
 
         controller->Display();
 
