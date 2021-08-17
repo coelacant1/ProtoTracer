@@ -33,6 +33,8 @@ protected:
         this->yPixels = yPixels;
     }
 
+    ~Image(){}
+
 public:
     void SetData(const uint8_t* data){
         this->data = data;

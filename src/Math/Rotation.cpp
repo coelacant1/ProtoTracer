@@ -190,7 +190,7 @@ EulerAngles Rotation::RotationMatrixToEulerAngles(RotationMatrix rM, EulerOrder 
 
 	if (order.InitialAxisRepetition == EulerOrder::AxisRepetition::Yes)
 	{
-		float sy = sqrtf(powf(rM.XAxis.Y, 2.0f) + powf(rM.XAxis.Z, 2.0f));
+		float sy = powf(powf(rM.XAxis.Y, 2.0f) + powf(rM.XAxis.Z, 2.0f), 0.5f);
 
 		if (sy > 32.0f * 0.00000000001f)//16 * float.Epsilon
 		{
@@ -207,7 +207,7 @@ EulerAngles Rotation::RotationMatrixToEulerAngles(RotationMatrix rM, EulerOrder 
 	}
 	else
 	{
-		float cy = sqrt(pow(rM.XAxis.X, 2.0f) + pow(rM.YAxis.X, 2.0f));
+		float cy = powf(powf(rM.XAxis.X, 2.0f) + powf(rM.YAxis.X, 2.0f), 0.5f);
 
 		if (cy > 32.0f * 0.00000000001f)
 		{
@@ -253,15 +253,13 @@ RotationMatrix Rotation::EulerAnglesToRotationMatrix(EulerAngles eulerAngles) {
 	eulerAngles.Angles.Y = Mathematics::DegreesToRadians(eulerAngles.Angles.Y);
 	eulerAngles.Angles.Z = Mathematics::DegreesToRadians(eulerAngles.Angles.Z);
 
-	if (eulerAngles.Order.FrameTaken == EulerOrder::AxisFrame::Rotating)
-	{
+	if (eulerAngles.Order.FrameTaken == EulerOrder::AxisFrame::Rotating){
 		float t = eulerAngles.Angles.X;
 		eulerAngles.Angles.X = eulerAngles.Angles.Z;
 		eulerAngles.Angles.Z = t;
 	}
 
-	if (eulerAngles.Order.AxisPermutation == EulerOrder::Parity::Odd)
-	{
+	if (eulerAngles.Order.AxisPermutation == EulerOrder::Parity::Odd){
 		eulerAngles.Angles.X = -eulerAngles.Angles.X;
 		eulerAngles.Angles.Y = -eulerAngles.Angles.Y;
 		eulerAngles.Angles.Z = -eulerAngles.Angles.Z;
@@ -279,14 +277,12 @@ RotationMatrix Rotation::EulerAnglesToRotationMatrix(EulerAngles eulerAngles) {
 	sc = sx * cz;
 	ss = sx * sz;
 
-	if (eulerAngles.Order.InitialAxisRepetition == EulerOrder::AxisRepetition::Yes)
-	{
+	if (eulerAngles.Order.InitialAxisRepetition == EulerOrder::AxisRepetition::Yes){
 		rM.XAxis.X = cy;       rM.XAxis.Y = sy * sx;       rM.XAxis.Z = sy * cx;
 		rM.YAxis.X = sy * sz;  rM.YAxis.Y = -cy * ss + cc; rM.YAxis.Z = -cy * cs - sc;
 		rM.ZAxis.X = -sy * cz; rM.ZAxis.Y = cy * sc + cs;  rM.ZAxis.Z = cy * cc - ss;
 	}
-	else
-	{
+	else{
 		rM.XAxis.X = cy * cz;  rM.XAxis.Y = sy * sc - cs;  rM.XAxis.Z = sy * cc + ss;
 		rM.YAxis.X = cy * sz;  rM.YAxis.Y = sy * ss + cc;  rM.YAxis.Z = sy * cs - sc;
 		rM.ZAxis.X = -sy;      rM.ZAxis.Y = cy * sx;       rM.ZAxis.Z = cy * cx;
@@ -303,7 +299,7 @@ Quaternion Rotation::QuaternionFromDirectionVectors(Vector3D initial, Vector3D t
 
 	float dot = Vector3D::DotProduct(initial, target);
 
-	if (dot < -0.999999)
+	if (dot < -0.999999f)
 	{
 		tempV = Vector3D::CrossProduct(xAxis, initial);
 
@@ -316,7 +312,7 @@ Quaternion Rotation::QuaternionFromDirectionVectors(Vector3D initial, Vector3D t
 
 		q = Rotation(AxisAngle(Mathematics::MPI, tempV)).GetQuaternion();
 	}
-	else if (dot > 0.999999)
+	else if (dot > 0.999999f)
 	{
 		q.W = 1.0f;
 		q.X = 0.0f;
@@ -427,10 +423,6 @@ EulerAngles Rotation::GetEulerAngles(EulerOrder order) {
 
 YawPitchRoll Rotation::GetYawPitchRoll() {
 	Quaternion q = QuaternionRotation;
-
-	//EulerAngles ea = Rotation(q).GetEulerAngles(EulerConstants::EulerOrderZXZR);
-
-	//ea.Angles;
 
 	//intrinsic tait-bryan rotation of order XYZ
 	float yaw =  atan2f( 2.0f * (q.Y * q.Z + q.W * q.X), powf(q.W, 2) - powf(q.X, 2) - powf(q.Y, 2) + powf(q.Z, 2));

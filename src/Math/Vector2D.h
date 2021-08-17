@@ -134,38 +134,26 @@ public:
 	}
 
 	Vector2D operator  +(Vector2D vector) {
-		Vector2D v = Vector2D(*this);
-
-		return v.Add(vector);
+		return Add(vector);
 	}
 
 	Vector2D operator  -(Vector2D vector) {
-		Vector2D v = Vector2D(*this);
-
-		return v.Subtract(vector);
+		return Subtract(vector);
 	}
 
 	Vector2D operator  *(Vector2D vector) {
-		Vector2D v = Vector2D(*this);
-
-		return v.Multiply(vector);
+		return Multiply(vector);
 	}
 
 	Vector2D operator  /(Vector2D vector) {
-		Vector2D v = Vector2D(*this);
-
-		return v.Divide(vector);
+		return Divide(vector);
 	}
 
 	Vector2D operator  *(float value) {
-		Vector2D v = Vector2D(*this);
-
-		return v.Multiply(value);
+		return Multiply(value);
 	}
 
 	Vector2D operator  /(float value) {
-		Vector2D v = Vector2D(*this);
-
-		return v.Divide(value);
+		return Divide(value);
 	}
 } Vector2D;

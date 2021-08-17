@@ -5,9 +5,6 @@
 #include "Vector3D.h"
 
 typedef struct Quaternion {
-private:
-	const float epsilon = 0.001f;
-
 public:
 	float W = 1.0f;
 	float X = 0.0f;
@@ -139,34 +136,24 @@ public:
 	}
 
 	Quaternion operator  +(Quaternion quaternion) {
-		Quaternion q = Quaternion(*this);
-
-		return q.Add(quaternion);
+		return Add(quaternion);
 	}
 
 	Quaternion operator  -(Quaternion quaternion) {
-		Quaternion q = Quaternion(*this);
-
-		return q.Subtract(quaternion);
+		return Subtract(quaternion);
 	}
 
 	Quaternion operator  *(Quaternion quaternion) {
-		Quaternion q = Quaternion(*this);
-
-		return q.Multiply(quaternion);
+		return Multiply(quaternion);
 	}
 
 	Quaternion operator  /(Quaternion quaternion) {
-		Quaternion q = Quaternion(*this);
-
-		return q.Divide(quaternion);
+		return Divide(quaternion);
 	}
 
 
 	Quaternion operator  /(float value) {
-		Quaternion q = Quaternion(*this);
-
-		return q.Divide(value);
+		return Divide(value);
 	}
 
 	friend Quaternion operator *(float scalar, Quaternion q);

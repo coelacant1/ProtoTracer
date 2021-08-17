@@ -20,9 +20,8 @@ private:
     SpyroImage spyroImage;
 
 public:
-    SpryoSequence(Vector2D size, Vector2D offset, float fps) : spyroImage(size, offset), ImageSequence(&spyroImage, sequence, (unsigned int)2, fps){
-
-    }
+    SpryoSequence(Vector2D size, Vector2D offset, float fps) : spyroImage(size, offset), ImageSequence(&spyroImage, sequence, (unsigned int)2, fps){}
+    
 };
 
 const uint8_t SpryoSequence::spyro0001[] PROGMEM = {};

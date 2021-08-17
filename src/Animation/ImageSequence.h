@@ -24,9 +24,27 @@ protected:
         this->frameTime = ((float)imageCount) / fps;
     }
 
+    virtual ~ImageSequence(){}
+
 public:
     void SetFPS(float fps){
         this->fps = fps;
+    }
+    
+    void SetSize(Vector2D size){
+        image->SetSize(size);
+    }
+
+    void SetPosition(Vector2D offset){
+        image->SetPosition(offset);
+    }
+
+    void SetRotation(float angle){
+        image->SetRotation(angle);
+    }
+
+    void SetHueAngle(float hueAngle){
+        image->SetHueAngle(hueAngle);
     }
 
     void Update(){

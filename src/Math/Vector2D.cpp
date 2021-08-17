@@ -28,7 +28,17 @@ Vector2D Vector2D::Absolute() {
 }
 
 Vector2D Vector2D::Normal() {
-	return Multiply(this->Magnitude() == 0 ? 3.40282e+038f : 1 / this->Magnitude());
+	float magn = Magnitude();
+	
+	if (Mathematics::IsClose(magn, 1.0f, Mathematics::EPSILON)){
+		return (*this);
+	}
+	else if (Mathematics::IsClose(magn, 0.0f, Mathematics::EPSILON)){
+		return Multiply(3.40282e+038f);
+	}
+	else{
+		return Multiply(1.0f / magn);
+	}
 }
 
 Vector2D Vector2D::Add(Vector2D vector) {
@@ -60,6 +70,9 @@ Vector2D Vector2D::Divide(Vector2D vector) {
 }
 
 Vector2D Vector2D::Multiply(float scalar) {
+	if (Mathematics::IsClose(scalar, 1.0f, Mathematics::EPSILON)) return (*this);
+	if (Mathematics::IsClose(scalar, 0.0f, Mathematics::EPSILON)) return Vector3D();
+
 	return Vector2D{
 		this->X * scalar,
 		this->Y * scalar
@@ -67,6 +80,9 @@ Vector2D Vector2D::Multiply(float scalar) {
 }
 
 Vector2D Vector2D::Divide(float scalar) {
+	if (Mathematics::IsClose(scalar, 1.0f, Mathematics::EPSILON)) return (*this);
+	if (Mathematics::IsClose(scalar, 0.0f, Mathematics::EPSILON)) return Vector3D();
+	
 	return Vector2D{
 		this->X / scalar,
 		this->Y / scalar
@@ -83,34 +99,29 @@ Vector3D Vector2D::CrossProduct(Vector2D vector) {
 }
 
 Vector2D Vector2D::UnitCircle() {
-	Vector2D vector = Vector2D(this->X, this->Y);
-	float length = vector.Magnitude();
+	float length = Magnitude();
 
-	if (length == 1) return vector;
+	if (Mathematics::IsClose(length, 1.0f, Mathematics::EPSILON)) return Vector2D(this->X, this->Y);
 	if (length == 0) return Vector2D(0, 1);
 
 	return Vector2D{
-		vector.X / length,
-		vector.Y / length
+		X / length,
+		Y / length
 	};
 }
 
 Vector2D Vector2D::Constrain(float minimum, float maximum) {
-	Vector2D vector = Vector2D(this->X, this->Y);
-
-	vector.X = Mathematics::Constrain(X, minimum, maximum);
-	vector.Y = Mathematics::Constrain(Y, minimum, maximum);
-
-	return vector;
+	return Vector2D{
+		Mathematics::Constrain(X, minimum, maximum),
+		Mathematics::Constrain(Y, minimum, maximum)
+	};
 }
 
 Vector2D Vector2D::Constrain(Vector2D minimum, Vector2D maximum) {
-	Vector2D vector = Vector2D(this->X, this->Y);
-
-	vector.X = Mathematics::Constrain(X, minimum.X, maximum.X);
-	vector.Y = Mathematics::Constrain(Y, minimum.Y, maximum.Y);
-
-	return vector;
+	return Vector2D{
+		Mathematics::Constrain(X, minimum.X, maximum.X),
+		Mathematics::Constrain(Y, minimum.Y, maximum.Y)
+	};
 }
 
 Vector2D Vector2D::Minimum(Vector2D v) {
@@ -130,7 +141,7 @@ Vector2D Vector2D::Maximum(Vector2D v) {
 Vector2D Vector2D::Rotate(float angle, Vector2D offset){
 	Vector2D v = Vector2D(X, Y).Subtract(offset);
 
-	angle = angle * Mathematics::MPI / 180.0f;
+	angle = angle * Mathematics::MPID180;
 
 	float cs = cosf(angle);
 	float sn = sinf(angle);
@@ -146,9 +157,7 @@ bool Vector2D::CheckBounds(Vector2D minimum, Vector2D maximum) {
 }
 
 float Vector2D::Magnitude() {
-	Vector2D vector = Vector2D(this->X, this->Y);
-
-	return sqrtf(DotProduct(vector, vector));
+	return Mathematics::Sqrt(X * X + Y * Y);
 }
 
 float Vector2D::DotProduct(Vector2D vector) {
@@ -156,7 +165,9 @@ float Vector2D::DotProduct(Vector2D vector) {
 }
 
 float Vector2D::CalculateEuclideanDistance(Vector2D vector) {
-	return sqrtf(powf(this->X - vector.X, 2) + powf(this->Y - vector.Y, 2));
+	vector = Subtract(vector);
+
+	return vector.Magnitude();
 }
 
 bool Vector2D::IsEqual(Vector2D vector) {

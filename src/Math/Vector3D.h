@@ -48,11 +48,11 @@ public:
   }
 
 	static Vector3D DegreesToRadians(Vector3D degrees) {
-		return degrees / (180.0f / Mathematics::MPI);
+		return degrees * Mathematics::MPID180;
 	}
 
 	static Vector3D RadiansToDegrees(Vector3D radians) {
-		return radians * (180.0f / Mathematics::MPI);
+		return radians * Mathematics::M180DPI;
 	}
 
 	//Static function declaractions
@@ -113,7 +113,7 @@ public:
 		return !(this->IsEqual(vector));
 	}
 
-	Vector3D operator  =(Vector3D vector) {
+	Vector3D operator =(Vector3D vector) {
 		this->X = vector.X;
 		this->Y = vector.Y;
 		this->Z = vector.Z;
@@ -122,38 +122,26 @@ public:
 	}
 
 	Vector3D operator  +(Vector3D vector) {
-		Vector3D v = Vector3D(*this);
-
-		return v.Add(vector);
+		return Add(vector);
 	}
 
 	Vector3D operator  -(Vector3D vector) {
-		Vector3D v = Vector3D(*this);
-
-		return v.Subtract(vector);
+		return Subtract(vector);
 	}
 
 	Vector3D operator  *(Vector3D vector) {
-		Vector3D v = Vector3D(*this);
-
-		return v.Multiply(vector);
+		return Multiply(vector);
 	}
 
 	Vector3D operator  /(Vector3D vector) {
-		Vector3D v = Vector3D(*this);
-
-		return v.Divide(vector);
+		return Divide(vector);
 	}
 
 	Vector3D operator  *(float value) {
-		Vector3D v = Vector3D(*this);
-
-		return v.Multiply(value);
+		return Multiply(value);
 	}
 
 	Vector3D operator  /(float value) {
-		Vector3D v = Vector3D(*this);
-
-		return v.Divide(value);
+		return Divide(value);
 	}
 } Vector3D;
