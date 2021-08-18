@@ -55,7 +55,7 @@ public:
 		return radians * Mathematics::M180DPI;
 	}
 
-	//Static function declaractions
+	//Static function declarations
 	static Vector3D Normal(Vector3D vector) {
 		return vector.Normal();
 	}

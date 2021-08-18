@@ -24,8 +24,6 @@ protected:
         this->frameTime = ((float)imageCount) / fps;
     }
 
-    virtual ~ImageSequence(){}
-
 public:
     void SetFPS(float fps){
         this->fps = fps;

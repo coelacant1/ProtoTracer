@@ -1,7 +1,7 @@
 //#include "Animation\ProtoDRMorphAnimation.h"
 //#include "Animation\KaiborgV1Animation.h"
-//#include "Animation\CoelaCubeAnimation.h"
-#include "Animation\SpyroAnimation.h"
+#include "Animation\CoelaCubeAnimation.h"
+//#include "Animation\SpyroAnimation.h"
 //#include "Animation\PikachuAnimation.h"
 //#include "Animation\BeeAnimation.h"
 //#include "Animation\CreeperAnimation.h"
@@ -14,9 +14,9 @@ const uint8_t maxBrightness = 20;
 //Controller controller = ProtoDRController(maxBrightness, ProtoDRController::RIGHT);
 Controller* controller = new ProtoDRController(maxBrightness, ProtoDRController::RIGHT);
 //ProtoDRMorphAnimation protoDRMorph;
-//CoelaCubeAnimation cube;
+CoelaCubeAnimation cube;
 //KaiborgV1Animation kaiborg;
-SpyroAnimation spyro;
+//SpyroAnimation spyro;
 //CreeperAnimation creeper;
 //PikachuAnimation pikachu;
 //BeeAnimation bee;
@@ -32,9 +32,9 @@ void setup() {
 
 void loop() {
     for (float i = 0.0f; i < 1.0f; i += 1.0f / 720.0f) {
-        spyro.Update(i);
+        cube.Update(i);
 
-        controller->Render(spyro.GetScene());
+        controller->Render(cube.GetScene());
 
         controller->Display();
 

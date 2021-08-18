@@ -22,8 +22,8 @@ Vector2D::Vector2D(const Vector3D& vector) {
 
 Vector2D Vector2D::Absolute() {
 	return Vector2D{
-		fabsf(this->X),
-		fabsf(this->Y)
+		fabsf(X),
+		fabsf(Y)
 	};
 }
 
@@ -43,29 +43,29 @@ Vector2D Vector2D::Normal() {
 
 Vector2D Vector2D::Add(Vector2D vector) {
 	return Vector2D{
-		this->X + vector.X,
-		this->Y + vector.Y
+		X + vector.X,
+		Y + vector.Y
 	};
 }
 
 Vector2D Vector2D::Subtract(Vector2D vector) {
 	return Vector2D{
-		this->X - vector.X,
-		this->Y - vector.Y
+		X - vector.X,
+		Y - vector.Y
 	};
 }
 
 Vector2D Vector2D::Multiply(Vector2D vector) {
 	return Vector2D{
-		this->X * vector.X,
-		this->Y * vector.Y
+		X * vector.X,
+		Y * vector.Y
 	};
 }
 
 Vector2D Vector2D::Divide(Vector2D vector) {
 	return Vector2D{
-		this->X / vector.X,
-		this->Y / vector.Y
+		X / vector.X,
+		Y / vector.Y
 	};
 }
 
@@ -74,8 +74,8 @@ Vector2D Vector2D::Multiply(float scalar) {
 	if (Mathematics::IsClose(scalar, 0.0f, Mathematics::EPSILON)) return Vector3D();
 
 	return Vector2D{
-		this->X * scalar,
-		this->Y * scalar
+		X * scalar,
+		Y * scalar
 	};
 }
 
@@ -84,8 +84,8 @@ Vector2D Vector2D::Divide(float scalar) {
 	if (Mathematics::IsClose(scalar, 0.0f, Mathematics::EPSILON)) return Vector3D();
 	
 	return Vector2D{
-		this->X / scalar,
-		this->Y / scalar
+		X / scalar,
+		Y / scalar
 	};
 
 }
@@ -94,7 +94,7 @@ Vector3D Vector2D::CrossProduct(Vector2D vector) {
 	return Vector3D{
 		0.0f,
 		0.0f,
-		(this->X * vector.Y) - (this->Y * vector.X)
+		(X * vector.Y) - (Y * vector.X)
 	};
 }
 
@@ -161,7 +161,7 @@ float Vector2D::Magnitude() {
 }
 
 float Vector2D::DotProduct(Vector2D vector) {
-	return (this->X * vector.X) + (this->Y * vector.Y);
+	return (X * vector.X) + (Y * vector.Y);
 }
 
 float Vector2D::CalculateEuclideanDistance(Vector2D vector) {
@@ -171,12 +171,12 @@ float Vector2D::CalculateEuclideanDistance(Vector2D vector) {
 }
 
 bool Vector2D::IsEqual(Vector2D vector) {
-	return (this->X == vector.X) && (this->Y == vector.Y);
+	return (X == vector.X) && (Y == vector.Y);
 }
 
 String Vector2D::ToString() {
-	String x = Mathematics::DoubleToCleanString(this->X);
-	String y = Mathematics::DoubleToCleanString(this->Y);
+	String x = Mathematics::DoubleToCleanString(X);
+	String y = Mathematics::DoubleToCleanString(Y);
 
 	return "[" + x + ", " + y + "]";
 }

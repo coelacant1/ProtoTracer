@@ -1,17 +1,11 @@
 #pragma once
 
+#include "Arduino.h"
 #include "..\Materials\Material.h"
 #include "..\Math\Vector2D.h"
 
 class Image : public Material{
-public:
-    enum Type{
-        RGB,
-        BW
-    };
-
-protected:
-    Type type;
+private:
     Vector2D size;
     Vector2D offset;
     float angle = 0.0f;
@@ -19,25 +13,26 @@ protected:
     unsigned int xPixels = 0;
     unsigned int yPixels = 0;
     const uint8_t* data;
+    const uint8_t* rgbColors;
+    uint8_t colors;
 
-    Image(Type type, unsigned int xPixels, unsigned int yPixels) {
-        this->type = type;
-        this->xPixels = xPixels;
-        this->yPixels = yPixels;
-    }
-
-    Image(Type type, const uint8_t* data, unsigned int xPixels, unsigned int yPixels) {
-        this->type = type;
+public:
+    Image(const uint8_t* data, const uint8_t* rgbColors, unsigned int xPixels, unsigned int yPixels, uint8_t colors) {
         this->data = data;
+        this->rgbColors = rgbColors;
         this->xPixels = xPixels;
         this->yPixels = yPixels;
+        this->colors = colors;
     }
 
     ~Image(){}
 
-public:
     void SetData(const uint8_t* data){
         this->data = data;
+    }
+
+    void SetColorPalette(const uint8_t* rgbColors){
+        this->rgbColors = rgbColors;
     }
 
     void SetSize(Vector2D size){
@@ -62,19 +57,18 @@ public:
         unsigned int x = (unsigned int)Mathematics::Map(rPos.X, size.X / -2.0f, size.X / 2.0f, xPixels, 0);
         unsigned int y = (unsigned int)Mathematics::Map(rPos.Y, size.Y / -2.0f, size.Y / 2.0f, yPixels, 0);
 
-        if(x <= 0 || x >= xPixels || y <= 0 || y >= yPixels){
-            return RGBColor();
-        }
+        if(x <= 0 || x >= xPixels || y <= 0 || y >= yPixels) return RGBColor();
 
-        if (type == RGB){//RGB
-            unsigned long pos = x * 3 + y * xPixels * 3;
+        unsigned int pos = data[x + y * xPixels] * 3;
 
-            return RGBColor(data[pos], data[pos + 1], data[pos + 2]).HueShift(hueAngle);
-        }
-        else{//Black and white
-            unsigned long pos = x + y * xPixels;
+        if (pos > colors - (unsigned int)1) return RGBColor();
 
-            return RGBColor(data[pos], data[pos], data[pos]);
-        }
+        Serial.print(pos);
+        Serial.print('\t');
+        Serial.print(x + y * xPixels);
+        Serial.print('\t');
+        Serial.println(RGBColor(rgbColors[pos], rgbColors[pos + 1], rgbColors[pos + 2]).ToString());
+
+        return RGBColor(rgbColors[pos], rgbColors[pos + 1], rgbColors[pos + 2]).HueShift(hueAngle);
     }
 };

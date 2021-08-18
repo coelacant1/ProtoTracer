@@ -6,8 +6,8 @@
 #include "..\Materials\LightMaterial.h"
 #include "..\Math\FunctionGenerator.h"
 
-#include "Flash\Images\Coela.h"
-//#include "Flash\ImageSequences\Bonk.h"
+//#include "Flash\Images\CoelaToot.h"
+#include "Flash\ImageSequences\Bonk.h"
 
 class CoelaCubeAnimation : public Animation{
 private:
@@ -17,10 +17,10 @@ private:
     FunctionGenerator fGenRotation = FunctionGenerator(FunctionGenerator::Sine, -360.0f, 360.0f, 6.0f);
     FunctionGenerator fGenScale = FunctionGenerator(FunctionGenerator::Sine, 10.0f, 10.0f, 4.0f);
     FunctionGenerator fGenMatPos = FunctionGenerator(FunctionGenerator::Sine, -10.0f, 10.0f, 1.3f);
-    FunctionGenerator fGenMatSize = FunctionGenerator(FunctionGenerator::Sine, 100.0f, 250.0f, 2.1f);
+    FunctionGenerator fGenMatSize = FunctionGenerator(FunctionGenerator::Sine, 250.0f, 350.0f, 2.1f);
     FunctionGenerator fGenMatRot = FunctionGenerator(FunctionGenerator::Sine, -15.0f, 15.0f, 3.2f);
     FunctionGenerator fGenMatHue = FunctionGenerator(FunctionGenerator::Sawtooth, 0.0f, 360.0f, 2.0f);
-    Coela coela = Coela(Vector2D(200, 145), Vector2D(100, 70));
+    BonkSequence coela = BonkSequence(Vector2D(200, 145), Vector2D(100, 70), 12);
 
 public:
     CoelaCubeAnimation() : Animation(1) {
@@ -42,10 +42,12 @@ public:
         
         Quaternion rotation = Rotation(EulerAngles(Vector3D(x, ratio * 720.0f, 0), EulerConstants::EulerOrderXZYS)).GetQuaternion();
 
-        coela.SetPosition(Vector2D(shift, shift + 80.0f));
+        coela.SetPosition(Vector2D(0.0f,  160.0f));
+        //coela.SetPosition(Vector2D(shift, shift + 80.0f));
         coela.SetSize(Vector2D(size, size));
-        coela.SetRotation(rotate);
+        //coela.SetRotation(rotate);
         //coela.SetHueAngle(hueAngle);
+        coela.Update();
 
         cube.GetObject()->ResetVertices();
 

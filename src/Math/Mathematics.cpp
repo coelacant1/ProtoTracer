@@ -32,11 +32,11 @@ float Mathematics::Constrain(float value, float minimum, float maximum) {
 }
 
 float Mathematics::DegreesToRadians(float degrees) {
-	return degrees / (180.0f / MPI);
+	return degrees * MPID180;
 }
 
 float Mathematics::RadiansToDegrees(float radians) {
-	return radians * (180.0f / MPI);
+	return radians * M180DPI;
 }
 
 String Mathematics::DoubleToCleanString(float value) {
@@ -78,6 +78,7 @@ float Mathematics::Pow(float value, float exponent){
 
 float Mathematics::Sqrt(float value){//IEEE-754 specific approximation
 	const int result = 0x1fbb4000 + (*(int*)&value >> 1);
+
     return *(float*)&result;
 }
 
