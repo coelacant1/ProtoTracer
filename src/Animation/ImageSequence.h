@@ -45,8 +45,12 @@ public:
         image->SetHueAngle(hueAngle);
     }
 
+    void Reset(){
+        startTime = millis();
+    }
+
     void Update(){
-        float currentTime = fmod(millis() / 1000.0f, frameTime) / frameTime;//normalize time to ratio
+        float currentTime = fmod((millis() - startTime) / 1000.0f, frameTime) / frameTime;//normalize time to ratio
 
         currentFrame = (unsigned int)Mathematics::Map(currentTime, 0.0f, 1.0f, 0, imageCount - 1);
 

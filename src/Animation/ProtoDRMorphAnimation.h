@@ -6,6 +6,9 @@
 #include "..\Render\Scene.h"
 #include "..\Materials\GradientMaterial.h"
 #include "..\Materials\SimplexNoise.h"
+#include "..\Math\FunctionGenerator.h"
+
+#include "Flash\ImageSequences\Noise.h"
 
 class ProtoDRMorphAnimation : public Animation{
 private:
@@ -14,6 +17,9 @@ private:
     RGBColor spectrum[4] = {RGBColor(0, 255, 0), RGBColor(255, 0, 0), RGBColor(0, 255, 0), RGBColor(0, 0, 255)};
     GradientMaterial gNoiseMat = GradientMaterial(4, spectrum, 2.0f, false);
     SimplexNoise sNoise = SimplexNoise(1, &gNoiseMat);
+    
+    FunctionGenerator fGenMatPos = FunctionGenerator(FunctionGenerator::Sine, -10.0f, 10.0f, 4.0f);
+    NoiseSequence gif = NoiseSequence(Vector2D(200, 145), Vector2D(100, 70), 180);
 
     KeyFrameTrack blink = KeyFrameTrack(1, 0.0f, 1.0f, 10, KeyFrameTrack::Cosine);
     KeyFrameTrack topFinOuter = KeyFrameTrack(1, 0.0f, 1.0f, 5, KeyFrameTrack::Cosine);
@@ -141,7 +147,7 @@ public:
         AddBotFinKeyFrames();
         AddMouthKeyFrames();
 
-        pM.GetObject()->SetMaterial(&sNoise);
+        pM.GetObject()->SetMaterial(&gif);
     }
 
     void UpdateKeyFrameTracks(){
@@ -240,6 +246,13 @@ public:
         gNoiseMat.HueShift(ratio * 360 * 2);
         sNoise.SetScale(Vector3D(sShift, sShift, sShift));
         sNoise.SetZPosition(x * 4.0f);
+
+        float shift = fGenMatPos.Update();
+
+        gif.SetPosition(Vector2D(20.0f + shift, 135.0f + shift));
+        gif.SetSize(Vector2D(-440, 350));
+        gif.SetRotation(15.0f);
+        gif.Update();
         
         pM.GetObject()->GetTransform()->SetRotation(Vector3D(0, 180.0f, 0.0f));
         pM.GetObject()->GetTransform()->SetPosition(Vector3D(x, y, 600.0f));
