@@ -1,11 +1,10 @@
 #pragma once
 
-#include "Arduino.h"
 #include "..\Materials\Material.h"
 #include "..\Math\Vector2D.h"
 
 class Image : public Material{
-private:
+public:
     Vector2D size;
     Vector2D offset;
     float angle = 0.0f;
@@ -16,7 +15,6 @@ private:
     const uint8_t* rgbColors;
     uint8_t colors;
 
-public:
     Image(const uint8_t* data, const uint8_t* rgbColors, unsigned int xPixels, unsigned int yPixels, uint8_t colors) {
         this->data = data;
         this->rgbColors = rgbColors;
@@ -62,12 +60,6 @@ public:
         unsigned int pos = data[x + y * xPixels] * 3;
 
         if (pos > colors - (unsigned int)1) return RGBColor();
-
-        Serial.print(pos);
-        Serial.print('\t');
-        Serial.print(x + y * xPixels);
-        Serial.print('\t');
-        Serial.println(RGBColor(rgbColors[pos], rgbColors[pos + 1], rgbColors[pos + 2]).ToString());
 
         return RGBColor(rgbColors[pos], rgbColors[pos + 1], rgbColors[pos + 2]).HueShift(hueAngle);
     }

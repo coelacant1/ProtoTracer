@@ -3,7 +3,6 @@
 #include "Material.h"
 #include "..\Math\Vector2D.h"
 #include "GradientMaterial.h"
-#include "Arduino.h"
 
 //Converts gif to RGB XY pixel matrix
 class DepthMaterial : public Material {

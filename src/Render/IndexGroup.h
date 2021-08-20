@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Arduino.h"
-
 typedef struct IndexGroup {
 public:
 	unsigned int A = 0;

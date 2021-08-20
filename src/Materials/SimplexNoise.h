@@ -1,6 +1,5 @@
 #pragma once
 
-#include <Arduino.h>
 #include "..\Materials\GradientMaterial.h"
 #include "..\Math\Vector3D.h"
 

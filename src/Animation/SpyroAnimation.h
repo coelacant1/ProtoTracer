@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Animation.h"
-#include "..\Objects\Cube.h"
 #include "..\Math\FunctionGenerator.h"
 #include "..\Objects\Spyro.h"
 
@@ -30,7 +29,7 @@ public:
         spyro.GetObject()->GetTransform()->SetRotation(rotation);
         spyro.GetObject()->GetTransform()->SetScale(Vector3D(sx, sx, sx));
         //spyro.GetObject()->GetTransform()->SetScaleOffset(Vector3D(100.0f, 75.0f, 0.0f));
-        spyro.GetObject()->GetTransform()->SetPosition(Vector3D(000.0f, 0.0f, 600.0f));
+        spyro.GetObject()->GetTransform()->SetPosition(Vector3D(0.0f, 0.0f, 600.0f));
 
         spyro.GetObject()->UpdateTransform();
     }

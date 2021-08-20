@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Arduino.h"
 #include "..\Math\Transform.h"
 
 class CameraLayout{
@@ -91,10 +90,7 @@ private:
             rightVector = upVector.CrossProduct(forwardVector);
 
             rotation = Rotation(rightVector, forwardVector, upVector).GetQuaternion().UnitQuaternion();
-        }
-        else{
-            Serial.println("Bad transform");
-        }
+        }//else bad transform
     }
 
 public:

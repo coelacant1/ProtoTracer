@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Arduino.h"
 #include "..\Math\Rotation.h"
 #include "Morph.h"
 #include "..\Materials\SimpleMaterial.h"
 #include "..\Render\IndexGroup.h"
+#include "..\Render\Object3D.h"
 
 class ProtoDR{
 public:
@@ -54,7 +54,7 @@ private:
     SimpleMaterial simpleMaterial = SimpleMaterial(RGBColor(128, 128, 128));
     Object3D basisObj = Object3D(&triangleGroup, &simpleMaterial);
 
-    static const byte morphCount = 36;
+    static const uint8_t morphCount = 36;
     int HideSecondEyeIndexes[6] = {106,107,108,109,110,111};
     int HideBlushIndexes[12] = {14,15,16,17,18,19,20,21,22,23,24,25};
     int TopFinOuterThinIndexes[3] = {49,51,52};
