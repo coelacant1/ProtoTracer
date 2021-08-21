@@ -1,21 +1,22 @@
 //#include "Animation\ProtoDRMorphAnimation.h"
 //#include "Animation\KaiborgV1Animation.h"
-//#include "Animation\CoelaCubeAnimation.h"
-//#include "Animation\SpyroAnimation.h"
-#include "Animation\RocksAnimation.h"
+//#include "Animation\CoelaBonkAnimation.h"
+#include "Animation\SpyroAnimation.h"
+//#include "Animation\SpyroRotateAnimation.h"
 //#include "Animation\PikachuAnimation.h"
 //#include "Animation\BeeAnimation.h"
 //#include "Animation\CreeperAnimation.h"
 //#include "Controllers\KaiborgV1Controller.h"
-//#include "Controllers\KaiborgV1D1Controller.h"
-#include "Controllers\ProtoDRController.h"
+#include "Controllers\KaiborgV1D1Controller.h"
+//#include "Controllers\ProtoDRController.h"
+#include "Sensors\SerialInterpreter.h"
 
 const uint8_t maxBrightness = 20;
 //Controller controller = ProtoDRController(maxBrightness, ProtoDRController::LEFT);
 //Controller controller = ProtoDRController(maxBrightness, ProtoDRController::RIGHT);
-Controller* controller = new ProtoDRController(maxBrightness, ProtoDRController::RIGHT);
+Controller* controller = new KaiborgV1D1Controller(maxBrightness);
 //ProtoDRMorphAnimation protoDRMorph;
-Animation* animation = new RocksAnimation();
+Animation* animation = new SpyroAnimation();
 
 void setup() {
     Serial.begin(115200);

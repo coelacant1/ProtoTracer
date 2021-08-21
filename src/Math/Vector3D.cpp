@@ -40,6 +40,22 @@ Vector3D Vector3D::Normal() {
 	}
 }
 
+Vector3D Vector3D::Add(float value) {
+	return Vector3D{
+		this->X + value,
+		this->Y + value,
+		this->Z + value 
+	};
+}
+
+Vector3D Vector3D::Subtract(float value) {
+	return Vector3D {
+		this->X - value,
+		this->Y - value,
+		this->Z - value
+	};
+}
+
 Vector3D Vector3D::Add(Vector3D vector) {
 	return Vector3D{
 		this->X + vector.X,

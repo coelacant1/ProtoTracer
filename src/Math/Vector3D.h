@@ -13,7 +13,9 @@ public:
 	Vector3D(float x, float y, float z);
 	Vector3D Absolute();
 	Vector3D Normal();
+	Vector3D Add(float value);
 	Vector3D Add(Vector3D vector);
+	Vector3D Subtract(float value);
 	Vector3D Subtract(Vector3D vector);
 	Vector3D Multiply(Vector3D vector);
 	Vector3D Divide(Vector3D vector);
@@ -135,6 +137,14 @@ public:
 
 	Vector3D operator  /(Vector3D vector) {
 		return Divide(vector);
+	}
+
+	Vector3D operator  +(float value) {
+		return Add(value);
+	}
+
+	Vector3D operator  -(float value) {
+		return Subtract(value);
 	}
 
 	Vector3D operator  *(float value) {
