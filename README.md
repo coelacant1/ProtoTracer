@@ -15,26 +15,19 @@ This codebase has been tested on an Arduino Mega (smaller .OBJ file with a 89 pi
 
 # Usage:
 The following links give a detailed description on how to import files, set up controllers, manipulate objects, and render to displays:
-- [Hardware Requirements and Use Cases](Hardware-Requirements-and-Use-Cases)
-- [Creating a controller](Creating-a-custom-controller)
-  - [Creating and importing the pixel map](Creating-and-Importing-the-Pixel-Map)
-  - [Rendering the camera](Rendering-the-Camera)
-  - [Writing to the display](Writing-to-the-Display)
-- [Using an existing controller](Using-an-Existing-Controller)
-  - [Kaiborg V1 controller](Kaiborg-V1-controller)
-  - [Kaiborg V1.1 controller](Kaiborg-V1.1-Controller)
-  - [ProtoDR controller](ProtoDR-Controller)
-- [Creating an animation](Creating-an-Animation)
-  - [Adding (.OBJ) objects with UV maps](Adding-.OBJ-Objects-with-UV-Maps)
-  - [Adding (.FBX) objects with blend shapes](Adding-.FBX-objects-with-Blend-Shapes)
-  - [Adding image materials](Adding-Image-Materials)
-  - [Adding gif materials](Adding-GIF-Materials)
-  - [Creating a shader material](Creating-a-Shader-Material)
-  - [Modifying 3D objects](Modifying-3D-Objects)
-  - [Keyframing animations](Keyframing-Animations)
+- [Creating a controller](https://github.com/coelacant1/ProtoTracer/wiki/Creating-a-custom-controller)
+- [Using an existing controller](https://github.com/coelacant1/ProtoTracer/wiki/Using-an-Existing-Controller)
+- [Creating an animation](https://github.com/coelacant1/ProtoTracer/wiki/Creating-an-Animation)
+  - [Adding (.OBJ) objects with UV maps](https://github.com/coelacant1/ProtoTracer/wiki/Adding-.OBJ-Objects-with-UV-Maps)
+  - [Adding (.FBX) objects with blend shapes](https://github.com/coelacant1/ProtoTracer/wiki/Adding-.FBX-objects-with-Blend-Shapes)
+  - [Adding image materials](https://github.com/coelacant1/ProtoTracer/wiki/Adding-Image-Materials)
+  - [Adding gif materials](https://github.com/coelacant1/ProtoTracer/wiki/Adding-GIF-Materials)
+  - [Creating a shader material](https://github.com/coelacant1/ProtoTracer/wiki/Creating-a-Shader-Material)
+  - [Modifying 3D objects](https://github.com/coelacant1/ProtoTracer/wiki/Modifying-3D-Objects)
+  - [Keyframing animations](https://github.com/coelacant1/ProtoTracer/wiki/Keyframing-Animations)
 
 # Questions?
-Any recommendations on additional information to add can be requested in the discussions tab. If you have additional questions, you can @ me in my [Discord server](https://discord.gg/YwaWnhJ) or on direct message me on [Twitter](https://twitter.com/Coelacant1).
+Any recommendations on additional information to add can be requested in the discussions tab. If you have additional questions, you can @ me in my [Discord server](https://discord.gg/YwaWnhJ) or direct message me on [Twitter](https://twitter.com/Coelacant1).
 
 # Contributing:
 Pull requests are very welcome. Any issues found should be reported first to open a discussion. Any recommendations can be requested in the discussions tab.
