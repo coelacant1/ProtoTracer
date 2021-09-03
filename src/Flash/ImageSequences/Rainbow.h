@@ -59,7 +59,7 @@ private:
 
 	static const uint8_t rgbColors[];
 
-	Image image = Image(frame0000, rgbColors, 180, 169, 256);
+	Image image = Image(frame0000, rgbColors, 180, 169, 255);
 
 public:
 	RainbowSequence(Vector2D size, Vector2D offset, float fps) : ImageSequence(&image, sequence, (unsigned int)50, fps) {

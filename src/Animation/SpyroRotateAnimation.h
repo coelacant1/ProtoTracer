@@ -7,8 +7,8 @@
 
 class SpyroRotateAnimation : public Animation{
 private:
-    Cube spyro;
-    FunctionGenerator fGenScale = FunctionGenerator(FunctionGenerator::Sine, 0.5f, 0.5f, 4.2f);
+    Spyro spyro;
+    FunctionGenerator fGenScale = FunctionGenerator(FunctionGenerator::Sine, 2.0f, 10.0f, 4.2f);
     SimpleMaterial sM = SimpleMaterial(RGBColor(255, 255, 255));
 
 public:

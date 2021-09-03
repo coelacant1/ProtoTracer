@@ -21,7 +21,7 @@ private:
 
 	static const uint8_t rgbColors[];
 
-	Image image = Image(frame0000, rgbColors, 12, 10, 256);
+	Image image = Image(frame0000, rgbColors, 12, 10, 255);
 
 public:
 	Rainbow2Sequence(Vector2D size, Vector2D offset, float fps) : ImageSequence(&image, sequence, (unsigned int)12, fps) {

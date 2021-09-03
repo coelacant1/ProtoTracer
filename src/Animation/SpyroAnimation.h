@@ -16,7 +16,7 @@ public:
     SpyroAnimation() : Animation(1) {
         scene->AddObject(spyro.GetObject());
 
-        spyro.GetObject()->SetMaterial(&nM);
+        //spyro.GetObject()->SetMaterial(&nM);
     }
 
     void FadeIn(float stepRatio) override {}
