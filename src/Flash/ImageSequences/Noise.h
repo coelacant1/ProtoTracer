@@ -369,7 +369,7 @@ private:
 
 	static const uint8_t rgbColors[];
 
-	Image image = Image(frame0000, rgbColors, 64, 64, 256);
+	Image image = Image(frame0000, rgbColors, 64, 64, 255);
 
 public:
 	NoiseSequence(Vector2D size, Vector2D offset, float fps) : ImageSequence(&image, sequence, (unsigned int)360, fps) {

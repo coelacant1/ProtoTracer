@@ -2,24 +2,26 @@
 
 #include "Animation.h"
 #include "KeyFrameTrack.h"
+#include "EasyEaseAnimator.h"
 #include "..\Morph\ProtoDRMorph.h"
 #include "..\Render\Scene.h"
 #include "..\Materials\GradientMaterial.h"
 #include "..\Materials\SimplexNoise.h"
 #include "..\Math\FunctionGenerator.h"
 
-#include "Flash\ImageSequences\Noise.h"
+#include "Flash\ImageSequences\Rainbow.h"
 
 class ProtoDRMorphAnimation : public Animation{
 private:
     ProtoDR pM;
+    EasyEaseAnimator eEA = EasyEaseAnimator(10);
 
     RGBColor spectrum[4] = {RGBColor(0, 255, 0), RGBColor(255, 0, 0), RGBColor(0, 255, 0), RGBColor(0, 0, 255)};
     GradientMaterial gNoiseMat = GradientMaterial(4, spectrum, 2.0f, false);
     SimplexNoise sNoise = SimplexNoise(1, &gNoiseMat);
     
     FunctionGenerator fGenMatPos = FunctionGenerator(FunctionGenerator::Sine, -10.0f, 10.0f, 4.0f);
-    NoiseSequence gif = NoiseSequence(Vector2D(200, 145), Vector2D(100, 70), 180);
+    RainbowSequence gif = RainbowSequence(Vector2D(200, 145), Vector2D(100, 70), 60);
 
     KeyFrameTrack blink = KeyFrameTrack(1, 0.0f, 1.0f, 10, KeyFrameTrack::Cosine);
     KeyFrameTrack topFinOuter = KeyFrameTrack(1, 0.0f, 1.0f, 5, KeyFrameTrack::Cosine);
@@ -32,6 +34,22 @@ private:
     KeyFrameTrack botFinLR4 = KeyFrameTrack(1, 0.0f, 1.0f, 10, KeyFrameTrack::Cosine);
     KeyFrameTrack botFinLR5 = KeyFrameTrack(1, 0.0f, 1.0f, 10, KeyFrameTrack::Cosine);
     KeyFrameTrack mouth = KeyFrameTrack(1, 0.0f, 1.0f, 5, KeyFrameTrack::Cosine);
+
+    void LinkEasyEase(){
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::BlushEye), ProtoDR::BlushEye, 40, 0.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::HideBlush), ProtoDR::HideBlush, 1, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::HideEyeBrow), ProtoDR::HideEyeBrow, 1, 0.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::OwOMouth), ProtoDR::OwOMouth, 60, 0.0f);
+
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::SadEye), ProtoDR::SadEye, 70, 0.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::SadEyeBrow), ProtoDR::SadEyeBrow, 80, 0.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::SadMouth), ProtoDR::SadMouth, 90, 0.0f);
+
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::FlatMouth), ProtoDR::FlatMouth, 50, 0.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::DeadEye), ProtoDR::DeadEye, 1, 0.0f);
+
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::HeartEye), ProtoDR::HeartEye, 30, 0.0f);
+    }
 
     void LinkParameters(){
         blink.AddParameter(pM.GetMorphWeightReference(ProtoDR::ClosedEye));
@@ -139,6 +157,7 @@ public:
     ProtoDRMorphAnimation() : Animation(1) {
         scene->AddObject(pM.GetObject());
 
+        LinkEasyEase();
         LinkParameters();
 
         AddBlinkKeyFrames();
@@ -168,7 +187,6 @@ public:
         pM.Reset();
         blink.Play();
         mouth.Play();
-
     }
 
     void OwO(){
@@ -178,10 +196,10 @@ public:
         mouth.Pause();
         mouth.Reset();
 
-        pM.SetMorphWeight(ProtoDR::BlushEye, 1.0f);
-        pM.SetMorphWeight(ProtoDR::HideBlush, 0.0f);
-        pM.SetMorphWeight(ProtoDR::HideEyeBrow, 1.0f);
-        pM.SetMorphWeight(ProtoDR::OwOMouth, 1.0f);
+        eEA.AddParameterFrame(ProtoDR::BlushEye, 1.0f);
+        eEA.AddParameterFrame(ProtoDR::HideBlush, 0.0f);
+        eEA.AddParameterFrame(ProtoDR::HideEyeBrow, 1.0f);
+        eEA.AddParameterFrame(ProtoDR::OwOMouth, 1.0f);
     }
 
     void Sad(){
@@ -190,9 +208,9 @@ public:
         mouth.Pause();
         mouth.Reset();
 
-        pM.SetMorphWeight(ProtoDR::SadEye, 1.0f);
-        pM.SetMorphWeight(ProtoDR::SadEyeBrow, 1.0f);
-        pM.SetMorphWeight(ProtoDR::SadMouth, 1.0f);
+        eEA.AddParameterFrame(ProtoDR::SadEye, 1.0f);
+        eEA.AddParameterFrame(ProtoDR::SadEyeBrow, 1.0f);
+        eEA.AddParameterFrame(ProtoDR::SadMouth, 1.0f);
     }
 
     void Dead(){
@@ -202,9 +220,9 @@ public:
         mouth.Pause();
         mouth.Reset();
 
-        pM.SetMorphWeight(ProtoDR::FlatMouth, 1.0f);
-        pM.SetMorphWeight(ProtoDR::DeadEye, 1.0f);
-        pM.SetMorphWeight(ProtoDR::HideEyeBrow, 1.0f);
+        eEA.AddParameterFrame(ProtoDR::FlatMouth, 1.0f);
+        eEA.AddParameterFrame(ProtoDR::DeadEye, 1.0f);
+        eEA.AddParameterFrame(ProtoDR::HideEyeBrow, 1.0f);
     }
 
     void Heart(){
@@ -214,9 +232,9 @@ public:
         mouth.Pause();
         mouth.Reset();
 
-        pM.SetMorphWeight(ProtoDR::HeartEye, 1.0f);
-        pM.SetMorphWeight(ProtoDR::HideEyeBrow, 1.0f);
-        pM.SetMorphWeight(ProtoDR::OwOMouth, 1.0f);
+        eEA.AddParameterFrame(ProtoDR::HeartEye, 1.0f);
+        eEA.AddParameterFrame(ProtoDR::HideEyeBrow, 1.0f);
+        eEA.AddParameterFrame(ProtoDR::OwOMouth, 1.0f);
     }
 
     void FadeIn(float stepRatio) override {}
@@ -229,11 +247,13 @@ public:
     void Update(float ratio) override {
         UpdateKeyFrameTracks();
 
-        if (ratio > 0.8f) OwO();
-        else if (ratio > 0.6f) Sad();
-        else if (ratio > 0.4f) Dead();
-        else if (ratio > 0.2f) Heart();
+        if (ratio > 0.75f) Heart();
+        else if (ratio > 0.5f) OwO();
+        //else if (ratio > 0.4f) Dead();
+        else if (ratio > 0.25f) Sad();
         else Default();
+
+        eEA.Update();
         pM.Update();
         
         float x = sinf(ratio * 3.14159f / 180.0f * 360.0f * 4.0f) * 3.0f;

@@ -1,6 +1,6 @@
-//#include "Animation\ProtoDRMorphAnimation.h"
+#include "Animation\ProtoDRMorphAnimation.h"
 //#include "Animation\KaiborgV1Animation.h"
-#include "Animation\ProtoV3Animation.h"
+//include "Animation\ProtoV3Animation.h"
 //#include "Animation\FullScreenAnimation.h"
 //#include "Animation\CoelaBonkAnimation.h"
 //#include "Animation\SpyroAnimation.h"
@@ -8,16 +8,17 @@
 //#include "Animation\PikachuAnimation.h"
 //#include "Animation\BeeAnimation.h"
 //#include "Animation\CreeperAnimation.h"
+//#include "Animation\DeltaruneAnimation.h"
 //#include "Controllers\KaiborgV1Controller.h"
-#include "Controllers\KaiborgV1D1Controller.h"
-//#include "Controllers\ProtoDRController.h"
+//#include "Controllers\KaiborgV1D1Controller.h"
+#include "Controllers\ProtoDRController.h"
 
 const uint8_t maxBrightness = 10;
 //Controller controller = ProtoDRController(maxBrightness, ProtoDRController::LEFT);
-//Controller controller = ProtoDRController(maxBrightness, ProtoDRController::RIGHT);
-Controller* controller = new KaiborgV1D1Controller(maxBrightness);
+Controller* controller = new ProtoDRController(maxBrightness, ProtoDRController::RIGHT);
+//Controller* controller = new KaiborgV1D1Controller(maxBrightness);
 //ProtoDRMorphAnimation protoDRMorph;
-Animation* animation = new ProtoV3Animation();
+Animation* animation = new ProtoDRMorphAnimation();
 
 void setup() {
     Serial.begin(115200);
