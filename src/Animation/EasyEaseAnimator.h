@@ -5,7 +5,15 @@
 #include "..\Math\Mathematics.h"
 
 class EasyEaseAnimator{
+public:
+    enum InterpolationMethod{
+        Cosine,
+        Bounce,
+        Linear
+    };
+    
 private:
+    InterpolationMethod interpMethod;
     const unsigned int maxParameters;
     float** parameters;
     float* parameterFrame;
@@ -19,8 +27,9 @@ private:
     bool isActive = true;
 
 public:
-    EasyEaseAnimator(unsigned int maxParameters) : maxParameters(maxParameters) {
+    EasyEaseAnimator(unsigned int maxParameters, InterpolationMethod interpMethod) : maxParameters(maxParameters) {
         this->basis = basis;
+        this->interpMethod = interpMethod;
 
         parameters = new float*[maxParameters];
         parameterFrame = new float[maxParameters];
@@ -108,6 +117,23 @@ public:
             }
             
             *parameters[i] = Mathematics::CosineInterpolation(previousChangedTarget[i], parameterFrame[i], ratio);
+
+            
+            switch(interpMethod){
+                case Cosine:
+                    *parameters[i] = Mathematics::CosineInterpolation(previousChangedTarget[i], parameterFrame[i], ratio);
+                    break;
+                case Bounce:
+                    *parameters[i] = Mathematics::BounceInterpolation(previousChangedTarget[i], parameterFrame[i], ratio);
+                    break;
+                case Linear:
+                    *parameters[i] = Mathematics::Map(ratio, 0.0f, 1.0f, previousChangedTarget[i], parameterFrame[i]);
+                    break;
+                default://Linear
+                    *parameters[i] = Mathematics::Map(ratio, 0.0f, 1.0f, previousChangedTarget[i], parameterFrame[i]);
+                    break;
+
+            }
 
             previousTarget[i] = parameterFrame[i];
             parameterFrame[i] = basis[i];

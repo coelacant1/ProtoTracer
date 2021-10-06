@@ -73,7 +73,7 @@ public:
     void Rasterize(Scene* scene) {
         int numTriangles = 0;
     
-        //for each object in the scene, get the triangles
+        //for each object in the scene, get the triangles W
         for(int i = 0; i < scene->GetObjectCount(); i++){
             if(scene->GetObjects()[i]->IsEnabled()){
                 numTriangles += scene->GetObjects()[i]->GetTriangleGroup()->GetTriangleCount();

@@ -88,6 +88,16 @@ float Mathematics::CosineInterpolation(float beg, float fin, float ratio){
    return(beg * (1.0f - mu2) + fin * mu2);
 }
 
+float Mathematics::BounceInterpolation(float beg, float fin, float ratio){
+	//logarithm added with diminshing sine wave
+	//log max amplitude = 1 - sine max amplitude / 2
+	float baseLog = log10f(10.0f * ratio + 1.0f);
+	float baseSine = sinf(16.0f * ratio) * powf((2.0f * ratio - 2.0f), 2.0f) / 4.0f / 4.0f;
+	float bounce = baseLog + baseSine;
+
+	return Map(ratio, 0.0f, bounce, beg, fin);
+}
+
 float Mathematics::Map(float value, float inLow, float inMax, float outMin, float outMax){
     return (value - inLow) * (outMax - outMin) / (inMax - inLow) + outMin;
 }

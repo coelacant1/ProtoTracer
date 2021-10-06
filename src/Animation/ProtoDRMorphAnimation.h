@@ -14,7 +14,7 @@
 class ProtoDRMorphAnimation : public Animation{
 private:
     ProtoDR pM;
-    EasyEaseAnimator eEA = EasyEaseAnimator(10);
+    EasyEaseAnimator eEA = EasyEaseAnimator(10, EasyEaseAnimator::Cosine);
 
     RGBColor spectrum[4] = {RGBColor(0, 255, 0), RGBColor(255, 0, 0), RGBColor(0, 255, 0), RGBColor(0, 0, 255)};
     GradientMaterial gNoiseMat = GradientMaterial(4, spectrum, 2.0f, false);
