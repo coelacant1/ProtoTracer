@@ -4,3 +4,9 @@
 .vscode/ipch
 .vscode/arduino.json
 .vscode/settings.json
+
+.pioenvs
+.piolibdeps
+.clang_complete
+.gcc-flags.json
+.pio

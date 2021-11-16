@@ -15,8 +15,7 @@ private:
 public:
     SpyroAnimation() : Animation(1) {
         scene->AddObject(spyro.GetObject());
-
-        //spyro.GetObject()->SetMaterial(&nM);
+        //spyro.GetObject()->SetMaterial(&nM); // this one
     }
 
     void FadeIn(float stepRatio) override {}
@@ -32,7 +31,7 @@ public:
 
         spyro.GetObject()->GetTransform()->SetRotation(rotation);
         spyro.GetObject()->GetTransform()->SetScale(Vector3D(sx, sx, sx));
-        //spyro.GetObject()->GetTransform()->SetScaleOffset(Vector3D(100.0f, 75.0f, 0.0f));
+        // spyro.GetObject()->GetTransform()->SetScaleOffset(Vector3D(100.0f, 75.0f, 0.0f)); // this one
         spyro.GetObject()->GetTransform()->SetPosition(Vector3D(120.0f, 30.0f, 600.0f));
 
         spyro.GetObject()->UpdateTransform();

@@ -1,17 +1,19 @@
 #include <Arduino.h>
+#include <SPI.h>
+#define FASTLED_ALL_PINS_HARDWARE_SPI true
 #include <FastLED.h>
 
 #include "Controller.h"
 #include "Flash/PixelGroups/MyloPixels.h"
 #include "Render/Camera.h"
 
-#define DATA_PIN 4
+#define DATA_PIN 19
 #define NUM_LEDS 256
 
 class MyloController : public Controller {
   private:
    CameraLayout cameraLayout = CameraLayout(CameraLayout::ZForward, CameraLayout::YUp);
-   Transform camRghtTransform = Transform(Vector3D(), Vector3D(-100, -100, 0), Vector3D(1.5, 1.5, 1));
+   Transform camRghtTransform = Transform(Vector3D(), Vector3D(50, 0, 0), Vector3D(1, 1, 1));
 
    PixelGroup* temp;
    PixelGroup* buf1;
@@ -21,21 +23,20 @@ class MyloController : public Controller {
    Camera* cameras[1] = {camRght};
 
    CRGB leds[NUM_LEDS];
-   uint8_t maxBrightness;
 
   public:
-   MyloController(uint8_t maxBrightness, PixelGroup* buffer1, PixelGroup* buffer2) : Controller(cameras, 1) {
-      this->buf1 = buffer1;
-      this->temp = buffer1;
-      this->buf2 = buffer2;
+   MyloController() : Controller(cameras, 1) {
+      this->buf1 = new PixelGroup(MyloPixels, NUM_LEDS, PixelGroup::ZEROTOMAX);
+      this->temp = this->buf1;
+      this->buf2 = new PixelGroup(MyloPixels, NUM_LEDS, PixelGroup::ZEROTOMAX);
       this->camRght = new Camera(&camRghtTransform, &cameraLayout, this->buf1);
-      this->maxBrightness = maxBrightness;
    }
 
-   void Initialize() override {
+   void Initialize(uint8_t maxBrightness, boolean dither) override {
       FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
-      FastLED.setBrightness(this->maxBrightness);
+      FastLED.setBrightness(maxBrightness);
       FastLED.setCorrection(TypicalSMD5050);
+      if (!dither) FastLED.setDither(0);
       FastLED.clear();
       FastLED.show();
    }

@@ -27,7 +27,7 @@ public:
         renderTime = ((float)(micros() - previousTime)) / 1000000.0f;
     }
 
-    virtual void Initialize() = 0;
+    virtual void Initialize(uint8_t maxBrightness, boolean dither) = 0;
     virtual void Display() = 0;
 
     float GetRenderTime(){

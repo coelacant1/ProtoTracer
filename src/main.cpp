@@ -1,12 +1,11 @@
 #include "Animation\CoelaBonkAnimation.h"
-#include "Controllers\MandoController.h"
-
+#include "Controllers\MyloController.h"
 #include "soc/rtc_wdt.h"
-
-const uint8_t maxBrightness = 10;
-MandoController* controller = new MandoController(maxBrightness);
+#define MAX_BRIGHT 31
+#define DITHER true
 
 Animation* bonk = new CoelaBonkAnimation();
+MyloController* controller = new MyloController();
 
 TaskHandle_t Task1;
 TaskHandle_t Task2;
@@ -20,13 +19,11 @@ void displayThread(void* pvParameters);
 void setup() {
    Serial.begin(115200);
    Serial.println("\nStarting...");
+   controller->Initialize(MAX_BRIGHT, DITHER);
 
-   delay(3000);
-   controller->Initialize();
-   delay(500);
-
-   xTaskCreatePinnedToCore(displayThread, "DisplayThread", 10000, NULL, 1, &Task2, 1);
-   xTaskCreatePinnedToCore(renderThread, "RenderThread", 10000, NULL, 1, &Task1, 0);
+   xTaskCreatePinnedToCore(displayThread, "DisplayThread", 10000, NULL, 1, &Task2, 0);
+   delay(10);
+   xTaskCreatePinnedToCore(renderThread, "RenderThread", 10000, NULL, 1, &Task1, 1);
 }
 
 void renderThread(void* pvParameters) {
@@ -37,12 +34,12 @@ void renderThread(void* pvParameters) {
          controller->Render(bonk->GetScene());
          frameReady = true;
 
-
          while (true) {
             if (frameAck)
                break;
-            else
+            else {
                delay(1);
+            }
          }
          frameReady = false;
          frameAck = false;
@@ -53,11 +50,13 @@ void renderThread(void* pvParameters) {
 void displayThread(void* pvParameters) {
    while (true) {
       if (frameReady) {
+         controller->SwapBuffers();
          frameAck = true;
          frameReady = false;
          controller->Display();
       } else {
          delay(1);
+         FastLED.show();
       }
    }
 }
