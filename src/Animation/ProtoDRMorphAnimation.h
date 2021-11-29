@@ -8,20 +8,27 @@
 #include "..\Materials\GradientMaterial.h"
 #include "..\Materials\SimplexNoise.h"
 #include "..\Math\FunctionGenerator.h"
+#include "..\Sensors\SerialSync.h"
+#include "..\Sensors\ButtonHandler.h"
+#include "..\Materials\NormalMaterial.h"
+
+#include "..\Objects\Spyro.h"
 
 #include "Flash\ImageSequences\Rainbow.h"
 
 class ProtoDRMorphAnimation : public Animation{
 private:
     ProtoDR pM;
-    EasyEaseAnimator eEA = EasyEaseAnimator(10, EasyEaseAnimator::Cosine);
+    EasyEaseAnimator eEA = EasyEaseAnimator(11, EasyEaseAnimator::Cosine);
 
     RGBColor spectrum[4] = {RGBColor(0, 255, 0), RGBColor(255, 0, 0), RGBColor(0, 255, 0), RGBColor(0, 0, 255)};
     GradientMaterial gNoiseMat = GradientMaterial(4, spectrum, 2.0f, false);
     SimplexNoise sNoise = SimplexNoise(1, &gNoiseMat);
+
+    NormalMaterial normalMaterial;
     
     FunctionGenerator fGenMatPos = FunctionGenerator(FunctionGenerator::Sine, -10.0f, 10.0f, 4.0f);
-    RainbowSequence gif = RainbowSequence(Vector2D(200, 145), Vector2D(100, 70), 60);
+    RainbowSequence gif = RainbowSequence(Vector2D(200, 145), Vector2D(100, 70), 15);
 
     KeyFrameTrack blink = KeyFrameTrack(1, 0.0f, 1.0f, 10, KeyFrameTrack::Cosine);
     KeyFrameTrack topFinOuter = KeyFrameTrack(1, 0.0f, 1.0f, 5, KeyFrameTrack::Cosine);
@@ -34,6 +41,10 @@ private:
     KeyFrameTrack botFinLR4 = KeyFrameTrack(1, 0.0f, 1.0f, 10, KeyFrameTrack::Cosine);
     KeyFrameTrack botFinLR5 = KeyFrameTrack(1, 0.0f, 1.0f, 10, KeyFrameTrack::Cosine);
     KeyFrameTrack mouth = KeyFrameTrack(1, 0.0f, 1.0f, 5, KeyFrameTrack::Cosine);
+
+    Spyro spyro;
+    FunctionGenerator fGenRotation = FunctionGenerator(FunctionGenerator::Sine, -30.0f, 30.0f, 2.6f);
+    FunctionGenerator fGenScale = FunctionGenerator(FunctionGenerator::Sine, 3.0f, 8.0f, 4.2f);
 
     void LinkEasyEase(){
         eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::BlushEye), ProtoDR::BlushEye, 40, 0.0f);
@@ -49,6 +60,8 @@ private:
         eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::DeadEye), ProtoDR::DeadEye, 1, 0.0f);
 
         eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::HeartEye), ProtoDR::HeartEye, 30, 0.0f);
+
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::OwO), ProtoDR::OwO, 90, 0.0f);
     }
 
     void LinkParameters(){
@@ -154,8 +167,9 @@ private:
     }
 
 public:
-    ProtoDRMorphAnimation() : Animation(1) {
+    ProtoDRMorphAnimation() : Animation(2) {
         scene->AddObject(pM.GetObject());
+        scene->AddObject(spyro.GetObject());
 
         LinkEasyEase();
         LinkParameters();
@@ -167,6 +181,9 @@ public:
         AddMouthKeyFrames();
 
         pM.GetObject()->SetMaterial(&gif);
+
+        SerialSync::Initialize();
+        ButtonHandler::Initialize(15, 8);
     }
 
     void UpdateKeyFrameTracks(){
@@ -237,6 +254,54 @@ public:
         eEA.AddParameterFrame(ProtoDR::OwOMouth, 1.0f);
     }
 
+    void OwO2(){
+        pM.Reset();
+        blink.Pause();
+        blink.Reset();
+        mouth.Pause();
+        mouth.Reset();
+        
+        topFinOuter.Reset();
+        topFinInner.Reset();
+        topFinGap.Reset();
+        midFin.Reset();
+        botFinLR1.Reset();
+        botFinLR2.Reset();
+        botFinLR3.Reset();
+        botFinLR4.Reset();
+        botFinLR5.Reset();
+        
+        pM.SetMorphWeight(ProtoDR::HideBlush, 0.0f);
+        pM.SetMorphWeight(ProtoDR::HideSecondEye, 0.0f);
+
+        eEA.AddParameterFrame(ProtoDR::OwO, 1.0f);
+    }
+
+    void SpyroDisplay(float ratio, bool normal){
+        pM.GetObject()->Disable();
+        spyro.GetObject()->Enable();
+
+        float x = fGenRotation.Update();
+        float sx = fGenScale.Update();
+        
+        Quaternion rotation = Rotation(EulerAngles(Vector3D(x, ratio * 720.0f, 0), EulerConstants::EulerOrderXZYS)).GetQuaternion();
+
+        spyro.GetObject()->ResetVertices();
+
+        spyro.GetObject()->GetTransform()->SetRotation(rotation);
+        spyro.GetObject()->GetTransform()->SetScale(Vector3D(sx, sx, sx));
+        spyro.GetObject()->GetTransform()->SetPosition(Vector3D(0.0f, 30.0f, 600.0f));
+
+        spyro.GetObject()->UpdateTransform();
+
+        if(!normal){
+            spyro.GetObject()->SetMaterial(&spyro.material);
+        }
+        else{
+            spyro.GetObject()->SetMaterial(&normalMaterial);
+        }
+    }
+
     void FadeIn(float stepRatio) override {}
     void FadeOut(float stepRatio) override {}
 
@@ -244,20 +309,51 @@ public:
         return pM.GetObject();
     }
 
+    float offset = 0.0f;
+
     void Update(float ratio) override {
+        pM.GetObject()->Enable();//Due to Spyro track
+        spyro.GetObject()->Disable();
+
+        /*
+        uint8_t mode = ButtonHandler::GetValue();
+        SerialSync::SetMode(mode);
+        SerialSync::SetRatio(ratio);
+        SerialSync::Send();
+        */
+        
+        SerialSync::Read();
+
+        //update offset only 2% of the time
+        if(SerialSync::GetRatio() < 0.02f){
+            if(ratio > SerialSync::GetRatio()) offset = ratio - 1.0f - SerialSync::GetRatio();
+            else offset = ratio - SerialSync::GetRatio();
+        }
+
+        //adjust current frame sync to new esp32
+        ratio = fmod(ratio - offset, 1.0f);//override input to synchronize from esp
+
+        uint8_t mode = SerialSync::GetMode();
+
+        Serial.print(mode);
+        Serial.print('\t');
+        Serial.println(ratio);
+
+        if (mode == 0) Heart();
+        else if (mode == 1) OwO();
+        else if (mode == 2) Sad();
+        else if (mode == 3) Dead();
+        else if (mode == 4) SpyroDisplay(ratio, false);
+        else if (mode == 5) SpyroDisplay(ratio, true);
+        else if (mode == 6) Default();
+        else OwO2();
+
         UpdateKeyFrameTracks();
-
-        if (ratio > 0.75f) Heart();
-        else if (ratio > 0.5f) OwO();
-        //else if (ratio > 0.4f) Dead();
-        else if (ratio > 0.25f) Sad();
-        else Default();
-
         eEA.Update();
         pM.Update();
         
-        float x = sinf(ratio * 3.14159f / 180.0f * 360.0f * 4.0f) * 3.0f;
-        float y = cosf(ratio * 3.14159f / 180.0f * 360.0f * 6.0f) * 3.0f;
+        float x = sinf(ratio * 3.14159f / 180.0f * 360.0f * 2.0f) * 3.0f;
+        float y = cosf(ratio * 3.14159f / 180.0f * 360.0f * 3.0f) * 3.0f;
         
         float linSweep = ratio > 0.5f ? 1.0f - ratio : ratio;
         float sShift = linSweep * 0.002f + 0.005f;
@@ -280,5 +376,4 @@ public:
 
         pM.GetObject()->UpdateTransform();
     }
-
 };

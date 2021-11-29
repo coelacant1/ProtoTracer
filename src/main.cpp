@@ -28,15 +28,14 @@ void setup() {
 }
 
 void loop() {
-    for (float i = 0.0f; i < 1.0f; i += 1.0f / 720.0f) {
-        animation->Update(i);
+    float ratio = (float)(millis() % 5000) / 5000.0f;
+    animation->Update(ratio);
 
-        controller->Render(animation->GetScene());
+    controller->Render(animation->GetScene());
 
-        controller->Display();
+    controller->Display();
 
-        Serial.print("Rendered in ");
-        Serial.print(controller->GetRenderTime(), 4);
-        Serial.println("s");
-    }
+    //Serial.print("Rendered in ");
+    //Serial.print(controller->GetRenderTime(), 4);
+    //Serial.println("s");
 }

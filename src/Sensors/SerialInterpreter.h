@@ -19,14 +19,16 @@ private:
         uint16_t c;
         uint8_t m;
         uint8_t d;
+        float ratio;
+        uint8_t mode;
     } e32Data;
 
     static SerialTransfer dataTransfer;
 
 public:
     static void Initialize(){
-        Serial4.begin(115200);
-        dataTransfer.begin(Serial4);
+        Serial4.begin(9600);
+        dataTransfer.begin(Serial4, true);//_debug = true
         baseRotationSet = false;
     }
 
@@ -43,6 +45,18 @@ public:
         }
 
         return q.Multiply(baseRotation.Conjugate());
+    }
+
+    static float GetRatio(){
+        return e32Data.ratio;
+    }
+
+    static uint8_t GetMode(){
+        return e32Data.mode;
+    }
+
+    static uint8_t GetMorph(){
+        return e32Data.m;
     }
 
     static void Update(){

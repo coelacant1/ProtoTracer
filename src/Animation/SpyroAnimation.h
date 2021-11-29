@@ -26,14 +26,14 @@ public:
         float x = fGenRotation.Update();
         float sx = fGenScale.Update();
         
-        Quaternion rotation = Rotation(EulerAngles(Vector3D(x, ratio * 2880.0f, 0), EulerConstants::EulerOrderXZYS)).GetQuaternion();
+        Quaternion rotation = Rotation(EulerAngles(Vector3D(x, ratio * 1440.0f, 0), EulerConstants::EulerOrderXZYS)).GetQuaternion();
 
         spyro.GetObject()->ResetVertices();
 
         spyro.GetObject()->GetTransform()->SetRotation(rotation);
         spyro.GetObject()->GetTransform()->SetScale(Vector3D(sx, sx, sx));
         //spyro.GetObject()->GetTransform()->SetScaleOffset(Vector3D(100.0f, 75.0f, 0.0f));
-        spyro.GetObject()->GetTransform()->SetPosition(Vector3D(120.0f, 30.0f, 600.0f));
+        spyro.GetObject()->GetTransform()->SetPosition(Vector3D(0.0f, 30.0f, 600.0f));
 
         spyro.GetObject()->UpdateTransform();
     }
