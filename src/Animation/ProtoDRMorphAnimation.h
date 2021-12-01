@@ -19,7 +19,7 @@
 class ProtoDRMorphAnimation : public Animation{
 private:
     ProtoDR pM;
-    EasyEaseAnimator eEA = EasyEaseAnimator(11, EasyEaseAnimator::Cosine);
+    EasyEaseAnimator eEA = EasyEaseAnimator(15, EasyEaseAnimator::Cosine);
 
     RGBColor spectrum[4] = {RGBColor(0, 255, 0), RGBColor(255, 0, 0), RGBColor(0, 255, 0), RGBColor(0, 0, 255)};
     GradientMaterial gNoiseMat = GradientMaterial(4, spectrum, 2.0f, false);
@@ -62,6 +62,10 @@ private:
         eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::HeartEye), ProtoDR::HeartEye, 30, 0.0f);
 
         eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::OwO), ProtoDR::OwO, 90, 0.0f);
+        
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::AlphaGenCircle), ProtoDR::AlphaGenCircle, 90, 0.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::AlphaGenSquare), ProtoDR::AlphaGenSquare, 90, 0.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::HideAll), ProtoDR::HideAll, 90, 0.0f);
     }
 
     void LinkParameters(){
@@ -183,7 +187,7 @@ public:
         pM.GetObject()->SetMaterial(&gif);
 
         SerialSync::Initialize();
-        ButtonHandler::Initialize(15, 8);
+        ButtonHandler::Initialize(15, 11);
     }
 
     void UpdateKeyFrameTracks(){
@@ -204,14 +208,33 @@ public:
         pM.Reset();
         blink.Play();
         mouth.Play();
+        
+        topFinOuter.Play();
+        topFinInner.Play();
+        topFinGap.Play();
+        midFin.Play();
+        botFinLR1.Play();
+        botFinLR2.Play();
+        botFinLR3.Play();
+        botFinLR4.Play();
+        botFinLR5.Play();
     }
 
     void OwO(){
         pM.Reset();
         blink.Pause();
         blink.Reset();
-        mouth.Pause();
-        mouth.Reset();
+        mouth.Play();
+
+        topFinOuter.Play();
+        topFinInner.Play();
+        topFinGap.Play();
+        midFin.Play();
+        botFinLR1.Play();
+        botFinLR2.Play();
+        botFinLR3.Play();
+        botFinLR4.Play();
+        botFinLR5.Play();
 
         eEA.AddParameterFrame(ProtoDR::BlushEye, 1.0f);
         eEA.AddParameterFrame(ProtoDR::HideBlush, 0.0f);
@@ -224,6 +247,16 @@ public:
         blink.Play();
         mouth.Pause();
         mouth.Reset();
+        
+        topFinOuter.Play();
+        topFinInner.Play();
+        topFinGap.Play();
+        midFin.Play();
+        botFinLR1.Play();
+        botFinLR2.Play();
+        botFinLR3.Play();
+        botFinLR4.Play();
+        botFinLR5.Play();
 
         eEA.AddParameterFrame(ProtoDR::SadEye, 1.0f);
         eEA.AddParameterFrame(ProtoDR::SadEyeBrow, 1.0f);
@@ -236,18 +269,36 @@ public:
         blink.Reset();
         mouth.Pause();
         mouth.Reset();
+        
+        topFinOuter.Play();
+        topFinInner.Play();
+        topFinGap.Play();
+        midFin.Play();
+        botFinLR1.Play();
+        botFinLR2.Play();
+        botFinLR3.Play();
+        botFinLR4.Play();
+        botFinLR5.Play();
 
         eEA.AddParameterFrame(ProtoDR::FlatMouth, 1.0f);
         eEA.AddParameterFrame(ProtoDR::DeadEye, 1.0f);
-        eEA.AddParameterFrame(ProtoDR::HideEyeBrow, 1.0f);
     }
 
     void Heart(){
         pM.Reset();
         blink.Pause();
         blink.Reset();
-        mouth.Pause();
-        mouth.Reset();
+        mouth.Play();
+        
+        topFinOuter.Play();
+        topFinInner.Play();
+        topFinGap.Play();
+        midFin.Play();
+        botFinLR1.Play();
+        botFinLR2.Play();
+        botFinLR3.Play();
+        botFinLR4.Play();
+        botFinLR5.Play();
 
         eEA.AddParameterFrame(ProtoDR::HeartEye, 1.0f);
         eEA.AddParameterFrame(ProtoDR::HideEyeBrow, 1.0f);
@@ -261,6 +312,16 @@ public:
         mouth.Pause();
         mouth.Reset();
         
+        topFinOuter.Pause();
+        topFinInner.Pause();
+        topFinGap.Pause();
+        midFin.Pause();
+        botFinLR1.Pause();
+        botFinLR2.Pause();
+        botFinLR3.Pause();
+        botFinLR4.Pause();
+        botFinLR5.Pause();
+        
         topFinOuter.Reset();
         topFinInner.Reset();
         topFinGap.Reset();
@@ -271,10 +332,111 @@ public:
         botFinLR4.Reset();
         botFinLR5.Reset();
         
-        pM.SetMorphWeight(ProtoDR::HideBlush, 0.0f);
-        pM.SetMorphWeight(ProtoDR::HideSecondEye, 0.0f);
-
+        eEA.AddParameterFrame(ProtoDR::HideBlush, 0.0f);
+        eEA.AddParameterFrame(ProtoDR::HideEyeBrow, 0.0f);
         eEA.AddParameterFrame(ProtoDR::OwO, 1.0f);
+    }
+
+    void AlphaGenSquare(){
+        pM.Reset();
+        blink.Pause();
+        blink.Reset();
+        mouth.Pause();
+        mouth.Reset();
+        
+        topFinOuter.Pause();
+        topFinInner.Pause();
+        topFinGap.Pause();
+        midFin.Pause();
+        botFinLR1.Pause();
+        botFinLR2.Pause();
+        botFinLR3.Pause();
+        botFinLR4.Pause();
+        botFinLR5.Pause();
+
+        topFinOuter.Reset();
+        topFinInner.Reset();
+        topFinGap.Reset();
+        midFin.Reset();
+        botFinLR1.Reset();
+        botFinLR2.Reset();
+        botFinLR3.Reset();
+        botFinLR4.Reset();
+        botFinLR5.Reset();
+
+        pM.SetMorphWeight(ProtoDR::HideSecondEye, 0.0f);
+        
+        eEA.AddParameterFrame(ProtoDR::HideBlush, 0.0f);
+        eEA.AddParameterFrame(ProtoDR::HideEyeBrow, 0.0f);
+        eEA.AddParameterFrame(ProtoDR::AlphaGenSquare, 1.0f);
+    }
+
+    void AlphaGenCircle(){
+        pM.Reset();
+        blink.Pause();
+        blink.Reset();
+        mouth.Pause();
+        mouth.Reset();
+        
+        topFinOuter.Pause();
+        topFinInner.Pause();
+        topFinGap.Pause();
+        midFin.Pause();
+        botFinLR1.Pause();
+        botFinLR2.Pause();
+        botFinLR3.Pause();
+        botFinLR4.Pause();
+        botFinLR5.Pause();
+
+        topFinOuter.Reset();
+        topFinInner.Reset();
+        topFinGap.Reset();
+        midFin.Reset();
+        botFinLR1.Reset();
+        botFinLR2.Reset();
+        botFinLR3.Reset();
+        botFinLR4.Reset();
+        botFinLR5.Reset();
+        
+        pM.SetMorphWeight(ProtoDR::HideSecondEye, 0.0f);
+        
+        eEA.AddParameterFrame(ProtoDR::HideBlush, 0.0f);
+        eEA.AddParameterFrame(ProtoDR::HideEyeBrow, 0.0f);
+        eEA.AddParameterFrame(ProtoDR::AlphaGenCircle, 1.0f);
+    }
+
+    void HideAll(){
+        pM.Reset();
+        blink.Pause();
+        blink.Reset();
+        mouth.Pause();
+        mouth.Reset();
+        
+        topFinOuter.Pause();
+        topFinInner.Pause();
+        topFinGap.Pause();
+        midFin.Pause();
+        botFinLR1.Pause();
+        botFinLR2.Pause();
+        botFinLR3.Pause();
+        botFinLR4.Pause();
+        botFinLR5.Pause();
+
+        topFinOuter.Reset();
+        topFinInner.Reset();
+        topFinGap.Reset();
+        midFin.Reset();
+        botFinLR1.Reset();
+        botFinLR2.Reset();
+        botFinLR3.Reset();
+        botFinLR4.Reset();
+        botFinLR5.Reset();
+        
+        pM.SetMorphWeight(ProtoDR::HideSecondEye, 0.0f);
+        
+        eEA.AddParameterFrame(ProtoDR::HideBlush, 0.0f);
+        eEA.AddParameterFrame(ProtoDR::HideEyeBrow, 0.0f);
+        eEA.AddParameterFrame(ProtoDR::HideAll, 1.0f);
     }
 
     void SpyroDisplay(float ratio, bool normal){
@@ -315,13 +477,7 @@ public:
         pM.GetObject()->Enable();//Due to Spyro track
         spyro.GetObject()->Disable();
 
-        /*
-        uint8_t mode = ButtonHandler::GetValue();
-        SerialSync::SetMode(mode);
-        SerialSync::SetRatio(ratio);
-        SerialSync::Send();
-        */
-        
+        #ifdef RIGHTFACE
         SerialSync::Read();
 
         //update offset only 2% of the time
@@ -334,6 +490,12 @@ public:
         ratio = fmod(ratio - offset, 1.0f);//override input to synchronize from esp
 
         uint8_t mode = SerialSync::GetMode();
+        #else
+        uint8_t mode = ButtonHandler::GetValue();
+        SerialSync::SetMode(mode);
+        SerialSync::SetRatio(ratio);
+        SerialSync::Send();
+        #endif
 
         Serial.print(mode);
         Serial.print('\t');
@@ -345,7 +507,10 @@ public:
         else if (mode == 3) Dead();
         else if (mode == 4) SpyroDisplay(ratio, false);
         else if (mode == 5) SpyroDisplay(ratio, true);
-        else if (mode == 6) Default();
+        else if (mode == 6) AlphaGenSquare();
+        else if (mode == 7) AlphaGenCircle();
+        else if (mode == 8) HideAll();
+        else if (mode == 9) Default();
         else OwO2();
 
         UpdateKeyFrameTracks();

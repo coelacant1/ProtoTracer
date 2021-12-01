@@ -1,3 +1,5 @@
+#define RIGHTFACE
+
 #include "Animation\ProtoDRMorphAnimation.h"
 //#include "Animation\KaiborgV1Animation.h"
 //include "Animation\ProtoV3Animation.h"
@@ -13,11 +15,14 @@
 //#include "Controllers\KaiborgV1D1Controller.h"
 #include "Controllers\ProtoDRController.h"
 
-const uint8_t maxBrightness = 10;
-//Controller controller = ProtoDRController(maxBrightness, ProtoDRController::LEFT);
+
+const uint8_t maxBrightness = 8;
+#ifdef RIGHTFACE
 Controller* controller = new ProtoDRController(maxBrightness, ProtoDRController::RIGHT);
+#else
+Controller* controller = new ProtoDRController(maxBrightness, ProtoDRController::LEFT);
+#endif
 //Controller* controller = new KaiborgV1D1Controller(maxBrightness);
-//ProtoDRMorphAnimation protoDRMorph;
 Animation* animation = new ProtoDRMorphAnimation();
 
 void setup() {

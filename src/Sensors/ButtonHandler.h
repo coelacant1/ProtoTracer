@@ -12,7 +12,7 @@ private:
         if(millis() - previousMillis > 250){
             if(!wasUsed){
                 currentValue += 1;
-                if (currentValue > 8) currentValue = 0;
+                if (currentValue > maxValue) currentValue = 0;
             
                 previousMillis = millis();
                 wasUsed = true;
@@ -27,6 +27,9 @@ public:
     static void Initialize(uint8_t pin, uint8_t maxValue) {
         pinMode(pin, INPUT);
         attachInterrupt(pin, isr, FALLING);
+
+        ButtonHandler::maxValue = maxValue;
+        ButtonHandler::pin = pin;
     }
 
     static uint8_t GetValue(){
