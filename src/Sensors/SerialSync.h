@@ -7,6 +7,7 @@ private:
     static struct ESP32Data {
         float ratio;
         uint8_t mode;
+        float mouthMove;
     } e32Data;
 
     static SerialTransfer dataTransfer;
@@ -25,6 +26,10 @@ public:
         return e32Data.mode;
     }
 
+    static float GetMouthMove(){
+        return e32Data.mouthMove;
+    }
+
     static void Read(){
         if(dataTransfer.available()){
             uint16_t receiveSize = 0;
@@ -39,6 +44,10 @@ public:
 
     static void SetMode(uint8_t mode){
         e32Data.mode = mode;
+    }
+    
+    static void SetMouthMove(float ratio){
+        e32Data.mouthMove = ratio;
     }
     
     static void Send(){

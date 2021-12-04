@@ -9,6 +9,7 @@
 #include "..\Materials\SimplexNoise.h"
 #include "..\Math\FunctionGenerator.h"
 #include "..\Sensors\SerialSync.h"
+#include "..\Sensors\MicrophoneSimple.h"
 #include "..\Sensors\ButtonHandler.h"
 #include "..\Materials\NormalMaterial.h"
 
@@ -28,7 +29,7 @@ private:
     NormalMaterial normalMaterial;
     
     FunctionGenerator fGenMatPos = FunctionGenerator(FunctionGenerator::Sine, -10.0f, 10.0f, 4.0f);
-    RainbowSequence gif = RainbowSequence(Vector2D(200, 145), Vector2D(100, 70), 15);
+    RainbowSequence gif = RainbowSequence(Vector2D(200, 145), Vector2D(100, 70), 60);
 
     KeyFrameTrack blink = KeyFrameTrack(1, 0.0f, 1.0f, 10, KeyFrameTrack::Cosine);
     KeyFrameTrack topFinOuter = KeyFrameTrack(1, 0.0f, 1.0f, 5, KeyFrameTrack::Cosine);
@@ -45,6 +46,9 @@ private:
     Spyro spyro;
     FunctionGenerator fGenRotation = FunctionGenerator(FunctionGenerator::Sine, -30.0f, 30.0f, 2.6f);
     FunctionGenerator fGenScale = FunctionGenerator(FunctionGenerator::Sine, 3.0f, 8.0f, 4.2f);
+
+    MicrophoneSimple mic = MicrophoneSimple(22);
+    bool talk = true;
 
     void LinkEasyEase(){
         eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::BlushEye), ProtoDR::BlushEye, 40, 0.0f);
@@ -188,6 +192,7 @@ public:
 
         SerialSync::Initialize();
         ButtonHandler::Initialize(15, 11);
+        //Microphone::Initialize(22);
     }
 
     void UpdateKeyFrameTracks(){
@@ -218,6 +223,8 @@ public:
         botFinLR3.Play();
         botFinLR4.Play();
         botFinLR5.Play();
+
+        talk = true;
     }
 
     void OwO(){
@@ -240,6 +247,8 @@ public:
         eEA.AddParameterFrame(ProtoDR::HideBlush, 0.0f);
         eEA.AddParameterFrame(ProtoDR::HideEyeBrow, 1.0f);
         eEA.AddParameterFrame(ProtoDR::OwOMouth, 1.0f);
+        
+        talk = true;
     }
 
     void Sad(){
@@ -261,6 +270,8 @@ public:
         eEA.AddParameterFrame(ProtoDR::SadEye, 1.0f);
         eEA.AddParameterFrame(ProtoDR::SadEyeBrow, 1.0f);
         eEA.AddParameterFrame(ProtoDR::SadMouth, 1.0f);
+
+        talk = true;
     }
 
     void Dead(){
@@ -282,6 +293,8 @@ public:
 
         eEA.AddParameterFrame(ProtoDR::FlatMouth, 1.0f);
         eEA.AddParameterFrame(ProtoDR::DeadEye, 1.0f);
+
+        talk = true;
     }
 
     void Heart(){
@@ -303,6 +316,8 @@ public:
         eEA.AddParameterFrame(ProtoDR::HeartEye, 1.0f);
         eEA.AddParameterFrame(ProtoDR::HideEyeBrow, 1.0f);
         eEA.AddParameterFrame(ProtoDR::OwOMouth, 1.0f);
+
+        talk = true;
     }
 
     void OwO2(){
@@ -335,6 +350,8 @@ public:
         eEA.AddParameterFrame(ProtoDR::HideBlush, 0.0f);
         eEA.AddParameterFrame(ProtoDR::HideEyeBrow, 0.0f);
         eEA.AddParameterFrame(ProtoDR::OwO, 1.0f);
+
+        talk = false;
     }
 
     void AlphaGenSquare(){
@@ -369,6 +386,8 @@ public:
         eEA.AddParameterFrame(ProtoDR::HideBlush, 0.0f);
         eEA.AddParameterFrame(ProtoDR::HideEyeBrow, 0.0f);
         eEA.AddParameterFrame(ProtoDR::AlphaGenSquare, 1.0f);
+        
+        talk = false;
     }
 
     void AlphaGenCircle(){
@@ -403,6 +422,8 @@ public:
         eEA.AddParameterFrame(ProtoDR::HideBlush, 0.0f);
         eEA.AddParameterFrame(ProtoDR::HideEyeBrow, 0.0f);
         eEA.AddParameterFrame(ProtoDR::AlphaGenCircle, 1.0f);
+
+        talk = false;
     }
 
     void HideAll(){
@@ -437,6 +458,8 @@ public:
         eEA.AddParameterFrame(ProtoDR::HideBlush, 0.0f);
         eEA.AddParameterFrame(ProtoDR::HideEyeBrow, 0.0f);
         eEA.AddParameterFrame(ProtoDR::HideAll, 1.0f);
+        
+        talk = false;
     }
 
     void SpyroDisplay(float ratio, bool normal){
@@ -462,6 +485,8 @@ public:
         else{
             spyro.GetObject()->SetMaterial(&normalMaterial);
         }
+        
+        talk = false;
     }
 
     void FadeIn(float stepRatio) override {}
@@ -472,6 +497,7 @@ public:
     }
 
     float offset = 0.0f;
+
 
     void Update(float ratio) override {
         pM.GetObject()->Enable();//Due to Spyro track
@@ -490,16 +516,15 @@ public:
         ratio = fmod(ratio - offset, 1.0f);//override input to synchronize from esp
 
         uint8_t mode = SerialSync::GetMode();
+        float mouthMove = SerialSync::GetMouthMove();
         #else
+        float mouthMove = mic.Update();
         uint8_t mode = ButtonHandler::GetValue();
+        SerialSync::SetMouthMove(mouthMove);
         SerialSync::SetMode(mode);
         SerialSync::SetRatio(ratio);
         SerialSync::Send();
         #endif
-
-        Serial.print(mode);
-        Serial.print('\t');
-        Serial.println(ratio);
 
         if (mode == 0) Heart();
         else if (mode == 1) OwO();
@@ -513,7 +538,10 @@ public:
         else if (mode == 9) Default();
         else OwO2();
 
+
         UpdateKeyFrameTracks();
+
+        if(talk) pM.SetMorphWeight(ProtoDR::OpenToothMouth, mouthMove);
         eEA.Update();
         pM.Update();
         

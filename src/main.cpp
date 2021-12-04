@@ -16,7 +16,7 @@
 #include "Controllers\ProtoDRController.h"
 
 
-const uint8_t maxBrightness = 8;
+const uint8_t maxBrightness = 15;
 #ifdef RIGHTFACE
 Controller* controller = new ProtoDRController(maxBrightness, ProtoDRController::RIGHT);
 #else
