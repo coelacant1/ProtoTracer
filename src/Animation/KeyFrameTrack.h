@@ -27,6 +27,8 @@ private:
     long startTime = 0;
     bool isActive = true;
     float parameterValue = 0.0f;
+    float currentTime = 0.0f;
+    float timeOffset = 0.0f;
 
     //shift array from position
     void ShiftKeyFrameArray(int position){
@@ -52,6 +54,19 @@ public:
         }
 
         delete[] keyFrames;
+    }
+
+    float GetCurrentTime(){
+        currentTime = fmod(millis() / 1000.0f + timeOffset, stopFrameTime - startFrameTime) + startFrameTime;//normalize time and add offset
+
+        return currentTime;
+    }
+
+    void SetCurrentTime(float setTime){
+        GetCurrentTime();
+
+        //Test case: current time = 1.32s, set time = 1.09s, 1.59s
+        timeOffset = setTime - currentTime;//1.59 - 1.32 = 0.27, 1.09 - 1.32 = -0.23
     }
 
     void Pause(){
@@ -107,7 +122,8 @@ public:
     }
 
     void Update(){
-        float currentTime = fmod(millis() / 1000.0f, stopFrameTime - startFrameTime) + startFrameTime;//normalize time and add offset
+        GetCurrentTime();
+
         byte previousFrame = 0, nextFrame = 0;
 
         //find current time, find keyframe before and after
