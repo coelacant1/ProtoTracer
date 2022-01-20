@@ -1,11 +1,11 @@
 #define RIGHTFACE
 
-#include "Animation\ProtoDRMorphAnimation.h"
+//#include "Animation\ProtoDRMorphAnimation.h"
 //#include "Animation\KaiborgV1Animation.h"
 //include "Animation\ProtoV3Animation.h"
 //#include "Animation\FullScreenAnimation.h"
 //#include "Animation\CoelaBonkAnimation.h"
-//#include "Animation\SpyroAnimation.h"
+#include "Animation\FoxAnimation.h"
 //#include "Animation\SpyroRotateAnimation.h"
 //#include "Animation\PikachuAnimation.h"
 //#include "Animation\BeeAnimation.h"
@@ -23,7 +23,7 @@ Controller* controller = new ProtoDRController(maxBrightness, ProtoDRController:
 Controller* controller = new ProtoDRController(maxBrightness, ProtoDRController::LEFT);
 #endif
 //Controller* controller = new KaiborgV1D1Controller(maxBrightness);
-Animation* animation = new ProtoDRMorphAnimation();
+Animation* animation = new FoxAnimation();
 
 void setup() {
     Serial.begin(115200);

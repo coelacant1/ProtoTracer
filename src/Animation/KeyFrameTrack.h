@@ -127,7 +127,7 @@ public:
         byte previousFrame = 0, nextFrame = 0;
 
         //find current time, find keyframe before and after
-        if(currentFrames > 0 && currentParameters > 0 && isActive){
+        if(currentFrames > 0 && isActive){
             for (int i = currentFrames - 1; i >= 0; i--){
                 if (currentTime >= keyFrames[i]->Time){
                     previousFrame = i;
@@ -155,8 +155,10 @@ public:
 
             parameterValue = parameter;
 
-            for(int i = 0; i < currentParameters; i++){
-                *(this->parameters[i]) = parameter;
+            if (currentParameters > 0){//Update if not parameters are linked
+                for(int i = 0; i < currentParameters; i++){
+                    *(this->parameters[i]) = parameter;
+                }
             }
         }
     }
