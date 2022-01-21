@@ -52,20 +52,43 @@ public:
         this->objectCount = objectCount;
     }
 
+    void PerspectiveDeform(float scaleRatio, Vector3D center, Axis axis){//0.0f close, 1.0f uniform, infinite infinite
+        for(int i = 0; i < objectCount; i++){
+            for(int j = 0; j < objects[i]->GetTriangleGroup()->GetVertexCount(); j++){
+                switch(axis){
+                    case XAxis:
+                        objects[i]->GetTriangleGroup()->GetVertices()[j].Y = objects[i]->GetTriangleGroup()->GetVertices()[j].Y * (1.0f - (objects[i]->GetTriangleGroup()->GetVertices()[j].X + center.X) / scaleRatio);
+                        objects[i]->GetTriangleGroup()->GetVertices()[j].Z = objects[i]->GetTriangleGroup()->GetVertices()[j].Z * (1.0f - (objects[i]->GetTriangleGroup()->GetVertices()[j].X + center.X) / scaleRatio);
+                        break;
+                    case YAxis:
+                        objects[i]->GetTriangleGroup()->GetVertices()[j].X = objects[i]->GetTriangleGroup()->GetVertices()[j].X * (1.0f - (objects[i]->GetTriangleGroup()->GetVertices()[j].Y + center.Y) / scaleRatio);
+                        objects[i]->GetTriangleGroup()->GetVertices()[j].Z = objects[i]->GetTriangleGroup()->GetVertices()[j].Z * (1.0f - (objects[i]->GetTriangleGroup()->GetVertices()[j].Y + center.Y) / scaleRatio);
+                        break;
+                    case ZAxis:
+                        objects[i]->GetTriangleGroup()->GetVertices()[j].X = objects[i]->GetTriangleGroup()->GetVertices()[j].X * (1.0f - (objects[i]->GetTriangleGroup()->GetVertices()[j].Z + center.Z) / scaleRatio);
+                        objects[i]->GetTriangleGroup()->GetVertices()[j].Y = objects[i]->GetTriangleGroup()->GetVertices()[j].Y * (1.0f - (objects[i]->GetTriangleGroup()->GetVertices()[j].Z + center.Z) / scaleRatio);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+
     void SinusoidalDeform(float magnitude, float timeRatio, float periodModifier, float frequencyModifier, Axis axis){
         for(int i = 0; i < objectCount; i++){
-            for(int j = 0; j < objects[i]->GetVertexAmount(); j++){
-                Vector3D base = objects[i]->GetVertices()[j];
+            for(int j = 0; j < objects[i]->GetTriangleGroup()->GetVertexCount(); j++){
+                Vector3D base = objects[i]->GetTriangleGroup()->GetVertices()[j];
                 
                 switch(axis){
                     case XAxis:
-                        objects[i]->GetVertices()[j].X = (sinf((base.Y) + timeRatio * frequencyModifier) * periodModifier + cosf((base.Z) + timeRatio * frequencyModifier) * periodModifier) * magnitude;
+                        objects[i]->GetTriangleGroup()->GetVertices()[j].X = (sinf((base.Y) + timeRatio * frequencyModifier) * periodModifier + cosf((base.Z) + timeRatio * frequencyModifier) * periodModifier) * magnitude;
                         break;
                     case YAxis:
-                        objects[i]->GetVertices()[j].Y = (sinf((base.X) + timeRatio * frequencyModifier) * periodModifier + cosf((base.Z) + timeRatio * frequencyModifier) * periodModifier) * magnitude;
+                        objects[i]->GetTriangleGroup()->GetVertices()[j].Y = (sinf((base.X) + timeRatio * frequencyModifier) * periodModifier + cosf((base.Z) + timeRatio * frequencyModifier) * periodModifier) * magnitude;
                         break;
                     case ZAxis:
-                        objects[i]->GetVertices()[j].Z = (sinf((base.X) + timeRatio * frequencyModifier) * periodModifier + cosf((base.Y) + timeRatio * frequencyModifier) * periodModifier) * magnitude;
+                        objects[i]->GetTriangleGroup()->GetVertices()[j].Z = (sinf((base.X) + timeRatio * frequencyModifier) * periodModifier + cosf((base.Y) + timeRatio * frequencyModifier) * periodModifier) * magnitude;
                         break;
                     default:
                         break;
@@ -76,18 +99,18 @@ public:
     
     void DropwaveDeform(float magnitude, float timeRatio, float periodModifier, float frequencyModifier, Axis axis){
         for(int i = 0; i < objectCount; i++){
-            for(int j = 0; j < objects[i]->GetVertexAmount(); j++){
-                Vector3D base = objects[i]->GetVertices()[j];
+            for(int j = 0; j < objects[i]->GetTriangleGroup()->GetVertexCount(); j++){
+                Vector3D base = objects[i]->GetTriangleGroup()->GetVertices()[j];
                 
                 switch(axis){
                     case XAxis:
-                        objects[i]->GetVertices()[j].X = -(1.0f + cosf(12.0f*sqrt(base.Y * base.Y + base.Z + base.Z) + timeRatio * frequencyModifier) * periodModifier) / (0.5f * (base.Y * base.Y + base.Z + base.Z) + 2.0f) * magnitude;
+                        objects[i]->GetTriangleGroup()->GetVertices()[j].X = -(1.0f + cosf(12.0f*sqrt(base.Y * base.Y + base.Z + base.Z) + timeRatio * frequencyModifier) * periodModifier) / (0.5f * (base.Y * base.Y + base.Z + base.Z) + 2.0f) * magnitude;
                         break;
                     case YAxis:
-                        objects[i]->GetVertices()[j].Y = -(1.0f + cosf(12.0f*sqrt(base.X * base.X + base.Z + base.Z) + timeRatio * frequencyModifier) * periodModifier) / (0.5f * (base.X * base.X + base.Z + base.Z) + 2.0f) * magnitude;
+                        objects[i]->GetTriangleGroup()->GetVertices()[j].Y = -(1.0f + cosf(12.0f*sqrt(base.X * base.X + base.Z + base.Z) + timeRatio * frequencyModifier) * periodModifier) / (0.5f * (base.X * base.X + base.Z + base.Z) + 2.0f) * magnitude;
                         break;
                     case ZAxis:
-                        objects[i]->GetVertices()[j].Z = -(1.0f + cosf(12.0f*sqrt(base.X * base.X + base.Y * base.Y) + timeRatio * frequencyModifier) * periodModifier) / (0.5f * (base.X * base.X + base.Y * base.Y) + 2.0f) * magnitude;
+                        objects[i]->GetTriangleGroup()->GetVertices()[j].Z = -(1.0f + cosf(12.0f*sqrt(base.X * base.X + base.Y * base.Y) + timeRatio * frequencyModifier) * periodModifier) / (0.5f * (base.X * base.X + base.Y * base.Y) + 2.0f) * magnitude;
                         break;
                     default:
                         break;
@@ -98,18 +121,18 @@ public:
 
     void SineWaveSurfaceDeform(Vector3D offset, float magnitude, float timeRatio, float periodModifier, float frequencyModifier, Axis axis){
         for(int i = 0; i < objectCount; i++){
-            for(int j = 0; j < objects[i]->GetVertexAmount(); j++){
-                Vector3D base = objects[i]->GetVertices()[j] - offset;
+            for(int j = 0; j < objects[i]->GetTriangleGroup()->GetVertexCount(); j++){
+                Vector3D base = objects[i]->GetTriangleGroup()->GetVertices()[j] - offset;
                 
                 switch(axis){
                     case XAxis:
-                        objects[i]->GetVertices()[j].X = objects[i]->GetVertices()[j].X + sinf((sqrtf(base.Y * base.Y + base.Z * base.Z) + timeRatio * frequencyModifier) * periodModifier) * magnitude;
+                        objects[i]->GetTriangleGroup()->GetVertices()[j].X = objects[i]->GetTriangleGroup()->GetVertices()[j].X + sinf((sqrtf(base.Y * base.Y + base.Z * base.Z) + timeRatio * frequencyModifier) * periodModifier) * magnitude;
                         break;
                     case YAxis:
-                        objects[i]->GetVertices()[j].Y = objects[i]->GetVertices()[j].Y + sinf((sqrtf(base.X * base.X + base.Z * base.Z) + timeRatio * frequencyModifier) * periodModifier) * magnitude;
+                        objects[i]->GetTriangleGroup()->GetVertices()[j].Y = objects[i]->GetTriangleGroup()->GetVertices()[j].Y + sinf((sqrtf(base.X * base.X + base.Z * base.Z) + timeRatio * frequencyModifier) * periodModifier) * magnitude;
                         break;
                     case ZAxis:
-                        objects[i]->GetVertices()[j].Z = objects[i]->GetVertices()[j].Z + sinf((sqrtf(base.X * base.X + base.Y * base.Y) + timeRatio * frequencyModifier) * periodModifier) * magnitude;
+                        objects[i]->GetTriangleGroup()->GetVertices()[j].Z = objects[i]->GetTriangleGroup()->GetVertices()[j].Z + sinf((sqrtf(base.X * base.X + base.Y * base.Y) + timeRatio * frequencyModifier) * periodModifier) * magnitude;
                         break;
                     default:
                         break;
@@ -121,18 +144,18 @@ public:
     void CosineInterpolationDeformer(float* pointMultiplier, int points, float scale, float minAxis, float maxAxis, Axis selectionAxis, Axis deformAxis){
         //map axis offsets based on value range for multiplying vertex coordinates at set intervals spaced evenly across minimum and maximum range of selected axis
         for(int i = 0; i < objectCount; i++){
-            for(int j = 0; j < objects[i]->GetVertexAmount(); j++){
+            for(int j = 0; j < objects[i]->GetTriangleGroup()->GetVertexCount(); j++){
                 float value;
                 
                 switch(selectionAxis){
                     case XAxis:
-                        value = objects[i]->GetVertices()[j].X;
+                        value = objects[i]->GetTriangleGroup()->GetVertices()[j].X;
                         break;
                     case YAxis:
-                        value = objects[i]->GetVertices()[j].Y;
+                        value = objects[i]->GetTriangleGroup()->GetVertices()[j].Y;
                         break;
                     case ZAxis:
-                        value = objects[i]->GetVertices()[j].Z;
+                        value = objects[i]->GetTriangleGroup()->GetVertices()[j].Z;
                         break;
                     default:
                         value = 0.0f;
@@ -163,13 +186,13 @@ public:
                 
                 switch(deformAxis){
                     case XAxis:
-                    objects[i]->GetVertices()[j].X = objects[i]->GetVertices()[j].X + scale * intervalMultiplier;
+                    objects[i]->GetTriangleGroup()->GetVertices()[j].X = objects[i]->GetTriangleGroup()->GetVertices()[j].X + scale * intervalMultiplier;
                     break;
                     case YAxis:
-                    objects[i]->GetVertices()[j].Y = objects[i]->GetVertices()[j].Y + scale * intervalMultiplier;
+                    objects[i]->GetTriangleGroup()->GetVertices()[j].Y = objects[i]->GetTriangleGroup()->GetVertices()[j].Y + scale * intervalMultiplier;
                     break;
                     case ZAxis:
-                    objects[i]->GetVertices()[j].Z = objects[i]->GetVertices()[j].Z + scale * intervalMultiplier;
+                    objects[i]->GetTriangleGroup()->GetVertices()[j].Z = objects[i]->GetTriangleGroup()->GetVertices()[j].Z + scale * intervalMultiplier;
                     break;
                     default:
                     break;
@@ -180,8 +203,8 @@ public:
 
     void AxisZeroClipping(bool positive, Axis clipAxis, Axis valueCheckAxis){
         for(int i = 0; i < objectCount; i++){
-            for(int j = 0; j < objects[i]->GetVertexAmount(); j++){
-                Vector3D base = objects[i]->GetVertices()[j];
+            for(int j = 0; j < objects[i]->GetTriangleGroup()->GetVertexCount(); j++){
+                Vector3D base = objects[i]->GetTriangleGroup()->GetVertices()[j];
                 
                 switch(clipAxis){
                     case XAxis:

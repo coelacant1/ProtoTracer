@@ -24,10 +24,10 @@ public:
 private:
     CameraLayout cameraLayout = CameraLayout(CameraLayout::ZForward, CameraLayout::YUp);
 
-    Transform camFronTopTransform = Transform(Vector3D(   35.25f, -2.25f, 216.5f), Vector3D(  68.25f, 210.75f, 31.0f), Vector3D(-1, 1, 1));
-    Transform camRearTopTransform = Transform(Vector3D(   -36.5f, 14.0f, 45.0f), Vector3D(  15.5f,   117.5f,   -43.5f), Vector3D(-1, 1, 1));
-    Transform camFronBotTransform = Transform(Vector3D(   20.25f,   7.0f,   1.0f), Vector3D(  0, 0, 0), Vector3D( 1, 1, 1));
-    Transform camRearBotTransform = Transform(Vector3D(   -20.75f,   -16.5f,   177.5f), Vector3D(  17, 122, -42), Vector3D( 1, 1, 1));
+    Transform camFronTopTransform = Transform(Vector3D(   35.25f, -2.25f, 216.5f), Vector3D(  68.25f, 210.75f, 31.0f - 5000.0f), Vector3D(-1, 1, 1));
+    Transform camRearTopTransform = Transform(Vector3D(   -36.5f, 14.0f, 45.0f), Vector3D(  15.5f,   117.5f,   -43.5f - 5000.0f), Vector3D(-1, 1, 1));
+    Transform camFronBotTransform = Transform(Vector3D(   20.25f,   7.0f,   1.0f), Vector3D(  0, 0, 0 - 5000.0f), Vector3D( 1, 1, 1));
+    Transform camRearBotTransform = Transform(Vector3D(   -20.75f,   -16.5f,   177.5f), Vector3D(  17, 122, -42 - 5000.0f), Vector3D( 1, 1, 1));
 
     Transform camRearMidTransform;
     Transform camFronMidTransform;
@@ -55,12 +55,12 @@ public:
 
         switch(side){
             case LEFT:
-                camRearMidTransform = Transform(Vector3D(13.5f, -189.0f, 312.5f), Vector3D(-59.0f, 191.0f, 175.0f), Vector3D(1, 1, 1));
-                camFronMidTransform = Transform(Vector3D(-13.5f, 171.0f, 132.5f), Vector3D(-126.0f, 117.5f, 191.0f), Vector3D(1, 1, 1));
+                camRearMidTransform = Transform(Vector3D(13.5f, -189.0f, 312.5f), Vector3D(-59.0f, 191.0f, 175.0f - 5000.0f), Vector3D(1, 1, 1));
+                camFronMidTransform = Transform(Vector3D(-13.5f, 171.0f, 132.5f), Vector3D(-126.0f, 117.5f, 191.0f - 5000.0f), Vector3D(1, 1, 1));
                 break;
             case RIGHT:
-                camRearMidTransform = Transform(Vector3D(-7.5f, 15.5f, 44.5f), Vector3D(-195.0f, 184.0f, -113.0f), Vector3D(1, 1, 1));
-                camFronMidTransform = Transform(Vector3D(7.5f, -15.5f, -135.5f), Vector3D(10.5f, 122.5f, -46.5f), Vector3D(1, 1, 1));
+                camRearMidTransform = Transform(Vector3D(-7.5f, 15.5f, 44.5f), Vector3D(-195.0f, 184.0f, -113.0f - 5000.0f), Vector3D(1, 1, 1));
+                camFronMidTransform = Transform(Vector3D(7.5f, -15.5f, -135.5f), Vector3D(10.5f, 122.5f, -46.5f - 5000.0f), Vector3D(1, 1, 1));
                 break;
             default:
                 break;

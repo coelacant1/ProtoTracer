@@ -122,7 +122,7 @@ public:
 
         fox.GetObject()->GetTransform()->SetRotation(rotation);
         fox.GetObject()->GetTransform()->SetScale(Vector3D(sA, sA, sA));
-        fox.GetObject()->GetTransform()->SetPosition(Vector3D(xA, yA + hop * hopCh, 6000.0f));
+        fox.GetObject()->GetTransform()->SetPosition(Vector3D(xA, yA + hop * hopCh, 0.0f));
 
         fox.GetObject()->UpdateTransform();
     }
