@@ -3,7 +3,7 @@
 //#include "Animation\ProtoDRMorphAnimation.h"
 //#include "Animation\KaiborgV1Animation.h"
 //include "Animation\ProtoV3Animation.h"
-//#include "Animation\FullScreenAnimation.h"
+#include "Animation\FullScreenAnimation.h"
 //#include "Animation\CoelaBonkAnimation.h"
 //#include "Animation\FoxAnimation.h"
 //#include "Animation\SpyroAnimation.h"
@@ -14,18 +14,18 @@
 //#include "Animation\DeltaruneAnimation.h"
 //#include "Controllers\KaiborgV1Controller.h"
 //#include "Controllers\KaiborgV1D1Controller.h"
-#include "Animation\NukudeFaceAnimation.h"
+//#include "Animation\NukudeFaceAnimation.h"
 #include "Controllers\ProtoDRController.h"
 
 
-const uint8_t maxBrightness = 15;
+const uint8_t maxBrightness = 10;
 #ifdef RIGHTFACE
 Controller* controller = new ProtoDRController(maxBrightness, ProtoDRController::RIGHT);
 #else
 Controller* controller = new ProtoDRController(maxBrightness, ProtoDRController::LEFT);
 #endif
 //Controller* controller = new KaiborgV1D1Controller(maxBrightness);
-Animation* animation = new NukudeFaceAnimation();
+Animation* animation = new FullScreenAnimation();
 
 void setup() {
     Serial.begin(115200);

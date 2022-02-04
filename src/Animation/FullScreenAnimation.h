@@ -8,20 +8,33 @@
 
 //#include "Flash\Images\CoelaToot.h"
 #include "Flash\ImageSequences\Rainbow.h"
+#include "..\Materials\StripeMaterial.h"
+#include "..\Materials\CombineMaterial.h"
 
 class FullScreenAnimation : public Animation{
 private:
     SolidCube cube;
+    FunctionGenerator fGenSelection = FunctionGenerator(FunctionGenerator::Triangle, 0.0f, 1.0f, 20.0f);
     FunctionGenerator fGenMatPos = FunctionGenerator(FunctionGenerator::Sine, -10.0f, 10.0f, 1.5f);
     FunctionGenerator fGenMatSize = FunctionGenerator(FunctionGenerator::Sine, 450.0f, 550.0f, 2.1f);
     FunctionGenerator fGenMatRot = FunctionGenerator(FunctionGenerator::Sine, -5.0f, 5.0f, 3.2f);
+    FunctionGenerator fGenMatWidth = FunctionGenerator(FunctionGenerator::Sine, 150.0f, 500.0f, 4.0f);
+    FunctionGenerator fGenMatPeriod = FunctionGenerator(FunctionGenerator::Sine, 200.0f, 500.0f, 6.3f);
+    FunctionGenerator fGenMatAmplitude = FunctionGenerator(FunctionGenerator::Sine, -100.0f, 100.0f, 2.7f);
     RainbowSequence gif = RainbowSequence(Vector2D(1000, 1000), Vector2D(0, 0), 60);
+    RGBColor spectrum1[6] = {RGBColor(255, 255, 0), RGBColor(0, 0, 0), RGBColor(0, 255, 255), RGBColor(0, 0, 0), RGBColor(255, 0, 255), RGBColor(0, 0, 0)};
+    RGBColor spectrum2[6] = {RGBColor(255, 0, 0), RGBColor(0, 0, 0), RGBColor(0, 255, 0), RGBColor(0, 0, 0), RGBColor(0, 0, 255), RGBColor(0, 0, 0)};
+    StripeMaterial stripe1 = StripeMaterial(6, spectrum1, 200.0f, 160.0f, 20.0f);
+    StripeMaterial stripe2 = StripeMaterial(6, spectrum2, 200.0f, 160.0f, 20.0f);
+    Material* materials[2] = {&stripe1, &stripe2};
+
+    CombineMaterial material = CombineMaterial(CombineMaterial::Add, 2, materials);
 
 public:
     FullScreenAnimation() : Animation(1) {
         scene->AddObject(cube.GetObject());
         
-        cube.GetObject()->SetMaterial(&gif);
+        cube.GetObject()->SetMaterial(&material);
     }
 
     void FadeIn(float stepRatio) override {}
@@ -40,6 +53,22 @@ public:
         gif.SetSize(Vector2D(-size, size));
         gif.SetRotation(15.0f + rotate);
         gif.Update();
+
+        stripe1.SetStripeWidth(fGenMatWidth.Update());
+        stripe1.SetWavePeriod(fGenMatPeriod.Update());
+        stripe1.SetWaveAmplitude(fGenMatAmplitude.Update());
+        stripe1.SetRotationAngle(ratio * 360.0f);
+        stripe1.SetPositionOffset(Vector2D(shift, shift));
+
+        stripe2.SetStripeWidth(fGenMatWidth.Update());
+        stripe2.SetWavePeriod(fGenMatPeriod.Update());
+        stripe2.SetWaveAmplitude(-fGenMatAmplitude.Update());
+        stripe2.SetRotationAngle((1.0f - ratio) * 360.0f);
+        stripe2.SetPositionOffset(Vector2D(-shift, -shift));
+
+        uint8_t materialSelection = floor(fGenSelection.Update() * 10.0f);
+
+        material.SetCombineMethod(materialSelection);
 
         cube.GetObject()->ResetVertices();
         cube.GetObject()->GetTransform()->SetScale(Vector3D(1000, 1000, 1));

@@ -4,7 +4,6 @@
 #include "..\Math\Mathematics.h"
 #include "..\Math\Vector2D.h"
 
-//Converts gif to RGB XY pixel matrix
 class GradientMaterial : public Material {
 private:
     RGBColor* rgbColors;
