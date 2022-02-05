@@ -9,6 +9,7 @@
 //#include "Flash\Images\CoelaToot.h"
 #include "Flash\ImageSequences\Rainbow.h"
 #include "..\Materials\StripeMaterial.h"
+#include "..\Materials\SpiralMaterial.h"
 #include "..\Materials\CombineMaterial.h"
 
 class FullScreenAnimation : public Animation{
@@ -21,20 +22,24 @@ private:
     FunctionGenerator fGenMatWidth = FunctionGenerator(FunctionGenerator::Sine, 150.0f, 500.0f, 4.0f);
     FunctionGenerator fGenMatPeriod = FunctionGenerator(FunctionGenerator::Sine, 200.0f, 500.0f, 6.3f);
     FunctionGenerator fGenMatAmplitude = FunctionGenerator(FunctionGenerator::Sine, -100.0f, 100.0f, 2.7f);
+    FunctionGenerator fGenMatBend = FunctionGenerator(FunctionGenerator::Sine, 0.1f, 1.0f, 6.7f);
+
     RainbowSequence gif = RainbowSequence(Vector2D(1000, 1000), Vector2D(0, 0), 60);
     RGBColor spectrum1[6] = {RGBColor(255, 255, 0), RGBColor(0, 0, 0), RGBColor(0, 255, 255), RGBColor(0, 0, 0), RGBColor(255, 0, 255), RGBColor(0, 0, 0)};
     RGBColor spectrum2[6] = {RGBColor(255, 0, 0), RGBColor(0, 0, 0), RGBColor(0, 255, 0), RGBColor(0, 0, 0), RGBColor(0, 0, 255), RGBColor(0, 0, 0)};
+    RGBColor spectrum3[6] = {RGBColor(255, 0, 0), RGBColor(255, 255, 0), RGBColor(0, 255, 0), RGBColor(0, 255, 255), RGBColor(0, 0, 255), RGBColor(255, 0, 255)};
     StripeMaterial stripe1 = StripeMaterial(6, spectrum1, 200.0f, 160.0f, 20.0f);
     StripeMaterial stripe2 = StripeMaterial(6, spectrum2, 200.0f, 160.0f, 20.0f);
-    Material* materials[2] = {&stripe1, &stripe2};
+    SpiralMaterial spiral = SpiralMaterial(6, spectrum3, 2.0f, 7.0f);
+    //Material* materials[2] = {&gif2, &gif};
 
-    CombineMaterial material = CombineMaterial(CombineMaterial::Add, 2, materials);
+    //CombineMaterial material = CombineMaterial(CombineMaterial::Subtract, 2, materials);
 
 public:
     FullScreenAnimation() : Animation(1) {
         scene->AddObject(cube.GetObject());
         
-        cube.GetObject()->SetMaterial(&material);
+        cube.GetObject()->SetMaterial(&spiral);
     }
 
     void FadeIn(float stepRatio) override {}
@@ -54,6 +59,7 @@ public:
         gif.SetRotation(15.0f + rotate);
         gif.Update();
 
+
         stripe1.SetStripeWidth(fGenMatWidth.Update());
         stripe1.SetWavePeriod(fGenMatPeriod.Update());
         stripe1.SetWaveAmplitude(fGenMatAmplitude.Update());
@@ -66,9 +72,9 @@ public:
         stripe2.SetRotationAngle((1.0f - ratio) * 360.0f);
         stripe2.SetPositionOffset(Vector2D(-shift, -shift));
 
-        uint8_t materialSelection = floor(fGenSelection.Update() * 10.0f);
-
-        material.SetCombineMethod(materialSelection);
+        spiral.SetBend(fGenMatBend.Update());
+        spiral.SetRotationAngle((1.0f - ratio) * 720.0f);
+        spiral.SetPositionOffset(Vector2D(0, 135.0f));
 
         cube.GetObject()->ResetVertices();
         cube.GetObject()->GetTransform()->SetScale(Vector3D(1000, 1000, 1));

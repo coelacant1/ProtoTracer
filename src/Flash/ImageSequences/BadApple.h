@@ -309,7 +309,7 @@ private:
 
 	static const uint8_t rgbColors[];
 
-	Image image = Image(frame0000, rgbColors, 90, 68, 256);
+	Image image = Image(frame0000, rgbColors, 90, 68, 255);
 
 public:
 	BadAppleSequence(Vector2D size, Vector2D offset, float fps) : ImageSequence(&image, sequence, (unsigned int)300, fps) {

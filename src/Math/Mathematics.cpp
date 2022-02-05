@@ -82,6 +82,10 @@ float Mathematics::Sqrt(float value){//IEEE-754 specific approximation
     return *(float*)&result;
 }
 
+float Mathematics::Fract(float value){
+	return value - floor(value);
+}
+
 float Mathematics::CosineInterpolation(float beg, float fin, float ratio){
    float mu2 = (1.0f - cosf(ratio * MPI)) / 2.0f;
    

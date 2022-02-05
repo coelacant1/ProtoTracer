@@ -23,6 +23,7 @@ public:
 	static float Map(float value, float inLow, float inMax, float outMin, float outMax);
 	static float Pow(float value, float exponent);
 	static float Sqrt(float value);
+	static float Fract(float value);
 
 	static float CosineInterpolation(float, float, float);
 	static float BounceInterpolation(float, float, float);
