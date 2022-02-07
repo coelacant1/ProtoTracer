@@ -1,4 +1,5 @@
 #define RIGHTFACE
+#define DEMOMODE
 
 //#include "Animation\ProtoDRMorphAnimation.h"
 //#include "Animation\KaiborgV1Animation.h"
@@ -18,7 +19,7 @@
 #include "Controllers\ProtoDRController.h"
 
 
-const uint8_t maxBrightness = 10;
+const uint8_t maxBrightness = 15;
 #ifdef RIGHTFACE
 Controller* controller = new ProtoDRController(maxBrightness, ProtoDRController::RIGHT);
 #else

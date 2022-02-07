@@ -20,13 +20,19 @@ public:
 private:
     uint8_t combineMethod;
     uint8_t materialCount;
-    Material** materials; 
+    Material** materials;
+    float opacity;
   
 public:
     CombineMaterial(Method combineMethod, uint8_t materialCount, Material** materials){
         this->combineMethod = combineMethod;
         this->materialCount = materialCount;
         this->materials = materials;
+        this->opacity = 0.0f;
+    }
+
+    void SetFirstLayerOpacity(float opacity){
+        this->opacity = opacity;
     }
 
     void SetCombineMethod(uint8_t combineMethod){
@@ -39,6 +45,7 @@ public:
 
     RGBColor GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) override{
         Vector3D rgb;
+        Vector3D baseRgb;
         RGBColor temp;
 
         //Set base color
@@ -46,6 +53,8 @@ public:
         rgb.X = temp.R;
         rgb.Y = temp.G;
         rgb.Z = temp.B;
+
+        baseRgb = rgb;
 
         switch(combineMethod){
             case Add:
@@ -154,6 +163,6 @@ public:
                 break;
         }
         
-        return RGBColor(rgb.Constrain(0, 255));
+        return RGBColor(Vector3D::LERP(rgb, baseRgb, opacity).Constrain(0, 255));
     }
 };

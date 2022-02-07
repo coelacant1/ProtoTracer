@@ -14,22 +14,41 @@
 #include "..\Materials\NormalMaterial.h"
 
 #include "..\Objects\Spyro.h"
+#include "..\Objects\SolidCube.h"
 
 #include "Flash\ImageSequences\Rainbow.h"
+#include "..\Materials\StripeMaterial.h"
+#include "..\Materials\CombineMaterial.h"
 
 class ProtoDRMorphAnimation : public Animation{
 private:
     ProtoDR pM;
-    EasyEaseAnimator eEA = EasyEaseAnimator(15, EasyEaseAnimator::Cosine);
-
-    RGBColor spectrum[4] = {RGBColor(0, 255, 0), RGBColor(255, 0, 0), RGBColor(0, 255, 0), RGBColor(0, 0, 255)};
-    GradientMaterial gNoiseMat = GradientMaterial(4, spectrum, 2.0f, false);
+    SolidCube cube;
+    float cubeSize = 0.0f;
+    EasyEaseAnimator eEA = EasyEaseAnimator(16, EasyEaseAnimator::Cosine);
+    
+    RGBColor spectrum[10] = {RGBColor(121, 35, 190), RGBColor(36, 120, 255), RGBColor(16, 207, 190), RGBColor(36, 239, 138), 
+                             RGBColor(240, 235, 19), RGBColor(255, 186, 0), RGBColor(255, 138, 0), RGBColor(255, 85, 0), 
+                             RGBColor(255, 0, 0), RGBColor(199, 0, 69)};
+    GradientMaterial gNoiseMat = GradientMaterial(10, spectrum, 2.0f, false);
     SimplexNoise sNoise = SimplexNoise(1, &gNoiseMat);
 
     NormalMaterial normalMaterial;
+
+    RGBColor spectrum1[6] = {RGBColor(255, 255, 0), RGBColor(0, 0, 0), RGBColor(0, 255, 255), RGBColor(0, 0, 0), RGBColor(255, 0, 255), RGBColor(0, 0, 0)};
+    FunctionGenerator fGenMatSize = FunctionGenerator(FunctionGenerator::Sine, 450.0f, 550.0f, 2.1f);
+    FunctionGenerator fGenMatWidth = FunctionGenerator(FunctionGenerator::Sine, 150.0f, 500.0f, 4.0f);
+    FunctionGenerator fGenMatPeriod = FunctionGenerator(FunctionGenerator::Sine, 200.0f, 500.0f, 6.3f);
+    FunctionGenerator fGenMatAmplitude = FunctionGenerator(FunctionGenerator::Sine, -100.0f, 100.0f, 2.7f);
+    FunctionGenerator fGenMatOpacity = FunctionGenerator(FunctionGenerator::Sine, 0.0f, 1.0f, 0.5f);
+    StripeMaterial stripe1 = StripeMaterial(6, spectrum1, 200.0f, 160.0f, 20.0f);
+
+    Material* materials[2] = {&sNoise, &stripe1};
+    CombineMaterial material = CombineMaterial(CombineMaterial::Add, 2, materials);
     
     FunctionGenerator fGenMatPos = FunctionGenerator(FunctionGenerator::Sine, -10.0f, 10.0f, 4.0f);
     RainbowSequence gif = RainbowSequence(Vector2D(200, 145), Vector2D(100, 70), 60);
+
 
     KeyFrameTrack blink = KeyFrameTrack(1, 0.0f, 1.0f, 10, KeyFrameTrack::Cosine);
     KeyFrameTrack topFinOuter = KeyFrameTrack(1, 0.0f, 1.0f, 5, KeyFrameTrack::Cosine);
@@ -52,8 +71,8 @@ private:
 
     void LinkEasyEase(){
         eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::BlushEye), ProtoDR::BlushEye, 40, 0.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::HideBlush), ProtoDR::HideBlush, 1, 1.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::HideEyeBrow), ProtoDR::HideEyeBrow, 1, 0.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::HideBlush), ProtoDR::HideBlush, 10, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::HideEyeBrow), ProtoDR::HideEyeBrow, 10, 0.0f);
         eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::OwOMouth), ProtoDR::OwOMouth, 60, 0.0f);
 
         eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::SadEye), ProtoDR::SadEye, 70, 0.0f);
@@ -70,6 +89,8 @@ private:
         eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::AlphaGenCircle), ProtoDR::AlphaGenCircle, 90, 0.0f);
         eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::AlphaGenSquare), ProtoDR::AlphaGenSquare, 90, 0.0f);
         eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::HideAll), ProtoDR::HideAll, 90, 0.0f);
+
+        eEA.AddParameter(&cubeSize, 99, 45, 0.0f);
     }
 
     void LinkParameters(){
@@ -175,9 +196,10 @@ private:
     }
 
 public:
-    ProtoDRMorphAnimation() : Animation(2) {
+    ProtoDRMorphAnimation() : Animation(3) {
         scene->AddObject(pM.GetObject());
         scene->AddObject(spyro.GetObject());
+        scene->AddObject(cube.GetObject());
 
         LinkEasyEase();
         LinkParameters();
@@ -188,7 +210,8 @@ public:
         AddBotFinKeyFrames();
         AddMouthKeyFrames();
 
-        pM.GetObject()->SetMaterial(&gif);
+        pM.GetObject()->SetMaterial(&material);
+        cube.GetObject()->SetMaterial(&material);
 
         SerialSync::Initialize();
         ButtonHandler::Initialize(15, 11);
@@ -489,6 +512,10 @@ public:
         talk = false;
     }
 
+    void FullScreenDisplay(){
+        eEA.AddParameterFrame(99, 1.0f);
+    }
+
     void FadeIn(float stepRatio) override {}
     void FadeOut(float stepRatio) override {}
 
@@ -497,7 +524,6 @@ public:
     }
 
     float offset = 0.0f;
-
 
     void Update(float ratio) override {
         pM.GetObject()->Enable();//Due to Spyro track
@@ -526,18 +552,32 @@ public:
         SerialSync::Send();
         #endif
 
-        if (mode == 0) Heart();
+        #ifdef DEMOMODE
+        ratio = fmod(ratio - offset, 1.0f);//override input to synchronize from esp
+        mode = floor(Mathematics::Map(ratio, 0, 1, 0, 1.99f));
+        #endif
+
+        if (mode == 0) FullScreenDisplay();
         else if (mode == 1) OwO();
         else if (mode == 2) Sad();
         else if (mode == 3) Dead();
-        else if (mode == 4) SpyroDisplay(ratio, false);
-        else if (mode == 5) SpyroDisplay(ratio, true);
-        else if (mode == 6) AlphaGenSquare();
-        else if (mode == 7) AlphaGenCircle();
-        else if (mode == 8) HideAll();
-        else if (mode == 9) Default();
+        else if (mode == 4) Heart();
+        else if (mode == 5) SpyroDisplay(ratio, false);
+        else if (mode == 6) SpyroDisplay(ratio, true);
+        else if (mode == 7) AlphaGenSquare();
+        else if (mode == 8) AlphaGenCircle();
+        else if (mode == 9) HideAll();
+        else if (mode == 10) Default();
         else OwO2();
+        
 
+        float shiftMat = fGenMatPos.Update();
+        stripe1.SetStripeWidth(fGenMatWidth.Update());
+        stripe1.SetWavePeriod(fGenMatPeriod.Update());
+        stripe1.SetWaveAmplitude(fGenMatAmplitude.Update());
+        stripe1.SetRotationAngle(ratio * 360.0f);
+        stripe1.SetPositionOffset(Vector2D(shiftMat, shiftMat));
+        material.SetFirstLayerOpacity(fGenMatOpacity.Update());
 
         UpdateKeyFrameTracks();
 
@@ -562,6 +602,11 @@ public:
         gif.SetSize(Vector2D(-440, 350));
         gif.SetRotation(15.0f);
         gif.Update();
+        
+        cube.GetObject()->ResetVertices();
+        cube.GetObject()->GetTransform()->SetPosition(Vector3D(0, 135, 6000));
+        cube.GetObject()->GetTransform()->SetScale(Vector3D(5.0f * cubeSize + 0.01f, 3.0f * cubeSize + 0.01f, 0.01f));
+        cube.GetObject()->UpdateTransform();
         
         pM.GetObject()->GetTransform()->SetRotation(Vector3D(0, 180.0f, 0.0f));
         pM.GetObject()->GetTransform()->SetPosition(Vector3D(x, y, 600.0f));
