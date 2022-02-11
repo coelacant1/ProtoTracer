@@ -4,7 +4,8 @@
 //#include "Animation\ProtoDRMorphAnimation.h"
 //#include "Animation\KaiborgV1Animation.h"
 //include "Animation\ProtoV3Animation.h"
-#include "Animation\FullScreenAnimation.h"
+//#include "Animation\FullScreenAnimation.h"
+#include "Animation\VectorFieldAnimation.h"
 //#include "Animation\CoelaBonkAnimation.h"
 //#include "Animation\FoxAnimation.h"
 //#include "Animation\SpyroAnimation.h"
@@ -26,7 +27,7 @@ Controller* controller = new ProtoDRController(maxBrightness, ProtoDRController:
 Controller* controller = new ProtoDRController(maxBrightness, ProtoDRController::LEFT);
 #endif
 //Controller* controller = new KaiborgV1D1Controller(maxBrightness);
-Animation* animation = new FullScreenAnimation();
+Animation* animation = new VectorFieldAnimation();
 
 void setup() {
     Serial.begin(115200);

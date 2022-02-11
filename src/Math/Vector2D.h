@@ -27,6 +27,7 @@ public:
 	Vector2D Minimum(Vector2D v);
 	Vector2D Maximum(Vector2D v);
 	Vector2D Rotate(float angle, Vector2D offset);
+	Vector2D BilinearInterpolation(Vector2D input, Vector2D bL, Vector2D bR, Vector2D tL, Vector2D tR);
 	bool CheckBounds(Vector2D minimum, Vector2D maximum);
 	float Magnitude();
 	float DotProduct(Vector2D vector);
