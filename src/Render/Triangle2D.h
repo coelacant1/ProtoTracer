@@ -82,6 +82,28 @@ public:
         t3p2 = t->p2;
         t3p3 = t->p3;
 	}
+    
+	Triangle2D(Triangle3D* t) {
+        averageDepth = (t->p1->Z + t->p2->Z + t->p3->Z) / 3.0f;
+
+		p1X = t->p1->X;
+		p1Y = t->p1->Y;
+		p2X = t->p2->X;
+		p2Y = t->p2->Y;
+		p3X = t->p3->X;
+		p3Y = t->p3->Y;
+
+        v0X = p2X - p1X;
+        v0Y = p2Y - p1Y;
+        v1X = p3X - p1X;
+        v1Y = p3Y - p1Y;
+
+        denominator = 1.0f / (v0X * v1Y - v1X * v0Y);
+
+        t3p1 = t->p1;
+        t3p2 = t->p2;
+        t3p3 = t->p3;
+	}
 
     Vector2D GetP1(){
         return Vector2D(p1X, p1Y);

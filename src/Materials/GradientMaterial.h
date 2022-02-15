@@ -11,9 +11,9 @@ private:
     uint8_t colorCount;
     Vector2D positionOffset;
     Vector2D rotationOffset;//point to rotate about
-    float gradientPeriod;
-    float rotationAngle;//rotate input xyPosition
-    bool isRadial;
+    float gradientPeriod = 1.0f;
+    float rotationAngle = 0.0f;//rotate input xyPosition
+    bool isRadial = false;
   
 public:
     GradientMaterial(uint8_t colorCount, RGBColor* rgbColors, float gradientPeriod, bool isRadial){
@@ -77,7 +77,6 @@ public:
             //modulo x value into x range from start position to end position
             pos = fabs(fmodf(position.X, gradientPeriod));
         }
-        
         
         //map from modulo'd x value to color count minimum
         float ratio = Mathematics::Map(pos, 0, gradientPeriod, 0, colorCount);

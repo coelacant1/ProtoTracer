@@ -38,11 +38,15 @@ void setup() {
 
 void loop() {
     float ratio = (float)(millis() % 5000) / 5000.0f;
-    animation->Update(ratio);
+    animation->UpdateTime(ratio);
 
     controller->Render(animation->GetScene());
 
     controller->Display();
+
+    //Serial.print("Animated in ");
+    //Serial.print(animation->GetAnimationTime(), 4);
+    //Serial.println("s");
 
     //Serial.print("Rendered in ");
     //Serial.print(controller->GetRenderTime(), 4);

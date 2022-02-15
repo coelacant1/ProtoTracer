@@ -9,7 +9,8 @@ public:
 	static const float MPID180;
 	static const float M180DPI;
 
-	static float Constrain(unsigned int value, unsigned int minimum, unsigned int maximum);
+	static uint32_t Constrain(uint32_t value, uint32_t minimum, uint32_t maximum);
+	static unsigned int Constrain(unsigned int value, unsigned int minimum, unsigned int maximum);
 	static float Constrain(float value, float minimum, float maximum);
 	static float DegreesToRadians(float degrees);
 	static float RadiansToDegrees(float radians);

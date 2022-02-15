@@ -5,7 +5,20 @@ const float Mathematics::MPI = atan(1) * 4;
 const float Mathematics::MPID180 = MPI / 180.0f;
 const float Mathematics::M180DPI = 180.0f / MPI;
 
-float Mathematics::Constrain(unsigned int value, unsigned int minimum, unsigned int maximum) {
+uint32_t Mathematics::Constrain(uint32_t value, uint32_t minimum, uint32_t maximum) {
+	if (value > maximum)
+	{
+		value = maximum;
+	}
+	else if (value < minimum)
+	{
+		value = minimum;
+	}
+
+	return value;
+}
+
+unsigned int Mathematics::Constrain(unsigned int value, unsigned int minimum, unsigned int maximum) {
 	if (value > maximum)
 	{
 		value = maximum;
