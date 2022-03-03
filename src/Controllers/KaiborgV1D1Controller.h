@@ -39,6 +39,8 @@ public:
     }
 
     void Display() override {
+        int offset;
+
         for (int i = 0; i < 571; i++){
             camLeftPixels.GetPixel(i)->Color = camLeftPixels.GetPixel(i)->Color.Scale(maxBrightness);
             camRghtPixels.GetPixel(i)->Color = camRghtPixels.GetPixel(i)->Color.Scale(maxBrightness);
@@ -47,15 +49,23 @@ public:
 
         for (int i = 0; i < 571; i++) {
             if (i < 346){
-                leds.setPixel(i + 346 * 4, camLeftPixels.GetPixel(i + 225)->Color.R, camLeftPixels.GetPixel(i + 225)->Color.G, camLeftPixels.GetPixel(i + 225)->Color.B);//Pin 7
+                offset = i + 225;
+
+                leds.setPixel(i + 346 * 4, camLeftPixels.GetPixel(offset)->Color.R, camLeftPixels.GetPixel(offset)->Color.G, camLeftPixels.GetPixel(offset)->Color.B);//Pin 7
                 leds.setPixel(i + 346 * 5, camRghtPixels.GetPixel(i)->Color.R, camRghtPixels.GetPixel(i)->Color.G, camRghtPixels.GetPixel(i)->Color.B);//Pin 8
             }
             else{
-                leds.setPixel(i + 346 * 6 - 346, camLeftPixels.GetPixel(i - 346)->Color.R, camLeftPixels.GetPixel(i - 346)->Color.G, camLeftPixels.GetPixel(i - 346)->Color.B);//Pin 8
+                offset = i - 346;
+
+                leds.setPixel(i + 346 * 6 - 346, camLeftPixels.GetPixel(offset)->Color.R, camLeftPixels.GetPixel(offset)->Color.G, camLeftPixels.GetPixel(offset)->Color.B);//Pin 8
                 leds.setPixel(i + 346 * 7 - 346, camRghtPixels.GetPixel(i)->Color.R, camRghtPixels.GetPixel(i)->Color.G, camRghtPixels.GetPixel(i)->Color.B);//Pin 8
             }
         }
 
         leds.show();
+    }
+
+    void SetPixels(uint8_t strip, uint16_t led, RGBColor rgb){
+        leds.setPixel(346 * strip + led, rgb.R, rgb.G, rgb.B);//Pin 8
     }
 };

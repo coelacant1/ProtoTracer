@@ -25,6 +25,7 @@ private:
     ProtoDR pM;
     SolidCube cube;
     float cubeSize = 0.0f;
+    float colorRed = 0.0f;
     EasyEaseAnimator eEA = EasyEaseAnimator(16, EasyEaseAnimator::Cosine);
     
     RGBColor spectrum[10] = {RGBColor(121, 35, 190), RGBColor(36, 120, 255), RGBColor(16, 207, 190), RGBColor(36, 239, 138), 
@@ -42,9 +43,10 @@ private:
     FunctionGenerator fGenMatAmplitude = FunctionGenerator(FunctionGenerator::Sine, -100.0f, 100.0f, 2.7f);
     FunctionGenerator fGenMatOpacity = FunctionGenerator(FunctionGenerator::Sine, 0.0f, 1.0f, 0.5f);
     StripeMaterial stripe1 = StripeMaterial(6, spectrum1, 200.0f, 160.0f, 20.0f);
+    SimpleMaterial red = SimpleMaterial(RGBColor(255, 0, 0));
 
-    Material* materials[2] = {&sNoise, &stripe1};
-    CombineMaterial material = CombineMaterial(CombineMaterial::Add, 2, materials);
+    Material* materials[2] = {&sNoise, &red};
+    CombineMaterial material = CombineMaterial(CombineMaterial::Darken, 2, materials);
     
     FunctionGenerator fGenMatPos = FunctionGenerator(FunctionGenerator::Sine, -10.0f, 10.0f, 4.0f);
     RainbowSequence gif = RainbowSequence(Vector2D(200, 145), Vector2D(100, 70), 60);
@@ -86,10 +88,14 @@ private:
 
         eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::OwO), ProtoDR::OwO, 90, 0.0f);
         
-        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::AlphaGenCircle), ProtoDR::AlphaGenCircle, 90, 0.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::AlphaGenSquare), ProtoDR::AlphaGenSquare, 90, 0.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::HideAll), ProtoDR::HideAll, 90, 0.0f);
+        //eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::AlphaGenCircle), ProtoDR::AlphaGenCircle, 90, 0.0f);
+        //eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::AlphaGenSquare), ProtoDR::AlphaGenSquare, 90, 0.0f);
+        //eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::HideAll), ProtoDR::HideAll, 90, 0.0f);
 
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::NewFins), ProtoDR::NewFins, 90, 0.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::AngryEyeMouth), ProtoDR::AngryEyeMouth, 90, 0.0f);
+
+        eEA.AddParameter(&colorRed, 98, 45, 0.0f);
         eEA.AddParameter(&cubeSize, 99, 45, 0.0f);
     }
 
@@ -408,7 +414,7 @@ public:
         
         eEA.AddParameterFrame(ProtoDR::HideBlush, 0.0f);
         eEA.AddParameterFrame(ProtoDR::HideEyeBrow, 0.0f);
-        eEA.AddParameterFrame(ProtoDR::AlphaGenSquare, 1.0f);
+        //eEA.AddParameterFrame(ProtoDR::AlphaGenSquare, 1.0f);
         
         talk = false;
     }
@@ -444,7 +450,7 @@ public:
         
         eEA.AddParameterFrame(ProtoDR::HideBlush, 0.0f);
         eEA.AddParameterFrame(ProtoDR::HideEyeBrow, 0.0f);
-        eEA.AddParameterFrame(ProtoDR::AlphaGenCircle, 1.0f);
+        //eEA.AddParameterFrame(ProtoDR::AlphaGenCircle, 1.0f);
 
         talk = false;
     }
@@ -480,7 +486,7 @@ public:
         
         eEA.AddParameterFrame(ProtoDR::HideBlush, 0.0f);
         eEA.AddParameterFrame(ProtoDR::HideEyeBrow, 0.0f);
-        eEA.AddParameterFrame(ProtoDR::HideAll, 1.0f);
+        //eEA.AddParameterFrame(ProtoDR::HideAll, 1.0f);
         
         talk = false;
     }
@@ -508,6 +514,44 @@ public:
         else{
             spyro.GetObject()->SetMaterial(&normalMaterial);
         }
+        
+        talk = false;
+    }
+    
+    void AngryFace(){
+        pM.Reset();
+        blink.Pause();
+        blink.Reset();
+        mouth.Pause();
+        mouth.Reset();
+        
+        topFinOuter.Pause();
+        topFinInner.Pause();
+        topFinGap.Pause();
+        midFin.Pause();
+        botFinLR1.Pause();
+        botFinLR2.Pause();
+        botFinLR3.Pause();
+        botFinLR4.Pause();
+        botFinLR5.Pause();
+
+        topFinOuter.Reset();
+        topFinInner.Reset();
+        topFinGap.Reset();
+        midFin.Reset();
+        botFinLR1.Reset();
+        botFinLR2.Reset();
+        botFinLR3.Reset();
+        botFinLR4.Reset();
+        botFinLR5.Reset();
+
+        pM.SetMorphWeight(ProtoDR::HideSecondEye, 1.0f);
+        
+        eEA.AddParameterFrame(ProtoDR::HideBlush, 1.0f);
+        eEA.AddParameterFrame(ProtoDR::HideEyeBrow, 1.0f);
+        eEA.AddParameterFrame(ProtoDR::NewFins, 1.0f);
+        eEA.AddParameterFrame(ProtoDR::AngryEyeMouth, 1.0f);
+        eEA.AddParameterFrame(98, 1.0f);
         
         talk = false;
     }
@@ -565,9 +609,10 @@ public:
         else if (mode == 5) SpyroDisplay(ratio, false);
         else if (mode == 6) SpyroDisplay(ratio, true);
         else if (mode == 7) AlphaGenSquare();
-        else if (mode == 8) AlphaGenCircle();
-        else if (mode == 9) HideAll();
-        else if (mode == 10) Default();
+        //else if (mode == 8) AlphaGenCircle();
+        else if (mode == 8) HideAll();
+        else if (mode == 9) Default();
+        else if (mode == 10) AngryFace();
         else OwO2();
         
 
@@ -577,7 +622,7 @@ public:
         stripe1.SetWaveAmplitude(fGenMatAmplitude.Update());
         stripe1.SetRotationAngle(ratio * 360.0f);
         stripe1.SetPositionOffset(Vector2D(shiftMat, shiftMat));
-        material.SetFirstLayerOpacity(fGenMatOpacity.Update());
+        material.SetFirstLayerOpacity(1.0f - colorRed);
 
         UpdateKeyFrameTracks();
 
