@@ -26,12 +26,12 @@ private:
     SolidCube cube;
     float cubeSize = 0.0f;
     float colorRed = 0.0f;
-    EasyEaseAnimator eEA = EasyEaseAnimator(16, EasyEaseAnimator::Cosine);
+    EasyEaseAnimator eEA = EasyEaseAnimator(30, EasyEaseAnimator::Cosine);
     
     RGBColor spectrum[10] = {RGBColor(121, 35, 190), RGBColor(36, 120, 255), RGBColor(16, 207, 190), RGBColor(36, 239, 138), 
                              RGBColor(240, 235, 19), RGBColor(255, 186, 0), RGBColor(255, 138, 0), RGBColor(255, 85, 0), 
                              RGBColor(255, 0, 0), RGBColor(199, 0, 69)};
-    GradientMaterial gNoiseMat = GradientMaterial(10, spectrum, 2.0f, false);
+    GradientMaterial gNoiseMat = GradientMaterial(10, spectrum, 2.0f, false, false);
     SimplexNoise sNoise = SimplexNoise(1, &gNoiseMat);
 
     NormalMaterial normalMaterial;
@@ -88,9 +88,9 @@ private:
 
         eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::OwO), ProtoDR::OwO, 90, 0.0f);
         
-        //eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::AlphaGenCircle), ProtoDR::AlphaGenCircle, 90, 0.0f);
-        //eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::AlphaGenSquare), ProtoDR::AlphaGenSquare, 90, 0.0f);
-        //eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::HideAll), ProtoDR::HideAll, 90, 0.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::AlphaGenCircle), ProtoDR::AlphaGenCircle, 90, 0.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::AlphaGenSquare), ProtoDR::AlphaGenSquare, 90, 0.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::HideAll), ProtoDR::HideAll, 90, 0.0f);
 
         eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::NewFins), ProtoDR::NewFins, 90, 0.0f);
         eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::AngryEyeMouth), ProtoDR::AngryEyeMouth, 90, 0.0f);
@@ -414,7 +414,7 @@ public:
         
         eEA.AddParameterFrame(ProtoDR::HideBlush, 0.0f);
         eEA.AddParameterFrame(ProtoDR::HideEyeBrow, 0.0f);
-        //eEA.AddParameterFrame(ProtoDR::AlphaGenSquare, 1.0f);
+        eEA.AddParameterFrame(ProtoDR::AlphaGenSquare, 1.0f);
         
         talk = false;
     }
@@ -450,7 +450,7 @@ public:
         
         eEA.AddParameterFrame(ProtoDR::HideBlush, 0.0f);
         eEA.AddParameterFrame(ProtoDR::HideEyeBrow, 0.0f);
-        //eEA.AddParameterFrame(ProtoDR::AlphaGenCircle, 1.0f);
+        eEA.AddParameterFrame(ProtoDR::AlphaGenCircle, 1.0f);
 
         talk = false;
     }
@@ -486,7 +486,7 @@ public:
         
         eEA.AddParameterFrame(ProtoDR::HideBlush, 0.0f);
         eEA.AddParameterFrame(ProtoDR::HideEyeBrow, 0.0f);
-        //eEA.AddParameterFrame(ProtoDR::HideAll, 1.0f);
+        eEA.AddParameterFrame(ProtoDR::HideAll, 1.0f);
         
         talk = false;
     }
@@ -636,10 +636,10 @@ public:
         float linSweep = ratio > 0.5f ? 1.0f - ratio : ratio;
         float sShift = linSweep * 0.002f + 0.005f;
 
-        gNoiseMat.SetGradientPeriod(0.5f + linSweep * 6.0f);
-        gNoiseMat.HueShift(ratio * 360 * 2);
+        gNoiseMat.SetGradientPeriod(1.0f + linSweep * 6.0f);
+        //gNoiseMat.HueShift(ratio * 360 * 2);
         sNoise.SetScale(Vector3D(sShift, sShift, sShift));
-        sNoise.SetZPosition(x * 4.0f);
+        sNoise.SetZPosition(x * 1.0f);
 
         float shift = fGenMatPos.Update();
 

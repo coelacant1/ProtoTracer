@@ -26,6 +26,8 @@ private:
     SimplexNoise sNoise = SimplexNoise(1, &gNoiseMat);
 
     NormalMaterial normalMaterial;
+
+    SimpleMaterial rgbColor = SimpleMaterial(RGBColor(255, 0, 0));
     
     FunctionGenerator fGenMatPos = FunctionGenerator(FunctionGenerator::Sine, -10.0f, 10.0f, 4.0f);
     RainbowSequence gif = RainbowSequence(Vector2D(200, 145), Vector2D(100, 70), 60);
@@ -93,7 +95,7 @@ public:
         AddBlinkKeyFrames();
         AddMouthKeyFrames();
 
-        pM.GetObject()->SetMaterial(&gif);
+        pM.GetObject()->SetMaterial(&rgbColor);
 
         ButtonHandler::Initialize(0, 8);//8 is number of faces
         boop.Initialize(2000, 175);
@@ -206,14 +208,19 @@ public:
         //uint8_t mode = (uint8_t)(ratio * 8.0f);//change sequentially
         uint8_t mode = ButtonHandler::GetValue();//change by button press
 
-        if (mode == 0) Angry();
-        else if (mode == 1) Sad();
-        else if (mode == 2) Surprised();
-        else if (mode == 3) Doubt();
-        else if (mode == 4) Frown();
-        else if (mode == 5) LookUp();
-        else if (mode == 6) LookDown();
-        else Default();
+        if (isBooped){
+            Surprised();
+        }
+        else{
+            if (mode == 0) Default();
+            else if (mode == 1) Angry();
+            else if (mode == 2) Doubt();
+            else if (mode == 3) Frown();
+            else if (mode == 4) LookUp();
+            else if (mode == 5) LookDown();
+            else if (mode == 6) Surprised();
+            else Sad();
+        }
 
         UpdateKeyFrameTracks();
 
@@ -240,7 +247,7 @@ public:
         gif.Update();
         
         pM.GetObject()->GetTransform()->SetRotation(Vector3D(0.0f, 0.0f, 0.0f));
-        pM.GetObject()->GetTransform()->SetPosition(Vector3D(x + 170.0f, y + 10.0f, 600.0f));
+        pM.GetObject()->GetTransform()->SetPosition(Vector3D(170.0f, 10.0f, 600.0f));
         pM.GetObject()->GetTransform()->SetScale(Vector3D(-1.0f, 0.6f, 0.7f));
 
         pM.GetObject()->UpdateTransform();

@@ -14,12 +14,28 @@ private:
     float gradientPeriod = 1.0f;
     float rotationAngle = 0.0f;//rotate input xyPosition
     bool isRadial = false;
+    bool isStepped = false;
   
 public:
     GradientMaterial(uint8_t colorCount, RGBColor* rgbColors, float gradientPeriod, bool isRadial){
         this->colorCount = colorCount;
         this->gradientPeriod = gradientPeriod;
         this->isRadial = isRadial;
+
+        this->rgbColors = new RGBColor[colorCount];
+        this->baseRGBColors = new RGBColor[colorCount];
+
+        for(int i = 0; i < colorCount; i++){
+            this->rgbColors[i] = rgbColors[i];
+            this->baseRGBColors[i] = rgbColors[i];
+        }
+    }
+
+    GradientMaterial(uint8_t colorCount, RGBColor* rgbColors, float gradientPeriod, bool isRadial, bool isStepped){
+        this->colorCount = colorCount;
+        this->gradientPeriod = gradientPeriod;
+        this->isRadial = isRadial;
+        this->isStepped = isStepped;
 
         this->rgbColors = new RGBColor[colorCount];
         this->baseRGBColors = new RGBColor[colorCount];
@@ -82,10 +98,17 @@ public:
         float ratio = Mathematics::Map(pos, 0, gradientPeriod, 0, colorCount);
         int startBox = floor(ratio);
         int endBox = startBox + 1 >= colorCount ? 0 : startBox + 1;
+        
+        RGBColor rgb;
 
-        float mu = Mathematics::Map(ratio, startBox, startBox + 1, 0.0f, 1.0f);//calculate mu between boxes
+        if(isStepped){
+            rgb = rgbColors[startBox];
+        }
+        else{
+            float mu = Mathematics::Map(ratio, startBox, startBox + 1, 0.0f, 1.0f);//calculate mu between boxes
 
-        RGBColor rgb = RGBColor::InterpolateColors(rgbColors[startBox], rgbColors[endBox], mu);
+            rgb = RGBColor::InterpolateColors(rgbColors[startBox], rgbColors[endBox], mu);
+        }
 
         return rgb;
     }

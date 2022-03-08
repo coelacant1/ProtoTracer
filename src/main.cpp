@@ -2,6 +2,7 @@
 //#define DEMOMODE
 
 #include "Animation\ProtoDRMorphAnimation.h"
+//#include "Animation\ProtogenKitFaceAnimation.h"
 //#include "Animation\KaiborgV1Animation.h"
 //include "Animation\ProtoV3Animation.h"
 //#include "Animation\FullScreenAnimation.h"
