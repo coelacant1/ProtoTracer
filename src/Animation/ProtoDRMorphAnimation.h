@@ -33,6 +33,7 @@ private:
                              RGBColor(255, 0, 0), RGBColor(199, 0, 69)};
     GradientMaterial gNoiseMat = GradientMaterial(10, spectrum, 2.0f, false, false);
     SimplexNoise sNoise = SimplexNoise(1, &gNoiseMat);
+    SimpleMaterial blackMaterial = SimpleMaterial(RGBColor(0,0,0));
 
     NormalMaterial normalMaterial;
 
@@ -216,7 +217,7 @@ public:
         AddBotFinKeyFrames();
         AddMouthKeyFrames();
 
-        pM.GetObject()->SetMaterial(&material);
+        pM.GetObject()->SetMaterial(&blackMaterial);
         cube.GetObject()->SetMaterial(&material);
 
         SerialSync::Initialize();
@@ -557,6 +558,9 @@ public:
     }
 
     void FullScreenDisplay(){
+        pM.SetMorphWeight(ProtoDR::HideSecondEye, 1.0f);
+        
+        eEA.AddParameterFrame(ProtoDR::HideBlush, 1.0f);
         eEA.AddParameterFrame(99, 1.0f);
     }
 
