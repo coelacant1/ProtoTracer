@@ -105,7 +105,7 @@ public:
 
         pM.GetObject()->SetMaterial(&material);
 
-        ButtonHandler::Initialize(0, 8);//8 is number of faces
+        ButtonHandler::Initialize(0, 5);//8 is number of faces
         boop.Initialize(5);
     }
 
@@ -226,13 +226,12 @@ public:
             else if (mode == 2) Doubt();
             else if (mode == 3) Frown();
             else if (mode == 4) LookUp();
-            else if (mode == 5) LookDown();
             else Sad();
         }
 
         UpdateKeyFrameTracks();
 
-        if(talk) pM.SetMorphWeight(NukudeFace::vrc_v_th, mouthMove);
+        if(talk) pM.SetMorphWeight(NukudeFace::vrc_v_ou, mouthMove);
         eEA.Update();
         pM.Update();
         
@@ -248,12 +247,6 @@ public:
         sNoise.SetZPosition(x * 4.0f);
         
         material.SetFirstLayerOpacity(colorMix);
-
-        Serial.print(isBooped);
-        Serial.print('\t');
-        Serial.print(ratio);
-        Serial.print('\t');
-        Serial.println(colorMix);
 
         float shift = fGenMatPos.Update();
 
