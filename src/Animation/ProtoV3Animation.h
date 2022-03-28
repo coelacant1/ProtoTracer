@@ -120,7 +120,7 @@ public:
         face.GetObject()->Enable();//
 
         //Objects can be moved to a coordinate or translated by a vector
-        face.GetObject()->GetTransform()->SetPosition(Vector3D(40.0f + offsetX, 20.0f + offsetY, 600.0f));
+        face.GetObject()->GetTransform()->SetPosition(Vector3D(40.0f + offsetX - 50.0f, 20.0f + offsetY + 80.0f, 600.0f));
 
         //Objects can be rotated with by any rotation object (quaternion is preferred) and about any coordinate or center
 
@@ -128,8 +128,8 @@ public:
         face.GetObject()->GetTransform()->SetRotation(Vector3D(sinf(ratio * 3.14159f / 180.0f * 1440.0f) * 1.0f, sinf(ratio * 3.14159f / 180.0f * 720.0f) * 1.0f, 1));
 
         //Objects can be scaled by origin, center, and at a point
-        float s = 1.0f + sin(ratio * 3.14159f / 180.0f * 2160.0f) * 0.03f;
-        face.GetObject()->GetTransform()->SetScale(Vector3D(s, s, s));
+        float s = 1.0f + sin(ratio * 3.14159f / 180.0f * 1440.0f) * 0.03f;
+        face.GetObject()->GetTransform()->SetScale(Vector3D(s, -s * 0.96f, s));
 
         face.GetObject()->UpdateTransform();
     }
