@@ -14,7 +14,7 @@
 //#include "Animation\SpyroRotateAnimation.h"
 //#include "Animation\PikachuAnimation.h"
 //#include "Animation\BeeAnimation.h"
-#include "Animation\CreeperAnimation.h"
+#include "Animation\ProtogenArtleckAnimation.h"
 //#include "Animation\DeltaruneAnimation.h"
 //#include "Animation\NukudeFaceAnimation.h"
 
@@ -32,7 +32,7 @@ Controller* controller = new ProtoDRController(maxBrightness, ProtoDRController:
 //Controller* controller = new ProtoDRController(maxBrightness, ProtoDRController::LEFT);
 #endif
 Controller* controller = new SmartMatrixHUB75(maxBrightness);
-Animation* animation = new CreeperAnimation();
+Animation* animation = new ProtogenArtleckAnimation();
 
 void setup() {
     Serial.begin(115200);
@@ -49,11 +49,11 @@ void loop() {
 
     controller->Display();
 
-    Serial.print("Animated in ");
-    Serial.print(animation->GetAnimationTime(), 4);
-    Serial.println("s");
+    //Serial.print("Animated in ");
+    //Serial.print(animation->GetAnimationTime(), 4);
+    //Serial.println("s");
 
-    Serial.print("Rendered in ");
-    Serial.print(controller->GetRenderTime(), 4);
-    Serial.println("s");
+    //Serial.print("Rendered in ");
+    //Serial.print(controller->GetRenderTime(), 4);
+    //Serial.println("s");
 }

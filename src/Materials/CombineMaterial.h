@@ -14,7 +14,8 @@ public:
         Lighten,
         Screen,
         Overlay,
-        SoftLight
+        SoftLight,
+        Replace
     };
 
 private:
@@ -156,6 +157,14 @@ public:
                     rgb.Y = (255.0f - 2.0f * temp.G) * (rgb.Y * rgb.Y) + 2.0f * (temp.G * rgb.Y);
                     rgb.Z = (255.0f - 2.0f * temp.B) * (rgb.Z * rgb.Z) + 2.0f * (temp.B * rgb.Z);
                 }
+
+                break;
+            case Replace:
+                temp = materials[materialCount - 1]->GetRGB(position, normal, uvw);
+
+                rgb.X = temp.R;
+                rgb.Y = temp.G;
+                rgb.Z = temp.B;
 
                 break;
             default:
