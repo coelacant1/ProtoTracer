@@ -21,7 +21,7 @@ private:
     float colorMix;
 
     ProtoArtleck pM;
-    EasyEaseAnimator eEA = EasyEaseAnimator(20, EasyEaseAnimator::Cosine);
+    EasyEaseAnimator eEA = EasyEaseAnimator(20, EasyEaseAnimator::Overshoot, 1.0f, 0.5f);
 
     RGBColor noiseSpectrum[4] = {RGBColor(0, 255, 0), RGBColor(255, 0, 0), RGBColor(0, 255, 0), RGBColor(0, 0, 255)};
     GradientMaterial gNoiseMat = GradientMaterial(4, noiseSpectrum, 2.0f, false);
@@ -93,6 +93,12 @@ private:
         mouth.AddKeyFrame(4.0f, 0.0f);
     }
 
+    void ChangeInterpolationMethods(){
+        eEA.SetInterpolationMethod(ProtoArtleck::Sadness, EasyEaseAnimator::Cosine);
+        eEA.SetInterpolationMethod(ProtoArtleck::vrc_v_ou, EasyEaseAnimator::Cosine);
+        eEA.SetInterpolationMethod(99, EasyEaseAnimator::Cosine);
+    }
+
 public:
     ProtogenArtleckAnimation() : Animation(1) {
         scene->AddObject(pM.GetObject());
@@ -102,6 +108,7 @@ public:
 
         AddBlinkKeyFrames();
         AddMouthKeyFrames();
+        ChangeInterpolationMethods();
 
         pM.GetObject()->SetMaterial(&faceMaterial);
         noiseMaterial.SetFirstLayerOpacity(0.4f);
@@ -247,9 +254,7 @@ public:
         
         faceMaterial.SetFirstLayerOpacity(colorMix);
 
-        Serial.println(colorMix);
-
-        float shift = fGenMatPos.Update();
+        //Serial.println(colorMix);
         
         pM.GetObject()->GetTransform()->SetRotation(Vector3D(0.0f, 0.0f, 0.0f + 15.0f));
         pM.GetObject()->GetTransform()->SetPosition(Vector3D(x + 65.0f, y + 115.0f, 600.0f));

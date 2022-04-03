@@ -1,6 +1,6 @@
 #include <Arduino.h>
-#include <MatrixHardware_Teensy3_ShieldV4.h>        // SmartLED Shield for Teensy 3 (V4)
-//#include <MatrixHardware_Teensy4_ShieldV5.h>        // SmartLED Shield for Teensy 4 (V5)
+//#include <MatrixHardware_Teensy3_ShieldV4.h>        // SmartLED Shield for Teensy 3 (V4)
+#include <MatrixHardware_Teensy4_ShieldV5.h>        // SmartLED Shield for Teensy 4 (V5)
 //#include <MatrixHardware_Teensy3_ShieldV1toV3.h>    // SmartMatrix Shield for Teensy 3 V1-V3
 //#include <MatrixHardware_Teensy4_ShieldV4Adapter.h> // Teensy 4 Adapter attached to SmartLED Shield for Teensy 3 (V4)
 //#include <MatrixHardware_ESP32_V0.h>                // This file contains multiple ESP32 hardware configurations, edit the file to define GPIOPINOUT (or add #define GPIOPINOUT with a hardcoded number before this #include)
@@ -54,14 +54,16 @@ public:
 
     void Display() override {
         for (int i = 0; i < 2048; i++){
-            camPixels.GetPixel(i)->Color = camPixels.GetPixel(i)->Color.Scale(maxBrightness * 8);
+            if (camPixels.GetPixel(i)->Color.R == 0 && camPixels.GetPixel(i)->Color.G == 0 && camPixels.GetPixel(i)->Color.B == 0){
+                camPixels.GetPixel(i)->Color = camPixels.GetPixel(i)->Color.Scale(maxBrightness).Add(16);
+            }
         }
 
         for (uint16_t y = 0; y < 32; y++) {
             for (uint16_t x = 0; x < 64; x++){
                 uint16_t pixelNum = y * 64 + x;
 
-                rgb24 rgbColor = rgb24(camPixels.GetPixel(pixelNum)->Color.R, camPixels.GetPixel(pixelNum)->Color.G, camPixels.GetPixel(pixelNum)->Color.B);
+                rgb24 rgbColor = rgb24((uint16_t)camPixels.GetPixel(pixelNum)->Color.R, (uint16_t)camPixels.GetPixel(pixelNum)->Color.G, (uint16_t)camPixels.GetPixel(pixelNum)->Color.B);
 
                 backgroundLayer.drawPixel(x, y, rgbColor);
                 backgroundLayer.drawPixel(63 - x, y + 32, rgbColor);

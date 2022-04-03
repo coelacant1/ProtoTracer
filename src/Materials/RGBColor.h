@@ -48,6 +48,24 @@ public:
         return RGBColor(sR, sG, sB);
     }
 
+    RGBColor Add(uint8_t value){
+        int sR, sG, sB;
+        
+        sR = (int)R + (int)value;
+        sG = (int)G + (int)value;
+        sB = (int)B + (int)value;
+        
+        sR = sR > 255 ? 255 : sR;
+        sG = sG > 255 ? 255 : sG;
+        sB = sB > 255 ? 255 : sB;
+        
+        sR = sR < 0 ? 0 : sR;
+        sG = sG < 0 ? 0 : sG;
+        sB = sB < 0 ? 0 : sB;
+        
+        return RGBColor(sR, sG, sB);
+    }
+
     RGBColor HueShift(float hueDeg){
         //hueDeg = (int)hueDeg % 360;
         //shift color space by rotating rgb vector about diagonal vector (1, 1, 1)
