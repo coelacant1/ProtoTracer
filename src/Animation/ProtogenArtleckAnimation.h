@@ -257,8 +257,9 @@ public:
         //Serial.println(colorMix);
         
         pM.GetObject()->GetTransform()->SetRotation(Vector3D(0.0f, 0.0f, 0.0f + 15.0f));
-        pM.GetObject()->GetTransform()->SetPosition(Vector3D(x + 65.0f, y + 115.0f, 600.0f));
-        pM.GetObject()->GetTransform()->SetScale(Vector3D(-0.65f, -0.65f, 0.5f));
+        pM.GetObject()->GetTransform()->SetPosition(Vector3D(x + 90.0f, y + 115.0f, 600.0f));
+        //pM.GetObject()->GetTransform()->SetScale(Vector3D(-0.65f, -0.65f, 0.5f));
+        pM.GetObject()->GetTransform()->SetScale(Vector3D(-0.85f, -0.65f, 0.5f));
 
         pM.GetObject()->UpdateTransform();
     }
