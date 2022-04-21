@@ -234,6 +234,8 @@ public:
         if(talk) pM.SetMorphWeight(NukudeFace::vrc_v_ou, mouthMove);
         eEA.Update();
         pM.Update();
+
+        Serial.println(mouthMove);
         
         float x = sinf(ratio * 3.14159f / 180.0f * 360.0f * 2.0f) * 3.0f;
         float y = cosf(ratio * 3.14159f / 180.0f * 360.0f * 3.0f) * 3.0f;

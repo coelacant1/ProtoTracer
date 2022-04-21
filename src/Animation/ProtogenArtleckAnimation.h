@@ -8,7 +8,7 @@
 #include "..\Materials\GradientMaterial.h"
 #include "..\Materials\SimplexNoise.h"
 #include "..\Math\FunctionGenerator.h"
-#include "..\Sensors\MicrophoneSimple.h"
+#include "..\Sensors\MicrophoneSimple_MAX9814.h"
 #include "..\Sensors\ButtonHandler.h"
 #include "..\Sensors\BoopSensor.h"
 #include "..\Materials\NormalMaterial.h"
@@ -49,7 +49,7 @@ private:
     FunctionGenerator fGenRotation = FunctionGenerator(FunctionGenerator::Sine, -30.0f, 30.0f, 2.6f);
     FunctionGenerator fGenScale = FunctionGenerator(FunctionGenerator::Sine, 3.0f, 8.0f, 4.2f);
 
-    MicrophoneSimple mic = MicrophoneSimple(22);
+    MicrophoneSimple mic = MicrophoneSimple(14);
     BoopSensor boop;
     bool talk = true;
 
@@ -113,7 +113,7 @@ public:
         pM.GetObject()->SetMaterial(&faceMaterial);
         noiseMaterial.SetFirstLayerOpacity(0.4f);
 
-        ButtonHandler::Initialize(23, 6);//8 is number of faces
+        ButtonHandler::Initialize(20, 6);//6 is number of faces
         boop.Initialize(5);
     }
 
@@ -138,7 +138,7 @@ public:
         mouth.Play();
 
         eEA.AddParameterFrame(ProtoArtleck::Anger, 1.0f);
-        eEA.AddParameterFrame(ProtoArtleck::vrc_v_aa, 1.0f);
+        //eEA.AddParameterFrame(ProtoArtleck::vrc_v_aa, 1.0f);
         eEA.AddParameterFrame(99, 1.0f);
 
         talk = true;
@@ -160,7 +160,7 @@ public:
         mouth.Play();
 
         eEA.AddParameterFrame(ProtoArtleck::Surprised, 1.0f);
-        eEA.AddParameterFrame(ProtoArtleck::vrc_v_aa, 1.0f);
+        //eEA.AddParameterFrame(ProtoArtleck::vrc_v_aa, 1.0f);
 
         talk = true;
     }
@@ -237,9 +237,11 @@ public:
 
         UpdateKeyFrameTracks();
 
-        if(talk) pM.SetMorphWeight(ProtoArtleck::vrc_v_ou, mouthMove);
         eEA.Update();
         pM.Update();
+
+        if(talk) eEA.AddParameterFrame(ProtoArtleck::vrc_v_aa, mouthMove);
+        
         
         float x = sinf(ratio * 3.14159f / 180.0f * 360.0f * 2.0f) * 2.25f;
         float y = cosf(ratio * 3.14159f / 180.0f * 360.0f * 3.0f) * 2.25f;
@@ -254,7 +256,7 @@ public:
         
         faceMaterial.SetFirstLayerOpacity(colorMix);
 
-        //Serial.println(colorMix);
+        //Serial.println(mouthMove);
         
         pM.GetObject()->GetTransform()->SetRotation(Vector3D(0.0f, 0.0f, 0.0f + 15.0f));
         pM.GetObject()->GetTransform()->SetPosition(Vector3D(x + 90.0f, y + 115.0f, 600.0f));

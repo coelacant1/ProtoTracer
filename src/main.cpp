@@ -53,7 +53,7 @@ void loop() {
     //Serial.print(animation->GetAnimationTime(), 4);
     //Serial.println("s");
 
-    Serial.print("Rendered in ");
-    Serial.print(controller->GetRenderTime(), 4);
-    Serial.println("s");
+    //Serial.print("Rendered in ");
+    //Serial.print(controller->GetRenderTime(), 4);
+    //Serial.println("s");
 }

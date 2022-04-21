@@ -18,7 +18,7 @@ private:
 
 public:
     static void Initialize(uint8_t pin, uint8_t maxValue) {
-        pinMode(pin, INPUT);
+        pinMode(pin, INPUT_PULLUP);
         attachInterrupt(pin, isr, FALLING);
 
         ButtonHandler::maxValue = maxValue;
