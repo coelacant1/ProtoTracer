@@ -54,18 +54,18 @@ private:
     bool talk = true;
 
     void LinkEasyEase(){
-        eEA.AddParameter(pM.GetMorphWeightReference(ProtoArtleck::Anger), ProtoArtleck::Anger, 10, 0.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(ProtoArtleck::Sadness), ProtoArtleck::Sadness, 10, 0.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(ProtoArtleck::Surprised), ProtoArtleck::Surprised, 10, 0.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(ProtoArtleck::Doubt), ProtoArtleck::Doubt, 10, 0.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(ProtoArtleck::Frown), ProtoArtleck::Frown, 10, 0.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(ProtoArtleck::LookUp), ProtoArtleck::LookUp, 10, 0.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(ProtoArtleck::LookDown), ProtoArtleck::LookDown, 10, 0.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoArtleck::Anger), ProtoArtleck::Anger, 30, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoArtleck::Sadness), ProtoArtleck::Sadness, 30, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoArtleck::Surprised), ProtoArtleck::Surprised, 30, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoArtleck::Doubt), ProtoArtleck::Doubt, 30, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoArtleck::Frown), ProtoArtleck::Frown, 30, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoArtleck::LookUp), ProtoArtleck::LookUp, 30, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoArtleck::LookDown), ProtoArtleck::LookDown, 30, 0.0f, 1.0f);
 
-        eEA.AddParameter(pM.GetMorphWeightReference(ProtoArtleck::vrc_v_ou), ProtoArtleck::vrc_v_ou, 10, 0.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(ProtoArtleck::vrc_v_aa), ProtoArtleck::vrc_v_aa, 10, 0.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoArtleck::vrc_v_ou), ProtoArtleck::vrc_v_ou, 30, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoArtleck::vrc_v_aa), ProtoArtleck::vrc_v_aa, 30, 0.0f, 1.0f);
         
-        eEA.AddParameter(&colorMix, 99, 10, 0.0f);
+        eEA.AddParameter(&colorMix, 99, 90, 0.0f, 1.0f);
     }
 
     void LinkParameters(){
@@ -127,8 +127,6 @@ public:
         blink.Play();
         mouth.Play();
 
-        eEA.AddParameterFrame(99, 0.0f);
-
         talk = true;
     }
 
@@ -138,7 +136,6 @@ public:
         mouth.Play();
 
         eEA.AddParameterFrame(ProtoArtleck::Anger, 1.0f);
-        //eEA.AddParameterFrame(ProtoArtleck::vrc_v_aa, 1.0f);
         eEA.AddParameterFrame(99, 1.0f);
 
         talk = true;
@@ -160,7 +157,6 @@ public:
         mouth.Play();
 
         eEA.AddParameterFrame(ProtoArtleck::Surprised, 1.0f);
-        //eEA.AddParameterFrame(ProtoArtleck::vrc_v_aa, 1.0f);
 
         talk = true;
     }
@@ -237,11 +233,10 @@ public:
 
         UpdateKeyFrameTracks();
 
+        if(talk) eEA.AddParameterFrame(ProtoArtleck::vrc_v_aa, mouthMove);
+
         eEA.Update();
         pM.Update();
-
-        if(talk) eEA.AddParameterFrame(ProtoArtleck::vrc_v_aa, mouthMove);
-        
         
         float x = sinf(ratio * 3.14159f / 180.0f * 360.0f * 2.0f) * 2.25f;
         float y = cosf(ratio * 3.14159f / 180.0f * 360.0f * 3.0f) * 2.25f;
@@ -256,7 +251,7 @@ public:
         
         faceMaterial.SetFirstLayerOpacity(colorMix);
 
-        //Serial.println(mouthMove);
+        Serial.println(colorMix);
         
         pM.GetObject()->GetTransform()->SetRotation(Vector3D(0.0f, 0.0f, 0.0f + 15.0f));
         pM.GetObject()->GetTransform()->SetPosition(Vector3D(x + 90.0f, y + 115.0f, 600.0f));

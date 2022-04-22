@@ -45,3 +45,12 @@ float* KalmanFilter::ShiftArray(float arr[]){
 
     return arr;
 }
+
+
+void KalmanFilter::SetGain(float gain){
+    this->gain = gain;
+}
+
+void KalmanFilter::SetMemory(float memory){
+
+}
