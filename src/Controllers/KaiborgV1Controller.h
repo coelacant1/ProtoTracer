@@ -26,12 +26,9 @@ private:
     Camera camLeft = Camera(&camLeftTransform, &cameraLayout, &camLeftPixels);
 
     Camera* cameras[2] = { &camRght, &camLeft };
-    uint8_t maxBrightness;
 
 public:
-    KaiborgV1Controller(uint8_t maxBrightness) : Controller(cameras, 2){
-        this->maxBrightness = maxBrightness;
-    }
+    KaiborgV1Controller(uint8_t maxBrightness) : Controller(cameras, 2, maxBrightness){}
 
     void Initialize() override{
         leds.begin();
@@ -40,8 +37,8 @@ public:
 
     void Display() override {
         for (int i = 0; i < 571; i++){
-            camLeftPixels.GetPixel(i)->Color = camLeftPixels.GetPixel(i)->Color.Scale(maxBrightness);
-            camRghtPixels.GetPixel(i)->Color = camRghtPixels.GetPixel(i)->Color.Scale(maxBrightness);
+            camLeftPixels.GetPixel(i)->Color = camLeftPixels.GetPixel(i)->Color.Scale(brightness);
+            camRghtPixels.GetPixel(i)->Color = camRghtPixels.GetPixel(i)->Color.Scale(brightness);
 
         }
 

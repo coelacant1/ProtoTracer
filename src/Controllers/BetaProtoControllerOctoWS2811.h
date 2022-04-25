@@ -41,12 +41,9 @@ private:
     Camera camLeftChin = Camera(&camLeftChinTransform, &cameraLayout, &camLeftChinPixels);
 
     Camera* cameras[6] = { &camRghtFrnt, &camLeftFrnt, &camRghtRear, &camLeftRear, &camRghtChin, &camLeftChin };
-    uint8_t maxBrightness;
 
 public:
-    BetaProtoController(uint8_t maxBrightness) : Controller(cameras, 6){
-        this->maxBrightness = maxBrightness;
-    }
+    BetaProtoController(uint8_t maxBrightness) : Controller(cameras, 6, maxBrightness){}
 
     void Initialize() override{
         leds.begin();
@@ -55,15 +52,15 @@ public:
 
     void Display() override {
         for (int i = 0; i < 571; i++){
-            camLeftFrntPixels.GetPixel(i)->Color = camLeftFrntPixels.GetPixel(i)->Color.Scale(maxBrightness);
-            camRghtFrntPixels.GetPixel(i)->Color = camRghtFrntPixels.GetPixel(i)->Color.Scale(maxBrightness);
+            camLeftFrntPixels.GetPixel(i)->Color = camLeftFrntPixels.GetPixel(i)->Color.Scale(brightness);
+            camRghtFrntPixels.GetPixel(i)->Color = camRghtFrntPixels.GetPixel(i)->Color.Scale(brightness);
 
-            camLeftRearPixels.GetPixel(i)->Color = camLeftRearPixels.GetPixel(i)->Color.Scale(maxBrightness);
-            camRghtRearPixels.GetPixel(i)->Color = camRghtRearPixels.GetPixel(i)->Color.Scale(maxBrightness);
+            camLeftRearPixels.GetPixel(i)->Color = camLeftRearPixels.GetPixel(i)->Color.Scale(brightness);
+            camRghtRearPixels.GetPixel(i)->Color = camRghtRearPixels.GetPixel(i)->Color.Scale(brightness);
             
             if(i < 89){
-                camRghtChinPixels.GetPixel(i)->Color = camRghtChinPixels.GetPixel(i)->Color.Scale(maxBrightness * 2);
-                camLeftChinPixels.GetPixel(i)->Color = camLeftChinPixels.GetPixel(i)->Color.Scale(maxBrightness * 2);
+                camRghtChinPixels.GetPixel(i)->Color = camRghtChinPixels.GetPixel(i)->Color.Scale(brightness * 2);
+                camLeftChinPixels.GetPixel(i)->Color = camLeftChinPixels.GetPixel(i)->Color.Scale(brightness * 2);
             }
         }
 

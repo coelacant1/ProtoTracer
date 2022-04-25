@@ -3,7 +3,7 @@
 
 //--------------- ANIMATIONS ---------------
 //#include "Animation\ProtoDRMorphAnimation.h"
-//#include "Animation\ProtogenKitFaceAnimation.h"
+#include "Animation\ProtogenKitFaceAnimation.h"
 //#include "Animation\KaiborgV1Animation.h"
 //#include "Animation\ProtoV3Animation.h"
 //#include "Animation\FullScreenAnimation.h"
@@ -14,15 +14,15 @@
 //#include "Animation\SpyroRotateAnimation.h"
 //#include "Animation\PikachuAnimation.h"
 //#include "Animation\BeeAnimation.h"
-#include "Animation\ProtogenArtleckAnimation.h"
+//#include "Animation\ProtogenArtleckAnimation.h"
 //#include "Animation\DeltaruneAnimation.h"
 //#include "Animation\NukudeFaceAnimation.h"
 
 //--------------- CONTROLLERS ---------------
 //#include "Controllers\KaiborgV1Controller.h"
-//#include "Controllers\KaiborgV1D1Controller.h"
+#include "Controllers\KaiborgV1D1Controller.h"
 //#include "Controllers\ProtoDRController.h"
-#include "Controllers\SmartMatrixHUB75.h"
+//#include "Controllers\SmartMatrixHUB75.h"
 
 
 const uint8_t maxBrightness = 20;
@@ -31,8 +31,8 @@ Controller* controller = new ProtoDRController(maxBrightness, ProtoDRController:
 #else
 //Controller* controller = new ProtoDRController(maxBrightness, ProtoDRController::LEFT);
 #endif
-Controller* controller = new SmartMatrixHUB75(maxBrightness);
-Animation* animation = new ProtogenArtleckAnimation();
+Controller* controller = new KaiborgV1D1Controller(maxBrightness);
+Animation* animation = new ProtogenKitFaceAnimation();
 
 void setup() {
     Serial.begin(115200);
@@ -49,11 +49,10 @@ void loop() {
 
     controller->Display();
 
-    //Serial.print("Animated in ");
-    //Serial.print(animation->GetAnimationTime(), 4);
-    //Serial.println("s");
+    Serial.print("Animated in ");
+    Serial.print(animation->GetAnimationTime(), 4);
 
-    //Serial.print("Rendered in ");
-    //Serial.print(controller->GetRenderTime(), 4);
-    //Serial.println("s");
+    Serial.print("s, Rendered in ");
+    Serial.print(controller->GetRenderTime(), 4);
+    Serial.println("s");
 }

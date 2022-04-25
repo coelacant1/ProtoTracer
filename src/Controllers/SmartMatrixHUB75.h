@@ -35,12 +35,9 @@ private:
     Camera cam = Camera(&camTransform, &cameraLayout, &camPixels);
 
     Camera* cameras[1] = { &cam };
-    uint8_t maxBrightness;
 
 public:
-    SmartMatrixHUB75(uint8_t maxBrightness) : Controller(cameras, 1){
-        this->maxBrightness = maxBrightness;
-    }
+    SmartMatrixHUB75(uint8_t maxBrightness) : Controller(cameras, 1, maxBrightness){}
 
     void Initialize() override{
         matrix.addLayer(&backgroundLayer);
@@ -55,7 +52,7 @@ public:
     void Display() override {
         for (int i = 0; i < 2048; i++){
             if (camPixels.GetPixel(i)->Color.R == 0 && camPixels.GetPixel(i)->Color.G == 0 && camPixels.GetPixel(i)->Color.B == 0){
-                camPixels.GetPixel(i)->Color = camPixels.GetPixel(i)->Color.Scale(maxBrightness).Add(16);
+                camPixels.GetPixel(i)->Color = camPixels.GetPixel(i)->Color.Scale(brightness).Add(16);
             }
         }
 

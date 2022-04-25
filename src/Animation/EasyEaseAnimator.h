@@ -33,7 +33,7 @@ private:
     bool isActive = true;
 
 public:
-    EasyEaseAnimator(uint16_t maxParameters, InterpolationMethod interpMethod, float springConstant = 0.5f, float dampingConstant = 10.0f) : maxParameters(maxParameters) {
+    EasyEaseAnimator(uint16_t maxParameters, InterpolationMethod interpMethod, float springConstant = 1.0f, float dampingConstant = 0.5f) : maxParameters(maxParameters) {
         this->interpMethod = interpMethod;
         this->springConstant = springConstant;
         this->dampingConstant = dampingConstant;

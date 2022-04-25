@@ -32,8 +32,6 @@ private:
 
     SimpleMaterial redMaterial = SimpleMaterial(RGBColor(255, 0, 0));
     
-    FunctionGenerator fGenMatPos = FunctionGenerator(FunctionGenerator::Sine, -10.0f, 10.0f, 4.0f);
-    
     //default face material with gradient + simplex noise
     Material* noiseMaterials[2] = {&gradientMat, &sNoise};
     CombineMaterial noiseMaterial = CombineMaterial(CombineMaterial::Lighten, 2, noiseMaterials);
@@ -46,6 +44,7 @@ private:
     KeyFrameTrack blink = KeyFrameTrack(1, 0.0f, 1.0f, 10, KeyFrameTrack::Cosine);
     KeyFrameTrack mouth = KeyFrameTrack(1, 0.0f, 1.0f, 5, KeyFrameTrack::Cosine);
 
+    FunctionGenerator fGenMatPos = FunctionGenerator(FunctionGenerator::Sine, -10.0f, 10.0f, 4.0f);
     FunctionGenerator fGenRotation = FunctionGenerator(FunctionGenerator::Sine, -30.0f, 30.0f, 2.6f);
     FunctionGenerator fGenScale = FunctionGenerator(FunctionGenerator::Sine, 3.0f, 8.0f, 4.2f);
 
@@ -218,7 +217,7 @@ public:
         //uint8_t mode = (uint8_t)(ratio * 8.0f);//change sequentially
         uint8_t mode = ButtonHandler::GetValue();//change by button press
 
-        if (!isBooped){
+        if (isBooped){
             Angry();
         }
         else{

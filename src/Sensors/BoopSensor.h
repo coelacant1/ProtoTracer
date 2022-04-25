@@ -28,9 +28,9 @@ public:
     }
 
     static bool isBooped(){
-        proximity = GetValue();
+        GetValue();
 
-        return proximity < threshold;
+        return proximity > threshold;
     }
 
     static uint8_t GetValue(){

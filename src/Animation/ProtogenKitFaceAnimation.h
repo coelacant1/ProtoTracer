@@ -8,12 +8,11 @@
 #include "..\Materials\GradientMaterial.h"
 #include "..\Materials\SimplexNoise.h"
 #include "..\Math\FunctionGenerator.h"
-#include "..\Sensors\MicrophoneSimple.h"
+#include "..\Sensors\MicrophoneSimple_MAX9814.h"
 #include "..\Sensors\ButtonHandler.h"
 #include "..\Sensors\BoopSensor.h"
 #include "..\Materials\NormalMaterial.h"
 
-#include "Flash\ImageSequences\Rainbow.h"
 #include "..\Materials\CombineMaterial.h"
 
 
@@ -22,50 +21,55 @@ private:
     float colorMix;
 
     NukudeFace pM;
-    EasyEaseAnimator eEA = EasyEaseAnimator(20, EasyEaseAnimator::Cosine);
-
-    RGBColor spectrum[4] = {RGBColor(0, 255, 0), RGBColor(255, 0, 0), RGBColor(0, 255, 0), RGBColor(0, 0, 255)};
-    GradientMaterial gNoiseMat = GradientMaterial(4, spectrum, 2.0f, false);
+    EasyEaseAnimator eEA = EasyEaseAnimator(20, EasyEaseAnimator::Overshoot);
+    
+    RGBColor noiseSpectrum[4] = {RGBColor(0, 255, 0), RGBColor(255, 0, 0), RGBColor(0, 255, 0), RGBColor(0, 0, 255)};
+    GradientMaterial gNoiseMat = GradientMaterial(4, noiseSpectrum, 2.0f, false);
     SimplexNoise sNoise = SimplexNoise(1, &gNoiseMat);
-
-    NormalMaterial normalMaterial;
-
-    SimpleMaterial rgbColor = SimpleMaterial(RGBColor(255, 0, 0));
     
-    FunctionGenerator fGenMatPos = FunctionGenerator(FunctionGenerator::Sine, -10.0f, 10.0f, 4.0f);
-    RainbowSequence gif = RainbowSequence(Vector2D(200, 145), Vector2D(100, 70), 60);
+    RGBColor gradientSpectrum[2] = {RGBColor(255, 255, 0), RGBColor(255, 128, 0)};
+    GradientMaterial gradientMat = GradientMaterial(2, gradientSpectrum, 350.0f, false);
     
-    Material* materials[2] = {&rgbColor, &sNoise};
-    CombineMaterial material = CombineMaterial(CombineMaterial::Add, 2, materials);
+    SimpleMaterial redMaterial = SimpleMaterial(RGBColor(255, 0, 0));
+
+    //default face material with gradient + simplex noise
+    Material* noiseMaterials[2] = {&gradientMat, &sNoise};
+    CombineMaterial noiseMaterial = CombineMaterial(CombineMaterial::Lighten, 2, noiseMaterials);
+
+    //for combining angry face with default material
+    Material* faceMaterials[2] = {&redMaterial, &noiseMaterial};
+    CombineMaterial faceMaterial = CombineMaterial(CombineMaterial::Replace, 2, faceMaterials);
 
     KeyFrameTrack blink = KeyFrameTrack(1, 0.0f, 1.0f, 10, KeyFrameTrack::Cosine);
     KeyFrameTrack mouth = KeyFrameTrack(1, 0.0f, 1.0f, 5, KeyFrameTrack::Cosine);
 
+    FunctionGenerator fGenMatPos = FunctionGenerator(FunctionGenerator::Sine, -10.0f, 10.0f, 4.0f);
     FunctionGenerator fGenRotation = FunctionGenerator(FunctionGenerator::Sine, -30.0f, 30.0f, 2.6f);
     FunctionGenerator fGenScale = FunctionGenerator(FunctionGenerator::Sine, 3.0f, 8.0f, 4.2f);
 
-    MicrophoneSimple mic = MicrophoneSimple(22);
+    MicrophoneSimple mic = MicrophoneSimple(22, 0.25f);
     BoopSensor boop;
     bool talk = true;
 
     void LinkEasyEase(){
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::Anger), NukudeFace::Anger, 20, 0.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::Sadness), NukudeFace::Sadness, 20, 0.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::Surprised), NukudeFace::Surprised, 20, 0.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::Doubt), NukudeFace::Doubt, 20, 0.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::Frown), NukudeFace::Frown, 20, 0.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::LookUp), NukudeFace::LookUp, 20, 0.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::LookDown), NukudeFace::LookDown, 20, 0.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::Anger), NukudeFace::Anger, 30, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::Sadness), NukudeFace::Sadness, 30, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::Surprised), NukudeFace::Surprised, 30, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::Doubt), NukudeFace::Doubt, 30, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::Frown), NukudeFace::Frown, 30, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::LookUp), NukudeFace::LookUp, 30, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::LookDown), NukudeFace::LookDown, 30, 0.0f, 1.0f);
 
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_ee), NukudeFace::vrc_v_ee, 20, 0.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_ff), NukudeFace::vrc_v_ff, 20, 0.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_aa), NukudeFace::vrc_v_aa, 20, 0.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_nn), NukudeFace::vrc_v_nn, 20, 0.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_dd), NukudeFace::vrc_v_dd, 20, 0.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_ih), NukudeFace::vrc_v_ih, 20, 0.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_pp), NukudeFace::vrc_v_pp, 20, 0.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_ou), NukudeFace::vrc_v_ou, 30, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_ee), NukudeFace::vrc_v_ee, 30, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_ff), NukudeFace::vrc_v_ff, 30, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_aa), NukudeFace::vrc_v_aa, 30, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_nn), NukudeFace::vrc_v_nn, 30, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_dd), NukudeFace::vrc_v_dd, 30, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_ih), NukudeFace::vrc_v_ih, 30, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_pp), NukudeFace::vrc_v_pp, 30, 0.0f, 1.0f);
         
-        eEA.AddParameter(&colorMix, 99, 20, 0.0f);
+        eEA.AddParameter(&colorMix, 99, 180, 0.0f, 1.0f);
     }
 
     void LinkParameters(){
@@ -93,6 +97,11 @@ private:
         mouth.AddKeyFrame(4.0f, 0.0f);
     }
 
+    void ChangeInterpolationMethods(){
+        eEA.SetInterpolationMethod(NukudeFace::Sadness, EasyEaseAnimator::Cosine);
+        eEA.SetInterpolationMethod(99, EasyEaseAnimator::Cosine);
+    }
+
 public:
     ProtogenKitFaceAnimation() : Animation(1) {
         scene->AddObject(pM.GetObject());
@@ -103,7 +112,10 @@ public:
         AddBlinkKeyFrames();
         AddMouthKeyFrames();
 
-        pM.GetObject()->SetMaterial(&material);
+        ChangeInterpolationMethods();
+
+        pM.GetObject()->SetMaterial(&faceMaterial);
+        noiseMaterial.SetFirstLayerOpacity(0.4f);
 
         ButtonHandler::Initialize(0, 5);//8 is number of faces
         boop.Initialize(5);
@@ -142,7 +154,7 @@ public:
         mouth.Play();
 
         eEA.AddParameterFrame(NukudeFace::Sadness, 1.0f);
-        eEA.AddParameterFrame(NukudeFace::vrc_v_ff, 1.0f);
+        eEA.AddParameterFrame(NukudeFace::Frown, 1.0f);
 
         talk = true;
     }
@@ -231,11 +243,9 @@ public:
 
         UpdateKeyFrameTracks();
 
-        if(talk) pM.SetMorphWeight(NukudeFace::vrc_v_ou, mouthMove);
+        if(talk) eEA.AddParameterFrame(NukudeFace::vrc_v_ou, mouthMove);
         eEA.Update();
         pM.Update();
-
-        Serial.println(mouthMove);
         
         float x = sinf(ratio * 3.14159f / 180.0f * 360.0f * 2.0f) * 3.0f;
         float y = cosf(ratio * 3.14159f / 180.0f * 360.0f * 3.0f) * 3.0f;
@@ -248,14 +258,7 @@ public:
         sNoise.SetScale(Vector3D(sShift, sShift, sShift));
         sNoise.SetZPosition(x * 4.0f);
         
-        material.SetFirstLayerOpacity(colorMix);
-
-        float shift = fGenMatPos.Update();
-
-        gif.SetPosition(Vector2D(20.0f + shift, 135.0f + shift));
-        gif.SetSize(Vector2D(-440, 350));
-        gif.SetRotation(15.0f);
-        gif.Update();
+        faceMaterial.SetFirstLayerOpacity(colorMix);
         
         pM.GetObject()->GetTransform()->SetRotation(Vector3D(0.0f, 0.0f, 0.0f));
         pM.GetObject()->GetTransform()->SetPosition(Vector3D(170.0f + x, 10.0f + y, 600.0f));
