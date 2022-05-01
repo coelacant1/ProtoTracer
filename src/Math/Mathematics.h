@@ -26,6 +26,6 @@ public:
 	static float Sqrt(float value);
 	static float Fract(float value);
 
-	static float CosineInterpolation(float, float, float);
-	static float BounceInterpolation(float, float, float);
+	static float CosineInterpolation(float beg, float fin, float ratio);
+	static float BounceInterpolation(float beg, float fin, float ratio);
 };

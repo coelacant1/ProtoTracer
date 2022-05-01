@@ -11,6 +11,7 @@
 #include "..\Materials\StripeMaterial.h"
 #include "..\Materials\SpiralMaterial.h"
 #include "..\Materials\CombineMaterial.h"
+#include "..\Materials\SpectrumAnalyzer.h"
 
 //#include "Flash\ImageSequences\Rainbow.h"
 
@@ -35,6 +36,8 @@ private:
     StripeMaterial stripe1 = StripeMaterial(6, spectrum1, 200.0f, 160.0f, 20.0f);
     StripeMaterial stripe2 = StripeMaterial(6, spectrum2, 200.0f, 160.0f, 20.0f);
     SpiralMaterial spiral = SpiralMaterial(6, spectrum3, 2.0f, 7.0f);
+    GradientMaterial gM = GradientMaterial(6, spectrum3, 1.0f, false);
+    SpectrumAnalyzer sA = SpectrumAnalyzer(A0, Vector2D(192, 96), Vector2D(96, 48), &gM);
     //Material* materials[2] = {&stripe1, &spiral};
 
     //CombineMaterial material = CombineMaterial(CombineMaterial::Subtract, 2, materials);
@@ -43,7 +46,7 @@ public:
     FullScreenAnimation() : Animation(1) {
         scene->AddObject(cube.GetObject());
         
-        cube.GetObject()->SetMaterial(&stripe1);
+        cube.GetObject()->SetMaterial(&sA);
     }
 
     void FadeIn(float stepRatio) override {}
@@ -57,6 +60,8 @@ public:
         float shift = fGenMatPos.Update();
         //float size = fGenMatSize.Update();
         //float rotate = fGenMatRot.Update();
+
+        sA.Update();
 
         //gif.SetPosition(Vector2D(0.0f, 135.0f));
         //gif.SetSize(Vector2D(-size, size));

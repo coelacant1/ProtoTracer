@@ -60,11 +60,37 @@ switch (flasher) {
     }
   }
 }
-
-//led colors 
-const int meteorColorsR[] = {236,112,181,166, 23,255,236,112,181,166, 23,255,236,112,181,166, 23,255,236,112,181,166, 23,255,236,112,181,166, 23,255,236,112,181,166, 23,255,};
-const int meteorColorsG[] = { 55,146,230,75,255,255, 55,146,230,75,255,255, 55,146,230,75,255,255, 55,146,230,75,255,255, 55,146,230,75,255,255, 55,146,230,75,255,255,};
-const int meteorColorsB[] = {143,190,29,168,243,120,143,190,29,168,243,120,143,190,29,168,243,120,143,190,29,168,243,120,143,190,29,168,243,120,143,190,29,168,243,120,};
+//led colors
+const int colorsR[] = {
+255, 255, 255, 255, 255,
+225, 225, 212, 170, 128,
+85, 43, 0, 0, 0,
+0, 0, 0, 0, 0, 
+0, 0, 0, 0, 0,
+43, 85, 128, 170, 212,
+255, 255, 255, 255, 255,
+255
+};
+const int colorsG[] = {
+0, 42, 85, 128, 170,
+213, 225, 255, 255, 255,
+255, 255, 255, 255, 255,
+255, 255, 255, 255, 213,
+170, 128, 85, 42, 0,
+0, 0, 0, 0, 0,
+0, 0, 0, 0, 0,
+255
+};
+const int colorsB[] = {
+0, 0, 0, 0, 0,
+0, 0, 0, 0, 0,
+0, 0, 0, 42, 85,
+128, 170, 213, 225, 255,
+255, 255, 255, 255, 255,
+255, 255, 255, 255, 255,
+255, 255, 255, 255, 255,
+255
+};
 /*
 rgb(252, 3, 90) pink
 rgb(236, 55, 143)
@@ -432,12 +458,12 @@ void spectrumLoop() {
       for (int j = 0; j < 25; j++) {
         
           if (loudness - j > 1) {
-            leds.setPixel(frontPanelToNeopixel(j, i, false,true) + 346*6, meteorColorsR[i]/25, meteorColorsG[i]/25, meteorColorsB[i]/25);
-            leds.setPixel(frontRightPanelToNeopixel(j, i, false, false) + 346*7, meteorColorsR[i]/25, meteorColorsG[i]/25, meteorColorsB[i]/25);
+            leds.setPixel(frontPanelToNeopixel(j, i, false,true) + 346*6, colorsR[i]/25, colorsG[i]/25, colorsB[i]/25);
+            leds.setPixel(frontRightPanelToNeopixel(j, i, false, false) + 346*7, colorsR[i]/25, colorsG[i]/25, colorsB[i]/25);
             
           } else if (loudness - j < 1 && loudness - j > 0){
-            leds.setPixel(frontPanelToNeopixel(j, i, false,true) + 346*6, meteorColorsR[i] * 4, meteorColorsG[i] * 4, meteorColorsB[i] * 4);
-            leds.setPixel(frontRightPanelToNeopixel(j, i, true, false) + 346*7, meteorColorsR[i] * 4, meteorColorsG[i] * 4, meteorColorsB[i] * 4); 
+            leds.setPixel(frontPanelToNeopixel(j, i, false,true) + 346*6, colorsR[i] * 4, colorsG[i] * 4, colorsB[i] * 4);
+            leds.setPixel(frontRightPanelToNeopixel(j, i, true, false) + 346*7, colorsR[i] * 4, colorsG[i] * 4, colorsB[i] * 4); 
           } else {
             break;
           }
@@ -456,12 +482,12 @@ void spectrumLoop() {
         for (int j = 0; j < 25; j++) {
        
           if (loudness - j > 1) {
-            leds.setPixel(rearPanelToNeopixel(j, i - 15,  false, true) + 346*4, meteorColorsR[i]/25, meteorColorsG[i]/25, meteorColorsB[i]/25);
-            leds.setPixel(rearRightPanelToNeopixel(j, i - 15,  false, false) + 346*5, meteorColorsR[i]/25, meteorColorsG[i]/25, meteorColorsB[i]/25);
+            leds.setPixel(rearPanelToNeopixel(j, i - 15,  false, true) + 346*4, colorsR[i]/25, colorsG[i]/25, colorsB[i]/25);
+            leds.setPixel(rearRightPanelToNeopixel(j, i - 15,  false, false) + 346*5, colorsR[i]/25, colorsG[i]/25, colorsB[i]/25);
             
           } else if (loudness - j < 1 && loudness - j > 0){
-            leds.setPixel(rearPanelToNeopixel(j, i - 15,  false, true) + 346*4, meteorColorsR[i] * 4, meteorColorsG[i] * 4, meteorColorsB[i] * 4);
-            leds.setPixel(rearRightPanelToNeopixel(j, i - 15, false, false) + 346*5, meteorColorsR[i] * 4, meteorColorsG[i] * 4, meteorColorsB[i] * 4);
+            leds.setPixel(rearPanelToNeopixel(j, i - 15,  false, true) + 346*4, colorsR[i] * 4, colorsG[i] * 4, colorsB[i] * 4);
+            leds.setPixel(rearRightPanelToNeopixel(j, i - 15, false, false) + 346*5, colorsR[i] * 4, colorsG[i] * 4, colorsB[i] * 4);
           } else {
             break;
           }
