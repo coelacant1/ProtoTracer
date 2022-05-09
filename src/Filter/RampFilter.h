@@ -12,9 +12,8 @@ public:
 
     }
 
-	RampFilter(int frames){
-        this->increment = 1.0f / ((float) frames);
-    }
+	RampFilter(int frames)
+        : increment(1.0f / ((float) frames){}
 
 	float Filter(float value){
         if(value > filter && filter + increment < 1.0f){

@@ -11,20 +11,19 @@ private:
     long previousMillis = 0;
 
 public:
-    DampedSpring(float springConstant, float damping){
-	    this->springConstant = springConstant;
-        this->damping = damping;
-    }
+    DampedSpring(const float springConstant, const float damping)
+        springConstant(springConstant),
+        damping(damping) {}
 
-    float Calculate(float target) {
-        long currentMillis = millis();
+    float Calculate(const float target) {
+        const long currentMillis = millis();
 
         float dT = ((float)(currentMillis - previousMillis)) / 50.0f;
 
         if (dT > 0.1f && dT < 2.0f) {
-            float springForce = -springConstant * currentPosition;
-            float dampingForce = damping * currentVelocity;
-            float force = springForce - dampingForce + target;
+            const float springForce = -springConstant * currentPosition;
+            const float dampingForce = damping * currentVelocity;
+            const float force = springForce - dampingForce + target;
 
             currentVelocity += force * dT;
             currentPosition += currentVelocity * dT;

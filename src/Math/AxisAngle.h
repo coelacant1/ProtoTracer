@@ -8,8 +8,20 @@ public:
 	float Rotation;
 	Vector3D Axis;
 
-	AxisAngle(float rotation, float x, float y, float z);
-	AxisAngle(float rotation, Vector3D axis);
+	AxisAngle(const float rotation, const float x, const float y, const float z) 
+		: Rotation(rotation),
+		  Axis(Vector3D(x, y, z)){}
 
-	String ToString();
+	AxisAngle(const float rotation, const Vector3D axis)
+		: Rotation(rotation),
+		  Axis(axis) {}
+
+	String ToString() const {
+		String r = Mathematics::DoubleToCleanString(Rotation);
+		String x = Mathematics::DoubleToCleanString(Axis.X);
+		String y = Mathematics::DoubleToCleanString(Axis.Y);
+		String z = Mathematics::DoubleToCleanString(Axis.Z);
+
+		return r + ": [" + x + " " + y + " " + z + "]";
+	}
 } AxisAngle;

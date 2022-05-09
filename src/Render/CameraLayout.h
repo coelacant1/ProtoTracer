@@ -28,21 +28,13 @@ private:
     UpAxis upAxis;
 
     bool VerifyTransform(){//verifies that up and forward axes are not aligned
-        if(forwardAxis == XForward || forwardAxis == XNForward){
-            return !(upAxis == XUp || upAxis == XNUp);
-        }
-        else if(forwardAxis == YForward || forwardAxis == YNForward){
-            return !(upAxis == YUp || upAxis == YNUp);
-        }
-        else {
-            return !(upAxis == ZUp || upAxis == ZNUp);
-        }
+        if(forwardAxis == XForward || forwardAxis == XNForward) return !(upAxis == XUp || upAxis == XNUp);
+        if(forwardAxis == YForward || forwardAxis == YNForward) return !(upAxis == YUp || upAxis == YNUp);
+        return !(upAxis == ZUp || upAxis == ZNUp);
     }
 
     void CalculateTransform(){//transform from input to YUp, ZForward
-        Vector3D upVector = Vector3D();
-        Vector3D forwardVector = Vector3D();
-        Vector3D rightVector = Vector3D();
+        Vector3D upVector(), forwardVector(), rightVector();
 
         if (VerifyTransform()){
             switch (upAxis){
@@ -94,10 +86,9 @@ private:
     }
 
 public:
-    CameraLayout(ForwardAxis forwardAxis, UpAxis upAxis){
-        this->forwardAxis = forwardAxis;
-        this->upAxis = upAxis;
-
+    CameraLayout(ForwardAxis forwardAxis, UpAxis upAxis)
+        : forwardAxis(forwardAxis),
+          upAxis(upAxis) {
         CalculateTransform();
     }
 

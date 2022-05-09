@@ -10,8 +10,18 @@ public:
 	Vector3D Angles;
 	EulerOrder Order;
 
-	EulerAngles();
-	EulerAngles(Vector3D angles, EulerOrder order);
+	EulerAngles() 
+		: Angles(Vector3D(0, 0, 0)),
+		  Order(EulerConstants::EulerOrderXYZS) {}
 
-	String ToString();
+	EulerAngles(const Vector3D angles, const EulerOrder order) 
+		: Angles(angles),
+		  Order(order) {}
+
+	String ToString() const {
+		String angles = Angles.ToString();
+		String order = Order.ToString();
+
+		return "[ " + angles + ", " + order + " ]";
+	}
 } EulerAngles;

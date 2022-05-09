@@ -14,29 +14,25 @@ private:
     unsigned long previousMillis;
 
 public:
-	PID() {
-        this->kp = 1.0f;
-        this->ki = 0.0f;
-        this->kd = 0.0f;
-
-        previousMillis = millis();
-    }
+	PID() 
+        : kp(1.0f), 
+          ki(0.0f), 
+          kd(0.0f),
+          previousMillis(millis()) {}
 
 	~PID();
 
-	PID(float kp, float ki, float kd){
-        this->kp = kp;
-        this->ki = ki;
-        this->kd = kd;
-
-        previousMillis = millis();
-    }
+	PID(const float kp, const float ki, const float kd)
+        : kp(kp),
+          ki(ki),
+          kd(kd),
+          previousMillis(millis()) {}
 
 	float Calculate(float setpoint, float processVariable){
         float POut, IOut, DOut;
 
-        unsigned long currentMillis = millis();
-        float dT = ((float)(currentMillis - previousMillis)) / 1000.0f;
+        const unsigned long currentMillis = millis();
+        const float dT = ((float)(currentMillis - previousMillis)) / 1000.0f;
 
         error = setpoint - processVariable;
         integral += error * dT;

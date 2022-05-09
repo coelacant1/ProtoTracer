@@ -17,22 +17,20 @@ private:
     Pixel** pixels;
 
 public:
-    PixelGroup(Vector2D* pixelLocations, unsigned int pixelCount, Direction direction = ZEROTOMAX) : pixelCount(pixelCount){
-        this->direction = direction;
-
-        pixels = new Pixel*[pixelCount];
-
+    PixelGroup(Vector2D* pixelLocations, unsigned int pixelCount, Direction direction = ZEROTOMAX) 
+        : pixelCount(pixelCount),
+          direction(direction),
+          pixels(new Pixel*[pixelCount]) {
         if(direction == ZEROTOMAX){
             for(unsigned int i = 0; i < pixelCount; i++){
                 pixels[i] = new Pixel(&pixelLocations[i]);
                 bounds.UpdateBounds(pixelLocations[i]);
             }
+            return;
         }
-        else{
-            for(unsigned int i = 0; i < pixelCount; i++){
-                pixels[i] = new Pixel(&pixelLocations[pixelCount - i - 1]);
-                bounds.UpdateBounds(pixelLocations[i]);
-            }
+        for(unsigned int i = 0; i < pixelCount; i++){
+            pixels[i] = new Pixel(&pixelLocations[pixelCount - i - 1]);
+            bounds.UpdateBounds(pixelLocations[i]);
         }
     }
 

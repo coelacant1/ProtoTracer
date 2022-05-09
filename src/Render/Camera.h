@@ -54,11 +54,10 @@ private:
     }
 
 public:
-    Camera(Transform* transform, CameraLayout* cameraLayout, PixelGroup* pixelGroup){
-        this->transform = transform;
-        this->pixelGroup = pixelGroup;
-        this->cameraLayout = cameraLayout;
-
+    Camera(Transform* transform, CameraLayout* cameraLayout, PixelGroup* pixelGroup)
+        : transform(transform),
+          pixelGroup(pixelGroup),
+          cameraLayout(cameraLayout) {
         transform->SetBaseRotation(cameraLayout->GetRotation());
     }
 

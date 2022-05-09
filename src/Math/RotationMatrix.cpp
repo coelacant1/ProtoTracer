@@ -13,20 +13,14 @@ RotationMatrix::RotationMatrix(Vector3D X, Vector3D Y, Vector3D Z) {
 }
 
 Vector3D RotationMatrix::ConvertCoordinateToVector() {
-	if (didRotate)
-	{
-		return Vector3D((XAxis.X + YAxis.X + ZAxis.X), (XAxis.Y + YAxis.Y + ZAxis.Y), (XAxis.Z + YAxis.Z + ZAxis.Z));
-	}
-	else
-	{
-		return InitialVector;
-	}
+	if (didRotate) return Vector3D((XAxis.X + YAxis.X + ZAxis.X), (XAxis.Y + YAxis.Y + ZAxis.Y), (XAxis.Z + YAxis.Z + ZAxis.Z));
+	return InitialVector;
 }
 
 void RotationMatrix::ReadjustMatrix() {
-	float X = (XAxis.X + YAxis.X + ZAxis.X);
-	float Y = (XAxis.Y + YAxis.Y + ZAxis.Y);
-	float Z = (XAxis.Z + YAxis.Z + ZAxis.Z);
+	const float X = (XAxis.X + YAxis.X + ZAxis.X);
+	const float Y = (XAxis.Y + YAxis.Y + ZAxis.Y);
+	const float Z = (XAxis.Z + YAxis.Z + ZAxis.Z);
 
 	XAxis = Vector3D(X, X, X);
 	YAxis = Vector3D(Y, Y, Y);
@@ -39,10 +33,7 @@ void RotationMatrix::Rotate(Vector3D rotation) {
 		RotateX(rotation.X);
 		didRotate = true;
 
-		if (rotation.Y != 0 || rotation.Z != 0)
-		{
-			ReadjustMatrix();
-		}
+		if (rotation.Y != 0 || rotation.Z != 0) ReadjustMatrix();
 	}
 
 	if (rotation.Y != 0)
@@ -50,10 +41,7 @@ void RotationMatrix::Rotate(Vector3D rotation) {
 		RotateY(rotation.Y);
 		didRotate = true;
 
-		if (rotation.Z != 0)
-		{
-			ReadjustMatrix();
-		}
+		if (rotation.Z != 0)ReadjustMatrix();
 	}
 
 	if (rotation.Z != 0)

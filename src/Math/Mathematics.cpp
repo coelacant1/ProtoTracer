@@ -1,7 +1,7 @@
 #include "Mathematics.h"
 
 const float Mathematics::EPSILON = 0.001f;
-const float Mathematics::MPI = atan(1) * 4;
+const float Mathematics::MPI = acos(-1.0f);
 const float Mathematics::MPID180 = MPI / 180.0f;
 const float Mathematics::M180DPI = 180.0f / MPI;
 

@@ -55,11 +55,11 @@ public:
 	}
   
 	static Vector2D DegreesToRadians(Vector2D degrees) {
-		return degrees / (180.0f / Mathematics::MPI);
+		return degrees / Mathematics::M180DPI;
 	}
 
 	static Vector2D RadiansToDegrees(Vector2D radians) {
-		return radians * (180.0f / Mathematics::MPI);
+		return radians * Mathematics::M180DPI;
 	}
 
 	//Static function declaractions

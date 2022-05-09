@@ -14,24 +14,22 @@ public:
 
 private:
     Function function;
-    float minimum = 0.0f;
-    float maximum = 0.0f;
-    float period = 0.0f;
+    float minimum = 0.0f, maximum = 0.0f, period = 0.0f;
 
     float TriangleWave(float ratio){
-        float wave = (ratio > 0.5f ? 1.0f - ratio : ratio) * 2.0f;
+        const float wave = (ratio > 0.5f ? 1.0f - ratio : ratio) * 2.0f;
 
         return Mathematics::Map(wave, 0.0f, 1.0f, minimum, maximum);
     }
 
     float SquareWave(float ratio){
-        float wave = ratio > 0.5f ? 1.0f : 0.0f;
+        const float wave = ratio > 0.5f ? 1.0f : 0.0f;
 
         return Mathematics::Map(wave, 0.0f, 1.0f, minimum, maximum);
     }
 
     float SineWave(float ratio){
-        float wave = sinf(ratio * 360.0f * 3.14159f / 180.0f);
+        float wave = sinf(ratio * 2.0f * Mathematics::MPI);
 
         return Mathematics::Map(wave, -1.0f, 1.0f, minimum, maximum);
     }
@@ -41,16 +39,15 @@ private:
     }
 
 public:
-    FunctionGenerator(Function function, float minimum, float maximum, float period){
-        this->function = function;
-        this->minimum = minimum;
-        this->maximum = maximum;
-        this->period = period;
-    }
+    FunctionGenerator(const Function function, const float minimum, const float maximum, const float period)
+        : function(function),
+          minimum(minimum),
+          maximum(maximum),
+          period(period) {}
 
     float Update(){
-        float currentTime = fmod(micros() / 1000000.0f, period);
-        float ratio = currentTime / period;
+        const float currentTime = fmod(micros() / 1000000.0f, period);
+        const float ratio = currentTime / period;
         
         switch(function){
             case Triangle:
