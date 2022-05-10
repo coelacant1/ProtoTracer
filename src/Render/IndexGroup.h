@@ -6,17 +6,23 @@ public:
 	unsigned int B = 0;
 	unsigned int C = 0;
 
-    IndexGroup() {}
+    IndexGroup() {
+        this->A = 0;
+        this->B = 0;
+        this->C = 0;
+    }
 
-    IndexGroup(const IndexGroup& indexGroup)
-        : A(indexGroup.A),
-          B(indexGroup.B),
-          C(indexGroup.C) {}
+    IndexGroup(const IndexGroup& indexGroup) {
+        this->A = indexGroup.A;
+        this->B = indexGroup.B;
+        this->C = indexGroup.C;
+    }
 
-    IndexGroup(unsigned int X, unsigned int Y, unsigned int Z) 
-        : A(X),
-          B(Y),
-          C(z) {}
+    IndexGroup(unsigned int X, unsigned int Y, unsigned int Z) {
+        this->A = X;
+        this->B = Y;
+        this->C = Z;
+    }
 
     IndexGroup Add(IndexGroup indexGroup) {
         return IndexGroup {

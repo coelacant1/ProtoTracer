@@ -5,156 +5,226 @@
 
 typedef struct Vector2D {
 public:
-	float X = 0.0f;
-	float Y = 0.0f;
+    float X = 0.0f;
+    float Y = 0.0f;
 
-	Vector2D();
-	Vector2D(const Vector2D& vector);
-	Vector2D(float x, float y);
-	Vector2D(const Vector3D& vector);
-	Vector2D Absolute();
-	Vector2D Normal();
-	Vector2D Add(Vector2D vector);
-	Vector2D Subtract(Vector2D vector);
-	Vector2D Multiply(Vector2D vector);
-	Vector2D Divide(Vector2D vector);
-	Vector2D Multiply(float scalar);
-	Vector2D Divide(float scalar);
-	Vector3D CrossProduct(Vector2D vector);
-	Vector2D UnitCircle();//unit sphere
-	Vector2D Constrain(float minimum, float maximum);
-	Vector2D Constrain(Vector2D minimum, Vector2D maximum);
-	Vector2D Minimum(Vector2D v);
-	Vector2D Maximum(Vector2D v);
-	Vector2D Rotate(float angle, Vector2D offset);
-	Vector2D BilinearInterpolation(Vector2D input, Vector2D bL, Vector2D bR, Vector2D tL, Vector2D tR);
-	bool CheckBounds(Vector2D minimum, Vector2D maximum);
-	float Magnitude();
-	float DotProduct(Vector2D vector);
-	float CalculateEuclideanDistance(Vector2D vector);
-	bool IsEqual(Vector2D vector);
-	String ToString();
-	
-	static Vector2D Minimum(Vector2D v1, Vector2D v2){
-		return Vector2D{
-			v1.X < v2.X ? v1.X : v2.X,
-			v1.Y < v2.Y ? v1.Y : v2.Y
-		};
-	}
+    Vector2D() {}
+    Vector2D(const Vector2D &vector)
+        : X(vector.X),
+          Y(vector.Y) {}
+    Vector2D(const float X, const float Y)
+        : X(X),
+          Y(Y) {}
+    Vector2D(const Vector3D &vector)
+        : X(vector.X),
+          Y(vector.Y) {}
 
-	static Vector2D Maximum(Vector2D v1, Vector2D v2){
-		return Vector2D{
-			v1.X > v2.X ? v1.X : v2.X,
-			v1.Y > v2.Y ? v1.Y : v2.Y
-		};
-	}
+    Vector2D Absolute() const {
+        return Vector2D(
+            fabsf(X),
+            fabsf(Y));
+    }
 
-  
-	static Vector2D LERP(Vector2D start, Vector2D finish, float ratio) {
-		return finish * ratio + start * (1.0f - ratio);
-	}
-  
-	static Vector2D DegreesToRadians(Vector2D degrees) {
-		return degrees / Mathematics::M180DPI;
-	}
+    Vector2D Normal() const {
+        const float magn = Magnitude();
 
-	static Vector2D RadiansToDegrees(Vector2D radians) {
-		return radians * Mathematics::M180DPI;
-	}
+        if (Mathematics::IsClose(magn, 1.0f, Mathematics::EPSILON)) return *this;
+        if (Mathematics::IsClose(magn, 0.0f, Mathematics::EPSILON)) return Vector2D(Mathematics::INF, Mathematics::INF);
+        return Multiply(1.0f / magn);
+    }
 
-	//Static function declaractions
-	static Vector2D Normal(Vector2D vector) {
-		return vector.Normal();
-	}
+    Vector2D Add(const Vector2D &vector) const {
+        return Vector2D(
+            X + vector.X,
+            Y + vector.Y);
+    }
 
-	static Vector2D Add(Vector2D v1, Vector2D v2) {
-		return v1.Add(v2);
-	}
+    Vector2D Subtract(const Vector2D &vector) const {
+        return Vector2D(
+            X - vector.X,
+            Y - vector.Y);
+    }
 
-	static Vector2D Subtract(Vector2D v1, Vector2D v2) {
-		return v1.Subtract(v2);
-	}
+    Vector2D Multiply(const Vector2D &vector) const {
+        return Vector2D(
+            X * vector.X,
+            Y * vector.Y);
+    }
 
-	static Vector2D Multiply(Vector2D v1, Vector2D v2) {
-		return v1.Multiply(v2);
-	}
+    Vector2D Divide(const Vector2D &vector) const {
+        return Vector2D(
+            X / vector.X,
+            Y / vector.Y);
+    }
 
-	static Vector2D Divide(Vector2D v1, Vector2D v2) {
-		return v1.Divide(v2);
-	}
+    Vector2D Multiply(const float scalar) const {
+        if (Mathematics::IsClose(scalar, 1.0f, Mathematics::EPSILON)) return *this;
+        if (Mathematics::IsClose(scalar, 0.0f, Mathematics::EPSILON)) return Vector2D();
 
-	static Vector2D Multiply(Vector2D vector, float scalar) {
-		return vector.Multiply(scalar);
-	}
+        return Vector2D{
+            X * scalar,
+            Y * scalar};
+    }
 
-	static Vector2D Multiply(float scalar, Vector2D vector) {
-		return vector.Multiply(scalar);
-	}
+    Vector2D Divide(const float scalar) const {
+        if (Mathematics::IsClose(scalar, 1.0f, Mathematics::EPSILON)) return (*this);
+        if (Mathematics::IsClose(scalar, 0.0f, Mathematics::EPSILON)) return Vector3D();
 
-	static Vector2D Divide(Vector2D vector, float scalar) {
-		return vector.Divide(scalar);
-	}
+        return Vector2D(
+            X / scalar,
+            Y / scalar);
+    }
 
-	static Vector3D CrossProduct(Vector2D v1, Vector2D v2) {
-		return v1.CrossProduct(v2);
-	}
+    Vector3D CrossProduct(const Vector2D &vector) const {
+        return Vector3D(
+            0.0f,
+            0.0f,
+            (X * vector.Y) - (Y * vector.X));
+    }
 
-	static float DotProduct(Vector2D v1, Vector2D v2) {
-		return v1.DotProduct(v2);
-	}
+    Vector2D UnitCircle() const {
+        float length = Magnitude();
 
-	static float CalculateEuclideanDistance(Vector2D v1, Vector2D v2) {
-		return v1.CalculateEuclideanDistance(v2);
-	}
+        if (Mathematics::IsClose(length, 1.0f, Mathematics::EPSILON)) return Vector2D(X, Y);
+        if (length == 0) return Vector2D(0, 1);
 
-	static bool IsEqual(Vector2D v1, Vector2D v2) {
-		return v1.IsEqual(v2);
-	}
+        return Vector2D(
+            X / length,
+            Y / length);
+    }
 
-	//Operator overloads
-	bool operator ==(Vector2D vector) {
-		return this->IsEqual(vector);
-	}
+    Vector2D Constrain(const float minimum, const float maximum) const {
+        return Vector2D(
+            Mathematics::Constrain(X, minimum, maximum),
+            Mathematics::Constrain(Y, minimum, maximum));
+    }
 
-	bool operator !=(Vector2D vector) {
-		return !(this->IsEqual(vector));
-	}
+    Vector2D Constrain(const Vector2D &minimum, const Vector2D &maximum) const {
+        return Vector2D(
+            Mathematics::Constrain(X, minimum.X, maximum.X),
+            Mathematics::Constrain(Y, minimum.Y, maximum.Y));
+    }
 
-	Vector2D operator  =(Vector2D vector) {
-		this->X = vector.X;
-		this->Y = vector.Y;
+    Vector2D Minimum(const Vector2D &v) const {
+        return Vector2D(
+            X < v.X ? X : v.X,
+            Y < v.Y ? Y : v.Y);
+    }
 
-		return *this;
-	}
+    Vector2D Maximum(const Vector2D &v) const {
+        return Vector2D(
+            X > v.X ? X : v.X,
+            Y > v.Y ? Y : v.Y);
+    }
 
-	Vector2D operator  =(Vector3D vector) {
-		this->X = vector.X;
-		this->Y = vector.Y;
+    Vector2D Rotate(float angle, const Vector2D &offset) const {
+        Vector2D v = Vector2D(X, Y) - offset;
 
-		return *this;
-	}
+        angle *= Mathematics::MPID180;
 
-	Vector2D operator  +(Vector2D vector) {
-		return Add(vector);
-	}
+        const float cs = cosf(angle);
+        const float sn = sinf(angle);
 
-	Vector2D operator  -(Vector2D vector) {
-		return Subtract(vector);
-	}
+        return Vector2D(
+            v.X * cs - v.Y * sn + offset.X,
+            v.X * sn + v.Y * cs + offset.Y);
+    }
 
-	Vector2D operator  *(Vector2D vector) {
-		return Multiply(vector);
-	}
+    bool CheckBounds(const Vector2D &minimum, const Vector2D &maximum) const {
+        return X > minimum.X && X < maximum.X && Y > minimum.Y && Y < maximum.Y;
+    }
 
-	Vector2D operator  /(Vector2D vector) {
-		return Divide(vector);
-	}
+    float Magnitude() const {
+        return Mathematics::Sqrt(X * X + Y * Y);
+    }
 
-	Vector2D operator  *(float value) {
-		return Multiply(value);
-	}
+    float DotProduct(const Vector2D &vector) const {
+        return (X * vector.X) + (Y * vector.Y);
+    }
 
-	Vector2D operator  /(float value) {
-		return Divide(value);
-	}
+    float CalculateEuclideanDistance(const Vector2D &vector) const {
+        return Subtract(vector).Magnitude();
+    }
+
+    bool IsEqual(const Vector2D &vector) const {
+        return (X == vector.X) && (Y == vector.Y);
+    }
+
+    String ToString() const {
+        const String x = Mathematics::DoubleToCleanString(X);
+        const String y = Mathematics::DoubleToCleanString(Y);
+
+        return "[" + x + ", " + y + "]";
+    }
+
+    static const Vector2D Minimum(const Vector2D &v1, const Vector2D &v2) {
+        return Vector2D(
+            v1.X < v2.X ? v1.X : v2.X,
+            v1.Y < v2.Y ? v1.Y : v2.Y);
+    }
+
+    static const Vector2D Maximum(const Vector2D &v1, const Vector2D &v2) {
+        return Vector2D(
+            v1.X > v2.X ? v1.X : v2.X,
+            v1.Y > v2.Y ? v1.Y : v2.Y);
+    }
+
+    static const Vector2D LERP(const Vector2D &start, const Vector2D &finish, const float ratio) {
+        return finish * ratio + start * (1.0f - ratio);
+    }
+
+    static Vector2D DegreesToRadians(const Vector2D &degrees) {
+        return degrees * Mathematics::MPID180;
+    }
+
+    static Vector2D RadiansToDegrees(const Vector2D &radians) {
+        return radians * Mathematics::M180DPI;
+    }
+
+    // Operator overloads
+    bool operator==(const Vector2D &vector) const {
+        return IsEqual(vector);
+    }
+
+    bool operator!=(const Vector2D &vector) const {
+        return !IsEqual(vector);
+    }
+
+    Vector2D &operator=(const Vector2D &vector) {
+        X = vector.X;
+        Y = vector.Y;
+
+        return *this;
+    }
+
+    Vector2D &operator=(const Vector3D &vector) {
+        X = vector.X;
+        Y = vector.Y;
+
+        return *this;
+    }
+
+    Vector2D operator+(const Vector2D &vector) const {
+        return Add(vector);
+    }
+
+    Vector2D operator-(const Vector2D &vector) const {
+        return Subtract(vector);
+    }
+
+    Vector2D operator*(const Vector2D &vector) const {
+        return Multiply(vector);
+    }
+
+    Vector2D operator/(const Vector2D &vector) const {
+        return Divide(vector);
+    }
+
+    Vector2D operator*(const float value) const {
+        return Multiply(value);
+    }
+
+    Vector2D operator/(const float value) const {
+        return Divide(value);
+    }
 } Vector2D;

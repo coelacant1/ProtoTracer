@@ -12,11 +12,11 @@ private:
 public:
 	VectorKalmanFilter()
 		: X(KalmanFilter()),
-		  Y(KalmanFilter())
+		  Y(KalmanFilter()),
 		  Z(KalmanFilter()) {}
 	VectorKalmanFilter(const float gain, const int memory)
-		: X(KalmanFilter(gain, memory))
-		  Y(KalmanFilter(gain, memory))
+		: X(KalmanFilter(gain, memory)),
+		  Y(KalmanFilter(gain, memory)),
 		  Z(KalmanFilter(gain, memory)) {}
 	VectorKalmanFilter(const Vector3D gain, const Vector3D memory)
 		: X(KalmanFilter(gain.X, (int)memory.X)),

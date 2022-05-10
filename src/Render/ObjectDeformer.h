@@ -15,13 +15,27 @@ private:
     int objectCount = 0;
 
     bool CheckClipAxis(Vector3D base, bool positive, Axis valueCheckAxis){
-        if (valueCheckAxis == XAxis && positive && base.X > 0) return true;
-        if (valueCheckAxis == XAxis && !positive && base.X < 0) return true;
-        if (valueCheckAxis == YAxis && positive && base.Y > 0) return true;
-        if (valueCheckAxis == YAxis && !positive && base.Y < 0) return true;
-        if (valueCheckAxis == ZAxis && positive && base.Z > 0) return true;
-        if (valueCheckAxis == ZAxis && !positive && base.Z < 0) return true;
-        return false;
+        if (valueCheckAxis == XAxis && positive && base.X > 0){
+            return true;
+        }
+        else if (valueCheckAxis == XAxis && !positive && base.X < 0){
+            return true;
+        }
+        else if (valueCheckAxis == YAxis && positive && base.Y > 0){
+            return true;
+        }
+        else if (valueCheckAxis == YAxis && !positive && base.Y < 0){
+            return true;
+        }
+        else if (valueCheckAxis == ZAxis && positive && base.Z > 0){
+            return true;
+        }
+        else if (valueCheckAxis == ZAxis && !positive && base.Z < 0){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
     
 public:

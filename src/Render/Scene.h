@@ -15,9 +15,9 @@ private:
 	}
 
 public:
-	Scene(unsigned int maxObjects) 
-		: maxObjects(maxObjects),
-		  objects(new Object3D*[maxObjects]) {}
+	Scene(unsigned int maxObjects) : maxObjects(maxObjects) {
+		objects = new Object3D*[maxObjects];
+	}
 
 	~Scene(){
 		delete[] objects;

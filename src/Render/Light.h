@@ -12,12 +12,7 @@ public:
   
 	Light(){}
 
-	Light(Vector3D p, Vector3D intensity, float falloff, float a, float b) 
-        : p(p), 
-          intensity(intensity), 
-          falloff(falloff), 
-          a(a), 
-          b(b) {}
+	Light(Vector3D p, Vector3D intensity, float falloff, float a, float b) : p(p), intensity(intensity), falloff(falloff), a(a), b(b) {}
 
 	void Set(Vector3D p, Vector3D intensity, float falloff, float a, float b) {
 		this->p = p;

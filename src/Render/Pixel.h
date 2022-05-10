@@ -2,7 +2,7 @@
 
 #include "..\Materials\RGBColor.h"
 
-class Pixel {
+typedef struct Pixel {
 	Vector2D* position;
 
 public:
@@ -10,11 +10,12 @@ public:
 
 	Pixel() {}
 
-	Pixel(Vector2D* position)
-		: position(position) {}
+	Pixel(Vector2D* position){
+		this->position = position;
+	}
 
 	Vector2D GetPosition(){
 		return *position;
 	}
 
-};
+} Pixel;

@@ -12,8 +12,8 @@ private:
 
 public:
     DampedSpring(const float springConstant, const float damping)
-        springConstant(springConstant),
-        damping(damping) {}
+        : springConstant(springConstant),
+          damping(damping) {}
 
     float Calculate(const float target) {
         const long currentMillis = millis();

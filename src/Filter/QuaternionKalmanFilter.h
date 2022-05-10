@@ -6,7 +6,7 @@ class QuaternionKalmanFilter {
 private:
 	float gain = 0.05f;
 	int memory = 90, currentAmount = 0, pointer = 0;
-	Quaternion* values, sum(0,0,0,0);
+	Quaternion* values, sum = Quaternion(0,0,0,0);
 
 
 public:
@@ -18,21 +18,24 @@ public:
         : gain(gain),
           memory(memory),
           values(new Quaternion[memory]) {}
+    ~QuaternionKalmanFilter(){
+        delete[] values;
+    }
     
-	float Filter(const Quaternion value){
-        sum = sum.Add(value);
+	Quaternion Filter(const Quaternion value){
+        sum += value;
 
         if(currentAmount < memory){
             values[currentAmount++] = value;
         } else {
-            sum = sum.Subtract(values[pointer]);
+            sum -= values[pointer];
             values[pointer++] = value;
             if(pointer <= memory) pointer = 0;
         }
 
-        sum.Divide(currentAmount);
+        sum / currentAmount;
 
-        return (gain * value) + ((1 - gain) * (sum / currentAmount));
+        return (value * gain) + ((sum / currentAmount) * (1.0f - gain));
     }
 
 	void SetGain(const float gain){
@@ -42,11 +45,11 @@ public:
         // transfer old stuff to new stuff via extremely convoluted means
 
         int oldMemory = this->memory;
-        float* old = new float[oldMemory];
+        Quaternion* old = new Quaternion[oldMemory];
         for(int i = 0; i < oldMemory; i++) old[i] = values[i];
 
         delete[] values;
-        values = new float[memory];
+        values = new Quaternion[memory];
 
         if(memory > oldMemory) {
             for(int i = 0; i < oldMemory; i++) values[i] = old[i];

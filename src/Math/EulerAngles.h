@@ -7,21 +7,21 @@
 
 typedef struct EulerAngles {
 public:
-	Vector3D Angles;
-	EulerOrder Order;
+    Vector3D Angles;
+    EulerOrder Order;
 
-	EulerAngles() 
-		: Angles(Vector3D(0, 0, 0)),
-		  Order(EulerConstants::EulerOrderXYZS) {}
+    EulerAngles()
+        : Angles(Vector3D(0, 0, 0)),
+          Order(EulerConstants::EulerOrderXYZS) {}
 
-	EulerAngles(const Vector3D angles, const EulerOrder order) 
-		: Angles(angles),
-		  Order(order) {}
+    EulerAngles(const Vector3D angles, const EulerOrder order)
+        : Angles(angles),
+          Order(order) {}
 
-	String ToString() const {
-		String angles = Angles.ToString();
-		String order = Order.ToString();
+    String ToString() const {
+        String angles = Angles.ToString();
+        String order = Order.ToString();
 
-		return "[ " + angles + ", " + order + " ]";
-	}
+        return "[ " + angles + ", " + order + " ]";
+    }
 } EulerAngles;
