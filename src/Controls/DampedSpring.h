@@ -18,7 +18,7 @@ public:
     float Calculate(const float target) {
         const long currentMillis = millis();
 
-        float dT = ((float)(currentMillis - previousMillis)) / 50.0f;
+        const float dT = ((float)(currentMillis - previousMillis)) * 0.02f; // /50.0f
 
         if (dT > 0.1f && dT < 2.0f) {
             const float springForce = -springConstant * currentPosition;

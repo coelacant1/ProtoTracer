@@ -57,24 +57,24 @@ public:
     }
 
     Vector3D Subtract(const Vector3D &vector) const {
-        return Vector3D{
+        return Vector3D(
             this->X - vector.X,
             this->Y - vector.Y,
-            this->Z - vector.Z};
+            this->Z - vector.Z);
     }
 
     Vector3D Multiply(const Vector3D &vector) const {
-        return Vector3D{
+        return Vector3D(
             this->X * vector.X,
             this->Y * vector.Y,
-            this->Z * vector.Z};
+            this->Z * vector.Z);
     }
 
     Vector3D Divide(const Vector3D &vector) const {
-        return Vector3D{
+        return Vector3D(
             this->X / vector.X,
             this->Y / vector.Y,
-            this->Z / vector.Z};
+            this->Z / vector.Z);
     }
 
     Vector3D Multiply(const float scalar) const {

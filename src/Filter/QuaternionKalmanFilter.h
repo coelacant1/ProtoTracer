@@ -41,26 +41,28 @@ public:
 	void SetGain(const float gain){
         this->gain = gain;
     }
-	void SetMemory(const int memory){
+	void SetMemory(const int newMemory) {
         // transfer old stuff to new stuff via extremely convoluted means
+        Quaternion *newValues = new Quaternion[newMemory];
 
-        int oldMemory = this->memory;
-        Quaternion* old = new Quaternion[oldMemory];
-        for(int i = 0; i < oldMemory; i++) old[i] = values[i];
-
-        delete[] values;
-        values = new Quaternion[memory];
-
-        if(memory > oldMemory) {
-            for(int i = 0; i < oldMemory; i++) values[i] = old[i];
+        if (newMemory > memory) {
+            for (int i = 0; i < memory; i++)
+                newValues[i] = values[i];
         } else {
-            const int end = memory + pointer;
+            if (currentAmount > newMemory) currentAmount = newMemory;
+            const int start = (pointer > newMemory) ? pointer - newMemory : memory - (newMemory - pointer) ;
+            const int end = start + newMemory;
+            sum = Quaternion(0, 0, 0, 0);
             int j = 0;
-            for(int i = pointer; i < end; i++) values[j++] = old[i <= oldMemory ? (i - oldMemory) : i];
-			if((pointer -= oldMemory - memory) < 0) pointer = 0; 
+            for (int i = start; i < end; i++)
+                sum += newValues[j++] = values[i % memory];
+            pointer = newMemory - (memory - newMemory);
         }
 
-        this->memory = memory;
+        memory = newMemory;
+
+        delete[] values; // Let's be memory safe at least...
+        values = newValues;
     }
 };
 

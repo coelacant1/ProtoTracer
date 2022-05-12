@@ -43,7 +43,7 @@ public:
         const Parity parity,
         const AxisRepetition axisRepetition,
         const AxisFrame axisFrame,
-        const Vector3D permutation)
+        const Vector3D& permutation)
         : InitialAxis(axis),
           AxisPermutation(parity),
           InitialAxisRepetition(axisRepetition),

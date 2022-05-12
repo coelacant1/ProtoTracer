@@ -13,9 +13,10 @@ public:
 
     float Filter(const float value) {
         if (value > filter && filter + increment < 1.0f) {
-            filter = filter + increment;
-        } else if (value < filter && filter - increment > 0.0f) {
-            filter = filter - increment;
+            return filter += increment;
+        } 
+        if (value < filter && filter - increment > 0.0f) {
+            return filter -= increment;
         }
 
         return filter;

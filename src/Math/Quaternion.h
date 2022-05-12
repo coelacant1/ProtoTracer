@@ -40,9 +40,9 @@ public:
         const float dPUV = (q.X * v.X + q.Y * v.Y) * 2.0f;
         const float dPUU = q.W * q.W - (q.X * q.X + q.Y * q.Y + q.Z * q.Z);
 
-        return Vector2D{
+        return Vector2D(
             X * dPUV + v.X * dPUU + (-(q.Z * v.Y)) * s2,
-            Y * dPUV + v.Y * dPUU + ((q.Z * v.X)) * s2};
+            Y * dPUV + v.Y * dPUU + ((q.Z * v.X)) * s2);
     }
 
     Vector2D UnrotateVector(const Vector2D &coordinate) const {
@@ -60,10 +60,10 @@ public:
         const float dPUV = (q.X * v.X + q.Y * v.Y + q.Z * v.Z) * 2.0f;
         const float dPUU = q.W * q.W - (q.X * q.X + q.Y * q.Y + q.Z * q.Z);
 
-        return Vector3D{
+        return Vector3D(
             X * dPUV + v.X * dPUU + ((q.Y * v.Z) - (q.Z * v.Y)) * s2,
             Y * dPUV + v.Y * dPUU + ((q.Z * v.X) - (q.X * v.Z)) * s2,
-            Z * dPUV + v.Z * dPUU + ((q.X * v.Y) - (q.Y * v.X)) * s2};
+            Z * dPUV + v.Z * dPUU + ((q.X * v.Y) - (q.Y * v.X)) * s2);
     }
 
     Vector3D UnrotateVector(const Vector3D &coordinate) const {

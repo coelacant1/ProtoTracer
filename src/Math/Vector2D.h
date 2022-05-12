@@ -61,9 +61,9 @@ public:
         if (Mathematics::IsClose(scalar, 1.0f, Mathematics::EPSILON)) return *this;
         if (Mathematics::IsClose(scalar, 0.0f, Mathematics::EPSILON)) return Vector2D();
 
-        return Vector2D{
+        return Vector2D(
             X * scalar,
-            Y * scalar};
+            Y * scalar);
     }
 
     Vector2D Divide(const float scalar) const {

@@ -10,7 +10,7 @@ public:
     float Roll = 0.0f;
 
     YawPitchRoll() {}
-    YawPitchRoll(const Vector3D& vector)
+    YawPitchRoll(const Vector3D &vector)
 		: Yaw(vector.X),
 		  Pitch(vector.Y),
 		  Roll(vector.Z) {}

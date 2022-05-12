@@ -5,9 +5,7 @@
 
 class VectorKalmanFilter {
 private:
-	KalmanFilter X;
-	KalmanFilter Y;
-	KalmanFilter Z;
+	KalmanFilter X, Y, Z;
 
 public:
 	VectorKalmanFilter()
@@ -24,10 +22,10 @@ public:
 		  Z(KalmanFilter(gain.Z, (int)memory.Z)) {}
 
 	Vector3D Filter(const Vector3D input) {
-		return Vector3D{
+		return Vector3D(
 			X.Filter(input.X),
 			Y.Filter(input.Y),
 			Z.Filter(input.Z)
-		};
+		);
 	}
 };

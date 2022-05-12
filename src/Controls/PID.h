@@ -29,17 +29,15 @@ public:
           previousMillis(millis()) {}
 
     float Calculate(float setpoint, float processVariable) {
-        float POut, IOut, DOut;
-
         const unsigned long currentMillis = millis();
-        const float dT = ((float)(currentMillis - previousMillis)) / 1000.0f;
+        const float dT = ((float)(currentMillis - previousMillis)) / 0.001f; // / 1000.0f
 
         error = setpoint - processVariable;
         integral += error * dT;
 
-        POut = kp * error;
-        IOut = ki * integral;
-        DOut = kd * ((error - previousError) / dT);
+        const float POut = kp * error;
+        const float IOut = ki * integral;
+        const float DOut = kd * ((error - previousError) / dT);
 
         output = POut + IOut + DOut;
         previousError = error;

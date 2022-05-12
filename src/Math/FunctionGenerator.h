@@ -16,25 +16,25 @@ private:
     Function function;
     float minimum = 0.0f, maximum = 0.0f, period = 0.0f;
 
-    float TriangleWave(float ratio) {
+    float TriangleWave(const float ratio) const {
         const float wave = (ratio > 0.5f ? 1.0f - ratio : ratio) * 2.0f;
 
         return Mathematics::Map(wave, 0.0f, 1.0f, minimum, maximum);
     }
 
-    float SquareWave(float ratio) {
+    float SquareWave(const float ratio) const {
         const float wave = ratio > 0.5f ? 1.0f : 0.0f;
 
         return Mathematics::Map(wave, 0.0f, 1.0f, minimum, maximum);
     }
 
-    float SineWave(float ratio) {
-        float wave = sinf(ratio * 2.0f * Mathematics::MPI);
+    float SineWave(const float ratio) const {
+        const float wave = sinf(ratio * 2.0f * Mathematics::MPI);
 
         return Mathematics::Map(wave, -1.0f, 1.0f, minimum, maximum);
     }
 
-    float SawtoothWave(float ratio) {
+    float SawtoothWave(const float ratio) const {
         return Mathematics::Map(ratio, 0.0f, 1.0f, minimum, maximum);
     }
 

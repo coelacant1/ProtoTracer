@@ -54,7 +54,7 @@ namespace Mathematics {
         return value != INF;
     }
 
-    bool IsClose(const float v1, const float v2, const float epsilon) {
+    const bool IsClose(const float v1, const float v2, const float epsilon) {
         return fabs(v1 - v2) < epsilon;
     }
 
@@ -63,10 +63,7 @@ namespace Mathematics {
     }
 
     const float Pow(const float value, const float exponent) {
-        union {
-            float d;
-            int x[2];
-        } u = {value};
+        union {float d; int x[2];} u = {value};
         u.x[1] = (int)(exponent * (u.x[1] - 1072632447) + 1072632447);
         u.x[0] = 0;
 

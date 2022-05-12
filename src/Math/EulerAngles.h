@@ -19,8 +19,8 @@ public:
           Order(order) {}
 
     String ToString() const {
-        String angles = Angles.ToString();
-        String order = Order.ToString();
+        const String angles = Angles.ToString();
+        const String order = Order.ToString();
 
         return "[ " + angles + ", " + order + " ]";
     }
