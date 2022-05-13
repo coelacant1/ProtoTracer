@@ -18,22 +18,14 @@ public:
 		  minMemory(5),
 		  values(new float[memory]),
 		  minValues(new float[minMemory]),
-		  denominator(1.0f / minMemory) {
-		for (int i = 0; i < minMemory; i++){
-			minValues[i] = 0.0f;
-		}
-	}
+		  denominator(1.0f / minMemory) {}
 
 	MinFilter(const int memory) 
 		: memory(memory),
 		  minMemory(memory / 10),
 		  values(new float[memory]),
 		  minValues(new float[minMemory]),
-		  denominator(1.0f / minMemory) {
-		for (int i = 0; i < minMemory; i++){
-			minValues[i] = 0.0f;
-		}
-	}
+		  denominator(1.0f / minMemory) {}
 
 	float Filter(const float value) {
 		// This cursed thing, it seems to work
@@ -61,7 +53,7 @@ public:
 		minValues[minPointer++] = currentMin;
 		if(minPointer <= minMemory) minPointer = 0;
 
-		return avg * denominator;
+		return sum * denominator;
 	}
 
 };
