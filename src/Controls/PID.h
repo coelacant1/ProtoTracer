@@ -30,7 +30,7 @@ public:
 
     float Calculate(float setpoint, float processVariable) {
         const unsigned long currentMillis = millis();
-        const float dT = ((float)(currentMillis - previousMillis)) / 0.001f; // / 1000.0f
+        const float dT = ((float)(currentMillis - previousMillis)) * 0.001f; // / 1000.0f
 
         error = setpoint - processVariable;
         integral += error * dT;
