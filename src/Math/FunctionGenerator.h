@@ -13,58 +13,84 @@ public:
     };
 
 private:
-    Function function;
-    float minimum = 0.0f, maximum = 0.0f, period = 0.0f;
+    class Func {
+    protected:
+        const float minimum, maximum;
+        Func(const float minimum, const float maximum)
+            : minimum(minimum),
+              maximum(maximum) {}
 
-    float TriangleWave(const float ratio) const {
-        const float wave = (ratio > 0.5f ? 1.0f - ratio : ratio) * 2.0f;
+    public:
+        virtual float get(const float ratio) const = 0;
+    };
+    class TriangleWave : public Func {
+    public:
+        TriangleWave(const float minimum, const float maximum)
+            : Func(minimum, maximum) {}
 
-        return Mathematics::Map(wave, 0.0f, 1.0f, minimum, maximum);
-    }
+        float get(const float ratio) const override {
+            const float wave = (ratio > 0.5f ? 1.0f - ratio : ratio) * 2.0f;
 
-    float SquareWave(const float ratio) const {
-        const float wave = ratio > 0.5f ? 1.0f : 0.0f;
+            return Mathematics::Map(wave, 0.0f, 1.0f, minimum, maximum);
+        }
+    };
+    class SquareWave : public Func {
+    public:
+        SquareWave(const float minimum, const float maximum)
+            : Func(minimum, maximum) {}
 
-        return Mathematics::Map(wave, 0.0f, 1.0f, minimum, maximum);
-    }
+        float get(const float ratio) const override {
+            const float wave = ratio > 0.5f ? 1.0f : 0.0f;
 
-    float SineWave(const float ratio) const {
-        const float wave = sinf(ratio * 2.0f * Mathematics::MPI);
+            return Mathematics::Map(wave, 0.0f, 1.0f, minimum, maximum);
+        }
+    };
+    class SineWave : public Func {
+    public:
+        SineWave(const float minimum, const float maximum)
+            : Func(minimum, maximum) {}
 
-        return Mathematics::Map(wave, -1.0f, 1.0f, minimum, maximum);
-    }
+        float get(const float ratio) const override {
+            const float wave = sinf(ratio * 2.0f * Mathematics::MPI);
 
-    float SawtoothWave(const float ratio) const {
-        return Mathematics::Map(ratio, 0.0f, 1.0f, minimum, maximum);
-    }
+            return Mathematics::Map(wave, -1.0f, 1.0f, minimum, maximum);
+        }
+    };
+    class SawtoothWave : public Func {
+    public:
+        SawtoothWave(const float minimum, const float maximum)
+            : Func(minimum, maximum) {}
+
+        float get(const float ratio) const override {
+            return Mathematics::Map(ratio, 0.0f, 1.0f, minimum, maximum);
+        }
+    };
+
+    const Func *function;
+    const float period = 0.0f;
 
 public:
     FunctionGenerator(const Function function, const float minimum, const float maximum, const float period)
-        : function(function),
-          minimum(minimum),
-          maximum(maximum),
-          period(period) {}
-
-    float Update() {
-        const float currentTime = fmod(micros() / 1000000.0f, period);
-        const float ratio = currentTime / period;
-
+        : period(period) {
         switch (function) {
         case Triangle:
-            return TriangleWave(ratio);
+            this->function = new TriangleWave(minimum, maximum);
             break;
         case Square:
-            return SquareWave(ratio);
+            this->function = new SquareWave(minimum, maximum);
             break;
         case Sine:
-            return SineWave(ratio);
+            this->function = new SineWave(minimum, maximum);
             break;
         case Sawtooth:
-            return SawtoothWave(ratio);
-            break;
-        default:
-            return 0.0f;
+            this->function = new SawtoothWave(minimum, maximum);
             break;
         }
+    }
+
+    float Update() {
+        const float currentTime = fmod(micros() * 1.0e-6f, period);
+        const float ratio = currentTime / period;
+        return function->get(ratio);
     }
 };

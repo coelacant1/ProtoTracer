@@ -67,14 +67,6 @@ public:
         delete[] rampFilter;
 
         delete parameters;
-        delete parameterFrame;
-        delete previousChangedTarget;
-        delete basis;
-        delete goal;
-        delete dictionary;
-        delete interpolationMethods;
-        delete dampedSpring;
-        delete rampFilter;
     }
 
     void AddParameter(float* parameter, uint16_t dictionaryValue, int frames, float basis, float goal){

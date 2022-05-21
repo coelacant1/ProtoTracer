@@ -5,8 +5,8 @@
 
 typedef struct RotationMatrix {
 private:
-    Vector3D InitialVector;
-    bool didRotate;
+    Vector3D InitialVector = Vector3D();
+    bool didRotate = false;
 
     Vector3D ConvertCoordinateToVector() {
         if (didRotate) return Vector3D((XAxis.X + YAxis.X + ZAxis.X), (XAxis.Y + YAxis.Y + ZAxis.Y), (XAxis.Z + YAxis.Z + ZAxis.Z));
@@ -98,7 +98,8 @@ public:
             vy.UnitSphere(),
             vz.UnitSphere());
     }
-    RotationMatrix const Transpose() {
+
+    RotationMatrix &const Transpose() {
         const Vector3D X = XAxis;
         XAxis = Vector3D(XAxis.X, YAxis.X, ZAxis.X);
         const Vector3D Y = YAxis;
@@ -109,17 +110,17 @@ public:
     }
 
     RotationMatrix const Inverse() {
-
-        RotationMatrix rM = RotationMatrix{
+        RotationMatrix rM = RotationMatrix(
             YAxis.CrossProduct(ZAxis),
             ZAxis.CrossProduct(XAxis),
-            XAxis.CrossProduct(YAxis)};
+            XAxis.CrossProduct(YAxis));
 
         rM = Transpose() * (1.0f / rM.Determinant());
 
         Transpose();
         return Multiply(1.0f / Determinant());
     }
+
     RotationMatrix Multiply(const float d) const {
         return RotationMatrix(
             XAxis * d,

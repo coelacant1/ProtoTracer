@@ -301,7 +301,7 @@ public:
 
     AxisAngle GetAxisAngle() const {
         AxisAngle axisAngle = AxisAngle(0, 0, 1, 0);
-        const q = (fabs(q.W) > 1.0f) ? QuaternionRotation.UnitQuaternion() : QuaternionRotation;
+        const Quaternion q = (fabs(q.W) > 1.0f) ? QuaternionRotation.UnitQuaternion() : QuaternionRotation;
 
         axisAngle.Rotation = Mathematics::RadiansToDegrees(2.0f * acosf(q.W));
 

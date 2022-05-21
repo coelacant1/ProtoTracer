@@ -83,7 +83,7 @@ public:
     }
 
     Vector2D UnitCircle() const {
-        float length = Magnitude();
+        const float length = Magnitude();
 
         if (Mathematics::IsClose(length, 1.0f, Mathematics::EPSILON)) return Vector2D(X, Y);
         if (length == 0) return Vector2D(0, 1);
@@ -118,7 +118,7 @@ public:
     }
 
     Vector2D Rotate(float angle, const Vector2D &offset) const {
-        Vector2D v = Vector2D(X, Y) - offset;
+        const Vector2D v = Vector2D(X, Y) - offset;
 
         angle *= Mathematics::MPID180;
 
@@ -173,11 +173,11 @@ public:
         return finish * ratio + start * (1.0f - ratio);
     }
 
-    static Vector2D DegreesToRadians(const Vector2D &degrees) {
+    static const Vector2D DegreesToRadians(const Vector2D &degrees) {
         return degrees * Mathematics::MPID180;
     }
 
-    static Vector2D RadiansToDegrees(const Vector2D &radians) {
+    static const Vector2D RadiansToDegrees(const Vector2D &radians) {
         return radians * Mathematics::M180DPI;
     }
 

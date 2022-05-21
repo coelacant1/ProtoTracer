@@ -28,7 +28,7 @@ public:
           kd(kd),
           previousMillis(millis()) {}
 
-    float Calculate(float setpoint, float processVariable) {
+    float Calculate(const float setpoint, const float processVariable) {
         const unsigned long currentMillis = millis();
         const float dT = ((float)(currentMillis - previousMillis)) * 0.001f; // / 1000.0f
 

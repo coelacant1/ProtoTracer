@@ -15,7 +15,7 @@ public:
         : gain(gain),
           memory(memory),
           values(new float[memory]) {}
-    ~KalmanFilter(){
+    ~KalmanFilter() {
         // This works sometimes, but also doesn't sometimes
         // it can be a possible error creator thing
         delete[] values;
@@ -43,16 +43,18 @@ public:
         float *newValues = new float[newMemory];
 
         if (newMemory > memory) {
-            for (int i = 0; i < memory; i++)
+            for (int i = 0; i < memory; i++) {
                 newValues[i] = values[i];
+            }
         } else {
             if (currentAmount > newMemory) currentAmount = newMemory;
-            const int start = (pointer > newMemory) ? pointer - newMemory : memory - (newMemory - pointer) ;
+            const int start = (pointer > newMemory) ? pointer - newMemory : memory - (newMemory - pointer);
             const int end = start + newMemory;
             sum = 0.0f;
             int j = 0;
-            for (int i = start; i < end; i++)
+            for (int i = start; i < end; i++) {
                 sum += newValues[j++] = values[i % memory];
+            }
             pointer = newMemory - (memory - newMemory);
         }
 

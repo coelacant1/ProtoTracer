@@ -62,18 +62,23 @@ namespace Mathematics {
         return (0 < value) - (value < 0);
     }
 
-    const float Pow(const float value, const float exponent) {
-        union {float d; int x[2];} u = {value};
-        u.x[1] = (int)(exponent * (u.x[1] - 1072632447) + 1072632447);
-        u.x[0] = 0;
-
+    const float Pow(const float a, const float b) {
+        union {
+            const float d;
+            int x;
+        } u = {a};
+        u.x = (int)(b * (u.x - 1064866805) + 1064866805);
         return u.d;
     }
 
     const float Sqrt(const float value) { // IEEE-754 specific approximation
-        const int result = 0x1fbb4000 + (*(int *)&value >> 1);
+        union {
+            const float f;
+            int i;
+        } v = {value};
+        v.i = 0x1fbb4000 + (v.i >> 1);
 
-        return *(float *)&result;
+        return v.f;
     }
 
     const float Fract(const float value) {

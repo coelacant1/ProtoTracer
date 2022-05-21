@@ -34,7 +34,7 @@ public:
     Vector2D RotateVector(const Vector2D &v) const {
         if (this->IsClose(Quaternion(), Mathematics::EPSILON)) return v;
 
-        Quaternion q = UnitQuaternion();
+        const Quaternion q = UnitQuaternion();
 
         const float s2 = q.W * 2.0f;
         const float dPUV = (q.X * v.X + q.Y * v.Y) * 2.0f;
@@ -112,7 +112,7 @@ public:
         const float halfAngleLength = halfAngle.Magnitude();
 
         if (halfAngleLength > Mathematics::EPSILON) { // exponential map
-            halfAngle = halfAngle * (sinf(halfAngleLength) / halfAngleLength);
+            halfAngle *= sinf(halfAngleLength) / halfAngleLength;
             return (current * Quaternion(cosf(halfAngleLength), halfAngle.X, halfAngle.Y, halfAngle.Z)).UnitQuaternion();
         }
         // first taylor series
