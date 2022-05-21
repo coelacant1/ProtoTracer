@@ -25,8 +25,6 @@ private:
     float* previousChangedTarget;
     float* basis;
     float* goal;
-    float springConstant;
-    float dampingConstant;
     uint8_t* interpolationMethods;
     uint16_t* dictionary;
     uint16_t currentParameters = 0;
@@ -35,8 +33,6 @@ private:
 public:
     EasyEaseAnimator(uint16_t maxParameters, InterpolationMethod interpMethod, float springConstant = 1.0f, float dampingConstant = 0.5f) : maxParameters(maxParameters) {
         this->interpMethod = interpMethod;
-        this->springConstant = springConstant;
-        this->dampingConstant = dampingConstant;
 
         parameters = new float*[maxParameters];
         parameterFrame = new float[maxParameters];
@@ -140,7 +136,7 @@ public:
                     *parameters[i] = Mathematics::BounceInterpolation(basis[i], goal[i], linear);
                     break;
                 case Overshoot:
-                    *parameters[i] = dampedSpring[i]->Calculate(parameterFrame[i]);
+                    *parameters[i] = dampedSpring[i]->Calculate(parameterFrame[i], 0.25f);
                     break;
                 default://Linear
                     *parameters[i] = linear;

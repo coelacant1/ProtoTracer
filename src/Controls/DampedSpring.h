@@ -11,7 +11,7 @@ private:
     long previousMillis = 0;
 
 public:
-    DampedSpring(float springConstant, float damping){
+    DampedSpring(float springConstant, float dampin){
 	    this->springConstant = springConstant;
         this->damping = damping;
     }
@@ -19,7 +19,7 @@ public:
     float Calculate(float target) {
         long currentMillis = millis();
 
-        float dT = ((float)(currentMillis - previousMillis)) / 50.0f;
+        float dT = ((float)(currentMillis - previousMillis)) / 1000.0f;
 
         if (dT > 0.1f && dT < 2.0f) {
             float springForce = -springConstant * currentPosition;
@@ -28,10 +28,21 @@ public:
 
             currentVelocity += force * dT;
             currentPosition += currentVelocity * dT;
+
+            previousMillis = currentMillis;
         }
 
-        previousMillis = currentMillis;
+        return currentPosition;
+    }
 
+    float Calculate(float target, float dT) {
+        float springForce = -springConstant * currentPosition;
+        float dampingForce = damping * currentVelocity;
+        float force = springForce - dampingForce + target;
+
+        currentVelocity += force * dT;
+        currentPosition += currentVelocity * dT;
+        
         return currentPosition;
     }
 };

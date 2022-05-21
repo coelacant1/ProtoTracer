@@ -49,7 +49,7 @@ public:
     static void SetMouthMove(float ratio){
         e32Data.mouthMove = ratio;
     }
-    
+
     static void Send(){
         uint16_t sendSize = 0;
 
