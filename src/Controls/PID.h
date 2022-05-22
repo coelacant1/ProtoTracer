@@ -14,7 +14,7 @@ private:
     unsigned long previousMillis;
 
 public:
-    PID()
+    PID() 
         : kp(1.0f),
           ki(0.0f),
           kd(0.0f),
@@ -22,7 +22,7 @@ public:
 
     ~PID();
 
-    PID(const float kp, const float ki, const float kd)
+    PID(const float kp, const float ki, const float kd) 
         : kp(kp),
           ki(ki),
           kd(kd),

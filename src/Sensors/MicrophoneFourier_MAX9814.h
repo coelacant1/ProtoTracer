@@ -57,10 +57,11 @@ public:
     static void Initialize(uint8_t pin, uint16_t sampleRate, float minDB, float maxDB){
         MicrophoneFourier::minDB = minDB;
         MicrophoneFourier::maxDB = maxDB;
+        MicrophoneFourier::pin = pin;
 
         pinMode(pin, INPUT);
-        analogReadResolution(12);
-        analogReadAveraging(8);
+        //analogReadResolution(12);
+        //analogReadAveraging(8);
 
         MicrophoneFourier::sampleRate = sampleRate;
         MicrophoneFourier::samples = 0;

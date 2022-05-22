@@ -3,18 +3,19 @@
 #include "Animation.h"
 #include "KeyFrameTrack.h"
 #include "EasyEaseAnimator.h"
+#include "..\Objects\SolidCube.h"
 #include "..\Morph\NukudeFace.h"
 #include "..\Render\Scene.h"
 #include "..\Materials\GradientMaterial.h"
 #include "..\Materials\SimplexNoise.h"
 #include "..\Math\FunctionGenerator.h"
-#include "..\Sensors\MicrophoneSimple_MAX9814.h"
 #include "..\Sensors\ButtonHandler.h"
 #include "..\Sensors\BoopSensor.h"
 #include "..\Materials\NormalMaterial.h"
 #include "..\Materials\SpiralMaterial.h"
 
 #include "..\Materials\CombineMaterial.h"
+#include "..\Materials\SpectrumAnalyzer.h"
 
 
 class ProtogenKitFaceAnimation : public Animation{
@@ -22,7 +23,7 @@ private:
     float colorMix;
 
     NukudeFace pM;
-    EasyEaseAnimator eEA = EasyEaseAnimator(20, EasyEaseAnimator::Overshoot);
+    EasyEaseAnimator eEA = EasyEaseAnimator(20, EasyEaseAnimator::Cosine, 1.0f, 0.5f);
     
     RGBColor noiseSpectrum[4] = {RGBColor(0, 255, 0), RGBColor(255, 0, 0), RGBColor(0, 255, 0), RGBColor(0, 0, 255)};
     GradientMaterial gNoiseMat = GradientMaterial(4, noiseSpectrum, 2.0f, false);
@@ -54,8 +55,16 @@ private:
     FunctionGenerator fGenScale = FunctionGenerator(FunctionGenerator::Sine, 3.0f, 8.0f, 4.2f);
     FunctionGenerator fGenMatXMove = FunctionGenerator(FunctionGenerator::Sine, -2.0f, 2.0f, 7.3f);
     FunctionGenerator fGenMatYMove = FunctionGenerator(FunctionGenerator::Sine, -2.0f, 2.0f, 9.7f);
+    
+    //Spectrum Analyzer
+    SolidCube cube;
+    
+    GradientMaterial gM = GradientMaterial(6, rainbowSpectrum, 1.0f, false);
+    SpectrumAnalyzer sA = SpectrumAnalyzer(22, Vector2D(250, 200), Vector2D(160, 130), &gM, true, true);
 
-    MicrophoneSimple mic = MicrophoneSimple(22, 0.4f);
+    Material* spectrumMaterials[2] = {&sA, &sNoise};
+    CombineMaterial spectrumMaterial = CombineMaterial(CombineMaterial::Lighten, 2, spectrumMaterials);
+
     BoopSensor boop;
     bool talk = true;
 
@@ -111,8 +120,9 @@ private:
     }
 
 public:
-    ProtogenKitFaceAnimation() : Animation(1) {
+    ProtogenKitFaceAnimation() : Animation(2) {
         scene->AddObject(pM.GetObject());
+        scene->AddObject(cube.GetObject());
 
         LinkEasyEase();
         LinkParameters();
@@ -123,10 +133,14 @@ public:
         ChangeInterpolationMethods();
 
         pM.GetObject()->SetMaterial(&faceMaterial);
+        cube.GetObject()->SetMaterial(&spectrumMaterial);
         noiseMaterial.SetFirstLayerOpacity(0.4f);
+        spectrumMaterial.SetFirstLayerOpacity(1.0f);
 
-        ButtonHandler::Initialize(0, 5);//8 is number of faces
+        ButtonHandler::Initialize(0, 6);//8 is number of faces
         boop.Initialize(5);
+
+
     }
 
     void UpdateKeyFrameTracks(){
@@ -135,6 +149,9 @@ public:
     }
 
     void Default(){
+        pM.GetObject()->Enable();
+        cube.GetObject()->Disable();
+        
         pM.Reset();
         blink.Play();
         mouth.Play();
@@ -145,6 +162,9 @@ public:
     }
 
     void Angry(){
+        pM.GetObject()->Enable();
+        cube.GetObject()->Disable();
+        
         pM.Reset();
         blink.Play();
         mouth.Play();
@@ -156,6 +176,9 @@ public:
     }
 
     void Sad(){
+        pM.GetObject()->Enable();
+        cube.GetObject()->Disable();
+        
         pM.Reset();
         blink.Play();
         mouth.Play();
@@ -167,6 +190,9 @@ public:
     }
 
     void Surprised(){
+        pM.GetObject()->Enable();
+        cube.GetObject()->Disable();
+        
         pM.Reset();
         blink.Play();
         mouth.Play();
@@ -179,6 +205,9 @@ public:
     }
     
     void Doubt(){
+        pM.GetObject()->Enable();
+        cube.GetObject()->Disable();
+        
         pM.Reset();
         blink.Play();
         mouth.Play();
@@ -190,6 +219,9 @@ public:
     }
     
     void Frown(){
+        pM.GetObject()->Enable();
+        cube.GetObject()->Disable();
+        
         pM.Reset();
         blink.Play();
         mouth.Play();
@@ -201,6 +233,9 @@ public:
     }
 
     void LookUp(){
+        pM.GetObject()->Enable();
+        cube.GetObject()->Disable();
+        
         pM.Reset();
         blink.Play();
         mouth.Play();
@@ -212,6 +247,9 @@ public:
     }
 
     void LookDown(){
+        pM.GetObject()->Enable();
+        cube.GetObject()->Disable();
+
         pM.Reset();
         blink.Play();
         mouth.Play();
@@ -220,6 +258,11 @@ public:
         eEA.AddParameterFrame(NukudeFace::vrc_v_pp, 1.0f);
 
         talk = true;
+    }
+
+    void SpectrumAnalyzerFace(){
+        pM.GetObject()->Disable();
+        cube.GetObject()->Enable();
     }
 
     void FadeIn(float stepRatio) override {}
@@ -233,9 +276,15 @@ public:
 
     void Update(float ratio) override {
         bool isBooped = boop.isBooped();
-        float mouthMove = mic.Update();
-        //uint8_t mode = (uint8_t)(ratio * 8.0f);//change sequentially
+        float mouthMove = 0.0f;
         uint8_t mode = ButtonHandler::GetValue();//change by button press
+
+        sA.Update();
+        sA.SetHueAngle(ratio * 360.0f * 4.0f);
+
+        mouthMove = sA.GetFourierData()[5];
+
+        Serial.println(mouthMove);
 
         if (isBooped){
             Surprised();
@@ -246,6 +295,7 @@ public:
             else if (mode == 2) Doubt();
             else if (mode == 3) Frown();
             else if (mode == 4) LookUp();
+            else if (mode == 5) SpectrumAnalyzerFace();
             else Sad();
         }
 
@@ -280,5 +330,10 @@ public:
         pM.GetObject()->GetTransform()->SetScale(Vector3D(-1.0f, 0.625f, 0.7f));
 
         pM.GetObject()->UpdateTransform();
+        
+        cube.GetObject()->ResetVertices();
+        cube.GetObject()->GetTransform()->SetPosition(Vector3D(1000, 1000, 10000.0f));
+        cube.GetObject()->GetTransform()->SetScale(Vector3D(1000, 1000, 1));
+        cube.GetObject()->UpdateTransform();
     }
 };

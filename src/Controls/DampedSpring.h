@@ -2,13 +2,13 @@
 
 #include <Arduino.h>
 
-class DampedSpring{
+class DampedSpring {
 private:
-	float currentVelocity = 0.0f;
-	float currentPosition = 1.0f;
-	float springConstant = 0.0f;
+    float currentVelocity = 0.0f;
+    float currentPosition = 1.0f;
+    float springConstant = 0.0f;
     float damping = 0.0f;
-    long previousMillis = 0;
+    unsigned long previousMillis = 0;
 
 public:
     DampedSpring(const float springConstant, const float damping)
@@ -16,9 +16,9 @@ public:
           damping(damping) {}
 
     float Calculate(const float target) {
-        const long currentMillis = millis();
+        const unsigned long currentMillis = millis();
 
-        const float dT = ((float)(currentMillis - previousMillis)) * 0.02f; // /50.0f
+        const float dT = ((float)(currentMillis - previousMillis)) * 0.001f; // / 1000.0f
 
         if (dT > 0.1f && dT < 2.0f) {
             const float springForce = -springConstant * currentPosition;
@@ -27,9 +27,20 @@ public:
 
             currentVelocity += force * dT;
             currentPosition += currentVelocity * dT;
+
+            previousMillis = currentMillis;
         }
 
-        previousMillis = currentMillis;
+        return currentPosition;
+    }
+
+    float Calculate(const float target, const float dT) {
+        const float springForce = -springConstant * currentPosition;
+        const float dampingForce = damping * currentVelocity;
+        const float force = springForce - dampingForce + target;
+
+        currentVelocity += force * dT;
+        currentPosition += currentVelocity * dT;
 
         return currentPosition;
     }

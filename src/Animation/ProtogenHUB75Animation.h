@@ -25,7 +25,7 @@ private:
 
     //Face
     ProtoArtleck pM;
-    EasyEaseAnimator eEA = EasyEaseAnimator(20, EasyEaseAnimator::Overshoot, 1.0f, 0.5f);
+    EasyEaseAnimator eEA = EasyEaseAnimator(20, EasyEaseAnimator::Cosine);//, 1.0f, 0.5f);
 
     RGBColor noiseSpectrum[4] = {RGBColor(0, 255, 0), RGBColor(255, 0, 0), RGBColor(0, 255, 0), RGBColor(0, 0, 255)};
     GradientMaterial gNoiseMat = GradientMaterial(4, noiseSpectrum, 2.0f, false);
@@ -50,7 +50,7 @@ private:
     RGBColor spectrum3[6] = {RGBColor(255, 0, 0), RGBColor(255, 255, 0), RGBColor(0, 255, 0), RGBColor(0, 255, 255), RGBColor(0, 0, 255), RGBColor(255, 0, 255)};
     
     GradientMaterial gM = GradientMaterial(6, spectrum3, 1.0f, false);
-    SpectrumAnalyzer sA = SpectrumAnalyzer(A0, Vector2D(192, 96), Vector2D(96, 48), &gM);
+    SpectrumAnalyzer sA = SpectrumAnalyzer(A0, Vector2D(192, 96), Vector2D(96, 48), &gM, true);
     
     Material* spectrumMaterials[2] = {&sA, &sNoise};
     CombineMaterial spectrumMaterial = CombineMaterial(CombineMaterial::Lighten, 2, spectrumMaterials);
@@ -129,7 +129,7 @@ public:
         noiseMaterial.SetFirstLayerOpacity(0.4f);
         spectrumMaterial.SetFirstLayerOpacity(1.0f);
 
-        ButtonHandler::Initialize(20, 6);//6 is number of faces
+        ButtonHandler::Initialize(20, 7);//6 is number of faces
 
         boop.Initialize(5);
     }
@@ -140,6 +140,9 @@ public:
     }
 
     void Default(){
+        pM.GetObject()->Enable();
+        cube.GetObject()->Disable();
+        
         pM.Reset();
         blink.Play();
         mouth.Play();
@@ -148,6 +151,9 @@ public:
     }
 
     void Angry(){
+        pM.GetObject()->Enable();
+        cube.GetObject()->Disable();
+        
         pM.Reset();
         blink.Play();
         mouth.Play();
@@ -159,6 +165,9 @@ public:
     }
 
     void Sad(){
+        pM.GetObject()->Enable();
+        cube.GetObject()->Disable();
+        
         pM.Reset();
         blink.Play();
         mouth.Play();
@@ -169,6 +178,9 @@ public:
     }
 
     void Surprised(){
+        pM.GetObject()->Enable();
+        cube.GetObject()->Disable();
+        
         pM.Reset();
         blink.Play();
         mouth.Play();
@@ -179,6 +191,9 @@ public:
     }
     
     void Doubt(){
+        pM.GetObject()->Enable();
+        cube.GetObject()->Disable();
+        
         pM.Reset();
         blink.Play();
         mouth.Play();
@@ -190,6 +205,9 @@ public:
     }
     
     void Frown(){
+        pM.GetObject()->Enable();
+        cube.GetObject()->Disable();
+        
         pM.Reset();
         blink.Play();
         mouth.Play();
@@ -201,6 +219,9 @@ public:
     }
 
     void LookUp(){
+        pM.GetObject()->Enable();
+        cube.GetObject()->Disable();
+        
         pM.Reset();
         blink.Play();
         mouth.Play();
@@ -211,6 +232,9 @@ public:
     }
 
     void LookDown(){
+        pM.GetObject()->Enable();
+        cube.GetObject()->Disable();
+        
         pM.Reset();
         blink.Play();
         mouth.Play();
@@ -218,6 +242,11 @@ public:
         eEA.AddParameterFrame(ProtoArtleck::LookDown, 1.0f);
 
         talk = true;
+    }
+
+    void SpectrumAnalyzerFace(){
+        pM.GetObject()->Disable();
+        cube.GetObject()->Enable();
     }
 
     void FadeIn(float stepRatio) override {}
@@ -236,7 +265,9 @@ public:
         uint8_t mode = ButtonHandler::GetValue();//change by button press
 
         sA.Update();
-
+        sA.SetHueAngle(ratio * 360.0f * 4.0f);
+        
+        
         if (isBooped){
             Angry();
         }
@@ -247,6 +278,7 @@ public:
             else if (mode == 3) Frown();
             else if (mode == 4) LookUp();
             else if (mode == 5) Angry();
+            else if (mode == 6) SpectrumAnalyzerFace();
             else Sad();
         }
 
@@ -259,6 +291,10 @@ public:
         
         float x = sinf(ratio * 3.14159f / 180.0f * 360.0f * 2.0f) * 2.25f;
         float y = cosf(ratio * 3.14159f / 180.0f * 360.0f * 3.0f) * 2.25f;
+        
+        //sA.SetPosition(Vector2D(96 + y, 48 + x));
+        //sA.SetRotation(ratio * 720.0f);
+        //sA.SetSize(Vector2D(192, 96).Multiply(x / 8.0f + 1.0f));
         
         float linSweep = ratio > 0.5f ? 1.0f - ratio : ratio;
         float sShift = linSweep * 0.002f + 0.005f;

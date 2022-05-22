@@ -9,16 +9,16 @@
 #include "..\Materials\SimplexNoise.h"
 #include "..\Math\FunctionGenerator.h"
 #include "..\Sensors\SerialSync.h"
-#include "..\Sensors\MicrophoneSimple.h"
+#include "..\Materials\SpectrumAnalyzer.h"
 #include "..\Sensors\ButtonHandler.h"
 #include "..\Materials\NormalMaterial.h"
 
 #include "..\Objects\Spyro.h"
 #include "..\Objects\SolidCube.h"
 
-#include "Flash\ImageSequences\Rainbow.h"
 #include "..\Materials\StripeMaterial.h"
 #include "..\Materials\CombineMaterial.h"
+
 
 class ProtoDRMorphAnimation : public Animation{
 private:
@@ -50,8 +50,6 @@ private:
     CombineMaterial material = CombineMaterial(CombineMaterial::Darken, 2, materials);
     
     FunctionGenerator fGenMatPos = FunctionGenerator(FunctionGenerator::Sine, -10.0f, 10.0f, 4.0f);
-    RainbowSequence gif = RainbowSequence(Vector2D(200, 145), Vector2D(100, 70), 60);
-
 
     KeyFrameTrack blink = KeyFrameTrack(1, 0.0f, 1.0f, 10, KeyFrameTrack::Cosine);
     KeyFrameTrack topFinOuter = KeyFrameTrack(1, 0.0f, 1.0f, 5, KeyFrameTrack::Cosine);
@@ -68,36 +66,44 @@ private:
     Spyro spyro;
     FunctionGenerator fGenRotation = FunctionGenerator(FunctionGenerator::Sine, -30.0f, 30.0f, 2.6f);
     FunctionGenerator fGenScale = FunctionGenerator(FunctionGenerator::Sine, 3.0f, 8.0f, 4.2f);
+    
+    //Spectrum Analyzer
+    RGBColor spectrum3[6] = {RGBColor(255, 0, 0), RGBColor(255, 255, 0), RGBColor(0, 255, 0), RGBColor(0, 255, 255), RGBColor(0, 0, 255), RGBColor(255, 0, 255)};
+    
+    GradientMaterial gM = GradientMaterial(6, spectrum3, 1.0f, false);
+    SpectrumAnalyzer sA = SpectrumAnalyzer(A8, Vector2D(430, 300), Vector2D(15, 135), &gM, true, true);
+    
+    Material* spectrumMaterials[2] = {&sA, &sNoise};
+    CombineMaterial spectrumMaterial = CombineMaterial(CombineMaterial::Lighten, 2, spectrumMaterials);
 
-    MicrophoneSimple mic = MicrophoneSimple(22);
     bool talk = true;
 
     void LinkEasyEase(){
-        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::BlushEye), ProtoDR::BlushEye, 40, 0.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::HideBlush), ProtoDR::HideBlush, 10, 1.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::HideEyeBrow), ProtoDR::HideEyeBrow, 10, 0.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::OwOMouth), ProtoDR::OwOMouth, 60, 0.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::BlushEye), ProtoDR::BlushEye, 40, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::HideBlush), ProtoDR::HideBlush, 10, 1.0f, 0.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::HideEyeBrow), ProtoDR::HideEyeBrow, 10, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::OwOMouth), ProtoDR::OwOMouth, 60, 0.0f, 1.0f);
 
-        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::SadEye), ProtoDR::SadEye, 70, 0.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::SadEyeBrow), ProtoDR::SadEyeBrow, 80, 0.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::SadMouth), ProtoDR::SadMouth, 90, 0.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::SadEye), ProtoDR::SadEye, 70, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::SadEyeBrow), ProtoDR::SadEyeBrow, 80, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::SadMouth), ProtoDR::SadMouth, 90, 0.0f, 1.0f);
 
-        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::FlatMouth), ProtoDR::FlatMouth, 50, 0.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::DeadEye), ProtoDR::DeadEye, 1, 0.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::FlatMouth), ProtoDR::FlatMouth, 50, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::DeadEye), ProtoDR::DeadEye, 1, 0.0f, 1.0f);
 
-        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::HeartEye), ProtoDR::HeartEye, 30, 0.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::HeartEye), ProtoDR::HeartEye, 30, 0.0f, 1.0f);
 
-        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::OwO), ProtoDR::OwO, 90, 0.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::OwO), ProtoDR::OwO, 90, 0.0f, 1.0f);
         
-        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::AlphaGenCircle), ProtoDR::AlphaGenCircle, 90, 0.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::AlphaGenSquare), ProtoDR::AlphaGenSquare, 90, 0.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::HideAll), ProtoDR::HideAll, 90, 0.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::AlphaGenCircle), ProtoDR::AlphaGenCircle, 90, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::AlphaGenSquare), ProtoDR::AlphaGenSquare, 90, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::HideAll), ProtoDR::HideAll, 90, 0.0f, 1.0f);
 
-        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::NewFins), ProtoDR::NewFins, 90, 0.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::AngryEyeMouth), ProtoDR::AngryEyeMouth, 90, 0.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::NewFins), ProtoDR::NewFins, 90, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::AngryEyeMouth), ProtoDR::AngryEyeMouth, 90, 0.0f, 1.0f);
 
-        eEA.AddParameter(&colorRed, 98, 45, 0.0f);
-        eEA.AddParameter(&cubeSize, 99, 45, 0.0f);
+        eEA.AddParameter(&colorRed, 98, 45, 0.0f, 1.0f);
+        eEA.AddParameter(&cubeSize, 99, 45, 0.0f, 1.0f);
     }
 
     void LinkParameters(){
@@ -217,12 +223,11 @@ public:
         AddBotFinKeyFrames();
         AddMouthKeyFrames();
 
-        pM.GetObject()->SetMaterial(&blackMaterial);
-        cube.GetObject()->SetMaterial(&material);
+        pM.GetObject()->SetMaterial(&material);
+        cube.GetObject()->SetMaterial(&sA);
 
         SerialSync::Initialize();
         ButtonHandler::Initialize(15, 11);
-        //Microphone::Initialize(22);
     }
 
     void UpdateKeyFrameTracks(){
@@ -558,9 +563,40 @@ public:
     }
 
     void FullScreenDisplay(){
-        pM.SetMorphWeight(ProtoDR::HideSecondEye, 1.0f);
+        pM.Reset();
+        blink.Pause();
+        blink.Reset();
+        mouth.Pause();
+        mouth.Reset();
         
-        eEA.AddParameterFrame(ProtoDR::HideBlush, 1.0f);
+        topFinOuter.Pause();
+        topFinInner.Pause();
+        topFinGap.Pause();
+        midFin.Pause();
+        botFinLR1.Pause();
+        botFinLR2.Pause();
+        botFinLR3.Pause();
+        botFinLR4.Pause();
+        botFinLR5.Pause();
+
+        topFinOuter.Reset();
+        topFinInner.Reset();
+        topFinGap.Reset();
+        midFin.Reset();
+        botFinLR1.Reset();
+        botFinLR2.Reset();
+        botFinLR3.Reset();
+        botFinLR4.Reset();
+        botFinLR5.Reset();
+        
+        pM.SetMorphWeight(ProtoDR::HideSecondEye, 0.0f);
+        
+        eEA.AddParameterFrame(ProtoDR::HideBlush, 0.0f);
+        eEA.AddParameterFrame(ProtoDR::HideEyeBrow, 0.0f);
+        eEA.AddParameterFrame(ProtoDR::HideAll, 1.0f);
+        
+        talk = false;
+        
         eEA.AddParameterFrame(99, 1.0f);
     }
 
@@ -576,6 +612,11 @@ public:
     void Update(float ratio) override {
         pM.GetObject()->Enable();//Due to Spyro track
         spyro.GetObject()->Disable();
+        
+        sA.Update();
+        sA.SetRotation(20.0f);
+        sA.SetHueAngle(ratio * 360.0f * 4.0f);
+        
 
         #ifdef RIGHTFACE
         SerialSync::Read();
@@ -592,7 +633,8 @@ public:
         uint8_t mode = SerialSync::GetMode();
         float mouthMove = SerialSync::GetMouthMove();
         #else
-        float mouthMove = mic.Update();
+        float mouthMove = sA.GetFourierData()[5];
+
         uint8_t mode = ButtonHandler::GetValue();
         SerialSync::SetMouthMove(mouthMove);
         SerialSync::SetMode(mode);
@@ -644,13 +686,6 @@ public:
         //gNoiseMat.HueShift(ratio * 360 * 2);
         sNoise.SetScale(Vector3D(sShift, sShift, sShift));
         sNoise.SetZPosition(x * 1.0f);
-
-        float shift = fGenMatPos.Update();
-
-        gif.SetPosition(Vector2D(20.0f + shift, 135.0f + shift));
-        gif.SetSize(Vector2D(-440, 350));
-        gif.SetRotation(15.0f);
-        gif.Update();
         
         cube.GetObject()->ResetVertices();
         cube.GetObject()->GetTransform()->SetPosition(Vector3D(0, 135, 6000));
