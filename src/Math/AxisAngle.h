@@ -12,7 +12,7 @@ public:
         : Rotation(rotation),
           Axis(Vector3D(x, y, z)) {}
 
-    AxisAngle(const float rotation, const Vector3D axis)
+    AxisAngle(const float rotation, const Vector3D &axis)
         : Rotation(rotation),
           Axis(axis) {}
 

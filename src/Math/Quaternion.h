@@ -161,11 +161,11 @@ public:
 
         const float scale = 1.0f / (quaternion.W * quaternion.W + quaternion.X * quaternion.X + quaternion.Y * quaternion.Y + quaternion.Z * quaternion.Z);
 
-        return Quaternion{
+        return Quaternion(
             (W * quaternion.W + X * quaternion.X + Y * quaternion.Y + Z * quaternion.Z) * scale,
             (-W * quaternion.X + X * quaternion.W + Y * quaternion.Z - Z * quaternion.Y) * scale,
             (-W * quaternion.Y - X * quaternion.Z + Y * quaternion.W + Z * quaternion.X) * scale,
-            (-W * quaternion.Z + X * quaternion.Y - Y * quaternion.X + Z * quaternion.W) * scale};
+            (-W * quaternion.Z + X * quaternion.Y - Y * quaternion.X + Z * quaternion.W) * scale);
     }
 
     Quaternion Divide(const float scalar) const {
@@ -174,27 +174,27 @@ public:
 
         const float d = 1.0f / scalar;
 
-        return Quaternion{
+        return Quaternion(
             W * d,
             X * d,
             Y * d,
-            Z * d};
+            Z * d);
     }
 
     Quaternion Power(const Quaternion &exponent) const {
-        return Quaternion{
+        return Quaternion(
             Mathematics::Pow(W, exponent.W),
             Mathematics::Pow(X, exponent.X),
             Mathematics::Pow(Y, exponent.Y),
-            Mathematics::Pow(Z, exponent.Z)};
+            Mathematics::Pow(Z, exponent.Z));
     }
 
     Quaternion Power(const float &exponent) const {
-        return Quaternion{
+        return Quaternion(
             Mathematics::Pow(W, exponent),
             Mathematics::Pow(X, exponent),
             Mathematics::Pow(Y, exponent),
-            Mathematics::Pow(Z, exponent)};
+            Mathematics::Pow(Z, exponent));
     }
 
     Quaternion Permutate(const Vector3D &permutation) const {

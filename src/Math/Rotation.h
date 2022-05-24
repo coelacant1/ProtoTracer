@@ -54,28 +54,28 @@ private:
 
         if (matrixTrace > 0) // standard procedure
         {
-            square = sqrtf(1.0f + matrixTrace) * 2.0f; // 4 * qw
+            square = Mathematics::Sqrt(1.0f + matrixTrace) * 2.0f; // 4 * qw
 
             q.W = 0.25f * square;
             q.X = (Z.Y - Y.Z) / square;
             q.Y = (X.Z - Z.X) / square;
             q.Z = (Y.X - X.Y) / square;
         } else if ((X.X > Y.Y) && (X.X > Z.Z)) {
-            square = sqrtf(1.0f + X.X - Y.Y - Z.Z) * 2.0f; // 4 * qx
+            square = Mathematics::Sqrt(1.0f + X.X - Y.Y - Z.Z) * 2.0f; // 4 * qx
 
             q.W = (Z.Y - Y.Z) / square;
             q.X = 0.25f * square;
             q.Y = (X.Y + Y.X) / square;
             q.Z = (X.Z + Z.X) / square;
         } else if (Y.Y > Z.Z) {
-            square = sqrtf(1.0f + Y.Y - X.X - Z.Z) * 2.0f; // 4 * qy
+            square = Mathematics::Sqrt(1.0f + Y.Y - X.X - Z.Z) * 2.0f; // 4 * qy
 
             q.W = (X.Z - Z.X) / square;
             q.X = (X.Y + Y.X) / square;
             q.Y = 0.25f * square;
             q.Z = (Y.Z + Z.Y) / square;
         } else {
-            square = sqrtf(1.0f + Z.Z - X.X - Y.Y) * 2.0f; // 4 * qz
+            square = Mathematics::Sqrt(1.0f + Z.Z - X.X - Y.Y) * 2.0f; // 4 * qz
 
             q.W = (Y.X - X.Y) / square;
             q.X = (X.Z + Z.X) / square;
@@ -305,7 +305,8 @@ public:
 
         axisAngle.Rotation = Mathematics::RadiansToDegrees(2.0f * acosf(q.W));
 
-        const float quaternionCheck = sqrtf(1.0f - powf(q.W, 2.0f)); // Prevents rotation jumps, and division by zero
+        //const float quaternionCheck = sqrtf(1.0f - powf(q.W, 2.0f)); // Prevents rotation jumps, and division by zero
+        const float quaternionCheck = Mathematics::Sqrt(1.0f - (q.W * q.W)); // Prevents rotation jumps, and division by zero
 
         if (quaternionCheck >= 0.001f) // Prevents division by zero
         {

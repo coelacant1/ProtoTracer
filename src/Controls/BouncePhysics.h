@@ -14,14 +14,13 @@ private:
     float previousVelocity = 0.0f;
 
 public:
-    BouncePhysics(float gravity){
-	    this->gravity = gravity;
-    }
+    BouncePhysics(const float gravity)
+        : gravity(gravity) {}
 
-    float Calculate(float velocity) {
-        long currentMillis = millis();
+    float Calculate(const float velocity) {
+        const long currentMillis = millis();
 
-        float dT = ((float)(currentMillis - previousMillis)) / 1000.0f;
+        const float dT = ((float)(currentMillis - previousMillis)) * 0.001f; // / 1000.0f
 
         if (dT > 0.1f && dT < 2.0f) {
             currentVelocity += velocity + gravity * dT;
@@ -33,8 +32,8 @@ public:
         return currentPosition;
     }
 
-    float Calculate(float velocity, float dT){
-        velocity = velocityFilter.Filter(velocity);
+    float Calculate(const float vel, const float dT){
+        const float velocity = velocityFilter.Filter(vel);
         float changeRate = (velocity - previousVelocity) / dT;
 
         changeRate = changeRate < 0.0f ? 0.0f : changeRate;
@@ -61,8 +60,7 @@ public:
         if(currentPosition < 0.0f){
             currentVelocity = 0.0f;
             currentPosition = 0.0f;
-        }
-        else if(currentPosition > 1.0f){
+        }else if(currentPosition > 1.0f){
             currentVelocity = 0.0f;
             currentPosition = 1.0f;
         }

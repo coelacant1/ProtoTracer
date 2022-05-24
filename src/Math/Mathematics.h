@@ -59,7 +59,13 @@ namespace Mathematics {
     }
 
     const int Sign(const float value) {
-        return (0 < value) - (value < 0);
+        //return (0 < value) - (value < 0); // Less optimized version
+        const union {
+            float n; 
+            int c;
+        } b = {value};
+        return (b.c >> 31) ? -1 : 1;
+        //return (b.c >> 15) ? -1 : 1;
     }
 
     const float Pow(const float a, const float b) {
@@ -86,7 +92,7 @@ namespace Mathematics {
     }
 
     const float CosineInterpolation(const float beg, const float fin, const float ratio) {
-        const float mu2 = (1.0f - cosf(ratio * MPI)) / 2.0f;
+        const float mu2 = (1.0f - cosf(ratio * MPI)) * 0.5f; // / 2.0f
 
         return (beg * (1.0f - mu2) + fin * mu2);
     }
@@ -100,7 +106,7 @@ namespace Mathematics {
         // log max amplitude = 1 - sine max amplitude / 2
         const float baseLog = log10f(10.0f * ratio + 1.0f);
         const float t = 2.0f * ratio - 2.0f;
-        const float baseSine = sinf(16.0f * ratio) * t * t / 16.0f;
+        const float baseSine = sinf(16.0f * ratio) * t * t * 0.0625f; // / 16.0f
         const float bounce = baseLog + baseSine;
 
         return Map(ratio, 0.0f, bounce, beg, fin);

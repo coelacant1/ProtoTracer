@@ -14,7 +14,7 @@ public:
         : Angles(Vector3D(0, 0, 0)),
           Order(EulerConstants::EulerOrderXYZS) {}
 
-    EulerAngles(const Vector3D angles, const EulerOrder order)
+    EulerAngles(const Vector3D &angles, const EulerOrder &order)
         : Angles(angles),
           Order(order) {}
 

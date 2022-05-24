@@ -68,11 +68,12 @@ public:
 
     Vector2D Divide(const float scalar) const {
         if (Mathematics::IsClose(scalar, 1.0f, Mathematics::EPSILON)) return (*this);
-        if (Mathematics::IsClose(scalar, 0.0f, Mathematics::EPSILON)) return Vector3D();
+        if (Mathematics::IsClose(scalar, 0.0f, Mathematics::EPSILON)) return Vector2D();
 
+        const float divisor = 1.0f / scalar; 
         return Vector2D(
-            X / scalar,
-            Y / scalar);
+            X * divisor,
+            Y * divisor);
     }
 
     Vector3D CrossProduct(const Vector2D &vector) const {
@@ -88,9 +89,10 @@ public:
         if (Mathematics::IsClose(length, 1.0f, Mathematics::EPSILON)) return Vector2D(X, Y);
         if (length == 0) return Vector2D(0, 1);
 
+        const float divisor = 1.0f / scalar; 
         return Vector2D(
-            X / length,
-            Y / length);
+            X * divisor,
+            Y * divisor);
     }
 
     Vector2D Constrain(const float minimum, const float maximum) const {

@@ -105,10 +105,11 @@ public:
         if (Mathematics::IsClose(length, 1.0f, Mathematics::EPSILON)) return Vector3D(X, Y, Z);
         if (length == 0) return Vector3D(0, 1, 0);
 
+        const float divisor = 1.0f / length;
         return Vector3D(
-            X / length,
-            Y / length,
-            Z / length);
+            X * divisor,
+            Y * divisor,
+            Z * divisor);
     }
 
     Vector3D Constrain(const float minimum, const float maximum) const {

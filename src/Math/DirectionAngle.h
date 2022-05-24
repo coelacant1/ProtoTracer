@@ -11,7 +11,7 @@ public:
         : Rotation(rotation),
           Direction(Vector3D(x, y, z)) {}
 
-    DirectionAngle(const float rotation, const Vector3D direction)
+    DirectionAngle(const float rotation, const Vector3D &direction)
         : Rotation(rotation),
           Direction(direction) {}
 

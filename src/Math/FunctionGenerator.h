@@ -68,6 +68,7 @@ private:
 
     const Func *function;
     const float period = 0.0f;
+    const float dPeriod = 0.0f;
 
 public:
     FunctionGenerator(const Function function, const float minimum, const float maximum, const float period)
@@ -90,7 +91,7 @@ public:
 
     float Update() {
         const float currentTime = fmod(micros() * 1.0e-6f, period);
-        const float ratio = currentTime / period;
+        const float ratio = currentTime * dPeriod;
         return function->get(ratio);
     }
 };
