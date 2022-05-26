@@ -89,7 +89,7 @@ public:
         if (Mathematics::IsClose(length, 1.0f, Mathematics::EPSILON)) return Vector2D(X, Y);
         if (length == 0) return Vector2D(0, 1);
 
-        const float divisor = 1.0f / scalar; 
+        const float divisor = 1.0f / length; 
         return Vector2D(
             X * divisor,
             Y * divisor);
