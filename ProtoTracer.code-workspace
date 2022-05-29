@@ -9,7 +9,8 @@
 			"type_traits": "cpp",
 			"utility": "cpp",
 			"limits": "cpp",
-			"string": "cpp"
+			"string": "cpp",
+			"cmath": "cpp"
 		}
 	}
 }

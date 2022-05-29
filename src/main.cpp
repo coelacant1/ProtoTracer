@@ -26,7 +26,6 @@
 //#include "Controllers\ProtoDRController.h"
 //#include "Controllers\SmartMatrixHUB75.h"
 
-
 const uint8_t maxBrightness = 20;
 #ifdef RIGHTFACE
 Controller* controller = new ProtoDRController(maxBrightness, ProtoDRController::RIGHT);

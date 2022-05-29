@@ -311,11 +311,6 @@ public:
         //pM.GetObject()->GetTransform()->SetScale(Vector3D(-0.65f, -0.65f, 0.5f));
         pM.GetObject()->GetTransform()->SetScale(Vector3D(-0.85f, -0.65f, 0.5f));
 
-        pM.GetObject()->UpdateTransform();
-        
-        cube.GetObject()->ResetVertices();
-        cube.GetObject()->GetTransform()->SetPosition(Vector3D(1000, 1000, 10000.0f));
-        cube.GetObject()->GetTransform()->SetScale(Vector3D(1000, 1000, 1));
-        cube.GetObject()->UpdateTransform();
+        pM.GetObject()->UpdateTransform(); 
     }
 };

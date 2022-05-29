@@ -6,6 +6,9 @@
 #include <arm_math.h>
 #include <IntervalTimer.h>
 #include "..\Math\Mathematics.h"
+#include "MicrophoneSimple_MAX9814.h"
+#include "..\Filter\FFTFilter.h"
+#include "..\Filter\PeakDetection.h"
 
 class MicrophoneFourier{
 private:
@@ -18,14 +21,20 @@ private:
     static uint8_t pin;
     static float minDB;
     static float maxDB;
+    static float currentValue;
     static bool samplesReady;
+    static PeakDetection peakDetection;
 
     static uint16_t frequencyBins[OutputBins];
     static float inputSamp[FFTSize * 2];
     static float outputMagn[FFTSize];
+    static float outputAR[FFTSize];
     static float outputData[OutputBins - 1];
+    static float peaks[FFTSize];
+    static FFTFilter fftFilters[FFTSize];
     
     static arm_cfft_radix4_instance_f32 RadixFFT;
+    static MicrophoneSimple microphoneFilter;
 
     static float AverageMagnitude(uint16_t binL, uint16_t binH){
         float average = 0.0f;
@@ -45,6 +54,8 @@ private:
             sampleTimer.end();
             samplesReady = true;
         }
+
+        currentValue = inputSamp[samples - 2];
     }
 
     static void StartSampler(){
@@ -60,8 +71,8 @@ public:
         MicrophoneFourier::pin = pin;
 
         pinMode(pin, INPUT);
-        //analogReadResolution(12);
-        //analogReadAveraging(8);
+        analogReadResolution(12);
+        analogReadAveraging(8);
 
         MicrophoneFourier::sampleRate = sampleRate;
         MicrophoneFourier::samples = 0;
@@ -77,6 +88,10 @@ public:
         StartSampler();
     }
 
+    static float GetCurrentValue(){
+        return microphoneFilter.Update(currentValue);
+    }
+
     static float* GetFourier(uint8_t &bins){
         bins = OutputBins - 1;
 
@@ -89,8 +104,12 @@ public:
         arm_cfft_radix4_init_f32(&RadixFFT, FFTSize, 0, 1);
         arm_cfft_radix4_f32(&RadixFFT, inputSamp);
         arm_cmplx_mag_f32(inputSamp, outputMagn, FFTSize);
+
         
         //Serial.print("FFT: ");
+        Serial.print(10);
+        Serial.print(',');
+        Serial.println(10);
 
         for (uint8_t i = 0; i < OutputBins - 1; i++){
             float intensity = 20.0f * log10f(AverageMagnitude(i, i + 1));
@@ -98,13 +117,38 @@ public:
             intensity = map(intensity, minDB, maxDB, 0.0f, 1.0f);
             intensity = Mathematics::Constrain(intensity, 0.0f, 1.0f);
 
-            outputData[i] = intensity;
-            
-            //Serial.print(intensity, 3);
-            //Serial.print('\t');
+            outputData[i] = fftFilters[i].Update(intensity);
+        }
+        
+        for (uint8_t i = 0; i < OutputBins - 5; i++){
+            float average = 0.0f;
+
+            for (uint8_t j = i; j < i + 5; j++){
+                average += outputData[j];
+            }
+
+            outputAR[i] = average / 5.0f;
+            outputAR[i] = powf(outputAR[i], 2.0f);
+
+            //outputAR[i] = outputAR[i] < 0.15f ? 0 : outputAR[i];
         }
 
-        //Serial.println();
+        peakDetection.Calculate(outputAR, peaks);
+
+        for (uint8_t i = 0; i < OutputBins - 5; i++){
+            
+            for (uint8_t j = 0; j < 4; j++){
+                Serial.print(peaks[i] * 6.0f);
+                Serial.print(',');
+                Serial.println(outputAR[i] * 10.0f);
+            }
+        }
+
+        for (uint16_t i = 0; i < 128; i++){
+            Serial.print(0);
+            Serial.print(',');
+            Serial.println(0);
+        }
 
         StartSampler();
     }
@@ -119,11 +163,17 @@ uint16_t MicrophoneFourier::samples;
 uint8_t MicrophoneFourier::pin;
 float MicrophoneFourier::minDB;
 float MicrophoneFourier::maxDB;
+float MicrophoneFourier::currentValue;
 bool MicrophoneFourier::samplesReady;
+PeakDetection MicrophoneFourier::peakDetection = PeakDetection(OutputBins);
 
 uint16_t MicrophoneFourier::frequencyBins[];
 float MicrophoneFourier::inputSamp[];
 float MicrophoneFourier::outputMagn[];
 float MicrophoneFourier::outputData[];
+float MicrophoneFourier::outputAR[];
+float MicrophoneFourier::peaks[];
+FFTFilter MicrophoneFourier::fftFilters[];
 
 arm_cfft_radix4_instance_f32 MicrophoneFourier::RadixFFT;
+MicrophoneSimple MicrophoneFourier::microphoneFilter;

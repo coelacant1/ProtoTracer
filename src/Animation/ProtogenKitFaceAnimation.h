@@ -23,13 +23,13 @@ private:
     float colorMix;
 
     NukudeFace pM;
-    EasyEaseAnimator eEA = EasyEaseAnimator(20, EasyEaseAnimator::Cosine, 1.0f, 0.5f);
+    EasyEaseAnimator eEA = EasyEaseAnimator(20, EasyEaseAnimator::Overshoot, 1.0f, 0.35f);
     
     RGBColor noiseSpectrum[4] = {RGBColor(0, 255, 0), RGBColor(255, 0, 0), RGBColor(0, 255, 0), RGBColor(0, 0, 255)};
     GradientMaterial gNoiseMat = GradientMaterial(4, noiseSpectrum, 2.0f, false);
     SimplexNoise sNoise = SimplexNoise(1, &gNoiseMat);
     
-    RGBColor gradientSpectrum[2] = {RGBColor(0, 0, 255), RGBColor(0, 128, 255)};
+    RGBColor gradientSpectrum[2] = {RGBColor(221, 15, 125), RGBColor(214, 35, 168)};
     GradientMaterial gradientMat = GradientMaterial(2, gradientSpectrum, 350.0f, false);
     
     SimpleMaterial redMaterial = SimpleMaterial(RGBColor(255, 0, 0));
@@ -53,8 +53,9 @@ private:
     FunctionGenerator fGenMatPos = FunctionGenerator(FunctionGenerator::Sine, -10.0f, 10.0f, 4.0f);
     FunctionGenerator fGenRotation = FunctionGenerator(FunctionGenerator::Sine, -30.0f, 30.0f, 2.6f);
     FunctionGenerator fGenScale = FunctionGenerator(FunctionGenerator::Sine, 3.0f, 8.0f, 4.2f);
-    FunctionGenerator fGenMatXMove = FunctionGenerator(FunctionGenerator::Sine, -2.0f, 2.0f, 7.3f);
-    FunctionGenerator fGenMatYMove = FunctionGenerator(FunctionGenerator::Sine, -2.0f, 2.0f, 9.7f);
+    FunctionGenerator fGenMatXMove = FunctionGenerator(FunctionGenerator::Sine, -3.5f, 3.5f, 5.3f);
+    FunctionGenerator fGenMatYMove = FunctionGenerator(FunctionGenerator::Sine, -3.5f, 3.5f, 6.7f);
+    FunctionGenerator fGenMatGradient = FunctionGenerator(FunctionGenerator::Sine, 0.0f, 0.5f, 6.65f);
     
     //Spectrum Analyzer
     SolidCube cube;
@@ -66,6 +67,7 @@ private:
     CombineMaterial spectrumMaterial = CombineMaterial(CombineMaterial::Lighten, 2, spectrumMaterials);
 
     BoopSensor boop;
+    float simplexNoiseDepth = 0.0f;
     bool talk = true;
 
     void LinkEasyEase(){
@@ -77,21 +79,23 @@ private:
         eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::LookUp), NukudeFace::LookUp, 30, 0.0f, 1.0f);
         eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::LookDown), NukudeFace::LookDown, 30, 0.0f, 1.0f);
 
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_ou), NukudeFace::vrc_v_ou, 30, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_ou), NukudeFace::vrc_v_ou, 5, 0.0f, 1.0f);
         eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_ee), NukudeFace::vrc_v_ee, 30, 0.0f, 1.0f);
         eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_ff), NukudeFace::vrc_v_ff, 30, 0.0f, 1.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_aa), NukudeFace::vrc_v_aa, 30, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_aa), NukudeFace::vrc_v_aa, 5, 0.0f, 1.0f);
         eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_nn), NukudeFace::vrc_v_nn, 30, 0.0f, 1.0f);
         eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_dd), NukudeFace::vrc_v_dd, 30, 0.0f, 1.0f);
         eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_ih), NukudeFace::vrc_v_ih, 30, 0.0f, 1.0f);
         eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_pp), NukudeFace::vrc_v_pp, 30, 0.0f, 1.0f);
         
-        eEA.AddParameter(&colorMix, 99, 360, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::HideBlush), NukudeFace::HideBlush, 20, 1.0f, 0.0f);
+        
+        eEA.AddParameter(&colorMix, 99, 40, 0.0f, 1.0f);
     }
 
     void LinkParameters(){
         blink.AddParameter(pM.GetMorphWeightReference(NukudeFace::Blink));
-        mouth.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_aa));
+        mouth.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_kk));
     }
 
     void AddBlinkKeyFrames(){
@@ -115,8 +119,13 @@ private:
     }
 
     void ChangeInterpolationMethods(){
+        eEA.SetInterpolationMethod(NukudeFace::HideBlush, EasyEaseAnimator::Cosine);
         eEA.SetInterpolationMethod(NukudeFace::Sadness, EasyEaseAnimator::Cosine);
+        eEA.SetInterpolationMethod(NukudeFace::vrc_v_ou, EasyEaseAnimator::Cosine);
         eEA.SetInterpolationMethod(99, EasyEaseAnimator::Cosine);
+
+        eEA.SetConstants(NukudeFace::vrc_v_aa, 1.0f, 0.5f);
+        eEA.SetConstants(NukudeFace::vrc_v_ou, 0.9f, 0.45f);
     }
 
 public:
@@ -134,13 +143,11 @@ public:
 
         pM.GetObject()->SetMaterial(&faceMaterial);
         cube.GetObject()->SetMaterial(&spectrumMaterial);
-        noiseMaterial.SetFirstLayerOpacity(0.4f);
+        noiseMaterial.SetFirstLayerOpacity(0.6f);
         spectrumMaterial.SetFirstLayerOpacity(1.0f);
 
         ButtonHandler::Initialize(0, 6);//8 is number of faces
         boop.Initialize(5);
-
-
     }
 
     void UpdateKeyFrameTracks(){
@@ -199,7 +206,8 @@ public:
 
         eEA.AddParameterFrame(NukudeFace::Surprised, 1.0f);
         eEA.AddParameterFrame(NukudeFace::vrc_v_aa, 1.0f);
-        eEA.AddParameterFrame(99, 1.0f);
+        eEA.AddParameterFrame(NukudeFace::HideBlush, 0.0f);
+        eEA.AddParameterFrame(99, 0.5f);
 
         talk = true;
     }
@@ -282,9 +290,9 @@ public:
         sA.Update();
         sA.SetHueAngle(ratio * 360.0f * 4.0f);
 
-        mouthMove = sA.GetFourierData()[5];
+        mouthMove = sA.GetCurrentValue();
 
-        Serial.println(mouthMove);
+        //Serial.println(mouthMove);
 
         if (isBooped){
             Surprised();
@@ -295,8 +303,8 @@ public:
             else if (mode == 2) Doubt();
             else if (mode == 3) Frown();
             else if (mode == 4) LookUp();
-            else if (mode == 5) SpectrumAnalyzerFace();
-            else Sad();
+            else if (mode == 5) Sad();
+            else SpectrumAnalyzerFace();
         }
 
         pM.SetMorphWeight(NukudeFace::BiggerNose, 1.0f);
@@ -304,20 +312,31 @@ public:
 
         UpdateKeyFrameTracks();
 
-        if(talk) eEA.AddParameterFrame(NukudeFace::vrc_v_ou, mouthMove);
+        if(talk) {
+            eEA.AddParameterFrame(NukudeFace::vrc_v_aa, mouthMove);
+            eEA.AddParameterFrame(NukudeFace::vrc_v_ou, mouthMove);
+        }
+
         eEA.Update();
         pM.Update();
+
+        //Serial.print(eEA.GetValue(NukudeFace::vrc_v_ou));
+        //Serial.print('\t');
+        //Serial.print(mouthMove);
+        //Serial.println('\t');
         
         float x = fGenMatXMove.Update();
         float y = fGenMatYMove.Update();
         
-        float linSweep = ratio > 0.5f ? 1.0f - ratio : ratio;
-        float sShift = linSweep * 0.002f + 0.005f;
+        float sweep = fGenMatGradient.Update();
+        float sShift = sweep * 0.004f + 0.005f;
 
-        gNoiseMat.SetGradientPeriod(0.5f + linSweep * 6.0f);
+        simplexNoiseDepth += 0.1f;
+
+        gNoiseMat.SetGradientPeriod(0.5f + sweep * 6.0f);
         gNoiseMat.HueShift(ratio * 360 * 2);
         sNoise.SetScale(Vector3D(sShift, sShift, sShift));
-        sNoise.SetZPosition(x * 4.0f);
+        sNoise.SetZPosition(simplexNoiseDepth);
         
         spiralMaterial.SetBend(fGenMatBend.Update());
         spiralMaterial.SetRotationAngle((1.0f - ratio) * 360.0f);

@@ -9,13 +9,15 @@ private:
     KalmanFilter velocityFilter = KalmanFilter(0.4f, 10);
 	float currentVelocity = 0.0f;
 	float currentPosition = 0.0f;
+    float velocityRatio = 1.0f;
 	float gravity = 0.0f;
     long previousMillis = 0;
     float previousVelocity = 0.0f;
 
 public:
-    BouncePhysics(float gravity){
+    BouncePhysics(float gravity, float velocityRatio = 1.0f){
 	    this->gravity = gravity;
+	    this->velocityRatio = velocityRatio;
     }
 
     float Calculate(float velocity) {
@@ -25,11 +27,11 @@ public:
 
         if (dT > 0.1f && dT < 2.0f) {
             currentVelocity += velocity + gravity * dT;
-            currentPosition += currentVelocity * dT;
+            currentPosition += velocityRatio * currentVelocity * dT;
             
             previousMillis = currentMillis;
         }
-
+        
         return currentPosition;
     }
 
@@ -39,24 +41,8 @@ public:
 
         changeRate = changeRate < 0.0f ? 0.0f : changeRate;
 
-        
-
         currentVelocity = changeRate - gravity * dT;
-        currentPosition += currentVelocity * dT;
-
-        /*
-        Serial.print(changeRate, 4);
-        Serial.print(',');
-        Serial.print(filterChange, 4);
-        Serial.print(',');
-        Serial.print(velocity, 4);
-        Serial.print(',');
-        Serial.print(currentVelocity, 4);
-        Serial.print(',');
-        Serial.print(dT, 4);
-        Serial.print(',');
-        Serial.println(currentPosition, 4);
-        */
+        currentPosition += velocityRatio * currentVelocity * dT;
 
         if(currentPosition < 0.0f){
             currentVelocity = 0.0f;
@@ -66,8 +52,6 @@ public:
             currentVelocity = 0.0f;
             currentPosition = 1.0f;
         }
-
-        //currentPosition += Mathematics::Constrain(currentPosition, 0.0f, 1.0f);
 
         previousVelocity = velocity;
 

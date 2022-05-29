@@ -32,11 +32,11 @@ public:
 
         if (bounce){
             for (uint8_t i = 0; i < 64; i++){
-                bPhy[i] = new BouncePhysics(3.5f);
+                bPhy[i] = new BouncePhysics(35.0f, 15.0f);
             }
         }
 
-        MicrophoneFourier::Initialize(pin, 20000, 50.0f, 100.0f);// 10KHz sample rate, 30dB min, 90dB max
+        MicrophoneFourier::Initialize(pin, 15000, 50.0f, 120.0f);// 10KHz sample rate, 30dB min, 90dB max
     }
 
     ~SpectrumAnalyzer(){
@@ -44,6 +44,10 @@ public:
             delete bPhy[i];
         }
 
+    }
+
+    float GetCurrentValue(){
+        return MicrophoneFourier::GetCurrentValue();
     }
 
     float* GetFourierData(){
