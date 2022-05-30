@@ -15,7 +15,7 @@ private:
     static IntervalTimer sampleTimer;
 
     static const uint16_t FFTSize = 256;
-    static const uint8_t OutputBins = 64;
+    static const uint8_t OutputBins = 128;
     static uint16_t sampleRate;
     static uint16_t samples;
     static uint8_t pin;
@@ -28,9 +28,9 @@ private:
     static uint16_t frequencyBins[OutputBins];
     static float inputSamp[FFTSize * 2];
     static float outputMagn[FFTSize];
-    static float outputAR[FFTSize];
-    static float outputData[OutputBins - 1];
-    static float peaks[FFTSize];
+    static float outputAR[OutputBins];
+    static float outputData[OutputBins];
+    static float peaks[OutputBins];
     static FFTFilter fftFilters[FFTSize];
     
     static arm_cfft_radix4_instance_f32 RadixFFT;
@@ -72,7 +72,7 @@ public:
 
         pinMode(pin, INPUT);
         analogReadResolution(12);
-        analogReadAveraging(8);
+        analogReadAveraging(4);
 
         MicrophoneFourier::sampleRate = sampleRate;
         MicrophoneFourier::samples = 0;
@@ -104,40 +104,35 @@ public:
         arm_cfft_radix4_init_f32(&RadixFFT, FFTSize, 0, 1);
         arm_cfft_radix4_f32(&RadixFFT, inputSamp);
         arm_cmplx_mag_f32(inputSamp, outputMagn, FFTSize);
-
-        
-        //Serial.print("FFT: ");
+        /*
         Serial.print(10);
         Serial.print(',');
         Serial.println(10);
-
+        */
         for (uint8_t i = 0; i < OutputBins - 1; i++){
             float intensity = 20.0f * log10f(AverageMagnitude(i, i + 1));
 
             intensity = map(intensity, minDB, maxDB, 0.0f, 1.0f);
-            intensity = Mathematics::Constrain(intensity, 0.0f, 1.0f);
 
-            outputData[i] = fftFilters[i].Update(intensity);
-        }
-        
-        for (uint8_t i = 0; i < OutputBins - 5; i++){
-            float average = 0.0f;
+            fftFilters[i].Update(intensity);
 
-            for (uint8_t j = i; j < i + 5; j++){
-                average += outputData[j];
+            outputData[i] = intensity;
+
+            if (i > 5){
+                float average = 0.0f;
+
+                for (uint8_t j = i - 5; j < i; j++){
+                    average += fftFilters[j].GetOutput();
+                }
+
+                outputAR[i] = powf(average / 5.0f, 2.0f);
             }
-
-            outputAR[i] = average / 5.0f;
-            outputAR[i] = powf(outputAR[i], 2.0f);
-
-            //outputAR[i] = outputAR[i] < 0.15f ? 0 : outputAR[i];
         }
 
         peakDetection.Calculate(outputAR, peaks);
-
+        /*
         for (uint8_t i = 0; i < OutputBins - 5; i++){
-            
-            for (uint8_t j = 0; j < 4; j++){
+            for (uint8_t j = 0; j < 2; j++){
                 Serial.print(peaks[i] * 6.0f);
                 Serial.print(',');
                 Serial.println(outputAR[i] * 10.0f);
@@ -149,7 +144,7 @@ public:
             Serial.print(',');
             Serial.println(0);
         }
-
+        */
         StartSampler();
     }
 };

@@ -8,7 +8,7 @@
 #include "..\Materials\SimplexNoise.h"
 #include "..\Sensors\SerialInterpreter.h"
 #include "..\Filter\QuaternionKalmanFilter.h"
-#include "..\Math\FunctionGenerator.h"
+#include "..\Signals\FunctionGenerator.h"
 
 class ProtoV3Animation : public Animation{
 private:
@@ -23,8 +23,8 @@ private:
 
     RGBColor spectrum[6] = {RGBColor(255, 0, 0), RGBColor(255, 255, 0), RGBColor(0, 255, 0), RGBColor(0, 255, 255), RGBColor(0, 0, 255), RGBColor(255, 0, 255)};
     SimpleMaterial sMat = SimpleMaterial(RGBColor(0, 0, 0));
-    GradientMaterial gMat = GradientMaterial(6, spectrum, 150.0f, true);
-    GradientMaterial gNoiseMat = GradientMaterial(6, spectrum, 2.0f, false);
+    GradientMaterial<6> gMat = GradientMaterial(spectrum, 150.0f, true);
+    GradientMaterial<6> gNoiseMat = GradientMaterial(spectrum, 2.0f, false);
     SimplexNoise sNoise = SimplexNoise(1, &gNoiseMat);
 
     QuaternionKalmanFilter qKF = QuaternionKalmanFilter(0.05f, 20);

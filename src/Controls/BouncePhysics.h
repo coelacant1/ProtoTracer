@@ -6,7 +6,7 @@
 
 class BouncePhysics{
 private:
-    KalmanFilter velocityFilter = KalmanFilter(0.4f, 10);
+    KalmanFilter<10> velocityFilter = KalmanFilter<10>(0.4f);
 	float currentVelocity = 0.0f;
 	float currentPosition = 0.0f;
     float velocityRatio = 1.0f;

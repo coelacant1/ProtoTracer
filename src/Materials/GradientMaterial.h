@@ -4,11 +4,11 @@
 #include "..\Math\Mathematics.h"
 #include "..\Math\Vector2D.h"
 
+template<size_t colorCount>
 class GradientMaterial : public Material {
 private:
-    RGBColor* rgbColors;
-    RGBColor* baseRGBColors;
-    uint8_t colorCount;
+    RGBColor rgbColors[colorCount];
+    RGBColor baseRGBColors[colorCount];
     Vector2D positionOffset;
     Vector2D rotationOffset;//point to rotate about
     float gradientPeriod = 1.0f;
@@ -17,21 +17,17 @@ private:
     bool isStepped = false;
   
 public:
-    GradientMaterial(uint8_t colorCount, RGBColor* rgbColors, float gradientPeriod, bool isRadial){
-        this->colorCount = colorCount;
+    GradientMaterial(RGBColor* rgbColors, float gradientPeriod, bool isRadial){
         this->gradientPeriod = gradientPeriod;
         this->isRadial = isRadial;
 
-        this->rgbColors = new RGBColor[colorCount];
-        this->baseRGBColors = new RGBColor[colorCount];
-
-        for(int i = 0; i < colorCount; i++){
+        for(uint8_t i = 0; i < colorCount; i++){
             this->rgbColors[i] = rgbColors[i];
             this->baseRGBColors[i] = rgbColors[i];
         }
     }
 
-    GradientMaterial(uint8_t colorCount, RGBColor* rgbColors, float gradientPeriod, bool isRadial, bool isStepped){
+    GradientMaterial(RGBColor* rgbColors, float gradientPeriod, bool isRadial, bool isStepped){
         this->colorCount = colorCount;
         this->gradientPeriod = gradientPeriod;
         this->isRadial = isRadial;
@@ -69,8 +65,8 @@ public:
     }
 
     void HueShift(float hueDeg){
-        for(int i = 0; i < colorCount; i++){
-        rgbColors[i] = baseRGBColors[i].HueShift(hueDeg);
+        for(uint8_t i = 0; i < colorCount; i++){
+            rgbColors[i] = baseRGBColors[i].HueShift(hueDeg);
         }
     }
     
@@ -96,8 +92,8 @@ public:
         
         //map from modulo'd x value to color count minimum
         float ratio = Mathematics::Map(pos, 0, gradientPeriod, 0, colorCount);
-        int startBox = floor(ratio);
-        int endBox = startBox + 1 >= colorCount ? 0 : startBox + 1;
+        uint8_t startBox = floor(ratio);
+        uint8_t endBox = startBox + 1 >= (uint8_t)colorCount ? 0 : startBox + 1;
         
         RGBColor rgb;
 

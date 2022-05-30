@@ -7,7 +7,7 @@
 #include "..\..\Render\Scene.h"
 #include "..\..\Materials\GradientMaterial.h"
 #include "..\..\Materials\SimplexNoise.h"
-#include "..\..\Math\FunctionGenerator.h"
+#include "..\..\Signals\FunctionGenerator.h"
 #include "..\..\Sensors\MicrophoneSimple_MAX9814.h"
 #include "..\..\Sensors\ButtonHandler.h"
 #include "..\..\Sensors\BoopSensor.h"
@@ -22,7 +22,7 @@ private:
     float colorMix;
 
     NukudeFace pM;
-    EasyEaseAnimator eEA = EasyEaseAnimator(20, EasyEaseAnimator::Overshoot);
+    EasyEaseAnimator<20> eEA = EasyEaseAnimator<20>(EasyEaseInterpolation::Overshoot);
     
     RGBColor noiseSpectrum[4] = {RGBColor(0, 255, 0), RGBColor(255, 0, 0), RGBColor(0, 255, 0), RGBColor(0, 0, 255)};
     GradientMaterial gNoiseMat = GradientMaterial(4, noiseSpectrum, 2.0f, false);
@@ -106,8 +106,8 @@ private:
     }
 
     void ChangeInterpolationMethods(){
-        eEA.SetInterpolationMethod(NukudeFace::Sadness, EasyEaseAnimator::Cosine);
-        eEA.SetInterpolationMethod(99, EasyEaseAnimator::Cosine);
+        eEA.SetInterpolationMethod(NukudeFace::Sadness, EasyEaseInterpolation::Cosine);
+        eEA.SetInterpolationMethod(99, EasyEaseInterpolation::Cosine);
     }
 
 public:

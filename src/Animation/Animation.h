@@ -3,25 +3,20 @@
 #include "Arduino.h"
 #include "..\Render\Scene.h"
 
+template<size_t numObjects>
 class Animation{
 protected:
     long previousTime;
     float fade = 0.0f;
     float animationTime = 0.0f;
     
-    Scene* scene;
-
-    Animation(int numObjects){
-        scene = new Scene(numObjects);
-    }
+    Scene scene = Scene(numObjects);
 
 public:
-    Scene* GetScene(){
-        return scene;
-    }
+    Animation(){}
 
-    ~Animation(){
-        delete scene;
+    Scene* GetScene(){
+        return &scene;
     }
 
     float GetAnimationTime(){

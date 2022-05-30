@@ -1,49 +1,57 @@
 #pragma once
 
-#include "Material.h"
-#include "GradientMaterial.h"
-#include "..\Sensors\MicrophoneFourier_MAX9814.h"
-#include "..\Controls\BouncePhysics.h"
+#include "..\Material.h"
+#include "..\GradientMaterial.h"
+#include "..\..\Sensors\MicrophoneFourier_MAX9814.h"
+#include "..\..\Controls\BouncePhysics.h"
 
 class SpectrumAnalyzer : public Material {
 private:
-    BouncePhysics* bPhy[64];
+    BouncePhysics* bPhy[128];
     Vector2D size;
     Vector2D offset;
     float angle = 0.0f;
     float hueAngle = 0.0f;
     uint8_t colors;
-    GradientMaterial* gM;
     float* data;
-    float bounceData[64];
+    float bounceData[128];
     uint8_t bins;
     bool mirrorY = false;
     bool flipY = false;
     bool bounce = false;
+    
+    RGBColor rainbowSpectrum[6] = {RGBColor(255, 0, 0), RGBColor(255, 255, 0), RGBColor(0, 255, 0), RGBColor(0, 255, 255), RGBColor(0, 0, 255), RGBColor(255, 0, 255)};
+    GradientMaterial<6> gM = GradientMaterial<6>(rainbowSpectrum, 1.0f, false);
+
+    Material* material;
 
 public:
-    SpectrumAnalyzer(uint8_t pin, Vector2D size, Vector2D offset, GradientMaterial* gM, bool bounce = false, bool flipY = false, bool mirrorY = false){
+    SpectrumAnalyzer(uint8_t pin, Vector2D size, Vector2D offset, bool bounce = false, bool flipY = false, bool mirrorY = false){
         this->size = size;
         this->offset = offset;
-        this->gM = gM;
         this->mirrorY = mirrorY;
         this->flipY = flipY;
         this->bounce = bounce;
+        this->material = &gM;
 
         if (bounce){
-            for (uint8_t i = 0; i < 64; i++){
+            for (uint8_t i = 0; i < 128; i++){
                 bPhy[i] = new BouncePhysics(35.0f, 15.0f);
             }
         }
 
-        MicrophoneFourier::Initialize(pin, 15000, 50.0f, 120.0f);// 10KHz sample rate, 30dB min, 90dB max
+        MicrophoneFourier::Initialize(pin, 8000, 50.0f, 120.0f);// 10KHz sample rate, 30dB min, 90dB max
     }
 
     ~SpectrumAnalyzer(){
-        for (uint8_t i = 0; i < 64; i++){
+        for (uint8_t i = 0; i < 128; i++){
             delete bPhy[i];
         }
 
+    }
+
+    void SetMaterial(Material* material){
+        this->material = material;
     }
 
     float GetCurrentValue(){
@@ -80,7 +88,7 @@ public:
         data = MicrophoneFourier::GetFourier(bins);
 
         if(bounce){
-            for (uint8_t i = 0; i < 64; i++){
+            for (uint8_t i = 0; i < 128; i++){
                 bounceData[i] = bPhy[i]->Calculate(data[i], 0.1f);
             }
         }
@@ -89,7 +97,7 @@ public:
     void Update(float* readData){
         data = readData;
         
-        for (uint8_t i = 0; i < 64; i++){
+        for (uint8_t i = 0; i < 128; i++){
             bounceData[i] = *(readData + i);
         }
     }
@@ -121,7 +129,7 @@ public:
         RGBColor color;
 
         if (yColor >= 0.0f && yColor <= height){
-            color = gM->GetRGB(Vector3D(1.0f - height - yColor, 0, 0), Vector3D(), Vector3D()).HueShift(hueAngle);
+            color = material->GetRGB(Vector3D(1.0f - height - yColor, 0, 0), Vector3D(), Vector3D()).HueShift(hueAngle);
         }
         else{
             color = RGBColor();

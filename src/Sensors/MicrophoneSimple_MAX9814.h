@@ -8,9 +8,9 @@
 class MicrophoneSimple{
 private:
     uint8_t pin;
-    KalmanFilter mv = KalmanFilter(0.2f, 5);
-    MinFilter minF = MinFilter(100);
-    KalmanFilter output = KalmanFilter(0.2f, 5);
+    KalmanFilter<5> mv = KalmanFilter<5>(0.2f);
+    MinFilter<100> minF = MinFilter<100>();
+    KalmanFilter<5> output = KalmanFilter<5>(0.2f);
     float previousReading = 0.0f;
     float gain = 1.0f;
     float clipping = 1.0f;

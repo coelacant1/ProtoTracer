@@ -3,9 +3,10 @@
 #include "..\Materials\GradientMaterial.h"
 #include "..\Math\Vector3D.h"
 
+template<size_t colors>
 class SimplexNoise : public Material{
 private:
-    GradientMaterial* gradientMaterial;
+    GradientMaterial<colors>* gradientMaterial;
 
     Vector3D noiseScale = Vector3D(1, 1, 1);
     // Skewing and unskewing factors for 2, 3, and 4 dimensions
@@ -69,7 +70,7 @@ private:
     }
   
 public:
-    SimplexNoise(int seed, GradientMaterial* gradientMaterial) {
+    SimplexNoise(int seed, GradientMaterial<colors>* gradientMaterial) {
         this->gradientMaterial = gradientMaterial;
         
         //the seed determines the swaps that occur between the default order and the order we're actually going to use

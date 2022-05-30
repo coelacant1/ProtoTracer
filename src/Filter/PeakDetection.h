@@ -64,7 +64,6 @@ public:
         GetStdDev(0, lag, data, avg[lag - 1], std[lag - 1]);
 
         for(uint8_t i = lag; i < sampleSize - lag; i++){
-
             if(fabs(data[i] - avg[i - 1]) > threshold * std[i - 1]){
                 if(data[i] > avg[i - 1] && data[i] > 0.05f) peaks[i] = 1.0f;
                 //else peaks[i] = -1.0f;

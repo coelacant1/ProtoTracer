@@ -6,7 +6,7 @@
 #include "..\Controls\DampedSpring.h"
 #include "..\Filter\RampFilter.h"
 
-class EasyEaseAnimator{
+class EasyEaseInterpolation{
 public:
     enum InterpolationMethod{
         Cosine,
@@ -14,62 +14,35 @@ public:
         Linear,
         Overshoot
     };
+};
+
+template<size_t maxParameters>
+class EasyEaseAnimator : public EasyEaseInterpolation{
+public:
     
 private:
     InterpolationMethod interpMethod;
-    DampedSpring* dampedSpring;
-    RampFilter* rampFilter;
-    const uint16_t maxParameters;
-    float** parameters;
-    float* parameterFrame;
-    float* previousChangedTarget;
-    float* basis;
-    float* goal;
-    uint8_t* interpolationMethods;
-    uint16_t* dictionary;
+    DampedSpring dampedSpring[maxParameters];
+    RampFilter rampFilter[maxParameters];
+    float* parameters[maxParameters];
+    float parameterFrame[maxParameters];
+    float previousChangedTarget[maxParameters];
+    float basis[maxParameters];
+    float goal[maxParameters];
+    uint8_t interpolationMethods[maxParameters];
+    uint16_t dictionary[maxParameters];
     uint16_t currentParameters = 0;
     bool isActive = true;
 
 public:
-    EasyEaseAnimator(uint16_t maxParameters, InterpolationMethod interpMethod, float springConstant = 1.0f, float dampingConstant = 0.5f) : maxParameters(maxParameters) {
+    EasyEaseAnimator(InterpolationMethod interpMethod, float springConstant = 1.0f, float dampingConstant = 0.5f) {
         this->interpMethod = interpMethod;
-
-        parameters = new float*[maxParameters];
-        parameterFrame = new float[maxParameters];
-        previousChangedTarget = new float[maxParameters];
-        basis = new float[maxParameters];
-        goal = new float[maxParameters];
-        dictionary = new uint16_t[maxParameters];
-        interpolationMethods = new uint8_t[maxParameters];
-        dampedSpring = new DampedSpring[maxParameters];
-        rampFilter = new RampFilter[maxParameters];
 
         for (uint8_t i = 0; i < maxParameters; i++){
             interpolationMethods[i] = interpMethod;
 
             dampedSpring[i].SetConstants(springConstant, dampingConstant);
         }
-    }
-
-    ~EasyEaseAnimator(){
-        delete[] parameterFrame;
-        delete[] previousChangedTarget;
-        delete[] basis;
-        delete[] goal;
-        delete[] dictionary;
-        delete[] interpolationMethods;
-        delete[] dampedSpring;
-        delete[] rampFilter;
-
-        delete parameters;
-        delete parameterFrame;
-        delete previousChangedTarget;
-        delete basis;
-        delete goal;
-        delete dictionary;
-        delete interpolationMethods;
-        delete dampedSpring;
-        delete rampFilter;
     }
     
     void SetConstants(uint16_t dictionaryValue, float springConstant, float damping){
