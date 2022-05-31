@@ -20,4 +20,8 @@ public:
     void SetIncrement(const float increment) {
         this->increment = increment;
     }
+
+    void SetFrames(const int frames) {
+        increment = 1.0f / ((float)frames);
+    }
 };

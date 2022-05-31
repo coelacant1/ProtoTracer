@@ -1,6 +1,6 @@
 #include <Arduino.h>
 
-class ButtonHandler{
+class ButtonHandler {
 private:
     static long previousMillis;
     static uint8_t currentValue;
@@ -8,10 +8,10 @@ private:
     static uint8_t pin;
 
     static void isr() {
-        if(millis() - previousMillis > 250){
+        if (millis() - previousMillis > 250) {
             currentValue += 1;
             if (currentValue > maxValue) currentValue = 0;
-        
+
             previousMillis = millis();
         }
     }
@@ -25,7 +25,7 @@ public:
         ButtonHandler::pin = pin;
     }
 
-    static uint8_t GetValue(){
+    static uint8_t GetValue() {
         return currentValue;
     }
 };

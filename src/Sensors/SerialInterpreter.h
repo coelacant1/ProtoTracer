@@ -1,10 +1,10 @@
 #pragma once
 
-#include "..\Math\Quaternion.h"
 #include "..\Materials\RGBColor.h"
+#include "..\Math\Quaternion.h"
 #include <SerialTransfer.h>
 
-class SerialInterpreter{
+class SerialInterpreter {
 private:
     static Quaternion baseRotation;
     static bool baseRotationSet;
@@ -27,49 +27,48 @@ private:
     static SerialTransfer dataTransfer;
 
 public:
-    static void Initialize(){
+    static void Initialize() {
         Serial4.begin(9600);
-        dataTransfer.begin(Serial4, true);//_debug = true
+        dataTransfer.begin(Serial4, true); //_debug = true
         baseRotationSet = false;
     }
 
-    static RGBColor GetColor(){
+    static RGBColor GetColor() {
         return RGBColor(e32Data.r, e32Data.g, e32Data.b);
     }
 
-    static Quaternion GetOrientation(){
-        Quaternion q = Quaternion(e32Data.oW, -e32Data.oX, -e32Data.oY, -e32Data.oZ);//XZ flipped
+    static Quaternion GetOrientation() {
+        const Quaternion q = Quaternion(e32Data.oW, -e32Data.oX, -e32Data.oY, -e32Data.oZ); // XZ flipped
 
-        if(!baseRotationSet){
+        if (!baseRotationSet) {
             baseRotation = q;
             baseRotationSet = true;
         }
 
-        return q.Multiply(baseRotation.Conjugate());
+        return q * baseRotation.Conjugate();
     }
 
-    static float GetRatio(){
+    static float GetRatio() {
         return e32Data.ratio;
     }
 
-    static uint8_t GetMode(){
+    static uint8_t GetMode() {
         return e32Data.mode;
     }
 
-    static uint8_t GetMorph(){
+    static uint8_t GetMorph() {
         return e32Data.m;
     }
 
-    static void Update(){
-        if(dataTransfer.available()){
+    static void Update() {
+        if (dataTransfer.available()) {
             uint16_t receiveSize = 0;
 
             receiveSize = dataTransfer.rxObj(e32Data, receiveSize);
-            //Serial.println(GetColor().ToString());
-            //Serial.print("\t");
+            // Serial.println(GetColor().ToString());
+            // Serial.print("\t");
         }
     }
-
 };
 
 Quaternion SerialInterpreter::baseRotation;

@@ -2,20 +2,19 @@
 
 #include "..\Math\Quaternion.h"
 
+template<size_t memory>
 class QuaternionKalmanFilter {
 private:
     float gain = 0.05f;
-    int memory = 90, currentAmount = 0, pointer = 0;
+    size_t currentAmount = 0, pointer = 0;
     Quaternion *values, sum = Quaternion(0, 0, 0, 0);
 
 public:
     QuaternionKalmanFilter()
         : gain(0.25f),
-          memory(25),
-          values(new Quaternion[25]) {}
-    QuaternionKalmanFilter(const float gain, const int memory)
+          values(new Quaternion[memory]) {}
+    QuaternionKalmanFilter(const float gain)
         : gain(gain),
-          memory(memory),
           values(new Quaternion[memory]) {}
     ~QuaternionKalmanFilter() {
         delete[] values;
@@ -39,30 +38,5 @@ public:
 
     void SetGain(const float gain) {
         this->gain = gain;
-    }
-    void SetMemory(const int newMemory) {
-        // transfer old stuff to new stuff via extremely convoluted means
-        Quaternion *newValues = new Quaternion[newMemory];
-
-        if (newMemory > memory) {
-            for (int i = 0; i < memory; i++) {
-                newValues[i] = values[i];
-            }
-        } else {
-            if (currentAmount > newMemory) currentAmount = newMemory;
-            const int start = (pointer > newMemory) ? pointer - newMemory : memory - (newMemory - pointer);
-            const int end = start + newMemory;
-            sum = Quaternion(0, 0, 0, 0);
-            int j = 0;
-            for (int i = start; i < end; i++) {
-                sum += newValues[j++] = values[i % memory];
-            }
-            pointer = newMemory - (memory - newMemory);
-        }
-
-        memory = newMemory;
-
-        delete[] values; // Let's be memory safe at least...
-        values = newValues;
     }
 };

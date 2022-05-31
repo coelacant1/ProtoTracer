@@ -7,7 +7,7 @@
 #include "..\Render\Scene.h"
 #include "..\Materials\GradientMaterial.h"
 #include "..\Materials\SimplexNoise.h"
-#include "..\Math\FunctionGenerator.h"
+#include "..\Signals\FunctionGenerator.h"
 #include "..\Sensors\SerialSync.h"
 #include "..\Materials\SpectrumAnalyzer.h"
 #include "..\Sensors\ButtonHandler.h"
@@ -26,7 +26,7 @@ private:
     SolidCube cube;
     float cubeSize = 0.0f;
     float colorRed = 0.0f;
-    EasyEaseAnimator eEA = EasyEaseAnimator(30, EasyEaseAnimator::Cosine);
+    EasyEaseAnimator<30> eEA = EasyEaseAnimator<30>(EasyEaseInterpolation::Cosine);
     
     RGBColor spectrum[10] = {RGBColor(121, 35, 190), RGBColor(36, 120, 255), RGBColor(16, 207, 190), RGBColor(36, 239, 138), 
                              RGBColor(240, 235, 19), RGBColor(255, 186, 0), RGBColor(255, 138, 0), RGBColor(255, 85, 0), 

@@ -99,7 +99,7 @@ public:
             vz.UnitSphere());
     }
 
-    RotationMatrix &const Transpose() {
+    RotationMatrix &Transpose() {
         const Vector3D X = XAxis;
         XAxis = Vector3D(XAxis.X, YAxis.X, ZAxis.X);
         const Vector3D Y = YAxis;

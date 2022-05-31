@@ -8,7 +8,7 @@
 #include "..\Render\Scene.h"
 #include "..\Materials\GradientMaterial.h"
 #include "..\Materials\SimplexNoise.h"
-#include "..\Math\FunctionGenerator.h"
+#include "..\Signals\FunctionGenerator.h"
 //#include "..\Sensors\MicrophoneSimple_MAX9814.h"
 //#include "..\Sensors\MicrophoneFourier_MAX9814.h"
 #include "..\Sensors\ButtonHandler.h"
@@ -25,7 +25,7 @@ private:
 
     //Face
     ProtoArtleck pM;
-    EasyEaseAnimator eEA = EasyEaseAnimator(20, EasyEaseAnimator::Cosine);//, 1.0f, 0.5f);
+    EasyEaseAnimator<20> eEA = EasyEaseAnimator<20>(EasyEaseInterpolation::Cosine);//, 1.0f, 0.5f);
 
     RGBColor noiseSpectrum[4] = {RGBColor(0, 255, 0), RGBColor(255, 0, 0), RGBColor(0, 255, 0), RGBColor(0, 0, 255)};
     GradientMaterial gNoiseMat = GradientMaterial(4, noiseSpectrum, 2.0f, false);
@@ -107,9 +107,9 @@ private:
     }
 
     void ChangeInterpolationMethods(){
-        eEA.SetInterpolationMethod(ProtoArtleck::Sadness, EasyEaseAnimator::Cosine);
-        eEA.SetInterpolationMethod(ProtoArtleck::vrc_v_ou, EasyEaseAnimator::Cosine);
-        eEA.SetInterpolationMethod(99, EasyEaseAnimator::Cosine);
+        eEA.SetInterpolationMethod(ProtoArtleck::Sadness, EasyEaseInterpolation::Cosine);
+        eEA.SetInterpolationMethod(ProtoArtleck::vrc_v_ou, EasyEaseInterpolation::Cosine);
+        eEA.SetInterpolationMethod(99, EasyEaseInterpolation::Cosine);
     }
 
 public:
@@ -311,11 +311,6 @@ public:
         //pM.GetObject()->GetTransform()->SetScale(Vector3D(-0.65f, -0.65f, 0.5f));
         pM.GetObject()->GetTransform()->SetScale(Vector3D(-0.85f, -0.65f, 0.5f));
 
-        pM.GetObject()->UpdateTransform();
-        
-        cube.GetObject()->ResetVertices();
-        cube.GetObject()->GetTransform()->SetPosition(Vector3D(1000, 1000, 10000.0f));
-        cube.GetObject()->GetTransform()->SetScale(Vector3D(1000, 1000, 1));
-        cube.GetObject()->UpdateTransform();
+        pM.GetObject()->UpdateTransform(); 
     }
 };

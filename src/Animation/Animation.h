@@ -1,30 +1,25 @@
 #pragma once
 
-#include "Arduino.h"
 #include "..\Render\Scene.h"
+#include "Arduino.h"
 
-class Animation{
+template <size_t numObjects>
+class Animation {
 protected:
     long previousTime;
     float fade = 0.0f;
     float animationTime = 0.0f;
-    
-    Scene* scene;
 
-    Animation(int numObjects){
-        scene = new Scene(numObjects);
-    }
+    Scene scene = Scene(numObjects);
 
 public:
-    Scene* GetScene(){
-        return scene;
+    Animation() {}
+
+    Scene *GetScene() {
+        return &scene;
     }
 
-    ~Animation(){
-        delete scene;
-    }
-
-    float GetAnimationTime(){
+    float GetAnimationTime() {
         return animationTime;
     }
 
@@ -32,7 +27,7 @@ public:
     virtual void FadeOut(float stepRatio) = 0;
     virtual void Update(float ratio) = 0;
 
-    void UpdateTime(float ratio){
+    void UpdateTime(float ratio) {
         previousTime = micros();
 
         Update(ratio);

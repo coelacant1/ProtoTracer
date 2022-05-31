@@ -1,8 +1,7 @@
 #include <Arduino.h>
 #include <arduinoFFT.h>
-#include "..\Filter\KalmanFilter.h"
 
-class Microphone{
+class Microphone {
 private:
     static arduinoFFT FFT;
     static IntervalTimer readingTimer;
@@ -13,33 +12,32 @@ private:
     static uint8_t exponent;
 
     static volatile double buffer[samples];
-	static volatile double currentRead[samples];
+    static volatile double currentRead[samples];
     static int currentBuffer;
 
-    static void CopyArray(){
-        for(int i = 0; i < samples; i++){
+    static void CopyArray() {
+        for (int i = 0; i < samples; i++) {
             vReal[i] = buffer[i];
         }
     }
 
-    static void CopyBuffer(){
-        for(int i = 0; i < samples; i++){
+    static void CopyBuffer() {
+        for (int i = 0; i < samples; i++) {
             buffer[i] = currentRead[i];
         }
     }
 
-    static void UpdateMicrophone(){
-        if(currentBuffer < samples){
+    static void UpdateMicrophone() {
+        if (currentBuffer < samples) {
             currentRead[currentBuffer++] = analogRead(pin);
-        }
-        else{
+        } else {
             CopyBuffer();
             currentBuffer = 0;
         }
     }
 
 public:
-    static void Initialize(uint8_t pin) {
+    static void Initialize(const uint8_t pin) {
         Microphone::pin = pin;
         Microphone::currentBuffer = 0;
 
@@ -49,10 +47,10 @@ public:
         readingTimer.begin(Microphone::UpdateMicrophone, 1000);
     }
 
-    static void Update(){
-        //update fft from current readings, disable interrupts
+    static void Update() {
+        // update fft from current readings, disable interrupts
         noInterrupts();
-        CopyArray();//copy from memory to local value
+        CopyArray(); // copy from memory to local value
         interrupts();
 
         FFT.Windowing(vReal, samples, FFT_WIN_TYP_HAMMING, FFT_FORWARD);

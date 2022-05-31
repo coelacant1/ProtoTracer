@@ -4,43 +4,55 @@
 
 class DampedSpring {
 private:
-    float currentVelocity = 0.0f;
-    float currentPosition = 1.0f;
-    float springConstant = 0.0f;
-    float damping = 0.0f;
-    unsigned long previousMillis = 0;
+    float springConstant;
+    float damping;
+    float currentVelocity = 0.001f;
+    float currentPosition = 0.001f;
+    float springForce = 0.0f;
+    float dampingForce = 0.0f;
+    float force = 0.0f;
+    long previousMillis = 0;
 
 public:
+    DampedSpring() {}
+
     DampedSpring(const float springConstant, const float damping)
-        : springConstant(springConstant),
-          damping(damping) {}
+        : springConstant(-1.0f * springConstant),
+          damping(-1.0f * damping) {}
+
+    void SetConstants(const float springConstant, const float damping) {
+        this->springConstant = -1.0f * springConstant;
+        this->damping = -1.0f * damping;
+    }
 
     float Calculate(const float target) {
-        const unsigned long currentMillis = millis();
+        const long currentMillis = millis();
 
-        const float dT = ((float)(currentMillis - previousMillis)) * 0.001f; // / 1000.0f
+        const float dT = ((float)(currentMillis - previousMillis)) / 1000.0f;
 
-        if (dT > 0.1f && dT < 2.0f) {
-            const float springForce = -springConstant * currentPosition;
-            const float dampingForce = damping * currentVelocity;
-            const float force = springForce - dampingForce + target;
+        if (dT > 0.01f && dT < 2.0f) {
+            springForce = springConstant * currentPosition;
+            dampingForce = damping * currentVelocity;
+            force = springForce - dampingForce + target;
 
             currentVelocity += force * dT;
             currentPosition += currentVelocity * dT;
-
-            previousMillis = currentMillis;
         }
+
+        previousMillis = currentMillis;
 
         return currentPosition;
     }
 
     float Calculate(const float target, const float dT) {
-        const float springForce = -springConstant * currentPosition;
-        const float dampingForce = damping * currentVelocity;
-        const float force = springForce - dampingForce + target;
+        if (!Mathematics::IsClose(target, currentPosition, 0.01f)) {
+            springForce = springConstant * currentPosition;
+            dampingForce = damping * currentVelocity;
+            force = springForce + dampingForce + target;
 
-        currentVelocity += force * dT;
-        currentPosition += currentVelocity * dT;
+            currentVelocity += force * dT;
+            currentPosition += currentVelocity * dT;
+        }
 
         return currentPosition;
     }

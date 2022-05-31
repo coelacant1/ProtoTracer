@@ -1,13 +1,13 @@
-#include <Wire.h>
-#include <Adafruit_Sensor.h>
-#include <Adafruit_BNO055.h>
-#include <utility/imumaths.h>
 #include "..\Filter\QuaternionKalmanFilter.h"
 #include "..\Filter\VectorKalmanFilter.h"
 #include "..\Math\Rotation.h"
 #include "..\Math\Vector3D.h"
+#include <Adafruit_BNO055.h>
+#include <Adafruit_Sensor.h>
+#include <Wire.h>
+#include <utility/imumaths.h>
 
-class MotionProcessor{
+class MotionProcessor {
 private:
     sensors_event_t angVelocityData, magnetometerData, accelerometerData, gravityData;
     Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28);
@@ -20,50 +20,47 @@ private:
     Quaternion absoluteOrientation;
     long previousMicros;
 
-    VectorKalmanFilter localAngulKF = VectorKalmanFilter(0.1f, 10);
-    VectorKalmanFilter localAccelKF = VectorKalmanFilter(0.1f, 10);
-    VectorKalmanFilter localGraviKF = VectorKalmanFilter(0.1f, 10);
+    VectorKalmanFilter<10, 10, 10> localAngulKF = VectorKalmanFilter<10, 10, 10>(0.1f);
+    VectorKalmanFilter<10, 10, 10> localAccelKF = VectorKalmanFilter<10, 10, 10>(0.1f);
+    VectorKalmanFilter<10, 10, 10> localGraviKF = VectorKalmanFilter<10, 10, 10>(0.1f);
 
-    Vector3D ReadMagneticField(){
+    Vector3D ReadMagneticField() {
         bno.getEvent(&magnetometerData, Adafruit_BNO055::VECTOR_MAGNETOMETER);
-        
+
         return Vector3D(magnetometerData.magnetic.x, magnetometerData.magnetic.y, magnetometerData.magnetic.z);
     }
 
-    Vector3D ReadLocalAcceleration(){
+    Vector3D ReadLocalAcceleration() {
         bno.getEvent(&accelerometerData, Adafruit_BNO055::VECTOR_ACCELEROMETER);
-        
+
         return Vector3D(accelerometerData.acceleration.x, accelerometerData.acceleration.y, accelerometerData.acceleration.z);
     }
 
-    Vector3D ReadLocalAngularVelocity(){
+    Vector3D ReadLocalAngularVelocity() {
         bno.getEvent(&angVelocityData, Adafruit_BNO055::VECTOR_GYROSCOPE);
 
         return Vector3D(angVelocityData.gyro.x, angVelocityData.gyro.y, angVelocityData.gyro.z);
     }
 
-    Vector3D ReadLocalGravityVector(){
+    Vector3D ReadLocalGravityVector() {
         bno.getEvent(&gravityData, Adafruit_BNO055::VECTOR_GRAVITY);
-        
+
         return Vector3D(gravityData.acceleration.x, gravityData.acceleration.y, gravityData.acceleration.z);
     }
-  
-public:
-    MotionProcessor(){
-        previousMicros = micros();
 
+public:
+    MotionProcessor()
+        : previousMicros(micros()) {
         pinMode(18, INPUT_PULLUP);
         pinMode(19, INPUT_PULLUP);
 
         Wire.setClock(100000);
-        if (!bno.begin())
-        {
-        Serial.println("No BNO055 detected");
+        if (!bno.begin()) {
+            Serial.println("No BNO055 detected");
+        } else {
+            Serial.println("BNO055 was detected");
         }
-        else{
-        Serial.println("BNO055 was detected");
-        }
-        
+
         delay(1000);
 
         bno.setExtCrystalUse(true);
@@ -72,72 +69,69 @@ public:
     int stepV = 0;
     long microWait;
 
-    void Update(){
-        float dT = ((float)micros() - (float)previousMicros) / 1000000.0f;
-        float wait = ((float)micros() - (float)microWait) / 1000000.0f;
+    void Update() {
+        const float dT = ((float)micros() - (float)previousMicros) * 1e-6f; // / 1000000.0f
+        const float wait = ((float)micros() - (float)microWait) * 1e-6f;    // / 1000000.0f
 
-        if (wait >= 0.001f){
-        if(stepV == 0){
-            localForce = ReadLocalAcceleration();
-            stepV++;
+        if (wait >= 0.001f) {
+            if (stepV == 0) {
+                localForce = ReadLocalAcceleration();
+                stepV++;
+            } else if (stepV == 1) {
+                localMagneticField = ReadMagneticField();
+                stepV++;
+            } else if (stepV == 2) {
+                localAngularVelocity = ReadLocalAngularVelocity();
+                stepV++;
+            } else if (stepV == 3) {
+                localGravityVector = ReadLocalGravityVector();
+                stepV = 0;
+            }
+
+            microWait = micros();
         }
-        else if(stepV == 1){
-            localMagneticField = ReadMagneticField();
-            stepV++;
-        }
-        else if(stepV == 2){
-            localAngularVelocity = ReadLocalAngularVelocity();
-            stepV++;
-        }
-        else if(stepV == 3){
-            localGravityVector = ReadLocalGravityVector();
-            stepV = 0;
-        }
-        
-        microWait = micros();
-        }
-        
+
         Vector3D orthogonal = GetLocalMagneticField().CrossProduct(localForce);
-        Vector3D orthoGravity = orthogonal.CrossProduct(localForce);//use for absolute yaw position
+        Vector3D orthoGravity = orthogonal.CrossProduct(localForce); // use for absolute yaw position
 
-        //use orthogonal for X axis -> east/west
-        //use orthogravity for Y axis -> north/south
-        //use gravity vector for Z axis -> up/down
+        // use orthogonal for X axis -> east/west
+        // use orthogravity for Y axis -> north/south
+        // use gravity vector for Z axis -> up/down
         Quaternion magForceQ = Rotation(orthogonal.UnitSphere(), orthoGravity.UnitSphere(), localForce.UnitSphere()).GetQuaternion().UnitQuaternion();
 
-        //complementary filter join both the gyro integration to angular position with the absolute orientation from mag and force
+        // complementary filter join both the gyro integration to angular position with the absolute orientation from mag and force
         absoluteOrientation = Quaternion::SphericalInterpolation(absoluteOrientation.DeltaRotation(localAngularVelocity, dT), magForceQ, 0.05f);
 
         localAcceleration = localForce - localGraviKF.Filter(localGravityVector);
-        
+
         previousMicros = micros();
     }
 
-    Vector3D GetLocalMagneticField(){
+    Vector3D GetLocalMagneticField() {
         return localMagneticField;
     }
 
-    Vector3D GetLocalForce(){
+    Vector3D GetLocalForce() {
         return localForce;
     }
 
-    Vector3D GetLocalAccelerationFiltered(){//acceleration without gravity
+    Vector3D GetLocalAccelerationFiltered() { // acceleration without gravity
         return localAccelKF.Filter(localAcceleration);
     }
 
-    Vector3D GetLocalAngularVelocityFiltered(){
+    Vector3D GetLocalAngularVelocityFiltered() {
         return localAngulKF.Filter(localAngularVelocity);
     }
-    
-    Vector3D GetLocalAcceleration(){//acceleration without gravity
+
+    Vector3D GetLocalAcceleration() { // acceleration without gravity
         return localAcceleration;
     }
 
-    Vector3D GetLocalAngularVelocity(){
+    Vector3D GetLocalAngularVelocity() {
         return localAngularVelocity;
     }
-    
-    Quaternion GetAbsoluteOrientation(){
+
+    Quaternion GetAbsoluteOrientation() {
         return absoluteOrientation;
     }
 };

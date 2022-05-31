@@ -6,7 +6,7 @@
 #include "..\Controls\DampedSpring.h"
 #include "..\Filter\RampFilter.h"
 
-class EasyEaseAnimator{
+class EasyEaseInterpolation{
 public:
     enum InterpolationMethod{
         Cosine,
@@ -14,63 +14,54 @@ public:
         Linear,
         Overshoot
     };
+};
+
+template<size_t maxParameters>
+class EasyEaseAnimator : public EasyEaseInterpolation{
+public:
     
 private:
     InterpolationMethod interpMethod;
-    DampedSpring** dampedSpring;
-    RampFilter* rampFilter;
-    const uint16_t maxParameters;
-    float** parameters;
-    float* parameterFrame;
-    float* previousChangedTarget;
-    float* basis;
-    float* goal;
-    uint8_t* interpolationMethods;
-    uint16_t* dictionary;
+    DampedSpring dampedSpring[maxParameters];
+    RampFilter rampFilter[maxParameters];
+    float* parameters[maxParameters];
+    float parameterFrame[maxParameters];
+    float previousChangedTarget[maxParameters];
+    float basis[maxParameters];
+    float goal[maxParameters];
+    uint8_t interpolationMethods[maxParameters];
+    uint16_t dictionary[maxParameters];
     uint16_t currentParameters = 0;
     bool isActive = true;
 
 public:
-    EasyEaseAnimator(uint16_t maxParameters, InterpolationMethod interpMethod, float springConstant = 1.0f, float dampingConstant = 0.5f) : maxParameters(maxParameters) {
+    EasyEaseAnimator(InterpolationMethod interpMethod, float springConstant = 1.0f, float dampingConstant = 0.5f) {
         this->interpMethod = interpMethod;
-
-        parameters = new float*[maxParameters];
-        parameterFrame = new float[maxParameters];
-        previousChangedTarget = new float[maxParameters];
-        basis = new float[maxParameters];
-        goal = new float[maxParameters];
-        dictionary = new uint16_t[maxParameters];
-        interpolationMethods = new uint8_t[maxParameters];
-        dampedSpring = new DampedSpring*[maxParameters];
-        rampFilter = new RampFilter[maxParameters];
 
         for (uint8_t i = 0; i < maxParameters; i++){
             interpolationMethods[i] = interpMethod;
 
-            dampedSpring[i] = new DampedSpring(springConstant, dampingConstant);
+            dampedSpring[i].SetConstants(springConstant, dampingConstant);
         }
-
+    }
+    
+    void SetConstants(uint16_t dictionaryValue, float springConstant, float damping){
+        for(uint16_t i = 0; i < currentParameters; i++){
+            if(dictionary[i] == dictionaryValue){
+                dampedSpring[i].SetConstants(springConstant, damping);
+                break;
+            }
+        }
     }
 
-    ~EasyEaseAnimator(){
-        delete[] parameterFrame;
-        delete[] previousChangedTarget;
-        delete[] basis;
-        delete[] goal;
-        delete[] dictionary;
-        delete[] interpolationMethods;
-        delete[] dampedSpring;
-        delete[] rampFilter;
-
-        delete parameters;
-        delete parameterFrame;
-        delete previousChangedTarget;
-        delete basis;
-        delete goal;
-        delete dictionary;
-        delete interpolationMethods;
-        delete dampedSpring;
-        delete rampFilter;
+    float GetValue(uint16_t dictionaryValue){
+        for(uint16_t i = 0; i < currentParameters; i++){
+            if(dictionary[i] == dictionaryValue){
+                return *parameters[i];
+            }
+        }
+        
+        return 0.0f;
     }
 
     void AddParameter(float* parameter, uint16_t dictionaryValue, int frames, float basis, float goal){
@@ -87,13 +78,14 @@ public:
                 this->basis[currentParameters] = basis;
                 this->goal[currentParameters] = goal;
                 parameters[currentParameters] = parameter;
+                parameterFrame[currentParameters] = 0.0f;
                 dictionary[currentParameters] = dictionaryValue;
+                rampFilter[currentParameters].SetFrames(frames);
                 currentParameters++;
-
-                rampFilter[currentParameters] = RampFilter(frames);
             }
         }
     }
+
     void AddParameterFrame(uint16_t dictionaryValue, float value){
         for(uint16_t i = 0; i < currentParameters; i++){
             if(dictionary[i] == dictionaryValue){
@@ -112,7 +104,6 @@ public:
             }
         }
     }
-
 
     void Reset(){
         for(uint16_t i = 0; i < currentParameters; i++){
@@ -136,7 +127,7 @@ public:
                     *parameters[i] = Mathematics::BounceInterpolation(basis[i], goal[i], linear);
                     break;
                 case Overshoot:
-                    *parameters[i] = dampedSpring[i]->Calculate(parameterFrame[i], 0.25f);
+                    *parameters[i] = dampedSpring[i].Calculate(parameterFrame[i], 0.25f);
                     break;
                 default://Linear
                     *parameters[i] = linear;

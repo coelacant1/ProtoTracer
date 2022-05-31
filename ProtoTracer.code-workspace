@@ -10,7 +10,8 @@
 			"utility": "cpp",
 			"limits": "cpp",
 			"string": "cpp",
-			"*.tcc": "cpp"
+			"*.tcc": "cpp",
+			"*.txt": "cpp"
 		},
 		"C_Cpp.clang_format_style": "{ BasedOnStyle: LLVM, UseTab: Never, DerivePointerAlignment: false, PointerAlignment: Right, IndentWidth: 4, TabWidth: 4, BreakBeforeBraces: Attach, AllowShortIfStatementsOnASingleLine: true, IndentCaseLabels: false, ColumnLimit: 0, AccessModifierOffset: -4, NamespaceIndentation: All, FixNamespaceComments: false }"
 	}

@@ -2,7 +2,7 @@
 
 #include <SerialTransfer.h>
 
-class SerialSync{
+class SerialSync {
 private:
     static struct ESP32Data {
         float ratio;
@@ -13,50 +13,49 @@ private:
     static SerialTransfer dataTransfer;
 
 public:
-    static void Initialize(){
+    static void Initialize() {
         Serial6.begin(115200);
-        dataTransfer.begin(Serial6, false);//_debug = true
+        dataTransfer.begin(Serial6, false); //_debug = true
     }
 
-    static float GetRatio(){
+    static float GetRatio() {
         return e32Data.ratio;
     }
 
-    static uint8_t GetMode(){
+    static uint8_t GetMode() {
         return e32Data.mode;
     }
 
-    static float GetMouthMove(){
+    static float GetMouthMove() {
         return e32Data.mouthMove;
     }
 
-    static void Read(){
-        if(dataTransfer.available()){
+    static void Read() {
+        if (dataTransfer.available()) {
             uint16_t receiveSize = 0;
 
             receiveSize = dataTransfer.rxObj(e32Data, receiveSize);
         }
     }
 
-    static void SetRatio(float ratio){
+    static void SetRatio(float ratio) {
         e32Data.ratio = ratio;
     }
 
-    static void SetMode(uint8_t mode){
+    static void SetMode(uint8_t mode) {
         e32Data.mode = mode;
     }
-    
-    static void SetMouthMove(float ratio){
+
+    static void SetMouthMove(float ratio) {
         e32Data.mouthMove = ratio;
     }
-    
-    static void Send(){
+
+    static void Send() {
         uint16_t sendSize = 0;
 
         sendSize = dataTransfer.txObj(e32Data, sendSize);
         dataTransfer.sendData(sendSize);
     }
-
 };
 
 SerialTransfer SerialSync::dataTransfer;

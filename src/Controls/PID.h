@@ -8,29 +8,22 @@ private:
     float error = 0;
     float previousError = 0;
     float output = 0;
-    float kp;
-    float ki;
-    float kd;
-    unsigned long previousMillis;
+    float kp = 1.0f;
+    float ki = 0.0f;
+    float kd = 0.0f;
+    unsigned long previousMillis = millis();
 
 public:
-    PID() 
-        : kp(1.0f),
-          ki(0.0f),
-          kd(0.0f),
-          previousMillis(millis()) {}
-
-    ~PID();
-
+    PID() {}
     PID(const float kp, const float ki, const float kd) 
         : kp(kp),
           ki(ki),
-          kd(kd),
-          previousMillis(millis()) {}
+          kd(kd) {}
+    ~PID();
 
-    float Calculate(const float setpoint, const float processVariable) {
+    float Calculate(float setpoint, float processVariable) {
         const unsigned long currentMillis = millis();
-        const float dT = ((float)(currentMillis - previousMillis)) * 0.001f; // / 1000.0f
+        const float dT = ((float)(currentMillis - previousMillis)) * 1e-3f; // / 1000.0f
 
         error = setpoint - processVariable;
         integral += error * dT;

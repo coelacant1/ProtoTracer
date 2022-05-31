@@ -1,40 +1,39 @@
-#include <Arduino.h>
-#include "..\Math\Mathematics.h"
 #include "..\Filter\KalmanFilter.h"
 #include "..\Filter\MinFilter.h"
+#include "..\Math\Mathematics.h"
+#include <Arduino.h>
 
-class MicrophoneSimple{
+class MicrophoneSimple {
 private:
     uint8_t pin;
-    KalmanFilter mv = KalmanFilter(0.075f, 40);
-    MinFilter minF = MinFilter(100);
-    KalmanFilter output = KalmanFilter(0.1f, 10);
+    KalmanFilter<40> mv = KalmanFilter<40>(0.075f);
+    MinFilter<100> minF = MinFilter<100>();
+    KalmanFilter<10> output = KalmanFilter<10>(0.1f);
     float previousReading = 0.0f;
     long previousMillis = 0;
     long startMillis = 0;
 
 public:
-    MicrophoneSimple(uint8_t pin){
-        this->pin = pin;
-
+    MicrophoneSimple(const uint8_t pin)
+        : pin(pin),
+          previousMillis(millis()), // Set the value to something other than zero
+          startMillis(previousMillis) {
         analogReadRes(12);
         analogReadAveraging(32);
 
         pinMode(pin, INPUT);
-
-        startMillis = millis();
     }
 
-    float Update(){
-        float read = analogRead(pin);
-        float change = read - previousReading;
-        float dT = ((float)millis() - (float)previousMillis) / 1000.0f;
-        float changeRate = change / dT;
-        float amplitude = mv.Filter(fabs(changeRate));
-        float minimum = minF.Filter(amplitude);
-        float normalized = Mathematics::Constrain(amplitude - minimum - 250, 0.0f, 4000.0f);
-        float truncate = output.Filter(normalized / 100.0f);
-        
+    float Update() {
+        const float read = analogRead(pin);
+        const float change = read - previousReading;
+        const float dT = ((float)millis() - (float)previousMillis) * 1e-3f; // / 1000.0f
+        const float changeRate = change / dT;
+        const float amplitude = mv.Filter(fabs(changeRate));
+        const float minimum = minF.Filter(amplitude);
+        const float normalized = Mathematics::Constrain(amplitude - minimum - 250, 0.0f, 4000.0f);
+        const float truncate = output.Filter(normalized * 1e-2f); // / 100.0f
+
         /*
         Serial.print(read);
         Serial.print('\t');
@@ -46,7 +45,7 @@ public:
         Serial.print('\t');
         Serial.println(truncate * 100.0f);
         */
-       
+
         previousReading = read;
         previousMillis = millis();
 

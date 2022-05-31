@@ -4,26 +4,27 @@
 #include "KeyFrame.h"
 #include "..\Math\Mathematics.h"
 
-class KeyFrameTrack{
+class KeyFrameInterpolation{
 public:
     enum InterpolationMethod{
         Linear,
         Cosine,
         Step
     };
+};
 
+template<size_t maxParameters, size_t maxKeyFrames>
+class KeyFrameTrack : public KeyFrameInterpolation{
 private:
-    const int maxParameters;
-    const int maxKeyFrames;
     InterpolationMethod interpMethod;
-    float** parameters;
-    KeyFrame** keyFrames;
+    float* parameters[maxParameters];
+    KeyFrame keyFrames[maxKeyFrames];
     float min = 0.0f;
     float max = 0.0f;
     float startFrameTime = 100000.0f;//initialize to out of bounds
     float stopFrameTime = -100000.0f;//initialize to out of bounds
-    int currentFrames = 0;
-    int currentParameters = 0;
+    uint8_t currentFrames = 0;
+    uint8_t currentParameters = 0;
     long startTime = 0;
     bool isActive = true;
     float parameterValue = 0.0f;
@@ -32,28 +33,17 @@ private:
 
     //shift array from position
     void ShiftKeyFrameArray(int position){
-        for(int i = position; i < currentFrames; i++){
+        for(uint8_t i = position; i < currentFrames; i++){
             keyFrames[i + 1] = keyFrames[i];
         }
     }
 
 public:
-    KeyFrameTrack(int maxParameters, float min, float max, int maxKeyFrames, InterpolationMethod interpMethod) : maxParameters(maxParameters), maxKeyFrames(maxKeyFrames){
+    KeyFrameTrack(float min, float max, InterpolationMethod interpMethod){
         this->min = min;
         this->max = max;
         this->startTime = millis();
         this->interpMethod = interpMethod;
-
-        keyFrames = new KeyFrame*[maxKeyFrames];
-        parameters = new float*[maxParameters];
-    }
-
-    ~KeyFrameTrack(){
-        for (int i = 0; i < currentFrames; i++){
-            delete keyFrames[i];
-        }
-
-        delete[] keyFrames;
     }
 
     float GetCurrentTime(){
@@ -89,16 +79,16 @@ public:
             value = Mathematics::Constrain(value, min, max);
 
             if(currentFrames == 0){
-                keyFrames[0] = new KeyFrame(time, value);
+                keyFrames[0].Set(time, value);
             }
             else if (time > this->stopFrameTime){
-                keyFrames[currentFrames] = new KeyFrame(time, value);
+                keyFrames[currentFrames].Set(time, value);
             }
             else{
                 for(int i = 0; i < currentFrames; i++){
-                    if(time < keyFrames[i]->Time){
+                    if(time < keyFrames[i].Time){
                         ShiftKeyFrameArray(i);
-                        keyFrames[i] = new KeyFrame(time, value);
+                        keyFrames[i].Set(time, value);
                         break;
                     }
                 }
@@ -128,8 +118,8 @@ public:
 
         //find current time, find keyframe before and after
         if(currentFrames > 0 && isActive){
-            for (int i = currentFrames - 1; i >= 0; i--){
-                if (currentTime >= keyFrames[i]->Time){
+            for (uint8_t i = currentFrames - 1; i >= 0; i--){
+                if (currentTime >= keyFrames[i].Time){
                     previousFrame = i;
                     nextFrame = i + 1;
 
@@ -137,18 +127,18 @@ public:
                 }
             }
 
-            float ratio = Mathematics::Map(currentTime, keyFrames[previousFrame]->Time, keyFrames[nextFrame]->Time, 0.0f, 1.0f);
+            float ratio = Mathematics::Map(currentTime, keyFrames[previousFrame].Time, keyFrames[nextFrame].Time, 0.0f, 1.0f);
             float parameter = 0.0f;
 
             switch(interpMethod){
                 case Cosine:
-                    parameter = Mathematics::CosineInterpolation(keyFrames[previousFrame]->Value, keyFrames[nextFrame]->Value, ratio);
+                    parameter = Mathematics::CosineInterpolation(keyFrames[previousFrame].Value, keyFrames[nextFrame].Value, ratio);
                     break;
                 case Step:
-                    parameter = keyFrames[previousFrame]->Value;
+                    parameter = keyFrames[previousFrame].Value;
                     break;
                 default://Linear
-                    parameter = Mathematics::Map(ratio, 0.0f, 1.0f, keyFrames[previousFrame]->Value, keyFrames[nextFrame]->Value);
+                    parameter = Mathematics::Map(ratio, 0.0f, 1.0f, keyFrames[previousFrame].Value, keyFrames[nextFrame].Value);
                     break;
 
             }
@@ -156,7 +146,7 @@ public:
             parameterValue = parameter;
 
             if (currentParameters > 0){//Update if not parameters are linked
-                for(int i = 0; i < currentParameters; i++){
+                for(uint8_t i = 0; i < currentParameters; i++){
                     *(this->parameters[i]) = parameter;
                 }
             }
