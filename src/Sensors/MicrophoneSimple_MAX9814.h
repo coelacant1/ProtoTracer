@@ -16,6 +16,7 @@ private:
     float clipping = 1.0f;
     long previousMillis = 0;
     long startMillis = 0;
+    float currentValue = 0.0f;
 
 public:
     MicrophoneSimple(){
@@ -32,6 +33,10 @@ public:
         pinMode(pin, INPUT);
 
         startMillis = millis();
+    }
+
+    float GetCurrentValue(){
+        return currentValue;
     }
 
     float Update(){
@@ -59,7 +64,9 @@ public:
         previousReading = read;
         previousMillis = millis();
 
-        return Mathematics::Constrain(truncate, 0.0f, 1.0f);
+        currentValue = Mathematics::Constrain(truncate, 0.0f, 1.0f);
+
+        return currentValue;
     }
 
     float Update(float read){
@@ -86,6 +93,8 @@ public:
         previousReading = read;
         previousMillis = millis();
 
-        return Mathematics::Constrain(truncate, 0.0f, 1.0f);
+        currentValue = Mathematics::Constrain(truncate, 0.0f, 1.0f);
+
+        return currentValue;
     }
 };

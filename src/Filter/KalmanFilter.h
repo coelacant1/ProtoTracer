@@ -7,14 +7,6 @@ private:
 	float values[memory];
   	uint8_t currentAmount = 0;
 
-	void ShiftArray(float* arr){
-		for(uint8_t i = 0; i < memory; i++){
-			arr[i] = arr[i + 1];
-		}
-
-		arr[memory - 1] = 0.0f;
-	}
-
 public:
 	KalmanFilter() {
 		this->gain = 0.25f;
@@ -37,11 +29,14 @@ public:
 			values[currentAmount++] = value;
 		}
 		else{
-			ShiftArray(values);//pop first
+			for(uint8_t i = 0; i < memory - 1; i++){
+				values[i] = values[i + 1];
+			}
+
 			values[memory - 1] = value;
 		}
 
-		for(int i = 0; i < currentAmount; i++){
+		for(uint8_t i = 0; i < currentAmount; i++){
 			sum += values[i];
 		}
 

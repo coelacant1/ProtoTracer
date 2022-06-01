@@ -54,10 +54,6 @@ public:
         this->material = material;
     }
 
-    float GetCurrentValue(){
-        return MicrophoneFourier::GetCurrentValue();
-    }
-
     float* GetFourierData(){
         if(bounce){
             return bounceData;

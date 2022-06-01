@@ -7,6 +7,7 @@
 #include <IntervalTimer.h>
 #include "..\Math\Mathematics.h"
 #include "MicrophoneSimple_MAX9814.h"
+#include "..\Filter\DerivativeFilter.h"
 #include "..\Filter\FFTFilter.h"
 #include "..\Filter\PeakDetection.h"
 
@@ -18,23 +19,26 @@ private:
     static const uint8_t OutputBins = 128;
     static uint16_t sampleRate;
     static uint16_t samples;
+    static uint16_t samplesStorage;
     static uint8_t pin;
     static float minDB;
     static float maxDB;
+    static float threshold;
     static float currentValue;
     static bool samplesReady;
-    static PeakDetection peakDetection;
+    static PeakDetection<OutputBins> peakDetection;
+    static DerivativeFilter peakFilterRate;
 
     static uint16_t frequencyBins[OutputBins];
     static float inputSamp[FFTSize * 2];
+    static float inputStorage[FFTSize];
     static float outputMagn[FFTSize];
     static float outputAR[OutputBins];
     static float outputData[OutputBins];
     static float peaks[OutputBins];
-    static FFTFilter fftFilters[FFTSize];
+    static FFTFilter fftFilters[OutputBins];
     
     static arm_cfft_radix4_instance_f32 RadixFFT;
-    static MicrophoneSimple microphoneFilter;
 
     static float AverageMagnitude(uint16_t binL, uint16_t binH){
         float average = 0.0f;
@@ -47,20 +51,21 @@ private:
     }
 
     static void SamplerCallback(){
-        inputSamp[samples++] = (float32_t)analogRead(pin);
+        inputSamp[samples++] = (float)analogRead(pin);
         inputSamp[samples++] = 0.0f;
+
+        inputStorage[samplesStorage++] = inputSamp[samples - 2];
 
         if(samples >= FFTSize * 2){
             sampleTimer.end();
             samplesReady = true;
         }
-
-        currentValue = inputSamp[samples - 2];
     }
 
     static void StartSampler(){
         samplesReady = false;
         samples = 0;
+        samplesStorage = 0;
         sampleTimer.begin(SamplerCallback, 1000000 / sampleRate);
     }
 
@@ -72,7 +77,7 @@ public:
 
         pinMode(pin, INPUT);
         analogReadResolution(12);
-        analogReadAveraging(4);
+        //analogReadAveraging(8);
 
         MicrophoneFourier::sampleRate = sampleRate;
         MicrophoneFourier::samples = 0;
@@ -88,35 +93,36 @@ public:
         StartSampler();
     }
 
-    static float GetCurrentValue(){
-        return microphoneFilter.Update(currentValue);
-    }
-
     static float* GetFourier(uint8_t &bins){
         bins = OutputBins - 1;
 
         return outputData;
     }
 
+    static float GetCurrentMagnitude(){
+        return threshold;
+    }
+    
     static void Update(){
         if(!samplesReady) return;
 
         arm_cfft_radix4_init_f32(&RadixFFT, FFTSize, 0, 1);
         arm_cfft_radix4_f32(&RadixFFT, inputSamp);
         arm_cmplx_mag_f32(inputSamp, outputMagn, FFTSize);
-        /*
-        Serial.print(10);
-        Serial.print(',');
-        Serial.println(10);
-        */
+        
+        
+
+        float averageMagnitude = 0.0f;
+        
         for (uint8_t i = 0; i < OutputBins - 1; i++){
             float intensity = 20.0f * log10f(AverageMagnitude(i, i + 1));
 
             intensity = map(intensity, minDB, maxDB, 0.0f, 1.0f);
 
-            fftFilters[i].Update(intensity);
+            fftFilters[i].Filter(intensity);
 
             outputData[i] = intensity;
+            if (i % 12 == 0) averageMagnitude = peakFilterRate.Filter(inputStorage[i] / 4096.0f);
 
             if (i > 5){
                 float average = 0.0f;
@@ -129,8 +135,28 @@ public:
             }
         }
 
-        peakDetection.Calculate(outputAR, peaks);
+        averageMagnitude *= 10.0f;
+        threshold = powf(averageMagnitude, 2.0f);
+        threshold = threshold > 0.2f ? (threshold * 5.0f > 1.0f ? 1.0f : threshold * 5.0f) : 0.0f;
+
+        if (threshold > 0.2f){
+            peakDetection.Calculate(outputAR, peaks);
+        }
+        else{
+            for (uint8_t i = 0; i < OutputBins; i++) peaks[i] = 0;
+        }
         /*
+        Serial.print(inputStorage[0] / 4096.0f);
+        Serial.print(',');
+        Serial.print(averageMagnitude);
+        Serial.print(',');
+        Serial.println(threshold * 10.0f);
+        */
+        
+        Serial.print(10);
+        Serial.print(',');
+        Serial.println(10);
+
         for (uint8_t i = 0; i < OutputBins - 5; i++){
             for (uint8_t j = 0; j < 2; j++){
                 Serial.print(peaks[i] * 6.0f);
@@ -144,7 +170,7 @@ public:
             Serial.print(',');
             Serial.println(0);
         }
-        */
+        
         StartSampler();
     }
 };
@@ -155,15 +181,18 @@ const uint16_t MicrophoneFourier::FFTSize;
 const uint8_t MicrophoneFourier::OutputBins;
 uint16_t MicrophoneFourier::sampleRate;
 uint16_t MicrophoneFourier::samples;
+uint16_t MicrophoneFourier::samplesStorage;
 uint8_t MicrophoneFourier::pin;
 float MicrophoneFourier::minDB;
 float MicrophoneFourier::maxDB;
-float MicrophoneFourier::currentValue;
+float MicrophoneFourier::threshold;
 bool MicrophoneFourier::samplesReady;
-PeakDetection MicrophoneFourier::peakDetection = PeakDetection(OutputBins);
+PeakDetection<MicrophoneFourier::OutputBins> MicrophoneFourier::peakDetection;
+DerivativeFilter MicrophoneFourier::peakFilterRate;
 
 uint16_t MicrophoneFourier::frequencyBins[];
 float MicrophoneFourier::inputSamp[];
+float MicrophoneFourier::inputStorage[];
 float MicrophoneFourier::outputMagn[];
 float MicrophoneFourier::outputData[];
 float MicrophoneFourier::outputAR[];
@@ -171,4 +200,3 @@ float MicrophoneFourier::peaks[];
 FFTFilter MicrophoneFourier::fftFilters[];
 
 arm_cfft_radix4_instance_f32 MicrophoneFourier::RadixFFT;
-MicrophoneSimple MicrophoneFourier::microphoneFilter;

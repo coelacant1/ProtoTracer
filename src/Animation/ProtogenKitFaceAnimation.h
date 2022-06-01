@@ -188,7 +188,7 @@ public:
         sA.Update();
         sA.SetHueAngle(ratio * 360.0f * 4.0f);
 
-        float mouthMove = sA.GetCurrentValue();
+        float mouthMove = MicrophoneFourier::GetCurrentMagnitude();
 
         if (isBooped){
             Surprised();
