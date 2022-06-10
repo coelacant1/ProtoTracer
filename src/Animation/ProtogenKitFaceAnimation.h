@@ -17,7 +17,8 @@
 #include "..\Materials\CombineMaterial.h"
 
 #include "AnimationTracks\BlinkTrack.h"
-#include "AnimationTracks\MouthTrack.h"
+
+#include "..\Signals\FFTVoiceDetection.h"
 
 class ProtogenKitFaceAnimation : public Animation<2> {
 private:
@@ -39,7 +40,6 @@ private:
 
     //Animation controllers
     BlinkTrack<1> blink;
-    MouthTrack<1> mouth;
 
     FunctionGenerator fGenMatPos = FunctionGenerator(FunctionGenerator::Sine, -10.0f, 10.0f, 4.0f);
     FunctionGenerator fGenRotation = FunctionGenerator(FunctionGenerator::Sine, -30.0f, 30.0f, 2.6f);
@@ -53,6 +53,8 @@ private:
     uint8_t rainbowFaceIndex = 50;
     uint8_t angryFaceIndex = 51;
 
+    FFTVoiceDetection<128> voiceDetection;
+
     void LinkEasyEase(){
         eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::Anger), NukudeFace::Anger, 60, 0.0f, 1.0f);
         eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::Sadness), NukudeFace::Sadness, 60, 0.0f, 1.0f);
@@ -62,14 +64,14 @@ private:
         eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::LookUp), NukudeFace::LookUp, 60, 0.0f, 1.0f);
         eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::LookDown), NukudeFace::LookDown, 60, 0.0f, 1.0f);
 
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_ou), NukudeFace::vrc_v_ou, 5, 0.0f, 1.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_ee), NukudeFace::vrc_v_ee, 30, 0.0f, 1.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_ff), NukudeFace::vrc_v_ff, 30, 0.0f, 1.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_aa), NukudeFace::vrc_v_aa, 5, 0.0f, 1.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_nn), NukudeFace::vrc_v_nn, 30, 0.0f, 1.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_dd), NukudeFace::vrc_v_dd, 30, 0.0f, 1.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_ih), NukudeFace::vrc_v_ih, 30, 0.0f, 1.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_pp), NukudeFace::vrc_v_pp, 30, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_ee), NukudeFace::vrc_v_ee, 2, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_ih), NukudeFace::vrc_v_ih, 2, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_dd), NukudeFace::vrc_v_dd, 2, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_rr), NukudeFace::vrc_v_rr, 2, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_ch), NukudeFace::vrc_v_ch, 2, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_aa), NukudeFace::vrc_v_aa, 2, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_oh), NukudeFace::vrc_v_oh, 2, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_ss), NukudeFace::vrc_v_ss, 4, 0.0f, 1.0f);
         
         eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::HideBlush), NukudeFace::HideBlush, 40, 1.0f, 0.0f);
         
@@ -79,18 +81,25 @@ private:
 
     void LinkParameters(){
         blink.AddParameter(pM.GetMorphWeightReference(NukudeFace::Blink));
-        mouth.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_kk));
     }
 
     void ChangeInterpolationMethods(){
         eEA.SetInterpolationMethod(NukudeFace::HideBlush, EasyEaseInterpolation::Cosine);
         eEA.SetInterpolationMethod(NukudeFace::Sadness, EasyEaseInterpolation::Cosine);
-        eEA.SetInterpolationMethod(NukudeFace::vrc_v_ou, EasyEaseInterpolation::Cosine);
         eEA.SetInterpolationMethod(rainbowFaceIndex, EasyEaseInterpolation::Cosine);
         eEA.SetInterpolationMethod(angryFaceIndex, EasyEaseInterpolation::Cosine);
+        
+        eEA.SetInterpolationMethod(NukudeFace::vrc_v_ee, EasyEaseInterpolation::Linear);
+        eEA.SetInterpolationMethod(NukudeFace::vrc_v_ih, EasyEaseInterpolation::Linear);
+        eEA.SetInterpolationMethod(NukudeFace::vrc_v_dd, EasyEaseInterpolation::Linear);
+        eEA.SetInterpolationMethod(NukudeFace::vrc_v_rr, EasyEaseInterpolation::Linear);
+        eEA.SetInterpolationMethod(NukudeFace::vrc_v_ch, EasyEaseInterpolation::Linear);
+        eEA.SetInterpolationMethod(NukudeFace::vrc_v_aa, EasyEaseInterpolation::Linear);
+        eEA.SetInterpolationMethod(NukudeFace::vrc_v_oh, EasyEaseInterpolation::Linear);
+        eEA.SetInterpolationMethod(NukudeFace::vrc_v_ss, EasyEaseInterpolation::Linear);
 
-        eEA.SetConstants(NukudeFace::vrc_v_aa, 1.0f, 0.5f);
-        eEA.SetConstants(NukudeFace::vrc_v_ou, 0.9f, 0.45f);
+        //eEA.SetConstants(NukudeFace::vrc_v_aa, 1.0f, 0.5f);
+        //eEA.SetConstants(NukudeFace::vrc_v_kk, 0.9f, 0.45f);
     }
 
     void SetMaterials(){
@@ -122,14 +131,12 @@ public:
 
     void UpdateKeyFrameTracks(){
         blink.Update();
-        mouth.Update();
     }
 
     void Default(){}
 
     void Angry(){
         eEA.AddParameterFrame(NukudeFace::Anger, 1.0f);
-        eEA.AddParameterFrame(NukudeFace::vrc_v_ee, 1.0f);
         eEA.AddParameterFrame(angryFaceIndex, 0.8f);
     }
 
@@ -140,29 +147,24 @@ public:
 
     void Surprised(){
         eEA.AddParameterFrame(NukudeFace::Surprised, 1.0f);
-        eEA.AddParameterFrame(NukudeFace::vrc_v_aa, 1.0f);
         eEA.AddParameterFrame(NukudeFace::HideBlush, 0.0f);
         eEA.AddParameterFrame(rainbowFaceIndex, 0.6f);
     }
     
     void Doubt(){
         eEA.AddParameterFrame(NukudeFace::Doubt, 1.0f);
-        eEA.AddParameterFrame(NukudeFace::vrc_v_nn, 1.0f);
     }
     
     void Frown(){
         eEA.AddParameterFrame(NukudeFace::Frown, 1.0f);
-        eEA.AddParameterFrame(NukudeFace::vrc_v_dd, 1.0f);
     }
 
     void LookUp(){
         eEA.AddParameterFrame(NukudeFace::LookUp, 1.0f);
-        eEA.AddParameterFrame(NukudeFace::vrc_v_ih, 1.0f);
     }
 
     void LookDown(){
         eEA.AddParameterFrame(NukudeFace::LookDown, 1.0f);
-        eEA.AddParameterFrame(NukudeFace::vrc_v_pp, 1.0f);
     }
 
     void SpectrumAnalyzerFace(){
@@ -177,6 +179,24 @@ public:
         return pM.GetObject();
     }
 
+    void UpdateFFTVisemes(){
+        eEA.AddParameterFrame(NukudeFace::vrc_v_ss, MicrophoneFourier::GetCurrentMagnitude());
+
+        if(MicrophoneFourier::GetCurrentMagnitude() > 0.05f){
+            voiceDetection.Update(MicrophoneFourier::GetFourierFiltered(), MicrophoneFourier::GetSampleRate());
+            
+            //voiceDetection.PrintVisemes();
+    
+            eEA.AddParameterFrame(NukudeFace::vrc_v_ee, voiceDetection.GetViseme(voiceDetection.EE));
+            eEA.AddParameterFrame(NukudeFace::vrc_v_ih, voiceDetection.GetViseme(voiceDetection.AH));
+            eEA.AddParameterFrame(NukudeFace::vrc_v_dd, voiceDetection.GetViseme(voiceDetection.UH));
+            eEA.AddParameterFrame(NukudeFace::vrc_v_rr, voiceDetection.GetViseme(voiceDetection.AR));
+            eEA.AddParameterFrame(NukudeFace::vrc_v_ch, voiceDetection.GetViseme(voiceDetection.ER));
+            eEA.AddParameterFrame(NukudeFace::vrc_v_aa, voiceDetection.GetViseme(voiceDetection.AH));
+            eEA.AddParameterFrame(NukudeFace::vrc_v_oh, voiceDetection.GetViseme(voiceDetection.OO));
+        }
+    }
+
     void Update(float ratio) override {
         pM.Reset();
         pM.GetObject()->Enable();
@@ -185,10 +205,12 @@ public:
         bool isBooped = boop.isBooped();
         uint8_t mode = ButtonHandler::GetValue();//change by button press
 
-        sA.Update();
+        MicrophoneFourier::Update();
+        sA.Update(MicrophoneFourier::GetFourierFiltered());
         sA.SetHueAngle(ratio * 360.0f * 4.0f);
+        
 
-        float mouthMove = MicrophoneFourier::GetCurrentMagnitude();
+        UpdateFFTVisemes();
 
         if (isBooped){
             Surprised();
@@ -208,11 +230,10 @@ public:
         pM.SetMorphWeight(NukudeFace::BiggerNose, 1.0f);
         pM.SetMorphWeight(NukudeFace::MoveEye, 1.0f);
 
-        eEA.AddParameterFrame(NukudeFace::vrc_v_aa, mouthMove);
-        eEA.AddParameterFrame(NukudeFace::vrc_v_ou, mouthMove);
-
         eEA.Update();
         pM.Update();
+
+        Serial.println(*pM.GetMorphWeightReference(NukudeFace::vrc_v_ee));
         
         rainbowNoise.Update(ratio);
         rainbowSpiral.Update(ratio);

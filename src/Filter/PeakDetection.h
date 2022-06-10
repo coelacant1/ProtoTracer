@@ -40,37 +40,47 @@ public:
         this->influence = influence;
     }
 
-    void Calculate(float* data, float* peaks){
+    void Calculate(float* data, bool* peaks){
         float average = 0.0f;
         float stdDev = 0.0f;
+        float maxData = 0.0f;
 
         for (uint8_t i = 0; i < sampleSize; i++){
             filData[i] = 0.0f;
             avg[i] = 0.0f;
             std[i] = 0.0f;
+            maxData = max(maxData, data[i]);
         }
 
-        GetStdDev(0, lag, data, average, stdDev);
+        if(maxData > threshold){
+            GetStdDev(0, lag, data, average, stdDev);
 
-        avg[lag - 1] = average;
-        std[lag - 1] = stdDev;
+            avg[lag - 1] = average;
+            std[lag - 1] = stdDev;
 
-        for(uint8_t i = lag; i < sampleSize - lag; i++){
-            if(fabs(data[i] - avg[i - 1]) > threshold * std[i - 1]){
-                if(data[i] > avg[i - 1]) peaks[i] = 1.0f;
-                //else peaks[i] = -1.0f;
+            for(uint8_t i = lag; i < sampleSize - lag; i++){
+                if(fabs(data[i] - avg[i - 1]) > threshold * std[i - 1]){
+                    if(data[i] > avg[i - 1]) peaks[i] = true;
+                    //else peaks[i] = -1.0f;
 
-                filData[i] = influence * data[i] + (1.0f - influence) * filData[i - 1];
+                    filData[i] = influence * data[i] + (1.0f - influence) * filData[i - 1];
+                }
+                else{
+                    peaks[i] = false;
+                    filData[i] = data[i];
+                }
+
+                GetStdDev(i - lag + 1, i, data, avg[i], std[i]);
+                
+                avg[i] = average;
+                std[i] = stdDev;
             }
-            else{
-                peaks[i] = 0;
-                filData[i] = data[i];
-            }
-
-            GetStdDev(i - lag + 1, i, data, avg[i], std[i]);
-            
-            avg[i] = average;
-            std[i] = stdDev;
         }
+        else{
+            for (uint8_t i = 0; i < sampleSize; i++){
+                peaks[i] = false;
+            }
+        }
+        
     }
 };

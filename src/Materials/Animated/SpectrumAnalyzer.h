@@ -15,7 +15,7 @@ private:
     uint8_t colors;
     float* data;
     float bounceData[128];
-    uint8_t bins;
+    uint8_t bins = 128;
     bool mirrorY = false;
     bool flipY = false;
     bool bounce = false;
@@ -79,22 +79,16 @@ public:
         this->hueAngle = hueAngle;
     }
 
-    void Update(){
-        MicrophoneFourier::Update();
-        data = MicrophoneFourier::GetFourier(bins);
-
-        if(bounce){
-            for (uint8_t i = 0; i < 128; i++){
-                bounceData[i] = bPhy[i]->Calculate(data[i], 0.1f);
-            }
-        }
-    }
-
     void Update(float* readData){
         data = readData;
         
         for (uint8_t i = 0; i < 128; i++){
-            bounceData[i] = *(readData + i);
+            if(bounce){
+                bounceData[i] = bPhy[i]->Calculate(data[i], 0.1f);
+            }
+            else{
+                bounceData[i] = data[i];
+            }
         }
     }
 

@@ -3,13 +3,10 @@
 #include <Arduino.h>
 #include "KalmanFilter.h"
 #include "..\Math\Mathematics.h"
-#include "MinFilter.h"
 
 class FFTFilter{
 private:
-    MinFilter<40> minF = MinFilter<40>();
-    KalmanFilter<5> output = KalmanFilter<5>(0.5f);
-    float previousReading = 0.0f;
+    KalmanFilter<20> minKF = KalmanFilter<20>(0.05f);
     float outputValue = 0.0f;
 
 public:
@@ -20,14 +17,10 @@ public:
     }
 
     float Filter(float value){
-        float changeRate = value - previousReading;
-        float amplitude = fabs(changeRate);//mv.Filter(fabs(changeRate));
-        float minimum = minF.Filter(value);
-        float normalized = value - amplitude - minimum;
-        float truncate = normalized < 0 ? 0 : normalized;//output.Filter(normalized);
+        float valueAbs = fabs(value);
+        float normalized = valueAbs - minKF.Filter(valueAbs);//minimum;
         
-        previousReading = value;
-        outputValue = Mathematics::Constrain(truncate, 0.0f, 1.0f);
+        outputValue = Mathematics::Constrain(normalized * 2.0f, 0.0f, 1.0f);
         
         return outputValue;
     }
