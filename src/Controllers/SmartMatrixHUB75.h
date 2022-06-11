@@ -62,8 +62,8 @@ public:
 
                 rgb24 rgbColor = rgb24((uint16_t)camPixels.GetPixel(pixelNum)->Color.R, (uint16_t)camPixels.GetPixel(pixelNum)->Color.G, (uint16_t)camPixels.GetPixel(pixelNum)->Color.B);
 
-                backgroundLayer.drawPixel(x, y, rgbColor);
-                backgroundLayer.drawPixel(63 - x, y + 32, rgbColor);
+                backgroundLayer.drawPixel(x, (31 - y), rgbColor);
+                backgroundLayer.drawPixel(63 - x, (31 - y) + 32, rgbColor);
             }
         }
 

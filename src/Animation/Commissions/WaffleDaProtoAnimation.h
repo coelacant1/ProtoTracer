@@ -1,26 +1,26 @@
 #pragma once
 
-#include "Animation.h"
-#include "KeyFrameTrack.h"
-#include "EasyEaseAnimator.h"
-#include "..\Objects\Background.h"
-#include "..\Morph\NukudeFace.h"
-#include "..\Render\Scene.h"
-#include "..\Signals\FunctionGenerator.h"
-#include "..\Sensors\ButtonHandler.h"
-#include "..\Sensors\BoopSensor.h"
+#include "..\Animation.h"
+#include "..\KeyFrameTrack.h"
+#include "..\EasyEaseAnimator.h"
+#include "..\..\Objects\Background.h"
+#include "..\..\Morph\NukudeFace.h"
+#include "..\..\Render\Scene.h"
+#include "..\..\Signals\FunctionGenerator.h"
+#include "..\..\Sensors\ButtonHandler.h"
+#include "..\..\Sensors\BoopSensor.h"
 
-#include "..\Materials\Animated\SpectrumAnalyzer.h"
-#include "..\Materials\Animated\RainbowNoise.h"
-#include "..\Materials\Animated\RainbowSpiral.h"
+#include "..\..\Materials\Animated\SpectrumAnalyzer.h"
+#include "..\..\Materials\Animated\RainbowNoise.h"
+#include "..\..\Materials\Animated\RainbowSpiral.h"
 
-#include "..\Materials\CombineMaterial.h"
+#include "..\..\Materials\CombineMaterial.h"
 
-#include "AnimationTracks\BlinkTrack.h"
+#include "..\AnimationTracks\BlinkTrack.h"
 
-#include "..\Signals\FFTVoiceDetection.h"
+#include "..\..\Signals\FFTVoiceDetection.h"
 
-class ProtogenHUB75Animation : public Animation<2> {
+class ProtogenKitFaceAnimation : public Animation<2> {
 private:
     NukudeFace pM;
     Background background;
@@ -31,12 +31,12 @@ private:
     RainbowSpiral rainbowSpiral;
     SimpleMaterial redMaterial = SimpleMaterial(RGBColor(255, 0, 0));
     
-    RGBColor gradientSpectrum[2] = {RGBColor(10, 255, 0), RGBColor(0, 255, 10)};
+    RGBColor gradientSpectrum[2] = {RGBColor(221, 15, 125), RGBColor(214, 35, 168)};
     GradientMaterial<2> gradientMat = GradientMaterial<2>(gradientSpectrum, 350.0f, false);
     
     CombineMaterial<4> faceMaterial;
     
-    SpectrumAnalyzer sA = SpectrumAnalyzer(A0, Vector2D(200, 100), Vector2D(100, 50), true, true); 
+    SpectrumAnalyzer sA = SpectrumAnalyzer(22, Vector2D(250, 200), Vector2D(160, 125), true, true);
 
     //Animation controllers
     BlinkTrack<1> blink;
@@ -44,8 +44,8 @@ private:
     FunctionGenerator fGenMatPos = FunctionGenerator(FunctionGenerator::Sine, -10.0f, 10.0f, 4.0f);
     FunctionGenerator fGenRotation = FunctionGenerator(FunctionGenerator::Sine, -30.0f, 30.0f, 2.6f);
     FunctionGenerator fGenScale = FunctionGenerator(FunctionGenerator::Sine, 3.0f, 8.0f, 4.2f);
-    FunctionGenerator fGenMatXMove = FunctionGenerator(FunctionGenerator::Sine, -2.0f, 2.0f, 5.3f);
-    FunctionGenerator fGenMatYMove = FunctionGenerator(FunctionGenerator::Sine, -2.0f, 2.0f, 6.7f);
+    FunctionGenerator fGenMatXMove = FunctionGenerator(FunctionGenerator::Sine, -3.5f, 3.5f, 5.3f);
+    FunctionGenerator fGenMatYMove = FunctionGenerator(FunctionGenerator::Sine, -3.5f, 3.5f, 6.7f);
 
     BoopSensor boop;
     float rainbowFaceMix = 0.0f;
@@ -101,13 +101,13 @@ private:
 
     void SetMaterials(){
         faceMaterial.AddMaterial(Material::Add, &gradientMat, 1.0f);
-        faceMaterial.AddMaterial(Material::Lighten, &rainbowNoise, 0.7f);
+        faceMaterial.AddMaterial(Material::Lighten, &rainbowNoise, 0.6f);
         faceMaterial.AddMaterial(Material::Replace, &rainbowSpiral, 0.0f);
         faceMaterial.AddMaterial(Material::Replace, &redMaterial, 0.0f);
     }
 
 public:
-    ProtogenHUB75Animation() {
+    ProtogenKitFaceAnimation() {
         scene.AddObject(pM.GetObject());
         scene.AddObject(background.GetObject());
 
@@ -120,10 +120,10 @@ public:
 
         pM.GetObject()->SetMaterial(&faceMaterial);
 
-        ButtonHandler::Initialize(20, 6, 2000);//8 is number of faces
+        ButtonHandler::Initialize(0, 6, 2000);//8 is number of faces
         boop.Initialize(5);
 
-        background.GetObject()->SetMaterial(&sA);//sA);
+        background.GetObject()->SetMaterial(&sA);
     }
 
     void UpdateKeyFrameTracks(){
@@ -145,7 +145,7 @@ public:
     void Surprised(){
         eEA.AddParameterFrame(NukudeFace::Surprised, 1.0f);
         eEA.AddParameterFrame(NukudeFace::HideBlush, 0.0f);
-        eEA.AddParameterFrame(rainbowFaceIndex, 0.4f);
+        eEA.AddParameterFrame(rainbowFaceIndex, 0.6f);
     }
     
     void Doubt(){
@@ -180,7 +180,7 @@ public:
         bool useMicrophone = ButtonHandler::GetHoldingToggle();
 
         if(useMicrophone){
-            eEA.AddParameterFrame(NukudeFace::vrc_v_ss, MicrophoneFourier::GetCurrentMagnitude() / 2.0f);
+            eEA.AddParameterFrame(NukudeFace::vrc_v_ss, MicrophoneFourier::GetCurrentMagnitude());
 
             if(MicrophoneFourier::GetCurrentMagnitude() > 0.05f){
                 voiceDetection.Update(MicrophoneFourier::GetFourierFiltered(), MicrophoneFourier::GetSampleRate());
@@ -237,9 +237,8 @@ public:
         faceMaterial.SetOpacity(2, rainbowFaceMix);//set face to spiral
         faceMaterial.SetOpacity(3, angryFaceMix);//set face to angry
         
-        pM.GetObject()->GetTransform()->SetRotation(Vector3D(0.0f, 0.0f, -7.5f));
-        pM.GetObject()->GetTransform()->SetPosition(Vector3D(125.0f + fGenMatXMove.Update(), -22.5f + fGenMatYMove.Update(), 600.0f));
-        pM.GetObject()->GetTransform()->SetScale(Vector3D(-1.05f, 0.585f, 0.8f));
+        pM.GetObject()->GetTransform()->SetPosition(Vector3D(170.0f + fGenMatXMove.Update(), 10.0f + fGenMatYMove.Update(), 600.0f));
+        pM.GetObject()->GetTransform()->SetScale(Vector3D(-1.0f, 0.625f, 0.7f));
 
         pM.GetObject()->UpdateTransform();
     }

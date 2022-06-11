@@ -20,9 +20,9 @@ public:
         float sweep = fGenMatGradient.Update();
         float sShift = sweep * 0.004f + 0.005f;
 
-        simplexNoiseDepth += 0.1f;
+        simplexNoiseDepth += 0.001f;
 
-        gNoiseMat.SetGradientPeriod(0.5f + sweep * 6.0f);
+        gNoiseMat.SetGradientPeriod(0.5f + sweep * 12.0f);
         gNoiseMat.HueShift(ratio * 360 * 2);
         sNoise.SetScale(Vector3D(sShift, sShift, sShift));
         sNoise.SetZPosition(simplexNoiseDepth);

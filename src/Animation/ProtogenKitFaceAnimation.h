@@ -71,11 +71,11 @@ private:
         eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_ch), NukudeFace::vrc_v_ch, 2, 0.0f, 1.0f);
         eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_aa), NukudeFace::vrc_v_aa, 2, 0.0f, 1.0f);
         eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_oh), NukudeFace::vrc_v_oh, 2, 0.0f, 1.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_ss), NukudeFace::vrc_v_ss, 4, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_ss), NukudeFace::vrc_v_ss, 2, 0.0f, 1.0f);
         
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::HideBlush), NukudeFace::HideBlush, 40, 1.0f, 0.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::HideBlush), NukudeFace::HideBlush, 30, 1.0f, 0.0f);
         
-        eEA.AddParameter(&rainbowFaceMix, rainbowFaceIndex, 80, 0.0f, 1.0f);
+        eEA.AddParameter(&rainbowFaceMix, rainbowFaceIndex, 50, 0.0f, 1.0f);
         eEA.AddParameter(&angryFaceMix, angryFaceIndex, 40, 0.0f, 1.0f);
     }
 
@@ -97,9 +97,6 @@ private:
         eEA.SetInterpolationMethod(NukudeFace::vrc_v_aa, EasyEaseInterpolation::Linear);
         eEA.SetInterpolationMethod(NukudeFace::vrc_v_oh, EasyEaseInterpolation::Linear);
         eEA.SetInterpolationMethod(NukudeFace::vrc_v_ss, EasyEaseInterpolation::Linear);
-
-        //eEA.SetConstants(NukudeFace::vrc_v_aa, 1.0f, 0.5f);
-        //eEA.SetConstants(NukudeFace::vrc_v_kk, 0.9f, 0.45f);
     }
 
     void SetMaterials(){
@@ -123,7 +120,7 @@ public:
 
         pM.GetObject()->SetMaterial(&faceMaterial);
 
-        ButtonHandler::Initialize(0, 6);//8 is number of faces
+        ButtonHandler::Initialize(0, 6, 2000);//8 is number of faces
         boop.Initialize(5);
 
         background.GetObject()->SetMaterial(&sA);
@@ -180,20 +177,22 @@ public:
     }
 
     void UpdateFFTVisemes(){
-        eEA.AddParameterFrame(NukudeFace::vrc_v_ss, MicrophoneFourier::GetCurrentMagnitude());
+        bool useMicrophone = ButtonHandler::GetHoldingToggle();
 
-        if(MicrophoneFourier::GetCurrentMagnitude() > 0.05f){
-            voiceDetection.Update(MicrophoneFourier::GetFourierFiltered(), MicrophoneFourier::GetSampleRate());
-            
-            //voiceDetection.PrintVisemes();
-    
-            eEA.AddParameterFrame(NukudeFace::vrc_v_ee, voiceDetection.GetViseme(voiceDetection.EE));
-            eEA.AddParameterFrame(NukudeFace::vrc_v_ih, voiceDetection.GetViseme(voiceDetection.AH));
-            eEA.AddParameterFrame(NukudeFace::vrc_v_dd, voiceDetection.GetViseme(voiceDetection.UH));
-            eEA.AddParameterFrame(NukudeFace::vrc_v_rr, voiceDetection.GetViseme(voiceDetection.AR));
-            eEA.AddParameterFrame(NukudeFace::vrc_v_ch, voiceDetection.GetViseme(voiceDetection.ER));
-            eEA.AddParameterFrame(NukudeFace::vrc_v_aa, voiceDetection.GetViseme(voiceDetection.AH));
-            eEA.AddParameterFrame(NukudeFace::vrc_v_oh, voiceDetection.GetViseme(voiceDetection.OO));
+        if(useMicrophone){
+            eEA.AddParameterFrame(NukudeFace::vrc_v_ss, MicrophoneFourier::GetCurrentMagnitude());
+
+            if(MicrophoneFourier::GetCurrentMagnitude() > 0.05f){
+                voiceDetection.Update(MicrophoneFourier::GetFourierFiltered(), MicrophoneFourier::GetSampleRate());
+        
+                eEA.AddParameterFrame(NukudeFace::vrc_v_ee, voiceDetection.GetViseme(voiceDetection.EE));
+                eEA.AddParameterFrame(NukudeFace::vrc_v_ih, voiceDetection.GetViseme(voiceDetection.AH));
+                eEA.AddParameterFrame(NukudeFace::vrc_v_dd, voiceDetection.GetViseme(voiceDetection.UH));
+                eEA.AddParameterFrame(NukudeFace::vrc_v_rr, voiceDetection.GetViseme(voiceDetection.AR));
+                eEA.AddParameterFrame(NukudeFace::vrc_v_ch, voiceDetection.GetViseme(voiceDetection.ER));
+                eEA.AddParameterFrame(NukudeFace::vrc_v_aa, voiceDetection.GetViseme(voiceDetection.AH));
+                eEA.AddParameterFrame(NukudeFace::vrc_v_oh, voiceDetection.GetViseme(voiceDetection.OO));
+            }
         }
     }
 
@@ -209,10 +208,9 @@ public:
         sA.Update(MicrophoneFourier::GetFourierFiltered());
         sA.SetHueAngle(ratio * 360.0f * 4.0f);
         
-
         UpdateFFTVisemes();
 
-        if (isBooped){
+        if (isBooped && mode != 6){
             Surprised();
         }
         else{
@@ -232,8 +230,6 @@ public:
 
         eEA.Update();
         pM.Update();
-
-        Serial.println(*pM.GetMorphWeightReference(NukudeFace::vrc_v_ee));
         
         rainbowNoise.Update(ratio);
         rainbowSpiral.Update(ratio);

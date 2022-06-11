@@ -128,44 +128,6 @@ private:
             f1 = float(secondStart + secondCount / 2);
             f2 = float(firstStart + firstCount / 2);
         }
-        
-        /*
-        Serial.print(10);
-        Serial.print(',');
-        Serial.print(10);
-        Serial.print(',');
-        Serial.print(10);
-        Serial.print(',');
-        Serial.print(10);
-        Serial.print(',');
-        Serial.println(10);
-
-        for (uint8_t i = 0; i < peakCount - 5; i++){
-            for (uint8_t j = 0; j < 2; j++){
-                Serial.print(i > firstStart && i < firstStart + firstCount ? 4 : 0);
-                Serial.print(',');
-                Serial.print(i > secondStart && i < secondStart + secondCount ? 4 : 0);
-                Serial.print(',');
-                Serial.print(peaksBinary[i]);
-                Serial.print(',');
-                Serial.print(peakDensity[i]);
-                Serial.print(',');
-                Serial.println(peaks[i]);
-            }
-        }
-
-        for (uint16_t i = 0; i < 128; i++){
-            Serial.print(0);
-            Serial.print(',');
-            Serial.print(0);
-            Serial.print(',');
-            Serial.print(0);
-            Serial.print(',');
-            Serial.print(0);
-            Serial.print(',');
-            Serial.println(0);
-        }
-        */
     }
 
     void CalculateVisemeGroup(){
@@ -241,6 +203,10 @@ public:
                     //Serial.println("?");
                     break;
             }
+    }
+
+    void ResetVisemes(){
+        for(uint8_t i = 0; i < visemeCount; i++) *visRatios[i] = 0.0f;
     }
 
     void Update(float* peaks, float maxFrequency){

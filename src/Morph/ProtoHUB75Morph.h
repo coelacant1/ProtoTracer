@@ -7,7 +7,7 @@
 #include "..\Render\IndexGroup.h"
 #include "..\Render\Object3D.h"
 
-class ProtoArtleck{
+class ProtoHUB75{
 public:
     enum Morphs {
         Doubt,
@@ -66,7 +66,7 @@ private:
     };
 
 public:
-    ProtoArtleck(){}
+    ProtoHUB75(){}
 
     Object3D* GetObject(){
         return &basisObj;

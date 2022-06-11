@@ -249,7 +249,7 @@ public:
     RGBColor GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) override {
         position = position * noiseScale;
 
-        float noise = Noise(position.X, position.Y, position.Z);
+        float noise = Noise(position.X, position.Y, zPosition);
         
         return gradientMaterial->GetRGB(Vector3D(noise, 0, 0), Vector3D(), Vector3D());
     }

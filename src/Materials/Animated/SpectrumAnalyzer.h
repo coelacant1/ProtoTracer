@@ -27,7 +27,7 @@ private:
 
 public:
     SpectrumAnalyzer(uint8_t pin, Vector2D size, Vector2D offset, bool bounce = false, bool flipY = false, bool mirrorY = false){
-        this->size = size;
+        this->size = size.Divide(2.0f);
         this->offset = offset;
         this->mirrorY = mirrorY;
         this->flipY = flipY;
@@ -64,7 +64,7 @@ public:
     }
 
     void SetSize(Vector2D size){
-        this->size = size;
+        this->size = size.Divide(2.0f);
     }
 
     void SetPosition(Vector2D offset){
@@ -93,39 +93,35 @@ public:
     }
 
     RGBColor GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) override {
-        Vector2D rPos = angle != 0.0f ? Vector2D(position.X, position.Y).Rotate(angle, offset) - offset : Vector2D(position.X, position.Y) - offset;
+        Vector2D rPos = Mathematics::IsClose(angle, 0.0f, 0.1f) ? Vector2D(position.X, position.Y).Rotate(angle, offset) - offset : Vector2D(position.X, position.Y) - offset;
 
-        if (rPos.X < -size.X / 2.0f || rPos.X > size.X / 2.0f || rPos.Y < -size.Y / 2.0f || rPos.Y > size.Y / 2.0f) return RGBColor();
+        if (-size.X > rPos.X && size.X < rPos.X) return RGBColor();
+        if (-size.Y > rPos.Y && size.Y < rPos.Y) return RGBColor();
+        
+        uint8_t x = uint8_t(Mathematics::Map(rPos.X, -size.X, size.X, float(bins), 0.0f));
 
-        uint8_t x = (unsigned int)Mathematics::Map(rPos.X, size.X / -2.0f, size.X / 2.0f, bins, 0);
+        if(bins > x && 0 > x) return RGBColor();
 
-        if(x < 0 || x >= uint8_t(bins - 1)) return RGBColor();
-
-        float xDistance = size.X / float(bins) * x - size.X / 2.0f;
-        float xDistance2 = size.X / float(bins) * (x + 1) - size.X / 2.0f;
+        float xDistance = size.X / float(bins) * x - size.X;
+        float xDistance2 = size.X / float(bins) * (x + 1) - size.X;
         float ratio = Mathematics::Map(rPos.X, xDistance, xDistance2, 0.0f, 1.0f);//ratio between two bins
         float height = bounce ? Mathematics::CosineInterpolation(bounceData[x], bounceData[x + 1], ratio) : Mathematics::CosineInterpolation(data[x], data[x + 1], ratio);//0->1.0f of max height of color
         float yColor;
 
         if(mirrorY){
-            yColor = Mathematics::Map(fabs(rPos.Y), size.Y / 2.0f, 0.0f, 1.0f, 0.0f);
+            yColor = Mathematics::Map(fabsf(rPos.Y), size.Y, 0.0f, 1.0f, 0.0f);
         }
         else{
-            yColor = Mathematics::Map(rPos.Y, -size.Y / 2.0f, size.Y / 2.0f, 1.0f, 0.0f);
+            yColor = Mathematics::Map(rPos.Y, -size.Y, size.Y, 1.0f, 0.0f);
         }
         
         if(flipY) yColor = 1.0f - yColor;
 
-        RGBColor color;
-
-        if (yColor >= 0.0f && yColor <= height){
-            color = material->GetRGB(Vector3D(1.0f - height - yColor, 0, 0), Vector3D(), Vector3D()).HueShift(hueAngle);
+        if (yColor <= height){
+            return material->GetRGB(Vector3D(1.0f - height - yColor, 0, 0), Vector3D(), Vector3D()).HueShift(hueAngle);
         }
         else{
-            color = RGBColor();
+            return RGBColor(0, 0, 0);
         }
-
-
-        return color;
     }
 };
