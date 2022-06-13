@@ -7,7 +7,7 @@
 #include "..\Morph\NukudeFace.h"
 #include "..\Render\Scene.h"
 #include "..\Signals\FunctionGenerator.h"
-#include "..\Sensors\ButtonHandler.h"
+#include "..\Sensors\MenuButtonHandler.h"
 #include "..\Sensors\BoopSensor.h"
 
 #include "..\Materials\Animated\SpectrumAnalyzer.h"
@@ -127,7 +127,7 @@ public:
 
         pM.GetObject()->SetMaterial(&faceMaterial);
 
-        ButtonHandler::Initialize(20, 6, 2000);//8 is number of faces
+        MenuButtonHandler::Initialize(20, 7, 500);//7 is number of faces
         boop.Initialize(5);
 
         background.GetObject()->SetMaterial(&sA);//sA);
@@ -185,9 +185,7 @@ public:
     }
 
     void UpdateFFTVisemes(){
-        bool useMicrophone = ButtonHandler::GetHoldingToggle();
-
-        if(useMicrophone){
+        if(MenuButtonHandler::UseMicrophone()){
             eEA.AddParameterFrame(NukudeFace::vrc_v_ss, MicrophoneFourier::GetCurrentMagnitude() / 2.0f);
 
             if(MicrophoneFourier::GetCurrentMagnitude() > 0.05f){
@@ -209,12 +207,14 @@ public:
         pM.GetObject()->Enable();
         background.GetObject()->Disable();
 
-        bool isBooped = boop.isBooped();
-        uint8_t mode = ButtonHandler::GetValue();//change by button press
+        bool isBooped = MenuButtonHandler::UseBoopSensor() ? boop.isBooped() : 0;
+        uint8_t mode = MenuButtonHandler::GetFaceState();//change by button press
 
         MicrophoneFourier::Update();
         sA.Update(MicrophoneFourier::GetFourierFiltered());
         sA.SetHueAngle(ratio * 360.0f * 4.0f);
+        sA.SetMirrorYState(MenuButtonHandler::MirrorSpectrumAnalyzer());
+        sA.SetFlipYState(!MenuButtonHandler::MirrorSpectrumAnalyzer());
         
         UpdateFFTVisemes();
 

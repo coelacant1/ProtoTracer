@@ -50,6 +50,14 @@ public:
 
     }
 
+    void SetMirrorYState(bool state){
+        mirrorY = state;
+    }
+
+    void SetFlipYState(bool state){
+        flipY = state;
+    }
+
     void SetMaterial(Material* material){
         this->material = material;
     }

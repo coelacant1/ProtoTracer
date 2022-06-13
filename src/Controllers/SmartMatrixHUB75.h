@@ -43,16 +43,17 @@ public:
         matrix.addLayer(&backgroundLayer);
         matrix.begin();
         
-        matrix.setBrightness(255);
         matrix.setRefreshRate(240);
 
         backgroundLayer.swapBuffers();//for ESP32 - first is ignored
     }
 
     void Display() override {
+        matrix.setBrightness(brightness);
+
         for (int i = 0; i < 2048; i++){
             if (camPixels.GetPixel(i)->Color.R == 0 && camPixels.GetPixel(i)->Color.G == 0 && camPixels.GetPixel(i)->Color.B == 0){
-                camPixels.GetPixel(i)->Color = camPixels.GetPixel(i)->Color.Scale(brightness).Add(16);
+                camPixels.GetPixel(i)->Color = camPixels.GetPixel(i)->Color.Add(16);
             }
         }
 

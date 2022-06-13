@@ -29,7 +29,7 @@ public:
         ButtonHandler::holdingToggle = holdingToggle;
     }
 
-    static bool GetHoldingToggle(){
+    static bool GetHoldingState(){
         long currentTime = millis();
 
         if(digitalRead(pin)){//pin on, not pressed

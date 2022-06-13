@@ -26,7 +26,7 @@
 //#include "Controllers\ProtoDRController.h"
 #include "Controllers\SmartMatrixHUB75.h"
 
-const uint8_t maxBrightness = 50;
+uint8_t maxBrightness = 50;
 #ifdef RIGHTFACE
 Controller* controller = new ProtoDRController(maxBrightness, ProtoDRController::RIGHT);
 #else
@@ -46,6 +46,8 @@ void setup() {
 void loop() {
     float ratio = (float)(millis() % 5000) / 5000.0f;
     animation.UpdateTime(ratio);
+
+    controller.SetBrightness(MenuButtonHandler::GetBrightness());
 
     controller.Render(animation.GetScene());
 

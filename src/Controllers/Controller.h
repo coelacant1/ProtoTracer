@@ -41,6 +41,14 @@ public:
         renderTime = ((float)(micros() - previousTime)) / 1000000.0f;
     }
 
+    void SetBrightness(uint8_t maxBrightness){
+        this->maxBrightness = maxBrightness;
+        
+        if(isOn){//past soft start
+            this->brightness = maxBrightness;
+        }
+    }
+
     virtual void Initialize() = 0;
     virtual void Display() = 0;
 
