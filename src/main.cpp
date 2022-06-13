@@ -15,7 +15,7 @@
 //#include "Animation\PikachuAnimation.h"
 //#include "Animation\BeeAnimation.h"
 //#include "Animation\ProtogenArtleckAnimation.h"
-#include "Animation\ProtogenHUB75Animation.h"
+#include "Animation\Commissions\ArtleckAnimationV2.h"
 //#include "Animation\DeltaruneAnimation.h"
 //#include "Animation\NukudeFaceAnimation.h"
 //#include "Animation\Commissions\WaffleDaProtoAnimation.h"
@@ -34,7 +34,7 @@ Controller* controller = new ProtoDRController(maxBrightness, ProtoDRController:
 #endif
 //KaiborgV1D1Controller controller = KaiborgV1D1Controller(maxBrightness);
 SmartMatrixHUB75 controller = SmartMatrixHUB75(maxBrightness);
-ProtogenHUB75Animation animation = ProtogenHUB75Animation();
+ArtleckAnimationV2 animation = ArtleckAnimationV2();
 
 void setup() {
     Serial.begin(115200);
