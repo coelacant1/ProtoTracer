@@ -28,15 +28,11 @@ public:
     }
 
     GradientMaterial(RGBColor* rgbColors, float gradientPeriod, bool isRadial, bool isStepped){
-        this->colorCount = colorCount;
         this->gradientPeriod = gradientPeriod;
         this->isRadial = isRadial;
         this->isStepped = isStepped;
 
-        this->rgbColors = new RGBColor[colorCount];
-        this->baseRGBColors = new RGBColor[colorCount];
-
-        for(int i = 0; i < colorCount; i++){
+        for(uint8_t i = 0; i < colorCount; i++){
             this->rgbColors[i] = rgbColors[i];
             this->baseRGBColors[i] = rgbColors[i];
         }

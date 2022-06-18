@@ -31,11 +31,12 @@ private:
     RainbowSpiral rainbowSpiral;
     SimpleMaterial redMaterial = SimpleMaterial(RGBColor(255, 0, 0));
     SimpleMaterial blueMaterial = SimpleMaterial(RGBColor(0, 0, 255));
+    SimpleMaterial purpleMaterial = SimpleMaterial(RGBColor(255, 0, 255));
     
     RGBColor gradientSpectrum[2] = {RGBColor(255, 255, 0), RGBColor(255, 128, 0)};
     GradientMaterial<2> gradientMat = GradientMaterial<2>(gradientSpectrum, 350.0f, false);
     
-    CombineMaterial<5> faceMaterial;
+    CombineMaterial<6> faceMaterial;
     
     SpectrumAnalyzer sA = SpectrumAnalyzer(A0, Vector2D(200, 100), Vector2D(100, 50), true, true); 
 
@@ -53,9 +54,11 @@ private:
     float rainbowFaceMix = 0.0f;
     float angryFaceMix = 0.0f;
     float sadFaceMix = 0.0f;
+    float purpleFaceMix = 0.0f;
     uint8_t rainbowFaceIndex = 50;
     uint8_t angryFaceIndex = 51;
     uint8_t sadFaceIndex = 52;
+    uint8_t purpleFaceIndex = 53;
 
     FFTVoiceDetection<128> voiceDetection;
 
@@ -80,6 +83,7 @@ private:
         eEA.AddParameter(&rainbowFaceMix, rainbowFaceIndex, 50, 0.0f, 1.0f);
         eEA.AddParameter(&angryFaceMix, angryFaceIndex, 40, 0.0f, 1.0f);
         eEA.AddParameter(&sadFaceMix, sadFaceIndex, 40, 0.0f, 1.0f);
+        eEA.AddParameter(&purpleFaceMix, purpleFaceIndex, 40, 0.0f, 1.0f);
     }
 
     void LinkParameters(){
@@ -91,6 +95,7 @@ private:
         eEA.SetInterpolationMethod(rainbowFaceIndex, EasyEaseInterpolation::Cosine);
         eEA.SetInterpolationMethod(angryFaceIndex, EasyEaseInterpolation::Cosine);
         eEA.SetInterpolationMethod(sadFaceIndex, EasyEaseInterpolation::Cosine);
+        eEA.SetInterpolationMethod(purpleFaceIndex, EasyEaseInterpolation::Cosine);
         
         eEA.SetInterpolationMethod(ArtleckFace::vrc_v_ee, EasyEaseInterpolation::Linear);
         eEA.SetInterpolationMethod(ArtleckFace::vrc_v_ih, EasyEaseInterpolation::Linear);
@@ -108,6 +113,7 @@ private:
         faceMaterial.AddMaterial(Material::Replace, &rainbowSpiral, 0.0f);
         faceMaterial.AddMaterial(Material::Replace, &redMaterial, 0.0f);
         faceMaterial.AddMaterial(Material::Replace, &blueMaterial, 0.0f);
+        faceMaterial.AddMaterial(Material::Replace, &purpleMaterial, 0.0f);
     }
 
 public:
@@ -149,7 +155,7 @@ public:
 
     void Surprised(){
         eEA.AddParameterFrame(ArtleckFace::Surprised, 1.0f);
-        eEA.AddParameterFrame(rainbowFaceIndex, 0.4f);
+        eEA.AddParameterFrame(purpleFaceIndex, 0.8f);
     }
     
     void Doubt(){
@@ -215,11 +221,11 @@ public:
         UpdateFFTVisemes();
 
         if (isBooped && mode != 6){
-            Surprised();
+            Angry();
         }
         else{
             if (mode == 0) Default();
-            else if (mode == 1) Angry();
+            else if (mode == 1) Surprised();
             else if (mode == 2) Doubt();
             else if (mode == 3) Frown();
             else if (mode == 4) LookUp();
@@ -238,10 +244,11 @@ public:
         faceMaterial.SetOpacity(2, rainbowFaceMix);//set face to spiral
         faceMaterial.SetOpacity(3, angryFaceMix);//set face to angry
         faceMaterial.SetOpacity(4, sadFaceMix);//set face to sad
+        faceMaterial.SetOpacity(5, purpleFaceMix);//set face to purple
         
-        pM.GetObject()->GetTransform()->SetRotation(Vector3D(0.0f, 0.0f, -7.5f));
-        pM.GetObject()->GetTransform()->SetPosition(Vector3D(100.0f + fGenMatXMove.Update(), -22.5f + fGenMatYMove.Update(), 600.0f));
-        pM.GetObject()->GetTransform()->SetScale(Vector3D(-0.85f, 0.65f, 0.8f));
+        pM.GetObject()->GetTransform()->SetRotation(Vector3D(0.0f, 0.0f, -15.0f));
+        pM.GetObject()->GetTransform()->SetPosition(Vector3D(82.5f + fGenMatXMove.Update(), -25.0f + fGenMatYMove.Update(), 600.0f));
+        pM.GetObject()->GetTransform()->SetScale(Vector3D(-0.85f, 0.70f, 0.8f));
 
         pM.GetObject()->UpdateTransform();
     }

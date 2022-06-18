@@ -123,7 +123,7 @@ public:
         MenuButtonHandler::maxValue[3] = 2;//boop sensor on or off
         MenuButtonHandler::maxValue[4] = 2;//spectrum analyzer mode
 
-        if(!ReadEEPROMInitialize()){
+        if(ReadEEPROMInitialize() == 255){//will default to 255, if was previously set will equal 1
             SetEEPOMBrightness(1);
             SetEEPOMMicrophone(1);
             SetEEPOMBoopSensor(1);

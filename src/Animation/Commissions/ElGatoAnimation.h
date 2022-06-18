@@ -1,40 +1,50 @@
 #pragma once
 
-#include "Animation.h"
-#include "KeyFrameTrack.h"
-#include "EasyEaseAnimator.h"
-#include "..\Objects\Background.h"
-#include "..\Morph\NukudeFace.h"
-#include "..\Render\Scene.h"
-#include "..\Signals\FunctionGenerator.h"
-#include "..\Sensors\MenuButtonHandler.h"
-#include "..\Sensors\BoopSensor.h"
+#include "..\Animation.h"
+#include "..\KeyFrameTrack.h"
+#include "..\EasyEaseAnimator.h"
+#include "..\..\Objects\Background.h"
+#include "..\..\Morph\NukudeFace.h"
+#include "..\..\Render\Scene.h"
+#include "..\..\Signals\FunctionGenerator.h"
+#include "..\..\Sensors\MenuButtonHandler.h"
+#include "..\..\Sensors\BoopSensor.h"
 
-#include "..\Materials\Animated\SpectrumAnalyzer.h"
-#include "..\Materials\Animated\RainbowNoise.h"
-#include "..\Materials\Animated\RainbowSpiral.h"
+#include "..\..\Materials\Animated\SpectrumAnalyzer.h"
+#include "..\..\Materials\Animated\RainbowNoise.h"
+#include "..\..\Materials\Animated\RainbowSpiral.h"
 
-#include "..\Materials\CombineMaterial.h"
+#include "..\..\Materials\CombineMaterial.h"
 
-#include "AnimationTracks\BlinkTrack.h"
+#include "..\AnimationTracks\BlinkTrack.h"
 
-#include "..\Signals\FFTVoiceDetection.h"
+#include "..\..\Signals\FFTVoiceDetection.h"
 
-class ProtogenKitFaceAnimation : public Animation<2> {
+class ElGatoAnimation : public Animation<2> {
 private:
     NukudeFace pM;
     Background background;
-    EasyEaseAnimator<20> eEA = EasyEaseAnimator<20>(EasyEaseInterpolation::Overshoot, 1.0f, 0.35f);
+    EasyEaseAnimator<25> eEA = EasyEaseAnimator<25>(EasyEaseInterpolation::Overshoot, 1.0f, 0.35f);
 
     //Materials
     RainbowNoise rainbowNoise;
     RainbowSpiral rainbowSpiral;
     SimpleMaterial redMaterial = SimpleMaterial(RGBColor(255, 0, 0));
+    SimpleMaterial greenMaterial = SimpleMaterial(RGBColor(0, 255, 0));
+    SimpleMaterial blueMaterial = SimpleMaterial(RGBColor(0, 0, 255));
+    SimpleMaterial pinkMaterial = SimpleMaterial(RGBColor(255, 0, 255));
+    SimpleMaterial yellowMaterial = SimpleMaterial(RGBColor(255, 255, 0));
+
+    //red angry
+    //green happy
+    //blue normal
+    //blush rainbow
+    //boop pink
     
-    RGBColor gradientSpectrum[2] = {RGBColor(221, 15, 125), RGBColor(214, 35, 168)};
-    GradientMaterial<2> gradientMat = GradientMaterial<2>(gradientSpectrum, 350.0f, false);
+    RGBColor gradientSpectrum[4] = {RGBColor(0, 0, 255), RGBColor(0, 255, 0), RGBColor(255, 0, 0), RGBColor(255, 255, 0)};
+    GradientMaterial<4> gradientMat = GradientMaterial<4>(gradientSpectrum, 180.0f, false, true);
     
-    CombineMaterial<4> faceMaterial;
+    CombineMaterial<8> faceMaterial;
     
     SpectrumAnalyzer sA = SpectrumAnalyzer(22, Vector2D(250, 200), Vector2D(120, 100), true, true);
 
@@ -49,9 +59,17 @@ private:
 
     BoopSensor boop;
     float rainbowFaceMix = 0.0f;
-    float angryFaceMix = 0.0f;
+    float redFaceMix = 0.0f;
+    float greenFaceMix = 0.0f;
+    float blueFaceMix = 0.0f;
+    float pinkFaceMix = 0.0f;
+    float customFaceMix = 0.0f;
     uint8_t rainbowFaceIndex = 50;
-    uint8_t angryFaceIndex = 51;
+    uint8_t redFaceIndex = 51;
+    uint8_t greenFaceIndex = 52;
+    uint8_t blueFaceIndex = 53;
+    uint8_t pinkFaceIndex = 54;
+    uint8_t customFaceIndex = 55;
 
     FFTVoiceDetection<128> voiceDetection;
 
@@ -76,7 +94,11 @@ private:
         eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::HideBlush), NukudeFace::HideBlush, 30, 1.0f, 0.0f);
         
         eEA.AddParameter(&rainbowFaceMix, rainbowFaceIndex, 50, 0.0f, 1.0f);
-        eEA.AddParameter(&angryFaceMix, angryFaceIndex, 40, 0.0f, 1.0f);
+        eEA.AddParameter(&redFaceMix, redFaceIndex, 40, 0.0f, 1.0f);
+        eEA.AddParameter(&greenFaceMix, greenFaceIndex, 40, 0.0f, 1.0f);
+        eEA.AddParameter(&blueFaceMix, blueFaceIndex, 40, 0.0f, 1.0f);
+        eEA.AddParameter(&pinkFaceMix, pinkFaceIndex, 40, 0.0f, 1.0f);
+        eEA.AddParameter(&customFaceMix, customFaceIndex, 40, 0.0f, 1.0f);
     }
 
     void LinkParameters(){
@@ -87,7 +109,11 @@ private:
         eEA.SetInterpolationMethod(NukudeFace::HideBlush, EasyEaseInterpolation::Cosine);
         eEA.SetInterpolationMethod(NukudeFace::Sadness, EasyEaseInterpolation::Cosine);
         eEA.SetInterpolationMethod(rainbowFaceIndex, EasyEaseInterpolation::Cosine);
-        eEA.SetInterpolationMethod(angryFaceIndex, EasyEaseInterpolation::Cosine);
+        eEA.SetInterpolationMethod(redFaceIndex, EasyEaseInterpolation::Cosine);
+        eEA.SetInterpolationMethod(greenFaceIndex, EasyEaseInterpolation::Cosine);
+        eEA.SetInterpolationMethod(blueFaceIndex, EasyEaseInterpolation::Cosine);
+        eEA.SetInterpolationMethod(pinkFaceIndex, EasyEaseInterpolation::Cosine);
+        eEA.SetInterpolationMethod(customFaceIndex, EasyEaseInterpolation::Cosine);
         
         eEA.SetInterpolationMethod(NukudeFace::vrc_v_ee, EasyEaseInterpolation::Linear);
         eEA.SetInterpolationMethod(NukudeFace::vrc_v_ih, EasyEaseInterpolation::Linear);
@@ -100,14 +126,18 @@ private:
     }
 
     void SetMaterials(){
-        faceMaterial.AddMaterial(Material::Add, &gradientMat, 1.0f);
-        faceMaterial.AddMaterial(Material::Lighten, &rainbowNoise, 0.6f);
+        faceMaterial.AddMaterial(Material::Add, &yellowMaterial, 1.0f);
         faceMaterial.AddMaterial(Material::Replace, &rainbowSpiral, 0.0f);
         faceMaterial.AddMaterial(Material::Replace, &redMaterial, 0.0f);
+        faceMaterial.AddMaterial(Material::Replace, &greenMaterial, 0.0f);
+        faceMaterial.AddMaterial(Material::Replace, &blueMaterial, 0.0f);
+        faceMaterial.AddMaterial(Material::Replace, &pinkMaterial, 0.0f);
+        faceMaterial.AddMaterial(Material::Replace, &gradientMat, 0.0f);
+        faceMaterial.AddMaterial(Material::Add, &rainbowNoise, 0.1f);
     }
 
 public:
-    ProtogenKitFaceAnimation() {
+    ElGatoAnimation() {
         scene.AddObject(pM.GetObject());
         scene.AddObject(background.GetObject());
 
@@ -130,34 +160,41 @@ public:
         blink.Update();
     }
 
-    void Default(){}
+    void Default(){
+        eEA.AddParameterFrame(blueFaceIndex, 1.0f);
+    }
+
+    void Default2(){
+        eEA.AddParameterFrame(customFaceIndex, 1.0f);
+    }
 
     void Angry(){
         eEA.AddParameterFrame(NukudeFace::Anger, 1.0f);
-        eEA.AddParameterFrame(angryFaceIndex, 0.8f);
+        eEA.AddParameterFrame(redFaceIndex, 1.0f);
     }
 
     void Sad(){
         eEA.AddParameterFrame(NukudeFace::Sadness, 1.0f);
         eEA.AddParameterFrame(NukudeFace::Frown, 1.0f);
+        eEA.AddParameterFrame(blueFaceIndex, 1.0f);
     }
 
     void Surprised(){
         eEA.AddParameterFrame(NukudeFace::Surprised, 1.0f);
         eEA.AddParameterFrame(NukudeFace::HideBlush, 0.0f);
-        eEA.AddParameterFrame(rainbowFaceIndex, 0.6f);
+        eEA.AddParameterFrame(rainbowFaceIndex, 1.0f);
     }
     
     void Doubt(){
         eEA.AddParameterFrame(NukudeFace::Doubt, 1.0f);
-    }
-    
-    void Frown(){
         eEA.AddParameterFrame(NukudeFace::Frown, 1.0f);
+        eEA.AddParameterFrame(greenFaceIndex, 1.0f);
     }
 
     void LookUp(){
         eEA.AddParameterFrame(NukudeFace::LookUp, 1.0f);
+        eEA.AddParameterFrame(NukudeFace::HideBlush, 0.0f);
+        eEA.AddParameterFrame(pinkFaceIndex, 1.0f);
     }
 
     void LookDown(){
@@ -211,14 +248,14 @@ public:
         UpdateFFTVisemes();
 
         if (isBooped && mode != 6){
-            Surprised();
+            LookUp();
         }
         else{
             if (mode == 0) Default();
             else if (mode == 1) Angry();
             else if (mode == 2) Doubt();
-            else if (mode == 3) Frown();
-            else if (mode == 4) LookUp();
+            else if (mode == 3) Default2();
+            else if (mode == 4) Surprised();
             else if (mode == 5) Sad();
             else SpectrumAnalyzerFace();
         }
@@ -234,8 +271,12 @@ public:
         rainbowNoise.Update(ratio);
         rainbowSpiral.Update(ratio);
     
-        faceMaterial.SetOpacity(2, rainbowFaceMix);//set face to spiral
-        faceMaterial.SetOpacity(3, angryFaceMix);//set face to angry
+        faceMaterial.SetOpacity(1, rainbowFaceMix);//set face to spiral
+        faceMaterial.SetOpacity(2, redFaceMix);//set face to angry
+        faceMaterial.SetOpacity(3, greenFaceMix);//set face to angry
+        faceMaterial.SetOpacity(4, blueFaceMix);//set face to angry
+        faceMaterial.SetOpacity(5, pinkFaceMix);//set face to angry
+        faceMaterial.SetOpacity(6, customFaceMix);//set face to angry
         
         pM.GetObject()->GetTransform()->SetPosition(Vector3D(130.0f + fGenMatXMove.Update(), -15.0f + fGenMatYMove.Update(), 600.0f));
         pM.GetObject()->GetTransform()->SetScale(Vector3D(-1.0f, 0.625f, 0.7f));
