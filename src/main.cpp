@@ -4,7 +4,7 @@
 //--------------- ANIMATIONS ---------------
 //#include "Animation\ProtoDRMorphAnimation.h"
 //#include "Animation\ProtogenKitFaceAnimation.h"
-#include "Animation\Commissions\ElGatoAnimation.h"
+//#include "Animation\Commissions\ElGatoAnimation.h"
 //#include "Animation\KaiborgV1Animation.h"
 //#include "Animation\ProtoV3Animation.h"
 //#include "Animation\FullScreenAnimation.h"
@@ -16,16 +16,16 @@
 //#include "Animation\PikachuAnimation.h"
 //#include "Animation\BeeAnimation.h"
 //#include "Animation\ProtogenArtleckAnimation.h"
-//#include "Animation\ProtogenHUB75Animation.h"
+#include "Animation\ProtogenHUB75Animation.h"
 //#include "Animation\DeltaruneAnimation.h"
 //#include "Animation\NukudeFaceAnimation.h"
 //#include "Animation\Commissions\WaffleDaProtoAnimation.h"
 
 //--------------- CONTROLLERS ---------------
 //#include "Controllers\KaiborgV1Controller.h"
-#include "Controllers\KaiborgV1D1Controller.h"
+//#include "Controllers\KaiborgV1D1Controller.h"
 //#include "Controllers\ProtoDRController.h"
-//#include "Controllers\SmartMatrixHUB75.h"
+#include "Controllers\SmartMatrixHUB75.h"
 
 uint8_t maxBrightness = 50;
 #ifdef RIGHTFACE
@@ -34,8 +34,8 @@ Controller* controller = new ProtoDRController(maxBrightness, ProtoDRController:
 //Controller* controller = new ProtoDRController(maxBrightness, ProtoDRController::LEFT);
 #endif
 //KaiborgV1D1Controller controller = KaiborgV1D1Controller(maxBrightness);
-KaiborgV1D1Controller controller = KaiborgV1D1Controller(maxBrightness);
-ElGatoAnimation animation = ElGatoAnimation();
+SmartMatrixHUB75 controller = SmartMatrixHUB75(maxBrightness);
+ProtogenHUB75Animation animation = ProtogenHUB75Animation();
 
 void setup() {
     Serial.begin(115200);
@@ -48,7 +48,7 @@ void loop() {
     float ratio = (float)(millis() % 5000) / 5000.0f;
     animation.UpdateTime(ratio);
 
-    controller.SetBrightness(MenuButtonHandler::GetBrightness() / 6);
+    controller.SetBrightness(MenuButtonHandler::GetBrightness());
 
     controller.Render(animation.GetScene());
 

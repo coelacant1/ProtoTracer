@@ -127,8 +127,8 @@ public:
             SetEEPOMBrightness(1);
             SetEEPOMMicrophone(1);
             SetEEPOMBoopSensor(1);
-            SetEEPOMSpectrum(1);
-            SetEEPOMInitialize(1);
+            SetEEPOMSpectrum(0);
+            SetEEPOMInitialize(0);
         }
 
         //initialize values from eeprom

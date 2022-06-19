@@ -18,8 +18,6 @@ public:
 
 template<size_t maxParameters>
 class EasyEaseAnimator : public EasyEaseInterpolation{
-public:
-    
 private:
     InterpolationMethod interpMethod;
     DampedSpring dampedSpring[maxParameters];
@@ -64,7 +62,17 @@ public:
         return 0.0f;
     }
 
-    void AddParameter(float* parameter, uint16_t dictionaryValue, int frames, float basis, float goal){
+    float GetTarget(uint16_t dictionaryValue){
+        for(uint16_t i = 0; i < currentParameters; i++){
+            if(dictionary[i] == dictionaryValue){
+                return goal[i];
+            }
+        }
+        
+        return 0.0f;
+    }
+
+    void AddParameter(float* parameter, uint16_t dictionaryValue, uint16_t frames, float basis, float goal){
         if(currentParameters < maxParameters){
             bool addValue = true;
             for(uint16_t i = 0; i < currentParameters; i++){
@@ -117,20 +125,24 @@ public:
 
             float set = rampFilter[i].Filter(parameterFrame[i]);
 
-            float linear = Mathematics::Map(set, basis[i], goal[i], 0.0f, 1.0f);
+            float fullRange = Mathematics::Map(set, basis[i], goal[i], 0.0f, 1.0f);
+
+            //basis at 0.5f does not go to 0.5f but to zero with linear
+
+            //when using set, it defaults the blush is shown the inverted 1.0f to 0.0f does not work
 
             switch(interpolationMethods[i]){
                 case Cosine:
-                    *parameters[i] = Mathematics::CosineInterpolation(basis[i], goal[i], linear);
+                    *parameters[i] = Mathematics::CosineInterpolation(basis[i], goal[i], fullRange);
                     break;
                 case Bounce:
-                    *parameters[i] = Mathematics::BounceInterpolation(basis[i], goal[i], linear);
+                    *parameters[i] = Mathematics::BounceInterpolation(basis[i], goal[i], fullRange);
                     break;
                 case Overshoot:
                     *parameters[i] = dampedSpring[i].Calculate(parameterFrame[i], 0.25f);
                     break;
                 default://Linear
-                    *parameters[i] = linear;
+                    *parameters[i] = set;
                     break;
             }
 
