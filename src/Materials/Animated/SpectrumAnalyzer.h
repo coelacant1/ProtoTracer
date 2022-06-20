@@ -101,7 +101,7 @@ public:
     }
 
     RGBColor GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) override {
-        Vector2D rPos = Mathematics::IsClose(angle, 0.0f, 0.1f) ? Vector2D(position.X, position.Y).Rotate(angle, offset) - offset : Vector2D(position.X, position.Y) - offset;
+        Vector2D rPos = Mathematics::IsClose(angle, 0.0f, 0.1f) ? Vector2D(position.X, position.Y) - offset : Vector2D(position.X, position.Y).Rotate(angle, offset) - offset;
 
         if (-size.X > rPos.X && size.X < rPos.X) return RGBColor();
         if (-size.Y > rPos.Y && size.Y < rPos.Y) return RGBColor();

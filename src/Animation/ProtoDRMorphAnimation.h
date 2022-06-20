@@ -5,78 +5,82 @@
 #include "EasyEaseAnimator.h"
 #include "..\Morph\ProtoDRMorph.h"
 #include "..\Render\Scene.h"
-#include "..\Materials\GradientMaterial.h"
-#include "..\Materials\SimplexNoise.h"
 #include "..\Signals\FunctionGenerator.h"
-#include "..\Sensors\SerialSync.h"
-#include "..\Materials\SpectrumAnalyzer.h"
-#include "..\Sensors\ButtonHandler.h"
-#include "..\Materials\NormalMaterial.h"
 
 #include "..\Objects\Spyro.h"
-#include "..\Objects\SolidCube.h"
+#include "..\Objects\Background.h"
 
-#include "..\Materials\StripeMaterial.h"
+#include "..\Materials\Animated\SpectrumAnalyzer.h"
+#include "..\Materials\Animated\RainbowNoise.h"
+#include "..\Materials\Animated\RainbowSpiral.h"
 #include "..\Materials\CombineMaterial.h"
+#include "..\Materials\GradientMaterial.h"
+#include "..\Materials\MaterialAnimator.h"
+#include "..\Materials\NormalMaterial.h"
+#include "..\Materials\StripeMaterial.h"
 
+#include "..\Signals\FFTVoiceDetection.h"
+#include "..\Sensors\MenuButtonHandler.h"
+#include "..\Sensors\SerialSync.h"
 
-class ProtoDRMorphAnimation : public Animation{
+class ProtoDRMorphAnimation : public Animation<2>{
 private:
     ProtoDR pM;
-    SolidCube cube;
-    float cubeSize = 0.0f;
-    float colorRed = 0.0f;
+    Background background;
+    Spyro spyro;
     EasyEaseAnimator<30> eEA = EasyEaseAnimator<30>(EasyEaseInterpolation::Cosine);
     
-    RGBColor spectrum[10] = {RGBColor(121, 35, 190), RGBColor(36, 120, 255), RGBColor(16, 207, 190), RGBColor(36, 239, 138), 
-                             RGBColor(240, 235, 19), RGBColor(255, 186, 0), RGBColor(255, 138, 0), RGBColor(255, 85, 0), 
-                             RGBColor(255, 0, 0), RGBColor(199, 0, 69)};
-    GradientMaterial gNoiseMat = GradientMaterial(10, spectrum, 2.0f, false, false);
-    SimplexNoise sNoise = SimplexNoise(1, &gNoiseMat);
+    //Materials
+    RGBColor gradientSpectrum[6] = {RGBColor(255, 0, 0), RGBColor(255, 255, 0), RGBColor(0, 255, 0), RGBColor(0, 255, 255), RGBColor(0, 0, 255), RGBColor(255, 0, 255)};
+
+    RainbowNoise rainbowNoise;
+    RainbowSpiral rainbowSpiral;
+    StripeMaterial stripe1 = StripeMaterial(6, gradientSpectrum, 200.0f, 160.0f, 20.0f);
+    SimpleMaterial redMaterial = SimpleMaterial(RGBColor(255, 0, 0));
+    SimpleMaterial blueMaterial = SimpleMaterial(RGBColor(0, 0, 255)); 
     SimpleMaterial blackMaterial = SimpleMaterial(RGBColor(0,0,0));
-
     NormalMaterial normalMaterial;
+    
+    GradientMaterial<6> gradientMat = GradientMaterial<6>(gradientSpectrum, 350.0f, false);
+    
+    MaterialAnimator<7> materialAnimator;
+    
+    SpectrumAnalyzer sA = SpectrumAnalyzer(A8, Vector2D(430, 300), Vector2D(15, 120), true, true);
 
-    RGBColor spectrum1[6] = {RGBColor(255, 255, 0), RGBColor(0, 0, 0), RGBColor(0, 255, 255), RGBColor(0, 0, 0), RGBColor(255, 0, 255), RGBColor(0, 0, 0)};
     FunctionGenerator fGenMatSize = FunctionGenerator(FunctionGenerator::Sine, 450.0f, 550.0f, 2.1f);
     FunctionGenerator fGenMatWidth = FunctionGenerator(FunctionGenerator::Sine, 150.0f, 500.0f, 4.0f);
     FunctionGenerator fGenMatPeriod = FunctionGenerator(FunctionGenerator::Sine, 200.0f, 500.0f, 6.3f);
     FunctionGenerator fGenMatAmplitude = FunctionGenerator(FunctionGenerator::Sine, -100.0f, 100.0f, 2.7f);
     FunctionGenerator fGenMatOpacity = FunctionGenerator(FunctionGenerator::Sine, 0.0f, 1.0f, 0.5f);
-    StripeMaterial stripe1 = StripeMaterial(6, spectrum1, 200.0f, 160.0f, 20.0f);
-    SimpleMaterial red = SimpleMaterial(RGBColor(255, 0, 0));
-
-    Material* materials[2] = {&sNoise, &red};
-    CombineMaterial material = CombineMaterial(CombineMaterial::Darken, 2, materials);
-    
     FunctionGenerator fGenMatPos = FunctionGenerator(FunctionGenerator::Sine, -10.0f, 10.0f, 4.0f);
-
-    KeyFrameTrack blink = KeyFrameTrack(1, 0.0f, 1.0f, 10, KeyFrameTrack::Cosine);
-    KeyFrameTrack topFinOuter = KeyFrameTrack(1, 0.0f, 1.0f, 5, KeyFrameTrack::Cosine);
-    KeyFrameTrack topFinInner = KeyFrameTrack(1, 0.0f, 1.0f, 5, KeyFrameTrack::Cosine);
-    KeyFrameTrack topFinGap = KeyFrameTrack(1, 0.0f, 1.0f, 5, KeyFrameTrack::Cosine);
-    KeyFrameTrack midFin = KeyFrameTrack(3, 0.0f, 1.0f, 5, KeyFrameTrack::Cosine);
-    KeyFrameTrack botFinLR1 = KeyFrameTrack(1, 0.0f, 1.0f, 10, KeyFrameTrack::Cosine);
-    KeyFrameTrack botFinLR2 = KeyFrameTrack(1, 0.0f, 1.0f, 10, KeyFrameTrack::Cosine);
-    KeyFrameTrack botFinLR3 = KeyFrameTrack(1, 0.0f, 1.0f, 10, KeyFrameTrack::Cosine);
-    KeyFrameTrack botFinLR4 = KeyFrameTrack(1, 0.0f, 1.0f, 10, KeyFrameTrack::Cosine);
-    KeyFrameTrack botFinLR5 = KeyFrameTrack(1, 0.0f, 1.0f, 10, KeyFrameTrack::Cosine);
-    KeyFrameTrack mouth = KeyFrameTrack(1, 0.0f, 1.0f, 5, KeyFrameTrack::Cosine);
-
-    Spyro spyro;
     FunctionGenerator fGenRotation = FunctionGenerator(FunctionGenerator::Sine, -30.0f, 30.0f, 2.6f);
     FunctionGenerator fGenScale = FunctionGenerator(FunctionGenerator::Sine, 3.0f, 8.0f, 4.2f);
-    
-    //Spectrum Analyzer
-    RGBColor spectrum3[6] = {RGBColor(255, 0, 0), RGBColor(255, 255, 0), RGBColor(0, 255, 0), RGBColor(0, 255, 255), RGBColor(0, 0, 255), RGBColor(255, 0, 255)};
-    
-    GradientMaterial gM = GradientMaterial(6, spectrum3, 1.0f, false);
-    SpectrumAnalyzer sA = SpectrumAnalyzer(A8, Vector2D(430, 300), Vector2D(15, 135), &gM, true, true);
-    
-    Material* spectrumMaterials[2] = {&sA, &sNoise};
-    CombineMaterial spectrumMaterial = CombineMaterial(CombineMaterial::Lighten, 2, spectrumMaterials);
 
+    KeyFrameTrack<1, 10> blink = KeyFrameTrack<1, 10>(0.0f, 1.0f, KeyFrameInterpolation::Cosine);
+    KeyFrameTrack<1, 5> topFinOuter = KeyFrameTrack<1, 5>(0.0f, 1.0f, KeyFrameInterpolation::Cosine);
+    KeyFrameTrack<1, 5> topFinInner = KeyFrameTrack<1, 5>(0.0f, 1.0f, KeyFrameInterpolation::Cosine);
+    KeyFrameTrack<1, 5> topFinGap = KeyFrameTrack<1, 5>(0.0f, 1.0f, KeyFrameInterpolation::Cosine);
+    KeyFrameTrack<1, 5> midFin = KeyFrameTrack<1, 5>(0.0f, 1.0f, KeyFrameInterpolation::Cosine);
+    KeyFrameTrack<1, 10> botFinLR1 = KeyFrameTrack<1, 10>(0.0f, 1.0f, KeyFrameInterpolation::Cosine);
+    KeyFrameTrack<1, 10> botFinLR2 = KeyFrameTrack<1, 10>(0.0f, 1.0f, KeyFrameInterpolation::Cosine);
+    KeyFrameTrack<1, 10> botFinLR3 = KeyFrameTrack<1, 10>(0.0f, 1.0f, KeyFrameInterpolation::Cosine);
+    KeyFrameTrack<1, 10> botFinLR4 = KeyFrameTrack<1, 10>(0.0f, 1.0f, KeyFrameInterpolation::Cosine);
+    KeyFrameTrack<1, 10> botFinLR5 = KeyFrameTrack<1, 10>(0.0f, 1.0f, KeyFrameInterpolation::Cosine);
+    KeyFrameTrack<1, 5> mouth = KeyFrameTrack<1, 5>(0.0f, 1.0f, KeyFrameInterpolation::Cosine);
+
+    FFTVoiceDetection<128> voiceDetection;
+    
     bool talk = true;
+
+    void SetMaterialLayers(){
+        materialAnimator.SetBaseMaterial(Material::Add, &rainbowNoise);
+        materialAnimator.AddMaterial(Material::Replace, &rainbowSpiral, 40, 0.0f, 1.0f);//layer 1
+        materialAnimator.AddMaterial(Material::Replace, &stripe1, 40, 0.0f, 1.0f);//layer 1
+        materialAnimator.AddMaterial(Material::Replace, &redMaterial, 40, 0.0f, 1.0f);//layer 2
+        materialAnimator.AddMaterial(Material::Replace, &blueMaterial, 40, 0.0f, 1.0f);//layer 3
+        materialAnimator.AddMaterial(Material::Replace, &normalMaterial, 40, 0.0f, 1.0f);//layer 3
+        materialAnimator.AddMaterial(Material::Lighten, &gradientMat, 40, 0.25f, 1.0f);//layer 4
+    }
 
     void LinkEasyEase(){
         eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::BlushEye), ProtoDR::BlushEye, 40, 0.0f, 1.0f);
@@ -101,9 +105,6 @@ private:
 
         eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::NewFins), ProtoDR::NewFins, 90, 0.0f, 1.0f);
         eEA.AddParameter(pM.GetMorphWeightReference(ProtoDR::AngryEyeMouth), ProtoDR::AngryEyeMouth, 90, 0.0f, 1.0f);
-
-        eEA.AddParameter(&colorRed, 98, 45, 0.0f, 1.0f);
-        eEA.AddParameter(&cubeSize, 99, 45, 0.0f, 1.0f);
     }
 
     void LinkParameters(){
@@ -209,10 +210,10 @@ private:
     }
 
 public:
-    ProtoDRMorphAnimation() : Animation(3) {
-        scene->AddObject(pM.GetObject());
-        scene->AddObject(spyro.GetObject());
-        scene->AddObject(cube.GetObject());
+    ProtoDRMorphAnimation() {
+        scene.AddObject(pM.GetObject());
+        scene.AddObject(spyro.GetObject());
+        scene.AddObject(background.GetObject());
 
         LinkEasyEase();
         LinkParameters();
@@ -223,11 +224,13 @@ public:
         AddBotFinKeyFrames();
         AddMouthKeyFrames();
 
-        pM.GetObject()->SetMaterial(&material);
-        cube.GetObject()->SetMaterial(&sA);
+        SetMaterialLayers();
+
+        pM.GetObject()->SetMaterial(&materialAnimator);
+        background.GetObject()->SetMaterial(&sA);
 
         SerialSync::Initialize();
-        ButtonHandler::Initialize(15, 11);
+        MenuButtonHandler::Initialize(15, 11, 1000);//7 is number of faces
     }
 
     void UpdateKeyFrameTracks(){
@@ -305,6 +308,8 @@ public:
         eEA.AddParameterFrame(ProtoDR::SadEye, 1.0f);
         eEA.AddParameterFrame(ProtoDR::SadEyeBrow, 1.0f);
         eEA.AddParameterFrame(ProtoDR::SadMouth, 1.0f);
+        
+        materialAnimator.AddMaterialFrame(blueMaterial, 0.8f);
 
         talk = true;
     }
@@ -325,6 +330,8 @@ public:
         botFinLR3.Play();
         botFinLR4.Play();
         botFinLR5.Play();
+        
+        materialAnimator.AddMaterialFrame(redMaterial, 0.8f);
 
         eEA.AddParameterFrame(ProtoDR::FlatMouth, 1.0f);
         eEA.AddParameterFrame(ProtoDR::DeadEye, 1.0f);
@@ -347,6 +354,8 @@ public:
         botFinLR3.Play();
         botFinLR4.Play();
         botFinLR5.Play();
+        
+        materialAnimator.AddMaterialFrame(rainbowSpiral, 0.8f);
 
         eEA.AddParameterFrame(ProtoDR::HeartEye, 1.0f);
         eEA.AddParameterFrame(ProtoDR::HideEyeBrow, 1.0f);
@@ -385,6 +394,8 @@ public:
         eEA.AddParameterFrame(ProtoDR::HideBlush, 0.0f);
         eEA.AddParameterFrame(ProtoDR::HideEyeBrow, 0.0f);
         eEA.AddParameterFrame(ProtoDR::OwO, 1.0f);
+        
+        materialAnimator.AddMaterialFrame(stripe1, 0.8f);
 
         talk = false;
     }
@@ -494,6 +505,8 @@ public:
         eEA.AddParameterFrame(ProtoDR::HideEyeBrow, 0.0f);
         eEA.AddParameterFrame(ProtoDR::HideAll, 1.0f);
         
+        materialAnimator.AddMaterialFrame(blackMaterial, 1.0f);
+        
         talk = false;
     }
 
@@ -557,12 +570,14 @@ public:
         eEA.AddParameterFrame(ProtoDR::HideEyeBrow, 1.0f);
         eEA.AddParameterFrame(ProtoDR::NewFins, 1.0f);
         eEA.AddParameterFrame(ProtoDR::AngryEyeMouth, 1.0f);
-        eEA.AddParameterFrame(98, 1.0f);
+        
+        materialAnimator.AddMaterialFrame(redMaterial, 0.8f);
         
         talk = false;
     }
 
     void FullScreenDisplay(){
+        background.GetObject()->Enable();
         pM.Reset();
         blink.Pause();
         blink.Reset();
@@ -597,7 +612,7 @@ public:
         
         talk = false;
         
-        eEA.AddParameterFrame(99, 1.0f);
+        materialAnimator.AddMaterialFrame(blackMaterial, 1.0f);
     }
 
     void FadeIn(float stepRatio) override {}
@@ -609,14 +624,37 @@ public:
 
     float offset = 0.0f;
 
+    void UpdateFFTVisemes(){
+        if(MenuButtonHandler::UseMicrophone()){
+            //eEA.AddParameterFrame(ProtoDR::::vrc_v_ss, MicrophoneFourier::GetCurrentMagnitude() / 2.0f);
+
+            if(MicrophoneFourier::GetCurrentMagnitude() > 0.05f){
+                voiceDetection.Update(MicrophoneFourier::GetFourierFiltered(), MicrophoneFourier::GetSampleRate());
+        
+                //eEA.AddParameterFrame(NukudeFace::vrc_v_ee, voiceDetection.GetViseme(voiceDetection.EE));
+                //eEA.AddParameterFrame(NukudeFace::vrc_v_ih, voiceDetection.GetViseme(voiceDetection.AH));
+                //eEA.AddParameterFrame(NukudeFace::vrc_v_dd, voiceDetection.GetViseme(voiceDetection.UH));
+                //eEA.AddParameterFrame(NukudeFace::vrc_v_rr, voiceDetection.GetViseme(voiceDetection.AR));
+                //eEA.AddParameterFrame(NukudeFace::vrc_v_ch, voiceDetection.GetViseme(voiceDetection.ER));
+                //eEA.AddParameterFrame(NukudeFace::vrc_v_aa, voiceDetection.GetViseme(voiceDetection.AH));
+                //eEA.AddParameterFrame(NukudeFace::vrc_v_oh, voiceDetection.GetViseme(voiceDetection.OO));
+            }
+        }
+    }
+
     void Update(float ratio) override {
         pM.GetObject()->Enable();//Due to Spyro track
         spyro.GetObject()->Disable();
-        
-        sA.Update();
+        background.GetObject()->Disable();
+
+        MicrophoneFourier::Update();
+        sA.Update(MicrophoneFourier::GetFourierFiltered());
         sA.SetRotation(20.0f);
         sA.SetHueAngle(ratio * 360.0f * 4.0f);
+        sA.SetMirrorYState(true);//MenuButtonHandler::MirrorSpectrumAnalyzer());
+        sA.SetFlipYState(false);//!MenuButtonHandler::MirrorSpectrumAnalyzer());
         
+        UpdateFFTVisemes();
 
         #ifdef RIGHTFACE
         SerialSync::Read();
@@ -633,9 +671,9 @@ public:
         uint8_t mode = SerialSync::GetMode();
         float mouthMove = SerialSync::GetMouthMove();
         #else
-        float mouthMove = sA.GetFourierData()[5];
+        float mouthMove = MicrophoneFourier::GetCurrentMagnitude() / 2.0f;
 
-        uint8_t mode = ButtonHandler::GetValue();
+        uint8_t mode = MenuButtonHandler::GetFaceState();//change by button press
         SerialSync::SetMouthMove(mouthMove);
         SerialSync::SetMode(mode);
         SerialSync::SetRatio(ratio);
@@ -647,17 +685,16 @@ public:
         mode = floor(Mathematics::Map(ratio, 0, 1, 0, 1.99f));
         #endif
 
-        if (mode == 0) FullScreenDisplay();
+        if (mode == 0) Default();
         else if (mode == 1) OwO();
         else if (mode == 2) Sad();
         else if (mode == 3) Dead();
         else if (mode == 4) Heart();
         else if (mode == 5) SpyroDisplay(ratio, false);
         else if (mode == 6) SpyroDisplay(ratio, true);
-        else if (mode == 7) AlphaGenSquare();
-        //else if (mode == 8) AlphaGenCircle();
+        else if (mode == 7) AlphaGenSquare();//AlphaGenCircle();
         else if (mode == 8) HideAll();
-        else if (mode == 9) Default();
+        else if (mode == 9) FullScreenDisplay();
         else if (mode == 10) AngryFace();
         else OwO2();
         
@@ -668,29 +705,19 @@ public:
         stripe1.SetWaveAmplitude(fGenMatAmplitude.Update());
         stripe1.SetRotationAngle(ratio * 360.0f);
         stripe1.SetPositionOffset(Vector2D(shiftMat, shiftMat));
-        material.SetFirstLayerOpacity(1.0f - colorRed);
+        
+        rainbowNoise.Update(ratio);
+        rainbowSpiral.Update(ratio);
+        materialAnimator.Update();
 
         UpdateKeyFrameTracks();
 
-        if(talk) pM.SetMorphWeight(ProtoDR::OpenToothMouth, mouthMove);
+        //if(talk) pM.SetMorphWeight(ProtoDR::OpenToothMouth, mouthMove);
         eEA.Update();
         pM.Update();
         
         float x = sinf(ratio * 3.14159f / 180.0f * 360.0f * 2.0f) * 3.0f;
         float y = cosf(ratio * 3.14159f / 180.0f * 360.0f * 3.0f) * 3.0f;
-        
-        float linSweep = ratio > 0.5f ? 1.0f - ratio : ratio;
-        float sShift = linSweep * 0.002f + 0.005f;
-
-        gNoiseMat.SetGradientPeriod(1.0f + linSweep * 6.0f);
-        //gNoiseMat.HueShift(ratio * 360 * 2);
-        sNoise.SetScale(Vector3D(sShift, sShift, sShift));
-        sNoise.SetZPosition(x * 1.0f);
-        
-        cube.GetObject()->ResetVertices();
-        cube.GetObject()->GetTransform()->SetPosition(Vector3D(0, 135, 6000));
-        cube.GetObject()->GetTransform()->SetScale(Vector3D(5.0f * cubeSize + 0.01f, 3.0f * cubeSize + 0.01f, 0.01f));
-        cube.GetObject()->UpdateTransform();
         
         pM.GetObject()->GetTransform()->SetRotation(Vector3D(0, 180.0f, 0.0f));
         pM.GetObject()->GetTransform()->SetPosition(Vector3D(x, y, 600.0f));
