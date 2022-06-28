@@ -1,26 +1,26 @@
 #pragma once
 
-#include "Animation.h"
-#include "KeyFrameTrack.h"
-#include "EasyEaseAnimator.h"
-#include "..\Objects\Background.h"
-#include "..\Morph\NukudeFace.h"
-#include "..\Render\Scene.h"
-#include "..\Signals\FunctionGenerator.h"
-#include "..\Sensors\MenuButtonHandler.h"
-#include "..\Sensors\BoopSensor.h"
+#include "..\Animation.h"
+#include "..\KeyFrameTrack.h"
+#include "..\EasyEaseAnimator.h"
+#include "..\..\Objects\Background.h"
+#include "..\..\Morph\NukudeFace.h"
+#include "..\..\Render\Scene.h"
+#include "..\..\Signals\FunctionGenerator.h"
+#include "..\..\Sensors\MenuButtonHandler.h"
+#include "..\..\Sensors\BoopSensor.h"
 
-#include "..\Materials\Animated\SpectrumAnalyzer.h"
-#include "..\Materials\Animated\RainbowNoise.h"
-#include "..\Materials\Animated\RainbowSpiral.h"
+#include "..\..\Materials\Animated\SpectrumAnalyzer.h"
+#include "..\..\Materials\Animated\RainbowNoise.h"
+#include "..\..\Materials\Animated\RainbowSpiral.h"
 
-#include "..\Materials\CombineMaterial.h"
+#include "..\..\Materials\CombineMaterial.h"
 
-#include "AnimationTracks\BlinkTrack.h"
+#include "..\AnimationTracks\BlinkTrack.h"
 
-#include "..\Signals\FFTVoiceDetection.h"
+#include "..\..\Signals\FFTVoiceDetection.h"
 
-class ProtogenKitFaceAnimation : public Animation<2> {
+class VesperAnimation : public Animation<2> {
 private:
     NukudeFace pM;
     Background background;
@@ -31,7 +31,7 @@ private:
     RainbowSpiral rainbowSpiral;
     SimpleMaterial redMaterial = SimpleMaterial(RGBColor(255, 0, 0));
     
-    RGBColor gradientSpectrum[2] = {RGBColor(221, 15, 125), RGBColor(214, 35, 168)};
+    RGBColor gradientSpectrum[2] = {RGBColor(25, 50, 255), RGBColor(50, 255, 50)};
     GradientMaterial<2> gradientMat = GradientMaterial<2>(gradientSpectrum, 350.0f, false);
     
     CombineMaterial<4> faceMaterial;
@@ -107,7 +107,7 @@ private:
     }
 
 public:
-    ProtogenKitFaceAnimation() {
+    VesperAnimation() {
         scene.AddObject(pM.GetObject());
         scene.AddObject(background.GetObject());
 
@@ -121,9 +121,6 @@ public:
         pM.GetObject()->SetMaterial(&faceMaterial);
 
         MenuButtonHandler::Initialize(0, 7, 1000);//7 is number of faces
-
-        MicrophoneFourier::Initialize(A8, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
-        
         boop.Initialize(5);
 
         background.GetObject()->SetMaterial(&sA);

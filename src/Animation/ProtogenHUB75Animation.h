@@ -118,6 +118,8 @@ public:
         boop.Initialize(5);
 
         background.GetObject()->SetMaterial(&sA);//sA);
+
+        MicrophoneFourier::Initialize(A8, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
     }
 
     void UpdateKeyFrameTracks(){

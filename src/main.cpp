@@ -4,7 +4,7 @@
 //--------------- ANIMATIONS ---------------
 #include "Animation\ProtoDRMorphAnimation.h"
 //#include "Animation\ProtogenKitFaceAnimation.h"
-//#include "Animation\Commissions\ElGatoAnimation.h"
+//#include "Animation\Commissions\VesperAnimation.h"
 //#include "Animation\KaiborgV1Animation.h"
 //#include "Animation\ProtoV3Animation.h"
 //#include "Animation\FullScreenAnimation.h"
@@ -25,7 +25,7 @@
 //#include "Controllers\KaiborgV1Controller.h"
 //#include "Controllers\KaiborgV1D1Controller.h"
 #include "Controllers\ProtoDRController.h"
-//#include "Controllers\SmartMatrixHUB75.h"
+//#include "Controllers\KaiborgV1D1Controller.h"
 
 uint8_t maxBrightness = 50;
 #ifdef RIGHTFACE
@@ -34,7 +34,7 @@ ProtoDRController controller = ProtoDRController(maxBrightness, ProtoDRControlle
 ProtoDRController controller = ProtoDRController(maxBrightness, ProtoDRController::LEFT);
 #endif
 //KaiborgV1D1Controller controller = KaiborgV1D1Controller(maxBrightness);
-//SmartMatrixHUB75 controller = SmartMatrixHUB75(maxBrightness);
+//KaiborgV1D1Controller controller = KaiborgV1D1Controller(maxBrightness);
 ProtoDRMorphAnimation animation = ProtoDRMorphAnimation();
 
 void setup() {

@@ -7,7 +7,7 @@
 #include "..\..\Morph\NukudeFace.h"
 #include "..\..\Render\Scene.h"
 #include "..\..\Signals\FunctionGenerator.h"
-#include "..\..\Sensors\ButtonHandler.h"
+#include "..\..\Sensors\MenuButtonHandler.h"
 #include "..\..\Sensors\BoopSensor.h"
 
 #include "..\..\Materials\Animated\SpectrumAnalyzer.h"
@@ -20,7 +20,7 @@
 
 #include "..\..\Signals\FFTVoiceDetection.h"
 
-class ProtogenKitFaceAnimation : public Animation<2> {
+class WaffleDaProtoAnimation : public Animation<2> {
 private:
     NukudeFace pM;
     Background background;
@@ -36,7 +36,7 @@ private:
     
     CombineMaterial<4> faceMaterial;
     
-    SpectrumAnalyzer sA = SpectrumAnalyzer(22, Vector2D(250, 200), Vector2D(160, 125), true, true);
+    SpectrumAnalyzer sA = SpectrumAnalyzer(22, Vector2D(250, 200), Vector2D(120, 100), true, true);
 
     //Animation controllers
     BlinkTrack<1> blink;
@@ -44,8 +44,8 @@ private:
     FunctionGenerator fGenMatPos = FunctionGenerator(FunctionGenerator::Sine, -10.0f, 10.0f, 4.0f);
     FunctionGenerator fGenRotation = FunctionGenerator(FunctionGenerator::Sine, -30.0f, 30.0f, 2.6f);
     FunctionGenerator fGenScale = FunctionGenerator(FunctionGenerator::Sine, 3.0f, 8.0f, 4.2f);
-    FunctionGenerator fGenMatXMove = FunctionGenerator(FunctionGenerator::Sine, -3.5f, 3.5f, 5.3f);
-    FunctionGenerator fGenMatYMove = FunctionGenerator(FunctionGenerator::Sine, -3.5f, 3.5f, 6.7f);
+    FunctionGenerator fGenMatXMove = FunctionGenerator(FunctionGenerator::Sine, -2.5f, 2.5f, 5.3f);
+    FunctionGenerator fGenMatYMove = FunctionGenerator(FunctionGenerator::Sine, -2.5f, 2.5f, 6.7f);
 
     BoopSensor boop;
     float rainbowFaceMix = 0.0f;
@@ -107,7 +107,7 @@ private:
     }
 
 public:
-    ProtogenKitFaceAnimation() {
+    WaffleDaProtoAnimation() {
         scene.AddObject(pM.GetObject());
         scene.AddObject(background.GetObject());
 
@@ -120,7 +120,7 @@ public:
 
         pM.GetObject()->SetMaterial(&faceMaterial);
 
-        ButtonHandler::Initialize(0, 6, 2000);//8 is number of faces
+        MenuButtonHandler::Initialize(0, 7, 1000);//7 is number of faces
         boop.Initialize(5);
 
         background.GetObject()->SetMaterial(&sA);
@@ -177,10 +177,8 @@ public:
     }
 
     void UpdateFFTVisemes(){
-        bool useMicrophone = ButtonHandler::GetHoldingToggle();
-
-        if(useMicrophone){
-            eEA.AddParameterFrame(NukudeFace::vrc_v_ss, MicrophoneFourier::GetCurrentMagnitude());
+        if(MenuButtonHandler::UseMicrophone()){
+            eEA.AddParameterFrame(NukudeFace::vrc_v_ss, MicrophoneFourier::GetCurrentMagnitude() / 2.0f);
 
             if(MicrophoneFourier::GetCurrentMagnitude() > 0.05f){
                 voiceDetection.Update(MicrophoneFourier::GetFourierFiltered(), MicrophoneFourier::GetSampleRate());
@@ -201,12 +199,14 @@ public:
         pM.GetObject()->Enable();
         background.GetObject()->Disable();
 
-        bool isBooped = boop.isBooped();
-        uint8_t mode = ButtonHandler::GetValue();//change by button press
+        bool isBooped = MenuButtonHandler::UseBoopSensor() ? boop.isBooped() : 0;
+        uint8_t mode = MenuButtonHandler::GetFaceState();//change by button press
 
         MicrophoneFourier::Update();
         sA.Update(MicrophoneFourier::GetFourierFiltered());
         sA.SetHueAngle(ratio * 360.0f * 4.0f);
+        sA.SetMirrorYState(MenuButtonHandler::MirrorSpectrumAnalyzer());
+        sA.SetFlipYState(!MenuButtonHandler::MirrorSpectrumAnalyzer());
         
         UpdateFFTVisemes();
 
@@ -237,7 +237,7 @@ public:
         faceMaterial.SetOpacity(2, rainbowFaceMix);//set face to spiral
         faceMaterial.SetOpacity(3, angryFaceMix);//set face to angry
         
-        pM.GetObject()->GetTransform()->SetPosition(Vector3D(170.0f + fGenMatXMove.Update(), 10.0f + fGenMatYMove.Update(), 600.0f));
+        pM.GetObject()->GetTransform()->SetPosition(Vector3D(130.0f + fGenMatXMove.Update(), -15.0f + fGenMatYMove.Update(), 600.0f));
         pM.GetObject()->GetTransform()->SetScale(Vector3D(-1.0f, 0.625f, 0.7f));
 
         pM.GetObject()->UpdateTransform();

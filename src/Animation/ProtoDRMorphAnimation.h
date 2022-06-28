@@ -10,6 +10,7 @@
 #include "..\Objects\Spyro.h"
 #include "..\Objects\Background.h"
 
+#include "..\Materials\Animated\AudioReactiveGradient.h"
 #include "..\Materials\Animated\SpectrumAnalyzer.h"
 #include "..\Materials\Animated\RainbowNoise.h"
 #include "..\Materials\Animated\RainbowSpiral.h"
@@ -22,6 +23,7 @@
 #include "..\Signals\FFTVoiceDetection.h"
 #include "..\Sensors\MenuButtonHandler.h"
 #include "..\Sensors\SerialSync.h"
+#include "..\Sensors\MicrophoneFourier_MAX9814.h"
 
 class ProtoDRMorphAnimation : public Animation<2>{
 private:
@@ -45,7 +47,8 @@ private:
     
     MaterialAnimator<7> materialAnimator;
     
-    SpectrumAnalyzer sA = SpectrumAnalyzer(A8, Vector2D(430, 300), Vector2D(15, 120), true, true);
+    SpectrumAnalyzer sA = SpectrumAnalyzer(Vector2D(430, 300), Vector2D(15, 120), true, true);
+    AudioReactiveGradient aRG = AudioReactiveGradient(Vector2D(250, 250), Vector2D(15, 120), true, true);
 
     FunctionGenerator fGenMatSize = FunctionGenerator(FunctionGenerator::Sine, 450.0f, 550.0f, 2.1f);
     FunctionGenerator fGenMatWidth = FunctionGenerator(FunctionGenerator::Sine, 150.0f, 500.0f, 4.0f);
@@ -230,7 +233,9 @@ public:
         background.GetObject()->SetMaterial(&sA);
 
         SerialSync::Initialize();
-        MenuButtonHandler::Initialize(15, 11, 1000);//7 is number of faces
+        MenuButtonHandler::Initialize(15, 13, 1000);//7 is number of faces
+
+        MicrophoneFourier::Initialize(A8, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
     }
 
     void UpdateKeyFrameTracks(){
@@ -576,7 +581,7 @@ public:
         talk = false;
     }
 
-    void FullScreenDisplay(){
+    void SpectrumAnalyzerDisplay(){
         background.GetObject()->Enable();
         pM.Reset();
         blink.Pause();
@@ -613,6 +618,47 @@ public:
         talk = false;
         
         materialAnimator.AddMaterialFrame(blackMaterial, 1.0f);
+        background.GetObject()->SetMaterial(&sA);
+    }
+    
+    void AudioReactiveGradientDisplay(){
+        background.GetObject()->Enable();
+        pM.Reset();
+        blink.Pause();
+        blink.Reset();
+        mouth.Pause();
+        mouth.Reset();
+        
+        topFinOuter.Pause();
+        topFinInner.Pause();
+        topFinGap.Pause();
+        midFin.Pause();
+        botFinLR1.Pause();
+        botFinLR2.Pause();
+        botFinLR3.Pause();
+        botFinLR4.Pause();
+        botFinLR5.Pause();
+
+        topFinOuter.Reset();
+        topFinInner.Reset();
+        topFinGap.Reset();
+        midFin.Reset();
+        botFinLR1.Reset();
+        botFinLR2.Reset();
+        botFinLR3.Reset();
+        botFinLR4.Reset();
+        botFinLR5.Reset();
+        
+        pM.SetMorphWeight(ProtoDR::HideSecondEye, 0.0f);
+        
+        eEA.AddParameterFrame(ProtoDR::HideBlush, 0.0f);
+        eEA.AddParameterFrame(ProtoDR::HideEyeBrow, 0.0f);
+        eEA.AddParameterFrame(ProtoDR::HideAll, 1.0f);
+        
+        talk = false;
+        
+        materialAnimator.AddMaterialFrame(blackMaterial, 1.0f);
+        background.GetObject()->SetMaterial(&aRG);
     }
 
     void FadeIn(float stepRatio) override {}
@@ -646,6 +692,9 @@ public:
         pM.GetObject()->Enable();//Due to Spyro track
         spyro.GetObject()->Disable();
         background.GetObject()->Disable();
+        
+        float x = sinf(ratio * 3.14159f / 180.0f * 360.0f * 2.0f) * 3.0f;
+        float y = cosf(ratio * 3.14159f / 180.0f * 360.0f * 3.0f) * 3.0f;
 
         MicrophoneFourier::Update();
         sA.Update(MicrophoneFourier::GetFourierFiltered());
@@ -653,6 +702,11 @@ public:
         sA.SetHueAngle(ratio * 360.0f * 4.0f);
         sA.SetMirrorYState(true);//MenuButtonHandler::MirrorSpectrumAnalyzer());
         sA.SetFlipYState(false);//!MenuButtonHandler::MirrorSpectrumAnalyzer());
+
+        aRG.Update(MicrophoneFourier::GetFourierFiltered());
+        aRG.SetHueAngle(ratio * 360.0f * 8.0f);
+        aRG.SetRotation(ratio * 360.0f * 2.0f);
+        aRG.SetPosition(Vector2D(15.0f + x * 4.0f, 120.0f + y * 4.0f));
         
         UpdateFFTVisemes();
 
@@ -685,7 +739,7 @@ public:
         mode = floor(Mathematics::Map(ratio, 0, 1, 0, 1.99f));
         #endif
 
-        if (mode == 0) Default();
+        if (mode == 0) AudioReactiveGradientDisplay();
         else if (mode == 1) OwO();
         else if (mode == 2) Sad();
         else if (mode == 3) Dead();
@@ -694,8 +748,9 @@ public:
         else if (mode == 6) SpyroDisplay(ratio, true);
         else if (mode == 7) AlphaGenSquare();//AlphaGenCircle();
         else if (mode == 8) HideAll();
-        else if (mode == 9) FullScreenDisplay();
-        else if (mode == 10) AngryFace();
+        else if (mode == 9) SpectrumAnalyzerDisplay();
+        else if (mode == 10) AudioReactiveGradientDisplay();
+        else if (mode == 11) AngryFace();
         else OwO2();
         
 
@@ -715,9 +770,6 @@ public:
         //if(talk) pM.SetMorphWeight(ProtoDR::OpenToothMouth, mouthMove);
         eEA.Update();
         pM.Update();
-        
-        float x = sinf(ratio * 3.14159f / 180.0f * 360.0f * 2.0f) * 3.0f;
-        float y = cosf(ratio * 3.14159f / 180.0f * 360.0f * 3.0f) * 3.0f;
         
         pM.GetObject()->GetTransform()->SetRotation(Vector3D(0, 180.0f, 0.0f));
         pM.GetObject()->GetTransform()->SetPosition(Vector3D(x, y, 600.0f));
