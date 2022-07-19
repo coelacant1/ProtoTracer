@@ -23,11 +23,13 @@
     THE SOFTWARE.
 */
 
-#include <string.h>
+#include <Arduino.h>
 #include "OctoWS2811.h"
 
+#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(__MK64FX512__) || defined(__MK66FX1M0__) || defined(__MKL26Z64__)
 
 uint16_t OctoWS2811::stripLen;
+//uint8_t OctoWS2811::brightness = 255;
 void * OctoWS2811::frameBuffer;
 void * OctoWS2811::drawBuffer;
 uint8_t OctoWS2811::params;
@@ -68,10 +70,24 @@ OctoWS2811::OctoWS2811(uint32_t numPerStrip, void *frameBuf, void *drawBuf, uint
 // Discussion about timing and flicker & color shift issues:
 // http://forum.pjrc.com/threads/23877-WS2812B-compatible-with-OctoWS2811-library?p=38190&viewfull=1#post38190
 
+void OctoWS2811::begin(uint32_t numPerStrip, void *frameBuf, void *drawBuf, uint8_t config)
+{
+	stripLen = numPerStrip;
+	frameBuffer = frameBuf;
+	drawBuffer = drawBuf;
+	params = config;
+	begin();
+}
+
 void OctoWS2811::begin(void)
 {
 	uint32_t bufsize, frequency;
-	bufsize = stripLen*24;
+
+	if ((params & 0x1F) < 6) {
+		bufsize = stripLen * 24; // RGB formats
+	} else {
+		bufsize = stripLen * 32; // RGBW formats
+	}
 
 	// set up the buffers
 	memset(frameBuffer, 0, bufsize);
@@ -93,7 +109,7 @@ void OctoWS2811::begin(void)
 	pinMode(5, OUTPUT);	// strip #8
 
 	// create the two waveforms for WS2811 low and high bits
-	switch (params & 0xF0) {
+	switch (params & 0xC0) {
 	case WS2811_400kHz:
 		frequency = 400000;
 		break;
@@ -250,7 +266,11 @@ void OctoWS2811::show(void)
 	if (drawBuffer != frameBuffer) {
 		// TODO: this could be faster with DMA, especially if the
 		// buffers are 32 bit aligned... but does it matter?
-		memcpy(frameBuffer, drawBuffer, stripLen * 24);
+		if ((params & 0x1F) < 6) {
+			memcpy(frameBuffer, drawBuffer, stripLen * 24);
+		} else {
+			memcpy(frameBuffer, drawBuffer, stripLen * 32);
+		}
 	}
 	// wait for WS2811 reset
 	while (micros() - update_completed_at < 300) ;
@@ -285,7 +305,6 @@ void OctoWS2811::show(void)
 #elif defined(__MK20DX256__)
 	FTM2_C0SC = 0x28;
 	FTM2_C1SC = 0x28;
-	delay(1);
 	uint32_t cv = FTM2_C0V;
 	noInterrupts();
 	// CAUTION: this code is timing critical.
@@ -313,7 +332,6 @@ void OctoWS2811::show(void)
 #elif defined(__MK64FX512__) || defined(__MK66FX1M0__)
 	FTM2_C0SC = 0x28;
 	FTM2_C1SC = 0x28;
-	delay(1);
 	uint32_t cv = FTM2_C1V;
 	noInterrupts();
 	// CAUTION: this code is timing critical.
@@ -321,8 +339,12 @@ void OctoWS2811::show(void)
 	while (FTM2_CNT > cv) ; // wait for beginning of an 800 kHz cycle
 	while (FTM2_CNT < cv) ;
 	FTM2_SC = 0;             // stop FTM2 timer (hopefully before it rolls over)
+	FTM2_CNT = 0;
 	update_in_progress = 1;
 	//digitalWriteFast(9, HIGH); // oscilloscope trigger
+	#if defined(__MK64FX512__)
+	asm("nop");
+	#endif
 	PORTA_ISFR = (1<<10);    // clear any prior rising edge
 	uint32_t tmp __attribute__((unused));
 	FTM2_C0SC = 0x28;
@@ -350,7 +372,7 @@ void OctoWS2811::show(void)
 	dma1.clearComplete();
 	dma2.clearComplete();
 	dma3.clearComplete();
-	uint32_t bufsize = stripLen*24;
+	const uint32_t bufsize = stripLen * (((params & 0x1F) < 6) ? 24 : 32);
 	dma1.transferCount(bufsize);
 	dma2.transferCount(bufsize);
 	dma3.transferCount(bufsize);
@@ -374,32 +396,126 @@ void OctoWS2811::show(void)
 
 void OctoWS2811::setPixel(uint32_t num, int color)
 {
-	uint32_t strip, offset, mask;
-	uint8_t bit, *p;
-
-	switch (params & 7) {
-	  case WS2811_RBG:
-		color = (color&0xFF0000) | ((color<<8)&0x00FF00) | ((color>>8)&0x0000FF);
-		break;
-	  case WS2811_GRB:
-		color = ((color<<8)&0xFF0000) | ((color>>8)&0x00FF00) | (color&0x0000FF);
-		break;
-	  case WS2811_GBR:
-		color = ((color<<8)&0xFFFF00) | ((color>>16)&0x0000FF);
-		break;
-	  default:
-		break;
-	}
-	strip = num / stripLen;  // Cortex-M4 has 2 cycle unsigned divide :-)
-	offset = num % stripLen;
-	bit = (1<<strip);
-	p = ((uint8_t *)drawBuffer) + offset * 24;
-	for (mask = (1<<23) ; mask ; mask >>= 1) {
-		if (color & mask) {
-			*p++ |= bit;
-		} else {
-			*p++ &= ~bit;
+	//Serial.printf("setPixel %u to color %08X\n", num, color);
+	if ((params & 0x1F) < 6) {
+		switch (params & 7) {
+		  case WS2811_RBG:
+			color = (color&0xFF0000) | ((color<<8)&0x00FF00) | ((color>>8)&0x0000FF);
+			break;
+		  case WS2811_GRB:
+			color = ((color<<8)&0xFF0000) | ((color>>8)&0x00FF00) | (color&0x0000FF);
+			break;
+		  case WS2811_GBR:
+			color = ((color<<16)&0xFF0000) | ((color>>8)&0x00FFFF);
+			break;
+		  case WS2811_BRG:
+			color = ((color<<8)&0xFFFF00) | ((color>>16)&0x0000FF);
+			break;
+		  case WS2811_BGR:
+			color = ((color<<16)&0xFF0000) | (color&0x00FF00) | ((color>>16)&0x0000FF);
+			break;
+		  default:
+			break;
 		}
+		uint32_t strip = num / stripLen;  // Cortex-M4 has 2 cycle unsigned divide :-)
+		uint32_t offset = num % stripLen;
+
+		uint32_t *p = ((uint32_t *) drawBuffer) + offset * 6;
+
+		uint32_t mask32 = (0x01010101) << strip;
+
+		// Set bytes 0-3
+		*p &= ~mask32;
+		*p |= (((color & 0x800000) >> 23) | ((color & 0x400000) >> 14) | ((color & 0x200000) >> 5) | ((color & 0x100000) << 4)) << strip;
+
+		// Set bytes 4-7
+		*++p &= ~mask32;
+		*p |= (((color & 0x80000) >> 19) | ((color & 0x40000) >> 10) | ((color & 0x20000) >> 1) | ((color & 0x10000) << 8)) << strip;
+
+		// Set bytes 8-11
+		*++p &= ~mask32;
+		*p |= (((color & 0x8000) >> 15) | ((color & 0x4000) >> 6) | ((color & 0x2000) << 3) | ((color & 0x1000) << 12)) << strip;
+
+		// Set bytes 12-15
+		*++p &= ~mask32;
+		*p |= (((color & 0x800) >> 11) | ((color & 0x400) >> 2) | ((color & 0x200) << 7) | ((color & 0x100) << 16)) << strip;
+
+		// Set bytes 16-19
+		*++p &= ~mask32;
+		*p |= (((color & 0x80) >> 7) | ((color & 0x40) << 2) | ((color & 0x20) << 11) | ((color & 0x10) << 20)) << strip;
+
+		// Set bytes 20-23
+		*++p &= ~mask32;
+		*p |= (((color & 0x8) >> 3) | ((color & 0x4) << 6) | ((color & 0x2) << 15) | ((color & 0x1) << 24)) << strip;
+	} else {
+		uint8_t b = color;
+		uint8_t g = color >> 8;
+		uint8_t r = color >> 16;
+		uint8_t w = color >> 24;
+		uint32_t c = 0;
+		switch (params & 0x1F) {
+			case WS2811_RGBW: c = (r << 24) | (g << 16) | (b << 8) | w; break;
+			case WS2811_RBGW: c = (r << 24) | (b << 16) | (g << 8) | w; break;
+			case WS2811_GRBW: c = (g << 24) | (r << 16) | (b << 8) | w; break;
+			case WS2811_GBRW: c = (g << 24) | (b << 16) | (r << 8) | w; break;
+			case WS2811_BRGW: c = (b << 24) | (r << 16) | (g << 8) | w; break;
+			case WS2811_BGRW: c = (b << 24) | (b << 16) | (r << 8) | w; break;
+			case WS2811_WRGB: c = (w << 24) | (r << 16) | (g << 8) | b; break;
+			case WS2811_WRBG: c = (w << 24) | (r << 16) | (b << 8) | g; break;
+			case WS2811_WGRB: c = (w << 24) | (g << 16) | (r << 8) | b; break;
+			case WS2811_WGBR: c = (w << 24) | (g << 16) | (b << 8) | r; break;
+			case WS2811_WBRG: c = (w << 24) | (b << 16) | (r << 8) | g; break;
+			case WS2811_WBGR: c = (w << 24) | (b << 16) | (g << 8) | r; break;
+			case WS2811_RWGB: c = (r << 24) | (w << 16) | (g << 8) | b; break;
+			case WS2811_RWBG: c = (r << 24) | (w << 16) | (b << 8) | g; break;
+			case WS2811_GWRB: c = (g << 24) | (w << 16) | (r << 8) | b; break;
+			case WS2811_GWBR: c = (g << 24) | (w << 16) | (b << 8) | r; break;
+			case WS2811_BWRG: c = (b << 24) | (w << 16) | (r << 8) | g; break;
+			case WS2811_BWGR: c = (b << 24) | (w << 16) | (g << 8) | r; break;
+			case WS2811_RGWB: c = (r << 24) | (g << 16) | (w << 8) | b; break;
+			case WS2811_RBWG: c = (r << 24) | (b << 16) | (w << 8) | g; break;
+			case WS2811_GRWB: c = (g << 24) | (r << 16) | (w << 8) | b; break;
+			case WS2811_GBWR: c = (g << 24) | (b << 16) | (w << 8) | r; break;
+			case WS2811_BRWG: c = (b << 24) | (r << 16) | (w << 8) | g; break;
+			case WS2811_BGWR: c = (b << 24) | (g << 16) | (w << 8) | r; break;
+		}
+		uint32_t strip = num / stripLen;
+		uint32_t offset = num % stripLen;
+
+		uint32_t *p = ((uint32_t *) drawBuffer) + offset * 8;
+		uint32_t mask32 = (0x01010101) << strip;
+
+		// Set bytes 0-3
+		*p &= ~mask32;
+		*p |= (((c & 0x80000000) >> 31) | ((c & 0x40000000) >> 22) | ((c & 0x20000000) >> 13) | ((c & 0x10000000) >> 4)) << strip;
+
+		// Set bytes 4-7
+		*++p &= ~mask32;
+		*p |= (((c & 0x8000000) >> 27) | ((c & 0x4000000) >> 18) | ((c & 0x2000000) >> 9) | ((c & 0x1000000) << 0)) << strip;
+
+		// Set bytes 8-11
+		*++p &= ~mask32;
+		*p |= (((c & 0x800000) >> 23) | ((c & 0x400000) >> 14) | ((c & 0x200000) >> 5) | ((c & 0x100000) << 4)) << strip;
+
+		// Set bytes 12-15
+		*++p &= ~mask32;
+		*p |= (((c & 0x80000) >> 19) | ((c & 0x40000) >> 10) | ((c & 0x20000) >> 1) | ((c & 0x10000) << 8)) << strip;
+
+		// Set bytes 16-19
+		*++p &= ~mask32;
+		*p |= (((c & 0x8000) >> 15) | ((c & 0x4000) >> 6) | ((c & 0x2000) << 3) | ((c & 0x1000) << 12)) << strip;
+
+		// Set bytes 20-23
+		*++p &= ~mask32;
+		*p |= (((c & 0x800) >> 11) | ((c & 0x400) >> 2) | ((c & 0x200) << 7) | ((c & 0x100) << 16)) << strip;
+
+		// Set bytes 24-27
+		*++p &= ~mask32;
+		*p |= (((c & 0x80) >> 7) | ((c & 0x40) << 2) | ((c & 0x20) << 11) | ((c & 0x10) << 20)) << strip;
+
+		// Set bytes 28-31
+		*++p &= ~mask32;
+		*p |= (((c & 0x8) >> 3) | ((c & 0x4) << 6) | ((c & 0x2) << 15) | ((c & 0x1) << 24)) << strip;
 	}
 }
 
@@ -412,28 +528,111 @@ int OctoWS2811::getPixel(uint32_t num)
 	strip = num / stripLen;
 	offset = num % stripLen;
 	bit = (1<<strip);
-	p = ((uint8_t *)drawBuffer) + offset * 24;
-	for (mask = (1<<23) ; mask ; mask >>= 1) {
-		if (*p++ & bit) color |= mask;
+	if ((params & 0x1F) < 6) {
+		p = ((uint8_t *)drawBuffer) + offset * 24;
+		for (mask = (1<<23) ; mask ; mask >>= 1) {
+			if (*p++ & bit) color |= mask;
+		}
+		switch (params & 7) {
+			case WS2811_RBG:
+				color = (color&0xFF0000) | ((color<<8)&0x00FF00) | ((color>>8)&0x0000FF);
+				break;
+			case WS2811_GRB:
+				color = ((color<<8)&0xFF0000) | ((color>>8)&0x00FF00) | (color&0x0000FF);
+				break;
+			case WS2811_GBR:
+				color = ((color<<8)&0xFFFF00) | ((color>>16)&0x0000FF);
+				break;
+			case WS2811_BRG:
+				color = ((color<<16)&0xFF0000) | ((color>>8)&0x00FFFF);
+				break;
+			case WS2811_BGR:
+				color = ((color<<16)&0xFF0000) | (color&0x00FF00) | ((color>>16)&0x0000FF);
+				break;
+			default:
+				break;
+		}
+	} else {
+		p = ((uint8_t *)drawBuffer) + offset * 32;
+		for (mask = (1<<31) ; mask ; mask >>= 1) {
+			if (*p++ & bit) color |= mask;
+		}
+		switch (params & 0x1F) {
+			case WS2811_RGBW:
+				color = ((color<<24)&0xFF000000) | ((color>>8)&0x00FF0000) | ((color>>8)&0x0000FF00) | ((color>>8)&0x000000FF);
+				break;
+			case WS2811_RBGW:
+				color = ((color<<24)&0xFF000000) | ((color>>8)&0x00FF0000) | (color&0x0000FF00) | ((color>>16)&0x000000FF);
+				break;
+			case WS2811_GRBW:
+				color = ((color<<24)&0xFF000000) | (color&0x00FF0000) | ((color>>16)&0x0000FF00) | ((color>>8)&0x000000FF);
+				break;
+			case WS2811_GBRW:
+				color = ((color<<24)&0xFF000000) | ((color<<8)&0x00FF0000) | ((color>>16)&0x0000FF00) | ((color>>16)&0x000000FF);
+				break;
+			case WS2811_BRGW:
+				color = ((color<<24)&0xFF000000) | (color&0x00FF0000) | (color&0x0000FF00) | ((color>>24)&0x000000FF);
+				break;
+			case WS2811_BGRW:
+				color = ((color<<24)&0xFF000000) | ((color<<8)&0x00FF0000) | ((color>>8)&0x0000FF00) | ((color>>24)&0x000000FF);
+				break;
+			case WS2811_WRBG:
+				color = (color&0xFF000000) | (color&0x00FF0000) | ((color<<8)&0x0000FF00) | ((color>>8)&0x000000FF);
+				break;
+			case WS2811_WGRB:
+				color = (color&0xFF000000) | ((color<<8)&0x00FF0000) | ((color>>8)&0x0000FF00) | (color&0x000000FF);
+				break;
+			case WS2811_WGBR:
+				color = (color&0xFF000000) | ((color<<16)&0x00FF0000) | ((color>>8)&0x0000FF00) | ((color>>8)&0x000000FF);
+				break;
+			case WS2811_WBRG:
+				color = (color&0xFF000000) | ((color<<8)&0x00FF0000) | ((color<<8)&0x0000FF00) | ((color>>16)&0x000000FF);
+				break;
+			case WS2811_WBGR:
+				color = (color&0xFF000000) | ((color<<16)&0x00FF0000) | (color&0x0000FF00) | ((color>>16)&0x000000FF);
+				break;
+			case WS2811_RWGB:
+				color = ((color<<8)&0xFF000000) | ((color>>8)&0x00FF0000) | (color&0x0000FF00) | (color&0x000000FF);
+				break;
+			case WS2811_RWBG:
+				color = ((color<<8)&0xFF000000) | ((color>>8)&0x00FF0000) | ((color<<8)&0x0000FF00) | ((color>>8)&0x000000FF);
+				break;
+			case WS2811_GWRB:
+				color = ((color<<8)&0xFF000000) | ((color<<8)&0x00FF0000) | ((color>>16)&0x0000FF00) | (color&0x000000FF);
+				break;
+			case WS2811_GWBR:
+				color = ((color<<8)&0xFF000000) | ((color<<16)&0x00FF0000) | ((color>>16)&0x0000FF00) | ((color>>8)&0x000000FF);
+				break;
+			case WS2811_BWRG:
+				color = ((color<<8)&0xFF000000) | ((color<<8)&0x00FF0000) | ((color<<8)&0x0000FF00) | ((color>>24)&0x000000FF);
+				break;
+			case WS2811_BWGR:
+				color = ((color<<8)&0xFF000000) | ((color<<16)&0x00FF0000) | (color&0x0000FF00) | ((color>>24)&0x000000FF);
+				break;
+			case WS2811_RGWB:
+				color = ((color<<16)&0xFF000000) | ((color>>8)&0x00FF0000) | ((color>>8)&0x0000FF00) | (color&0x000000FF);
+				break;
+			case WS2811_RBWG:
+				color = ((color<<16)&0xFF000000) | ((color>>8)&0x00FF0000) | ((color<<8)&0x0000FF00) | ((color>>16)&0x000000FF);
+				break;
+			case WS2811_GRWB:
+				color = ((color<<16)&0xFF000000) | (color&0x00FF0000) | ((color>>16)&0x0000FF00) | (color&0x000000FF);
+				break;
+			case WS2811_GBWR:
+				color = ((color<<16)&0xFF000000) | ((color<<16)&0x00FF0000) | ((color>>16)&0x0000FF00) | ((color>>16)&0x000000FF);
+				break;
+			case WS2811_BRWG:
+				color = ((color<<16)&0xFF000000) | (color&0x00FF0000) | ((color<<8)&0x0000FF00) | ((color>>24)&0x000000FF);
+				break;
+			case WS2811_BGWR:
+				color = ((color<<16)&0xFF000000) | ((color<<16)&0x00FF0000) | ((color>>8)&0x0000FF00) | ((color>>24)&0x000000FF);
+				break;
+			default:
+				break;
+		}
 	}
-	switch (params & 7) {
-	  case WS2811_RBG:
-		color = (color&0xFF0000) | ((color<<8)&0x00FF00) | ((color>>8)&0x0000FF);
-		break;
-	  case WS2811_GRB:
-		color = ((color<<8)&0xFF0000) | ((color>>8)&0x00FF00) | (color&0x0000FF);
-		break;
-	  case WS2811_GBR:
-		color = ((color<<8)&0xFFFF00) | ((color>>16)&0x0000FF);
-		break;
-	  case WS2811_BRG:
-		color = ((color<<16)&0xFF0000) | ((color>>8)&0x00FFFF);
-		break;
-	  case WS2811_BGR:
-		color = ((color<<16)&0xFF0000) | (color&0x00FF00) | ((color>>16)&0x0000FF);
-		break;
-	  default:
-		break;
-	}
+
 	return color;
 }
+
+#endif // supported boards

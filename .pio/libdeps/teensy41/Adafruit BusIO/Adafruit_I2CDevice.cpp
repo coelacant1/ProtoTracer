@@ -13,6 +13,8 @@ Adafruit_I2CDevice::Adafruit_I2CDevice(uint8_t addr, TwoWire *theWire) {
   _begun = false;
 #ifdef ARDUINO_ARCH_SAMD
   _maxBufferSize = 250; // as defined in Wire.h's RingBuffer
+#elif defined(ESP32)
+  _maxBufferSize = I2C_BUFFER_LENGTH;
 #else
   _maxBufferSize = 32;
 #endif
@@ -106,7 +108,7 @@ bool Adafruit_I2CDevice::write(const uint8_t *buffer, size_t len, bool stop,
   _wire->beginTransmission(_addr);
 
   // Write the prefix data (usually an address)
-  if ((prefix_len != 0) && (prefix_buffer != NULL)) {
+  if ((prefix_len != 0) && (prefix_buffer != nullptr)) {
     if (_wire->write(prefix_buffer, prefix_len) != prefix_len) {
 #ifdef DEBUG_SERIAL
       DEBUG_SERIAL.println(F("\tI2CDevice failed to write"));
@@ -128,7 +130,7 @@ bool Adafruit_I2CDevice::write(const uint8_t *buffer, size_t len, bool stop,
   DEBUG_SERIAL.print(F("\tI2CWRITE @ 0x"));
   DEBUG_SERIAL.print(_addr, HEX);
   DEBUG_SERIAL.print(F(" :: "));
-  if ((prefix_len != 0) && (prefix_buffer != NULL)) {
+  if ((prefix_len != 0) && (prefix_buffer != nullptr)) {
     for (uint16_t i = 0; i < prefix_len; i++) {
       DEBUG_SERIAL.print(F("0x"));
       DEBUG_SERIAL.print(prefix_buffer[i], HEX);

@@ -13,6 +13,7 @@
 #include "..\..\Signals\FunctionGenerator.h"
 #include "..\..\Sensors\MenuButtonHandler.h"
 #include "..\..\Sensors\BoopSensor.h"
+#include "..\..\Sensors\MicrophoneFourier_MAX9814.h"
 
 #include "..\..\Materials\Animated\SpectrumAnalyzer.h"
 #include "..\..\Materials\Animated\RainbowNoise.h"
@@ -50,7 +51,7 @@ private:
     
     CombineMaterial<5> faceMaterial;
     
-    SpectrumAnalyzer sA = SpectrumAnalyzer(22, Vector2D(250, 110), Vector2D(125, 60), true, true);
+    SpectrumAnalyzer sA = SpectrumAnalyzer(Vector2D(250, 110), Vector2D(125, 60), true, true);
 
     //Animation controllers
     BlinkTrack<1> blink;
@@ -156,6 +157,9 @@ public:
         zzz.GetObject()->SetMaterial(&blueMaterial);
 
         MenuButtonHandler::Initialize(0, 9, 1000);//8 is number of faces
+
+        MicrophoneFourier::Initialize(22, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
+
         boop.Initialize(5);
 
         background.GetObject()->SetMaterial(&sA);

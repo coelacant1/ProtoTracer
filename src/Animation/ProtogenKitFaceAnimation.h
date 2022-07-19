@@ -20,6 +20,8 @@
 
 #include "..\Signals\FFTVoiceDetection.h"
 
+#include "..\Sensors\MicrophoneFourier_MAX9814.h"
+
 class ProtogenKitFaceAnimation : public Animation<2> {
 private:
     NukudeFace pM;
@@ -36,7 +38,7 @@ private:
     
     CombineMaterial<4> faceMaterial;
     
-    SpectrumAnalyzer sA = SpectrumAnalyzer(22, Vector2D(250, 200), Vector2D(120, 100), true, true);
+    SpectrumAnalyzer sA = SpectrumAnalyzer(Vector2D(250, 200), Vector2D(120, 100), true, true);
 
     //Animation controllers
     BlinkTrack<1> blink;
@@ -122,7 +124,7 @@ public:
 
         MenuButtonHandler::Initialize(0, 7, 1000);//7 is number of faces
 
-        MicrophoneFourier::Initialize(A8, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
+        MicrophoneFourier::Initialize(22, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
         
         boop.Initialize(5);
 
@@ -239,7 +241,7 @@ public:
     
         faceMaterial.SetOpacity(2, rainbowFaceMix);//set face to spiral
         faceMaterial.SetOpacity(3, angryFaceMix);//set face to angry
-        
+
         pM.GetObject()->GetTransform()->SetPosition(Vector3D(130.0f + fGenMatXMove.Update(), -15.0f + fGenMatYMove.Update(), 600.0f));
         pM.GetObject()->GetTransform()->SetScale(Vector3D(-1.0f, 0.625f, 0.7f));
 
