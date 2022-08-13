@@ -31,9 +31,9 @@ private:
     //Materials
     RainbowNoise rainbowNoise;
     RainbowSpiral rainbowSpiral;
-    SimpleMaterial redMaterial = SimpleMaterial(RGBColor(255, 0, 0));
+    SimpleMaterial redMaterial = SimpleMaterial(RGBColor(100, 0, 0));
     
-    RGBColor gradientSpectrum[2] = {RGBColor(221, 15, 125), RGBColor(214, 35, 168)};
+    RGBColor gradientSpectrum[2] = {RGBColor(255, 0, 0), RGBColor(50, 0, 0)};
     GradientMaterial<2> gradientMat = GradientMaterial<2>(gradientSpectrum, 350.0f, false);
     
     CombineMaterial<4> faceMaterial;
@@ -103,7 +103,7 @@ private:
 
     void SetMaterials(){
         faceMaterial.AddMaterial(Material::Add, &gradientMat, 1.0f);
-        faceMaterial.AddMaterial(Material::Lighten, &rainbowNoise, 0.6f);
+        faceMaterial.AddMaterial(Material::Add, &rainbowNoise, 0.0f);
         faceMaterial.AddMaterial(Material::Replace, &rainbowSpiral, 0.0f);
         faceMaterial.AddMaterial(Material::Replace, &redMaterial, 0.0f);
     }

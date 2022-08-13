@@ -34,7 +34,7 @@ private:
     SimpleMaterial redMaterial = SimpleMaterial(RGBColor(255, 0, 0));
     SimpleMaterial blueMaterial = SimpleMaterial(RGBColor(0, 0, 255));
     
-    RGBColor gradientSpectrum[2] = {RGBColor(255, 0, 0), RGBColor(255, 50, 0)};
+    RGBColor gradientSpectrum[2] = {RGBColor(5, 162, 232), RGBColor(10, 170, 255)};
     GradientMaterial<2> gradientMat = GradientMaterial<2>(gradientSpectrum, 350.0f, false);
     
     MaterialAnimator<5> materialAnimator;
@@ -238,8 +238,25 @@ public:
         //gradientMat.HueShift(fGenMatHue.Update());
         
         pM.GetObject()->GetTransform()->SetRotation(Vector3D(0.0f, 0.0f, -7.5f));
-        pM.GetObject()->GetTransform()->SetPosition(Vector3D(125.0f + fGenMatXMove.Update(), -22.5f + fGenMatYMove.Update(), 600.0f));
-        pM.GetObject()->GetTransform()->SetScale(Vector3D(-1.05f, 0.585f, 0.8f));
+
+        uint8_t faceSize = MenuButtonHandler::GetFaceSize();
+
+        if(faceSize == 0){
+            pM.GetObject()->GetTransform()->SetPosition(Vector3D(125.0f + fGenMatXMove.Update(), -22.5f + fGenMatYMove.Update(), 600.0f));
+            pM.GetObject()->GetTransform()->SetScale(Vector3D(-1.05f, 0.585f, 0.8f));
+        }
+        else if(faceSize == 1){
+            pM.GetObject()->GetTransform()->SetPosition(Vector3D(117.5f + fGenMatXMove.Update(), -22.5f + fGenMatYMove.Update(), 600.0f));
+            pM.GetObject()->GetTransform()->SetScale(Vector3D(-0.975f, 0.585f, 0.8f));
+        }
+        else if(faceSize == 2){
+            pM.GetObject()->GetTransform()->SetPosition(Vector3D(110.0f + fGenMatXMove.Update(), -22.5f + fGenMatYMove.Update(), 600.0f));
+            pM.GetObject()->GetTransform()->SetScale(Vector3D(-0.9f, 0.585f, 0.8f));
+        }
+        else {
+            pM.GetObject()->GetTransform()->SetPosition(Vector3D(102.5f + fGenMatXMove.Update(), -22.5f + fGenMatYMove.Update(), 600.0f));
+            pM.GetObject()->GetTransform()->SetScale(Vector3D(-0.825f, 0.585f, 0.8f));
+        }
 
         pM.GetObject()->UpdateTransform();
     }

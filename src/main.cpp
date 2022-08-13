@@ -4,6 +4,7 @@
 //--------------- ANIMATIONS ---------------
 //#include "Animation\ProtoDRMorphAnimation.h"
 //#include "Animation\ProtogenKitFaceAnimation.h"
+#include "Animation\ProtogenHUB75Animation.h"
 //#include "Animation\Commissions\VesperAnimation.h"
 //#include "Animation\KaiborgV1Animation.h"
 //#include "Animation\ProtoV3Animation.h"
@@ -16,7 +17,6 @@
 //#include "Animation\PikachuAnimation.h"
 //#include "Animation\BeeAnimation.h"
 //#include "Animation\ProtogenArtleckAnimation.h"
-#include "Animation\ProtogenHUB75Animation.h"
 //#include "Animation\DeltaruneAnimation.h"
 //#include "Animation\NukudeFaceAnimation.h"
 //#include "Animation\Commissions\InfraredAnimation.h"

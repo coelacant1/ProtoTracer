@@ -6,7 +6,7 @@
 
 class MenuButtonHandler{
 private:
-    static const uint8_t toggleCount = 5;
+    static const uint8_t toggleCount = 7;
     static IntervalTimer menuChangeTimer;
     static long previousMillisHold;
     static uint16_t holdingTime;
@@ -52,6 +52,12 @@ private:
                 case 4:
                     SetEEPOMSpectrum(currentValue[currentMenu]);
                     break;
+                case 5:
+                    SetEEPOMFace(currentValue[currentMenu]);
+                    break;
+                case 6:
+                    SetEEPOMColor(currentValue[currentMenu]);
+                    break;
                 default:
                     break;
             }
@@ -83,6 +89,14 @@ private:
         return EEPROM.read(3);
     }
 
+    static uint8_t ReadEEPOMFace(){
+        return EEPROM.read(4);
+    }
+    
+    static uint8_t ReadEEPOMColor(){
+        return EEPROM.read(5);
+    }
+
     static uint8_t ReadEEPROMInitialize(){
         return EEPROM.read(50);
     }
@@ -104,6 +118,14 @@ private:
         EEPROM.write(3, value);
     }
 
+    static void SetEEPOMFace(uint8_t value){
+        EEPROM.write(4, value);
+    }
+
+    static void SetEEPOMColor(uint8_t value){
+        EEPROM.write(5, value);
+    }
+
     static void SetEEPOMInitialize(uint8_t value){
         EEPROM.write(50, value);
     }
@@ -121,13 +143,17 @@ public:
         MenuButtonHandler::maxValue[1] = 5;//number of brightness intervals
         MenuButtonHandler::maxValue[2] = 2;//microphone on or off
         MenuButtonHandler::maxValue[3] = 2;//boop sensor on or off
-        MenuButtonHandler::maxValue[4] = 2;//spectrum analyzer mode
+        MenuButtonHandler::maxValue[4] = 2;//spectrum analyzer
+        MenuButtonHandler::maxValue[5] = 4;//face size
+        MenuButtonHandler::maxValue[6] = 8;//face color
 
         if(ReadEEPROMInitialize() == 255){//will default to 255, if was previously set will equal 1
             SetEEPOMBrightness(1);
             SetEEPOMMicrophone(1);
             SetEEPOMBoopSensor(1);
             SetEEPOMSpectrum(0);
+            SetEEPOMFace(0);
+            SetEEPOMColor(0);
             SetEEPOMInitialize(0);
         }
 
@@ -137,6 +163,12 @@ public:
         MenuButtonHandler::currentValue[2] = ReadEEPOMMicrophone();//initialize microphone state from eeprom
         MenuButtonHandler::currentValue[3] = ReadEEPOMBoopSensor();//initialize boop sensor state from eeprom
         MenuButtonHandler::currentValue[4] = ReadEEPOMSpectrum();//initialize spectrum state from eeprom
+        MenuButtonHandler::currentValue[5] = ReadEEPOMFace();//initialize boop sensor state from eeprom
+        MenuButtonHandler::currentValue[6] = ReadEEPOMColor();//initialize spectrum state from eeprom
+    }
+
+    static uint8_t GetFaceState(){
+        return currentValue[0];
     }
 
     static uint8_t GetBrightness(){
@@ -155,8 +187,12 @@ public:
         return currentValue[4];
     }
 
-    static uint8_t GetFaceState(){
-        return currentValue[0];
+    static uint8_t GetFaceSize(){
+        return currentValue[5];
+    }
+    
+    static uint8_t GetFaceColor(){
+        return currentValue[6];
     }
 };
 

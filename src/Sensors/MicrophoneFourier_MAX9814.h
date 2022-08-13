@@ -115,7 +115,7 @@ public:
         arm_cmplx_mag_f32(inputSamp, outputMagn, FFTSize);
         
         float averageMagnitude = 0.0f;
-        
+
         for (uint8_t i = 0; i < OutputBins - 1; i++){
             float intensity = 20.0f * log10f(AverageMagnitude(i, i + 1));
 
