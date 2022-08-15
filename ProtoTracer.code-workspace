@@ -10,7 +10,8 @@
 			"utility": "cpp",
 			"limits": "cpp",
 			"string": "cpp",
-			"cmath": "cpp"
+			"cmath": "cpp",
+			"initializer_list": "cpp"
 		}
 	}
 }

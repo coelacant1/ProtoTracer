@@ -47,16 +47,17 @@ void loop() {
     float ratio = (float)(millis() % 5000) / 5000.0f;
     animation.UpdateTime(ratio);
 
-    controller.SetBrightness(MenuButtonHandler::GetBrightness());
+    controller.SetBrightness(Menu::GetBrightness());
 
     controller.Render(animation.GetScene());
 
     controller.Display();
-
+    /*
     Serial.print("Animated in ");
     Serial.print(animation.GetAnimationTime(), 4);
 
     Serial.print("s, Rendered in ");
     Serial.print(controller.GetRenderTime(), 4);
     Serial.println("s");
+    */
 }
