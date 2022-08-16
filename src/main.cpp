@@ -3,8 +3,8 @@
 
 //--------------- ANIMATIONS ---------------
 //#include "Animation\ProtoDRMorphAnimation.h"
-#include "Animation\ProtogenKitFaceAnimation.h"
-//#include "Animation\ProtogenHUB75Animation.h"
+//#include "Animation\ProtogenKitFaceAnimation.h"
+#include "Animation\ProtogenHUB75Animation.h"
 //#include "Animation\Commissions\VesperAnimation.h"
 //#include "Animation\KaiborgV1Animation.h"
 //#include "Animation\ProtoV3Animation.h"
@@ -23,9 +23,9 @@
 
 //--------------- CONTROLLERS ---------------
 //#include "Controllers\KaiborgV1Controller.h"
-#include "Controllers\KaiborgV1D1Controller.h"
+//#include "Controllers\KaiborgV1D1Controller.h"
 //#include "Controllers\ProtoDRController.h"
-//#include "Controllers\SmartMatrixHUB75.h"
+#include "Controllers\SmartMatrixHUB75.h"
 
 uint8_t maxBrightness = 50;
 #ifdef RIGHTFACE
@@ -33,8 +33,8 @@ ProtoDRController controller = ProtoDRController(maxBrightness, ProtoDRControlle
 #else
 //ProtoDRController controller = ProtoDRController(maxBrightness, ProtoDRController::LEFT);
 #endif
-KaiborgV1D1Controller controller = KaiborgV1D1Controller(maxBrightness);
-ProtogenKitFaceAnimation animation = ProtogenKitFaceAnimation();
+SmartMatrixHUB75 controller = SmartMatrixHUB75(maxBrightness);
+ProtogenHUB75Animation animation = ProtogenHUB75Animation();
 
 void setup() {
     Serial.begin(115200);
