@@ -2,7 +2,6 @@
 
 #include <Arduino.h>
 #include "..\Controls\DampedSpring.h"
-#include "..\Objects\MenuBackground.h"
 #include "..\Sensors\MenuHandler.h"
 #include "..\Materials\Animated\RainbowNoise.h"
 #include "..\Materials\Menu\TextEngine.h"
@@ -21,7 +20,6 @@ public:
 
 private:
     static RainbowNoise material;
-    static MenuBackground menuBackground;
     static DampedSpring dampedSpringX;
     static DampedSpring dampedSpringShow;
 
@@ -31,6 +29,7 @@ private:
 
     static Vector2D size;
     static Vector2D position;
+    static Vector2D positionOffset;
     static Vector2D rotationOffset;
     static float rotation;
     static float showMenuRatio;
@@ -67,17 +66,15 @@ private:
     }
 
 public:
-    static void Initialize(uint8_t faceCount, uint8_t pin, uint16_t holdingTime){
+    static void Initialize(uint8_t faceCount, uint8_t pin, uint16_t holdingTime, Vector2D size = Vector2D(240, 50)){
         Menu::faceCount = faceCount;
 
         dampedSpringX.SetConstants(1.0f, 0.5f);
         dampedSpringShow.SetConstants(1.0f, 0.5f);
 
-        SetSize(Vector2D(240 * menuCount, 50));
+        SetSize(size);
 
         textEngine.SetMaterial(&material);
-
-        textEngine.SetSize(size);
         textEngine.SetPositionOffset(position);
         textEngine.SetBlinkTime(200);
 
@@ -86,14 +83,8 @@ public:
         }
 
         SetMaxEntries();
-        
-        menuBackground.GetObject()->SetMaterial(&textEngine);
 
         MenuHandler::Begin();
-    }
-
-    static Object3D* GetObject(){
-        return menuBackground.GetObject();
     }
 
     static Material* GetMaterial(){
@@ -112,10 +103,6 @@ public:
         Menu::SetPosition(Vector2D(-xPosition + fGenMatXMenu.Update() * wiggleRatio, fGenMatYMenu.Update() * wiggleRatio + 40.0f + showMenuRatio));
         Menu::SetRotationOffset(Vector2D(200.0f / 2, 100.0f / 2));
         Menu::SetRotation(fGenMatRMenu.Update());
-        
-        Menu::GetObject()->ResetVertices();
-        Menu::GetObject()->GetTransform()->SetPosition(Vector3D(0.0f, showMenuRatio, 1200.0f));
-        Menu::GetObject()->UpdateTransform();
     }
 
     static void SetWiggleRatio(float wiggleRatio){
@@ -123,13 +110,20 @@ public:
     }
 
     static void SetSize(Vector2D size){
+        size.X = size.X * menuCount;
+
         Menu::size = size;
+
         textEngine.SetSize(size);
     }
 
     static void SetPosition(Vector2D position){
-        Menu::position = position;
-        textEngine.SetPositionOffset(position);
+        Menu::position = position + positionOffset;
+        textEngine.SetPositionOffset(Menu::position);
+    }
+
+    static void SetPositionOffset(Vector2D positionOffset){
+        Menu::positionOffset = positionOffset;
     }
 
     static void SetRotationOffset(Vector2D rotationOffset){
@@ -246,16 +240,16 @@ public:
 };
 
 RainbowNoise Menu::material;
-MenuBackground Menu::menuBackground;
 DampedSpring Menu::dampedSpringX;
 DampedSpring Menu::dampedSpringShow;
 
-FunctionGenerator Menu::fGenMatXMenu = FunctionGenerator(FunctionGenerator::Sine, -3.0f, 3.0f, 4.1f);
-FunctionGenerator Menu::fGenMatYMenu = FunctionGenerator(FunctionGenerator::Sine, -3.0f, 3.0f, 3.7f);
-FunctionGenerator Menu::fGenMatRMenu = FunctionGenerator(FunctionGenerator::Sine, -3.0f, 3.0f, 1.7f);
+FunctionGenerator Menu::fGenMatXMenu = FunctionGenerator(FunctionGenerator::Sine, -4.0f, 4.0f, 1.12f);
+FunctionGenerator Menu::fGenMatYMenu = FunctionGenerator(FunctionGenerator::Sine, -4.0f, 4.0f, 1.73f);
+FunctionGenerator Menu::fGenMatRMenu = FunctionGenerator(FunctionGenerator::Sine, -4.0f, 4.0f, 0.76f);
 
 Vector2D Menu::size;
 Vector2D Menu::position;
+Vector2D Menu::positionOffset;
 Vector2D Menu::rotationOffset;
 float Menu::rotation;
 float Menu::showMenuRatio;

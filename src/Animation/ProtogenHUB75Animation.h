@@ -22,7 +22,7 @@
 
 #include "..\Sensors\MicrophoneFourier_MAX9814.h"
 
-class ProtogenHUB75Animation : public Animation<3> {
+class ProtogenHUB75Animation : public Animation<2> {
 private:
     NukudeFace pM;
     Background background;
@@ -32,12 +32,17 @@ private:
     RainbowNoise rainbowNoise;
     RainbowSpiral rainbowSpiral;
     SimpleMaterial redMaterial = SimpleMaterial(RGBColor(255, 0, 0));
+    SimpleMaterial orangeMaterial = SimpleMaterial(RGBColor(255, 165, 0));
+    SimpleMaterial whiteMaterial = SimpleMaterial(RGBColor(255, 255, 255));
+    SimpleMaterial greenMaterial = SimpleMaterial(RGBColor(0, 255, 0));
     SimpleMaterial blueMaterial = SimpleMaterial(RGBColor(0, 0, 255));
+    SimpleMaterial yellowMaterial = SimpleMaterial(RGBColor(255, 255, 0));
+    SimpleMaterial purpleMaterial = SimpleMaterial(RGBColor(255, 0, 255));
     
     RGBColor gradientSpectrum[2] = {RGBColor(5, 162, 232), RGBColor(10, 170, 255)};
     GradientMaterial<2> gradientMat = GradientMaterial<2>(gradientSpectrum, 350.0f, false);
     
-    MaterialAnimator<5> materialAnimator;
+    MaterialAnimator<10> materialAnimator;
     MaterialAnimator<2> backgroundMaterial;
     
     SpectrumAnalyzer sA = SpectrumAnalyzer(Vector2D(200, 100), Vector2D(100, 50), true, true); 
@@ -60,6 +65,8 @@ private:
 
     FFTVoiceDetection<128> voiceDetection;
 
+    float offsetFaceSA = 0.0f;
+    uint8_t offsetFaceInd = 50;
 
     void LinkEasyEase(){
         eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::Anger), NukudeFace::Anger, 15, 0.0f, 1.0f);
@@ -80,6 +87,9 @@ private:
         eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_ss), NukudeFace::vrc_v_ss, 2, 0.0f, 1.0f);
         
         eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::HideBlush), NukudeFace::HideBlush, 30, 1.0f, 0.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::HideBlush), NukudeFace::HideBlush, 30, 1.0f, 0.0f);
+
+        eEA.AddParameter(&offsetFaceSA, offsetFaceInd, 30, 0.0f, 1.0f);
     }
 
     void LinkParameters(){
@@ -102,36 +112,18 @@ private:
 
     void SetMaterialLayers(){
         materialAnimator.SetBaseMaterial(Material::Add, &gradientMat);
-        materialAnimator.AddMaterial(Material::Replace, &rainbowSpiral, 40, 0.0f, 1.0f);//layer 1
-        materialAnimator.AddMaterial(Material::Replace, &redMaterial, 40, 0.0f, 1.0f);//layer 2
-        materialAnimator.AddMaterial(Material::Replace, &blueMaterial, 40, 0.0f, 1.0f);//layer 3
-        materialAnimator.AddMaterial(Material::Lighten, &rainbowNoise, 40, 0.35f, 1.0f);//layer 4
+        materialAnimator.AddMaterial(Material::Replace, &orangeMaterial, 40, 0.0f, 1.0f);//layer 1
+        materialAnimator.AddMaterial(Material::Replace, &whiteMaterial, 40, 0.0f, 1.0f);//layer 2
+        materialAnimator.AddMaterial(Material::Replace, &greenMaterial, 40, 0.0f, 1.0f);//layer 3
+        materialAnimator.AddMaterial(Material::Replace, &yellowMaterial, 40, 0.0f, 1.0f);//layer 4
+        materialAnimator.AddMaterial(Material::Replace, &purpleMaterial, 40, 0.0f, 1.0f);//layer 5
+        materialAnimator.AddMaterial(Material::Replace, &redMaterial, 40, 0.0f, 1.0f);//layer 6
+        materialAnimator.AddMaterial(Material::Replace, &blueMaterial, 40, 0.0f, 1.0f);//layer 7
+        materialAnimator.AddMaterial(Material::Replace, &rainbowSpiral, 40, 0.0f, 1.0f);//layer 8
+        materialAnimator.AddMaterial(Material::Lighten, &rainbowNoise, 40, 0.35f, 1.0f);//layer 9
 
         backgroundMaterial.SetBaseMaterial(Material::Add, Menu::GetMaterial());
         backgroundMaterial.AddMaterial(Material::Add, &sA, 40, 0.0f, 1.0f);
-    }
-
-public:
-    ProtogenHUB75Animation() {
-        scene.AddObject(pM.GetObject());
-        scene.AddObject(background.GetObject());
-        scene.AddObject(Menu::GetObject());
-
-        LinkEasyEase();
-        LinkParameters();
-
-        ChangeInterpolationMethods();
-
-        SetMaterialLayers();
-
-        pM.GetObject()->SetMaterial(&materialAnimator);
-
-        boop.Initialize(5);
-
-        background.GetObject()->SetMaterial(&backgroundMaterial);
-
-        MicrophoneFourier::Initialize(A0, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
-        Menu::Initialize(7, 20, 500);//7 is number of faces
     }
 
     void UpdateKeyFrameTracks(){
@@ -174,14 +166,9 @@ public:
     }
 
     void SpectrumAnalyzerFace(){
-        
-    }
+        eEA.AddParameterFrame(offsetFaceInd, 1.0f);
 
-    void FadeIn(float stepRatio) override {}
-    void FadeOut(float stepRatio) override {}
-
-    Object3D* GetObject(){
-        return pM.GetObject();
+        backgroundMaterial.AddMaterialFrame(sA, offsetFaceSA);
     }
 
     void UpdateFFTVisemes(){
@@ -202,16 +189,58 @@ public:
         }
     }
 
+    void SetMaterialColor(){
+        switch(Menu::GetFaceColor()){
+            case 1: materialAnimator.AddMaterialFrame(redMaterial, 0.8f); break;
+            case 2: materialAnimator.AddMaterialFrame(orangeMaterial, 0.8f); break;
+            case 3: materialAnimator.AddMaterialFrame(whiteMaterial, 0.8f); break;
+            case 4: materialAnimator.AddMaterialFrame(greenMaterial, 0.8f); break;
+            case 5: materialAnimator.AddMaterialFrame(blueMaterial, 0.8f); break;
+            case 6: materialAnimator.AddMaterialFrame(yellowMaterial, 0.8f); break;
+            case 7: materialAnimator.AddMaterialFrame(purpleMaterial, 0.8f); break;
+            case 8: materialAnimator.AddMaterialFrame(rainbowSpiral, 0.8f); break;
+            case 9: materialAnimator.AddMaterialFrame(rainbowNoise, 0.8f); break;
+            default: break;
+        }
+    }
+
+public:
+    ProtogenHUB75Animation() {
+        scene.AddObject(pM.GetObject());
+        scene.AddObject(background.GetObject());
+
+        LinkEasyEase();
+        LinkParameters();
+
+        ChangeInterpolationMethods();
+
+        SetMaterialLayers();
+
+        pM.GetObject()->SetMaterial(&materialAnimator);
+        background.GetObject()->SetMaterial(&backgroundMaterial);
+
+        boop.Initialize(5);
+
+        MicrophoneFourier::Initialize(A0, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
+        Menu::Initialize(7, 20, 500);//7 is number of faces
+    }
+
+    void FadeIn(float stepRatio) override {}
+    void FadeOut(float stepRatio) override {}
+
+    Object3D* GetObject(){
+        return pM.GetObject();
+    }
+
     void Update(float ratio) override {
         pM.Reset();
-        //menuBackground.GetObject()->Disable();
 
         float xOffset = fGenMatXMove.Update();
         float yOffset = fGenMatYMove.Update();
         
         Menu::Update();
-        float menuRatio = Menu::ShowMenu();
 
+        SetMaterialColor();
 
         bool isBooped = Menu::UseBoopSensor() ? boop.isBooped() : 0;
         uint8_t mode = Menu::GetFaceState();//change by button press
@@ -245,21 +274,19 @@ public:
         eEA.Update();
         pM.Update();
         
+        float menuRatio = Menu::ShowMenu();
+
         rainbowNoise.Update(ratio);
         rainbowSpiral.Update(ratio);
         materialAnimator.Update();
         backgroundMaterial.Update();
-
-
-        //gradientMat.HueShift(fGenMatHue.Update());
         
         pM.GetObject()->GetTransform()->SetRotation(Vector3D(0.0f, 0.0f, -7.5f));
 
         uint8_t faceSize = Menu::GetFaceSize();
-
         float scale = menuRatio * 0.6f + 0.4f;
         float xShift = (1.0f - menuRatio) * 60.0f;
-        float yShift = (1.0f - menuRatio) * 20.0f;
+        float yShift = (1.0f - menuRatio) * 20.0f + offsetFaceSA * -100.0f;
         float adjustFacePos = float(4 - faceSize) * 5.0f;
         float adjustFaceX = float(faceSize) * 0.05f;
         

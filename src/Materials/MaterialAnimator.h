@@ -49,7 +49,7 @@ public:
     }
 
     void AddMaterialFrame(Material &material, float opacity){
-        for(uint8_t i = 0; i < currentMaterials; i++){
+        for(uint8_t i = 0; i <= currentMaterials; i++){
             if(dictionary[i] == &material){
                 eEA.AddParameterFrame(i, opacity);
                 break;
@@ -60,7 +60,7 @@ public:
     void Update(){
         eEA.Update();//update material opacities
 
-        for(uint8_t i = 1; i < currentMaterials; i++){//link opacities
+        for(uint8_t i = 1; i <= currentMaterials; i++){//link opacities
             combineMaterial.SetOpacity(i, materialRatios[i]);
         }
     }
