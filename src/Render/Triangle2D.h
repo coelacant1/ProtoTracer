@@ -2,8 +2,9 @@
 
 #include "..\Materials\Material.h"
 #include "..\Math\Transform.h"
-#include "Triangle3D.h"
 #include "..\Math\Vector2D.h"
+#include "Triangle3D.h"
+#include "BoundingBox2D.h"
 
 class Triangle2D {
 private:
@@ -122,19 +123,42 @@ public:
     }
 
     bool DidIntersect(float x, float y, float& u, float& v, float& w) {
-        v2X = x - p1X;
-        v2Y = y - p1Y;
+        float v2lX = x - p1X;
+        float v2lY = y - p1Y;
 
-        v = (v2X * v1Y - v1X * v2Y) * denominator;
+        v = (v2lX * v1Y - v1X * v2lY) * denominator;
         if (v <= 0.0f) return false;
         if (v >= 1.0f) return false;
 
-        w = (v0X * v2Y - v2X * v0Y) * denominator;
+        w = (v0X * v2lY - v2lX * v0Y) * denominator;
         if (w <= 0.0f) return false;
         if (w >= 1.0f) return false;
 
         u = 1.0f - v - w;
         if (u <= 0.0f) return false;
+
+        return true;
+    }
+
+    bool DidIntersect(BoundingBox2D& bbox) {
+        Vector2D axes[] = { {1.0f, 0.0f}, {0.0f, 1.0f}, {-1.0f * (p2Y - p1Y), p2X - p1X},
+                            {-1.0f * (p3Y - p1Y), p3X - p1X}, {-1.0f * (p3Y - p2Y), (p3Y - p2Y)} }; // axes for SAT-based intersection testing
+
+        Vector2D c = (bbox.GetMinimum() + bbox.GetMaximum()) * 0.5f;
+        Vector2D e = (bbox.GetMaximum() - bbox.GetMinimum()) * 0.5f;
+
+        for (const Vector2D& axis : axes) {
+            //project vertices and bbox onto axis, relative to bbox center
+            float p0 = axis.X * (p1X - c.X) + axis.Y * (p1Y - c.Y);
+            float p1 = axis.X * (p2X - c.X) + axis.Y * (p2Y - c.Y);
+            float p2 = axis.X * (p3X - c.X) + axis.Y * (p3Y - c.Y);
+
+            float r = e.X * fabsf(axis.X) + e.Y * fabsf(axis.Y);
+
+            //if the projected ranges dont overlap then the axis is separating
+            if (fmaxf(-1.0f * fmaxf(p0, fmaxf(p1, p2)), fminf(p0, fminf(p1, p2))) > r)
+                return false;
+        }
 
         return true;
     }
