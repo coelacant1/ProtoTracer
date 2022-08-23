@@ -20,7 +20,6 @@ public:
 	}
 
 	~Scene(){
-        printf("destroying scene\n");
 		delete[] objects;
 	}
 

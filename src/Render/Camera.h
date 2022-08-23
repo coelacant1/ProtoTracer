@@ -6,6 +6,8 @@
 #include "PixelGroup.h"
 #include "Scene.h"
 #include "Triangle2D.h"
+#include "QuadTree.h"
+
 
 class Camera {
 private:
@@ -86,28 +88,22 @@ public:
         lookDirection = transform->GetRotation().Conjugate() * lookOffset;
         rayDirection  = transform->GetRotation().Multiply(lookDirection);
 
+        BoundingBox2D transformedBounds;
+        for (unsigned int i = 0; i < pixelGroup->GetPixelCount(); ++i) {
+            Vector2D pixelRay = Vector2D(lookDirection.RotateVector(pixelGroup->GetPixel(i)->GetPosition() * transform->GetScale()));
+            transformedBounds.UpdateBounds(pixelRay);
+        }
+
+        QuadTree tree(transformedBounds);
+
         //for each object in the scene, get the triangles
         for(int i = 0; i < scene->GetObjectCount(); i++){
             if(scene->GetObjects()[i]->IsEnabled()){
                 //for each triangle in object, project onto 2d surface, but pass material
                 for (int j = 0; j < scene->GetObjects()[i]->GetTriangleGroup()->GetTriangleCount(); j++) {
                     triangles[triangleCounter] = new Triangle2D(lookDirection, transform, &scene->GetObjects()[i]->GetTriangleGroup()->GetTriangles()[j], scene->GetObjects()[i]->GetMaterial());
-                    
-                    bool triangleInView = false;
 
-                    if (triangles[triangleCounter]->averageDepth > 0){//cull behind camera
-                        Vector2D p1 = lookDirection.UnrotateVector(triangles[triangleCounter]->GetP1()) * transform->GetScale();
-                        Vector2D p2 = lookDirection.UnrotateVector(triangles[triangleCounter]->GetP2()) * transform->GetScale();
-                        Vector2D p3 = lookDirection.UnrotateVector(triangles[triangleCounter]->GetP3()) * transform->GetScale();
-
-                        BoundingBox2D triangleBox;
-
-                        triangleBox.UpdateBounds(p1);
-                        triangleBox.UpdateBounds(p2);
-                        triangleBox.UpdateBounds(p3);
-
-                        triangleInView = pixelGroup->Overlaps(&triangleBox);//cull outside camera view
-                    }
+                    bool triangleInView = tree.insert(triangles[triangleCounter]);
                     
                     if(triangleInView) triangleCounter++;
                     else delete triangles[triangleCounter];//out of view space remove from array
@@ -115,9 +111,17 @@ public:
             }
         }
 
+        tree.Rebuild();
+
         for (unsigned int i = 0; i < pixelGroup->GetPixelCount(); i++) {
             Vector2D pixelRay = Vector2D(lookDirection.RotateVector(pixelGroup->GetPixel(i)->GetPosition() * transform->GetScale()));//scale pixel location prior to rotating and moving
-            pixelGroup->GetPixel(i)->Color = CheckRasterPixel(triangles, triangleCounter, pixelRay);
+            QuadTree::Node* leafNode =  tree.intersect(pixelRay);
+            if (!leafNode) {
+                pixelGroup->GetPixel(i)->Color = RGBColor();
+                continue;
+            }
+
+            pixelGroup->GetPixel(i)->Color = CheckRasterPixel(leafNode->entities, leafNode->count, pixelRay);
         }
 
         for (int i = 0; i < triangleCounter; i++){
