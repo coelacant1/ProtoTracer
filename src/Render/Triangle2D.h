@@ -147,6 +147,11 @@ public:
         Vector2D c = (bbox.GetMinimum() + bbox.GetMaximum()) * 0.5f;
         Vector2D e = (bbox.GetMaximum() - bbox.GetMinimum()) * 0.5f;
 
+        //on x86 these are a lot faster than using fminf/fmaxf, TODO: verify performance on different platforms
+        auto max = [](float a, float b) {return a > b ? a : b; };
+        auto tmax = [](float a, float b, float c) {return a > b ? (a > c ? a : c) : (b > c ? b : c); };
+        auto tmin = [](float a, float b, float c) {return a < b ? (a < c ? a : c) : (b < c ? b : c); };
+
         for (const Vector2D& axis : axes) {
             //project vertices and bbox onto axis, relative to bbox center
             float p0 = axis.X * (p1X - c.X) + axis.Y * (p1Y - c.Y);
@@ -156,7 +161,10 @@ public:
             float r = e.X * fabsf(axis.X) + e.Y * fabsf(axis.Y);
 
             //if the projected ranges dont overlap then the axis is separating
-            if (fmaxf(-1.0f * fmaxf(p0, fmaxf(p1, p2)), fminf(p0, fminf(p1, p2))) > r)
+            /*if (fmaxf(-1.0f * fmaxf(p0, fmaxf(p1, p2)), fminf(p0, fminf(p1, p2))) > r)
+                return false;*/
+
+            if (max(-1.0f * tmax(p0, p1, p2), tmin(p0, p1, p2)) > r)
                 return false;
         }
 
