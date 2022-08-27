@@ -27,8 +27,8 @@ private:
         RGBColor color;
         
         for (int t = 0; t < numTriangles; t++) {
-            if (triangles[t]->DidIntersect(pixelRay.X, pixelRay.Y, u, v, w)){
-                if(triangles[t]->averageDepth < zBuffer){
+            if (triangles[t]->averageDepth < zBuffer){
+                if(triangles[t]->DidIntersect(pixelRay.X, pixelRay.Y, u, v, w)){
                     uvw.X = u;
                     uvw.Y = v;
                     uvw.Z = w;
@@ -49,7 +49,7 @@ private:
                 uv = *triangles[triangle]->p1UV * uvw.X + *triangles[triangle]->p2UV * uvw.Y + *triangles[triangle]->p3UV * uvw.Z;
             }
             
-            color = triangles[triangle]->GetMaterial()->GetRGB(intersect, *triangles[triangle]->normal, Vector3D(uv.X, uv.Y, 0));
+            color = triangles[triangle]->GetMaterial()->GetRGB(intersect, *triangles[triangle]->normal, Vector3D(uv.X, uv.Y, 0.0f));
         }
         
         return color;

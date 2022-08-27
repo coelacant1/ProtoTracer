@@ -8,18 +8,13 @@ public:
     class Node {
     public:
         Node() {
-            entities = new Triangle2D*[QuadTree::maxEntities]; //slightly inefficient since we always store the max number of pointers, could be optimized
-            for (int i = 0; i < QuadTree::maxEntities; ++i)
-                entities[i] = NULL;
         };
         ~Node() {
             if(entities)
                 delete[] entities;
 
-            for (Node* childNode : childNodes) {
-                if (childNode)
-                    delete childNode;
-            }
+            if(childNodes)
+                delete[] childNodes;
         }
 
         void expand(unsigned int newCount) {
@@ -47,7 +42,7 @@ public:
             printf("bbox: %.2f, %.2f, %.2f, %.2f\n", bbox.GetMinimum().X, bbox.GetMinimum().Y, bbox.GetMaximum().X, bbox.GetMaximum().Y);*/
 
             if (count == capacity)
-                expand(2 * capacity);
+                expand(capacity? 2 * capacity : QuadTree::maxEntities);
 
             entities[count] = triangle;
             ++count;
@@ -66,11 +61,15 @@ public:
             BoundingBox2D bboxes[] = { {bbox.GetMinimum(), mid}, {{mid.X, bbox.GetMinimum().Y}, {bbox.GetMaximum().X, mid.Y} },
                                        {{bbox.GetMinimum().X, mid.Y}, {mid.X, bbox.GetMaximum().Y}}, {mid, bbox.GetMaximum()} };
 
-            for (int i = 0; i < 4; ++i) {
-                childNodes[i] = new Node();
-                for (int j = 0; j < count; ++j) {
-                    if (entities[j])
-                        childNodes[i]->insert(entities[j], bboxes[i], depth + 1);
+            childNodes = new Node[4];
+
+            for (int j = 0; j < count; ++j) {
+                if (!entities[j])
+                    continue;
+
+                int entityCount = 0;
+                for (int i = 0; i < 4; ++i) {
+                    entityCount += childNodes[i].insert(entities[j], bboxes[i], depth + 1);
                 }
             }
 
@@ -80,7 +79,7 @@ public:
             //edge case: stop subdividing if we cant improve the average entity counts (eg due to suboptimal mesh topology)
             float avgEntities = 0.0f;
             for (int i = 0; i < 4; ++i)
-                avgEntities += 0.25f * (float)childNodes[i]->count;
+                avgEntities += 0.25f * (float)childNodes[i].count;
 
             bool canSubdiv = avgEntities < QuadTree::maxSubdivRatio * (float)count;
 
@@ -96,34 +95,33 @@ public:
             count = 0;
 
             for (int i = 0; i < 4; ++i) {
-                if(childNodes[i]->count > QuadTree::maxEntities)
-                    childNodes[i]->subdivide(bboxes[i], depth + 1);
+                if(childNodes[i].count > QuadTree::maxEntities)
+                    childNodes[i].subdivide(bboxes[i], depth + 1);
             }
         }
 
         bool isLeaf() {
-            for (Node* childNode : childNodes) {
-                if (childNode)
-                    return false;
-            }
-
-            return true;
+            return !childNodes;
         }
 
-        void PrintStats(int& totalCount) {
+        void PrintStats(int& totalCount, BoundingBox2D& bbox) {
             if (isLeaf()) {
                 printf("count: %d\n", count);
                 totalCount += count;
             }
             else {
-                for (Node* childNode : childNodes)
-                    childNode->PrintStats(totalCount);
+                Vector2D mid = (bbox.GetMinimum() + bbox.GetMaximum()) * 0.5f;
+                BoundingBox2D bboxes[] = { {bbox.GetMinimum(), mid}, {{mid.X, bbox.GetMinimum().Y}, {bbox.GetMaximum().X, mid.Y} },
+                                   {{bbox.GetMinimum().X, mid.Y}, {mid.X, bbox.GetMaximum().Y}}, {mid, bbox.GetMaximum()} };
+                for (int i = 0; i < 4; ++i) {
+                    childNodes[i].PrintStats(totalCount, bboxes[i]);
+                }
             }
         }
 
         uint16_t count = 0;
-        uint16_t capacity = QuadTree::maxEntities;
-        Node* childNodes[4] = {NULL, NULL, NULL, NULL};
+        uint16_t capacity = 0;
+        Node* childNodes = NULL;
         Triangle2D** entities = NULL;
     };
 
@@ -153,7 +151,7 @@ public:
             bool found = false;
             for (int i = 0; i < 4; ++i) {
                 if (bboxes[i].Contains(p)) {
-                    currentNode = currentNode->childNodes[i];
+                    currentNode = &(currentNode->childNodes[i]);
                     currentBbox = bboxes[i];
                     found = true;
                     break;
@@ -172,7 +170,7 @@ public:
         int totalCount = 0;
         printf("total inserts: %d\n", count);
         printf("node stats: \n");
-        root.PrintStats(totalCount);
+        root.PrintStats(totalCount, bbox);
         printf("total entities: %d \n", totalCount);
     }
 
