@@ -141,16 +141,20 @@ public:
     }
 
     bool DidIntersect(BoundingBox2D& bbox) {
-        Vector2D axes[] = { {1.0f, 0.0f}, {0.0f, 1.0f}, {-1.0f * (p2Y - p1Y), p2X - p1X},
-                            {-1.0f * (p3Y - p1Y), p3X - p1X}, {-1.0f * (p3Y - p2Y), (p3Y - p2Y)} }; // axes for SAT-based intersection testing
-
-        Vector2D c = (bbox.GetMinimum() + bbox.GetMaximum()) * 0.5f;
-        Vector2D e = (bbox.GetMaximum() - bbox.GetMinimum()) * 0.5f;
-
         //on x86 these are a lot faster than using fminf/fmaxf, TODO: verify performance on different platforms
         auto max = [](float a, float b) {return a > b ? a : b; };
         auto tmax = [](float a, float b, float c) {return a > b ? (a > c ? a : c) : (b > c ? b : c); };
         auto tmin = [](float a, float b, float c) {return a < b ? (a < c ? a : c) : (b < c ? b : c); };
+
+
+        if (!(bbox.GetMinimum().X < tmax(p1X, p2X, p3X) && bbox.GetMaximum().X > tmin(p1X, p2X, p3X))) { return false; }
+        if (!(bbox.GetMinimum().Y < tmax(p1Y, p2Y, p3Y) && bbox.GetMaximum().Y > tmin(p1Y, p2Y, p3Y))) { return false; }
+
+        Vector2D axes[] = { {-1.0f * (p2Y - p1Y), p2X - p1X},
+                            {-1.0f * (p3Y - p1Y), p3X - p1X}, {-1.0f * (p3Y - p2Y), (p3Y - p2Y)} }; // axes for SAT-based intersection testing
+
+        Vector2D c = (bbox.GetMinimum() + bbox.GetMaximum()) * 0.5f;
+        Vector2D e = (bbox.GetMaximum() - bbox.GetMinimum()) * 0.5f;
 
         for (const Vector2D& axis : axes) {
             //project vertices and bbox onto axis, relative to bbox center
