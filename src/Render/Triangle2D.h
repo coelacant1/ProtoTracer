@@ -153,8 +153,8 @@ public:
         Vector2D axes[] = { {-1.0f * (p2Y - p1Y), p2X - p1X},
                             {-1.0f * (p3Y - p1Y), p3X - p1X}, {-1.0f * (p3Y - p2Y), (p3Y - p2Y)} }; // axes for SAT-based intersection testing
 
-        Vector2D c = (bbox.GetMinimum() + bbox.GetMaximum()) * 0.5f;
-        Vector2D e = (bbox.GetMaximum() - bbox.GetMinimum()) * 0.5f;
+        Vector2D c = {(bbox.GetMinimum().X + bbox.GetMaximum().X) * 0.5f, (bbox.GetMinimum().Y + bbox.GetMaximum().Y) * 0.5f };
+        Vector2D e = {(bbox.GetMaximum().X - bbox.GetMinimum().X) * 0.5f, (bbox.GetMaximum().Y - bbox.GetMinimum().Y) * 0.5f };
 
         for (const Vector2D& axis : axes) {
             //project vertices and bbox onto axis, relative to bbox center

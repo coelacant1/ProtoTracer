@@ -129,8 +129,24 @@ public:
     QuadTree(const BoundingBox2D& bounds): bbox(bounds){
     }
 
+    ~QuadTree() {
+        free(entities);
+    }
+
     bool insert(Triangle2D* triangle){
         bool inserted = root.insert(triangle, bbox);
+        if (inserted)
+            ++count;
+        return inserted;
+    }
+
+    bool insert(Triangle2D triangle) {
+        if (count == capacity)
+            expand(capacity ? (1.5f * capacity) : QuadTree::maxEntities);
+
+        entities[count] = triangle;
+
+        bool inserted = root.insert(&entities[count], bbox);
         if (inserted)
             ++count;
         return inserted;
@@ -163,6 +179,8 @@ public:
     }
 
     void Rebuild() {
+        for (int i = 0; i < count; ++i)
+            root.entities[i] = &entities[i];
         root.subdivide(bbox);
     }
 
@@ -172,12 +190,18 @@ public:
         printf("node stats: \n");
         root.PrintStats(totalCount, bbox);
         printf("total entities: %d \n", totalCount);
+
+    void expand(int newCapacity) {
+        entities = (Triangle2D*)realloc(entities, newCapacity * sizeof(Triangle2D));
+        capacity = newCapacity;
     }
 
 private:
     int count = 0;
+    int capacity = 0;
     Node root;
     BoundingBox2D bbox;
+    Triangle2D* entities = NULL;
     static const int maxEntities = 16; //The maximum number of entities in a leaf node before subdividing
     static const int maxDepth = 8;
     static constexpr float maxSubdivRatio = 0.5f;
