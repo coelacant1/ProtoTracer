@@ -64,9 +64,6 @@ public:
             childNodes = new Node[4];
 
             for (int j = 0; j < count; ++j) {
-                if (!entities[j])
-                    continue;
-
                 int entityCount = 0;
                 for (int i = 0; i < 4; ++i) {
                     entityCount += childNodes[i].insert(entities[j], bboxes[i], depth + 1);
@@ -159,7 +156,7 @@ public:
             if (currentNode->isLeaf())
                 return currentNode;
 
-            Vector2D mid = (currentBbox.GetMinimum() + currentBbox.GetMaximum()) * 0.5f;
+            Vector2D mid = {(currentBbox.GetMinimum().X + currentBbox.GetMaximum().X) * 0.5f, (currentBbox.GetMinimum().Y + currentBbox.GetMaximum().Y) * 0.5f};
 
             BoundingBox2D bboxes[] = { {currentBbox.GetMinimum(), mid}, {{mid.X, currentBbox.GetMinimum().Y}, {currentBbox.GetMaximum().X, mid.Y} },
                                        {{currentBbox.GetMinimum().X, mid.Y}, {mid.X, currentBbox.GetMaximum().Y}}, {mid, currentBbox.GetMaximum()} };

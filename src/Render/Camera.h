@@ -76,11 +76,12 @@ public:
         int triangleCounter = 0;
         
         lookDirection = transform->GetRotation().Conjugate() * lookOffset;
+        Quaternion normLookDir = lookDirection.UnitQuaternion();
         rayDirection  = transform->GetRotation().Multiply(lookDirection);
 
         BoundingBox2D transformedBounds;
         for (unsigned int i = 0; i < pixelGroup->GetPixelCount(); ++i) {
-            Vector2D pixelRay = Vector2D(lookDirection.RotateVector(pixelGroup->GetPixel(i)->GetPosition() * transform->GetScale()));
+            Vector2D pixelRay = Vector2D(lookDirection.RotateVectorUnit(pixelGroup->GetPixel(i)->GetPosition() * transform->GetScale(), normLookDir));
             transformedBounds.UpdateBounds(pixelRay);
         }
 
@@ -99,7 +100,7 @@ public:
         tree.Rebuild();
 
         for (unsigned int i = 0; i < pixelGroup->GetPixelCount(); i++) {
-            Vector2D pixelRay = Vector2D(lookDirection.RotateVector(pixelGroup->GetPixel(i)->GetPosition() * transform->GetScale()));//scale pixel location prior to rotating and moving
+            Vector2D pixelRay = Vector2D(lookDirection.RotateVectorUnit(pixelGroup->GetPixel(i)->GetPosition() * transform->GetScale(), normLookDir));//scale pixel location prior to rotating and moving
             QuadTree::Node* leafNode =  tree.intersect(pixelRay);
             if (!leafNode) {
                 pixelGroup->GetPixel(i)->Color = RGBColor();

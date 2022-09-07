@@ -54,6 +54,19 @@ public:
 		};
 	}
 
+    Vector2D RotateVectorUnit(Vector2D v, const Quaternion& q) {
+        if (IsClose(Quaternion(), Mathematics::EPSILON)) return v;
+
+        float s2 = q.W * 2.0f;
+        float dPUV = (q.X * v.X + q.Y * v.Y) * 2.0f;
+        float dPUU = q.W * q.W - (q.X * q.X + q.Y * q.Y + q.Z * q.Z);
+
+        return Vector2D{
+            X * dPUV + v.X * dPUU + (-(q.Z * v.Y)) * s2,
+            Y * dPUV + v.Y * dPUU + ((q.Z * v.X)) * s2
+        };
+    }
+
 	Vector2D UnrotateVector(Vector2D coordinate) {
 		if (IsClose(Quaternion(), Mathematics::EPSILON)) return coordinate;
 
