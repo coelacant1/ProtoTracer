@@ -143,6 +143,7 @@ public:
     bool DidIntersect(BoundingBox2D& bbox) {
         //on x86 these are a lot faster than using fminf/fmaxf, TODO: verify performance on different platforms
         auto max = [](float a, float b) {return a > b ? a : b; };
+        auto min = [](float a, float b) {return a < b ? a : b; };
         auto tmax = [](float a, float b, float c) {return a > b ? (a > c ? a : c) : (b > c ? b : c); };
         auto tmin = [](float a, float b, float c) {return a < b ? (a < c ? a : c) : (b < c ? b : c); };
 
@@ -151,26 +152,37 @@ public:
         if (!(bbox.GetMinimum().Y < tmax(p1Y, p2Y, p3Y) && bbox.GetMaximum().Y > tmin(p1Y, p2Y, p3Y))) { return false; }
 
         Vector2D axes[] = { {-1.0f * (p2Y - p1Y), p2X - p1X},
-                            {-1.0f * (p3Y - p1Y), p3X - p1X}, {-1.0f * (p3Y - p2Y), (p3Y - p2Y)} }; // axes for SAT-based intersection testing
+                            {-1.0f * (p3Y - p1Y), p3X - p1X}, {-1.0f * (p3Y - p2Y), (p3X - p2X)} }; // axes for SAT-based intersection testing
 
         Vector2D c = {(bbox.GetMinimum().X + bbox.GetMaximum().X) * 0.5f, (bbox.GetMinimum().Y + bbox.GetMaximum().Y) * 0.5f };
         Vector2D e = {(bbox.GetMaximum().X - bbox.GetMinimum().X) * 0.5f, (bbox.GetMaximum().Y - bbox.GetMinimum().Y) * 0.5f };
 
-        for (const Vector2D& axis : axes) {
-            //project vertices and bbox onto axis, relative to bbox center
-            float p0 = axis.X * (p1X - c.X) + axis.Y * (p1Y - c.Y);
-            float p1 = axis.X * (p2X - c.X) + axis.Y * (p2Y - c.Y);
-            float p2 = axis.X * (p3X - c.X) + axis.Y * (p3Y - c.Y);
+        float p0 = axes[0].X * (p1X - c.X) + axes[0].Y * (p1Y - c.Y);
+        float p2 = axes[0].X * (p3X - c.X) + axes[0].Y * (p3Y - c.Y);
 
-            float r = e.X * fabsf(axis.X) + e.Y * fabsf(axis.Y);
+        float r = e.X * fabsf(axes[0].X) + e.Y * fabsf(axes[0].Y);
 
-            //if the projected ranges dont overlap then the axis is separating
-            /*if (fmaxf(-1.0f * fmaxf(p0, fmaxf(p1, p2)), fminf(p0, fminf(p1, p2))) > r)
-                return false;*/
+        if (max(-1.0f * max(p0, p2), min(p0, p2)) > r)
+            return false;
 
-            if (max(-1.0f * tmax(p0, p1, p2), tmin(p0, p1, p2)) > r)
-                return false;
-        }
+
+        p0 = axes[1].X * (p1X - c.X) + axes[1].Y * (p1Y - c.Y);
+        float p1 = axes[1].X * (p2X - c.X) + axes[1].Y * (p2Y - c.Y);
+
+        r = e.X * fabsf(axes[1].X) + e.Y * fabsf(axes[1].Y);
+
+        if (max(-1.0f * max(p0, p1), min(p0, p1)) > r)
+            return false;
+
+
+        p0 = axes[2].X * (p1X - c.X) + axes[2].Y * (p1Y - c.Y);
+        p1 = axes[2].X * (p2X - c.X) + axes[2].Y * (p2Y - c.Y);
+
+        r = e.X * fabsf(axes[2].X) + e.Y * fabsf(axes[2].Y);
+
+        if (max(-1.0f * max(p0, p1), min(p0, p1)) > r)
+            return false;
+
 
         return true;
     }
