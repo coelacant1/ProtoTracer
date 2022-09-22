@@ -11,6 +11,7 @@ private:
     Vector2D offset;
     float angle = 0.0f;
     float hueAngle = 0.0f;
+    float radius = 0.0f;
     uint8_t colors;
     float* data;
     float bounceData[128];
@@ -74,6 +75,10 @@ public:
         this->hueAngle = hueAngle;
     }
 
+    void SetRadius(float radius){
+        this->radius = radius;
+    }
+
     void Update(float* readData){
         data = readData;
         
@@ -111,17 +116,19 @@ public:
         float yColor = Mathematics::Map(rPos.Y, 0, size.Y, 1.0f, 0.0f);
 
         float inside = 1.0f - (height * 4.0f + 0.15f) - yColor;
-        float circle = 1.0f - ((height - 0.5f) * 4.0f) - yColor;
         
         if (!circular && inside < 0.0f){
             return material->GetRGB(Vector3D(1.0f - height - yColor, 0, 0), Vector3D(), Vector3D()).HueShift(hueAngle);
         }
-        else if (circular && rPos.Y + height * 150.0f > 75.0f && rPos.Y - height * 150.0f < 85.0f){
+        else if (circular && rPos.Y + height * 150.0f > radius - 5.0f && rPos.Y - height * 150.0f < radius - 5.0f){
             if(rPos.Y - height * 50.0f > 75.0f){
                 return material->GetRGB(Vector3D(1.0f + height - yColor, 0, 0), Vector3D(), Vector3D()).HueShift(hueAngle);
             }
             else if (rPos.Y - height * 50.0f < 125.0f){
                 return material->GetRGB(Vector3D(1.0f - height - yColor, 0, 0), Vector3D(), Vector3D()).HueShift(hueAngle);
+            }
+            else {
+                return RGBColor(0, 0, 0);
             }
         }
         else{

@@ -47,7 +47,7 @@ void loop() {
     float ratio = (float)(millis() % 5000) / 5000.0f;
     animation.UpdateTime(ratio);
 
-    controller.SetBrightness(Menu::GetBrightness() / 8);
+    controller.SetBrightness(Menu::GetBrightness());// / 8);
 
     controller.Render(animation.GetScene());
 
