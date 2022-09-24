@@ -95,6 +95,10 @@ public:
         return sampleRate;
     }
 
+    static float* GetSamples(){
+        return inputStorage;
+    }
+
     static float* GetFourier(){
         return outputData;
     }

@@ -113,6 +113,8 @@ public:
         float height = bounce ? Mathematics::CosineInterpolation(bounceData[x], bounceData[x + 1], ratio) : Mathematics::CosineInterpolation(data[x], data[x + 1], ratio);//0->1.0f of max height of color
         float yColor;
 
+        height = height * 3.0f;
+
         if(mirrorY){
             yColor = Mathematics::Map(fabsf(rPos.Y), size.Y, 0.0f, 1.0f, 0.0f);
         }
