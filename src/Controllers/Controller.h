@@ -41,6 +41,23 @@ public:
         renderTime = ((float)(micros() - previousTime)) / 1000000.0f;
     }
 
+    
+    void RenderCamera(Scene* scene, uint8_t cameraNum){
+        previousTime = micros();
+
+        if (!isOn && previousTime < softStart){
+            brightness = map(previousTime, 0, softStart, 0, maxBrightness);
+        }
+        else if (!isOn){
+            brightness = maxBrightness;
+            isOn = true;
+        }
+
+        cameras[cameraNum]->Rasterize(scene);
+
+        renderTime = ((float)(micros() - previousTime)) / 1000000.0f;
+    }
+
     void SetBrightness(uint8_t maxBrightness){
         this->maxBrightness = maxBrightness;
         

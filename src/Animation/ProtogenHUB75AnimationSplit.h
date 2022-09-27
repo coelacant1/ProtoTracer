@@ -24,7 +24,7 @@
 
 #include "..\Sensors\MicrophoneFourier_MAX9814.h"
 
-class ProtogenHUB75Animation : public Animation<2> {
+class ProtogenHUB75AnimationSplit : public Animation<2> {
 private:
     NukudeFace pM;
     Background background;
@@ -41,7 +41,7 @@ private:
     SimpleMaterial yellowMaterial = SimpleMaterial(RGBColor(255, 255, 0));
     SimpleMaterial purpleMaterial = SimpleMaterial(RGBColor(255, 0, 255));
     
-    RGBColor gradientSpectrum[2] = {RGBColor(5, 162, 232), RGBColor(10, 170, 255)};
+    RGBColor gradientSpectrum[2] = {RGBColor(255, 0, 0), RGBColor(0, 0, 255)};
     GradientMaterial<2> gradientMat = GradientMaterial<2>(gradientSpectrum, 350.0f, false);
     
     MaterialAnimator<10> materialAnimator;
@@ -75,6 +75,7 @@ private:
     uint8_t offsetFaceIndSA = 50;
     uint8_t offsetFaceIndARG = 51;
     uint8_t offsetFaceIndOSC = 52;
+    bool mirror = false;
 
     void LinkEasyEase(){
         eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::Anger), NukudeFace::Anger, 15, 0.0f, 1.0f);
@@ -229,7 +230,7 @@ private:
     }
 
 public:
-    ProtogenHUB75Animation() {
+    ProtogenHUB75AnimationSplit() {
         scene.AddObject(pM.GetObject());
         scene.AddObject(background.GetObject());
 
@@ -256,87 +257,100 @@ public:
         return pM.GetObject();
     }
 
+    void SetCameraMirror(bool mirror){
+        this->mirror = mirror;
+    }
+
     void Update(float ratio) override {
-        pM.Reset();
+        if(!mirror){
+            gradientSpectrum[0].SetColor(253, 253, 251);
+            gradientSpectrum[1].SetColor(0, 80, 175);
+            gradientMat.UpdateRGB();
 
-        float xOffset = fGenMatXMove.Update();
-        float yOffset = fGenMatYMove.Update();
-        
-        Menu::Update();
+            pM.Reset();
 
-        SetMaterialColor();
+            float xOffset = fGenMatXMove.Update();
+            float yOffset = fGenMatYMove.Update();
 
-        bool isBooped = Menu::UseBoopSensor() ? boop.isBooped() : 0;
-        uint8_t mode = Menu::GetFaceState();//change by button press
+            Menu::Update();
 
-        MicrophoneFourier::Update();
-        sA.SetHueAngle(ratio * 360.0f * 4.0f);
-        sA.SetMirrorYState(Menu::MirrorSpectrumAnalyzer());
-        sA.SetFlipYState(!Menu::MirrorSpectrumAnalyzer());
-        
-        aRG.SetRadius((xOffset + 2.0f) * 2.0f + 25.0f);
-        aRG.SetSize(Vector2D((xOffset + 2.0f) * 10.0f + 50.0f, (xOffset + 2.0f) * 10.0f + 50.0f));
-        aRG.SetHueAngle(ratio * 360.0f * 8.0f);
-        aRG.SetRotation(ratio * 360.0f * 2.0f);
-        aRG.SetPosition(Vector2D(80.0f + xOffset * 4.0f, 48.0f + yOffset * 4.0f));
+            SetMaterialColor();
 
-        oSC.SetSize(Vector2D(200.0f, 100.0f));
-        oSC.SetHueAngle(ratio * 360.0f * 8.0f);
-        oSC.SetPosition(Vector2D(100.0f, 50.0f));
+            bool isBooped = Menu::UseBoopSensor() ? boop.isBooped() : 0;
+            uint8_t mode = Menu::GetFaceState();//change by button press
 
-        UpdateFFTVisemes();
+            MicrophoneFourier::Update();
+            sA.SetHueAngle(ratio * 360.0f * 4.0f);
+            sA.SetMirrorYState(Menu::MirrorSpectrumAnalyzer());
+            sA.SetFlipYState(!Menu::MirrorSpectrumAnalyzer());
+            
+            aRG.SetRadius((xOffset + 2.0f) * 2.0f + 25.0f);
+            aRG.SetSize(Vector2D((xOffset + 2.0f) * 10.0f + 50.0f, (xOffset + 2.0f) * 10.0f + 50.0f));
+            aRG.SetHueAngle(ratio * 360.0f * 8.0f);
+            aRG.SetRotation(ratio * 360.0f * 2.0f);
+            aRG.SetPosition(Vector2D(80.0f + xOffset * 4.0f, 48.0f + yOffset * 4.0f));
 
-        if (isBooped && mode != 6){
-            Surprised();
+            oSC.SetSize(Vector2D(200.0f, 100.0f));
+            oSC.SetHueAngle(ratio * 360.0f * 8.0f);
+            oSC.SetPosition(Vector2D(100.0f, 50.0f));
+
+            UpdateFFTVisemes();
+            
+            if (isBooped && mode != 6){
+                Surprised();
+            }
+            else{
+                if (mode == 0) Default();
+                else if (mode == 1) Angry();
+                else if (mode == 2) Doubt();
+                else if (mode == 3) Frown();
+                else if (mode == 4) LookUp();
+                else if (mode == 5) Sad();
+                else if (mode == 6) {
+                    aRG.Update(MicrophoneFourier::GetFourierFiltered());
+                    AudioReactiveGradientFace();
+                }
+                else if (mode == 7){
+                    oSC.Update(MicrophoneFourier::GetSamples());
+                    OscilloscopeFace();
+                }
+                else {
+                    sA.Update(MicrophoneFourier::GetFourierFiltered());
+                    SpectrumAnalyzerFace();
+                }
+            }
+            
+            UpdateKeyFrameTracks();
+
+            pM.SetMorphWeight(NukudeFace::BiggerNose, 1.0f);
+            pM.SetMorphWeight(NukudeFace::MoveEye, 1.0f);
+
+            eEA.Update();
+            pM.Update();
+            
+            rainbowNoise.Update(ratio);
+            rainbowSpiral.Update(ratio);
+            materialAnimator.Update();
+            backgroundMaterial.Update();
+            
+            uint8_t faceSize = Menu::GetFaceSize();
+            float menuRatio = Menu::ShowMenu();
+            float scale = menuRatio * 0.6f + 0.4f;
+            float xShift = (1.0f - menuRatio) * 60.0f;
+            float yShift = (1.0f - menuRatio) * 20.0f + offsetFaceSA * -100.0f + offsetFaceARG * -100.0f + offsetFaceOSC * -100.0f;
+            float adjustFacePos = float(4 - faceSize) * 5.0f;
+            float adjustFaceX = float(faceSize) * 0.05f;
+            
+            pM.GetObject()->GetTransform()->SetRotation(Vector3D(0.0f, 0.0f, -7.5f));
+            pM.GetObject()->GetTransform()->SetPosition(Vector3D(102.5f + xOffset - xShift + adjustFacePos, -22.5f + yOffset + yShift, 600.0f));
+            pM.GetObject()->GetTransform()->SetScale(Vector3D(-1.05f + adjustFaceX, 0.585f, 0.8f).Multiply(scale));
+
+            pM.GetObject()->UpdateTransform();
         }
         else{
-            if (mode == 0) Default();
-            else if (mode == 1) Angry();
-            else if (mode == 2) Doubt();
-            else if (mode == 3) Frown();
-            else if (mode == 4) LookUp();
-            else if (mode == 5) Sad();
-            else if (mode == 6) {
-                aRG.Update(MicrophoneFourier::GetFourierFiltered());
-                AudioReactiveGradientFace();
-            }
-            else if (mode == 7){
-                oSC.Update(MicrophoneFourier::GetSamples());
-                OscilloscopeFace();
-            }
-            else {
-                sA.Update(MicrophoneFourier::GetFourierFiltered());
-                SpectrumAnalyzerFace();
-            }
+            gradientSpectrum[0].SetColor(253, 253, 251);
+            gradientSpectrum[1].SetColor(175, 40, 120);
+            gradientMat.UpdateRGB();
         }
-
-        UpdateKeyFrameTracks();
-
-        pM.SetMorphWeight(NukudeFace::BiggerNose, 1.0f);
-        pM.SetMorphWeight(NukudeFace::MoveEye, 1.0f);
-
-        eEA.Update();
-        pM.Update();
-        
-        float menuRatio = Menu::ShowMenu();
-
-        rainbowNoise.Update(ratio);
-        rainbowSpiral.Update(ratio);
-        materialAnimator.Update();
-        backgroundMaterial.Update();
-        
-        pM.GetObject()->GetTransform()->SetRotation(Vector3D(0.0f, 0.0f, -7.5f));
-
-        uint8_t faceSize = Menu::GetFaceSize();
-        float scale = menuRatio * 0.6f + 0.4f;
-        float xShift = (1.0f - menuRatio) * 60.0f;
-        float yShift = (1.0f - menuRatio) * 20.0f + offsetFaceSA * -100.0f + offsetFaceARG * -100.0f + offsetFaceOSC * -100.0f;
-        float adjustFacePos = float(4 - faceSize) * 5.0f;
-        float adjustFaceX = float(faceSize) * 0.05f;
-        
-        pM.GetObject()->GetTransform()->SetPosition(Vector3D(102.5f + xOffset - xShift + adjustFacePos, -22.5f + yOffset + yShift, 600.0f));
-        pM.GetObject()->GetTransform()->SetScale(Vector3D(-1.05f + adjustFaceX, 0.585f, 0.8f).Multiply(scale));
-
-        pM.GetObject()->UpdateTransform();
     }
 };

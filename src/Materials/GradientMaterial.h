@@ -8,7 +8,7 @@ template<size_t colorCount>
 class GradientMaterial : public Material {
 private:
     RGBColor rgbColors[colorCount];
-    RGBColor baseRGBColors[colorCount];
+    RGBColor* baseRGBColors;
     Vector2D positionOffset;
     Vector2D rotationOffset;//point to rotate about
     float gradientPeriod = 1.0f;
@@ -20,10 +20,10 @@ public:
     GradientMaterial(RGBColor* rgbColors, float gradientPeriod, bool isRadial){
         this->gradientPeriod = gradientPeriod;
         this->isRadial = isRadial;
+        this->baseRGBColors = rgbColors;
 
         for(uint8_t i = 0; i < colorCount; i++){
             this->rgbColors[i] = rgbColors[i];
-            this->baseRGBColors[i] = rgbColors[i];
         }
     }
 
@@ -31,12 +31,13 @@ public:
         this->gradientPeriod = gradientPeriod;
         this->isRadial = isRadial;
         this->isStepped = isStepped;
+        this->baseRGBColors = rgbColors;
 
         for(uint8_t i = 0; i < colorCount; i++){
             this->rgbColors[i] = rgbColors[i];
-            this->baseRGBColors[i] = rgbColors[i];
         }
     }
+
 
     //x 0->1 mapping all counts of colors, linearly interpolating
 
@@ -63,6 +64,12 @@ public:
     void HueShift(float hueDeg){
         for(uint8_t i = 0; i < colorCount; i++){
             rgbColors[i] = baseRGBColors[i].HueShift(hueDeg);
+        }
+    }
+
+    void UpdateRGB(){
+        for(uint8_t i = 0; i < colorCount; i++){
+            rgbColors[i] = baseRGBColors[i];
         }
     }
     

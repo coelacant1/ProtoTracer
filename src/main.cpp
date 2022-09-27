@@ -1,10 +1,12 @@
 //#define RIGHTFACE
 //#define DEMOMODE
 
+
 //--------------- ANIMATIONS ---------------
 //#include "Animation\ProtoDRMorphAnimation.h"
 //#include "Animation\ProtogenKitFaceAnimation.h"
-#include "Animation\ProtogenHUB75Animation.h"
+//#include "Animation\ProtogenHUB75Animation.h"
+#include "Animation\ProtogenHUB75AnimationSplit.h"
 //#include "Animation\Commissions\VesperAnimation.h"
 //#include "Animation\KaiborgV1Animation.h"
 //#include "Animation\ProtoV3Animation.h"
@@ -25,7 +27,8 @@
 //#include "Controllers\KaiborgV1Controller.h"
 //#include "Controllers\KaiborgV1D1Controller.h"
 //#include "Controllers\ProtoDRController.h"
-#include "Controllers\SmartMatrixHUB75.h"
+//#include "Controllers\SmartMatrixHUB75.h"
+#include "Controllers\SmartMatrixHUB75Split.h"
 
 uint8_t maxBrightness = 50;
 #ifdef RIGHTFACE
@@ -33,8 +36,8 @@ ProtoDRController controller = ProtoDRController(maxBrightness, ProtoDRControlle
 #else
 //ProtoDRController controller = ProtoDRController(maxBrightness, ProtoDRController::LEFT);
 #endif
-SmartMatrixHUB75 controller = SmartMatrixHUB75(maxBrightness);
-ProtogenHUB75Animation animation = ProtogenHUB75Animation();
+SmartMatrixHUB75Split controller = SmartMatrixHUB75Split(maxBrightness);
+ProtogenHUB75AnimationSplit animation = ProtogenHUB75AnimationSplit();
 
 void setup() {
     Serial.begin(115200);
@@ -45,11 +48,20 @@ void setup() {
 
 void loop() {
     float ratio = (float)(millis() % 5000) / 5000.0f;
-    animation.UpdateTime(ratio);
 
     controller.SetBrightness(Menu::GetBrightness());// / 8);
 
-    controller.Render(animation.GetScene());
+    //animation.UpdateTime(ratio);
+    //controller.Render(animation.GetScene());
+    
+    animation.SetCameraMirror(false);
+    animation.UpdateTime(ratio);
+    controller.RenderCamera(animation.GetScene(), 0);
+
+    animation.SetCameraMirror(true);
+    animation.UpdateTime(ratio);
+    controller.RenderCamera(animation.GetScene(), 1);
+    
 
     controller.Display();
     

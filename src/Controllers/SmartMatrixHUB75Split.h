@@ -24,20 +24,22 @@ const uint8_t kBackgroundLayerOptions = (SM_BACKGROUND_OPTIONS_NONE);
 SMARTMATRIX_ALLOCATE_BUFFERS(matrix, kMatrixWidth, kMatrixHeight, kRefreshDepth, kDmaBufferRows, kPanelType, kMatrixOptions);
 SMARTMATRIX_ALLOCATE_BACKGROUND_LAYER(backgroundLayer, kMatrixWidth, kMatrixHeight, COLOR_DEPTH, kBackgroundLayerOptions);
 
-class SmartMatrixHUB75 : public Controller {
+class SmartMatrixHUB75Split : public Controller {
 private:
     CameraLayout cameraLayout = CameraLayout(CameraLayout::ZForward, CameraLayout::YUp);
 
     Transform camTransform = Transform(Vector3D(), Vector3D(0, 0, -500.0f), Vector3D(1, 1, 1));
 
-    PixelGroup camPixels = PixelGroup(P3HUB75, 2048);
+    PixelGroup camPixelsLeft = PixelGroup(P3HUB75, 2048);
+    PixelGroup camPixelsRight = PixelGroup(P3HUB75, 2048);
 
-    Camera cam = Camera(&camTransform, &cameraLayout, &camPixels);
+    Camera camLeft = Camera(&camTransform, &cameraLayout, &camPixelsLeft);
+    Camera camRight = Camera(&camTransform, &cameraLayout, &camPixelsRight);
 
-    Camera* cameras[1] = { &cam };
+    Camera* cameras[2] = { &camLeft, &camRight };
 
 public:
-    SmartMatrixHUB75(uint8_t maxBrightness) : Controller(cameras, 1, maxBrightness){}
+    SmartMatrixHUB75Split(uint8_t maxBrightness) : Controller(cameras, 2, maxBrightness){}
 
     void Initialize() override{
         matrix.addLayer(&backgroundLayer);
@@ -55,10 +57,11 @@ public:
             for (uint16_t x = 0; x < 64; x++){
                 uint16_t pixelNum = y * 64 + x;
 
-                rgb24 rgbColor = rgb24((uint16_t)camPixels.GetPixel(pixelNum)->Color.R, (uint16_t)camPixels.GetPixel(pixelNum)->Color.G, (uint16_t)camPixels.GetPixel(pixelNum)->Color.B);
+                rgb24 rgbColorLeft = rgb24((uint16_t)camPixelsLeft.GetPixel(pixelNum)->Color.R, (uint16_t)camPixelsLeft.GetPixel(pixelNum)->Color.G, (uint16_t)camPixelsLeft.GetPixel(pixelNum)->Color.B);
+                rgb24 rgbColorRight = rgb24((uint16_t)camPixelsRight.GetPixel(pixelNum)->Color.R, (uint16_t)camPixelsRight.GetPixel(pixelNum)->Color.G, (uint16_t)camPixelsRight.GetPixel(pixelNum)->Color.B);
 
-                backgroundLayer.drawPixel(x, (31 - y), rgbColor);
-                backgroundLayer.drawPixel(63 - x, (31 - y) + 32, rgbColor);
+                backgroundLayer.drawPixel(x, (31 - y), rgbColorLeft);
+                backgroundLayer.drawPixel(63 - x, (31 - y) + 32, rgbColorRight);
             }
         }
 

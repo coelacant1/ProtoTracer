@@ -7,6 +7,7 @@
 #include "Scene.h"
 #include "Triangle2D.h"
 #include "QuadTree.h"
+#include "Node.h"
 
 
 class Camera {
@@ -73,8 +74,6 @@ public:
     }
 
     void Rasterize(Scene* scene) {
-        int triangleCounter = 0;
-        
         lookDirection = transform->GetRotation().Conjugate() * lookOffset;
         Quaternion normLookDir = lookDirection.UnitQuaternion();
         rayDirection  = transform->GetRotation().Multiply(lookDirection);
@@ -92,7 +91,7 @@ public:
             if(scene->GetObjects()[i]->IsEnabled()){
                 //for each triangle in object, project onto 2d surface, but pass material
                 for (int j = 0; j < scene->GetObjects()[i]->GetTriangleGroup()->GetTriangleCount(); j++) {
-                    tree.insert(Triangle2D(lookDirection, transform, &scene->GetObjects()[i]->GetTriangleGroup()->GetTriangles()[j], scene->GetObjects()[i]->GetMaterial()));
+                    tree.Insert(Triangle2D(lookDirection, transform, &scene->GetObjects()[i]->GetTriangleGroup()->GetTriangles()[j], scene->GetObjects()[i]->GetMaterial()));
                 }
             }
         }
@@ -101,13 +100,14 @@ public:
 
         for (unsigned int i = 0; i < pixelGroup->GetPixelCount(); i++) {
             Vector2D pixelRay = Vector2D(lookDirection.RotateVectorUnit(pixelGroup->GetPixel(i)->GetPosition() * transform->GetScale(), normLookDir));//scale pixel location prior to rotating and moving
-            QuadTree::Node* leafNode =  tree.intersect(pixelRay);
+            Node* leafNode =  tree.Intersect(pixelRay);
+            
             if (!leafNode) {
                 pixelGroup->GetPixel(i)->Color = RGBColor();
                 continue;
             }
 
-            pixelGroup->GetPixel(i)->Color = CheckRasterPixel(leafNode->entities, leafNode->count, pixelRay);
+            pixelGroup->GetPixel(i)->Color = CheckRasterPixel(leafNode->GetEntities(), leafNode->GetCount(), pixelRay);
         }
     }
     

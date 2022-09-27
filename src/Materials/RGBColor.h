@@ -30,6 +30,12 @@ public:
         this->B = color.Z;
     }
 
+    void SetColor(uint8_t R, uint8_t G, uint8_t B){
+        this->R = R;
+        this->G = G;
+        this->B = B;
+    }
+
     RGBColor Scale(uint8_t maxBrightness){
         int sR, sG, sB;
         
