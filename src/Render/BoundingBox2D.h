@@ -9,6 +9,7 @@ private:
 
 public:
     BoundingBox2D(){}
+    BoundingBox2D(Vector2D min, Vector2D max): min(min), max(max) {}
 
     void UpdateBounds(Vector2D current){
         min = min.Minimum(current);
@@ -23,10 +24,14 @@ public:
         return max;
     }
 
-    bool Overlaps(BoundingBox2D *bb){
+    bool Overlaps(BoundingBox2D* bb){
         bool xOverlap = bb->GetMinimum().X < max.X && bb->GetMaximum().X > min.X;
         bool yOverlap = bb->GetMinimum().Y < max.Y && bb->GetMaximum().Y > min.Y;
 
         return xOverlap && yOverlap;
+    }
+
+    bool Contains(const Vector2D& v) {
+        return min.X <= v.X && v.X <= max.X && min.Y <= v.Y && v.Y <= max.Y;
     }
 };

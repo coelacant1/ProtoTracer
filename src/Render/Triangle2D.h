@@ -2,8 +2,9 @@
 
 #include "..\Materials\Material.h"
 #include "..\Math\Transform.h"
-#include "Triangle3D.h"
 #include "..\Math\Vector2D.h"
+#include "Triangle3D.h"
+#include "BoundingBox2D.h"
 
 class Triangle2D {
 private:
@@ -122,19 +123,66 @@ public:
     }
 
     bool DidIntersect(float x, float y, float& u, float& v, float& w) {
-        v2X = x - p1X;
-        v2Y = y - p1Y;
+        float v2lX = x - p1X;
+        float v2lY = y - p1Y;
 
-        v = (v2X * v1Y - v1X * v2Y) * denominator;
+        v = (v2lX * v1Y - v1X * v2lY) * denominator;
         if (v <= 0.0f) return false;
         if (v >= 1.0f) return false;
 
-        w = (v0X * v2Y - v2X * v0Y) * denominator;
+        w = (v0X * v2lY - v2lX * v0Y) * denominator;
         if (w <= 0.0f) return false;
         if (w >= 1.0f) return false;
 
         u = 1.0f - v - w;
         if (u <= 0.0f) return false;
+
+        return true;
+    }
+
+    bool DidIntersect(BoundingBox2D& bbox) {
+        //on x86 these are a lot faster than using fminf/fmaxf, TODO: verify performance on different platforms
+        auto max = [](float a, float b) {return a > b ? a : b; };
+        auto min = [](float a, float b) {return a < b ? a : b; };
+        auto tmax = [](float a, float b, float c) {return a > b ? (a > c ? a : c) : (b > c ? b : c); };
+        auto tmin = [](float a, float b, float c) {return a < b ? (a < c ? a : c) : (b < c ? b : c); };
+
+
+        if (!(bbox.GetMinimum().X < tmax(p1X, p2X, p3X) && bbox.GetMaximum().X > tmin(p1X, p2X, p3X))) { return false; }
+        if (!(bbox.GetMinimum().Y < tmax(p1Y, p2Y, p3Y) && bbox.GetMaximum().Y > tmin(p1Y, p2Y, p3Y))) { return false; }
+
+        Vector2D axes[] = { {-1.0f * (p2Y - p1Y), p2X - p1X},
+                            {-1.0f * (p3Y - p1Y), p3X - p1X}, {-1.0f * (p3Y - p2Y), (p3X - p2X)} }; // axes for SAT-based intersection testing
+
+        Vector2D c = {(bbox.GetMinimum().X + bbox.GetMaximum().X) * 0.5f, (bbox.GetMinimum().Y + bbox.GetMaximum().Y) * 0.5f };
+        Vector2D e = {(bbox.GetMaximum().X - bbox.GetMinimum().X) * 0.5f, (bbox.GetMaximum().Y - bbox.GetMinimum().Y) * 0.5f };
+
+        float p0 = axes[0].X * (p1X - c.X) + axes[0].Y * (p1Y - c.Y);
+        float p2 = axes[0].X * (p3X - c.X) + axes[0].Y * (p3Y - c.Y);
+
+        float r = e.X * fabsf(axes[0].X) + e.Y * fabsf(axes[0].Y);
+
+        if (max(-1.0f * max(p0, p2), min(p0, p2)) > r)
+            return false;
+
+
+        p0 = axes[1].X * (p1X - c.X) + axes[1].Y * (p1Y - c.Y);
+        float p1 = axes[1].X * (p2X - c.X) + axes[1].Y * (p2Y - c.Y);
+
+        r = e.X * fabsf(axes[1].X) + e.Y * fabsf(axes[1].Y);
+
+        if (max(-1.0f * max(p0, p1), min(p0, p1)) > r)
+            return false;
+
+
+        p0 = axes[2].X * (p1X - c.X) + axes[2].Y * (p1Y - c.Y);
+        p1 = axes[2].X * (p2X - c.X) + axes[2].Y * (p2Y - c.Y);
+
+        r = e.X * fabsf(axes[2].X) + e.Y * fabsf(axes[2].Y);
+
+        if (max(-1.0f * max(p0, p1), min(p0, p1)) > r)
+            return false;
+
 
         return true;
     }
