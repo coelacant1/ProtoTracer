@@ -78,7 +78,7 @@ public:
         textEngine.SetPositionOffset(position);
         textEngine.SetBlinkTime(200);
 
-        if (MenuHandler::Initialize(pin, holdingTime)){
+        if (!MenuHandler::Initialize(pin, holdingTime)){
             SetDefaultEntries();
         }
 

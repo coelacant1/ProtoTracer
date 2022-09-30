@@ -1,37 +1,43 @@
 #pragma once
 
-#include "Animation.h"
-#include "KeyFrameTrack.h"
-#include "EasyEaseAnimator.h"
-#include "..\Objects\Background.h"
-#include "..\Morph\NukudeFace.h"
-#include "..\Render\Scene.h"
-#include "..\Signals\FunctionGenerator.h"
-#include "..\Menu\Menu.h"
-#include "..\Sensors\BoopSensor.h"
+#include "..\Animation.h"
+#include "..\KeyFrameTrack.h"
+#include "..\EasyEaseAnimator.h"
+#include "..\..\Objects\Background.h"
+#include "..\..\Morph\NukudeFace.h"
+#include "..\..\Morph\TechSane.h"
+#include "..\..\Morph\TechSaneM.h"
+#include "..\..\Render\Scene.h"
+#include "..\..\Signals\FunctionGenerator.h"
+#include "..\..\Menu\Menu.h"
+#include "..\..\Sensors\BoopSensor.h"
 
-#include "..\Materials\Animated\RainbowNoise.h"
-#include "..\Materials\Animated\RainbowSpiral.h"
-#include "..\Materials\Animated\SpectrumAnalyzer.h"
-#include "..\Materials\Animated\AudioReactiveGradient.h"
-#include "..\Materials\Animated\Oscilloscope.h"
+#include "..\..\Materials\Animated\RainbowNoise.h"
+#include "..\..\Materials\Animated\RainbowSpiral.h"
+#include "..\..\Materials\Animated\FlowNoise.h"
+#include "..\..\Materials\Animated\SpectrumAnalyzer.h"
+#include "..\..\Materials\Animated\AudioReactiveGradient.h"
+#include "..\..\Materials\Animated\Oscilloscope.h"
 
-#include "..\Materials\MaterialAnimator.h"
+#include "..\..\Materials\MaterialAnimator.h"
 
-#include "AnimationTracks\BlinkTrack.h"
+#include "..\AnimationTracks\BlinkTrack.h"
 
-#include "..\Signals\FFTVoiceDetection.h"
+#include "..\..\Signals\FFTVoiceDetection.h"
 
-#include "..\Sensors\MicrophoneFourier_MAX9814.h"
+#include "..\..\Sensors\MicrophoneFourier_MAX9814.h"
 
-class ProtogenHUB75AnimationSplit : public Animation<2> {
+class TechSaneAnimation : public Animation<4> {
 private:
     NukudeFace pM;
+    TechSane tS;
+    TechSaneM tSM;
     Background background;
-    EasyEaseAnimator<21> eEA = EasyEaseAnimator<21>(EasyEaseInterpolation::Overshoot, 1.0f, 0.35f);
+    EasyEaseAnimator<25> eEA = EasyEaseAnimator<25>(EasyEaseInterpolation::Overshoot, 1.0f, 0.35f);
     
     //Materials
     RainbowNoise rainbowNoise;
+    FlowNoise flowNoise;
     RainbowSpiral rainbowSpiral;
     SimpleMaterial redMaterial = SimpleMaterial(RGBColor(255, 0, 0));
     SimpleMaterial orangeMaterial = SimpleMaterial(RGBColor(255, 165, 0));
@@ -72,10 +78,16 @@ private:
     float offsetFaceSA = 0.0f;
     float offsetFaceARG = 0.0f;
     float offsetFaceOSC = 0.0f;
+    float techSaneLogo = 0.0f;
     uint8_t offsetFaceIndSA = 50;
     uint8_t offsetFaceIndARG = 51;
     uint8_t offsetFaceIndOSC = 52;
+    uint8_t techSaneLogoInd = 53;
     bool mirror = false;
+
+    float xOffset = 0.0f;
+    float yOffset = 0.0f;
+    float adjustTS = 0.0f;
 
     void LinkEasyEase(){
         eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::Anger), NukudeFace::Anger, 15, 0.0f, 1.0f);
@@ -101,6 +113,7 @@ private:
         eEA.AddParameter(&offsetFaceSA, offsetFaceIndSA, 40, 0.0f, 1.0f);
         eEA.AddParameter(&offsetFaceARG, offsetFaceIndARG, 40, 0.0f, 1.0f);
         eEA.AddParameter(&offsetFaceOSC, offsetFaceIndOSC, 40, 0.0f, 1.0f);
+        eEA.AddParameter(&techSaneLogo, techSaneLogoInd, 40, 2.0f, 0.0f);
     }
 
     void LinkParameters(){
@@ -122,7 +135,7 @@ private:
     }
 
     void SetMaterialLayers(){
-        materialAnimator.SetBaseMaterial(Material::Add, &gradientMat);
+        materialAnimator.SetBaseMaterial(Material::Add, &flowNoise);
         materialAnimator.AddMaterial(Material::Replace, &orangeMaterial, 40, 0.0f, 1.0f);//layer 1
         materialAnimator.AddMaterial(Material::Replace, &whiteMaterial, 40, 0.0f, 1.0f);//layer 2
         materialAnimator.AddMaterial(Material::Replace, &greenMaterial, 40, 0.0f, 1.0f);//layer 3
@@ -131,7 +144,7 @@ private:
         materialAnimator.AddMaterial(Material::Replace, &redMaterial, 40, 0.0f, 1.0f);//layer 6
         materialAnimator.AddMaterial(Material::Replace, &blueMaterial, 40, 0.0f, 1.0f);//layer 7
         materialAnimator.AddMaterial(Material::Replace, &rainbowSpiral, 40, 0.0f, 1.0f);//layer 8
-        materialAnimator.AddMaterial(Material::Add, &rainbowNoise, 40, 0.5f, 1.0f);//layer 9
+        materialAnimator.AddMaterial(Material::Lighten, &rainbowNoise, 40, 0.35f, 1.0f);//layer 9
 
         backgroundMaterial.SetBaseMaterial(Material::Add, Menu::GetMaterial());
         backgroundMaterial.AddMaterial(Material::Add, &sA, 20, 0.0f, 1.0f);
@@ -196,6 +209,10 @@ private:
         backgroundMaterial.AddMaterialFrame(oSC, offsetFaceOSC);
     }
 
+    void TechSaneFace(){
+        eEA.AddParameterFrame(techSaneLogoInd, 0.0f);
+    }
+
     void UpdateFFTVisemes(){
         if(Menu::UseMicrophone()){
             eEA.AddParameterFrame(NukudeFace::vrc_v_ss, MicrophoneFourier::GetCurrentMagnitude() / 2.0f);
@@ -230,8 +247,10 @@ private:
     }
 
 public:
-    ProtogenHUB75AnimationSplit() {
+    TechSaneAnimation() {
         scene.AddObject(pM.GetObject());
+        scene.AddObject(tS.GetObject());
+        scene.AddObject(tSM.GetObject());
         scene.AddObject(background.GetObject());
 
         LinkEasyEase();
@@ -243,11 +262,13 @@ public:
 
         pM.GetObject()->SetMaterial(&materialAnimator);
         background.GetObject()->SetMaterial(&backgroundMaterial);
+        tS.GetObject()->SetMaterial(&flowNoise);
+        tSM.GetObject()->SetMaterial(&flowNoise);
 
         boop.Initialize(5);
 
         MicrophoneFourier::Initialize(A0, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
-        Menu::Initialize(9, 20, 500);//7 is number of faces
+        Menu::Initialize(10, 20, 500);//7 is number of faces
     }
 
     void FadeIn(float stepRatio) override {}
@@ -263,14 +284,14 @@ public:
 
     void Update(float ratio) override {
         if(!mirror){
-            gradientSpectrum[0].SetColor(255, 175, 175);
-            gradientSpectrum[1].SetColor(255, 55, 225);
+            gradientSpectrum[0].SetColor(253, 253, 251);
+            gradientSpectrum[1].SetColor(0, 80, 175);
             gradientMat.UpdateRGB();
 
             pM.Reset();
 
-            float xOffset = fGenMatXMove.Update();
-            float yOffset = fGenMatYMove.Update();
+            xOffset = fGenMatXMove.Update();
+            yOffset = fGenMatYMove.Update();
 
             Menu::Update();
 
@@ -306,11 +327,12 @@ public:
                 else if (mode == 3) Frown();
                 else if (mode == 4) LookUp();
                 else if (mode == 5) Sad();
-                else if (mode == 6) {
+                else if (mode == 6) TechSaneFace();
+                else if (mode == 7) {
                     aRG.Update(MicrophoneFourier::GetFourierFiltered());
                     AudioReactiveGradientFace();
                 }
-                else if (mode == 7){
+                else if (mode == 8){
                     oSC.Update(MicrophoneFourier::GetSamples());
                     OscilloscopeFace();
                 }
@@ -327,17 +349,19 @@ public:
 
             eEA.Update();
             pM.Update();
+            tS.Update();
             
             rainbowNoise.Update(ratio);
+            flowNoise.Update(ratio);
             rainbowSpiral.Update(ratio);
             materialAnimator.Update();
             backgroundMaterial.Update();
             
-            uint8_t faceSize = Menu::GetFaceSize();
+            uint8_t faceSize = 0;//Menu::GetFaceSize();
             float menuRatio = Menu::ShowMenu();
             float scale = menuRatio * 0.6f + 0.4f;
             float xShift = (1.0f - menuRatio) * 60.0f;
-            float yShift = (1.0f - menuRatio) * 20.0f + offsetFaceSA * -100.0f + offsetFaceARG * -100.0f + offsetFaceOSC * -100.0f;
+            float yShift = (1.0f - menuRatio) * 20.0f + offsetFaceSA * -100.0f + offsetFaceARG * -100.0f + offsetFaceOSC * -100.0f + (2.0f - techSaneLogo) * -50.0f;
             float adjustFacePos = float(4 - faceSize) * 5.0f;
             float adjustFaceX = float(faceSize) * 0.05f;
             
@@ -346,11 +370,31 @@ public:
             pM.GetObject()->GetTransform()->SetScale(Vector3D(-1.05f + adjustFaceX, 0.585f, 0.8f).Multiply(scale));
 
             pM.GetObject()->UpdateTransform();
+
+            adjustTS = 1.0f - (float(faceSize) * 0.15f);
+
+            tS.GetObject()->GetTransform()->SetPosition(Vector3D(xOffset / 2.0f, 5.0f + yOffset / 2.0f - techSaneLogo * 30.0f, 300.0f));
+            tS.GetObject()->GetTransform()->SetScale(Vector3D(1.0f * adjustTS + xOffset / 40.0f, 1.15f - techSaneLogo, 1.0f));
+
+            tS.GetObject()->UpdateTransform();
+
+            tS.GetObject()->Enable();
+            tSM.GetObject()->Disable();
         }
         else{
-            gradientSpectrum[0].SetColor(255, 175, 175);
-            gradientSpectrum[1].SetColor(255, 55, 225);
+            gradientSpectrum[0].SetColor(253, 253, 251);
+            gradientSpectrum[1].SetColor(175, 40, 120);
             gradientMat.UpdateRGB();
+
+            tSM.Update();
+
+            tSM.GetObject()->GetTransform()->SetPosition(Vector3D(xOffset / 2.0f, 5.0f + yOffset / 2.0f - techSaneLogo * 30.0f, 300.0f));
+            tSM.GetObject()->GetTransform()->SetScale(Vector3D(1.0f * adjustTS + xOffset / 40.0f, 1.15f - techSaneLogo, 1.0f));
+
+            tSM.GetObject()->UpdateTransform();
+
+            tS.GetObject()->Disable();
+            tSM.GetObject()->Enable();
         }
     }
 };

@@ -84,6 +84,8 @@ public:
     static void SetDefaultValue(uint16_t menu, uint8_t value){
         if(menu >= menuCount) return;
 
+        currentValue[menu] = value;
+
         WriteEEPROM(menu, value);
     }
 
