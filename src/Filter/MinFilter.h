@@ -7,6 +7,7 @@ private:
 	float values[memory];
 	float minValues[memory / 10];
   	uint8_t currentAmount = 0;
+	bool ignoreSame;
 
 	void ShiftArray(uint8_t mem, float* arr){
 		for(uint8_t i = 0; i < mem; i++){
@@ -17,7 +18,9 @@ private:
 	}
 
 public:
-	MinFilter() {}
+	MinFilter(bool ignoreSame = true) {
+		this->ignoreSame = ignoreSame;
+	}
 
 	float Filter(float value) {
 		float avg = 0;
@@ -36,6 +39,10 @@ public:
 		}
 
 		if(minValues[minMemory - 1] != currentMin){//the current min is different than the first, shift back and add
+			ShiftArray(minMemory, minValues);//pop first
+			minValues[minMemory - 1] = currentMin;
+		}
+		else if (!ignoreSame){
 			ShiftArray(minMemory, minValues);//pop first
 			minValues[minMemory - 1] = currentMin;
 		}

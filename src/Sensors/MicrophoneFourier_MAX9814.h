@@ -10,10 +10,12 @@
 #include "..\Filter\DerivativeFilter.h"
 #include "..\Filter\FFTFilter.h"
 #include "..\Filter\PeakDetection.h"
+#include "..\Signals\TimeStep.h"
 
 class MicrophoneFourier{
 private:
     static IntervalTimer sampleTimer;
+    static TimeStep timeStep;
 
     static const uint16_t FFTSize = 256;
     static const uint8_t OutputBins = 128;
@@ -25,7 +27,9 @@ private:
     static float maxDB;
     static float threshold;
     static float currentValue;
+    static float refreshRate;
     static bool samplesReady;
+    static bool isInitialized;
     static DerivativeFilter peakFilterRate;
 
     static uint16_t frequencyBins[OutputBins];
@@ -68,10 +72,11 @@ private:
     }
 
 public:
-    static void Initialize(uint8_t pin, uint16_t sampleRate, float minDB, float maxDB){
+    static void Initialize(uint8_t pin, uint16_t sampleRate, float minDB, float maxDB, float refreshRate = 60.0f){
         MicrophoneFourier::minDB = minDB;
         MicrophoneFourier::maxDB = maxDB;
         MicrophoneFourier::pin = pin;
+        MicrophoneFourier::refreshRate = 1.0f / refreshRate;
 
         pinMode(pin, INPUT);
         analogReadResolution(12);
@@ -89,6 +94,11 @@ public:
         }
 
         StartSampler();
+        isInitialized = true;
+    }
+
+    static bool IsInitialized(){
+        return isInitialized;
     }
 
     static float GetSampleRate(){
@@ -112,7 +122,7 @@ public:
     }
     
     static void Update(){
-        if(!samplesReady) return;
+        if(!samplesReady && timeStep.IsReady()) return;
 
         arm_cfft_radix4_init_f32(&RadixFFT, FFTSize, 0, 1);
         arm_cfft_radix4_f32(&RadixFFT, inputSamp);
@@ -139,6 +149,7 @@ public:
 };
 
 IntervalTimer MicrophoneFourier::sampleTimer;
+TimeStep MicrophoneFourier::timeStep = TimeStep(60);
 
 const uint16_t MicrophoneFourier::FFTSize;
 const uint8_t MicrophoneFourier::OutputBins;
@@ -149,7 +160,9 @@ uint8_t MicrophoneFourier::pin;
 float MicrophoneFourier::minDB;
 float MicrophoneFourier::maxDB;
 float MicrophoneFourier::threshold;
+float MicrophoneFourier::refreshRate;
 bool MicrophoneFourier::samplesReady;
+bool MicrophoneFourier::isInitialized = false;
 DerivativeFilter MicrophoneFourier::peakFilterRate;
 
 uint16_t MicrophoneFourier::frequencyBins[];

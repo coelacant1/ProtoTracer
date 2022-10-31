@@ -4,13 +4,16 @@
 #include "..\KeyFrameTrack.h"
 #include "..\EasyEaseAnimator.h"
 #include "..\..\Objects\Background.h"
-#include "..\..\Morph\InfraredFace.h"
+#include "..\..\Objects\LEDStripBackground.h"
+#include "..\..\Morph\Commissions\InfraredFace.h"
 #include "..\..\Render\Scene.h"
 #include "..\..\Signals\FunctionGenerator.h"
-#include "..\..\Sensors\MenuButtonHandler.h"
 #include "..\..\Sensors\BoopSensor.h"
 
+#include "..\..\Menu\Menu.h"
 #include "..\..\Materials\Animated\SpectrumAnalyzer.h"
+#include "..\..\Materials\Animated\AudioReactiveGradient.h"
+#include "..\..\Materials\Animated\Oscilloscope.h"
 #include "..\..\Materials\Animated\RainbowNoise.h"
 #include "..\..\Materials\Animated\RainbowSpiral.h"
 
@@ -22,11 +25,12 @@
 
 #include "..\..\Sensors\MicrophoneFourier_MAX9814.h"
 
-class InfraredAnimation : public Animation<2> {
+class InfraredAnimation : public Animation<3> {
 private:
     InfraredFace pM;
     Background background;
-    EasyEaseAnimator<20> eEA = EasyEaseAnimator<20>(EasyEaseInterpolation::Cosine, 1.0f, 0.35f);
+    LEDStripBackground ledStripBackground;
+    EasyEaseAnimator<21> eEA = EasyEaseAnimator<21>(EasyEaseInterpolation::Cosine, 1.0f, 0.35f);
     
     //Materials
     RainbowNoise rainbowNoise;
@@ -38,8 +42,11 @@ private:
     GradientMaterial<2> gradientMat = GradientMaterial<2>(gradientSpectrum, 350.0f, false);
     
     MaterialAnimator<5> materialAnimator;
+    MaterialAnimator<4> backgroundMaterial;
     
     SpectrumAnalyzer sA = SpectrumAnalyzer(Vector2D(200, 100), Vector2D(100, 50), true, true); 
+    AudioReactiveGradient aRG = AudioReactiveGradient(Vector2D(160, 160), Vector2D(0, 0), true, true); 
+    Oscilloscope oSC = Oscilloscope(Vector2D(200, 100), Vector2D(0, 0));
 
     //Animation controllers
     BlinkTrack<1> blink;
@@ -54,7 +61,13 @@ private:
     BoopSensor boop;
 
     FFTVoiceDetection<128> voiceDetection;
-    float moveSpectrum = 0.0f;
+
+    float offsetFaceSA = 0.0f;
+    float offsetFaceARG = 0.0f;
+    float offsetFaceOSC = 0.0f;
+    uint8_t offsetFaceIndSA = 50;
+    uint8_t offsetFaceIndARG = 51;
+    uint8_t offsetFaceIndOSC = 52;
 
     void LinkEasyEase(){
         eEA.AddParameter(pM.GetMorphWeightReference(InfraredFace::Angry), InfraredFace::Angry, 15, 0.0f, 1.0f);
@@ -70,7 +83,10 @@ private:
         eEA.AddParameter(pM.GetMorphWeightReference(InfraredFace::TalkC), InfraredFace::TalkC, 3, 0.0f, 1.0f);
         
         eEA.AddParameter(pM.GetMorphWeightReference(InfraredFace::Blush), InfraredFace::Blush, 30, 0.0f, 1.0f);
-        eEA.AddParameter(&moveSpectrum, 99, 30, 0.0f, 1.0f);
+
+        eEA.AddParameter(&offsetFaceSA, offsetFaceIndSA, 40, 0.0f, 1.0f);
+        eEA.AddParameter(&offsetFaceARG, offsetFaceIndARG, 40, 0.0f, 1.0f);
+        eEA.AddParameter(&offsetFaceOSC, offsetFaceIndOSC, 40, 0.0f, 1.0f);
     }
 
     void LinkParameters(){
@@ -88,12 +104,18 @@ private:
         materialAnimator.AddMaterial(Material::Replace, &rainbowSpiral, 40, 0.0f, 1.0f);//layer 1
         materialAnimator.AddMaterial(Material::Replace, &blueMaterial, 40, 0.0f, 1.0f);//layer 2
         materialAnimator.AddMaterial(Material::Lighten, &rainbowNoise, 40, 0.35f, 1.0f);//layer 3
+
+        backgroundMaterial.SetBaseMaterial(Material::Add, Menu::GetMaterial());
+        backgroundMaterial.AddMaterial(Material::Add, &sA, 20, 0.0f, 1.0f);
+        backgroundMaterial.AddMaterial(Material::Add, &aRG, 20, 0.0f, 1.0f);
+        backgroundMaterial.AddMaterial(Material::Add, &oSC, 20, 0.0f, 1.0f);
     }
 
 public:
     InfraredAnimation() {
         scene.AddObject(pM.GetObject());
         scene.AddObject(background.GetObject());
+        scene.AddObject(ledStripBackground.GetObject());
 
         LinkEasyEase();
         LinkParameters();
@@ -103,12 +125,12 @@ public:
         SetMaterialLayers();
 
         pM.GetObject()->SetMaterial(&materialAnimator);
+        background.GetObject()->SetMaterial(&backgroundMaterial);
+        ledStripBackground.GetObject()->SetMaterial(&materialAnimator);
 
-        MenuButtonHandler::Initialize(20, 8, 500);//7 is number of faces
-        boop.Initialize(5);
+        boop.Initialize(10);
 
-        background.GetObject()->SetMaterial(&sA);//sA);
-
+        Menu::Initialize(10, 20, 500);//10 is number of faces
         MicrophoneFourier::Initialize(A0, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
     }
 
@@ -192,9 +214,35 @@ public:
 
     void SpectrumAnalyzerFace(){
         blink.Pause();
+        eEA.AddParameterFrame(offsetFaceIndSA, 1.0f);
+
+        backgroundMaterial.AddMaterialFrame(sA, offsetFaceSA);
+
         eEA.AddParameterFrame(InfraredFace::Flatten, 1.0f);
 
-        eEA.AddParameterFrame(99, 1.0f);
+        pM.SetMorphWeight(InfraredFace::EyeBrowThicker, 0.0f);
+        pM.SetMorphWeight(InfraredFace::EyeBigger, 0.0f);
+    }
+
+    void AudioReactiveGradientFace(){
+        blink.Pause();
+        eEA.AddParameterFrame(offsetFaceIndARG, 1.0f);
+
+        backgroundMaterial.AddMaterialFrame(aRG, offsetFaceARG);
+
+        eEA.AddParameterFrame(InfraredFace::Flatten, 1.0f);
+
+        pM.SetMorphWeight(InfraredFace::EyeBrowThicker, 0.0f);
+        pM.SetMorphWeight(InfraredFace::EyeBigger, 0.0f);
+    }
+
+    void OscilloscopeFace(){
+        blink.Pause();
+        eEA.AddParameterFrame(offsetFaceIndOSC, 1.0f);
+
+        backgroundMaterial.AddMaterialFrame(oSC, offsetFaceOSC);
+
+        eEA.AddParameterFrame(InfraredFace::Flatten, 1.0f);
 
         pM.SetMorphWeight(InfraredFace::EyeBrowThicker, 0.0f);
         pM.SetMorphWeight(InfraredFace::EyeBigger, 0.0f);
@@ -208,7 +256,7 @@ public:
     }
 
     void UpdateFFTVisemes(){
-        if(MenuButtonHandler::UseMicrophone()){
+        if(Menu::UseMicrophone()){
             eEA.AddParameterFrame(InfraredFace::TalkA, MicrophoneFourier::GetCurrentMagnitude() / 2.0f);
 
             if(MicrophoneFourier::GetCurrentMagnitude() > 0.05f){
@@ -227,16 +275,31 @@ public:
     void Update(float ratio) override {
         pM.Reset();
 
-        bool isBooped = MenuButtonHandler::UseBoopSensor() ? boop.isBooped() : 0;
-        uint8_t mode = MenuButtonHandler::GetFaceState();//change by button press
+        float xOffset = fGenMatXMove.Update();
+        float yOffset = fGenMatYMove.Update();
+        
+        Menu::Update();
+
+        bool isBooped = Menu::UseBoopSensor() ? boop.isBooped() : 0;
+        uint8_t mode = Menu::GetFaceState();//change by button press
 
         MicrophoneFourier::Update();
+
         sA.Update(MicrophoneFourier::GetFourierFiltered());
         sA.SetHueAngle(ratio * 360.0f * 4.0f);
-        sA.SetMirrorYState(MenuButtonHandler::MirrorSpectrumAnalyzer());
-        sA.SetFlipYState(!MenuButtonHandler::MirrorSpectrumAnalyzer());
-        sA.SetPosition(Vector2D(100.0f, -50.0f + moveSpectrum * 100.0f));
+        sA.SetMirrorYState(Menu::MirrorSpectrumAnalyzer());
+        sA.SetFlipYState(!Menu::MirrorSpectrumAnalyzer());
         
+        aRG.SetRadius((xOffset + 2.0f) * 2.0f + 25.0f);
+        aRG.SetSize(Vector2D((xOffset + 2.0f) * 10.0f + 50.0f, (xOffset + 2.0f) * 10.0f + 50.0f));
+        aRG.SetHueAngle(ratio * 360.0f * 8.0f);
+        aRG.SetRotation(ratio * 360.0f * 2.0f);
+        aRG.SetPosition(Vector2D(80.0f + xOffset * 4.0f, 48.0f + yOffset * 4.0f));
+
+        oSC.SetSize(Vector2D(200.0f, 100.0f));
+        oSC.SetHueAngle(ratio * 360.0f * 8.0f);
+        oSC.SetPosition(Vector2D(100.0f, 50.0f));
+
         UpdateFFTVisemes();
 
         if (isBooped && mode != 6){
@@ -250,7 +313,18 @@ public:
             else if (mode == 4) Happy();
             else if (mode == 5) Calm();
             else if (mode == 6) Sad();
-            else SpectrumAnalyzerFace();
+            else if (mode == 7) {
+                aRG.Update(MicrophoneFourier::GetFourierFiltered());
+                AudioReactiveGradientFace();
+            }
+            else if (mode == 8){
+                oSC.Update(MicrophoneFourier::GetSamples());
+                OscilloscopeFace();
+            }
+            else {
+                sA.Update(MicrophoneFourier::GetFourierFiltered());
+                SpectrumAnalyzerFace();
+            }
         }
 
         UpdateKeyFrameTracks();
@@ -261,16 +335,25 @@ public:
         rainbowNoise.Update(ratio);
         rainbowSpiral.Update(ratio);
         materialAnimator.Update();
+        backgroundMaterial.Update();
 
         gradientMat.HueShift(fGenMatHue.Update());
 
         background.GetObject()->GetTransform()->SetPosition(Vector3D(0.0f, 0.0f, 1200.0f));
 
         background.GetObject()->UpdateTransform();
+
+        int8_t faceSize = Menu::GetFaceSize();
+        float menuRatio = Menu::ShowMenu();
+        float scale = menuRatio * 0.6f + 0.4f;
+        float xShift = (1.0f - menuRatio) * 80.0f;
+        float yShift = (1.0f - menuRatio) * 30.0f + offsetFaceSA * -200.0f + offsetFaceARG * -200.0f + offsetFaceOSC * -200.0f;
+        float adjustFacePos = float(faceSize) * 6.0f;
+        float adjustFaceX = float(faceSize) * 0.05f;
         
         pM.GetObject()->GetTransform()->SetRotation(Vector3D(0.0f, 0.0f, -7.5f));
-        pM.GetObject()->GetTransform()->SetPosition(Vector3D(135.0f + fGenMatXMove.Update(), 67.5f + fGenMatYMove.Update(), 600.0f));
-        pM.GetObject()->GetTransform()->SetScale(Vector3D(-0.625f, 0.825f, 1.0f));
+        pM.GetObject()->GetTransform()->SetPosition(Vector3D(135.0f - xShift + xOffset - adjustFacePos, 67.5f - yShift + yOffset, 600.0f));
+        pM.GetObject()->GetTransform()->SetScale(Vector3D(-0.625f + adjustFaceX, 0.825f, 1.0f).Multiply(scale));
 
         pM.GetObject()->UpdateTransform();
     }
