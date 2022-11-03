@@ -39,7 +39,7 @@ private:
     Camera* cameras[2] = { &camLeft, &camRight };
 
 public:
-    SmartMatrixHUB75Split(uint8_t maxBrightness) : Controller(cameras, 2, maxBrightness){}
+    SmartMatrixHUB75Split(uint8_t maxBrightness, uint8_t maxAccentBrightness) : Controller(cameras, 2, maxBrightness, maxAccentBrightness){}
 
     void Initialize() override{
         matrix.addLayer(&backgroundLayer);

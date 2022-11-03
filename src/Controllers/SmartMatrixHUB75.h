@@ -57,7 +57,7 @@ private:
     Camera* cameras[2] = { &camMain, &camSidePanels };
 
 public:
-    SmartMatrixHUB75(uint8_t maxBrightness) : Controller(cameras, 2, maxBrightness){}
+    SmartMatrixHUB75(uint8_t maxBrightness, uint8_t maxAccentBrightness) : Controller(cameras, 2, maxBrightness, maxAccentBrightness){}
 
     void Initialize() override{
         //HUB75
@@ -78,7 +78,7 @@ public:
 
     void Display() override {
         matrix.setBrightness(brightness);
-        apamatrix.setBrightness(brightness / 4);
+        apamatrix.setBrightness(accentBrightness);
 
         while(apaBackgroundLayer.isSwapPending());
         rgb24 *apabuffer = apaBackgroundLayer.backBuffer();

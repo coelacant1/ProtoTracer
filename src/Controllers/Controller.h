@@ -10,15 +10,30 @@ private:
     uint8_t count = 0;
     float renderTime = 0.0f;
     uint8_t maxBrightness;
+    uint8_t maxAccentBrightness;
     bool isOn = false;
+
+    void UpdateBrightness(){
+        if (!isOn && previousTime < softStart){
+            brightness = map(previousTime, 0, softStart, 0, maxBrightness);
+            accentBrightness = map(previousTime, 0, softStart, 0, maxAccentBrightness);
+        }
+        else if (!isOn){
+            brightness = maxBrightness;
+            accentBrightness = maxAccentBrightness;
+            isOn = true;
+        }
+    }
 
 protected:
     uint8_t brightness;
+    uint8_t accentBrightness;
 
-    Controller(Camera** cameras, uint8_t count, uint8_t maxBrightness){
+    Controller(Camera** cameras, uint8_t count, uint8_t maxBrightness, uint8_t maxAccentBrightness){
         this->cameras = cameras;
         this->count = count;
         this->maxBrightness = maxBrightness;
+        this->maxAccentBrightness = maxAccentBrightness;
         previousTime = micros();
     }
 
@@ -26,13 +41,7 @@ public:
     void Render(Scene* scene){
         previousTime = micros();
 
-        if (!isOn && previousTime < softStart){
-            brightness = map(previousTime, 0, softStart, 0, maxBrightness);
-        }
-        else if (!isOn){
-            brightness = maxBrightness;
-            isOn = true;
-        }
+        UpdateBrightness();
 
         for (int i = 0; i < count; i++){
             cameras[i]->Rasterize(scene);
@@ -41,17 +50,10 @@ public:
         renderTime = ((float)(micros() - previousTime)) / 1000000.0f;
     }
 
-    
     void RenderCamera(Scene* scene, uint8_t cameraNum){
         previousTime = micros();
 
-        if (!isOn && previousTime < softStart){
-            brightness = map(previousTime, 0, softStart, 0, maxBrightness);
-        }
-        else if (!isOn){
-            brightness = maxBrightness;
-            isOn = true;
-        }
+        UpdateBrightness();
 
         cameras[cameraNum]->Rasterize(scene);
 
@@ -63,6 +65,14 @@ public:
         
         if(isOn){//past soft start
             this->brightness = maxBrightness;
+        }
+    }
+
+    void SetAccentBrightness(uint8_t maxAccentBrightness){
+        this->maxAccentBrightness = maxAccentBrightness;
+        
+        if(isOn){//past soft start
+            this->accentBrightness = maxAccentBrightness;
         }
     }
 

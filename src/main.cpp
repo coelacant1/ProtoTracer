@@ -5,9 +5,9 @@
 //--------------- ANIMATIONS ---------------
 //#include "Animation\ProtoDRMorphAnimation.h"
 //#include "Animation\ProtogenKitFaceAnimation.h"
-//#include "Animation\ProtogenHUB75Animation.h"
+#include "Animation\ProtogenHUB75Animation.h"
 //#include "Animation\ProtogenHUB75AnimationSplit.h"
-#include "Animation\Commissions\BroookAnimation.h"
+//#include "Animation\Commissions\BroookAnimation.h"
 //#include "Animation\Commissions\InfraredAnimation.h"
 //#include "Animation\KaiborgV1Animation.h"
 //#include "Animation\ProtoV3Animation.h"
@@ -26,13 +26,14 @@
 //#include "Controllers\SmartMatrixHUB75Split.h"
 
 uint8_t maxBrightness = 50;
+uint8_t maxAccentBrightness = 100;
 #ifdef RIGHTFACE
 ProtoDRController controller = ProtoDRController(maxBrightness, ProtoDRController::RIGHT);
 #else
 //ProtoDRController controller = ProtoDRController(maxBrightness, ProtoDRController::LEFT);
 #endif
-SmartMatrixHUB75 controller = SmartMatrixHUB75(maxBrightness);
-BroookAnimation animation = BroookAnimation();
+SmartMatrixHUB75 controller = SmartMatrixHUB75(maxBrightness, maxAccentBrightness);
+ProtogenHUB75Animation animation = ProtogenHUB75Animation();
 
 float FreeMem(){
     uint32_t stackT;
@@ -61,6 +62,7 @@ void loop() {
     float ratio = (float)(millis() % 5000) / 5000.0f;
 
     controller.SetBrightness(Menu::GetBrightness());// / 8);
+    controller.SetAccentBrightness(Menu::GetAccentBrightness());
 
     animation.UpdateTime(ratio);
     controller.Render(animation.GetScene());

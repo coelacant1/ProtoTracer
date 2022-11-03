@@ -54,6 +54,8 @@ private:
     float f1;
     float f2;
 
+    float threshold = 400.0f;
+
     void CalculateFormants(float* peaks, uint8_t bandwidth){
         //calculate forward and backward of bandwidth of sum for each peak for kernel density estimation
         for(int16_t i = 0; i < int16_t(peakCount); i++){
@@ -134,7 +136,7 @@ private:
         //update all viseme values
         for(uint8_t i = 0; i < visemeCount; i++) *visRatios[i] = 0.0f;
         
-        if(f1 > 500.0f || f2 > 500.0f){
+        if(f1 > threshold || f2 > threshold){
             Vector2D formant = Vector2D(f1, f2);
             uint8_t firstClosest = 0;
             float firstDistance = 1000000.0f;//arbitrary large value
@@ -154,6 +156,10 @@ private:
 
 public:
     FFTVoiceDetection(){}
+
+    void SetThreshold(float threshold){
+        this->threshold = threshold;
+    }
 
     float GetViseme(Viseme viseme){
         return *visRatios[viseme];
@@ -218,4 +224,3 @@ public:
         CalculateVisemeGroup();
     }
 };
-

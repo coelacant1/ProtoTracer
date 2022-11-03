@@ -45,8 +45,8 @@ private:
     SimpleMaterial yellowMaterial = SimpleMaterial(RGBColor(255, 255, 0));
     SimpleMaterial purpleMaterial = SimpleMaterial(RGBColor(255, 0, 255));
     
-    RGBColor gradientSpectrum[2] = {RGBColor(5, 162, 232), RGBColor(10, 170, 255)};
-    GradientMaterial<2> gradientMat = GradientMaterial<2>(gradientSpectrum, 350.0f, false);
+    RGBColor gradientSpectrum[2] = {RGBColor(222, 217, 141), RGBColor(100, 120, 211)};
+    GradientMaterial<2> gradientMat = GradientMaterial<2>(gradientSpectrum, 50.0f, false);
     
     MaterialAnimator<10> materialAnimator;
     MaterialAnimator<4> backgroundMaterial;
@@ -88,21 +88,20 @@ private:
         eEA.AddParameter(pM.GetMorphWeightReference(BroookFace::Happy6), BroookFace::Happy6, 15, 0.0f, 1.0f);
         eEA.AddParameter(pM.GetMorphWeightReference(BroookFace::Flustered7), BroookFace::Flustered7, 45, 0.0f, 1.0f);
         eEA.AddParameter(pM.GetMorphWeightReference(BroookFace::Dot8), BroookFace::Dot8, 30, 0.0f, 1.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(BroookFace::Heart8), BroookFace::Heart8, 30, 0.0f, 1.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(BroookFace::Dead9), BroookFace::Dead9, 30, 0.0f, 1.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(BroookFace::Question10), BroookFace::Question10, 30, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(BroookFace::Heart9), BroookFace::Heart9, 30, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(BroookFace::Dead10), BroookFace::Dead10, 30, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(BroookFace::Question11), BroookFace::Question11, 30, 0.0f, 1.0f);
 
         eEA.AddParameter(pM.GetMorphWeightReference(BroookFace::vrc_v_ee), BroookFace::vrc_v_ee, 2, 0.0f, 1.0f);
         eEA.AddParameter(pM.GetMorphWeightReference(BroookFace::vrc_v_aa), BroookFace::vrc_v_aa, 2, 0.0f, 1.0f);
         eEA.AddParameter(pM.GetMorphWeightReference(BroookFace::vrc_v_oh), BroookFace::vrc_v_oh, 2, 0.0f, 1.0f);
 
-        
-        eEA.AddParameter(pME.GetMorphWeightReference(BroookExtras::Heart), BroookExtras::Heart, 30, 0.0f, 1.0f);
-        eEA.AddParameter(pME.GetMorphWeightReference(BroookExtras::Dead), BroookExtras::Dead, 30, 0.0f, 1.0f);
-        eEA.AddParameter(pME.GetMorphWeightReference(BroookExtras::Sleepy), BroookExtras::Sleepy, 50, 0.0f, 1.0f);
-        eEA.AddParameter(pME.GetMorphWeightReference(BroookExtras::Happy), BroookExtras::Happy, 15, 0.0f, 1.0f);
-        eEA.AddParameter(pME.GetMorphWeightReference(BroookExtras::Sad), BroookExtras::Sad, 50, 0.0f, 1.0f);
-        eEA.AddParameter(pME.GetMorphWeightReference(BroookExtras::None), BroookExtras::None, 30, 0.0f, 1.0f);
+        eEA.AddParameter(pME.GetMorphWeightReference(BroookExtras::Heart), BroookExtras::Heart + 100, 30, 0.0f, 1.0f);
+        eEA.AddParameter(pME.GetMorphWeightReference(BroookExtras::Dead), BroookExtras::Dead + 100, 30, 0.0f, 1.0f);
+        eEA.AddParameter(pME.GetMorphWeightReference(BroookExtras::Sleepy), BroookExtras::Sleepy + 100, 50, 0.0f, 1.0f);
+        eEA.AddParameter(pME.GetMorphWeightReference(BroookExtras::Happy), BroookExtras::Happy + 100, 15, 0.0f, 1.0f);
+        eEA.AddParameter(pME.GetMorphWeightReference(BroookExtras::Sad), BroookExtras::Sad + 100, 50, 0.0f, 1.0f);
+        eEA.AddParameter(pME.GetMorphWeightReference(BroookExtras::None), BroookExtras::None + 100, 30, 0.0f, 1.0f);
 
         eEA.AddParameter(&offsetFaceSA, offsetFaceIndSA, 40, 0.0f, 1.0f);
         eEA.AddParameter(&offsetFaceARG, offsetFaceIndARG, 40, 0.0f, 1.0f);
@@ -114,17 +113,27 @@ private:
     }
 
     void ChangeInterpolationMethods(){
-        eEA.SetInterpolationMethod(BroookExtras::Sad, EasyEaseInterpolation::Cosine);
-        eEA.SetInterpolationMethod(BroookFace::Sad5, EasyEaseInterpolation::Cosine);
-        
         eEA.SetInterpolationMethod(BroookFace::vrc_v_ee, EasyEaseInterpolation::Linear);
-        //eEA.SetInterpolationMethod(BroookFace::vrc_v_ih, EasyEaseInterpolation::Linear);
-        //eEA.SetInterpolationMethod(BroookFace::vrc_v_dd, EasyEaseInterpolation::Linear);
-        //eEA.SetInterpolationMethod(BroookFace::vrc_v_rr, EasyEaseInterpolation::Linear);
-        //eEA.SetInterpolationMethod(BroookFace::vrc_v_ch, EasyEaseInterpolation::Linear);
         eEA.SetInterpolationMethod(BroookFace::vrc_v_aa, EasyEaseInterpolation::Linear);
         eEA.SetInterpolationMethod(BroookFace::vrc_v_oh, EasyEaseInterpolation::Linear);
-        //eEA.SetInterpolationMethod(BroookFace::vrc_v_ss, EasyEaseInterpolation::Linear);
+        
+        //eEA.SetInterpolationMethod(BroookFace::Determined2, EasyEaseInterpolation::Cosine);
+        eEA.SetInterpolationMethod(BroookFace::Upset3, EasyEaseInterpolation::Cosine);
+        eEA.SetInterpolationMethod(BroookFace::Sleepy4, EasyEaseInterpolation::Cosine);
+        eEA.SetInterpolationMethod(BroookFace::Sad5, EasyEaseInterpolation::Cosine);
+        eEA.SetInterpolationMethod(BroookFace::Happy6, EasyEaseInterpolation::Cosine);
+        //eEA.SetInterpolationMethod(BroookFace::Flustered7, EasyEaseInterpolation::Cosine);
+        eEA.SetInterpolationMethod(BroookFace::Dot8, EasyEaseInterpolation::Cosine);
+        eEA.SetInterpolationMethod(BroookFace::Heart9, EasyEaseInterpolation::Cosine);
+        //eEA.SetInterpolationMethod(BroookFace::Dead10, EasyEaseInterpolation::Cosine);
+        eEA.SetInterpolationMethod(BroookFace::Question11, EasyEaseInterpolation::Cosine);
+
+        eEA.SetInterpolationMethod(BroookExtras::Heart + 100, EasyEaseInterpolation::Cosine);
+        //eEA.SetInterpolationMethod(BroookExtras::Dead, EasyEaseInterpolation::Cosine);
+        eEA.SetInterpolationMethod(BroookExtras::Sleepy + 100, EasyEaseInterpolation::Cosine);
+        eEA.SetInterpolationMethod(BroookExtras::Happy + 100, EasyEaseInterpolation::Cosine);
+        eEA.SetInterpolationMethod(BroookExtras::Sad + 100, EasyEaseInterpolation::Cosine);
+        eEA.SetInterpolationMethod(BroookExtras::None + 100, EasyEaseInterpolation::Cosine);
     }
 
     void SetMaterialLayers(){
@@ -150,81 +159,93 @@ private:
     }
 
     void Default(){
-        eEA.AddParameterFrame(BroookExtras::None, 1.0f);
+        eEA.AddParameterFrame(BroookExtras::None + 100, 1.0f);
+        blink.Play();
     }
 
     void Determined(){
         eEA.AddParameterFrame(BroookFace::Determined2, 1.0f);
-        eEA.AddParameterFrame(BroookExtras::None, 1.0f);
+        eEA.AddParameterFrame(BroookExtras::None + 100, 1.0f);
+        blink.Play();
     }
 
     void Upset(){
         eEA.AddParameterFrame(BroookFace::Upset3, 1.0f);
-        eEA.AddParameterFrame(BroookExtras::None, 1.0f);
+        eEA.AddParameterFrame(BroookExtras::None + 100, 1.0f);
+        blink.Play();
         materialAnimator.AddMaterialFrame(redMaterial, 0.8f);
     }
 
     void Sleepy(){
         eEA.AddParameterFrame(BroookFace::Sleepy4, 1.0f);
-        eEA.AddParameterFrame(BroookExtras::Sleepy, 1.0f);
+        eEA.AddParameterFrame(BroookExtras::Sleepy + 100, 1.0f);
+        blink.Pause();
     }
 
     void Sad(){
         eEA.AddParameterFrame(BroookFace::Sad5, 1.0f);
-        eEA.AddParameterFrame(BroookExtras::Sad, 1.0f);
+        eEA.AddParameterFrame(BroookExtras::Sad + 100, 1.0f);
+        blink.Play();
         materialAnimator.AddMaterialFrame(blueMaterial, 0.8f);
     }
 
     void Happy(){
         eEA.AddParameterFrame(BroookFace::Happy6, 1.0f);
-        eEA.AddParameterFrame(BroookExtras::Happy, 1.0f);
+        eEA.AddParameterFrame(BroookExtras::Happy + 100, 1.0f);
+        blink.Pause();
+        materialAnimator.AddMaterialFrame(rainbowSpiral, 0.8f);
     }
 
     void Flustered(){
         eEA.AddParameterFrame(BroookFace::Flustered7, 1.0f);
-        eEA.AddParameterFrame(BroookExtras::None, 1.0f);
-        materialAnimator.AddMaterialFrame(rainbowSpiral, 0.8f);
+        eEA.AddParameterFrame(BroookExtras::None + 100, 1.0f);
+        blink.Pause();
+
+        
+        eEA.AddParameterFrame(BroookFace::Dead10, 0.0f);
+        eEA.AddParameterFrame(BroookExtras::Dead + 100, 0.0f);
     }
     
     void Dot(){
         eEA.AddParameterFrame(BroookFace::Dot8, 1.0f);
-        eEA.AddParameterFrame(BroookExtras::None, 1.0f);
+        eEA.AddParameterFrame(BroookExtras::None + 100, 1.0f);
+        blink.Play();
     }
     
     void Heart(){
-        eEA.AddParameterFrame(BroookFace::Heart8, 1.0f);
-        eEA.AddParameterFrame(BroookExtras::Heart, 1.0f);
+        eEA.AddParameterFrame(BroookFace::Heart9, 1.0f);
+        eEA.AddParameterFrame(BroookExtras::Heart + 100, 1.0f);
+        blink.Pause();
         materialAnimator.AddMaterialFrame(rainbowSpiral, 0.8f);
     }
 
     void Dead(){
-        eEA.AddParameterFrame(BroookFace::Dead9, 1.0f);
-        eEA.AddParameterFrame(BroookExtras::Dead, 1.0f);
+        eEA.AddParameterFrame(BroookFace::Dead10, 1.0f);
+        eEA.AddParameterFrame(BroookExtras::Dead + 100, 1.0f);
+        blink.Pause();
         materialAnimator.AddMaterialFrame(redMaterial, 0.8f);
     }
 
     void Question(){
-        eEA.AddParameterFrame(BroookFace::Question10, 1.0f);
+        eEA.AddParameterFrame(BroookFace::Question11, 1.0f);
+        blink.Pause();
         //Default Extra face
     }
 
     void SpectrumAnalyzerFace(){
         eEA.AddParameterFrame(offsetFaceIndSA, 1.0f);
-        eEA.AddParameterFrame(BroookExtras::None, 1.0f);
 
         backgroundMaterial.AddMaterialFrame(sA, offsetFaceSA);
     }
 
     void AudioReactiveGradientFace(){
         eEA.AddParameterFrame(offsetFaceIndARG, 1.0f);
-        eEA.AddParameterFrame(BroookExtras::None, 1.0f);
 
         backgroundMaterial.AddMaterialFrame(aRG, offsetFaceARG);
     }
 
     void OscilloscopeFace(){
         eEA.AddParameterFrame(offsetFaceIndOSC, 1.0f);
-        eEA.AddParameterFrame(BroookExtras::None, 1.0f);
 
         backgroundMaterial.AddMaterialFrame(oSC, offsetFaceOSC);
     }
@@ -284,7 +305,9 @@ public:
         boop.Initialize(5);
 
         MicrophoneFourier::Initialize(A0, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
-        Menu::Initialize(13, 20, 500);//7 is number of faces
+        Menu::Initialize(13, 20, 500);//13 is number of faces
+
+        gradientMat.SetRotationAngle(90);
     }
 
     void FadeIn(float stepRatio) override {}
@@ -322,10 +345,12 @@ public:
         oSC.SetSize(Vector2D(200.0f, 100.0f));
         oSC.SetHueAngle(ratio * 360.0f * 8.0f);
         oSC.SetPosition(Vector2D(100.0f, 50.0f));
+        
+        voiceDetection.SetThreshold(map(Menu::GetMicLevel(), 0, 10, 1000, 50));
 
         UpdateFFTVisemes();
 
-        if (isBooped && mode != 6){
+        if (isBooped){
             Happy();
         }
         else{
@@ -371,15 +396,15 @@ public:
 
         uint8_t faceSize = Menu::GetFaceSize();
         float scale = menuRatio * 0.6f + 0.4f;
-        float xShift = (1.0f - menuRatio) * 60.0f;
-        float yShift = (1.0f - menuRatio) * 20.0f + offsetFaceSA * -100.0f + offsetFaceARG * -100.0f + offsetFaceOSC * -100.0f;
-        float adjustFacePos = float(4 - faceSize) * 5.0f;
+        float xShift = (1.0f - menuRatio) * 100.0f;
+        float yShift = (1.0f - menuRatio) * 0.0f + offsetFaceSA * -100.0f + offsetFaceARG * -100.0f + offsetFaceOSC * -100.0f;
+        float adjustFacePos = float(4 - faceSize) * 8.0f;
         float adjustFaceX = float(faceSize) * 0.05f;
         
-        pM.GetObject()->GetTransform()->SetPosition(Vector3D(170.0f + xOffset - xShift + adjustFacePos, 0.0f + yOffset + yShift, 600.0f));
-        pME.GetObject()->GetTransform()->SetPosition(Vector3D(170.0f + xOffset - xShift + adjustFacePos, 0.0f + yOffset + yShift, 600.0f));
-        pM.GetObject()->GetTransform()->SetScale(Vector3D(-1.0f + adjustFaceX, 1.4f, 0.8f).Multiply(scale));
-        pME.GetObject()->GetTransform()->SetScale(Vector3D(-1.0f + adjustFaceX, 1.4f, 0.8f).Multiply(scale));
+        pM.GetObject()->GetTransform()->SetPosition(Vector3D(155.0f + xOffset - xShift + adjustFacePos, 0.0f + yOffset + yShift, 600.0f));
+        pME.GetObject()->GetTransform()->SetPosition(Vector3D(155.0f + xOffset - xShift + adjustFacePos, 0.0f + yOffset + yShift, 600.0f));
+        pM.GetObject()->GetTransform()->SetScale(Vector3D(-1.0f + adjustFaceX, 1.0f, 0.98f).Multiply(scale));
+        pME.GetObject()->GetTransform()->SetScale(Vector3D(-1.0f + adjustFaceX, 1.0f, 0.98f).Multiply(scale));
 
         pM.GetObject()->UpdateTransform();
         pME.GetObject()->UpdateTransform();

@@ -6,7 +6,7 @@
 
 class MenuHandler{
 private:
-    static const uint8_t menuCount = 7;
+    static const uint8_t menuCount = 9;
     static IntervalTimer menuChangeTimer;
     static long previousMillisHold;
     static uint16_t holdingTime;

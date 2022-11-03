@@ -9,6 +9,10 @@ private:
 
 public:
     TimeStep(float frequency){
+        SetFrequency(frequency);
+    }
+
+    void SetFrequency(float frequency){
         this->updateInterval = uint16_t((1.0f / frequency) * 1000.0f);//time in milliseconds
     }
 

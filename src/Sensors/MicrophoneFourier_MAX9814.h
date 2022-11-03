@@ -53,10 +53,12 @@ private:
     }
 
     static void SamplerCallback(){
-        inputSamp[samples++] = (float)analogRead(pin);
+        int inputSample = analogRead(pin);
+
+        inputSamp[samples++] = (float)inputSample;
         inputSamp[samples++] = 0.0f;
 
-        inputStorage[samplesStorage++] = inputSamp[samples - 2];
+        inputStorage[samplesStorage++] = inputSample;
 
         if(samples >= FFTSize * 2){
             sampleTimer.end();
@@ -76,17 +78,18 @@ public:
         MicrophoneFourier::minDB = minDB;
         MicrophoneFourier::maxDB = maxDB;
         MicrophoneFourier::pin = pin;
-        MicrophoneFourier::refreshRate = 1.0f / refreshRate;
+        MicrophoneFourier::refreshRate = refreshRate;
 
         pinMode(pin, INPUT);
         analogReadResolution(12);
-        //analogReadAveraging(8);
 
         MicrophoneFourier::sampleRate = sampleRate;
         MicrophoneFourier::samples = 0;
         MicrophoneFourier::samplesReady = false;
 
         float windowRange = float(sampleRate) / 2.0f / float(OutputBins);
+
+        timeStep.SetFrequency(refreshRate);
 
         for (uint8_t i = 0; i < OutputBins; i++){
             float frequency = (float(i) * windowRange);
@@ -153,15 +156,15 @@ TimeStep MicrophoneFourier::timeStep = TimeStep(60);
 
 const uint16_t MicrophoneFourier::FFTSize;
 const uint8_t MicrophoneFourier::OutputBins;
-uint16_t MicrophoneFourier::sampleRate;
-uint16_t MicrophoneFourier::samples;
-uint16_t MicrophoneFourier::samplesStorage;
-uint8_t MicrophoneFourier::pin;
-float MicrophoneFourier::minDB;
-float MicrophoneFourier::maxDB;
-float MicrophoneFourier::threshold;
-float MicrophoneFourier::refreshRate;
-bool MicrophoneFourier::samplesReady;
+uint16_t MicrophoneFourier::sampleRate = 8000;
+uint16_t MicrophoneFourier::samples = 0;
+uint16_t MicrophoneFourier::samplesStorage = 0;
+uint8_t MicrophoneFourier::pin = 0;
+float MicrophoneFourier::minDB = 50.0f;
+float MicrophoneFourier::maxDB = 120.0f;
+float MicrophoneFourier::threshold = 400.0f;
+float MicrophoneFourier::refreshRate = 60.0f;
+bool MicrophoneFourier::samplesReady = false;
 bool MicrophoneFourier::isInitialized = false;
 DerivativeFilter MicrophoneFourier::peakFilterRate;
 

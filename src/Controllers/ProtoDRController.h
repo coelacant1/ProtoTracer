@@ -49,7 +49,7 @@ private:
     Camera* cameras[6] = { &camFronTop, &camRearTop, &camFronBot, &camRearBot, &camRearMid, &camFronMid };
 
 public:
-    ProtoDRController(uint8_t maxBrightness, Side side) : Controller(cameras, 6, maxBrightness){
+    ProtoDRController(uint8_t maxBrightness, Side side) : Controller(cameras, 6, maxBrightness, 0){
         switch(side){
             case LEFT:
                 camRearMidTransform = Transform(Vector3D(13.5f, -189.0f, 312.5f), Vector3D(-59.0f, 191.0f, 175.0f - 5000.0f), Vector3D(1, 1, 1));

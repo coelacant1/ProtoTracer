@@ -28,7 +28,7 @@ private:
     Camera* cameras[2] = { &camRght, &camLeft };
 
 public:
-    KaiborgV1D1Controller(uint8_t maxBrightness) : Controller(cameras, 2, maxBrightness){}
+    KaiborgV1D1Controller(uint8_t maxBrightness) : Controller(cameras, 2, maxBrightness, 0){}
 
     void Initialize() override{
         leds.begin();

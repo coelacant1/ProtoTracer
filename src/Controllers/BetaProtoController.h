@@ -41,7 +41,7 @@ private:
     Camera* cameras[6] = { &camRghtFrnt, &camLeftFrnt, &camRghtRear, &camLeftRear, &camRghtChin, &camLeftChin };
 
 public:
-    BetaProtoController(uint8_t maxBrightness) : Controller(cameras, 8, maxBrightness){}
+    BetaProtoController(uint8_t maxBrightness) : Controller(cameras, 8, maxBrightness, 0){}
 
     void Initialize() override{
         leds.begin();

@@ -12,6 +12,7 @@ private:
     static MinFilter<10> minF;
     static TimeStep timeStep;
     static float minimum;
+    static bool didBegin;
 
 public:
     static bool Initialize(uint8_t threshold) {//timeout in milliseconds and threshold is minimum for detection (0 is far away, 255 is touching)
@@ -22,7 +23,7 @@ public:
         Wire.setSCL(19);
         Wire.setSDA(18);
 
-        bool didBegin = apds.begin();
+        didBegin = apds.begin();
 
         apds.enableProximity(true);
 
@@ -43,7 +44,9 @@ public:
     }
 
     static uint8_t GetValue(){
-        proximity = apds.readProximity();
+        if (didBegin){
+            proximity = apds.readProximity();
+        }
 
         return proximity;
     }
@@ -56,3 +59,4 @@ uint16_t BoopSensor::threshold;
 MinFilter<10> BoopSensor::minF = MinFilter<10>(false);
 TimeStep BoopSensor::timeStep = TimeStep(5);
 float BoopSensor::minimum = 0.0f;
+bool BoopSensor::didBegin = false;

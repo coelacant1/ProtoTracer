@@ -287,6 +287,8 @@ public:
         oSC.SetSize(Vector2D(200.0f, 100.0f));
         oSC.SetHueAngle(ratio * 360.0f * 8.0f);
         oSC.SetPosition(Vector2D(100.0f, 50.0f));
+        
+        voiceDetection.SetThreshold(map(Menu::GetMicLevel(), 0, 10, 1000, 50));
 
         UpdateFFTVisemes();
 

@@ -1,1 +1,1 @@
-{"type": "library", "name": "Adafruit BusIO", "version": "1.13.2", "spec": {"owner": "adafruit", "id": 6214, "name": "Adafruit BusIO", "requirements": null, "uri": null}}
+{"type": "library", "name": "Adafruit BusIO", "version": "1.14.0", "spec": {"owner": "adafruit", "id": 6214, "name": "Adafruit BusIO", "requirements": null, "uri": null}}
