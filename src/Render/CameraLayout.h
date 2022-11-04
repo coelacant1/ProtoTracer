@@ -45,48 +45,8 @@ private:
         Vector3D rightVector = Vector3D();
 
         if (VerifyTransform()){
-            switch (upAxis){
-                case XUp:
-                    upVector.X = 1;
-                    break;
-                case ZUp:
-                    upVector.Z = 1;
-                    break;
-                case XNUp:
-                    upVector.X = -1;
-                    break;
-                case YNUp:
-                    upVector.Y = -1;
-                    break;
-                case ZNUp:
-                    upVector.Z = -1;
-                    break;
-                default:
-                    upVector.Y = 1;
-                    break;
-            }
-
-            switch (forwardAxis){
-                case XForward:
-                    forwardVector.X = 1;
-                    break;
-                case YForward:
-                    forwardVector.Y = 1;
-                    break;
-                case XNForward:
-                    forwardVector.X = -1;
-                    break;
-                case YNForward:
-                    forwardVector.Y = -1;
-                    break;
-                case ZNForward:
-                    forwardVector.Z = -1;
-                    break;
-                default:
-                    forwardVector.Z = 1;
-                    break;
-            }
-
+            upVector = GetUpVector();
+            forwardVector = GetForwardVector();
             rightVector = upVector.CrossProduct(forwardVector);
 
             rotation = Rotation(rightVector, forwardVector, upVector).GetQuaternion().UnitQuaternion();
@@ -99,6 +59,68 @@ public:
         this->upAxis = upAxis;
 
         CalculateTransform();
+    }
+
+    ForwardAxis GetForwardAxis(){
+        return forwardAxis;
+    }
+
+    UpAxis GetUpAxis(){
+        return upAxis;
+    }
+
+    Vector3D GetForwardVector(){
+        Vector3D forwardVector;
+
+        switch (forwardAxis){
+            case XForward:
+                forwardVector.X = 1;
+                break;
+            case YForward:
+                forwardVector.Y = 1;
+                break;
+            case XNForward:
+                forwardVector.X = -1;
+                break;
+            case YNForward:
+                forwardVector.Y = -1;
+                break;
+            case ZNForward:
+                forwardVector.Z = -1;
+                break;
+            default:
+                forwardVector.Z = 1;
+                break;
+        }
+
+        return forwardVector;
+    }
+
+    Vector3D GetUpVector(){
+        Vector3D upVector;
+
+        switch (upAxis){
+            case XUp:
+                upVector.X = 1;
+                break;
+            case ZUp:
+                upVector.Z = 1;
+                break;
+            case XNUp:
+                upVector.X = -1;
+                break;
+            case YNUp:
+                upVector.Y = -1;
+                break;
+            case ZNUp:
+                upVector.Z = -1;
+                break;
+            default:
+                upVector.Y = 1;
+                break;
+        }
+
+        return upVector;
     }
 
     //create transform from up and forwardaxis

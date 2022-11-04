@@ -121,6 +121,14 @@ public:
 		return (value - inLow) * (outMax - outMin) / (inMax - inLow) + outMin;
 	}
 
+	static float Max(float value1, float value2){
+		return value1 > value2 ? value1 : value2;
+	}
+	
+	static float Min(float value1, float value2){
+		return value1 < value2 ? value1 : value2;
+	}
+
 	static int RoundUpWindow(int value, int multiple){
 		if (multiple == 0)
 			return value;

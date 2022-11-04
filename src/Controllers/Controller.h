@@ -38,6 +38,14 @@ protected:
     }
 
 public:
+    Camera** GetCameras(){
+        return cameras;
+    }
+
+    uint8_t GetCameraCount(){
+        return count;
+    }
+
     void Render(Scene* scene){
         previousTime = micros();
 
