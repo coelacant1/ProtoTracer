@@ -102,6 +102,15 @@ public:
         return max;
     }
 
+    Vector2D GetCameraCenterCoordinate(){
+        Vector2D min, max;
+
+        min = GetCameraMinCoordinate();
+        max = GetCameraMaxCoordinate();
+
+        return (min + max) / 2.0f;
+    }
+
     void SetLookOffset(Quaternion lookOffset){
         this->lookOffset = lookOffset;
     }

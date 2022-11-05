@@ -9,8 +9,8 @@ private:
     Quaternion rotation = Quaternion(1, 0, 0, 0);
     Vector3D position = Vector3D(0, 0, 0);
     Vector3D scale = Vector3D(1, 1, 1);
+    Quaternion scaleRotationOffset = Quaternion(1, 0, 0, 0);
 
-    
     Vector3D scaleOffset = Vector3D(0, 0, 0);
     Vector3D rotationOffset = Vector3D(0, 0, 0);
 
@@ -86,6 +86,14 @@ public:
 
     Vector3D GetScale(){
         return scale;
+    }
+
+    void SetScaleRotationOffset(Quaternion scaleRotationOffset){
+        this->scaleRotationOffset = scaleRotationOffset;
+    }
+
+    Quaternion GetScaleRotationOffset(){
+        return scaleRotationOffset;
     }
 
     void SetRotationOffset(Vector3D rotationOffset){

@@ -129,6 +129,14 @@ public:
 		return value1 < value2 ? value1 : value2;
 	}
 
+	static float Min(float v1, float v2, float v3){
+		return v1 < v2 ? (v1 < v3 ? v1 : v3) : (v2 < v3 ? v2 : v3);
+	}
+
+	static float Max(float v1, float v2, float v3){
+		return v1 > v2 ? (v1 > v3 ? v1 : v3) : (v2 > v3 ? v2 : v3);
+	}
+
 	static int RoundUpWindow(int value, int multiple){
 		if (multiple == 0)
 			return value;

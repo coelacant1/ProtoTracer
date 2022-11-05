@@ -25,6 +25,8 @@
 
 #include "..\Sensors\MicrophoneFourier_MAX9814.h"
 
+#include "..\Render\ObjectAlign.h"
+
 class ProtogenHUB75Animation : public Animation<3> {
 private:
     NukudeFace pM;
@@ -70,6 +72,8 @@ private:
     BoopSensor boop;
 
     FFTVoiceDetection<128> voiceDetection;
+
+    ObjectAlign objA = ObjectAlign(Vector2D(0.0f, 0.0f), Vector2D(189.0f, 93.0f), Quaternion());
 
     float offsetFaceSA = 0.0f;
     float offsetFaceARG = 0.0f;
@@ -330,8 +334,14 @@ public:
         rainbowSpiral.Update(ratio);
         materialAnimator.Update();
         backgroundMaterial.Update();
+
+        objA.SetPlaneOffsetAngle(720.0f * ratio);
+
+        objA.AlignObjects(scene.GetObjects(), 1, ObjectAlign::MiddleRight, false);
         
-        pM.GetObject()->GetTransform()->SetRotation(Vector3D(0.0f, 0.0f, -7.5f));
+        //pM.GetObject()->GetTransform()->SetRotation(Vector3D(0.0f, 0.0f, -7.5f));
+        //pM.GetObject()->GetTransform()->SetRotation(Vector3D(90.0f, 0.0f, 0.0f));
+        //pM.GetObject()->GetTransform()->SetRotationOffset(pM.GetObject()->GetCenterOffset());
 
         uint8_t faceSize = Menu::GetFaceSize();
         float scale = menuRatio * 0.6f + 0.4f;
@@ -340,9 +350,9 @@ public:
         float adjustFacePos = float(4 - faceSize) * 5.0f;
         float adjustFaceX = float(faceSize) * 0.05f;
         
-        pM.GetObject()->GetTransform()->SetPosition(Vector3D(102.5f + xOffset - xShift + adjustFacePos, -22.5f + yOffset + yShift, 600.0f));
-        pM.GetObject()->GetTransform()->SetScale(Vector3D(-1.05f + adjustFaceX, 0.585f, 0.8f).Multiply(scale));
+        //pM.GetObject()->GetTransform()->SetPosition(Vector3D(102.5f + xOffset - xShift + adjustFacePos, -22.5f + yOffset + yShift, 600.0f));
+        //pM.GetObject()->GetTransform()->SetScale(Vector3D(-1.05f + adjustFaceX, 0.585f, 0.8f).Multiply(scale));
 
-        pM.GetObject()->UpdateTransform();
+        //pM.GetObject()->UpdateTransform();
     }
 };
