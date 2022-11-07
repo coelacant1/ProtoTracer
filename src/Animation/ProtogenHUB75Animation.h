@@ -69,11 +69,13 @@ private:
     FunctionGenerator fGenMatYMenu = FunctionGenerator(FunctionGenerator::Sine, -10.0f, 10.0f, 2.7f);
     FunctionGenerator fGenMatRMenu = FunctionGenerator(FunctionGenerator::Sine, -5.0f, 5.0f, 1.7f);
 
+    FunctionGenerator fGenMatTest = FunctionGenerator(FunctionGenerator::Sine, 0.0f, 1.0f, 12.1f);
+
     BoopSensor boop;
 
     FFTVoiceDetection<128> voiceDetection;
 
-    ObjectAlign objA = ObjectAlign(Vector2D(0.0f, 0.0f), Vector2D(189.0f, 93.0f), Quaternion());
+    ObjectAlign objA = ObjectAlign(Vector2D(0.0f, 0.0f), Vector2D(149.0f, 93.0f), Quaternion());
 
     float offsetFaceSA = 0.0f;
     float offsetFaceARG = 0.0f;
@@ -335,8 +337,18 @@ public:
         materialAnimator.Update();
         backgroundMaterial.Update();
 
-        objA.SetPlaneOffsetAngle(720.0f * ratio);
 
+        pM.GetObject()->GetTransform()->SetScale(Vector3D(1.0f, 1.0f, 0.0f));
+        pM.GetObject()->UpdateTransform();
+
+        float t = fGenMatTest.Update();
+
+        objA.SetPlaneOffsetAngle(t * 720.0f);
+        objA.SetEdgeMargin(10.0f);
+        
+        t = 1.0f;//
+
+        //objA.SetMax(Vector2D(135.0f * t + 45.0f, 67.5f * t + 22.5f));
         objA.AlignObjects(scene.GetObjects(), 1, ObjectAlign::MiddleRight, false);
         
         //pM.GetObject()->GetTransform()->SetRotation(Vector3D(0.0f, 0.0f, -7.5f));

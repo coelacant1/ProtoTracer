@@ -1,5 +1,6 @@
 //#define RIGHTFACE
 //#define DEMOMODE
+//#define PRINTINFO
 
 
 //--------------- ANIMATIONS ---------------
@@ -77,7 +78,8 @@ void loop() {
     */
 
     controller.Display();
-    
+
+    #ifdef PRINTINFO
     Serial.print("Animated in ");
     Serial.print(animation.GetAnimationTime(), 4);
 
@@ -89,4 +91,5 @@ void loop() {
     Serial.print(FreeMem(),3);
 
     Serial.println("Kb");
+    #endif
 }
