@@ -53,7 +53,7 @@ private:
         MenuHandler::SetMenuMax(MicLevel, 10);
         MenuHandler::SetMenuMax(BoopSensor, 2);
         MenuHandler::SetMenuMax(SpectrumMirror, 2);
-        MenuHandler::SetMenuMax(FaceSize, 4);
+        MenuHandler::SetMenuMax(FaceSize, 10);
         MenuHandler::SetMenuMax(Color, 10);
     }
 
@@ -208,7 +208,7 @@ public:
         line2 += GenerateLine(10, GetMicLevel());
         line2 += UseBoopSensor() ? "   on OFF   " : "   ON off   ";
         line2 += MirrorSpectrumAnalyzer() ? "   on OFF   " : "   ON off   ";
-        line2 += GenerateLine(4, GetFaceSize());
+        line2 += GenerateLine(10, GetFaceSize());
         line2 += GenerateLine(10, GetFaceColor());
 
         textEngine.SetText(1, line2, false);

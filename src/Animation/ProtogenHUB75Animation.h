@@ -69,20 +69,20 @@ private:
     FunctionGenerator fGenMatYMenu = FunctionGenerator(FunctionGenerator::Sine, -10.0f, 10.0f, 2.7f);
     FunctionGenerator fGenMatRMenu = FunctionGenerator(FunctionGenerator::Sine, -5.0f, 5.0f, 1.7f);
 
-    FunctionGenerator fGenMatTest = FunctionGenerator(FunctionGenerator::Sine, 0.0f, 1.0f, 12.1f);
-
     BoopSensor boop;
 
     FFTVoiceDetection<128> voiceDetection;
 
-    ObjectAlign objA = ObjectAlign(Vector2D(0.0f, 0.0f), Vector2D(149.0f, 93.0f), Quaternion());
+    ObjectAlign objA = ObjectAlign(Vector2D(0.0f, 0.0f), Vector2D(189.0f, 93.0f), Quaternion());
 
+    float offsetFace = 0.0f;
     float offsetFaceSA = 0.0f;
     float offsetFaceARG = 0.0f;
     float offsetFaceOSC = 0.0f;
-    uint8_t offsetFaceIndSA = 50;
-    uint8_t offsetFaceIndARG = 51;
-    uint8_t offsetFaceIndOSC = 52;
+    uint8_t offsetFaceInd = 50;
+    uint8_t offsetFaceIndSA = 51;
+    uint8_t offsetFaceIndARG = 52;
+    uint8_t offsetFaceIndOSC = 53;
 
     void LinkEasyEase(){
         eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::Anger), NukudeFace::Anger, 15, 0.0f, 1.0f);
@@ -105,6 +105,7 @@ private:
         eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::HideBlush), NukudeFace::HideBlush, 30, 1.0f, 0.0f);
         eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::HideBlush), NukudeFace::HideBlush, 30, 1.0f, 0.0f);
 
+        eEA.AddParameter(&offsetFace, offsetFaceInd, 40, 0.0f, 1.0f);
         eEA.AddParameter(&offsetFaceSA, offsetFaceIndSA, 40, 0.0f, 1.0f);
         eEA.AddParameter(&offsetFaceARG, offsetFaceIndARG, 40, 0.0f, 1.0f);
         eEA.AddParameter(&offsetFaceOSC, offsetFaceIndOSC, 40, 0.0f, 1.0f);
@@ -186,18 +187,21 @@ private:
     }
 
     void SpectrumAnalyzerFace(){
+        eEA.AddParameterFrame(offsetFaceInd, 1.0f);
         eEA.AddParameterFrame(offsetFaceIndSA, 1.0f);
 
         backgroundMaterial.AddMaterialFrame(sA, offsetFaceSA);
     }
 
     void AudioReactiveGradientFace(){
+        eEA.AddParameterFrame(offsetFaceInd, 1.0f);
         eEA.AddParameterFrame(offsetFaceIndARG, 1.0f);
 
         backgroundMaterial.AddMaterialFrame(aRG, offsetFaceARG);
     }
 
     void OscilloscopeFace(){
+        eEA.AddParameterFrame(offsetFaceInd, 1.0f);
         eEA.AddParameterFrame(offsetFaceIndOSC, 1.0f);
 
         backgroundMaterial.AddMaterialFrame(oSC, offsetFaceOSC);
@@ -257,6 +261,9 @@ public:
 
         MicrophoneFourier::Initialize(A0, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
         Menu::Initialize(9, 20, 500);//7 is number of faces
+
+        objA.SetJustification(ObjectAlign::Stretch);
+        //objA.SetScale(1.0f, 1.0f);
     }
 
     void FadeIn(float stepRatio) override {}
@@ -337,34 +344,18 @@ public:
         materialAnimator.Update();
         backgroundMaterial.Update();
 
-
-        pM.GetObject()->GetTransform()->SetScale(Vector3D(1.0f, 1.0f, 0.0f));
-        pM.GetObject()->UpdateTransform();
-
-        float t = fGenMatTest.Update();
-
-        objA.SetPlaneOffsetAngle(t * 720.0f);
-        objA.SetEdgeMargin(10.0f);
-        
-        t = 1.0f;//
-
-        //objA.SetMax(Vector2D(135.0f * t + 45.0f, 67.5f * t + 22.5f));
-        objA.AlignObjects(scene.GetObjects(), 1, ObjectAlign::MiddleRight, false);
-        
-        //pM.GetObject()->GetTransform()->SetRotation(Vector3D(0.0f, 0.0f, -7.5f));
-        //pM.GetObject()->GetTransform()->SetRotation(Vector3D(90.0f, 0.0f, 0.0f));
-        //pM.GetObject()->GetTransform()->SetRotationOffset(pM.GetObject()->GetCenterOffset());
-
         uint8_t faceSize = Menu::GetFaceSize();
-        float scale = menuRatio * 0.6f + 0.4f;
-        float xShift = (1.0f - menuRatio) * 60.0f;
-        float yShift = (1.0f - menuRatio) * 20.0f + offsetFaceSA * -100.0f + offsetFaceARG * -100.0f + offsetFaceOSC * -100.0f;
-        float adjustFacePos = float(4 - faceSize) * 5.0f;
-        float adjustFaceX = float(faceSize) * 0.05f;
-        
-        //pM.GetObject()->GetTransform()->SetPosition(Vector3D(102.5f + xOffset - xShift + adjustFacePos, -22.5f + yOffset + yShift, 600.0f));
-        //pM.GetObject()->GetTransform()->SetScale(Vector3D(-1.05f + adjustFaceX, 0.585f, 0.8f).Multiply(scale));
 
-        //pM.GetObject()->UpdateTransform();
+        float scale = menuRatio * 0.6f + 0.4f;
+        float faceSizeOffset = faceSize * 8.0f;
+
+        objA.SetPlaneOffsetAngle(-7.5f);
+        objA.SetEdgeMargin(2.0f);
+        objA.SetCameraMax(Vector2D(110.0f + faceSizeOffset, 93.0f - 93.0f * offsetFace).Multiply(scale));
+
+        objA.AlignObjects(scene.GetObjects(), 1);
+        
+        pM.GetObject()->GetTransform()->SetPosition(Vector3D(xOffset, yOffset, 0.0f));
+        pM.GetObject()->UpdateTransform();
     }
 };

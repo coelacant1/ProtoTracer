@@ -10,21 +10,27 @@ public:
         UpperMiddle,
         UpperRight,
         MiddleLeft,
-        Center,
+        Middle,
         MiddleRight,
         LowerLeft,
         LowerMiddle,
-        LowerRight
+        LowerRight,
+        Stretch
     };
 
 private:
+    Justification jst = Middle;
     Quaternion targetOrientation;
     Vector3D forwardVector = Vector3D(0.0f, 0.0f, 1.0f);
-    Vector2D center;
-    Vector2D posMin;
-    Vector2D posMax;
+    Vector2D cameraCenter;
+    Vector2D camMin;
+    Vector2D camMax;
     float offsetPlaneAngle = 0.0f;
     float edgeMargin = 10.0f;
+    float scaleX = 1.0f;
+    float scaleY = 1.0f;
+    bool mirrorX = false;
+    bool mirrorY = false;
 
     Vector3D GetCentroid(Object3D** objs, uint8_t numObjects){
         //Calculate plane centroid
@@ -43,13 +49,74 @@ private:
         return centroid;
     }
 
-    Quaternion GetPlaneNormal(Vector3D centroid, Object3D** objs, uint8_t numObjects){
+    Vector3D GetObjectCenter(Object3D** objs, uint8_t numObjects){
+        Vector3D min = Vector3D(100000.0f, 100000.0f, 100000.0f), max = Vector3D(-100000.0f, -100000.0f, -100000.0f);
+
+        for(uint8_t i = 0; i < numObjects; i++){
+            // get size of object in origin orientation 
+            for (uint16_t j = 0; j < objs[i]->GetTriangleGroup()->GetVertexCount(); j++) {
+                Vector3D vertex = objs[i]->GetTriangleGroup()->GetVertices()[j];
+
+                min = Vector3D::Min(min, vertex);
+                max = Vector3D::Max(max, vertex);
+            }
+        }
+
+        return (max + min) / 2.0f;
+    }
+
+    Vector3D GetObjectSize(Object3D** objs, uint8_t numObjects){
+        Vector3D min = Vector3D(100000.0f, 100000.0f, 100000.0f), max = Vector3D(-100000.0f, -100000.0f, -100000.0f);
+
+        for(uint8_t i = 0; i < numObjects; i++){
+            // get size of object in origin orientation 
+            for (uint16_t j = 0; j < objs[i]->GetTriangleGroup()->GetVertexCount(); j++) {
+                Vector3D modifiedVector = objs[i]->GetTriangleGroup()->GetVertices()[j];
+
+                min = Vector3D::Min(min, modifiedVector);
+                max = Vector3D::Max(max, modifiedVector);
+                
+                objs[i]->GetTriangleGroup()->GetVertices()[j] = modifiedVector;
+            }
+        }
+
+        return max - min;
+    }
+
+    void NormalizeObjectPlane(Object3D** objs, uint8_t numObjects, Vector3D center, Quaternion planeOrientation){
+        for(uint8_t i = 0; i < numObjects; i++){
+            // get size of object in origin orientation 
+            for (uint16_t j = 0; j < objs[i]->GetTriangleGroup()->GetVertexCount(); j++) {
+                Vector3D modifiedVector = objs[i]->GetTriangleGroup()->GetVertices()[j];
+
+                modifiedVector = modifiedVector - center;// move to origin
+                modifiedVector = planeOrientation.UnrotateVector(modifiedVector);// unrotate to align with base camera orientation
+                
+                objs[i]->GetTriangleGroup()->GetVertices()[j] = modifiedVector;
+            }
+        }
+    }
+
+    void NormalizeObjectCenter(Object3D** objs, uint8_t numObjects, Vector3D center){
+        for(uint8_t i = 0; i < numObjects; i++){
+            // get size of object in origin orientation 
+            for (uint16_t j = 0; j < objs[i]->GetTriangleGroup()->GetVertexCount(); j++) {
+                Vector3D modifiedVector = objs[i]->GetTriangleGroup()->GetVertices()[j];
+
+                modifiedVector = modifiedVector - center;// move to origin
+                
+                objs[i]->GetTriangleGroup()->GetVertices()[j] = modifiedVector;
+            }
+        }
+    }
+
+    Quaternion GetPlaneNormal(Object3D** objs, uint8_t numObjects){
         Vector3D normal;
         uint16_t count = 0;
 
         for(uint8_t i = 0; i < numObjects; i++){
             for(uint16_t j = 0; j < objs[i]->GetTriangleGroup()->GetTriangleCount(); j++){
-                normal = normal + *objs[i]->GetTriangleGroup()->GetTriangles()[j].Normal();
+                normal = normal + *(objs[i]->GetTriangleGroup()->GetTriangles()[j].Normal());
 
                 count++;
             }
@@ -66,7 +133,7 @@ private:
         return rotation;
     }
 
-    Quaternion GetPlaneOrientation(Vector3D centroid, Object3D** objs, uint8_t numObjects){
+    Quaternion GetPlaneOrientation(Object3D** objs, uint8_t numObjects, Vector3D centroid){
         //Calculate covariance matrix without symmetry
         float xx = 0.0f, xy = 0.0f, xz = 0.0f, yy = 0.0f, yz = 0.0f, zz = 0.0f;
         uint16_t count = 0;
@@ -85,13 +152,6 @@ private:
                 count++;
             }
         }
-
-        xx /= count;
-        xy /= count;
-        xz /= count;
-        yy /= count;
-        yz /= count;
-        zz /= count;
 
         //Calculate determinants
         float xD = yy * zz - yz * yz;
@@ -120,18 +180,16 @@ private:
             dir.Z = xD;
         }
 
-        //dir = dir.Normal();
-
         dir = dir.UnitSphere();
 
         return Rotation(Vector3D(0.0f, 0.0f, 1.0f), dir).GetQuaternion() * Rotation(EulerAngles(Vector3D(0.0f, 0.0f, offsetPlaneAngle), EulerConstants::EulerOrderXYZS)).GetQuaternion();
     }
 
 public:
-    ObjectAlign(Vector2D posMin, Vector2D posMax, Quaternion targetOrientation = Quaternion()){
-        this->posMin = posMin;
-        this->posMax = posMax;
-        this->center = (posMin + posMax) / 2.0f;
+    ObjectAlign(Vector2D camMin, Vector2D camMax, Quaternion targetOrientation = Quaternion()){
+        this->camMin = camMin;
+        this->camMax = camMax;
+        this->cameraCenter = (camMin + camMax) / 2.0f;
         this->targetOrientation = targetOrientation;
     }
 
@@ -140,74 +198,121 @@ public:
     }
 
     void SetEdgeMargin(float edgeMargin){
-        this->edgeMargin = edgeMargin;
+        this->edgeMargin = edgeMargin * 2.0f;// for both sides
     }
 
     void SetForwardVector(Vector3D forwardVector){
         this->forwardVector = forwardVector;
     }
 
-    void SetMin(Vector2D posMin){
-        this->posMin = posMin;
-        this->center = (posMin + posMax) / 2.0f;
+    void SetCameraMin(Vector2D camMin){
+        this->camMin = camMin;
+        this->cameraCenter = (camMin + camMax) / 2.0f;
     }
 
-    void SetMax(Vector2D posMax){
-        this->posMax = posMax;
-        this->center = (posMin + posMax) / 2.0f;
+    void SetCameraMax(Vector2D camMax){
+        this->camMax = camMax;
+        this->cameraCenter = (camMin + camMax) / 2.0f;
     }
 
-    void AlignObjects(Object3D** objs, uint8_t numObjects, Justification jst = MiddleRight, bool mirror = false){
+    void SetMirrorX(bool mirrorX){
+        this->mirrorX = mirrorX;
+    }
+
+    void SetMirrorY(bool mirrorY){
+        this->mirrorY = mirrorY;
+    }
+
+    void SetJustification(Justification jst){
+        this->jst = jst;
+    }
+
+    void SetScale(float scaleX, float scaleY){
+        this->scaleX = scaleX;
+        this->scaleY = scaleY;
+    }
+
+    void AlignObjects(Object3D** objs, uint8_t numObjects){
         // calculate planes, assume flat object (largest axes are axis), best fit plane i.e. centroid + direction/normal
         Vector3D centroid = GetCentroid(objs, numObjects);
-        Quaternion cameraOrientation = targetOrientation;
-        Quaternion planeOrientation = GetPlaneNormal(centroid, objs, numObjects);
+        Quaternion planeOrientation = GetPlaneOrientation(objs, numObjects, centroid);
+        Vector2D cameraSize = (camMax - camMin);
+        Vector3D objectCenter = GetObjectCenter(objs, numObjects);//Get cameraCenter of objects
         
-        Vector3D min = Vector3D(100000.0f, 100000.0f, 100000.0f), max = Vector3D(-100000.0f, -100000.0f, -100000.0f), objectSize = Vector3D();
-        Vector2D cameraSize = (posMax - posMin);
+        //Normalize objects to plane orientation and cameraCenter of object
+        NormalizeObjectPlane(objs, numObjects, centroid, planeOrientation);
 
-        for(uint8_t i = 0; i < numObjects; i++){
-            // get size of object in origin orientation 
-            for (uint16_t j = 0; j < objs[i]->GetTriangleGroup()->GetVertexCount(); j++) {
-                Vector3D modifiedVector = objs[i]->GetTriangleGroup()->GetVertices()[j];
+        objectCenter = GetObjectCenter(objs, numObjects);//Get cameraCenter of objects
 
-                modifiedVector = modifiedVector - centroid;// move to origin
-                modifiedVector = planeOrientation.UnrotateVector(modifiedVector);// unrotate to align with base camera orientation
+        NormalizeObjectCenter(objs, numObjects, objectCenter);//Shift object back to center of view
 
-                min = Vector3D::Min(min, modifiedVector);
-                max = Vector3D::Max(max, modifiedVector);
-                
-                objs[i]->GetTriangleGroup()->GetVertices()[j] = modifiedVector;
-            }
-        }
-
-        objectSize = max - min;//find offset in two min/max coordinates for size and add edge margin to normalize base on edge
-
-        //scale to largest object size and smallest camera size
-        //float maxObjectSize = Mathematics::Max(objectSize.X, objectSize.Y, objectSize.Z);
-        //float minCameraSize = Mathematics::Min(cameraSize.X, cameraSize.Y);
-        //float scaleRatio = (cameraSize.X  - edgeMargin) / objectSize.X;
+        //Get new size of objects after normalization
+        Vector3D objectSize = GetObjectSize(objs, numObjects);
 
         float xRatio = (cameraSize.X - edgeMargin) / objectSize.X;
         float yRatio = (cameraSize.Y - edgeMargin) / objectSize.Y;
 
-        float scaleRatio = Mathematics::Min(xRatio, yRatio);
+        if(jst != Stretch){
+            //Uniform object scaling with modifier
+            xRatio = Mathematics::Min(xRatio, yRatio) * scaleX;
+            yRatio = Mathematics::Min(xRatio, yRatio) * scaleY;
+        }
 
-        //justification offset
-        Vector2D offsetPosition;
+        float xOffset = ((cameraSize.X - edgeMargin) - (xRatio * objectSize.X)) / 2.0f;//get left over space between camera edge and object in X-axis view
+        float yOffset = ((cameraSize.Y - edgeMargin) - (yRatio * objectSize.Y)) / 2.0f;//get left over space between camera edge and object in Y-axis view
+
+        //xOffset = xOffset < 0.0f ? 0.0f : xOffset;//stay within bounds, do not move outside if object is larger than camera
+        //yOffset = yOffset < 0.0f ? 0.0f : yOffset;
+
+        switch (jst){
+            case UpperLeft:
+                //No Change
+                break;
+            case UpperMiddle:
+                xOffset = 0.0f;
+                break;
+            case UpperRight:
+                xOffset = -xOffset;
+                break;
+            case MiddleLeft:
+                yOffset = 0.0f;
+                break;
+            case MiddleRight:
+                xOffset = -xOffset;
+                yOffset = 0.0f;
+                break;
+            case LowerLeft:
+                yOffset = -yOffset;
+                break;
+            case LowerMiddle:
+                xOffset = 0.0f;
+                yOffset = -yOffset;
+                break;
+            case LowerRight:
+                xOffset = -xOffset;
+                yOffset = -yOffset;
+                break;
+            default://Middle
+                xOffset = 0.0f;
+                yOffset = 0.0f;
+                break;
+        }
         
         // calculate point 1000mm in front of camera
-        Vector3D cameraTarget = cameraOrientation.RotateVector(Vector3D(forwardVector * 1000.0f) + Vector3D(center.X, center.Y, 0.0f) + Vector3D(offsetPosition.X, offsetPosition.Y, 0.0f));
+        Vector3D cameraTarget = targetOrientation.RotateVector(Vector3D(forwardVector * 1000.0f) + Vector3D(cameraCenter.X, cameraCenter.Y, 0.0f));
 
         for(uint8_t i = 0; i < numObjects; i++){
             for (uint16_t j = 0; j < objs[i]->GetTriangleGroup()->GetVertexCount(); j++) {
                 Vector3D modifiedVector = objs[i]->GetTriangleGroup()->GetVertices()[j];
+
+                // scaled object normalized in default camera space
+                modifiedVector = modifiedVector * Vector3D(xRatio, yRatio, 1.0f) * Vector3D(mirrorX ? -1.0f : 1.0f, mirrorY ? -1.0f : 1.0f, 1.0f);
                 
-                // scaled object normalized in world origin
-                modifiedVector = mirror ? modifiedVector * Vector3D(xRatio, yRatio, 1.0f) : modifiedVector * Vector3D(-xRatio, yRatio, 1.0f);
+                // move object in default camera space before rotation
+                modifiedVector = modifiedVector + Vector3D(xOffset, yOffset, 0.0f);
 
                 // align object plane to camera plane
-                modifiedVector = cameraOrientation.RotateVector(modifiedVector);
+                modifiedVector = targetOrientation.RotateVector(modifiedVector);
 
                 // move object to 1000mm point in front of camera
                 modifiedVector = modifiedVector + cameraTarget;//offset position

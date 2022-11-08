@@ -26,6 +26,8 @@
 
 #include "..\..\Sensors\MicrophoneFourier_MAX9814.h"
 
+#include "..\..\Render\ObjectAlign.h"
+
 class BroookAnimation : public Animation<4> {
 private:
     BroookFace pM;
@@ -73,12 +75,16 @@ private:
 
     FFTVoiceDetection<128> voiceDetection;
 
+    ObjectAlign objA = ObjectAlign(Vector2D(0.0f, 0.0f), Vector2D(189.0f, 93.0f), Quaternion());
+
+    float offsetFace = 0.0f;
     float offsetFaceSA = 0.0f;
     float offsetFaceARG = 0.0f;
     float offsetFaceOSC = 0.0f;
-    uint8_t offsetFaceIndSA = 50;
-    uint8_t offsetFaceIndARG = 51;
-    uint8_t offsetFaceIndOSC = 52;
+    uint8_t offsetFaceInd = 50;
+    uint8_t offsetFaceIndSA = 51;
+    uint8_t offsetFaceIndARG = 52;
+    uint8_t offsetFaceIndOSC = 53;
 
     void LinkEasyEase(){
         eEA.AddParameter(pM.GetMorphWeightReference(BroookFace::Determined2), BroookFace::Determined2, 15, 0.0f, 1.0f);
@@ -103,6 +109,7 @@ private:
         eEA.AddParameter(pME.GetMorphWeightReference(BroookExtras::Sad), BroookExtras::Sad + 100, 50, 0.0f, 1.0f);
         eEA.AddParameter(pME.GetMorphWeightReference(BroookExtras::None), BroookExtras::None + 100, 30, 0.0f, 1.0f);
 
+        eEA.AddParameter(&offsetFace, offsetFaceInd, 40, 0.0f, 1.0f);
         eEA.AddParameter(&offsetFaceSA, offsetFaceIndSA, 40, 0.0f, 1.0f);
         eEA.AddParameter(&offsetFaceARG, offsetFaceIndARG, 40, 0.0f, 1.0f);
         eEA.AddParameter(&offsetFaceOSC, offsetFaceIndOSC, 40, 0.0f, 1.0f);
@@ -233,18 +240,21 @@ private:
     }
 
     void SpectrumAnalyzerFace(){
+        eEA.AddParameterFrame(offsetFaceInd, 1.0f);
         eEA.AddParameterFrame(offsetFaceIndSA, 1.0f);
 
         backgroundMaterial.AddMaterialFrame(sA, offsetFaceSA);
     }
 
     void AudioReactiveGradientFace(){
+        eEA.AddParameterFrame(offsetFaceInd, 1.0f);
         eEA.AddParameterFrame(offsetFaceIndARG, 1.0f);
 
         backgroundMaterial.AddMaterialFrame(aRG, offsetFaceARG);
     }
 
     void OscilloscopeFace(){
+        eEA.AddParameterFrame(offsetFaceInd, 1.0f);
         eEA.AddParameterFrame(offsetFaceIndOSC, 1.0f);
 
         backgroundMaterial.AddMaterialFrame(oSC, offsetFaceOSC);
@@ -308,6 +318,10 @@ public:
         Menu::Initialize(13, 20, 500);//13 is number of faces
 
         gradientMat.SetRotationAngle(90);
+
+        objA.SetJustification(ObjectAlign::Stretch);
+        objA.SetMirrorX(true);
+        objA.SetMirrorY(true);
     }
 
     void FadeIn(float stepRatio) override {}
@@ -390,23 +404,21 @@ public:
         rainbowSpiral.Update(ratio);
         materialAnimator.Update();
         backgroundMaterial.Update();
-        
-        pM.GetObject()->GetTransform()->SetRotation(Vector3D(-90.0f, 0.0f, 0.0f));
-        pME.GetObject()->GetTransform()->SetRotation(Vector3D(-90.0f, 0.0f, 0.0f));
 
         uint8_t faceSize = Menu::GetFaceSize();
-        float scale = menuRatio * 0.6f + 0.4f;
-        float xShift = (1.0f - menuRatio) * 100.0f;
-        float yShift = (1.0f - menuRatio) * 0.0f + offsetFaceSA * -100.0f + offsetFaceARG * -100.0f + offsetFaceOSC * -100.0f;
-        float adjustFacePos = float(4 - faceSize) * 8.0f;
-        float adjustFaceX = float(faceSize) * 0.05f;
-        
-        pM.GetObject()->GetTransform()->SetPosition(Vector3D(155.0f + xOffset - xShift + adjustFacePos, 0.0f + yOffset + yShift, 600.0f));
-        pME.GetObject()->GetTransform()->SetPosition(Vector3D(155.0f + xOffset - xShift + adjustFacePos, 0.0f + yOffset + yShift, 600.0f));
-        pM.GetObject()->GetTransform()->SetScale(Vector3D(-1.0f + adjustFaceX, 1.0f, 0.98f).Multiply(scale));
-        pME.GetObject()->GetTransform()->SetScale(Vector3D(-1.0f + adjustFaceX, 1.0f, 0.98f).Multiply(scale));
 
+        float scale = menuRatio * 0.6f + 0.4f;
+        float faceSizeOffset = faceSize * 8.0f;
+
+        //objA.SetPlaneOffsetAngle(360.0f * ratio);
+        objA.SetEdgeMargin(2.0f);
+        objA.SetCameraMax(Vector2D(110.0f + faceSizeOffset, 93.0f).Multiply(scale));
+
+        objA.AlignObjects(scene.GetObjects(), 2);
+        
+        pM.GetObject()->GetTransform()->SetPosition(Vector3D(xOffset, yOffset - 93.0f * offsetFace, 0.0f));
         pM.GetObject()->UpdateTransform();
+        pME.GetObject()->GetTransform()->SetPosition(Vector3D(xOffset, yOffset - 93.0f * offsetFace, 0.0f));
         pME.GetObject()->UpdateTransform();
     }
 };
