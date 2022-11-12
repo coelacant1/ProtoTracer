@@ -209,10 +209,10 @@ private:
 
     void UpdateFFTVisemes(){
         if(Menu::UseMicrophone()){
-            eEA.AddParameterFrame(NukudeFace::vrc_v_ss, MicrophoneFourier::GetCurrentMagnitude() / 2.0f);
+            eEA.AddParameterFrame(NukudeFace::vrc_v_ss, MicrophoneFourierIT::GetCurrentMagnitude() / 2.0f);
 
-            if(MicrophoneFourier::GetCurrentMagnitude() > 0.05f){
-                voiceDetection.Update(MicrophoneFourier::GetFourierFiltered(), MicrophoneFourier::GetSampleRate());
+            if(MicrophoneFourierIT::GetCurrentMagnitude() > 0.05f){
+                voiceDetection.Update(MicrophoneFourierIT::GetFourierFiltered(), MicrophoneFourierIT::GetSampleRate());
         
                 eEA.AddParameterFrame(NukudeFace::vrc_v_ee, voiceDetection.GetViseme(voiceDetection.EE));
                 eEA.AddParameterFrame(NukudeFace::vrc_v_ih, voiceDetection.GetViseme(voiceDetection.AH));
@@ -259,7 +259,7 @@ public:
 
         boop.Initialize(5);
 
-        MicrophoneFourier::Initialize(A0, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
+        MicrophoneFourierIT::Initialize(A0, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
         Menu::Initialize(9, 20, 500);//7 is number of faces
 
         objA.SetJustification(ObjectAlign::Stretch);
@@ -286,7 +286,7 @@ public:
         bool isBooped = Menu::UseBoopSensor() ? boop.isBooped() : 0;
         uint8_t mode = Menu::GetFaceState();//change by button press
 
-        MicrophoneFourier::Update();
+        MicrophoneFourierIT::Update();
         sA.SetHueAngle(ratio * 360.0f * 4.0f);
         sA.SetMirrorYState(Menu::MirrorSpectrumAnalyzer());
         sA.SetFlipYState(!Menu::MirrorSpectrumAnalyzer());
@@ -316,15 +316,15 @@ public:
             else if (mode == 4) LookUp();
             else if (mode == 5) Sad();
             else if (mode == 6) {
-                aRG.Update(MicrophoneFourier::GetFourierFiltered());
+                aRG.Update(MicrophoneFourierIT::GetFourierFiltered());
                 AudioReactiveGradientFace();
             }
             else if (mode == 7){
-                oSC.Update(MicrophoneFourier::GetSamples());
+                oSC.Update(MicrophoneFourierIT::GetSamples());
                 OscilloscopeFace();
             }
             else {
-                sA.Update(MicrophoneFourier::GetFourierFiltered());
+                sA.Update(MicrophoneFourierIT::GetFourierFiltered());
                 SpectrumAnalyzerFace();
             }
         }

@@ -57,7 +57,7 @@ public:
                 leds.setPixel(i + 346 * 7 - 346, camRghtPixels.GetPixel(i)->Color.R, camRghtPixels.GetPixel(i)->Color.G, camRghtPixels.GetPixel(i)->Color.B);//Pin 8
             }
         }
-
+        
         leds.show();
     }
 
