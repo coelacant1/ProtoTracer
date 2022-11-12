@@ -17,8 +17,7 @@ DMAMEM static volatile uint16_t __attribute__((aligned(32))) adc_buffer1[256];
 DMAMEM static volatile uint16_t __attribute__((aligned(32))) adc_buffer2[256];
 AnalogBufferDMA adc_dma_instance(adc_buffer1, 256, adc_buffer2, 256);
 
-class MicrophoneFourier
-{
+class MicrophoneFourier{
 private:
     static const uint16_t FFTSize = 256;
     static const uint8_t OutputBins = 128;
@@ -41,12 +40,10 @@ private:
 
     static arm_cfft_radix4_instance_f32 RadixFFT;
 
-    static float AverageMagnitude(uint16_t binL, uint16_t binH)
-    {
+    static float AverageMagnitude(uint16_t binL, uint16_t binH){
         float average = 0.0f;
 
-        for (uint16_t i = 1; i < FFTSize / 2; i++)
-        {
+        for (uint16_t i = 1; i < FFTSize / 2; i++){
             if (i >= binL && i <= binH)
                 average += outputMagn[i];
         }
@@ -54,35 +51,35 @@ private:
         return average / float(binH - binL + 1);
     }
 
-    static void SamplerCallback(AnalogBufferDMA *dma_buffer_instance, int8_t adc_num)
-    {
+    static void SamplerCallback(AnalogBufferDMA *dma_buffer_instance, int8_t adc_num){
         uint16_t samplePos = 0;
         uint16_t samplesStoragePos = 0;
         volatile uint16_t *temp = dma_buffer_instance->bufferLastISRFilled();
         volatile uint16_t *buffer_end = temp + dma_buffer_instance->bufferCountLastISRFilled();
+        
         if ((uint32_t)temp >= 0x20200000u)
             arm_dcache_delete((void *)temp, sizeof(adc_buffer1));
 
-        while (temp < buffer_end)
-        {
+        while (temp < buffer_end){
             inputSamp[samplePos++] = *temp;
             inputSamp[samplePos++] = 0.0f;
 
             inputStorage[samplesStoragePos++] = *temp;
             temp++;
         }
+
         dma_buffer_instance->clearInterrupt();
     }
 
 public:
-    static void Initialize(uint8_t pin, uint32_t sampleRate, float minDB, float maxDB)
-    {
+    static void Initialize(uint8_t pin, uint32_t sampleRate, float minDB, float maxDB){
         MicrophoneFourier::minDB = minDB;
         MicrophoneFourier::maxDB = maxDB;
         MicrophoneFourier::pin = pin;
         MicrophoneFourier::sampleRate = sampleRate;
 
         pinMode(pin, INPUT);
+
         adc->adc1->setAveraging(32);
         adc->adc1->setResolution(16);
         
@@ -93,8 +90,7 @@ public:
 
         float windowRange = float(sampleRate) / 2.0f / float(OutputBins);
 
-        for (uint8_t i = 0; i < OutputBins; i++)
-        {
+        for (uint8_t i = 0; i < OutputBins; i++){
             float frequency = (float(i) * windowRange);
             frequencyBins[i] = uint16_t(frequency / float(sampleRate / FFTSize));
         }
@@ -102,40 +98,32 @@ public:
         isInitialized = true;
     }
 
-    static bool IsInitialized()
-    {
+    static bool IsInitialized(){
         return isInitialized;
     }
 
-    static float GetSampleRate()
-    {
+    static float GetSampleRate(){
         return sampleRate;
     }
 
-    static float *GetSamples()
-    {
+    static float *GetSamples(){
         return inputStorage;
     }
 
-    static float *GetFourier()
-    {
+    static float *GetFourier(){
         return outputData;
     }
 
-    static float *GetFourierFiltered()
-    {
+    static float *GetFourierFiltered(){
         return outputDataFilt;
     }
 
-    static float GetCurrentMagnitude()
-    {
+    static float GetCurrentMagnitude(){
         return threshold;
     }
 
-    static void Update()
-    {
-        if (adc_dma_instance.interrupted())
-        {
+    static void Update(){
+        if (adc_dma_instance.interrupted()){
             SamplerCallback(&adc_dma_instance, ADC_1);
 
             arm_cfft_radix4_init_f32(&RadixFFT, FFTSize, 0, 1);
@@ -144,14 +132,14 @@ public:
 
             float averageMagnitude = 0.0f;
 
-            for (uint8_t i = 0; i < OutputBins - 1; i++)
-            {
+            for (uint8_t i = 0; i < OutputBins - 1; i++){
                 float intensity = 20.0f * log10f(AverageMagnitude(i, i + 1));
 
                 intensity = map(intensity, minDB, maxDB, 0.0f, 1.0f);
 
                 outputData[i] = intensity;
                 outputDataFilt[i] = fftFilters[i].Filter(intensity);
+
                 if (i % 12 == 0)
                     averageMagnitude = peakFilterRate.Filter(inputStorage[i] / 4096.0f);
             }

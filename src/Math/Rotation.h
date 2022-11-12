@@ -25,10 +25,6 @@ private:
 		);
 	}
 
-	Quaternion NormalVectorToQuaternion(Vector3D normal){
-		
-	}
-
 	Quaternion DirectionAngleToQuaternion(DirectionAngle directionAngle) {
 		Vector3D right =   Vector3D(1, 0, 0);
 		Vector3D up =      Vector3D(0, 1, 0);

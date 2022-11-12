@@ -13,7 +13,7 @@
 #include "..\..\Signals\FunctionGenerator.h"
 #include "..\..\Signals\FFTVoiceDetection.h"
 #include "..\..\Sensors\BoopSensor.h"
-#include "..\..\Sensors\MicrophoneFourier_MAX9814.h"
+#include "..\..\Sensors\MicrophoneFourier_DMA.h"
 #include "..\..\Render\ObjectAlign.h"
 
 #include "..\..\Materials\Animated\RainbowNoise.h"
@@ -25,13 +25,13 @@
 
 
 
-class BroookAnimation : public Animation<4> {
+class Warzone2Animation : public Animation<4> {
 private:
     WarzoneFace pM;
     WarzoneExtras pME;
     Background background;
     LEDStripBackground ledStripBackground;
-    EasyEaseAnimator<25> eEA = EasyEaseAnimator<25>(EasyEaseInterpolation::Overshoot, 1.0f, 0.35f);
+    EasyEaseAnimator<30> eEA = EasyEaseAnimator<30>(EasyEaseInterpolation::Overshoot, 1.0f, 0.35f);
     
     //Materials
     RainbowNoise rainbowNoise;
@@ -44,8 +44,8 @@ private:
     SimpleMaterial yellowMaterial = SimpleMaterial(RGBColor(255, 255, 0));
     SimpleMaterial purpleMaterial = SimpleMaterial(RGBColor(255, 0, 255));
     
-    RGBColor gradientSpectrum[2] = {RGBColor(222, 217, 141), RGBColor(100, 120, 211)};
-    GradientMaterial<2> gradientMat = GradientMaterial<2>(gradientSpectrum, 50.0f, false);
+    RGBColor gradientSpectrum[2] = {RGBColor(246, 176, 194), RGBColor(207, 148, 163)};
+    GradientMaterial<2> gradientMat = GradientMaterial<2>(gradientSpectrum, 200.0f, false);
     
     MaterialAnimator<10> materialAnimator;
     MaterialAnimator<4> backgroundMaterial;
@@ -68,6 +68,10 @@ private:
     FunctionGenerator fGenMatYMenu = FunctionGenerator(FunctionGenerator::Sine, -10.0f, 10.0f, 2.7f);
     FunctionGenerator fGenMatRMenu = FunctionGenerator(FunctionGenerator::Sine, -5.0f, 5.0f, 1.7f);
 
+    FunctionGenerator fGenMatM1Sleep = FunctionGenerator(FunctionGenerator::Sine, 0.0f, 1.0f, 5.3f);
+    FunctionGenerator fGenMatM2Sleep = FunctionGenerator(FunctionGenerator::Sine, 0.0f, 1.0f, 6.7f);
+    FunctionGenerator fGenMatS1Sleep = FunctionGenerator(FunctionGenerator::Sine, 0.0f, 1.0f, 4.6f);
+
     BoopSensor boop;
 
     FFTVoiceDetection<128> voiceDetection;
@@ -78,10 +82,12 @@ private:
     float offsetFaceSA = 0.0f;
     float offsetFaceARG = 0.0f;
     float offsetFaceOSC = 0.0f;
+    float offsetFaceZZZ = 0.0f;
     uint8_t offsetFaceInd = 50;
     uint8_t offsetFaceIndSA = 51;
     uint8_t offsetFaceIndARG = 52;
     uint8_t offsetFaceIndOSC = 53;
+    uint8_t offsetFaceIndZZZ = 54;
 
     void LinkEasyEase(){
         eEA.AddParameter(pM.GetMorphWeightReference(WarzoneFace::BasisMouth), WarzoneFace::BasisMouth, 30, 0.0f, 1.0f);
@@ -102,18 +108,18 @@ private:
         eEA.AddParameter(pM.GetMorphWeightReference(WarzoneFace::UpsetMouth), WarzoneFace::UpsetMouth, 40, 0.0f, 1.0f);
         eEA.AddParameter(pM.GetMorphWeightReference(WarzoneFace::Hide), WarzoneFace::Hide, 30, 0.0f, 1.0f);
 
+        eEA.AddParameter(pM.GetMorphWeightReference(WarzoneFace::vrc_v_aa), WarzoneFace::vrc_v_aa, 2, 0.0f, 1.0f);
         eEA.AddParameter(pM.GetMorphWeightReference(WarzoneFace::vrc_v_ee), WarzoneFace::vrc_v_ee, 2, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(WarzoneFace::vrc_v_oo), WarzoneFace::vrc_v_oo, 2, 0.0f, 1.0f);
 
-        eEA.AddParameter(pME.GetMorphWeightReference(WarzoneExtras::HideBlush), WarzoneExtras::HideBlush + 100, 30, 0.0f, 1.0f);
-        eEA.AddParameter(pME.GetMorphWeightReference(WarzoneExtras::HideZZZ), WarzoneExtras::HideZZZ + 100, 30, 0.0f, 1.0f);
-        eEA.AddParameter(pME.GetMorphWeightReference(WarzoneExtras::Move2ZZZ), WarzoneExtras::Move2ZZZ + 100, 50, 0.0f, 1.0f);
-        eEA.AddParameter(pME.GetMorphWeightReference(WarzoneExtras::MoveZZZ), WarzoneExtras::MoveZZZ + 100, 15, 0.0f, 1.0f);
-        eEA.AddParameter(pME.GetMorphWeightReference(WarzoneExtras::ScaleZZZ), WarzoneExtras::ScaleZZZ + 100, 50, 0.0f, 1.0f);
+        eEA.AddParameter(pME.GetMorphWeightReference(WarzoneExtras::HideBlush), WarzoneExtras::HideBlush + 100, 30, 1.0f, 0.0f);
+        eEA.AddParameter(pME.GetMorphWeightReference(WarzoneExtras::HideZZZ), WarzoneExtras::HideZZZ + 100, 30, 1.0f, 0.0f);
 
         eEA.AddParameter(&offsetFace, offsetFaceInd, 40, 0.0f, 1.0f);
         eEA.AddParameter(&offsetFaceSA, offsetFaceIndSA, 40, 0.0f, 1.0f);
         eEA.AddParameter(&offsetFaceARG, offsetFaceIndARG, 40, 0.0f, 1.0f);
         eEA.AddParameter(&offsetFaceOSC, offsetFaceIndOSC, 40, 0.0f, 1.0f);
+        eEA.AddParameter(&offsetFaceZZZ, offsetFaceIndZZZ, 40, 0.0f, 1.0f);
     }
 
     void LinkParameters(){
@@ -121,7 +127,9 @@ private:
     }
 
     void ChangeInterpolationMethods(){
+        eEA.SetInterpolationMethod(WarzoneFace::vrc_v_aa, EasyEaseInterpolation::Linear);
         eEA.SetInterpolationMethod(WarzoneFace::vrc_v_ee, EasyEaseInterpolation::Linear);
+        eEA.SetInterpolationMethod(WarzoneFace::vrc_v_oo, EasyEaseInterpolation::Linear);
         
         eEA.SetInterpolationMethod(WarzoneFace::DeadEyes, EasyEaseInterpolation::Cosine);
         eEA.SetInterpolationMethod(WarzoneFace::DeadMouth, EasyEaseInterpolation::Cosine);
@@ -135,9 +143,6 @@ private:
 
         eEA.SetInterpolationMethod(WarzoneExtras::HideBlush + 100, EasyEaseInterpolation::Cosine);
         eEA.SetInterpolationMethod(WarzoneExtras::HideZZZ + 100, EasyEaseInterpolation::Cosine);
-        eEA.SetInterpolationMethod(WarzoneExtras::Move2ZZZ + 100, EasyEaseInterpolation::Cosine);
-        eEA.SetInterpolationMethod(WarzoneExtras::MoveZZZ + 100, EasyEaseInterpolation::Cosine);
-        eEA.SetInterpolationMethod(WarzoneExtras::ScaleZZZ + 100, EasyEaseInterpolation::Cosine);
     }
 
     void SetMaterialLayers(){
@@ -162,78 +167,74 @@ private:
         blink.Update();
     }
 
-    void Default(){
-        eEA.AddParameterFrame(WarzoneExtras::None + 100, 1.0f);
+    void Default(){//Default mouth
+        eEA.AddParameterFrame(WarzoneFace::BasisMouth, 1.0f);
         blink.Play();
     }
 
-    void Determined(){
-        eEA.AddParameterFrame(WarzoneFace::Determined2, 1.0f);
-        eEA.AddParameterFrame(WarzoneExtras::None + 100, 1.0f);
-        blink.Play();
-    }
-
-    void Upset(){
-        eEA.AddParameterFrame(WarzoneFace::Upset3, 1.0f);
-        eEA.AddParameterFrame(WarzoneExtras::None + 100, 1.0f);
-        blink.Play();
-        materialAnimator.AddMaterialFrame(redMaterial, 0.8f);
-    }
-
-    void Sleepy(){
-        eEA.AddParameterFrame(WarzoneFace::Sleepy4, 1.0f);
-        eEA.AddParameterFrame(WarzoneExtras::Sleepy + 100, 1.0f);
+    void UwU(){
+        eEA.AddParameterFrame(WarzoneFace::UwUEyes, 1.0f);
+        eEA.AddParameterFrame(WarzoneFace::UwUMouth, 1.0f);
         blink.Pause();
     }
 
-    void Sad(){
-        eEA.AddParameterFrame(WarzoneFace::Sad5, 1.0f);
-        eEA.AddParameterFrame(WarzoneExtras::Sad + 100, 1.0f);
-        blink.Play();
-        materialAnimator.AddMaterialFrame(blueMaterial, 0.8f);
+    void Spiral(){
+        eEA.AddParameterFrame(WarzoneFace::SpiralEyes, 1.0f);
+        eEA.AddParameterFrame(WarzoneFace::SpiralMouth, 1.0f);
+        blink.Pause();
+        materialAnimator.AddMaterialFrame(rainbowSpiral, 0.8f);
     }
 
     void Happy(){
-        eEA.AddParameterFrame(WarzoneFace::Happy6, 1.0f);
-        eEA.AddParameterFrame(WarzoneExtras::Happy + 100, 1.0f);
-        blink.Pause();
-        materialAnimator.AddMaterialFrame(rainbowSpiral, 0.8f);
-    }
-
-    void Flustered(){
-        eEA.AddParameterFrame(WarzoneFace::Flustered7, 1.0f);
-        eEA.AddParameterFrame(WarzoneExtras::None + 100, 1.0f);
-        blink.Pause();
-
-        
-        eEA.AddParameterFrame(WarzoneFace::Dead10, 0.0f);
-        eEA.AddParameterFrame(WarzoneExtras::Dead + 100, 0.0f);
-    }
-    
-    void Dot(){
-        eEA.AddParameterFrame(WarzoneFace::Dot8, 1.0f);
-        eEA.AddParameterFrame(WarzoneExtras::None + 100, 1.0f);
+        eEA.AddParameterFrame(WarzoneFace::HappyEyes, 1.0f);
+        eEA.AddParameterFrame(WarzoneFace::HappyMouth, 1.0f);
+        eEA.AddParameterFrame(WarzoneExtras::HideBlush + 100, 0.0f);
         blink.Play();
-    }
-    
-    void Heart(){
-        eEA.AddParameterFrame(WarzoneFace::Heart9, 1.0f);
-        eEA.AddParameterFrame(WarzoneExtras::Heart + 100, 1.0f);
-        blink.Pause();
-        materialAnimator.AddMaterialFrame(rainbowSpiral, 0.8f);
     }
 
     void Dead(){
-        eEA.AddParameterFrame(WarzoneFace::Dead10, 1.0f);
-        eEA.AddParameterFrame(WarzoneExtras::Dead + 100, 1.0f);
+        eEA.AddParameterFrame(WarzoneFace::DeadEyes, 1.0f);
+        eEA.AddParameterFrame(WarzoneFace::DeadMouth, 1.0f);
         blink.Pause();
         materialAnimator.AddMaterialFrame(redMaterial, 0.8f);
     }
 
-    void Question(){
-        eEA.AddParameterFrame(WarzoneFace::Question11, 1.0f);
+    void HappyClosed(){
+        eEA.AddParameterFrame(WarzoneFace::HappyClosed, 1.0f);
+        blink.Play();
+    }
+
+    void Sleep(){
+        eEA.AddParameterFrame(offsetFaceIndZZZ, 1.0f);
+
+        eEA.AddParameterFrame(WarzoneFace::Hide, 1.0f);
+        eEA.AddParameterFrame(WarzoneExtras::HideZZZ + 100, 0.0f);
         blink.Pause();
-        //Default Extra face
+
+        pME.SetMorphWeight(WarzoneExtras::MoveZZZ, fGenMatM1Sleep.Update());
+        pME.SetMorphWeight(WarzoneExtras::Move2ZZZ, fGenMatM2Sleep.Update());
+        pME.SetMorphWeight(WarzoneExtras::ScaleZZZ, fGenMatS1Sleep.Update());
+    }
+    
+    void Circle(){
+        eEA.AddParameterFrame(WarzoneFace::CircleEyes, 1.0f);
+        eEA.AddParameterFrame(WarzoneFace::CircleMouth, 1.0f);
+        blink.Pause();
+    }
+    
+    void Blush(){
+        eEA.AddParameterFrame(WarzoneFace::SempaiEyes, 1.0f);
+        eEA.AddParameterFrame(WarzoneFace::SempaiMouth, 1.0f);
+        eEA.AddParameterFrame(WarzoneExtras::HideBlush + 100, 0.0f);
+        blink.Pause();
+        materialAnimator.AddMaterialFrame(rainbowSpiral, 0.8f);
+    }
+
+    void Upset(){
+        eEA.AddParameterFrame(WarzoneFace::UpsetEyes, 1.0f);
+        eEA.AddParameterFrame(WarzoneFace::UpsetMouth, 1.0f);
+        blink.Pause();
+        materialAnimator.AddMaterialFrame(redMaterial, 0.8f);
     }
 
     void SpectrumAnalyzerFace(){
@@ -259,18 +260,18 @@ private:
 
     void UpdateFFTVisemes(){
         if(Menu::UseMicrophone()){
-            eEA.AddParameterFrame(WarzoneFace::BasisMouth, MicrophoneFourier::GetCurrentMagnitude() / 2.0f);
+            eEA.AddParameterFrame(WarzoneFace::vrc_v_aa, MicrophoneFourier::GetCurrentMagnitude() / 2.0f);
 
             if(MicrophoneFourier::GetCurrentMagnitude() > 0.05f){
                 voiceDetection.Update(MicrophoneFourier::GetFourierFiltered(), MicrophoneFourier::GetSampleRate());
         
                 eEA.AddParameterFrame(WarzoneFace::vrc_v_ee, voiceDetection.GetViseme(voiceDetection.EE));
-                eEA.AddParameterFrame(WarzoneFace::DeadMouth, voiceDetection.GetViseme(voiceDetection.AH));
-                eEA.AddParameterFrame(WarzoneFace::DeadMouth, voiceDetection.GetViseme(voiceDetection.UH));
-                eEA.AddParameterFrame(WarzoneFace::BasisMouth, voiceDetection.GetViseme(voiceDetection.AR));
-                eEA.AddParameterFrame(WarzoneFace::DeadMouth, voiceDetection.GetViseme(voiceDetection.ER));
-                eEA.AddParameterFrame(WarzoneFace::CircleMouth, voiceDetection.GetViseme(voiceDetection.AH));
-                eEA.AddParameterFrame(WarzoneFace::DeadMouth, voiceDetection.GetViseme(voiceDetection.OO));
+                eEA.AddParameterFrame(WarzoneFace::vrc_v_oo, voiceDetection.GetViseme(voiceDetection.AH));
+                eEA.AddParameterFrame(WarzoneFace::vrc_v_oo, voiceDetection.GetViseme(voiceDetection.UH));
+                eEA.AddParameterFrame(WarzoneFace::vrc_v_aa, voiceDetection.GetViseme(voiceDetection.AR));
+                eEA.AddParameterFrame(WarzoneFace::vrc_v_oo, voiceDetection.GetViseme(voiceDetection.ER));
+                eEA.AddParameterFrame(WarzoneFace::vrc_v_aa, voiceDetection.GetViseme(voiceDetection.AH));
+                eEA.AddParameterFrame(WarzoneFace::vrc_v_oo, voiceDetection.GetViseme(voiceDetection.OO));
             }
         }
     }
@@ -291,7 +292,7 @@ private:
     }
 
 public:
-    BroookAnimation() {
+    Warzone2Animation() {
         scene.AddObject(pM.GetObject());
         scene.AddObject(pME.GetObject());
         scene.AddObject(background.GetObject());
@@ -312,13 +313,13 @@ public:
         boop.Initialize(5);
 
         MicrophoneFourier::Initialize(A0, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
-        Menu::Initialize(13, 20, 500);//13 is number of faces
+        Menu::Initialize(12, 20, 500);//13 is number of faces
 
         gradientMat.SetRotationAngle(90);
 
         objA.SetJustification(ObjectAlign::Stretch);
         objA.SetMirrorX(true);
-        objA.SetMirrorY(true);
+        //objA.SetMirrorY(true);
     }
 
     void FadeIn(float stepRatio) override {}
@@ -362,24 +363,23 @@ public:
         UpdateFFTVisemes();
 
         if (isBooped){
-            Happy();
+            Blush();
         }
         else{
             if (mode == 0) Default();
-            else if (mode == 1) Determined();
-            else if (mode == 2) Upset();
-            else if (mode == 3) Sleepy();
-            else if (mode == 4) Sad();
-            else if (mode == 5) Flustered();
-            else if (mode == 6) Dot();
-            else if (mode == 7) Heart();
-            else if (mode == 8) Dead();
-            else if (mode == 9) Question();
-            else if (mode == 10) {
+            else if (mode == 1) UwU();
+            else if (mode == 2) Spiral();
+            else if (mode == 3) Happy();
+            else if (mode == 4) Dead();
+            else if (mode == 5) HappyClosed();
+            else if (mode == 6) Sleep();
+            else if (mode == 7) Circle();
+            else if (mode == 8) Upset();
+            else if (mode == 9) {
                 aRG.Update(MicrophoneFourier::GetFourierFiltered());
                 AudioReactiveGradientFace();
             }
-            else if (mode == 11){
+            else if (mode == 10){
                 oSC.Update(MicrophoneFourier::GetSamples());
                 OscilloscopeFace();
             }
@@ -413,7 +413,7 @@ public:
 
         objA.AlignObjects(scene.GetObjects(), 2);
         
-        pM.GetObject()->GetTransform()->SetPosition(Vector3D(xOffset, yOffset - 93.0f * offsetFace, 0.0f));
+        pM.GetObject()->GetTransform()->SetPosition(Vector3D(xOffset, yOffset - 93.0f * offsetFace - 93.0f * offsetFaceZZZ, 0.0f));
         pM.GetObject()->UpdateTransform();
         pME.GetObject()->GetTransform()->SetPosition(Vector3D(xOffset, yOffset - 93.0f * offsetFace, 0.0f));
         pME.GetObject()->UpdateTransform();

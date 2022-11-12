@@ -1,6 +1,6 @@
 //#define RIGHTFACE
 //#define DEMOMODE
-//#define PRINTINFO
+#define PRINTINFO
 
 
 //--------------- ANIMATIONS ---------------
@@ -8,7 +8,7 @@
 //#include "Animation\ProtogenKitFaceAnimation.h"
 //#include "Animation\ProtogenHUB75Animation.h"
 //#include "Animation\ProtogenHUB75AnimationSplit.h"
-#include "Animation\Commissions\BroookAnimation.h"
+#include "Animation\Commissions\WarzoneAnimationV2.h"
 //#include "Animation\Commissions\InfraredAnimation.h"
 //#include "Animation\KaiborgV1Animation.h"
 //#include "Animation\ProtoV3Animation.h"
@@ -34,7 +34,7 @@ ProtoDRController controller = ProtoDRController(maxBrightness, ProtoDRControlle
 //ProtoDRController controller = ProtoDRController(maxBrightness, ProtoDRController::LEFT);
 #endif
 SmartMatrixHUB75 controller = SmartMatrixHUB75(maxBrightness, maxAccentBrightness);
-BroookAnimation animation = BroookAnimation();
+Warzone2Animation animation = Warzone2Animation();
 
 float FreeMem(){
     uint32_t stackT;
