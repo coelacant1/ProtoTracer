@@ -166,49 +166,49 @@ public:
     }
 
     void PrintVisemes(){
-            float max = 0.0f;
-            uint8_t ind = 10;
+        float max = 0.0f;
+        uint8_t ind = 10;
+    
+        for(uint8_t i = 0; i < visemeCount; i++){
+            if(max < *visRatios[i]){
+                max = *visRatios[i];
+                ind = i;
+            }
+        }
         
-            for(uint8_t i = 0; i < visemeCount; i++){
-                if(max < *visRatios[i]){
-                    max = *visRatios[i];
-                    ind = i;
-                }
-            }
-            
-            if(ind < 7){
-                Serial.print(f1);
-                Serial.print(',');
-                Serial.print(f2);
-                Serial.print(',');
-            }
+        if(ind < 7){
+            Serial.print(f1);
+            Serial.print(',');
+            Serial.print(f2);
+            Serial.print(',');
+        }
 
-            switch(ind){
-                case EE:
-                    Serial.println("EE");
-                    break;
-                case AE:
-                    Serial.println("AE");
-                    break;
-                case UH:
-                    Serial.println("UH");
-                    break;
-                case AR:
-                    Serial.println("AR");
-                    break;
-                case ER:
-                    Serial.println("ER");
-                    break;
-                case AH:
-                    Serial.println("AH");
-                    break;
-                case OO:
-                    Serial.println("OO");
-                    break;
-                default:
-                    //Serial.println("?");
-                    break;
-            }
+        switch(ind){
+            case EE:
+                Serial.println("EE");
+                break;
+            case AE:
+                Serial.println("AE");
+                break;
+            case UH:
+                Serial.println("UH");
+                break;
+            case AR:
+                Serial.println("AR");
+                break;
+            case ER:
+                Serial.println("ER");
+                break;
+            case AH:
+                Serial.println("AH");
+                break;
+            case OO:
+                Serial.println("OO");
+                break;
+            default:
+                //Serial.println("?");
+                break;
+        }
     }
 
     void ResetVisemes(){

@@ -27,8 +27,12 @@ public:
         track.Reset();
     }
 
-    void Update(){
-        track.Update();
+    float GetParameterValue(){
+        return track.GetParameterValue();
+    }
+
+    float Update(){
+        return track.Update();
     }
 
     void AddParameter(float* parameter){

@@ -169,10 +169,10 @@ private:
 
     void UpdateFFTVisemes(){
         if(Menu::UseMicrophone()){
-            eEA.AddParameterFrame(NukudeFace::vrc_v_ss, MicrophoneFourier::GetCurrentMagnitude() / 2.0f);
+            eEA.AddParameterFrame(NukudeFace::vrc_v_ss, MicrophoneFourierIT::GetCurrentMagnitude() / 2.0f);
 
-            if(MicrophoneFourier::GetCurrentMagnitude() > 0.05f){
-                voiceDetection.Update(MicrophoneFourier::GetFourierFiltered(), MicrophoneFourier::GetSampleRate());
+            if(MicrophoneFourierIT::GetCurrentMagnitude() > 0.05f){
+                voiceDetection.Update(MicrophoneFourierIT::GetFourierFiltered(), MicrophoneFourierIT::GetSampleRate());
         
                 eEA.AddParameterFrame(NukudeFace::vrc_v_ee, voiceDetection.GetViseme(voiceDetection.EE));
                 eEA.AddParameterFrame(NukudeFace::vrc_v_ih, voiceDetection.GetViseme(voiceDetection.AH));
@@ -217,7 +217,7 @@ public:
 
         boop.Initialize(5);
 
-        MicrophoneFourier::Initialize(22, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
+        MicrophoneFourierIT::Initialize(22, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
         Menu::Initialize(7, 0, 500);//7 is number of faces
 
         Menu::SetSize(Vector2D(280, 60));
@@ -244,8 +244,8 @@ public:
         bool isBooped = Menu::UseBoopSensor() ? boop.isBooped() : 0;
         uint8_t mode = Menu::GetFaceState();//change by button press
 
-        MicrophoneFourier::Update();
-        sA.Update(MicrophoneFourier::GetFourierFiltered());
+        MicrophoneFourierIT::Update();
+        sA.Update(MicrophoneFourierIT::GetFourierFiltered());
         sA.SetHueAngle(ratio * 360.0f * 4.0f);
         sA.SetMirrorYState(Menu::MirrorSpectrumAnalyzer());
         sA.SetFlipYState(!Menu::MirrorSpectrumAnalyzer());

@@ -111,7 +111,8 @@ public:
         }
     }
 
-    void Update(){
+    float Update(){
+
         GetCurrentTime();
 
         byte previousFrame = 0, nextFrame = 0;
@@ -151,6 +152,8 @@ public:
                 }
             }
         }
+
+        return parameterValue;
     }
 
 };

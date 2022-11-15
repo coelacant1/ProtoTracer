@@ -8,7 +8,7 @@
 //#include "Animation\ProtogenKitFaceAnimation.h"
 //#include "Animation\ProtogenHUB75Animation.h"
 //#include "Animation\ProtogenHUB75AnimationSplit.h"
-#include "Animation\Commissions\StrawberryAnimation.h"
+#include "Animation\Commissions\SergaliciousAnimation.h"
 //#include "Animation\Commissions\InfraredAnimation.h"
 //#include "Animation\KaiborgV1Animation.h"
 //#include "Animation\ProtoV3Animation.h"
@@ -21,9 +21,9 @@
 
 //--------------- CONTROLLERS ---------------
 //#include "Controllers\KaiborgV1Controller.h"
-#include "Controllers\KaiborgV1D1Controller.h"
+//#include "Controllers\KaiborgV1D1Controller.h"
 //#include "Controllers\ProtoDRController.h"
-//#include "Controllers\SmartMatrixHUB75.h"
+#include "Controllers\SmartMatrixHUB75.h"
 //#include "Controllers\SmartMatrixHUB75Split.h"
 
 uint8_t maxBrightness = 50;
@@ -33,8 +33,8 @@ ProtoDRController controller = ProtoDRController(maxBrightness, ProtoDRControlle
 #else
 //ProtoDRController controller = ProtoDRController(maxBrightness, ProtoDRController::LEFT);
 #endif
-KaiborgV1D1Controller controller = KaiborgV1D1Controller(maxBrightness);
-StrawberryAnimation animation = StrawberryAnimation();
+SmartMatrixHUB75 controller = SmartMatrixHUB75(maxBrightness, maxAccentBrightness);
+SergaliciousAnimation animation = SergaliciousAnimation();
 
 float FreeMem(){
     uint32_t stackT;
