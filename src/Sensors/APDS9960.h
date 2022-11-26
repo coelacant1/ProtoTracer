@@ -1,10 +1,12 @@
+#pragma once
+
 #include <Arduino.h>
 //#include <Adafruit_SPIDevice.h>
 #include <Adafruit_APDS9960.h>
 #include "..\Filter\MinFilter.h"
 #include "..\Signals\TimeStep.h"
 
-class BoopSensor{
+class APDS9960{
 private:
     static Adafruit_APDS9960 apds;
     static uint16_t proximity;
@@ -16,7 +18,7 @@ private:
 
 public:
     static bool Initialize(uint8_t threshold) {//timeout in milliseconds and threshold is minimum for detection (0 is far away, 255 is touching)
-        BoopSensor::threshold = threshold;
+        APDS9960::threshold = threshold;
 
         Wire.begin();
 
@@ -52,11 +54,11 @@ public:
     }
 };
 
-Adafruit_APDS9960 BoopSensor::apds;
-uint16_t BoopSensor::proximity;
-uint16_t BoopSensor::threshold;
+Adafruit_APDS9960 APDS9960::apds;
+uint16_t APDS9960::proximity;
+uint16_t APDS9960::threshold;
 
-MinFilter<10> BoopSensor::minF = MinFilter<10>(false);
-TimeStep BoopSensor::timeStep = TimeStep(5);
-float BoopSensor::minimum = 0.0f;
-bool BoopSensor::didBegin = false;
+MinFilter<10> APDS9960::minF = MinFilter<10>(false);
+TimeStep APDS9960::timeStep = TimeStep(5);
+float APDS9960::minimum = 0.0f;
+bool APDS9960::didBegin = false;
