@@ -1,6 +1,6 @@
 //#define RIGHTFACE
 //#define DEMOMODE
-//#define PRINTINFO
+#define PRINTINFO
 
 
 //--------------- ANIMATIONS ---------------
@@ -8,11 +8,11 @@
 //#include "Animation\ProtogenKitFaceAnimation.h"
 //#include "Animation\ProtogenHUB75Animation.h"
 //#include "Animation\ProtogenHUB75AnimationSplit.h"
-#include "Animation\Commissions\SergaliciousAnimation.h"
+//#include "Animation\Commissions\SergaliciousAnimation.h"
 //#include "Animation\Commissions\InfraredAnimation.h"
 //#include "Animation\KaiborgV1Animation.h"
 //#include "Animation\ProtoV3Animation.h"
-//#include "Animation\FullScreenAnimation.h"
+#include "Animation\Test\FullScreenAnimation.h"
 //#include "Animation\VectorFieldAnimation.h"
 //#include "Animation\CoelaBonkAnimation.h"
 //#include "Animation\SpyroAnimation.h"
@@ -23,8 +23,10 @@
 //#include "Controllers\KaiborgV1Controller.h"
 //#include "Controllers\KaiborgV1D1Controller.h"
 //#include "Controllers\ProtoDRController.h"
-#include "Controllers\SmartMatrixHUB75.h"
+//include "Controllers\SmartMatrixHUB75.h"
 //#include "Controllers\SmartMatrixHUB75Split.h"
+//#include "Controllers\GammaControllerFront.h"
+#include "Controllers\GammaControllerBack.h"
 
 uint8_t maxBrightness = 50;
 uint8_t maxAccentBrightness = 100;
@@ -33,8 +35,8 @@ ProtoDRController controller = ProtoDRController(maxBrightness, ProtoDRControlle
 #else
 //ProtoDRController controller = ProtoDRController(maxBrightness, ProtoDRController::LEFT);
 #endif
-SmartMatrixHUB75 controller = SmartMatrixHUB75(maxBrightness, maxAccentBrightness);
-SergaliciousAnimation animation = SergaliciousAnimation();
+GammaControllerBack controller = GammaControllerBack(maxBrightness);
+FullScreenAnimation animation = FullScreenAnimation();
 
 float FreeMem(){
     uint32_t stackT;
@@ -62,20 +64,21 @@ void setup() {
 void loop() {
     float ratio = (float)(millis() % 5000) / 5000.0f;
 
-    controller.SetBrightness(Menu::GetBrightness() / 2);// / 8);
-    controller.SetAccentBrightness(Menu::GetAccentBrightness());
+    controller.SetBrightness(2);// / 8);
+    //controller.SetBrightness(Menu::GetBrightness() / 2);// / 8);
+    //controller.SetAccentBrightness(Menu::GetAccentBrightness());
 
     animation.UpdateTime(ratio);
     controller.Render(animation.GetScene());
-    /*
-    animation.SetCameraMirror(false);
-    animation.UpdateTime(ratio);
-    controller.RenderCamera(animation.GetScene(), 0);
+    
+    //animation.SetCameraMirror(false);
+    //animation.UpdateTime(ratio);
+    //controller.RenderCamera(animation.GetScene(), 0);
 
-    animation.SetCameraMirror(true);
-    animation.UpdateTime(ratio);
-    controller.RenderCamera(animation.GetScene(), 1);
-    */
+    //animation.SetCameraMirror(true);
+    //animation.UpdateTime(ratio);
+    //controller.RenderCamera(animation.GetScene(), 1);
+    
 
     controller.Display();
 

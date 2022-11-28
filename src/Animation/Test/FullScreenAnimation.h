@@ -1,21 +1,21 @@
 #pragma once
 
-#include "Animation.h"
-#include "..\Objects\SolidCube.h"
-#include "..\Materials\DepthMaterial.h"
-#include "..\Materials\LightMaterial.h"
-#include "..\Math\FunctionGenerator.h"
+#include "..\Animation.h"
+#include "..\..\Objects\SolidCube.h"
+//#include "..\..\Materials\DepthMaterial.h"
+#include "..\..\Materials\LightMaterial.h"
+#include "..\..\Signals\FunctionGenerator.h"
 
 //#include "Flash\Images\CoelaToot.h"
 //#include "Flash\ImageSequences\Hex2.h"
-#include "..\Materials\StripeMaterial.h"
-#include "..\Materials\SpiralMaterial.h"
-#include "..\Materials\CombineMaterial.h"
-#include "..\Materials\SpectrumAnalyzer.h"
+#include "..\..\Materials\StripeMaterial.h"
+#include "..\..\Materials\SpiralMaterial.h"
+#include "..\..\Materials\CombineMaterial.h"
+#include "..\..\Materials\Animated\SpectrumAnalyzer.h"
 
 //#include "Flash\ImageSequences\Rainbow.h"
 
-class FullScreenAnimation : public Animation{
+class FullScreenAnimation : public Animation<1>{
 private:
     SolidCube cube;
     FunctionGenerator fGenSelection = FunctionGenerator(FunctionGenerator::Triangle, 0.0f, 1.0f, 20.0f);
@@ -36,17 +36,15 @@ private:
     StripeMaterial stripe1 = StripeMaterial(6, spectrum1, 200.0f, 160.0f, 20.0f);
     StripeMaterial stripe2 = StripeMaterial(6, spectrum2, 200.0f, 160.0f, 20.0f);
     SpiralMaterial spiral = SpiralMaterial(6, spectrum3, 2.0f, 7.0f);
-    GradientMaterial gM = GradientMaterial(6, spectrum3, 1.0f, false);
-    SpectrumAnalyzer sA = SpectrumAnalyzer(A0, Vector2D(192, 96), Vector2D(96, 48), &gM);
     //Material* materials[2] = {&stripe1, &spiral};
 
     //CombineMaterial material = CombineMaterial(CombineMaterial::Subtract, 2, materials);
 
 public:
-    FullScreenAnimation() : Animation(1) {
-        scene->AddObject(cube.GetObject());
+    FullScreenAnimation() : Animation<1>() {
+        scene.AddObject(cube.GetObject());
         
-        cube.GetObject()->SetMaterial(&sA);
+        cube.GetObject()->SetMaterial(&spiral);
     }
 
     void FadeIn(float stepRatio) override {}
@@ -61,7 +59,7 @@ public:
         //float size = fGenMatSize.Update();
         //float rotate = fGenMatRot.Update();
 
-        sA.Update();
+        //sA.Update();
 
         //gif.SetPosition(Vector2D(0.0f, 135.0f));
         //gif.SetSize(Vector2D(-size, size));
@@ -86,11 +84,10 @@ public:
         stripe2.SetWaveAmplitude(-fGenMatAmplitude.Update());
         stripe2.SetRotationAngle((1.0f - ratio) * 360.0f);
         stripe2.SetPositionOffset(Vector2D(-shift, -shift));
-
+        */
         spiral.SetBend(fGenMatBend.Update());
         spiral.SetRotationAngle((1.0f - ratio) * 720.0f);
         spiral.SetPositionOffset(Vector2D(0, 135.0f));
-        */
 
         cube.GetObject()->ResetVertices();
         cube.GetObject()->GetTransform()->SetScale(Vector3D(1000, 1000, 1));
