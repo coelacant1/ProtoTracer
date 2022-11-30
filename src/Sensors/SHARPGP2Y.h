@@ -3,9 +3,11 @@
 #pragma once
 
 #include <Arduino.h>
+#include "..\Filter\KalmanFilter.h"
 
 class SHARPGP2Y{
 private:
+    KalmanFilter<25> kf = KalmanFilter<25>(0.1f);
     float distance = 0.0f;
     uint8_t pin;
 
@@ -28,7 +30,10 @@ public:
     }
     
     float Update(){
-        distance = ReadingToDistance(analogRead(pin));
+        noInterrupts();
+        float read = analogRead(pin);
+        interrupts();
+        distance = kf.Filter(read);
 
         return distance;
     }

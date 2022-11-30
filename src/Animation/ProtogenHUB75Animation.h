@@ -9,7 +9,7 @@
 #include "..\Render\Scene.h"
 #include "..\Signals\FunctionGenerator.h"
 #include "..\Menu\Menu.h"
-#include "..\Sensors\BoopSensor.h"
+#include "..\Sensors\APDS9960.h"
 
 #include "..\Materials\Animated\RainbowNoise.h"
 #include "..\Materials\Animated\RainbowSpiral.h"
@@ -69,7 +69,7 @@ private:
     FunctionGenerator fGenMatYMenu = FunctionGenerator(FunctionGenerator::Sine, -10.0f, 10.0f, 2.7f);
     FunctionGenerator fGenMatRMenu = FunctionGenerator(FunctionGenerator::Sine, -5.0f, 5.0f, 1.7f);
 
-    BoopSensor boop;
+    APDS9960 boop;
 
     FFTVoiceDetection<128> voiceDetection;
 
@@ -279,7 +279,7 @@ public:
         float xOffset = fGenMatXMove.Update();
         float yOffset = fGenMatYMove.Update();
         
-        Menu::Update();
+        Menu::Update(ratio);
 
         SetMaterialColor();
 

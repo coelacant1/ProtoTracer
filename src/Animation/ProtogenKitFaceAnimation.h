@@ -8,7 +8,7 @@
 #include "..\Render\Scene.h"
 #include "..\Signals\FunctionGenerator.h"
 #include "..\Menu\Menu.h"
-#include "..\Sensors\BoopSensor.h"
+#include "..\Sensors\APDS9960.h"
 
 #include "..\Materials\Animated\SpectrumAnalyzer.h"
 #include "..\Materials\Animated\RainbowNoise.h"
@@ -57,7 +57,7 @@ private:
     FunctionGenerator fGenMatYMove = FunctionGenerator(FunctionGenerator::Sine, -2.0f, 2.0f, 6.7f);
     FunctionGenerator fGenMatHue = FunctionGenerator(FunctionGenerator::Triangle, 0.0f, 360.0f, 17.3f);
 
-    BoopSensor boop;
+    APDS9960 boop;
 
     FFTVoiceDetection<128> voiceDetection;
 

@@ -1,9 +1,13 @@
 //#define RIGHTFACE
+//#define LEFTFACE
+//#define FRONTFACE
+#define BACKFACE
 //#define DEMOMODE
-#define PRINTINFO
+//#define PRINTINFO
 
 
 //--------------- ANIMATIONS ---------------
+#include "Animation\GammaAnimation.h"
 //#include "Animation\ProtoDRMorphAnimation.h"
 //#include "Animation\ProtogenKitFaceAnimation.h"
 //#include "Animation\ProtogenHUB75Animation.h"
@@ -12,7 +16,7 @@
 //#include "Animation\Commissions\InfraredAnimation.h"
 //#include "Animation\KaiborgV1Animation.h"
 //#include "Animation\ProtoV3Animation.h"
-#include "Animation\Test\FullScreenAnimation.h"
+//#include "Animation\Test\FullScreenAnimation.h"
 //#include "Animation\VectorFieldAnimation.h"
 //#include "Animation\CoelaBonkAnimation.h"
 //#include "Animation\SpyroAnimation.h"
@@ -25,18 +29,22 @@
 //#include "Controllers\ProtoDRController.h"
 //include "Controllers\SmartMatrixHUB75.h"
 //#include "Controllers\SmartMatrixHUB75Split.h"
-//#include "Controllers\GammaControllerFront.h"
-#include "Controllers\GammaControllerBack.h"
 
 uint8_t maxBrightness = 50;
 uint8_t maxAccentBrightness = 100;
 #ifdef RIGHTFACE
 ProtoDRController controller = ProtoDRController(maxBrightness, ProtoDRController::RIGHT);
-#else
-//ProtoDRController controller = ProtoDRController(maxBrightness, ProtoDRController::LEFT);
-#endif
+#elif defined(LEFTFACE)
+ProtoDRController controller = ProtoDRController(maxBrightness, ProtoDRController::LEFT);
+#elif defined(FRONTFACE)
+#include "Controllers\GammaControllerFront.h"
+GammaControllerFront controller = GammaControllerFront(maxBrightness);
+#elif defined(BACKFACE)
+#include "Controllers\GammaControllerBack.h"
 GammaControllerBack controller = GammaControllerBack(maxBrightness);
-FullScreenAnimation animation = FullScreenAnimation();
+#endif
+
+GammaAnimation animation = GammaAnimation();
 
 float FreeMem(){
     uint32_t stackT;
@@ -64,11 +72,11 @@ void setup() {
 void loop() {
     float ratio = (float)(millis() % 5000) / 5000.0f;
 
-    controller.SetBrightness(2);// / 8);
-    //controller.SetBrightness(Menu::GetBrightness() / 2);// / 8);
     //controller.SetAccentBrightness(Menu::GetAccentBrightness());
 
     animation.UpdateTime(ratio);
+
+    controller.SetBrightness(powf(Menu::GetBrightness() + 3, 2) / 3);// / 8);
     controller.Render(animation.GetScene());
     
     //animation.SetCameraMirror(false);

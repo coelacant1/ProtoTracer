@@ -25,10 +25,6 @@ private:
     static DampedSpring dampedSpringX;
     static DampedSpring dampedSpringShow;
 
-    static FunctionGenerator fGenMatXMenu;
-    static FunctionGenerator fGenMatYMenu;
-    static FunctionGenerator fGenMatRMenu;
-
     static Vector2D size;
     static Vector2D position;
     static Vector2D positionOffset;
@@ -40,7 +36,19 @@ private:
     static const uint8_t menuLength = 12;
     static TextEngine<2, menuLength * menuCount> textEngine;
     static uint8_t faceCount;
+    static uint8_t currentMenu;
     static float wiggleRatio;
+    static bool isSecondary;
+    
+    static uint8_t faceState;
+    static uint8_t bright;
+    static uint8_t accentBright;
+    static uint8_t microphone;
+    static uint8_t micLevel;
+    static uint8_t boopSensor;
+    static uint8_t spectrumMirror;
+    static uint8_t faceSize;
+    static uint8_t color;
     
     static String line1;
     static String line2;
@@ -91,24 +99,59 @@ public:
         SetMaxEntries();
 
         MenuHandler::Begin();
+        isSecondary = false;
+    }
+
+    static void Initialize(uint8_t faceCount, Vector2D size = Vector2D(240, 50)){
+        Menu::faceCount = faceCount;
+
+        dampedSpringX.SetConstants(1.0f, 0.5f);
+        dampedSpringShow.SetConstants(1.0f, 0.5f);
+
+        SetSize(size);
+
+        textEngine.SetMaterial(&material);
+        textEngine.SetPositionOffset(position);
+        textEngine.SetBlinkTime(200);
+
+        SetMaxEntries();
+
+        isSecondary = true;
     }
 
     static Material* GetMaterial(){
         return &textEngine;
     }
 
-    static void Update(){
-        float target = (1.0f - float(MenuHandler::GetCurrentMenu() + 1) / float(menuCount)) * size.X + 25.0f;
+    static void SetCurrentMenu(uint8_t currentMenu){
+        Menu::currentMenu = currentMenu;
+    }
+
+    static void Update(float ratio){
+        float target = 0.0f;
+        float menuTarget = 0.0f;
+
+        if (isSecondary){
+            target = (1.0f - float(currentMenu + 1) / float(menuCount)) * size.X + 25.0f;
+            menuTarget = currentMenu != 0 ? 0.0f : 100.0f;
+        }
+        else{
+            target = (1.0f - float(MenuHandler::GetCurrentMenu() + 1) / float(menuCount)) * size.X + 25.0f;
+            menuTarget = MenuHandler::GetCurrentMenu() != 0 ? 0.0f : 100.0f;
+        }
+
         float xPosition = dampedSpringX.Calculate(target, 0.25f);
-        float menuTarget = MenuHandler::GetCurrentMenu() != 0 ? 0.0f : 100.0f;
 
         showMenuRatio = dampedSpringShow.Calculate(menuTarget, 0.25f);
-        material.Update(float(millis() % 15000) / 15000.0f);
+        material.Update(ratio);
+
+        ratio = sinf(ratio * Mathematics::MPI * 2.0f) * 4.0f;//Mathematics::Map(ratio, 0.0f, 1.0f, -4.0f, 4.0f);
+
+        Menu::SetPosition(Vector2D(-xPosition + ratio * wiggleRatio, ratio * wiggleRatio + 40.0f + showMenuRatio * 3.0f));
+        Menu::SetRotationOffset(Vector2D(200.0f / 2, 100.0f / 2));
+        Menu::SetRotation(ratio);
 
         Menu::GenerateText();
-        Menu::SetPosition(Vector2D(-xPosition + fGenMatXMenu.Update() * wiggleRatio, fGenMatYMenu.Update() * wiggleRatio + 40.0f + showMenuRatio));
-        Menu::SetRotationOffset(Vector2D(200.0f / 2, 100.0f / 2));
-        Menu::SetRotation(fGenMatRMenu.Update());
     }
 
     static void SetWiggleRatio(float wiggleRatio){
@@ -123,6 +166,10 @@ public:
         textEngine.SetSize(size);
     }
 
+    static Vector2D GetPosition(){
+        return Menu::position;
+    }
+
     static void SetPosition(Vector2D position){
         Menu::position = position + positionOffset;
         textEngine.SetPositionOffset(Menu::position);
@@ -135,6 +182,10 @@ public:
     static void SetRotationOffset(Vector2D rotationOffset){
         Menu::rotationOffset = rotationOffset;
         textEngine.SetRotationOffset(rotationOffset);
+    }
+
+    static float GetRotation(){
+        return Menu::rotation;
     }
     
     static void SetRotation(float rotation){
@@ -202,8 +253,8 @@ public:
 
         line2 = "            ";
 
-        line2 += GenerateLine(10, MenuHandler::GetMenuValue(Bright));
-        line2 += GenerateLine(10, MenuHandler::GetMenuValue(AccentBright));
+        line2 += GenerateLine(10, GetBrightness());
+        line2 += GenerateLine(10, GetAccentBrightness());
         line2 += UseMicrophone() ? "   on OFF   " : "   ON off   ";
         line2 += GenerateLine(10, GetMicLevel());
         line2 += UseBoopSensor() ? "   on OFF   " : "   ON off   ";
@@ -214,40 +265,85 @@ public:
         textEngine.SetText(1, line2, false);
     }
 
+    static void SetFaceState(uint8_t faceState){
+        Menu::faceState = faceState;
+    }
+
     static uint8_t GetFaceState(){
-        return MenuHandler::GetMenuValue(Faces);
+        if(isSecondary) return faceState;
+        else return MenuHandler::GetMenuValue(Faces);
+    }
+
+    static void SetBrightness(uint8_t bright){
+        Menu::bright = bright;
     }
 
     static uint8_t GetBrightness(){
-        return (MenuHandler::GetMenuValue(Bright) + 1) * 25;
+        if(isSecondary) return bright;
+        else return MenuHandler::GetMenuValue(Bright);
+    }
+
+    static void SetAccentBrightness(uint8_t accentBright){
+        Menu::accentBright = accentBright;
     }
 
     static uint8_t GetAccentBrightness(){
-        return (MenuHandler::GetMenuValue(AccentBright) + 1) * 25;
+        if(isSecondary) return accentBright;
+        else return MenuHandler::GetMenuValue(AccentBright);
+    }
+
+    static void SetUseMicrophone(uint8_t microphone){
+        Menu::microphone = microphone;
     }
 
     static uint8_t UseMicrophone(){
-        return MenuHandler::GetMenuValue(Microphone);
+        if(isSecondary) return microphone;
+        else return MenuHandler::GetMenuValue(Microphone);
+    }
+
+    static void SetMicLevel(uint8_t micLevel){
+        Menu::micLevel = micLevel;
     }
 
     static uint8_t GetMicLevel(){
-        return MenuHandler::GetMenuValue(MicLevel);
+        if(isSecondary) return micLevel;
+        else return MenuHandler::GetMenuValue(MicLevel);
+    }
+
+    static void SetUseBoopSensor(uint8_t boopSensor){
+        Menu::boopSensor = boopSensor;
     }
 
     static uint8_t UseBoopSensor(){
-        return MenuHandler::GetMenuValue(BoopSensor);
+        if(isSecondary) return boopSensor;
+        else return MenuHandler::GetMenuValue(BoopSensor);
+    }
+
+    static void SetMirrorSpectrumAnalyzer(uint8_t spectrumMirror){
+        Menu::spectrumMirror = spectrumMirror;
     }
 
     static uint8_t MirrorSpectrumAnalyzer(){
-        return MenuHandler::GetMenuValue(SpectrumMirror);
+        if(isSecondary) return spectrumMirror;
+        else return MenuHandler::GetMenuValue(SpectrumMirror);
+    }
+
+    static void SetFaceSize(uint8_t faceSize){
+        Menu::faceSize = faceSize;
     }
 
     static uint8_t GetFaceSize(){
-        return MenuHandler::GetMenuValue(FaceSize);
+        if(isSecondary) return faceSize;
+        else return MenuHandler::GetMenuValue(FaceSize);
+    }
+
+    static void SetFaceColor(uint8_t color){
+        Menu::color = color;
     }
 
     static uint8_t GetFaceColor(){
-        return MenuHandler::GetMenuValue(Color);
+        if(isSecondary) return color;
+        else return MenuHandler::GetMenuValue(Color);
     }
 
     static float ShowMenu(){
@@ -258,10 +354,6 @@ public:
 RainbowNoise Menu::material;
 DampedSpring Menu::dampedSpringX;
 DampedSpring Menu::dampedSpringShow;
-
-FunctionGenerator Menu::fGenMatXMenu = FunctionGenerator(FunctionGenerator::Sine, -4.0f, 4.0f, 1.12f);
-FunctionGenerator Menu::fGenMatYMenu = FunctionGenerator(FunctionGenerator::Sine, -4.0f, 4.0f, 1.73f);
-FunctionGenerator Menu::fGenMatRMenu = FunctionGenerator(FunctionGenerator::Sine, -4.0f, 4.0f, 0.76f);
 
 Vector2D Menu::size;
 Vector2D Menu::position;
@@ -274,7 +366,19 @@ const uint8_t Menu::menuCount;
 const uint8_t Menu::menuLength;
 TextEngine<2, 12 * Menu::menuCount> Menu::textEngine;
 uint8_t Menu::faceCount;
+uint8_t Menu::currentMenu = 0;
 float Menu::wiggleRatio = 1.0f;
+bool Menu::isSecondary = 0;
+
+uint8_t Menu::faceState = 0;
+uint8_t Menu::bright = 0;
+uint8_t Menu::accentBright = 0;
+uint8_t Menu::microphone = 0;
+uint8_t Menu::micLevel = 0;
+uint8_t Menu::boopSensor = 0;
+uint8_t Menu::spectrumMirror = 0;
+uint8_t Menu::faceSize = 0;
+uint8_t Menu::color = 0;
 
 //                    111111111111222222222222333333333333444444444444555555555555666666666666777777777777888888888888999999999999
 String Menu::line1 = "               BRIGHT     SIDEBRT       MIC        LEVEL        BOOP        SPEC        SIZE       COLOR    ";
