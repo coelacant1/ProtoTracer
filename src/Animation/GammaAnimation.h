@@ -436,7 +436,7 @@ public:
         //bool isBooped = Menu::UseBoopSensor() ? boop.GetDistance(); : 0;
         uint8_t mode = Menu::GetFaceState();//change by button press
 
-        if (isDead && false){
+        if (isDead){
             Dead();
         }
         else if(isBoop){

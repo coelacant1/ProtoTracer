@@ -1,7 +1,7 @@
 //#define RIGHTFACE
 //#define LEFTFACE
-//#define FRONTFACE
-#define BACKFACE
+#define FRONTFACE
+//#define BACKFACE
 //#define DEMOMODE
 //#define PRINTINFO
 
