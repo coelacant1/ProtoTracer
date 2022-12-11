@@ -237,7 +237,7 @@ public:
         float xOffset = fGenMatXMove.Update();
         float yOffset = fGenMatYMove.Update();
         
-        Menu::Update();
+        Menu::Update(ratio);
 
         SetMaterialColor();
 

@@ -41,7 +41,7 @@ private:
     Camera* cameras[6] = { &camRghtFrnt, &camLeftFrnt, &camRghtRear, &camLeftRear, &camRghtChin, &camLeftChin };
 
 public:
-    BetaProtoController(uint8_t maxBrightness) : Controller(cameras, 8, maxBrightness, 0){}
+    BetaProtoController(uint8_t maxBrightness) : Controller(cameras, 6, maxBrightness, 0){}
 
     void Initialize() override{
         leds.begin();
@@ -81,12 +81,11 @@ public:
                 leds.setPixel(i + 346 * 1 - 346, camLeftFrntPixels.GetPixel(i - 346)->Color.R, camLeftFrntPixels.GetPixel(i - 346)->Color.G, camLeftFrntPixels.GetPixel(i - 346)->Color.B);//Pin 8
                 leds.setPixel(i + 346 * 0 - 346, camRghtFrntPixels.GetPixel(i)->Color.R, camRghtFrntPixels.GetPixel(i)->Color.G, camRghtFrntPixels.GetPixel(i)->Color.B);//Pin 8
             }
-        }
-        
-        for(int i = 0; i < 89; i++){
-            //Front Panels
-            leds.setPixel(i + 346 * 1 + 225, camLeftChinPixels.GetPixel(i)->Color.R, camLeftChinPixels.GetPixel(i)->Color.G, camLeftChinPixels.GetPixel(i)->Color.B);//Pin 8
-            leds.setPixel(i + 346 * 0 + 225, camRghtChinPixels.GetPixel(i)->Color.R, camRghtChinPixels.GetPixel(i)->Color.G, camRghtChinPixels.GetPixel(i)->Color.B);//Pin 8
+
+            if (i < 89){
+                leds.setPixel(i + 346 * 1 + 225, camLeftChinPixels.GetPixel(i)->Color.R, camLeftChinPixels.GetPixel(i)->Color.G, camLeftChinPixels.GetPixel(i)->Color.B);//Pin 8
+                leds.setPixel(i + 346 * 0 + 225, camRghtChinPixels.GetPixel(i)->Color.R, camRghtChinPixels.GetPixel(i)->Color.G, camRghtChinPixels.GetPixel(i)->Color.B);//Pin 8
+            }
         }
 
         leds.show();

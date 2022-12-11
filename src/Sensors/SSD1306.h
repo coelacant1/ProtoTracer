@@ -37,4 +37,20 @@ public:
 
         display.startscrollright(0x00, 0x0F);
     }
+
+    void Display(const __FlashStringHelper *line1, const __FlashStringHelper *line2, const __FlashStringHelper *line3){
+        display.clearDisplay();
+
+        display.setTextSize(1);
+        display.setTextColor(SSD1306_WHITE);
+        display.setTextWrap(false);
+        
+        display.setCursor(10, 0);
+        display.println(line1);
+        display.setCursor(10, 10);
+        display.println(line2);
+        display.setCursor(10, 20);
+        display.println(line3);
+        display.display();
+    }
 };

@@ -1,16 +1,17 @@
 //#define RIGHTFACE
 //#define LEFTFACE
-#define FRONTFACE
+//#define FRONTFACE
 //#define BACKFACE
 //#define DEMOMODE
-//#define PRINTINFO
+#define PRINTINFO
 
 
 //--------------- ANIMATIONS ---------------
-#include "Animation\GammaAnimation.h"
+//#include "Animation\GammaAnimation.h"
 //#include "Animation\ProtoDRMorphAnimation.h"
 //#include "Animation\ProtogenKitFaceAnimation.h"
 //#include "Animation\ProtogenHUB75Animation.h"
+#include "Animation\Commissions\HertzzAnimation.h"
 //#include "Animation\ProtogenHUB75AnimationSplit.h"
 //#include "Animation\Commissions\SergaliciousAnimation.h"
 //#include "Animation\Commissions\InfraredAnimation.h"
@@ -27,8 +28,9 @@
 //#include "Controllers\KaiborgV1Controller.h"
 //#include "Controllers\KaiborgV1D1Controller.h"
 //#include "Controllers\ProtoDRController.h"
-//include "Controllers\SmartMatrixHUB75.h"
+//#include "Controllers\SmartMatrixHUB75.h"
 //#include "Controllers\SmartMatrixHUB75Split.h"
+#include "Controllers\BetaProtoControllerOctoWS2811.h"
 
 uint8_t maxBrightness = 50;
 uint8_t maxAccentBrightness = 100;
@@ -42,9 +44,11 @@ GammaControllerFront controller = GammaControllerFront(maxBrightness);
 #elif defined(BACKFACE)
 #include "Controllers\GammaControllerBack.h"
 GammaControllerBack controller = GammaControllerBack(maxBrightness);
+#else
+ProtoV2Controller controller = ProtoV2Controller(maxBrightness);
 #endif
 
-GammaAnimation animation = GammaAnimation();
+HertzzAnimation animation = HertzzAnimation();
 
 float FreeMem(){
     uint32_t stackT;

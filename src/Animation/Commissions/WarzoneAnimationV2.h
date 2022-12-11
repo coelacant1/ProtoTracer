@@ -6,13 +6,13 @@
 #include "..\EasyEaseAnimator.h"
 #include "..\..\Objects\Background.h"
 #include "..\..\Objects\LEDStripBackground.h"
-#include "..\..\Morph\Commissions\WarzoneFace.h"
-#include "..\..\Morph\Commissions\WarzoneExtras.h"
+#include "..\..\Morph\WarzoneFace.h"
+#include "..\..\Morph\WarzoneExtras.h"
 #include "..\..\Render\Scene.h"
 #include "..\..\Menu\Menu.h"
 #include "..\..\Signals\FunctionGenerator.h"
 #include "..\..\Signals\FFTVoiceDetection.h"
-#include "..\..\Sensors\BoopSensor.h"
+#include "..\..\Sensors\APDS9960.h"
 #include "..\..\Sensors\MicrophoneFourier_DMA.h"
 #include "..\..\Render\ObjectAlign.h"
 
@@ -72,7 +72,7 @@ private:
     FunctionGenerator fGenMatM2Sleep = FunctionGenerator(FunctionGenerator::Sine, 0.0f, 1.0f, 6.7f);
     FunctionGenerator fGenMatS1Sleep = FunctionGenerator(FunctionGenerator::Sine, 0.0f, 1.0f, 4.6f);
 
-    BoopSensor boop;
+    APDS9960 boop;
 
     FFTVoiceDetection<128> voiceDetection;
 
@@ -336,7 +336,7 @@ public:
         float xOffset = fGenMatXMove.Update();
         float yOffset = fGenMatYMove.Update();
         
-        Menu::Update();
+        Menu::Update(ratio);
 
         SetMaterialColor();
 

@@ -74,10 +74,26 @@ Adafruit_BNO055::Adafruit_BNO055(int32_t sensorID, uint8_t address,
  *  @return true if process is successful
  */
 bool Adafruit_BNO055::begin(adafruit_bno055_opmode_t mode) {
+  // Start without a detection
+  i2c_dev->begin(false);
 
-  if (!i2c_dev->begin()) {
-    return false;
+#if defined(TARGET_RP2040)
+  // philhower core seems to work with this speed?
+  i2c_dev->setSpeed(50000);
+#endif
+
+  // can take 850 ms to boot!
+  int timeout = 850; // in ms
+  while (timeout > 0) {
+    if (i2c_dev->begin()) {
+      break;
+    }
+    // wasnt detected... we'll retry!
+    delay(10);
+    timeout -= 10;
   }
+  if (timeout <= 0)
+    return false;
 
   /* Make sure we have the right device */
   uint8_t id = read8(BNO055_CHIP_ID_ADDR);
@@ -156,6 +172,15 @@ void Adafruit_BNO055::setMode(adafruit_bno055_opmode_t mode) {
   _mode = mode;
   write8(BNO055_OPR_MODE_ADDR, _mode);
   delay(30);
+}
+
+/*!
+ *  @brief  Gets the current operating mode of the chip
+ *  @return  operating_mode in integer which can be mapped in Section 3.3
+ *           for example: a return of 12 (0X0C) => NDOF
+ */
+adafruit_bno055_opmode_t Adafruit_BNO055::getMode() {
+  return (adafruit_bno055_opmode_t)read8(BNO055_OPR_MODE_ADDR);
 }
 
 /*!
