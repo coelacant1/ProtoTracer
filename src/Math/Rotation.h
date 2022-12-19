@@ -14,11 +14,11 @@ private:
 	Quaternion QuaternionRotation;
 
 	Quaternion AxisAngleToQuaternion(AxisAngle axisAngle) {
-		float rotation = Mathematics::DegreesToRadians(axisAngle.Rotation);
-		float scale = sinf(rotation / 2.0f);
+		float halfRotation = Mathematics::DegreesToRadians(axisAngle.Rotation) / 2.0f;
+		float scale = sinf(halfRotation);
 
 		return Quaternion(
-			cosf(rotation / 2.0f),
+			cosf(halfRotation / 2.0f),
 			axisAngle.Axis.X * scale,
 			axisAngle.Axis.Y * scale,
 			axisAngle.Axis.Z * scale
@@ -30,13 +30,10 @@ private:
 		Vector3D up =      Vector3D(0, 1, 0);
 		Vector3D forward = Vector3D(0, 0, 1);
 
-		directionAngle.Direction.UnitSphere();
-
 		Vector3D rotatedRight;
-		Vector3D rotatedUp = Vector3D(directionAngle.Direction);
 		Vector3D rotatedForward;
 
-		Quaternion rotationChange = QuaternionFromDirectionVectors(up, rotatedUp);
+		Quaternion rotationChange = QuaternionFromDirectionVectors(up, directionAngle.Direction.UnitSphere());
 
 		Vector3D rightAngleRotated = RotationMatrix::RotateVector(Vector3D(0, -directionAngle.Rotation, 0), right);
 		Vector3D forwardAngleRotated = RotationMatrix::RotateVector(Vector3D(0, -directionAngle.Rotation, 0), forward);
@@ -44,7 +41,7 @@ private:
 		rotatedRight = rotationChange.RotateVector(rightAngleRotated);
 		rotatedForward = rotationChange.RotateVector(forwardAngleRotated);
 
-		return RotationMatrixToQuaternion(RotationMatrix(rotatedRight, rotatedUp, rotatedForward)).UnitQuaternion();
+		return RotationMatrixToQuaternion(RotationMatrix(rotatedRight, directionAngle.Direction, rotatedForward)).UnitQuaternion();
 	}
 
 	Quaternion RotationMatrixToQuaternion(RotationMatrix rM) {
@@ -52,49 +49,49 @@ private:
 	}
 
 	Quaternion RotationMatrixToQuaternion(Vector3D X, Vector3D Y, Vector3D Z){
-	Quaternion q = Quaternion();
-	
-	float matrixTrace = X.X + Y.Y + Z.Z;
-	float square;
+		Quaternion q = Quaternion();
+		
+		float matrixTrace = X.X + Y.Y + Z.Z;
+		float square;
 
-	if (matrixTrace > 0)//standard procedure
-	{
-		square = sqrtf(1.0f + matrixTrace) * 2.0f;//4 * qw
+		if (matrixTrace > 0)//standard procedure
+		{
+			square = sqrtf(1.0f + matrixTrace) * 2.0f;//4 * qw
 
-		q.W = 0.25f * square;
-		q.X = (Z.Y - Y.Z) / square;
-		q.Y = (X.Z - Z.X) / square;
-		q.Z = (Y.X - X.Y) / square;
-	}
-	else if ((X.X > Y.Y) && (X.X > Z.Z))
-	{
-		square = sqrtf(1.0f + X.X - Y.Y - Z.Z) * 2.0f;//4 * qx
+			q.W = 0.25f * square;
+			q.X = (Z.Y - Y.Z) / square;
+			q.Y = (X.Z - Z.X) / square;
+			q.Z = (Y.X - X.Y) / square;
+		}
+		else if ((X.X > Y.Y) && (X.X > Z.Z))
+		{
+			square = sqrtf(1.0f + X.X - Y.Y - Z.Z) * 2.0f;//4 * qx
 
-		q.W = (Z.Y - Y.Z) / square;
-		q.X = 0.25f * square;
-		q.Y = (X.Y + Y.X) / square;
-		q.Z = (X.Z + Z.X) / square;
-	}
-	else if (Y.Y > Z.Z)
-	{
-		square = sqrtf(1.0f + Y.Y - X.X - Z.Z) * 2.0f;//4 * qy
+			q.W = (Z.Y - Y.Z) / square;
+			q.X = 0.25f * square;
+			q.Y = (X.Y + Y.X) / square;
+			q.Z = (X.Z + Z.X) / square;
+		}
+		else if (Y.Y > Z.Z)
+		{
+			square = sqrtf(1.0f + Y.Y - X.X - Z.Z) * 2.0f;//4 * qy
 
-		q.W = (X.Z - Z.X) / square;
-		q.X = (X.Y + Y.X) / square;
-		q.Y = 0.25f * square;
-		q.Z = (Y.Z + Z.Y) / square;
-	}
-	else
-	{
-		square = sqrtf(1.0f + Z.Z - X.X - Y.Y) * 2.0f;//4 * qz
+			q.W = (X.Z - Z.X) / square;
+			q.X = (X.Y + Y.X) / square;
+			q.Y = 0.25f * square;
+			q.Z = (Y.Z + Z.Y) / square;
+		}
+		else
+		{
+			square = sqrtf(1.0f + Z.Z - X.X - Y.Y) * 2.0f;//4 * qz
 
-		q.W = (Y.X - X.Y) / square;
-		q.X = (X.Z + Z.X) / square;
-		q.Y = (Y.Z + Z.Y) / square;
-		q.Z = 0.25f * square;
-	}
+			q.W = (Y.X - X.Y) / square;
+			q.X = (X.Z + Z.X) / square;
+			q.Y = (Y.Z + Z.Y) / square;
+			q.Z = 0.25f * square;
+		}
 
-	return q.UnitQuaternion().Conjugate();
+		return q.UnitQuaternion().Conjugate();
 	}
 
 	Quaternion EulerAnglesToQuaternion(EulerAngles eulerAngles) {

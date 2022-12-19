@@ -1,12 +1,12 @@
 #pragma once
 
 #include <Arduino.h>
-#include "KalmanFilter.h"
+#include "RunningAverageFilter.h"
 #include "..\Math\Mathematics.h"
 
 class FFTFilter{
 private:
-    KalmanFilter<20> minKF = KalmanFilter<20>(0.05f);
+    RunningAverageFilter<20> minKF = RunningAverageFilter<20>(0.05f);
     float outputValue = 0.0f;
 
 public:

@@ -1,50 +1,30 @@
 #pragma once
 
-template<size_t memory>
+template<typename T>
 class KalmanFilter {
 private:
-	float gain = 0.1f;
-	float values[memory];
-  	uint8_t currentAmount = 0;
+	T processNoise;
+	T sensorNoise;
+	T estimation;
+	T errorCovariance;
 
 public:
-	KalmanFilter() {
-		this->gain = 0.25f;
-	}
-
-	KalmanFilter(float gain){
-		this->gain = gain;
-	}
-
-	void SetGain(float gain){
-		this->gain = gain;
+	KalmanFilter(T processNoise, T sensorNoise, T errorCovariance) {
+		this->processNoise = processNoise;
+        this->sensorNoise = sensorNoise;
+        this->estimation = 0;
+        this->errorCovariance = errorCovariance;
 	}
 
 	float Filter(float value) {
-		float sum = 0.0f;
-		float avg = 0.0f;
-		float gainInverse = (1.0f - gain);
+		// Prediction
+        errorCovariance += processNoise;
 
-		if(currentAmount < memory){
-			values[currentAmount++] = value;
-		}
-		else{
-			for(uint8_t i = 0; i < memory - 1; i++){
-				values[i] = values[i + 1];
-			}
+        // Update
+        T kalmanGain = errorCovariance / (errorCovariance + sensorNoise);
+        estimation += kalmanGain * (value - estimation);
+        errorCovariance *= T(1) - kalmanGain;
 
-			values[memory - 1] = value;
-		}
-
-		for(uint8_t i = 0; i < currentAmount; i++){
-			sum += values[i];
-		}
-
-		if (currentAmount > 0) {
-			avg = sum / currentAmount;
-		}
-
-		return (gain * value) + (gainInverse * avg);
+		return estimation;
 	}
-
 };

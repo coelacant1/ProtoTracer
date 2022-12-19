@@ -4,55 +4,29 @@
 
 class Mathematics {
 public:
-	static const float EPSILON;
-	static const float MPI;
-	static const float MPID180;
-	static const float M180DPI;
-	
-	static uint32_t Constrain(uint32_t value, uint32_t minimum, uint32_t maximum) {
-		if (value > maximum)
-		{
+	static constexpr float EPSILON =  0.001f;
+	static constexpr float MPI     =  3.14159265358979323846f;
+	static constexpr float MPID180 =  0.01745329251994329576f;
+	static constexpr float M180DPI = 57.29577951308232087684f;
+
+	template<typename T>
+	static T Constrain(T value, T minimum, T maximum) {
+		if (value > maximum) {
 			value = maximum;
-		}
-		else if (value < minimum)
-		{
+		} else if (value < minimum) {
 			value = minimum;
 		}
 
 		return value;
 	}
 
-	static unsigned int Constrain(unsigned int value, unsigned int minimum, unsigned int maximum) {
-		if (value > maximum)
-		{
-			value = maximum;
-		}
-		else if (value < minimum)
-		{
-			value = minimum;
-		}
-
-		return value;
-	}
-
-	static float Constrain(float value, float minimum, float maximum) {
-		if (value > maximum)
-		{
-			value = maximum;
-		}
-		else if (value < minimum)
-		{
-			value = minimum;
-		}
-
-		return value;
-	}
-
-	static float DegreesToRadians(float degrees) {
+	template<typename T>
+	static T DegreesToRadians(T degrees) {
 		return degrees * MPID180;
 	}
 
-	static float RadiansToDegrees(float radians) {
+	template<typename T>
+	static T RadiansToDegrees(T radians) {
 		return radians * M180DPI;
 	}
 
@@ -65,11 +39,11 @@ public:
 	}
 
 	static bool IsInfinite(float value) {
-		return value == 3.402823466e+38f;
+		return isinf(value);
 	}
 
 	static bool IsFinite(float value) {
-		return value != 3.402823466e+38f;
+		return isfinite(value);
 	}
 
 	static bool IsClose(float v1, float v2, float epsilon){
@@ -117,23 +91,28 @@ public:
 		return Map(ratio, 0.0f, bounce, beg, fin);
 	}
 
-	static float Map(float value, float inLow, float inMax, float outMin, float outMax){
+	template<typename T>
+	static T Map(T value, T inLow, T inMax, T outMin, T outMax){
 		return (value - inLow) * (outMax - outMin) / (inMax - inLow) + outMin;
 	}
 
-	static float Max(float value1, float value2){
+	template <typename T>
+	static T Max(T value1, T value2) {
 		return value1 > value2 ? value1 : value2;
 	}
-	
-	static float Min(float value1, float value2){
+
+	template <typename T>
+	static T Min(T value1, T value2) {
 		return value1 < value2 ? value1 : value2;
 	}
 
-	static float Min(float v1, float v2, float v3){
+	template <typename T>
+	static T Min(T v1, T v2, T v3) {
 		return v1 < v2 ? (v1 < v3 ? v1 : v3) : (v2 < v3 ? v2 : v3);
 	}
 
-	static float Max(float v1, float v2, float v3){
+	template <typename T>
+	static T Max(T v1, T v2, T v3) {
 		return v1 > v2 ? (v1 > v3 ? v1 : v3) : (v2 > v3 ? v2 : v3);
 	}
 
@@ -151,8 +130,3 @@ public:
 			return value + multiple - remainder;
 	}
 };
-
-const float Mathematics::EPSILON = 0.001f;
-const float Mathematics::MPI = atan(1) * 4;
-const float Mathematics::MPID180 = MPI / 180.0f;
-const float Mathematics::M180DPI = 180.0f / MPI;

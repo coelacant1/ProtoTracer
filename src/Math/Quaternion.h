@@ -4,8 +4,7 @@
 #include "Vector2D.h"
 #include "Vector3D.h"
 
-class Quaternion {
-public:
+struct Quaternion {
 	float W = 1.0f;
 	float X = 0.0f;
 	float Y = 0.0f;
@@ -122,7 +121,7 @@ public:
 		}
 		else
 		{
-			dot = Mathematics::Constrain(dot, -1, 1);
+			dot = Mathematics::Constrain<float>(dot, -1, 1);
 
 			float theta0 = acosf(dot);
 			float theta = theta0 * ratio;

@@ -3,7 +3,7 @@
 template<size_t memory>
 class MaxFilter {
 private:
-	const int maxMemory = memory / 10;
+	const int maxMemory = ceil(memory / 10);
 	float values[memory];
 	float maxValues[memory / 10];
   	uint8_t currentAmount = 0;
@@ -17,7 +17,12 @@ private:
 	}
 
 public:
-	MaxFilter() {}
+	MaxFilter() {
+		// Initialize the maxValues array to 0.0f
+		for (int i = 0; i < maxMemory; i++) {
+			maxValues[i] = 0.0f;
+		}
+	}
 
 	float Filter(float value) {
 		float avg = 0;

@@ -235,7 +235,8 @@ public:
     void AlignObjects(Object3D** objs, uint8_t numObjects){
         // calculate planes, assume flat object (largest axes are axis), best fit plane i.e. centroid + direction/normal
         Vector3D centroid = GetCentroid(objs, numObjects);
-        Quaternion planeOrientation = GetPlaneOrientation(objs, numObjects, centroid);
+        Quaternion planeOrientation = GetPlaneNormal(objs, numObjects);
+        //Quaternion planeOrientation = GetPlaneOrientation(objs, numObjects, centroid);
         Vector2D cameraSize = (camMax - camMin);
         Vector3D objectCenter = GetObjectCenter(objs, numObjects);//Get cameraCenter of objects
         

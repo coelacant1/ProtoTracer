@@ -92,7 +92,7 @@ public:
         float secondPoint = (data[x + 2] - midPoint) / 1024.0f;
 
         float height = Mathematics::CosineInterpolation(firstPoint, secondPoint, ratio);//0->1.0f of max height of color
-        float yColor = Mathematics::Map(rPos.Y, 0, size.Y, 1.0f, 0.0f);
+        float yColor = Mathematics::Map(rPos.Y, 0.0f, size.Y, 1.0f, 0.0f);
         
         if (rPos.Y < height * 40.0f && rPos.Y > height * 40.0f - 8.0f){
             return material->GetRGB(Vector3D(1.0f + height - yColor, 0, 0), Vector3D(), Vector3D()).HueShift(hueAngle);

@@ -3,7 +3,7 @@
 template<size_t memory>
 class MinFilter {
 private:
-	const int minMemory = memory / 10;
+	const int minMemory = ceil(memory / 10);
 	float values[memory];
 	float minValues[memory / 10];
   	uint8_t currentAmount = 0;
@@ -20,6 +20,11 @@ private:
 public:
 	MinFilter(bool ignoreSame = true) {
 		this->ignoreSame = ignoreSame;
+
+		// Initialize the minValues array to 0.0f
+		for (int i = 0; i < minMemory; i++) {
+			minValues[i] = 0.0f;
+		}
 	}
 
 	float Filter(float value) {

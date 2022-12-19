@@ -1,12 +1,12 @@
 #pragma once
 
 #include <Arduino.h>
-#include "..\Filter\KalmanFilter.h"
+#include "..\Filter\RunningAverageFilter.h"
 #include "..\Math\Mathematics.h"
 
 class BouncePhysics{
 private:
-    KalmanFilter<10> velocityFilter = KalmanFilter<10>(0.4f);
+    RunningAverageFilter<10> velocityFilter = RunningAverageFilter<10>(0.4f);
 	float currentVelocity = 0.0f;
 	float currentPosition = 0.0f;
     float velocityRatio = 1.0f;

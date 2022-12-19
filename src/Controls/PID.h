@@ -4,14 +4,14 @@
 
 class PID {
 private:
-	float integral = 0;
-	float error = 0;
-	float previousError = 0;
-	float output = 0;
-	float kp;
-	float ki;
-	float kd;
-    unsigned long previousMillis;
+	float integral = 0.0f;
+	float error = 0.0f;
+	float previousError = 0.0f;
+	float output = 0.0f;
+	float kp = 1.0f;
+	float ki = 0.0f;
+	float kd = 0.0f;
+    float previousSeconds = 0.0f;
 
 public:
 	PID() {
@@ -19,7 +19,7 @@ public:
         this->ki = 0.0f;
         this->kd = 0.0f;
 
-        previousMillis = millis();
+        previousSeconds = millis();
     }
 
 	~PID();
@@ -29,14 +29,14 @@ public:
         this->ki = ki;
         this->kd = kd;
 
-        previousMillis = millis();
+        previousSeconds = millis();
     }
 
 	float Calculate(float setpoint, float processVariable){
         float POut, IOut, DOut;
 
-        unsigned long currentMillis = millis();
-        float dT = ((float)(currentMillis - previousMillis)) / 1000.0f;
+        float currentSeconds = millis() / 1000.0f;
+        float dT = currentSeconds - previousSeconds;
 
         error = setpoint - processVariable;
         integral += error * dT;
@@ -48,7 +48,7 @@ public:
         output = POut + IOut + DOut;
         previousError = error;
         
-        previousMillis = currentMillis;
+        previousSeconds = currentSeconds;
 
         return output;
     }

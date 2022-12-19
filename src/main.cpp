@@ -1,17 +1,57 @@
-//#define RIGHTFACE
-//#define LEFTFACE
-//#define FRONTFACE
-//#define BACKFACE
-//#define DEMOMODE
-#define PRINTINFO
+//#define ALPHARIGHT
+//#define ALPHALEFT
+//#define BETAWS35
+//#define GAMMAFRONT
+//#define GAMMABACK
+#define HUB75
+//#define HUB75Split
+//#define WS35
 
+//#define PRINTINFO
 
+#include <Arduino.h>
+
+uint8_t maxBrightness = 50;
+uint8_t maxAccentBrightness = 100;
+
+#ifdef ALPHARIGHT
+#include "Controllers\ProtoDRController.h"
+#include "Animation\ProtoDRMorphAnimation.h"
+ProtoDRController controller = ProtoDRController(maxBrightness, ProtoDRController::RIGHT);
+#elif defined(ALPHALEFT)
+#include "Controllers\ProtoDRController.h"
+#include "Animation\ProtoDRMorphAnimation.h"
+ProtoDRController controller = ProtoDRController(maxBrightness, ProtoDRController::LEFT);
+#elif defined(BETAWS35)
+#include "Controllers\BetaProtoController.h"
+#include "Animation\ProtoV3Animation.h"
+BetaProtoController controller = BetaProtoController(maxBrightness);
+#elif defined(GAMMAFRONT)
+#include "Controllers\GammaControllerFront.h"
+GammaControllerFront controller = GammaControllerFront(maxBrightness);
+#elif defined(GAMMABACK)
+#include "Controllers\GammaControllerBack.h"
+GammaControllerBack controller = GammaControllerBack(maxBrightness);
+#elif defined(HUB75)
+#include "Controllers\SmartMatrixHUB75.h"
+#include "Animation\ProtogenHUB75Animation.h"
+SmartMatrixHUB75 controller = SmartMatrixHUB75(maxBrightness, maxAccentBrightness);
+ProtogenHUB75Animation animation = ProtogenHUB75Animation();
+#elif defined(HUB75Split)
+#include "Controllers\SmartMatrixHUB75Split.h"
+#include "Animation\ProtogenHUB75AnimationSplit.h"
+SmartMatrixHUB75Split controller = SmartMatrixHUB75Split(maxBrightness, maxAccentBrightness);
+ProtogenHUB75AnimationSplit animation = ProtogenHUB75AnimationSplit();
+#elif defined(WS35)
+#include "Controllers\KaiborgV1D1Controller.h"
+#include "Animation\ProtogenKitFaceAnimation.h"
+
+#else
 //--------------- ANIMATIONS ---------------
-//#include "Animation\GammaAnimation.h"
+#include "Animation\GammaAnimation.h"
 //#include "Animation\ProtoDRMorphAnimation.h"
 //#include "Animation\ProtogenKitFaceAnimation.h"
 //#include "Animation\ProtogenHUB75Animation.h"
-#include "Animation\Commissions\HertzzAnimation.h"
 //#include "Animation\ProtogenHUB75AnimationSplit.h"
 //#include "Animation\Commissions\SergaliciousAnimation.h"
 //#include "Animation\Commissions\InfraredAnimation.h"
@@ -28,9 +68,8 @@
 //#include "Controllers\KaiborgV1Controller.h"
 //#include "Controllers\KaiborgV1D1Controller.h"
 //#include "Controllers\ProtoDRController.h"
-//#include "Controllers\SmartMatrixHUB75.h"
+//include "Controllers\SmartMatrixHUB75.h"
 //#include "Controllers\SmartMatrixHUB75Split.h"
-#include "Controllers\BetaProtoControllerOctoWS2811.h"
 
 uint8_t maxBrightness = 50;
 uint8_t maxAccentBrightness = 100;
@@ -44,11 +83,9 @@ GammaControllerFront controller = GammaControllerFront(maxBrightness);
 #elif defined(BACKFACE)
 #include "Controllers\GammaControllerBack.h"
 GammaControllerBack controller = GammaControllerBack(maxBrightness);
-#else
-ProtoV2Controller controller = ProtoV2Controller(maxBrightness);
 #endif
 
-HertzzAnimation animation = HertzzAnimation();
+GammaAnimation animation = GammaAnimation();
 
 float FreeMem(){
     uint32_t stackT;
@@ -76,20 +113,29 @@ void setup() {
 void loop() {
     float ratio = (float)(millis() % 5000) / 5000.0f;
 
-    //controller.SetAccentBrightness(Menu::GetAccentBrightness());
-
     animation.UpdateTime(ratio);
 
-    controller.SetBrightness(powf(Menu::GetBrightness() + 3, 2) / 3);// / 8);
-    controller.Render(animation.GetScene());
-    
-    //animation.SetCameraMirror(false);
-    //animation.UpdateTime(ratio);
-    //controller.RenderCamera(animation.GetScene(), 0);
+    #ifdef HUB75Split
+    controller.SetAccentBrightness(Menu::GetAccentBrightness() * 25 + 5);
+    controller.SetBrightness(Menu::GetBrightness() * 25 + 5);
 
-    //animation.SetCameraMirror(true);
-    //animation.UpdateTime(ratio);
-    //controller.RenderCamera(animation.GetScene(), 1);
+    animation.SetCameraMirror(false);
+    animation.UpdateTime(ratio);
+    controller.RenderCamera(animation.GetScene(), 0);
+
+    animation.SetCameraMirror(true);
+    animation.UpdateTime(ratio);
+    controller.RenderCamera(animation.GetScene(), 1);
+    #elif defined(HUB75)
+    controller.SetAccentBrightness(Menu::GetAccentBrightness() * 25 + 5);
+    controller.SetBrightness(Menu::GetBrightness() * 25 + 5);
+
+    controller.Render(animation.GetScene());
+    #else
+    controller.SetAccentBrightness(Menu::GetAccentBrightness() * 25 + 5);
+
+    controller.SetBrightness(powf(Menu::GetBrightness() + 3, 2) / 3);// / 8);
+    #endif
     
 
     controller.Display();

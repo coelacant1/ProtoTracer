@@ -4,7 +4,7 @@
 //
 #pragma once
 
-#include "..\Filter\KalmanFilter.h"
+#include "..\Filter\RunningAverageFilter.h"
 #include "..\Filter\PeakDetection.h"
 #include "..\Render\IndexGroup.h"
 #include "..\Render\Triangle2D.h"
@@ -47,7 +47,7 @@ private:
     float* visRatios[visemeCount] = { &visRatioEE, &visRatioAE, &visRatioUH, &visRatioAR, &visRatioER, &visRatioAH, &visRatioOO };
 
     PeakDetection<peakCount> peakDetection = PeakDetection<peakCount>(8, 2.0f, 0.5f);
-    KalmanFilter<10> peakSmoothing = KalmanFilter<10>(0.1f);
+    RunningAverageFilter<10> peakSmoothing = RunningAverageFilter<10>(0.1f);
     bool peaksBinary[peakCount];
     float peakDensity[peakCount];
 

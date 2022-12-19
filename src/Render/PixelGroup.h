@@ -45,7 +45,7 @@ public:
     }
 
     Pixel* GetPixel(unsigned int count){
-        count = Mathematics::Constrain(count, 0, pixelCount);
+        count = Mathematics::Constrain<int>(count, 0, pixelCount);
 
         return pixels[count];
     }

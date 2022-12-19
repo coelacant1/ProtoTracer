@@ -27,7 +27,7 @@ public:
         }
     }
 
-    GradientMaterial(RGBColor* rgbColors, float gradientPeriod, bool isRadial, bool isStepped){
+    GradientMaterial(RGBColor* rgbColors, float gradientPeriod, bool isRadial, bool  ){
         this->gradientPeriod = gradientPeriod;
         this->isRadial = isRadial;
         this->isStepped = isStepped;
@@ -94,7 +94,7 @@ public:
         }
         
         //map from modulo'd x value to color count minimum
-        float ratio = Mathematics::Map(pos, 0, gradientPeriod, 0, colorCount);
+        float ratio = Mathematics::Map(pos, 0.0f, gradientPeriod, 0.0f, float(colorCount));
         uint8_t startBox = floor(ratio);
         uint8_t endBox = startBox + 1 >= (uint8_t)colorCount ? 0 : startBox + 1;
         
@@ -104,7 +104,7 @@ public:
             rgb = rgbColors[startBox];
         }
         else{
-            float mu = Mathematics::Map(ratio, startBox, startBox + 1, 0.0f, 1.0f);//calculate mu between boxes
+            float mu = Mathematics::Map(ratio, float(startBox), float(startBox + 1), 0.0f, 1.0f);//calculate mu between boxes
 
             rgb = RGBColor::InterpolateColors(rgbColors[startBox], rgbColors[endBox], mu);
         }

@@ -113,7 +113,7 @@ public:
         float ratio = Mathematics::Map(rPos.X, xDistance, xDistance2, 0.0f, 1.0f);//ratio between two bins
         float height = bounce ? Mathematics::CosineInterpolation(bounceData[x], bounceData[x + 1], ratio) : Mathematics::CosineInterpolation(data[x], data[x + 1], ratio);//0->1.0f of max height of color
         
-        float yColor = Mathematics::Map(rPos.Y, 0, size.Y, 1.0f, 0.0f);
+        float yColor = Mathematics::Map(rPos.Y, 0.0f, size.Y, 1.0f, 0.0f);
 
         float inside = 1.0f - (height * 4.0f + 0.15f) - yColor;
         

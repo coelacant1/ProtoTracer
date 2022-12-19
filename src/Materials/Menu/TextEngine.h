@@ -94,8 +94,8 @@ public:
         position = position - Vector3D(positionOffset.X, positionOffset.Y, 0);//offset position
 
         
-        int x = floorf(Mathematics::Map(position.X, 0.0f, size.X, characterWidth * 10, 0));
-        int y = floorf(Mathematics::Map(position.Y, 0.0f, size.Y, lineCount * 10, 0));
+        int x = floorf(Mathematics::Map(position.X, 0.0f, size.X, characterWidth * 10.0f, 0.0f));
+        int y = floorf(Mathematics::Map(position.Y, 0.0f, size.Y, lineCount * 10.0f, 0.0f));
 
         if(x < 0 || x >= characterWidth * 10 || y < 0 || y >= lineCount * 10) return black;
 

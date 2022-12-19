@@ -2,15 +2,15 @@
 
 #include <Arduino.h>
 #include "..\Math\Mathematics.h"
-#include "..\Filter\KalmanFilter.h"
+#include "..\Filter\RunningAverageFilter.h"
 #include "..\Filter\MinFilter.h"
 
 class MicrophoneSimple{
 private:
     uint8_t pin;
-    KalmanFilter<5> mv = KalmanFilter<5>(0.2f);
+    RunningAverageFilter<5> mv = RunningAverageFilter<5>(0.2f);
     MinFilter<100> minF = MinFilter<100>();
-    KalmanFilter<5> output = KalmanFilter<5>(0.2f);
+    RunningAverageFilter<5> output = RunningAverageFilter<5>(0.2f);
     float previousReading = 0.0f;
     float gain = 1.0f;
     float clipping = 1.0f;

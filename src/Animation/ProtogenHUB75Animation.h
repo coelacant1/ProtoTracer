@@ -5,7 +5,7 @@
 #include "EasyEaseAnimator.h"
 #include "..\Objects\Background.h"
 #include "..\Objects\LEDStripBackground.h"
-#include "..\Morph\NukudeFace.h"
+#include "..\Morph\NukudeFlat.h"
 #include "..\Render\Scene.h"
 #include "..\Signals\FunctionGenerator.h"
 #include "..\Menu\Menu.h"
@@ -32,7 +32,7 @@ private:
     NukudeFace pM;
     Background background;
     LEDStripBackground ledStripBackground;
-    EasyEaseAnimator<21> eEA = EasyEaseAnimator<21>(EasyEaseInterpolation::Overshoot, 1.0f, 0.35f);
+    EasyEaseAnimator<25> eEA = EasyEaseAnimator<25>(EasyEaseInterpolation::Overshoot, 1.0f, 0.35f);
     
     //Materials
     RainbowNoise rainbowNoise;
@@ -139,7 +139,7 @@ private:
         materialAnimator.AddMaterial(Material::Replace, &redMaterial, 40, 0.0f, 1.0f);//layer 6
         materialAnimator.AddMaterial(Material::Replace, &blueMaterial, 40, 0.0f, 1.0f);//layer 7
         materialAnimator.AddMaterial(Material::Replace, &rainbowSpiral, 40, 0.0f, 1.0f);//layer 8
-        materialAnimator.AddMaterial(Material::Lighten, &rainbowNoise, 40, 0.35f, 1.0f);//layer 9
+        materialAnimator.AddMaterial(Material::Replace, &rainbowNoise, 40, 0.35f, 1.0f);//layer 9
 
         backgroundMaterial.SetBaseMaterial(Material::Add, Menu::GetMaterial());
         backgroundMaterial.AddMaterial(Material::Add, &sA, 20, 0.0f, 1.0f);
@@ -263,7 +263,7 @@ public:
         Menu::Initialize(9, 20, 500);//7 is number of faces
 
         objA.SetJustification(ObjectAlign::Stretch);
-        //objA.SetScale(1.0f, 1.0f);
+        objA.SetMirrorX(true);
     }
 
     void FadeIn(float stepRatio) override {}
@@ -330,14 +330,12 @@ public:
         }
 
         UpdateKeyFrameTracks();
-
+        
         pM.SetMorphWeight(NukudeFace::BiggerNose, 1.0f);
         pM.SetMorphWeight(NukudeFace::MoveEye, 1.0f);
 
         eEA.Update();
         pM.Update();
-        
-        float menuRatio = Menu::ShowMenu();
 
         rainbowNoise.Update(ratio);
         rainbowSpiral.Update(ratio);
@@ -345,8 +343,7 @@ public:
         backgroundMaterial.Update();
 
         uint8_t faceSize = Menu::GetFaceSize();
-
-        float scale = menuRatio * 0.6f + 0.4f;
+        float scale = Menu::ShowMenu() * 0.6f + 0.4f;
         float faceSizeOffset = faceSize * 8.0f;
 
         objA.SetPlaneOffsetAngle(-7.5f);

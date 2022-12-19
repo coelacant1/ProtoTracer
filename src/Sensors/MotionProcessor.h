@@ -20,9 +20,9 @@ private:
     Quaternion absoluteOrientation;
     long previousMicros;
 
-    VectorKalmanFilter localAngulKF = VectorKalmanFilter(0.1f, 10);
-    VectorKalmanFilter localAccelKF = VectorKalmanFilter(0.1f, 10);
-    VectorKalmanFilter localGraviKF = VectorKalmanFilter(0.1f, 10);
+    VectorKalmanFilter<float> localAngulKF = VectorKalmanFilter<float>(0.1f, 10);
+    VectorKalmanFilter<float> localAccelKF = VectorKalmanFilter<float>(0.1f, 10);
+    VectorKalmanFilter<float> localGraviKF = VectorKalmanFilter<float>(0.1f, 10);
 
     Vector3D ReadMagneticField(){
         bno.getEvent(&magnetometerData, Adafruit_BNO055::VECTOR_MAGNETOMETER);
