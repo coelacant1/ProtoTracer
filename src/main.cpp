@@ -28,9 +28,11 @@ ProtoDRController controller = ProtoDRController(maxBrightness, ProtoDRControlle
 BetaProtoController controller = BetaProtoController(maxBrightness);
 #elif defined(GAMMAFRONT)
 #include "Controllers\GammaControllerFront.h"
+#include "Animation\GammaAnimation.h"
 GammaControllerFront controller = GammaControllerFront(maxBrightness);
 #elif defined(GAMMABACK)
 #include "Controllers\GammaControllerBack.h"
+#include "Animation\GammaAnimation.h"
 GammaControllerBack controller = GammaControllerBack(maxBrightness);
 #elif defined(HUB75)
 #include "Controllers\SmartMatrixHUB75.h"
@@ -45,24 +47,16 @@ ProtogenHUB75AnimationSplit animation = ProtogenHUB75AnimationSplit();
 #elif defined(WS35)
 #include "Controllers\KaiborgV1D1Controller.h"
 #include "Animation\ProtogenKitFaceAnimation.h"
-
+KaiborgV1D1Controller controller = KaiborgV1D1Controller(maxBrightness);
+ProtogenKitFaceAnimation animation = ProtogenKitFaceAnimation();
 #else
+//Define your own here
 //--------------- ANIMATIONS ---------------
-#include "Animation\GammaAnimation.h"
-//#include "Animation\ProtoDRMorphAnimation.h"
-//#include "Animation\ProtogenKitFaceAnimation.h"
-//#include "Animation\ProtogenHUB75Animation.h"
-//#include "Animation\ProtogenHUB75AnimationSplit.h"
-//#include "Animation\Commissions\SergaliciousAnimation.h"
-//#include "Animation\Commissions\InfraredAnimation.h"
-//#include "Animation\KaiborgV1Animation.h"
-//#include "Animation\ProtoV3Animation.h"
 //#include "Animation\Test\FullScreenAnimation.h"
 //#include "Animation\VectorFieldAnimation.h"
 //#include "Animation\CoelaBonkAnimation.h"
 //#include "Animation\SpyroAnimation.h"
 //#include "Animation\SpyroRotateAnimation.h"
-//#include "Animation\Commissions\InfraredAnimation.h"
 
 //--------------- CONTROLLERS ---------------
 //#include "Controllers\KaiborgV1Controller.h"
@@ -70,22 +64,7 @@ ProtogenHUB75AnimationSplit animation = ProtogenHUB75AnimationSplit();
 //#include "Controllers\ProtoDRController.h"
 //include "Controllers\SmartMatrixHUB75.h"
 //#include "Controllers\SmartMatrixHUB75Split.h"
-
-uint8_t maxBrightness = 50;
-uint8_t maxAccentBrightness = 100;
-#ifdef RIGHTFACE
-ProtoDRController controller = ProtoDRController(maxBrightness, ProtoDRController::RIGHT);
-#elif defined(LEFTFACE)
-ProtoDRController controller = ProtoDRController(maxBrightness, ProtoDRController::LEFT);
-#elif defined(FRONTFACE)
-#include "Controllers\GammaControllerFront.h"
-GammaControllerFront controller = GammaControllerFront(maxBrightness);
-#elif defined(BACKFACE)
-#include "Controllers\GammaControllerBack.h"
-GammaControllerBack controller = GammaControllerBack(maxBrightness);
 #endif
-
-GammaAnimation animation = GammaAnimation();
 
 float FreeMem(){
     uint32_t stackT;
@@ -134,7 +113,7 @@ void loop() {
     #else
     controller.SetAccentBrightness(Menu::GetAccentBrightness() * 25 + 5);
 
-    controller.SetBrightness(powf(Menu::GetBrightness() + 3, 2) / 3);// / 8);
+    controller.SetBrightness(powf(Menu::GetBrightness() + 3, 2) / 3);
     #endif
     
 
