@@ -1,11 +1,14 @@
+adafruit/Adafruit APDS9960 Library@^1.2.2
+adafruit/Adafruit BusIO@^1.11.3
+adafruit/Adafruit SSD1306@^2.5.7
+adafruit/Adafruit seesaw Library@^1.6.3
+adafruit/Adafruit Unified Sensor@^1.1.4
+Wire
+SPI
+pixelmatix/SmartMatrix@^4.0.3
+pedvide/Teensy_ADC@^9.1.0
+powerbroker2/SerialTransfer@^3.1.2
+adafruit/Adafruit GFX Library@^1.11.3
 paulstoffregen/OctoWS2811@^1.4
 kosme/arduinoFFT@^1.5.6
-adafruit/Adafruit BusIO@^1.11.3
-SPI
-pedvide/Teensy_ADC@^9.1.0
-adafruit/Adafruit Unified Sensor@^1.1.4
-pixelmatix/SmartMatrix@^4.0.3
-Wire
 adafruit/Adafruit BNO055@^1.4.3
-powerbroker2/SerialTransfer@^3.1.2
-adafruit/Adafruit APDS9960 Library@^1.2.2

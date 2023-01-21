@@ -8,7 +8,8 @@
 #include "..\Morph\NukudeFlat.h"
 #include "..\Render\Scene.h"
 #include "..\Signals\FunctionGenerator.h"
-#include "..\Menu\Menu.h"
+#include "..\Menu\SingleButtonMenu.h"
+//#include "..\Menu\NeoTrellisMenu.h"
 #include "..\Sensors\APDS9960.h"
 
 #include "..\Materials\Animated\RainbowNoise.h"
@@ -29,6 +30,7 @@
 
 class ProtogenHUB75Animation : public Animation<3> {
 private:
+    static const uint8_t faceCount = 9;
     NukudeFace pM;
     Background background;
     LEDStripBackground ledStripBackground;
@@ -260,11 +262,20 @@ public:
         boop.Initialize(5);
 
         MicrophoneFourierIT::Initialize(A0, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
+        //Menu::Initialize(9);//NeoTrellis
         Menu::Initialize(9, 20, 500);//7 is number of faces
 
         objA.SetJustification(ObjectAlign::Stretch);
         objA.SetMirrorX(true);
     }
+
+    uint8_t GetAccentBrightness(){
+        return Menu::GetAccentBrightness();
+    };
+
+    uint8_t GetBrightness(){
+        return Menu::GetBrightness();
+    };
 
     void FadeIn(float stepRatio) override {}
     void FadeOut(float stepRatio) override {}
@@ -280,6 +291,9 @@ public:
         float yOffset = fGenMatYMove.Update();
         
         Menu::Update(ratio);
+
+        //Menu::SetSize(Vector2D(280, 60));
+        //Menu::SetPositionOffset(Vector2D(0.0f, -30.0f * yOffset));
 
         SetMaterialColor();
 

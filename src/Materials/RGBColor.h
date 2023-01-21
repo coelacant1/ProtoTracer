@@ -37,11 +37,11 @@ public:
     }
 
     RGBColor Scale(uint8_t maxBrightness){
-        int sR, sG, sB;
+        uint8_t sR, sG, sB;
         
-        sR = (int)R * (int)maxBrightness / 255;
-        sG = (int)G * (int)maxBrightness / 255;
-        sB = (int)B * (int)maxBrightness / 255;
+        sR = (uint8_t)R * (uint8_t)maxBrightness / 255;
+        sG = (uint8_t)G * (uint8_t)maxBrightness / 255;
+        sB = (uint8_t)B * (uint8_t)maxBrightness / 255;
         
         sR = sR > 255 ? 255 : sR;
         sG = sG > 255 ? 255 : sG;
@@ -57,9 +57,9 @@ public:
     RGBColor Add(uint8_t value){
         int sR, sG, sB;
         
-        sR = (int)R + (int)value;
-        sG = (int)G + (int)value;
-        sB = (int)B + (int)value;
+        sR = (uint8_t)R + (uint8_t)value;
+        sG = (uint8_t)G + (uint8_t)value;
+        sB = (uint8_t)B + (uint8_t)value;
         
         sR = sR > 255 ? 255 : sR;
         sG = sG > 255 ? 255 : sG;

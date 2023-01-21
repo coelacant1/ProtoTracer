@@ -3,11 +3,12 @@
 //#define BETAWS35
 //#define GAMMAFRONT
 //#define GAMMABACK
-#define HUB75
+//#define HUB75
 //#define HUB75Split
 //#define WS35
+#define ESP32HUB75
 
-//#define PRINTINFO
+#define PRINTINFO
 
 #include <Arduino.h>
 
@@ -49,6 +50,13 @@ ProtogenHUB75AnimationSplit animation = ProtogenHUB75AnimationSplit();
 #include "Animation\ProtogenKitFaceAnimation.h"
 KaiborgV1D1Controller controller = KaiborgV1D1Controller(maxBrightness);
 ProtogenKitFaceAnimation animation = ProtogenKitFaceAnimation();
+#elif defined(ESP32HUB75)
+#include "Controllers\ESP32DevKitV1.h"
+#include "Animation\ESP32Clock.h"
+
+ESP32DevKitV1 controller = ESP32DevKitV1(maxBrightness);
+ESP32Clock animation = ESP32Clock();
+
 #else
 //Define your own here
 //--------------- ANIMATIONS ---------------
@@ -57,13 +65,20 @@ ProtogenKitFaceAnimation animation = ProtogenKitFaceAnimation();
 //#include "Animation\CoelaBonkAnimation.h"
 //#include "Animation\SpyroAnimation.h"
 //#include "Animation\SpyroRotateAnimation.h"
+#include "Animation\Commissions\AphoriAnimation.h"
 
 //--------------- CONTROLLERS ---------------
 //#include "Controllers\KaiborgV1Controller.h"
 //#include "Controllers\KaiborgV1D1Controller.h"
 //#include "Controllers\ProtoDRController.h"
-//include "Controllers\SmartMatrixHUB75.h"
+#include "Controllers\SmartMatrixHUB75.h"
 //#include "Controllers\SmartMatrixHUB75Split.h"
+#define HUB75
+
+SmartMatrixHUB75 controller = SmartMatrixHUB75(maxBrightness, maxAccentBrightness);
+AphoriAnimation animation = AphoriAnimation();
+
+
 #endif
 
 float FreeMem(){
@@ -95,8 +110,8 @@ void loop() {
     animation.UpdateTime(ratio);
 
     #ifdef HUB75Split
-    controller.SetAccentBrightness(Menu::GetAccentBrightness() * 25 + 5);
-    controller.SetBrightness(Menu::GetBrightness() * 25 + 5);
+    controller.SetAccentBrightness(animation.GetAccentBrightness() * 25 + 5);
+    controller.SetBrightness(animation.GetBrightness() * 25 + 5);
 
     animation.SetCameraMirror(false);
     animation.UpdateTime(ratio);
@@ -106,14 +121,19 @@ void loop() {
     animation.UpdateTime(ratio);
     controller.RenderCamera(animation.GetScene(), 1);
     #elif defined(HUB75)
-    controller.SetAccentBrightness(Menu::GetAccentBrightness() * 25 + 5);
-    controller.SetBrightness(Menu::GetBrightness() * 25 + 5);
+    controller.SetAccentBrightness(animation.GetAccentBrightness() * 25 + 5);
+    controller.SetBrightness(animation.GetBrightness() * 25 + 5);
+
+    controller.Render(animation.GetScene());
+    #elif defined(ESP32HUB75)
+    controller.SetBrightness(100);
 
     controller.Render(animation.GetScene());
     #else
-    controller.SetAccentBrightness(Menu::GetAccentBrightness() * 25 + 5);
+    controller.SetAccentBrightness(animation.GetAccentBrightness() * 25 + 5);
+    controller.SetBrightness(powf(animation.GetBrightness() + 3, 2) / 3);
 
-    controller.SetBrightness(powf(Menu::GetBrightness() + 3, 2) / 3);
+    controller.Render(animation.GetScene());
     #endif
     
 

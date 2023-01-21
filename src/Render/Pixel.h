@@ -6,8 +6,8 @@ typedef struct Pixel {
 	Vector2D* position;
 
 public:
-  	RGBColor Color;
-
+  	RGBColor* Color;
+	
 	Pixel() {}
 
 	Pixel(Vector2D* position){

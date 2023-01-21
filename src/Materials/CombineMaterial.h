@@ -150,9 +150,11 @@ public:
                     case Replace:
                         temp = materials[i]->GetRGB(position, normal, uvw);
 
-                        tempV.X = temp.R;
-                        tempV.Y = temp.G;
-                        tempV.Z = temp.B;
+                        if(temp.R > 0 || temp.G > 0 || temp.B > 0){
+                            tempV.X = temp.R;
+                            tempV.Y = temp.G;
+                            tempV.Z = temp.B;
+                        }
 
                         rgb = Vector3D::LERP(rgb, tempV, opacity[i]);
 

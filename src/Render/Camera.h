@@ -17,6 +17,7 @@ private:
     Quaternion rayDirection;
     Quaternion lookDirection;
     Quaternion lookOffset;
+    bool is2D = false;
 
     RGBColor CheckRasterPixel(Triangle2D** triangles, int numTriangles, Vector2D pixelRay){
         float zBuffer = 3.402823466e+38f;
@@ -56,6 +57,13 @@ private:
     }
 
 public:
+    Camera(Transform* transform, PixelGroup* pixelGroup){
+        this->transform = transform;
+        this->pixelGroup = pixelGroup;
+
+        is2D = true;
+    }
+
     Camera(Transform* transform, CameraLayout* cameraLayout, PixelGroup* pixelGroup){
         this->transform = transform;
         this->pixelGroup = pixelGroup;
@@ -81,8 +89,8 @@ public:
 
         for(uint16_t i = 0; i < pixelGroup->GetPixelCount(); i++){
             if(cameraLayout->GetForwardAxis() == cameraLayout->XForward){
-                min.X = pixelGroup->GetPixel(i)->GetPosition().X < min.X ? pixelGroup->GetPixel(i)->GetPosition().X : min.X;
-                min.Y = pixelGroup->GetPixel(i)->GetPosition().Y < min.Y ? pixelGroup->GetPixel(i)->GetPosition().Y : min.Y;
+                min.X = pixelGroup->GetCoordinate(i).X < min.X ? pixelGroup->GetCoordinate(i).X : min.X;
+                min.Y = pixelGroup->GetCoordinate(i).Y < min.Y ? pixelGroup->GetCoordinate(i).Y : min.Y;
             }
         }
 
@@ -94,8 +102,8 @@ public:
 
         for(uint16_t i = 0; i < pixelGroup->GetPixelCount(); i++){
             if(cameraLayout->GetForwardAxis() == cameraLayout->XForward){
-                max.X = pixelGroup->GetPixel(i)->GetPosition().X < max.X ? pixelGroup->GetPixel(i)->GetPosition().X : max.X;
-                max.Y = pixelGroup->GetPixel(i)->GetPosition().Y < max.Y ? pixelGroup->GetPixel(i)->GetPosition().Y : max.Y;
+                max.X = pixelGroup->GetCoordinate(i).X < max.X ? pixelGroup->GetCoordinate(i).X : max.X;
+                max.Y = pixelGroup->GetCoordinate(i).Y < max.Y ? pixelGroup->GetCoordinate(i).Y : max.Y;
             }
         }
 
@@ -116,40 +124,61 @@ public:
     }
 
     void Rasterize(Scene* scene) {
-        lookDirection = transform->GetRotation().Conjugate() * lookOffset;
-        Quaternion normLookDir = lookDirection.UnitQuaternion();
-        rayDirection  = transform->GetRotation().Multiply(lookDirection);
+        if (is2D){
+            for (unsigned int i = 0; i < pixelGroup->GetPixelCount(); i++) {
+                Vector2D pixelRay = pixelGroup->GetCoordinate(i);//scale pixel location prior to rotating and moving
+                Vector3D pixelRay3D = Vector3D(pixelRay.X, pixelRay.Y, 0) + transform->GetPosition();
 
-        BoundingBox2D transformedBounds;
-        for (unsigned int i = 0; i < pixelGroup->GetPixelCount(); ++i) {
-            Vector2D pixelRay = Vector2D(lookDirection.RotateVectorUnit(pixelGroup->GetPixel(i)->GetPosition() * transform->GetScale(), normLookDir));
-            transformedBounds.UpdateBounds(pixelRay);
+                RGBColor color = scene->GetObjects()[0]->GetMaterial()->GetRGB(pixelRay3D, Vector3D(), Vector3D());
+
+                pixelGroup->GetColor(i)->R = color.R;
+                pixelGroup->GetColor(i)->G = color.G;
+                pixelGroup->GetColor(i)->B = color.B;
+            }
         }
+        else{
+            lookDirection = transform->GetRotation().Conjugate() * lookOffset;
+            Quaternion normLookDir = lookDirection.UnitQuaternion();
+            rayDirection  = transform->GetRotation().Multiply(lookDirection);
 
-        QuadTree tree(transformedBounds);
+            BoundingBox2D transformedBounds;
+            for (unsigned int i = 0; i < pixelGroup->GetPixelCount(); ++i) {
+                Vector2D pixelRay = Vector2D(lookDirection.RotateVectorUnit(pixelGroup->GetCoordinate(i) * transform->GetScale(), normLookDir));
+                transformedBounds.UpdateBounds(pixelRay);
+            }
 
-        //for each object in the scene, get the triangles
-        for(int i = 0; i < scene->GetObjectCount(); i++){
-            if(scene->GetObjects()[i]->IsEnabled()){
-                //for each triangle in object, project onto 2d surface, but pass material
-                for (int j = 0; j < scene->GetObjects()[i]->GetTriangleGroup()->GetTriangleCount(); j++) {
-                    tree.Insert(Triangle2D(lookDirection, transform, &scene->GetObjects()[i]->GetTriangleGroup()->GetTriangles()[j], scene->GetObjects()[i]->GetMaterial()));
+            QuadTree tree(transformedBounds);
+
+            //for each object in the scene, get the triangles
+            for(int i = 0; i < scene->GetObjectCount(); i++){
+                if(scene->GetObjects()[i]->IsEnabled()){
+                    //for each triangle in object, project onto 2d surface, but pass material
+                    for (int j = 0; j < scene->GetObjects()[i]->GetTriangleGroup()->GetTriangleCount(); j++) {
+                        tree.Insert(Triangle2D(lookDirection, transform, &scene->GetObjects()[i]->GetTriangleGroup()->GetTriangles()[j], scene->GetObjects()[i]->GetMaterial()));
+                    }
                 }
             }
-        }
 
-        tree.Rebuild();
+            tree.Rebuild();
 
-        for (unsigned int i = 0; i < pixelGroup->GetPixelCount(); i++) {
-            Vector2D pixelRay = Vector2D(lookDirection.RotateVectorUnit(pixelGroup->GetPixel(i)->GetPosition() * transform->GetScale(), normLookDir));//scale pixel location prior to rotating and moving
-            Node* leafNode =  tree.Intersect(pixelRay);
-            
-            if (!leafNode) {
-                pixelGroup->GetPixel(i)->Color = RGBColor();
-                continue;
+            for (unsigned int i = 0; i < pixelGroup->GetPixelCount(); i++) {
+                Vector2D pixelRay = Vector2D(lookDirection.RotateVectorUnit(pixelGroup->GetCoordinate(i) * transform->GetScale(), normLookDir));//scale pixel location prior to rotating and moving
+                Node* leafNode =  tree.Intersect(pixelRay);
+                
+                if (!leafNode) {
+                    pixelGroup->GetColor(i)->R = 0;
+                    pixelGroup->GetColor(i)->G = 0;
+                    pixelGroup->GetColor(i)->B = 0;
+                    continue;
+                }
+
+                RGBColor color = CheckRasterPixel(leafNode->GetEntities(), leafNode->GetCount(), pixelRay);
+
+                pixelGroup->GetColor(i)->R = color.R;
+                pixelGroup->GetColor(i)->G = color.G;
+                pixelGroup->GetColor(i)->B = color.B;
+
             }
-
-            pixelGroup->GetPixel(i)->Color = CheckRasterPixel(leafNode->GetEntities(), leafNode->GetCount(), pixelRay);
         }
     }
     

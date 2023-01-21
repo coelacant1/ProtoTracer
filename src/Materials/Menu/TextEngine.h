@@ -30,7 +30,7 @@ public:
 
     TextEngine(Vector2D size, Vector2D position, uint16_t blinkTime){
         this->size = size;
-        this->position = position;
+        this->positionOffset = position;
         this->blinkTime = blinkTime;
 
         ClearText();//init to spaces

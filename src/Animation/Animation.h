@@ -22,7 +22,9 @@ public:
     float GetAnimationTime(){
         return animationTime;
     }
-
+    
+    virtual uint8_t GetAccentBrightness() = 0;
+    virtual uint8_t GetBrightness() = 0;
     virtual void FadeIn(float stepRatio) = 0;
     virtual void FadeOut(float stepRatio) = 0;
     virtual void Update(float ratio) = 0;

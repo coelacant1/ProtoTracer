@@ -4,6 +4,7 @@
 
 class Characters{
 public:
+    static const uint8_t COLON[8];
     static const uint8_t SPACE[8];
     static const uint8_t N0[8];
     static const uint8_t N1[8];
@@ -45,6 +46,7 @@ public:
 
     static const uint8_t* GetCharacter(char character){
         switch (character){
+            case ':': return COLON; break;
             case '0': case '[': return N0; break;
             case '1': case '\\': return N1; break;
             case '2': case ']': return N2; break;
@@ -86,6 +88,16 @@ public:
     }
 };
 
+const uint8_t Characters::COLON[8] = { 
+    B00000000,
+    B00000000,
+    B00111000,
+    B00111000,
+    B00000000,
+    B00000000,
+    B00111000,
+    B00111000
+};
 
 const uint8_t Characters::SPACE[8] = { 
     B00000000,
