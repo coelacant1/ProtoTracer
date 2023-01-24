@@ -88,10 +88,21 @@ public:
         matrix.setRefreshRate(120);
 
         backgroundLayer.swapBuffers();//for ESP32 - first is ignored
+
+        //APA102
+        pinMode(SMARTLED_APA_ENABLE_PIN, OUTPUT);
+        digitalWrite(SMARTLED_APA_ENABLE_PIN, HIGH);  // enable access to LEDs
+        apamatrix.addLayer(&apaBackgroundLayer);
+
+        apamatrix.begin();
     }
 
     void Display() override {
         matrix.setBrightness(brightness);
+        apamatrix.setBrightness(accentBrightness);
+
+        while(apaBackgroundLayer.isSwapPending());
+        rgb24 *apabuffer = apaBackgroundLayer.backBuffer();
 
         for (uint16_t y = 0; y < RESOLUTION_Y; y++) {
             for (uint16_t x = 0; x < RESOLUTION_X; x++){
@@ -99,12 +110,16 @@ public:
 
                 rgb24 rgbColor = rgb24((uint16_t)camPixels.GetColor(pixelNum)->R, (uint16_t)camPixels.GetColor(pixelNum)->G, (uint16_t)camPixels.GetColor(pixelNum)->B);
 
-                
                 backgroundLayer.drawPixel(x, RESOLUTION_Y - y, rgbColor);
                 backgroundLayer.drawPixel(RESOLUTION_X - 1 - x, kMatrixHeight-y, rgbColor);//mirroring is vertical, provided by assigning y values up to 2*RESOLUTION_Y
             }
         }
+
+        for (uint16_t x = 0; x < kApaMatrixWidth; x++){
+            apabuffer[x] = CRGB(camSidePixels.GetColor(x)->R, camSidePixels.GetColor(x)->G, camSidePixels.GetColor(x)->B);
+        }
         
         backgroundLayer.swapBuffers();
+        apaBackgroundLayer.swapBuffers(false);
     }
 };
