@@ -16,11 +16,12 @@
 //HUB75 SETUP ~~~~~~~~~~
 #define RESOLUTION_X 128 //Pixel count of your HUB75 panel
 #define RESOLUTION_Y 64
-#define P_VALUE 2 //Use whatever P{VALUE} your panels are, Example: P2, P3, P4. This would be the size of your individual pixels in millimeters.
+#define P_VALUE 2 //Use whatever P{VALUE} your panels are, Example: P2, P3, P4
 #define ENABLE_HUB75_REFRESH    1
 #define COLOR_DEPTH 24                  // Choose the color depth used for storing pixels in the layers: 24 or 48 (24 is good for most sketches - If the sketch uses type `rgb24` directly, COLOR_DEPTH must be 24)
 #define VERTICAL_STRETCH 0.8 //float 0.0 - 2.0 give best effects, usually around 0.8 for P2
 #define HORIZONTAL_STRETCH 0.5 //float 0.0 - 2.0 give best effects, usually around 0.5  for P2
+#define PIXELGROUP_TYPE 1 //0 = Base CoelaCan't formatting (better for memory), 1 = Slightly better FPS performance but more memory
 const uint8_t kPanelType = SM_PANELTYPE_HUB75_64ROW_MOD32SCAN;   // Choose the configuration that matches your panels.  See more details in MatrixCommonHub75.h and the docs: https://github.com/pixelmatix/SmartMatrix/wiki
 //~~~~~~~~~~~~
 
@@ -55,8 +56,10 @@ private:
     Transform camTransform = Transform(Vector3D(), Vector3D(0, 0, 0), Vector3D(HORIZONTAL_STRETCH, VERTICAL_STRETCH, 1));
     Transform camSideTransform = Transform(Vector3D(), Vector3D(0, 0, -500.0f), Vector3D(1, 1, 1));
 
-    Vector2D* panel = createPanel();
-    PixelGroup camPixels = PixelGroup(panel, RESOLUTION_X*RESOLUTION_Y);
+    PixelGroup camPixels = createPanel();
+    //Vector2D* panel = createPanel();
+    //PixelGroup camPixels = PixelGroup(panel, RESOLUTION_X*RESOLUTION_Y);
+    
     //PixelGroup camPixels = PixelGroup(P3HUB75, 2048);
     PixelGroup camSidePixels = PixelGroup(LinearPixels, 100);
 
@@ -68,16 +71,22 @@ private:
 public:
     SmartMatrixHUB75(uint8_t maxBrightness, uint8_t maxAccentBrightness) : Controller(cameras, 2, maxBrightness, maxAccentBrightness){}
 
-    Vector2D* createPanel(){
-        static Vector2D panelConfig[RESOLUTION_X*RESOLUTION_Y] = {};
-        int count = 0;
-        for (int y = 0; y < RESOLUTION_Y; y++) {
-            for (int x = 0; x < RESOLUTION_X; x++){
-                panelConfig[count]=Vector2D((float)x*P_VALUE,(float)y*P_VALUE);
-                count++;
+    PixelGroup createPanel(){
+
+        if(PIXELGROUP_TYPE == 0){
+            return PixelGroup(Vector2D(RESOLUTION_X*P_VALUE,RESOLUTION_Y*P_VALUE), Vector2D(RESOLUTION_X,RESOLUTION_Y), RESOLUTION_Y*2, RESOLUTION_X*RESOLUTION_Y);
+        } else {
+            static Vector2D panelConfig[RESOLUTION_X*RESOLUTION_Y] = {};
+            int count = 0;
+            for (int y = 0; y < RESOLUTION_Y; y++) {
+                for (int x = 0; x < RESOLUTION_X; x++){
+                    panelConfig[count]=Vector2D((float)x*P_VALUE,(float)y*P_VALUE);
+                    count++;
+                }
             }
+            return PixelGroup(panelConfig, RESOLUTION_X*RESOLUTION_Y);
         }
-        return panelConfig;
+        return camPixels;
     }
 
     void Initialize() override{
@@ -88,21 +97,10 @@ public:
         matrix.setRefreshRate(120);
 
         backgroundLayer.swapBuffers();//for ESP32 - first is ignored
-
-        //APA102
-        pinMode(SMARTLED_APA_ENABLE_PIN, OUTPUT);
-        digitalWrite(SMARTLED_APA_ENABLE_PIN, HIGH);  // enable access to LEDs
-        apamatrix.addLayer(&apaBackgroundLayer);
-
-        apamatrix.begin();
     }
 
     void Display() override {
         matrix.setBrightness(brightness);
-        apamatrix.setBrightness(accentBrightness);
-
-        while(apaBackgroundLayer.isSwapPending());
-        rgb24 *apabuffer = apaBackgroundLayer.backBuffer();
 
         for (uint16_t y = 0; y < RESOLUTION_Y; y++) {
             for (uint16_t x = 0; x < RESOLUTION_X; x++){
@@ -110,16 +108,12 @@ public:
 
                 rgb24 rgbColor = rgb24((uint16_t)camPixels.GetColor(pixelNum)->R, (uint16_t)camPixels.GetColor(pixelNum)->G, (uint16_t)camPixels.GetColor(pixelNum)->B);
 
+                
                 backgroundLayer.drawPixel(x, RESOLUTION_Y - y, rgbColor);
                 backgroundLayer.drawPixel(RESOLUTION_X - 1 - x, kMatrixHeight-y, rgbColor);//mirroring is vertical, provided by assigning y values up to 2*RESOLUTION_Y
             }
         }
-
-        for (uint16_t x = 0; x < kApaMatrixWidth; x++){
-            apabuffer[x] = CRGB(camSidePixels.GetColor(x)->R, camSidePixels.GetColor(x)->G, camSidePixels.GetColor(x)->B);
-        }
         
         backgroundLayer.swapBuffers();
-        apaBackgroundLayer.swapBuffers(false);
     }
 };
