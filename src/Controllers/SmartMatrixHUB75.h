@@ -110,7 +110,7 @@ public:
 
                 
                 backgroundLayer.drawPixel(x, RESOLUTION_Y - y, rgbColor);
-                backgroundLayer.drawPixel(RESOLUTION_X - 1 - x, kMatrixHeight-y, rgbColor);//mirroring is vertical, provided by assigning y values up to 2*RESOLUTION_Y
+                backgroundLayer.drawPixel(RESOLUTION_X - 1 - x, kMatrixHeight-y-1, rgbColor);//mirroring is vertical, provided by assigning y values up to 2*RESOLUTION_Y
             }
         }
         
