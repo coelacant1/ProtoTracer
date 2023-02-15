@@ -16,6 +16,9 @@
 #include "..\..\Materials\Animated\SpectrumAnalyzer.h"
 #include "..\..\Materials\Animated\AudioReactiveGradient.h"
 #include "..\..\Materials\Animated\Oscilloscope.h"
+#include "..\..\Materials\MaterialMask.h"
+#include "..\..\Shapes\Circle.h"
+#include "..\..\Shapes\Rectangle.h"
 
 #include "..\..\Materials\MaterialAnimator.h"
 
@@ -35,6 +38,11 @@ private:
     LEDStripBackground ledStripBackground;
     EasyEaseAnimator<25> eEA = EasyEaseAnimator<25>(EasyEaseInterpolation::Overshoot, 1.0f, 0.35f);
     
+    Circle angryEyeCirc = Circle(Vector2D(102.0f, 62.0f), 12.0f);
+    Rectangle toastEyeRect = Rectangle(Vector2D(60.0f, 34.0f), Vector2D(80.0f, 50.0f), 0.0f);
+    Rectangle blushRect = Rectangle(Vector2D(75.0f, 20.0f), Vector2D(40.0f, 15.0f), 0.0f);
+    Rectangle sadRect = Rectangle(Vector2D(75.0f, 18.0f), Vector2D(40.0f, 15.0f), 0.0f);
+
     //Materials
     RainbowNoise rainbowNoise;
     RainbowSpiral rainbowSpiral;
@@ -45,16 +53,21 @@ private:
     SimpleMaterial blueMaterial = SimpleMaterial(RGBColor(0, 0, 255));
     SimpleMaterial yellowMaterial = SimpleMaterial(RGBColor(255, 255, 0));
     SimpleMaterial purpleMaterial = SimpleMaterial(RGBColor(255, 0, 255));
+    SimpleMaterial pinkMaterial = SimpleMaterial(RGBColor(227, 11, 92));
+    MaterialMask angryEyeMaterial = MaterialMask(&redMaterial, &whiteMaterial, &angryEyeCirc);
+    MaterialMask toastEyeMaterial = MaterialMask(&redMaterial, &whiteMaterial, &toastEyeRect);
+    MaterialMask blushMaterial = MaterialMask(&pinkMaterial, &whiteMaterial, &blushRect);
+    MaterialMask sadMaterial = MaterialMask(&blueMaterial, &whiteMaterial, &sadRect);
     
-    RGBColor gradientSpectrum[2] = {RGBColor(5, 162, 232), RGBColor(10, 170, 255)};
+    RGBColor gradientSpectrum[2] = {RGBColor(175, 175, 175), RGBColor(175, 175, 175)};
     GradientMaterial<2> gradientMat = GradientMaterial<2>(gradientSpectrum, 350.0f, false);
     
-    MaterialAnimator<10> materialAnimator;
+    MaterialAnimator<15> materialAnimator;
     MaterialAnimator<4> backgroundMaterial;
     
     SpectrumAnalyzer sA = SpectrumAnalyzer(Vector2D(200, 100), Vector2D(100, 50), true, true); 
     AudioReactiveGradient aRG = AudioReactiveGradient(Vector2D(160, 160), Vector2D(0, 0), true, true); 
-    Oscilloscope oSC = Oscilloscope(Vector2D(200, 100), Vector2D(0, 0));
+    Oscilloscope oSC = Oscilloscope(Vector2D(192, 96), Vector2D(0, 0));
 
     //Animation controllers
     BlinkTrack<1> blink;
@@ -137,11 +150,15 @@ private:
         materialAnimator.AddMaterial(Material::Replace, &whiteMaterial, 40, 0.0f, 1.0f);//layer 2
         materialAnimator.AddMaterial(Material::Replace, &greenMaterial, 40, 0.0f, 1.0f);//layer 3
         materialAnimator.AddMaterial(Material::Replace, &yellowMaterial, 40, 0.0f, 1.0f);//layer 4
-        materialAnimator.AddMaterial(Material::Replace, &purpleMaterial, 40, 0.0f, 1.0f);//layer 5
+        materialAnimator.AddMaterial(Material::Replace, &pinkMaterial, 40, 0.0f, 1.0f);//layer 5
         materialAnimator.AddMaterial(Material::Replace, &redMaterial, 40, 0.0f, 1.0f);//layer 6
         materialAnimator.AddMaterial(Material::Replace, &blueMaterial, 40, 0.0f, 1.0f);//layer 7
         materialAnimator.AddMaterial(Material::Replace, &rainbowSpiral, 40, 0.0f, 1.0f);//layer 8
-        materialAnimator.AddMaterial(Material::Replace, &rainbowNoise, 40, 0.35f, 1.0f);//layer 9
+        materialAnimator.AddMaterial(Material::Replace, &rainbowNoise, 40, 0.15f, 1.0f);//layer 9
+        materialAnimator.AddMaterial(Material::Replace, &toastEyeMaterial, 40, 0.0f, 1.0f);//
+        materialAnimator.AddMaterial(Material::Replace, &angryEyeMaterial, 40, 0.0f, 1.0f);//
+        materialAnimator.AddMaterial(Material::Replace, &blushMaterial, 40, 0.0f, 1.0f);//
+        materialAnimator.AddMaterial(Material::Replace, &sadMaterial, 40, 0.0f, 1.0f);//
 
         backgroundMaterial.SetBaseMaterial(Material::Add, Menu::GetMaterial());
         backgroundMaterial.AddMaterial(Material::Add, &sA, 20, 0.0f, 1.0f);
@@ -164,6 +181,7 @@ private:
     void Blush(){
         eEA.AddParameterFrame(AphoriFace::Blush, 1.0f);
         eEA.AddParameterFrame(AphoriFace::HideU, 0.0f);
+        materialAnimator.AddMaterialFrame(blushMaterial, 0.8f);
     }
 
     void Upset(){
@@ -172,13 +190,12 @@ private:
 
     void Angry(){
         eEA.AddParameterFrame(AphoriFace::Angry, 1.0f);
-        materialAnimator.AddMaterialFrame(redMaterial, 0.8f);
+        materialAnimator.AddMaterialFrame(angryEyeMaterial, 0.8f);
     }
 
     void Sad(){
-        eEA.AddParameterFrame(AphoriFace::Sad, 1.0f);
-        eEA.AddParameterFrame(AphoriFace::Upset, 1.0f);
-        materialAnimator.AddMaterialFrame(blueMaterial, 0.8f);
+        eEA.AddParameterFrame(AphoriFace::Sad, 0.75f);
+        materialAnimator.AddMaterialFrame(sadMaterial, 0.8f);
     }
 
     void Nervous(){
@@ -194,11 +211,12 @@ private:
     void Toast(){
         eEA.AddParameterFrame(AphoriFace::Toast, 1.0f);
         eEA.AddParameterFrame(AphoriFace::HideU, 0.0f);
-        materialAnimator.AddMaterialFrame(redMaterial, 0.8f);
+        materialAnimator.AddMaterialFrame(toastEyeMaterial, 1.0f);
     }
 
     void Boop(){
         eEA.AddParameterFrame(AphoriFace::Boop, 1.0f);
+        materialAnimator.AddMaterialFrame(pinkMaterial, 0.5f);
     }
 
     void SpectrumAnalyzerFace(){
@@ -274,7 +292,7 @@ public:
 
         boop.Initialize(5);
 
-        MicrophoneFourierIT::Initialize(A0, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
+        MicrophoneFourierIT::Initialize(15, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
         Menu::Initialize(faceCount);//7 is number of faces
 
         objA.SetJustification(ObjectAlign::Stretch);

@@ -8,9 +8,9 @@
 #include "..\..\Morph\Commissions\InfraredFace.h"
 #include "..\..\Render\Scene.h"
 #include "..\..\Signals\FunctionGenerator.h"
-#include "..\..\Sensors\BoopSensor.h"
+#include "..\..\Sensors\APDS9960.h"
 
-#include "..\..\Menu\Menu.h"
+#include "..\..\Menu\SingleButtonMenu.h"
 #include "..\..\Materials\Animated\SpectrumAnalyzer.h"
 #include "..\..\Materials\Animated\AudioReactiveGradient.h"
 #include "..\..\Materials\Animated\Oscilloscope.h"
@@ -58,7 +58,7 @@ private:
     FunctionGenerator fGenMatYMove = FunctionGenerator(FunctionGenerator::Sine, -2.0f, 2.0f, 6.7f);
     FunctionGenerator fGenMatHue = FunctionGenerator(FunctionGenerator::Triangle, 0.0f, 360.0f, 17.3f);
 
-    BoopSensor boop;
+    APDS9960 boop;
 
     FFTVoiceDetection<128> voiceDetection;
 
@@ -131,7 +131,7 @@ public:
         boop.Initialize(10);
 
         Menu::Initialize(10, 20, 500);//10 is number of faces
-        MicrophoneFourier::Initialize(A0, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
+        MicrophoneFourierIT::Initialize(15, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
     }
 
     void UpdateKeyFrameTracks(){
@@ -248,6 +248,14 @@ public:
         pM.SetMorphWeight(InfraredFace::EyeBigger, 0.0f);
     }
 
+    uint8_t GetAccentBrightness(){
+        return Menu::GetAccentBrightness();
+    };
+
+    uint8_t GetBrightness(){
+        return Menu::GetBrightness();
+    };
+
     void FadeIn(float stepRatio) override {}
     void FadeOut(float stepRatio) override {}
 
@@ -257,10 +265,10 @@ public:
 
     void UpdateFFTVisemes(){
         if(Menu::UseMicrophone()){
-            eEA.AddParameterFrame(InfraredFace::TalkA, MicrophoneFourier::GetCurrentMagnitude() / 2.0f);
+            eEA.AddParameterFrame(InfraredFace::TalkA, MicrophoneFourierIT::GetCurrentMagnitude() / 2.0f);
 
-            if(MicrophoneFourier::GetCurrentMagnitude() > 0.05f){
-                voiceDetection.Update(MicrophoneFourier::GetFourierFiltered(), MicrophoneFourier::GetSampleRate());
+            if(MicrophoneFourierIT::GetCurrentMagnitude() > 0.05f){
+                voiceDetection.Update(MicrophoneFourierIT::GetFourierFiltered(), MicrophoneFourierIT::GetSampleRate());
         
                 eEA.AddParameterFrame(InfraredFace::TalkB, voiceDetection.GetViseme(voiceDetection.EE));
                 //eEA.AddParameterFrame(InfraredFace::TalkA, voiceDetection.GetViseme(voiceDetection.UH));
@@ -278,14 +286,14 @@ public:
         float xOffset = fGenMatXMove.Update();
         float yOffset = fGenMatYMove.Update();
         
-        Menu::Update();
+        Menu::Update(ratio);
 
         bool isBooped = Menu::UseBoopSensor() ? boop.isBooped() : 0;
         uint8_t mode = Menu::GetFaceState();//change by button press
 
-        MicrophoneFourier::Update();
+        MicrophoneFourierIT::Update();
 
-        sA.Update(MicrophoneFourier::GetFourierFiltered());
+        sA.Update(MicrophoneFourierIT::GetFourierFiltered());
         sA.SetHueAngle(ratio * 360.0f * 4.0f);
         sA.SetMirrorYState(Menu::MirrorSpectrumAnalyzer());
         sA.SetFlipYState(!Menu::MirrorSpectrumAnalyzer());
@@ -299,6 +307,8 @@ public:
         oSC.SetSize(Vector2D(200.0f, 100.0f));
         oSC.SetHueAngle(ratio * 360.0f * 8.0f);
         oSC.SetPosition(Vector2D(100.0f, 50.0f));
+        
+        voiceDetection.SetThreshold(map(Menu::GetMicLevel(), 0, 10, 1000, 50));
 
         UpdateFFTVisemes();
 
@@ -314,15 +324,15 @@ public:
             else if (mode == 5) Calm();
             else if (mode == 6) Sad();
             else if (mode == 7) {
-                aRG.Update(MicrophoneFourier::GetFourierFiltered());
+                aRG.Update(MicrophoneFourierIT::GetFourierFiltered());
                 AudioReactiveGradientFace();
             }
             else if (mode == 8){
-                oSC.Update(MicrophoneFourier::GetSamples());
+                oSC.Update(MicrophoneFourierIT::GetSamples());
                 OscilloscopeFace();
             }
             else {
-                sA.Update(MicrophoneFourier::GetFourierFiltered());
+                sA.Update(MicrophoneFourierIT::GetFourierFiltered());
                 SpectrumAnalyzerFace();
             }
         }

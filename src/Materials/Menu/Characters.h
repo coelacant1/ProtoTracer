@@ -5,6 +5,7 @@
 class Characters{
 public:
     static const uint8_t COLON[8];
+    static const uint8_t FWDSLSH[8];
     static const uint8_t SPACE[8];
     static const uint8_t N0[8];
     static const uint8_t N1[8];
@@ -47,6 +48,7 @@ public:
     static const uint8_t* GetCharacter(char character){
         switch (character){
             case ':': return COLON; break;
+            case '/': return FWDSLSH; break;
             case '0': case '[': return N0; break;
             case '1': case '\\': return N1; break;
             case '2': case ']': return N2; break;
@@ -97,6 +99,17 @@ const uint8_t Characters::COLON[8] = {
     B00000000,
     B00111000,
     B00111000
+};
+
+const uint8_t Characters::FWDSLSH[8] = { 
+    B00000001,
+    B00000011,
+    B00000110,
+    B00001100,
+    B00011000,
+    B00110000,
+    B01100000,
+    B11000000
 };
 
 const uint8_t Characters::SPACE[8] = { 
@@ -354,9 +367,9 @@ const uint8_t Characters::LL[8] = {
 };
 
 const uint8_t Characters::LM[8] = { 
-    B11000011,
     B11100111,
     B11111111,
+    B11011011,
     B11011011,
     B11000011,
     B11000011,

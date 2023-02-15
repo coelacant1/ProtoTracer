@@ -15,6 +15,7 @@ private:
     static uint8_t maxValue[menuCount];
     static uint8_t faceChoices;
     static bool menuActive;
+    static bool isReady;
 
     static uint32_t Wheel(byte WheelPos){
         WheelPos = 255 - WheelPos;
@@ -92,22 +93,28 @@ private:
 
 public:
     static void Update(){
-        trellis.read();
+        if(isReady){
+            trellis.read();
+        }
     }
 
     static bool Initialize(){//if true, eeprom needs set
+        Wire.setClock(100000);
+
         if (!trellis.begin()) {
             Serial.println("Could not start Trellis, check wiring?");
         }
         else {
-            Serial.println("NeoPixel Trellis started");
-        }
+            //activate all keys and set callbacks
+            for(int i=0; i<NEO_TRELLIS_NUM_KEYS; i++){
+                trellis.activateKey(i, SEESAW_KEYPAD_EDGE_RISING);
+                trellis.activateKey(i, SEESAW_KEYPAD_EDGE_FALLING);
+                trellis.registerCallback(i, blink);
+            }
 
-        //activate all keys and set callbacks
-        for(int i=0; i<NEO_TRELLIS_NUM_KEYS; i++){
-            trellis.activateKey(i, SEESAW_KEYPAD_EDGE_RISING);
-            trellis.activateKey(i, SEESAW_KEYPAD_EDGE_FALLING);
-            trellis.registerCallback(i, blink);
+            isReady = true;
+
+            Serial.println("NeoPixel Trellis started");
         }
 
         for (uint8_t i = 0; i < menuCount; i++){
@@ -157,3 +164,5 @@ template<uint8_t menuCount>
 uint8_t MenuHandler<menuCount>::faceChoices = 0;
 template<uint8_t menuCount>
 bool MenuHandler<menuCount>::menuActive = false;
+template<uint8_t menuCount>
+bool MenuHandler<menuCount>::isReady = false;

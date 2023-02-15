@@ -1,5 +1,5 @@
 #pragma once
-#include <math.h> 
+#include <math.h>
 #include <WString.h>
 
 class Mathematics {
@@ -8,6 +8,7 @@ public:
 	static constexpr float MPI     =  3.14159265358979323846f;
 	static constexpr float MPID180 =  0.01745329251994329576f;
 	static constexpr float M180DPI = 57.29577951308232087684f;
+	static constexpr float FLTMAX  = __FLT_MAX__;
 
 	template<typename T>
 	static T Constrain(T value, T minimum, T maximum) {

@@ -3,12 +3,16 @@
 //#define BETAWS35
 //#define GAMMAFRONT
 //#define GAMMABACK
-//#define HUB75
+#define HUB75
 //#define HUB75Split
+//#define HUB75Square
 //#define WS35
-#define ESP32HUB75
+//#define WS35SPLIT
+//#define ESP32HUB75
+//#define CUSTOMHUB75
+//#define CUSTOMWS35
 
-#define PRINTINFO
+//#define PRINTINFO
 
 #include <Arduino.h>
 
@@ -45,7 +49,17 @@ ProtogenHUB75Animation animation = ProtogenHUB75Animation();
 #include "Animation\ProtogenHUB75AnimationSplit.h"
 SmartMatrixHUB75Split controller = SmartMatrixHUB75Split(maxBrightness, maxAccentBrightness);
 ProtogenHUB75AnimationSplit animation = ProtogenHUB75AnimationSplit();
+#elif defined(HUB75Square)
+#include "Controllers\SmartMatrixHUB75Square.h"
+#include "Animation\ClockAnimation.h"
+SmartMatrixHUB75Split controller = SmartMatrixHUB75Split(maxBrightness, maxAccentBrightness);
+ClockAnimation animation = ClockAnimation();
 #elif defined(WS35)
+#include "Controllers\KaiborgV1D1Controller.h"
+#include "Animation\ProtogenKitFaceAnimation.h"
+KaiborgV1D1Controller controller = KaiborgV1D1Controller(maxBrightness);
+ProtogenKitFaceAnimation animation = ProtogenKitFaceAnimation();
+#elif defined(WS35SPLIT)
 #include "Controllers\KaiborgV1D1Controller.h"
 #include "Animation\ProtogenKitFaceAnimation.h"
 KaiborgV1D1Controller controller = KaiborgV1D1Controller(maxBrightness);
@@ -56,27 +70,41 @@ ProtogenKitFaceAnimation animation = ProtogenKitFaceAnimation();
 
 ESP32DevKitV1 controller = ESP32DevKitV1(maxBrightness);
 ESP32Clock animation = ESP32Clock();
+#elif defined(CUSTOMHUB75)
+#define HUB75
+#include "Controllers\SmartMatrixHUB75.h"
+#include "Animation\Commissions\InfraredAnimation.h"
+SmartMatrixHUB75 controller = SmartMatrixHUB75(maxBrightness, maxAccentBrightness);
+InfraredAnimation animation = InfraredAnimation();
+#elif defined(CUSTOMWS35)
+#define WS35SPLIT
+#include "Controllers\KaiborgV1D1Controller.h"
+#include "Animation\Commissions\GalaxyAnimation.h"
 
+KaiborgV1D1Controller controller = KaiborgV1D1Controller(maxBrightness);
+GalaxyAnimation animation = GalaxyAnimation();
 #else
 //Define your own here
 //--------------- ANIMATIONS ---------------
-//#include "Animation\Test\FullScreenAnimation.h"
+#include "Animation\Test\FullScreenAnimation.h"
 //#include "Animation\VectorFieldAnimation.h"
 //#include "Animation\CoelaBonkAnimation.h"
 //#include "Animation\SpyroAnimation.h"
 //#include "Animation\SpyroRotateAnimation.h"
-#include "Animation\Commissions\AphoriAnimation.h"
+//#include "Animation\Commissions\AphoriAnimation.h"
+//#include "Animation\Commissions\GalaxyAnimation.h"
 
 //--------------- CONTROLLERS ---------------
 //#include "Controllers\KaiborgV1Controller.h"
-//#include "Controllers\KaiborgV1D1Controller.h"
+#include "Controllers\KaiborgV1D1Controller.h"
 //#include "Controllers\ProtoDRController.h"
-#include "Controllers\SmartMatrixHUB75.h"
+//#include "Controllers\SmartMatrixHUB75.h"
 //#include "Controllers\SmartMatrixHUB75Split.h"
-#define HUB75
+//#define HUB75
+#define WS35SPLIT
 
-SmartMatrixHUB75 controller = SmartMatrixHUB75(maxBrightness, maxAccentBrightness);
-AphoriAnimation animation = AphoriAnimation();
+KaiborgV1D1Controller controller = KaiborgV1D1Controller(maxBrightness);
+FullScreenAnimation animation = FullScreenAnimation();
 
 
 #endif
@@ -107,8 +135,6 @@ void setup() {
 void loop() {
     float ratio = (float)(millis() % 5000) / 5000.0f;
 
-    animation.UpdateTime(ratio);
-
     #ifdef HUB75Split
     controller.SetAccentBrightness(animation.GetAccentBrightness() * 25 + 5);
     controller.SetBrightness(animation.GetBrightness() * 25 + 5);
@@ -124,18 +150,40 @@ void loop() {
     controller.SetAccentBrightness(animation.GetAccentBrightness() * 25 + 5);
     controller.SetBrightness(animation.GetBrightness() * 25 + 5);
 
+    animation.UpdateTime(ratio);
     controller.Render(animation.GetScene());
     #elif defined(ESP32HUB75)
     controller.SetBrightness(100);
 
+    animation.UpdateTime(ratio);
     controller.Render(animation.GetScene());
-    #else
+    #elif defined(HUB75Square)
+    controller.SetBrightness(animation.GetBrightness());
+
+    animation.UpdateTime(ratio);
+    controller.Render(animation.GetScene());
+    #elif defined(WS35)
     controller.SetAccentBrightness(animation.GetAccentBrightness() * 25 + 5);
     controller.SetBrightness(powf(animation.GetBrightness() + 3, 2) / 3);
 
+    animation.UpdateTime(ratio);
     controller.Render(animation.GetScene());
+    #elif defined(WS35SPLIT)
+    controller.SetAccentBrightness(animation.GetAccentBrightness() * 25 + 5);
+    controller.SetBrightness(powf(animation.GetBrightness() + 3, 2) / 3);
+
+    animation.SetCameraMirror(false);
+    animation.UpdateTime(ratio);
+    controller.RenderCamera(animation.GetScene(), 0);
+
+    animation.SetCameraMirror(true);
+    animation.UpdateTime(ratio);
+    controller.RenderCamera(animation.GetScene(), 1);
+    #else
+    Serial.print("not defined")
     #endif
     
+    //controller.
 
     controller.Display();
 

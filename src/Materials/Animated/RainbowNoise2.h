@@ -5,7 +5,7 @@
 #include "..\..\Materials\GradientMaterial.h"
 #include "..\..\Materials\SimplexNoise.h"
 
-class RainbowNoise : public AnimatedMaterial{
+class RainbowNoise2 : public AnimatedMaterial{
 private:
     FunctionGenerator fGenMatGradient = FunctionGenerator(FunctionGenerator::Sine, 0.0f, 0.5f, 6.65f);
     RGBColor noiseSpectrum[4] = {RGBColor(0, 0, 0), RGBColor(255, 0, 0), RGBColor(0, 255, 0), RGBColor(0, 0, 255)};
@@ -14,7 +14,7 @@ private:
     float simplexNoiseDepth = 0.0f;
 
 public:
-    RainbowNoise(){}
+    RainbowNoise2(){}
 
     void Update(float ratio){
         float sweep = fGenMatGradient.Update();

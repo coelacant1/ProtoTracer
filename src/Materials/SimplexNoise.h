@@ -16,7 +16,7 @@ private:
     const float G3 = 1.0f / 6.0f;
     float zPosition = 0.0f;
 
-    Vector3D grad3[12] = {Vector3D(1, 1, 0), Vector3D(-1, 1, 0), Vector3D(1, -1, 0), Vector3D(-1, -1, 0), 
+    Vector3D grad3[12] = {Vector3D(1, 1, 0), Vector3D(-1, 1, 0), Vector3D(1, -1, 0), Vector3D(-1, -1, 0),  
                             Vector3D(1, 0, 1), Vector3D(-1, 0, 1), Vector3D(1, 0, -1), Vector3D(-1, 0, -1), 
                             Vector3D(0, 1, 1), Vector3D(0, -1, 1), Vector3D(0, 1, -1), Vector3D(0, -1, -1) };
 

@@ -22,16 +22,20 @@ private:
     float rotationAngle = 0.0f;//rotate input xyPosition
     char lines[lineCount][characterWidth];
     uint16_t blinkTime;
+    bool isEfficient = false;
 
 public:
-    TextEngine(){
+    TextEngine(bool isEfficient = false){
+        this->isEfficient = isEfficient;
+
         ClearText();//init to spaces
     }
 
-    TextEngine(Vector2D size, Vector2D position, uint16_t blinkTime){
+    TextEngine(Vector2D size, Vector2D position, uint16_t blinkTime, bool isEfficient = false){
         this->size = size;
         this->positionOffset = position;
         this->blinkTime = blinkTime;
+        this->isEfficient = isEfficient;
 
         ClearText();//init to spaces
     }
@@ -81,7 +85,7 @@ public:
     }
     
     RGBColor GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) override{
-        if(rotationAngle != 0){
+        if(rotationAngle != 0 && !isEfficient){
             position = position - Vector3D(rotationOffset.X, rotationOffset.Y, 0);
 
             Quaternion temp = Rotation(EulerAngles(Vector3D(0, 0, rotationAngle), EulerConstants::EulerOrderXYZS)).GetQuaternion();
@@ -90,9 +94,24 @@ public:
 
             position = position + Vector3D(rotationOffset.X, rotationOffset.Y, 0);
         }
+        else{
+            Vector2D tempPos = position;
+
+            if(Mathematics::IsClose(int(rotationAngle) % 360, 90.0f, 45.0f)){
+                position.X = tempPos.Y;
+                position.Y = -tempPos.X;
+            }
+            else if (Mathematics::IsClose(int(rotationAngle) % 360, 180.0f, 45.0f)){
+                position.X = -tempPos.X;
+                position.Y = -tempPos.Y;
+            }
+            else if (Mathematics::IsClose(int(rotationAngle) % 360, 270.0f, 45.0f)){
+                position.X = -tempPos.Y;
+                position.Y = tempPos.X;
+            }
+        }
 
         position = position - Vector3D(positionOffset.X, positionOffset.Y, 0);//offset position
-
         
         int x = floorf(Mathematics::Map(position.X, 0.0f, size.X, characterWidth * 10.0f, 0.0f));
         int y = floorf(Mathematics::Map(position.Y, 0.0f, size.Y, lineCount * 10.0f, 0.0f));

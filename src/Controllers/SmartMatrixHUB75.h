@@ -40,7 +40,6 @@ const uint8_t kApaBackgroundLayerOptions = (SM_BACKGROUND_OPTIONS_NONE);
 SMARTMATRIX_APA_ALLOCATE_BUFFERS(apamatrix, kApaMatrixWidth, kApaMatrixHeight, kApaRefreshDepth, kApaDmaBufferRows, kApaPanelType, kApaMatrixOptions);
 SMARTMATRIX_ALLOCATE_BACKGROUND_LAYER(apaBackgroundLayer, kApaMatrixWidth, kApaMatrixHeight, COLOR_DEPTH, kApaBackgroundLayerOptions);
 
-
 class SmartMatrixHUB75 : public Controller {
 private:
     CameraLayout cameraLayout = CameraLayout(CameraLayout::ZForward, CameraLayout::YUp);
@@ -77,6 +76,8 @@ public:
     }
 
     void Display() override {
+        camPixels.ShiftRedLeft();
+
         matrix.setBrightness(brightness);
         apamatrix.setBrightness(accentBrightness);
 
@@ -87,7 +88,7 @@ public:
             for (uint16_t x = 0; x < 64; x++){
                 uint16_t pixelNum = y * 64 + x;
 
-                rgb24 rgbColor = rgb24((uint16_t)camPixels.GetPixel(pixelNum)->Color.R, (uint16_t)camPixels.GetPixel(pixelNum)->Color.G, (uint16_t)camPixels.GetPixel(pixelNum)->Color.B);
+                rgb24 rgbColor = rgb24((uint16_t)camPixels.GetColor(pixelNum)->R, (uint16_t)camPixels.GetColor(pixelNum)->G, (uint16_t)camPixels.GetColor(pixelNum)->B);
 
                 backgroundLayer.drawPixel(x, (31 - y), rgbColor);
                 backgroundLayer.drawPixel(63 - x, (31 - y) + 32, rgbColor);
@@ -95,7 +96,7 @@ public:
         }
 
         for (uint16_t x = 0; x < kApaMatrixWidth; x++){
-            apabuffer[x] = CRGB(camSidePixels.GetPixel(x)->Color.R, camSidePixels.GetPixel(x)->Color.G, camSidePixels.GetPixel(x)->Color.B);
+            apabuffer[x] = CRGB(camSidePixels.GetColor(x)->R, camSidePixels.GetColor(x)->G, camSidePixels.GetColor(x)->B);
         }
         
         backgroundLayer.swapBuffers();

@@ -6,6 +6,7 @@
 class Material{
 public:
     enum Method{
+        Base,
         Add,
         Subtract,
         Multiply,
@@ -15,7 +16,8 @@ public:
         Screen,
         Overlay,
         SoftLight,
-        Replace
+        Replace,
+        EfficientMask
     };
 
     virtual RGBColor GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) = 0;

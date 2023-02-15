@@ -24,7 +24,7 @@ private:
     RampFilter rampFilter[maxParameters];
     float* parameters[maxParameters];
     float parameterFrame[maxParameters];
-    float previousChangedTarget[maxParameters];
+    float previousSet[maxParameters];
     float basis[maxParameters];
     float goal[maxParameters];
     uint8_t interpolationMethods[maxParameters];
@@ -87,6 +87,7 @@ public:
                 this->goal[currentParameters] = goal;
                 parameters[currentParameters] = parameter;
                 parameterFrame[currentParameters] = 0.0f;
+                previousSet[currentParameters] = 0.0f;
                 dictionary[currentParameters] = dictionaryValue;
                 rampFilter[currentParameters].SetFrames(frames);
                 currentParameters++;
@@ -119,16 +120,38 @@ public:
         }
     }
 
+    void SetParameters(){//Used to set parameters but not update interpolation
+        for(uint16_t i = 0; i < currentParameters; i++){
+            float set = previousSet[i];
+            float fullRange = Mathematics::Map(set, basis[i], goal[i], 0.0f, 1.0f);
+
+            switch(interpolationMethods[i]){
+                case Cosine:
+                    *parameters[i] = Mathematics::CosineInterpolation(basis[i], goal[i], fullRange);
+                    break;
+                case Bounce:
+                    *parameters[i] = Mathematics::BounceInterpolation(basis[i], goal[i], fullRange);
+                    break;
+                case Overshoot:
+                    *parameters[i] = dampedSpring[i].GetCurrentPosition();
+                    break;
+                default://Linear
+                    *parameters[i] = set;
+                    break;
+            }
+        }
+    }
+
     void Update(){
         //parameterFrame is the target, if no parameter is given for the frame, it will move towards the basis value
         for(uint16_t i = 0; i < currentParameters; i++){
 
             float set = rampFilter[i].Filter(parameterFrame[i]);
-
             float fullRange = Mathematics::Map(set, basis[i], goal[i], 0.0f, 1.0f);
 
-            //basis at 0.5f does not go to 0.5f but to zero with linear
+            previousSet[i] = set;
 
+            //basis at 0.5f does not go to 0.5f but to zero with linear
             //when using set, it defaults the blush is shown the inverted 1.0f to 0.0f does not work
 
             switch(interpolationMethods[i]){

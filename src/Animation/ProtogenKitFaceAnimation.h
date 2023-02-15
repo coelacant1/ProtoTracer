@@ -7,7 +7,7 @@
 #include "..\Morph\NukudeFace.h"
 #include "..\Render\Scene.h"
 #include "..\Signals\FunctionGenerator.h"
-#include "..\Menu\Menu.h"
+#include "..\Menu\SingleButtonMenu.h"
 #include "..\Sensors\APDS9960.h"
 
 #include "..\Materials\Animated\SpectrumAnalyzer.h"
@@ -224,6 +224,14 @@ public:
         Menu::SetPositionOffset(Vector2D(-40.0f, -30.0f));
     }
 
+    uint8_t GetAccentBrightness(){
+        return Menu::GetAccentBrightness();
+    };
+
+    uint8_t GetBrightness(){
+        return Menu::GetBrightness();
+    };
+    
     void FadeIn(float stepRatio) override {}
     void FadeOut(float stepRatio) override {}
 

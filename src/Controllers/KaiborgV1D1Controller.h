@@ -39,22 +39,22 @@ public:
         int offset;
 
         for (int i = 0; i < 571; i++){
-            camLeftPixels.GetPixel(i)->Color = camLeftPixels.GetPixel(i)->Color.Scale(brightness);
-            camRghtPixels.GetPixel(i)->Color = camRghtPixels.GetPixel(i)->Color.Scale(brightness);
+            *camLeftPixels.GetColor(i) = camLeftPixels.GetColor(i)->Scale(brightness);
+            *camRghtPixels.GetColor(i) = camRghtPixels.GetColor(i)->Scale(brightness);
         }
 
         for (int i = 0; i < 571; i++) {
             if (i < 346){
                 offset = i + 225;
 
-                leds.setPixel(i + 346 * 4, camLeftPixels.GetPixel(offset)->Color.R, camLeftPixels.GetPixel(offset)->Color.G, camLeftPixels.GetPixel(offset)->Color.B);//Pin 7
-                leds.setPixel(i + 346 * 5, camRghtPixels.GetPixel(i)->Color.R, camRghtPixels.GetPixel(i)->Color.G, camRghtPixels.GetPixel(i)->Color.B);//Pin 8
+                leds.setPixel(i + 346 * 4, camLeftPixels.GetColor(offset)->R, camLeftPixels.GetColor(offset)->G, camLeftPixels.GetColor(offset)->B);//Pin 7
+                leds.setPixel(i + 346 * 5, camRghtPixels.GetColor(i)->R, camRghtPixels.GetColor(i)->G, camRghtPixels.GetColor(i)->B);//Pin 8
             }
             else{
                 offset = i - 346;
 
-                leds.setPixel(i + 346 * 6 - 346, camLeftPixels.GetPixel(offset)->Color.R, camLeftPixels.GetPixel(offset)->Color.G, camLeftPixels.GetPixel(offset)->Color.B);//Pin 8
-                leds.setPixel(i + 346 * 7 - 346, camRghtPixels.GetPixel(i)->Color.R, camRghtPixels.GetPixel(i)->Color.G, camRghtPixels.GetPixel(i)->Color.B);//Pin 8
+                leds.setPixel(i + 346 * 6 - 346, camLeftPixels.GetColor(offset)->R, camLeftPixels.GetColor(offset)->G, camLeftPixels.GetColor(offset)->B);//Pin 8
+                leds.setPixel(i + 346 * 7 - 346, camRghtPixels.GetColor(i)->R, camRghtPixels.GetColor(i)->G, camRghtPixels.GetColor(i)->B);//Pin 8
             }
         }
         

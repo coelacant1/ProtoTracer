@@ -1,3 +1,4 @@
 mrfaptastic/ESP32 HUB75 LED MATRIX PANEL DMA Display@^3.0.2
+arduino-libraries/NTPClient@^3.2.1
 fastled/FastLED@^3.5.0
 adafruit/Adafruit GFX Library@^1.11.3

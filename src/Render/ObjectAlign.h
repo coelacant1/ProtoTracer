@@ -123,7 +123,7 @@ private:
         }
 
         normal = normal / count;
-        normal = normal.UnitSphere();
+        normal = normal.UnitSphere().Absolute();
 
         Quaternion rotation = Rotation(Vector3D(0.0f, 0.0f, 1.0f), normal).GetQuaternion();
 

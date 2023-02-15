@@ -14,17 +14,9 @@ public:
         float cosR = cosf(rotation * Mathematics::MPID180);
 
         float xP = x * cosR - y * sinR;//rotate about center
-        float yP = y * cosR + x * sinR;//rotate about center
+        float yP = x * sinR + y * cosR;//rotate about center
 
-        float sizeXH = size.X / 2.0f;
-        float sizeYH = size.Y / 2.0f;
-
-        float xL = center.X - sizeXH;
-        float xR = center.X + sizeXH;
-        float yB = center.Y - sizeYH;
-        float yT = center.Y + sizeYH;
-
-        return (xP > xL && xP < xR && yP > yB && yP < yT);
+        return fabs(xP) <= size.X / 2.0f && fabs(yP) <= size.Y / 2.0f;
     }
 
 };

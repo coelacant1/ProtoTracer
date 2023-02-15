@@ -39,6 +39,7 @@ private:
     Camera camMain1 = Camera(&camTransform1, &camPixels1);
     Camera camMain2 = Camera(&camTransform2, &camPixels2);
 
+    //Camera* cameras[1] = { &camMain1 };
     Camera* cameras[2] = { &camMain1, &camMain2 };
 
 public:

@@ -47,15 +47,19 @@ public:
         Vector3D tempV;
         RGBColor temp;
 
-        //Set base color
-        temp = materials[0]->GetRGB(position, normal, uvw);
-        rgb.X = temp.R;
-        rgb.Y = temp.G;
-        rgb.Z = temp.B;
-
-        for(int i = 1; i < materialsAdded; i++){
+        for(int i = 0; i < materialsAdded; i++){
             if (opacity[i] > 0.01f){
                 switch(method[i]){
+                    case Base:
+                        temp = materials[i]->GetRGB(position, normal, uvw);
+                        
+                        rgb.X = temp.R;
+                        rgb.Y = temp.G;
+                        rgb.Z = temp.B;
+
+                        rgb = rgb * opacity[i];
+
+                        break;
                     case Add:
                         //Add all colors to base color
                         temp = materials[i]->GetRGB(position, normal, uvw);
@@ -157,6 +161,22 @@ public:
                         }
 
                         rgb = Vector3D::LERP(rgb, tempV, opacity[i]);
+
+                        break;
+                    case EfficientMask:
+                        temp = materials[i]->GetRGB(position, normal, uvw);
+
+                        if(temp.R > 128 && temp.G > 128 && temp.B > 128){
+                            rgb.X = temp.R;
+                            rgb.Y = temp.G;
+                            rgb.Z = temp.B;
+
+                            rgb = rgb * opacity[i];
+
+                            i = materialsAdded;
+
+                            break;
+                        }
 
                         break;
                     default:

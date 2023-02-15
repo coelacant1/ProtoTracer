@@ -35,6 +35,10 @@ public:
         previousMillis = 0;
     }
 
+    float GetCurrentPosition(){
+        return currentPosition;
+    }
+
     void SetConstants(float springConstant, float damping){
         this->springConstant = -1.0f * springConstant;
         this->damping = -1.0f * damping;
