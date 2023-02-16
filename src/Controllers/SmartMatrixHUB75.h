@@ -76,8 +76,6 @@ public:
     }
 
     void Display() override {
-        camPixels.ShiftRedLeft();
-
         matrix.setBrightness(brightness);
         apamatrix.setBrightness(accentBrightness);
 

@@ -12,7 +12,7 @@
 //#define CUSTOMHUB75
 //#define CUSTOMWS35
 
-//#define PRINTINFO
+#define PRINTINFO
 
 #include <Arduino.h>
 

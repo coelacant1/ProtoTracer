@@ -1,5 +1,6 @@
 #pragma once
 
+#include "..\Screenspace\Effect.h"
 #include "Object3D.h"
 
 class Scene {
@@ -7,6 +8,8 @@ private:
 	const int maxObjects;
 	Object3D** objects;
 	unsigned int numObjects = 0;
+    Effect* effect;
+    bool doesUseEffect = false;
 
 	void RemoveElement(unsigned int element){
 		for(unsigned int i = element; i < numObjects; i++){
@@ -21,6 +24,26 @@ public:
 
 	~Scene(){
 		delete[] objects;
+	}
+
+    bool UseEffect(){
+        return doesUseEffect;
+    }
+
+	void EnableEffect(){
+		doesUseEffect = true;
+	}
+
+	void DisableEffect(){
+		doesUseEffect = false;
+	}
+    
+    Effect* GetEffect(){
+		return effect;
+	}
+
+	void SetEffect(Effect* effect){
+		this->effect = effect;
 	}
 
 	void AddObject(Object3D* object){

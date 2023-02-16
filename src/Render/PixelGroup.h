@@ -165,6 +165,10 @@ public:
         return pixelColors[count];
     }
 
+    RGBColor** GetColors(){
+        return pixelColors;
+    }
+
     unsigned int GetPixelCount(){
         return pixelCount;
     }
@@ -399,29 +403,6 @@ public:
             Serial.print(*downExists[i]); Serial.print('\t');
             Serial.print(*leftExists[i]); Serial.print('\t');
             Serial.print(*rightExists[i]); Serial.print('\n');
-        }
-    }
-
-    void ShiftRedLeft(){
-        for (unsigned int i = 0; i < pixelCount; i++){
-            unsigned int l1 = 0, l2 = 0, l3 = 0, l4 = 0, l5 = 0;
-            
-            bool l1E = GetLeftIndex(i, &l1);
-            bool l2E = GetLeftIndex(l1, &l2);
-            bool l3E = GetLeftIndex(l2, &l3);
-            bool l4E = GetLeftIndex(l3, &l4);
-            bool l5E = GetLeftIndex(l4, &l5);
-
-            if(l5E){
-                pixelColors[l5]->R = (pixelColors[i]->R + pixelColors[l2]->R + pixelColors[l3]->R + pixelColors[4]->R) / 4;
-                pixelColors[l5]->B = (pixelColors[i]->B + pixelColors[l2]->B + pixelColors[l3]->B + pixelColors[4]->B) / 4;
-                pixelColors[l5]->G = (pixelColors[i]->G + pixelColors[l2]->G + pixelColors[l3]->G + pixelColors[4]->G) / 4;
-            }
-            else{
-                pixelColors[l5]->R = 0;
-                pixelColors[l5]->B = 0;
-                pixelColors[l5]->G = 0;
-            }
         }
     }
 };

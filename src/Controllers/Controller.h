@@ -53,7 +53,12 @@ public:
 
         for (int i = 0; i < count; i++){
             cameras[i]->Rasterize(scene);
+
+            if(scene->UseEffect()){
+                scene->GetEffect()->ApplyEffect(cameras[i]->GetPixelGroup());
+            }
         }
+        
 
         renderTime = ((float)(micros() - previousTime)) / 1000000.0f;
     }
@@ -64,6 +69,10 @@ public:
         UpdateBrightness();
 
         cameras[cameraNum]->Rasterize(scene);
+
+        if(scene->UseEffect()){
+            scene->GetEffect()->ApplyEffect(cameras[cameraNum]->GetPixelGroup());
+        }
 
         renderTime = ((float)(micros() - previousTime)) / 1000000.0f;
     }

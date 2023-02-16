@@ -28,6 +28,10 @@
 
 #include "..\Render\ObjectAlign.h"
 
+#include "..\Screenspace\HorizontalBlur.h"
+#include "..\Screenspace\RadialBlur.h"
+#include "..\Screenspace\VerticalBlur.h"
+
 class ProtogenHUB75Animation : public Animation<3> {
 private:
     static const uint8_t faceCount = 9;
@@ -71,11 +75,17 @@ private:
     FunctionGenerator fGenMatYMenu = FunctionGenerator(FunctionGenerator::Sine, -10.0f, 10.0f, 2.7f);
     FunctionGenerator fGenMatRMenu = FunctionGenerator(FunctionGenerator::Sine, -5.0f, 5.0f, 1.7f);
 
+    FunctionGenerator fGenBlur = FunctionGenerator(FunctionGenerator::Sine, 0.0f, 1.0f, 1.5f);
+
     APDS9960 boop;
 
     FFTVoiceDetection<128> voiceDetection;
 
     ObjectAlign objA = ObjectAlign(Vector2D(0.0f, 0.0f), Vector2D(189.0f, 93.0f), Quaternion());
+
+    HorizontalBlur blurH = HorizontalBlur(20);
+    VerticalBlur blurV = VerticalBlur(20);
+    RadialBlur blurR = RadialBlur(10);
 
     float offsetFace = 0.0f;
     float offsetFaceSA = 0.0f;
@@ -153,7 +163,10 @@ private:
         blink.Update();
     }
 
-    void Default(){}
+    void Default(){
+        scene.SetEffect(&blurH);
+        scene.EnableEffect();
+    }
 
     void Angry(){
         eEA.AddParameterFrame(NukudeFace::Anger, 1.0f);
@@ -167,6 +180,8 @@ private:
     }
 
     void Surprised(){
+        scene.SetEffect(&blurV);
+        scene.EnableEffect();
         eEA.AddParameterFrame(NukudeFace::Surprised, 1.0f);
         eEA.AddParameterFrame(NukudeFace::HideBlush, 0.0f);
         materialAnimator.AddMaterialFrame(rainbowSpiral, 0.8f);
@@ -294,6 +309,10 @@ public:
 
         //Menu::SetSize(Vector2D(280, 60));
         //Menu::SetPositionOffset(Vector2D(0.0f, -30.0f * yOffset));
+
+        blurH.SetRatio(fGenBlur.Update());
+        blurV.SetRatio(fGenBlur.Update());
+        blurR.SetRatio(fGenBlur.Update());
 
         SetMaterialColor();
 
