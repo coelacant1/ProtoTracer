@@ -113,7 +113,6 @@ public:
             }
         }
 
-        //delay(2000);
         GridSort();
         //ListPixelNeighbors();
     }
@@ -195,7 +194,7 @@ public:
         else{
             *upIndex = *up[count];
 
-            return upExists[*up[count]];
+            return *upExists[count];
         }
     }
 
@@ -212,7 +211,7 @@ public:
         else{
             *downIndex = *down[count];
 
-            return downExists[*down[count]];
+            return *downExists[count];
         }
     }
 
@@ -229,7 +228,7 @@ public:
         else{
             *leftIndex = *left[count];
 
-            return leftExists[*left[count]];
+            return *leftExists[count];
         }
     }
 
@@ -246,84 +245,53 @@ public:
         else{
             *rightIndex = *right[count];
 
-            return rightExists[*right[count]];
+            return *rightExists[count];
         }
     }
 
-    bool GetUpColor(unsigned int count, RGBColor* upColor){
-        if (isRectangular){
-            unsigned int index = count + rowCount;
+    #define ABS(_x) ((_x) >= 0 ? (_x) : -(_x))
+    #define SGN(_x) ((_x) < 0 ? -1 : ((_x) > 0 ? 1 : 0))
 
-            if (index < pixelCount){
-                upColor = pixelColors[index];
-                return true;
+    bool GetRadialIndex(unsigned int count, unsigned int* index, int pixels, float angle){//walks in the direction of the angle to a target pixel to grab an index
+        int x1 = int(float(pixels) * cosf(angle * Mathematics::MPID180));
+        int y1 = int(float(pixels) * sinf(angle * Mathematics::MPID180));
+
+        unsigned int tempIndex = count;
+        bool valid = true;
+
+        int previousX = 0;
+        int previousY = 0;
+
+        int x = 0;
+        int y = 0;
+
+        for(int i = 0; i < pixels; i++){
+            x = Mathematics::Map(i, 0, pixels, 0, x1);
+            y = Mathematics::Map(i, 0, pixels, 0, y1);
+
+            for (int i = 0; i < abs(x - previousX); i++){
+                if (x > previousX) valid = GetRightIndex(tempIndex, &tempIndex);
+                else if (x < previousX) valid = GetLeftIndex(tempIndex, &tempIndex);
+                if (!valid) break;
             }
-            else{ return false; }
-        }
-        else{
-            unsigned int index = *up[count];
+
+            if (!valid) break;
+
+            for (int i = 0; i < abs(y - previousY); i++){
+                if (y > previousY) valid = GetUpIndex(tempIndex, &tempIndex);
+                if (y < previousY) valid = GetDownIndex(tempIndex, &tempIndex);
+                if (!valid) break;
+            }
             
-            upColor = pixelColors[index];
+            if (!valid) break;
 
-            return upExists[index];
+            previousX = x;
+            previousY = y;
         }
-    }
 
-    bool GetDownColor(unsigned int count, RGBColor* downColor){
-        if (isRectangular){
-            int index = count - rowCount;
+        *index = tempIndex;
 
-            if (index > 0){
-                downColor = pixelColors[index];
-                return true;
-            }
-            else{ return false; }
-        }
-        else{
-            unsigned int index = *down[count];
-            
-            downColor = pixelColors[index];
-
-            return downExists[index];
-        }
-    }
-
-    bool GetLeftColor(unsigned int count, RGBColor* leftColor){
-        if (isRectangular){
-            int index = count - 1;
-
-            if (!count % rowCount == 0 && count > 0){
-                leftColor = pixelColors[index];
-                return true;
-            }
-            else{ return false; }
-        }
-        else{
-            unsigned int index = *left[count];
-            
-            leftColor = pixelColors[index];
-
-            return leftExists[index];
-        }
-    }
-
-    bool GetRightColor(unsigned int count, RGBColor* rightColor){
-        if (isRectangular){
-            int index = count + 1;
-
-            if (!count % rowCount + 1 == 0 && count < pixelCount){
-                rightColor = pixelColors[index];
-                return true;
-            }
-            else{ return false; }
-        }
-        else{
-            unsigned int index = *right[count];
-
-            rightColor = pixelColors[index];
-
-            return rightExists[index];
-        }
+        return valid;
     }
 
     void GridSort() {
@@ -346,7 +314,7 @@ public:
                     float dist = currentPos.CalculateEuclideanDistance(neighborPos);
 
                     // Check if the other pixel is above or below the current pixel
-                    if (Mathematics::IsClose(currentPos.X, neighborPos.X, 0.5f)) {
+                    if (Mathematics::IsClose(currentPos.X, neighborPos.X, 1.0f)) {
                         if (currentPos.Y < neighborPos.Y && dist < minUp) {
                             minUp = dist;
                             minUpIndex = j;
@@ -358,7 +326,7 @@ public:
                     }
 
                     // Check if the other pixel is to the left or right of the current pixel
-                    if (Mathematics::IsClose(currentPos.Y, neighborPos.Y, 0.5f)) {
+                    if (Mathematics::IsClose(currentPos.Y, neighborPos.Y, 1.0f)) {
                         if (currentPos.X > neighborPos.X && dist < minLeft) {
                             minLeft = dist;
                             minLeftIndex = j;
@@ -375,14 +343,17 @@ public:
                     *up[i] = minUpIndex;
                     *upExists[i] = true;
                 }
+
                 if (minDownIndex != -1) {
                     *down[i] = minDownIndex;
                     *downExists[i] = true;
                 }
+
                 if (minLeftIndex != -1) {
                     *left[i] = minLeftIndex;
                     *leftExists[i] = true;
                 }
+
                 if (minRightIndex != -1) {
                     *right[i] = minRightIndex;
                     *rightExists[i] = true;

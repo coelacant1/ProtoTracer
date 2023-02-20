@@ -29,6 +29,9 @@
 #include "..\Render\ObjectAlign.h"
 
 #include "..\Screenspace\HorizontalBlur.h"
+#include "..\Screenspace\PhaseOffsetX.h"
+#include "..\Screenspace\PhaseOffsetY.h"
+#include "..\Screenspace\PhaseOffsetR.h"
 #include "..\Screenspace\RadialBlur.h"
 #include "..\Screenspace\VerticalBlur.h"
 
@@ -86,6 +89,9 @@ private:
     HorizontalBlur blurH = HorizontalBlur(20);
     VerticalBlur blurV = VerticalBlur(20);
     RadialBlur blurR = RadialBlur(10);
+    PhaseOffsetX phaseX = PhaseOffsetX(20);
+    PhaseOffsetY phaseY = PhaseOffsetY(20);
+    PhaseOffsetR phaseR = PhaseOffsetR(8);
 
     float offsetFace = 0.0f;
     float offsetFaceSA = 0.0f;
@@ -164,7 +170,7 @@ private:
     }
 
     void Default(){
-        scene.SetEffect(&blurH);
+        scene.SetEffect(&phaseR);
         scene.EnableEffect();
     }
 
@@ -180,8 +186,9 @@ private:
     }
 
     void Surprised(){
-        scene.SetEffect(&blurV);
+        scene.SetEffect(&phaseR);
         scene.EnableEffect();
+
         eEA.AddParameterFrame(NukudeFace::Surprised, 1.0f);
         eEA.AddParameterFrame(NukudeFace::HideBlush, 0.0f);
         materialAnimator.AddMaterialFrame(rainbowSpiral, 0.8f);
@@ -313,6 +320,9 @@ public:
         blurH.SetRatio(fGenBlur.Update());
         blurV.SetRatio(fGenBlur.Update());
         blurR.SetRatio(fGenBlur.Update());
+        phaseX.SetRatio(fGenBlur.Update());
+        phaseY.SetRatio(fGenBlur.Update());
+        //phaseR.SetRatio(fGenBlur.Update());
 
         SetMaterialColor();
 
@@ -369,6 +379,8 @@ public:
 
         eEA.Update();
         pM.Update();
+        
+        phaseR.SetRatio(eEA.GetValue(NukudeFace::Surprised));
 
         rainbowNoise.Update(ratio);
         rainbowSpiral.Update(ratio);
