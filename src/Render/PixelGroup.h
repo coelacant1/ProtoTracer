@@ -187,6 +187,31 @@ public:
         }
     }
 
+    virtual bool GetOffsetXYIndex(unsigned int count, unsigned int* index, int x1, int y1) override {
+        unsigned int tempIndex = count;
+        bool valid = true;
+
+        for(int i = 0; i < x1; i++){
+            if (x1 > 0) valid = GetRightIndex(tempIndex, &tempIndex);
+            else if (x1 < 0) valid = GetLeftIndex(tempIndex, &tempIndex);
+            else break;
+            
+            if (!valid) break;
+        }
+        
+        for(int i = 0; i < y1; i++){
+            if (y1 > 0) valid = GetUpIndex(tempIndex, &tempIndex);
+            else if (y1 < 0) valid = GetDownIndex(tempIndex, &tempIndex);
+            else break;
+            
+            if (!valid) break;
+        }
+        
+        *index = tempIndex;
+
+        return valid;
+    }
+
     virtual bool GetRadialIndex(unsigned int count, unsigned int* index, int pixels, float angle) override {//walks in the direction of the angle to a target pixel to grab an index
         int x1 = int(float(pixels) * cosf(angle * Mathematics::MPID180));
         int y1 = int(float(pixels) * sinf(angle * Mathematics::MPID180));
@@ -204,7 +229,7 @@ public:
             x = Mathematics::Map(i, 0, pixels, 0, x1);
             y = Mathematics::Map(i, 0, pixels, 0, y1);
 
-            for (int i = 0; i < abs(x - previousX); i++){
+            for (int k = 0; k < abs(x - previousX); k++){
                 if (x > previousX) valid = GetRightIndex(tempIndex, &tempIndex);
                 else if (x < previousX) valid = GetLeftIndex(tempIndex, &tempIndex);
                 if (!valid) break;
@@ -212,9 +237,9 @@ public:
 
             if (!valid) break;
 
-            for (int i = 0; i < abs(y - previousY); i++){
+            for (int k = 0; k < abs(y - previousY); k++){
                 if (y > previousY) valid = GetUpIndex(tempIndex, &tempIndex);
-                if (y < previousY) valid = GetDownIndex(tempIndex, &tempIndex);
+                else if (y < previousY) valid = GetDownIndex(tempIndex, &tempIndex);
                 if (!valid) break;
             }
             
