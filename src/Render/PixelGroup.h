@@ -1,28 +1,23 @@
 #pragma once
 
-#include "..\Materials\RGBColor.h"
-#include "BoundingBox2D.h"
+#include "IPixelGroup.h"
 
-class PixelGroup{
-public:
-    enum Direction{
-        ZEROTOMAX,
-        MAXTOZERO
-    };
-
+template<size_t pixelCount>
+class PixelGroup : public IPixelGroup{
 private:
-    const unsigned int pixelCount;
+    Direction direction;
     BoundingBox2D bounds;
-	Vector2D** pixelPositions;
-  	RGBColor** pixelColors;
-    unsigned int** up;
-    unsigned int** down;
-    unsigned int** left;
-    unsigned int** right;
-    bool** upExists;
-    bool** downExists;
-    bool** leftExists;
-    bool** rightExists;
+	Vector2D* pixelPositions;
+  	RGBColor pixelColors[pixelCount];
+  	RGBColor pixelBuffer[pixelCount];
+    unsigned int up[pixelCount];
+    unsigned int down[pixelCount];
+    unsigned int left[pixelCount];
+    unsigned int right[pixelCount];
+    bool upExists[pixelCount];
+    bool downExists[pixelCount];
+    bool leftExists[pixelCount];
+    bool rightExists[pixelCount];
 
     bool isRectangular = false;
     uint16_t rowCount;
@@ -31,7 +26,7 @@ private:
     Vector2D position;
 
 public:
-    PixelGroup(Vector2D size, Vector2D position, uint16_t rowCount, unsigned int pixelCount) : pixelCount(pixelCount){
+    PixelGroup(Vector2D size, Vector2D position, uint16_t rowCount){
         this->size = size;
         this->position = position;
         this->rowCount = rowCount;
@@ -42,92 +37,27 @@ public:
         bounds.UpdateBounds(position - (size / 2.0f));
         bounds.UpdateBounds(position + (size / 2.0f));
 
-        pixelColors = new RGBColor*[pixelCount];
-
         for(unsigned int i = 0; i < pixelCount; i++){
-            pixelColors[i] = new RGBColor();
+            pixelColors[i] = RGBColor();
+            pixelBuffer[i] = RGBColor();
         }
     }
 
-    PixelGroup(Vector2D* pixelLocations, unsigned int pixelCount, Direction direction = ZEROTOMAX) : pixelCount(pixelCount){
-        pixelPositions = new Vector2D*[pixelCount];
-        pixelColors = new RGBColor*[pixelCount];
-        up = new unsigned int*[pixelCount];
-        down = new unsigned int*[pixelCount];
-        left = new unsigned int*[pixelCount];
-        right = new unsigned int*[pixelCount];
-        upExists = new bool*[pixelCount];
-        downExists = new bool*[pixelCount];
-        leftExists = new bool*[pixelCount];
-        rightExists = new bool*[pixelCount];
+    PixelGroup(Vector2D* pixelLocations, Direction direction = ZEROTOMAX){
+        this->direction = direction;
+        pixelPositions = pixelLocations;
 
-        if(direction == ZEROTOMAX){
-            for(unsigned int i = 0; i < pixelCount; i++){
-                pixelPositions[i] = &pixelLocations[i];
-                pixelColors[i] = new RGBColor();
-                up[i] = new unsigned int();
-                down[i] = new unsigned int();
-                left[i] = new unsigned int();
-                right[i] = new unsigned int();
-                upExists[i] = new bool();
-                downExists[i] = new bool();
-                leftExists[i] = new bool();
-                rightExists[i] = new bool();
-
-                
-                *up[i] = 0;
-                *down[i] = 0;
-                *left[i] = 0;
-                *right[i] = 0;
-                *upExists[i] = false;
-                *downExists[i] = false;
-                *leftExists[i] = false;
-                *rightExists[i] = false;
-
-                bounds.UpdateBounds(pixelLocations[i]);
-            }
-        }
-        else{
-            for(unsigned int i = 0; i < pixelCount; i++){
-                pixelPositions[i] = &pixelLocations[pixelCount - i - 1];
-                pixelColors[i] = new RGBColor();
-                up[i] = new unsigned int();
-                down[i] = new unsigned int();
-                left[i] = new unsigned int();
-                right[i] = new unsigned int();
-                upExists[i] = new bool();
-                downExists[i] = new bool();
-                leftExists[i] = new bool();
-                rightExists[i] = new bool();
-
-                *up[i] = 0;
-                *down[i] = 0;
-                *left[i] = 0;
-                *right[i] = 0;
-                *upExists[i] = false;
-                *downExists[i] = false;
-                *leftExists[i] = false;
-                *rightExists[i] = false;
-
-                bounds.UpdateBounds(pixelLocations[i]);
-            }
+        for(unsigned int i = 0; i < pixelCount; i++){
+            bounds.UpdateBounds(pixelLocations[i]);
         }
 
         GridSort();
         //ListPixelNeighbors();
     }
 
-    ~PixelGroup(){
-        for (unsigned int i = 0; i < pixelCount; i++){
-            delete pixelPositions[i];
-            delete pixelColors[i];
-        }
+    ~PixelGroup(){}
 
-        delete pixelPositions;
-        delete pixelColors;
-    }
-
-    Vector2D GetCoordinate(unsigned int count){
+    virtual Vector2D GetCoordinate(unsigned int count) override {
         count = Mathematics::Constrain<int>(count, 0, pixelCount);
 
         if (isRectangular){
@@ -142,11 +72,16 @@ public:
             return location;
         }
         else{
-            return *pixelPositions[count];
+            if(direction == ZEROTOMAX){
+                return pixelPositions[count];
+            }
+            else{
+                return pixelPositions[pixelCount - count - 1];
+            }
         }
     }
 
-    int GetPixelIndex(Vector2D location){
+    virtual int GetPixelIndex(Vector2D location) override {
         float row = Mathematics::Map(location.X, position.X - size.X / 2.0f, position.X + size.X / 2.0f, 0.0f, float(rowCount));
         float col = Mathematics::Map(location.Y, position.Y - size.Y / 2.0f, position.Y + size.Y / 2.0f, 0.0f, float(colCount));
 
@@ -160,28 +95,31 @@ public:
         }
     }
 
-    RGBColor* GetColor(unsigned int count){
-        return pixelColors[count];
+    virtual RGBColor* GetColor(unsigned int count) override {
+        return &pixelColors[count];
     }
 
-    RGBColor** GetColors(){
-        return pixelColors;
+    virtual RGBColor* GetColors() override {
+        return &pixelColors[0];
     }
 
-    unsigned int GetPixelCount(){
+    virtual RGBColor* GetColorBuffer() override {
+        return &pixelBuffer[0];
+    }
+
+    virtual unsigned int GetPixelCount() override {
         return pixelCount;
     }
 
-    bool Overlaps(BoundingBox2D* box){
+    virtual bool Overlaps(BoundingBox2D* box) override {
         return bounds.Overlaps(box);
     }
 
-    bool ContainsVector2D(Vector2D v){
+    virtual bool ContainsVector2D(Vector2D v) override {
         return v.CheckBounds(bounds.GetMinimum(), bounds.GetMaximum());
     }
 
-    
-    bool GetUpIndex(unsigned int count, unsigned int* upIndex){
+    virtual bool GetUpIndex(unsigned int count, unsigned int* upIndex) override {
         if (isRectangular){
             unsigned int index = count + rowCount;
 
@@ -192,13 +130,13 @@ public:
             else{ return false; }
         }
         else{
-            *upIndex = *up[count];
+            *upIndex = up[count];
 
-            return *upExists[count];
+            return upExists[count];
         }
     }
 
-    bool GetDownIndex(unsigned int count, unsigned int* downIndex){
+    virtual bool GetDownIndex(unsigned int count, unsigned int* downIndex) override {
         if (isRectangular){
             unsigned int index = count - rowCount;
 
@@ -209,13 +147,13 @@ public:
             else{ return false; }
         }
         else{
-            *downIndex = *down[count];
+            *downIndex = down[count];
 
-            return *downExists[count];
+            return downExists[count];
         }
     }
 
-    bool GetLeftIndex(unsigned int count, unsigned int* leftIndex){
+    virtual bool GetLeftIndex(unsigned int count, unsigned int* leftIndex) override {
         if (isRectangular){
             unsigned int index = count - 1;
 
@@ -226,13 +164,13 @@ public:
             else{ return false; }
         }
         else{
-            *leftIndex = *left[count];
+            *leftIndex = left[count];
 
-            return *leftExists[count];
+            return leftExists[count];
         }
     }
 
-    bool GetRightIndex(unsigned int count, unsigned int* rightIndex){
+    virtual bool GetRightIndex(unsigned int count, unsigned int* rightIndex) override {
         if (isRectangular){
             unsigned int index = count + 1;
 
@@ -243,16 +181,13 @@ public:
             else{ return false; }
         }
         else{
-            *rightIndex = *right[count];
+            *rightIndex = right[count];
 
-            return *rightExists[count];
+            return rightExists[count];
         }
     }
 
-    #define ABS(_x) ((_x) >= 0 ? (_x) : -(_x))
-    #define SGN(_x) ((_x) < 0 ? -1 : ((_x) > 0 ? 1 : 0))
-
-    bool GetRadialIndex(unsigned int count, unsigned int* index, int pixels, float angle){//walks in the direction of the angle to a target pixel to grab an index
+    virtual bool GetRadialIndex(unsigned int count, unsigned int* index, int pixels, float angle) override {//walks in the direction of the angle to a target pixel to grab an index
         int x1 = int(float(pixels) * cosf(angle * Mathematics::MPID180));
         int y1 = int(float(pixels) * sinf(angle * Mathematics::MPID180));
 
@@ -294,11 +229,11 @@ public:
         return valid;
     }
 
-    void GridSort() {
+    virtual void GridSort() override {
         if(!isRectangular){
             // Loop through all pixels
             for (unsigned int i = 0; i < pixelCount; i++) {
-                Vector2D& currentPos = *pixelPositions[i];
+                Vector2D& currentPos = pixelPositions[i];
 
                 // Initialize the minimum distances and indices to the first pixel
                 float minUp = Mathematics::FLTMAX, minDown = Mathematics::FLTMAX, minLeft = Mathematics::FLTMAX, minRight = Mathematics::FLTMAX;
@@ -308,7 +243,7 @@ public:
                 for (unsigned int j = 0; j < pixelCount; j++) {
                     if (i == j) { continue; } // Skip the current pixel
 
-                    Vector2D& neighborPos = *pixelPositions[j];
+                    Vector2D& neighborPos = pixelPositions[j];
 
                     // Calculate the distances between the current pixel and the other pixel
                     float dist = currentPos.CalculateEuclideanDistance(neighborPos);
@@ -340,23 +275,23 @@ public:
 
                 // Set the indices of the neighboring pixels
                 if (minUpIndex != -1) {
-                    *up[i] = minUpIndex;
-                    *upExists[i] = true;
+                    up[i] = minUpIndex;
+                    upExists[i] = true;
                 }
 
                 if (minDownIndex != -1) {
-                    *down[i] = minDownIndex;
-                    *downExists[i] = true;
+                    down[i] = minDownIndex;
+                    downExists[i] = true;
                 }
 
                 if (minLeftIndex != -1) {
-                    *left[i] = minLeftIndex;
-                    *leftExists[i] = true;
+                    left[i] = minLeftIndex;
+                    leftExists[i] = true;
                 }
 
                 if (minRightIndex != -1) {
-                    *right[i] = minRightIndex;
-                    *rightExists[i] = true;
+                    right[i] = minRightIndex;
+                    rightExists[i] = true;
                 }
             }
         }
@@ -366,14 +301,14 @@ public:
     void ListPixelNeighbors(){
         for(unsigned int i = 0; i < pixelCount; i++){
             Serial.print(i); Serial.print('\t');
-            Serial.print(*up[i]); Serial.print('\t');
-            Serial.print(*down[i]); Serial.print('\t');
-            Serial.print(*left[i]); Serial.print('\t');
-            Serial.print(*right[i]); Serial.print('\t');
-            Serial.print(*upExists[i]); Serial.print('\t');
-            Serial.print(*downExists[i]); Serial.print('\t');
-            Serial.print(*leftExists[i]); Serial.print('\t');
-            Serial.print(*rightExists[i]); Serial.print('\n');
+            Serial.print(up[i]); Serial.print('\t');
+            Serial.print(down[i]); Serial.print('\t');
+            Serial.print(left[i]); Serial.print('\t');
+            Serial.print(right[i]); Serial.print('\t');
+            Serial.print(upExists[i]); Serial.print('\t');
+            Serial.print(downExists[i]); Serial.print('\t');
+            Serial.print(leftExists[i]); Serial.print('\t');
+            Serial.print(rightExists[i]); Serial.print('\n');
         }
     }
 };

@@ -11,8 +11,8 @@ private:
 public:
     PhaseOffsetY(uint8_t pixels) : pixels(pixels){}
 
-    void ApplyEffect(PixelGroup* pixelGroup){
-        RGBColor** pixelColors = pixelGroup->GetColors();
+    void ApplyEffect(IPixelGroup* pixelGroup){
+        RGBColor* pixelColors = pixelGroup->GetColors();
 
         for (unsigned int i = 0; i < pixelGroup->GetPixelCount(); i++){
             unsigned int indices[pixels + 1];
@@ -37,14 +37,14 @@ public:
                 valid[j] = pixelGroup->GetUpIndex(indices[j - 1], &indices[j]);
             }
 
-            if(valid[blurRangeR]) pixelColors[i]->R = pixelColors[indices[blurRangeR]]->R;
-            else pixelColors[i]->R = 0;
+            if(valid[blurRangeR]) pixelColors[i].R = pixelColors[indices[blurRangeR]].R;
+            else pixelColors[i].R = 0;
             
-            if(valid[blurRangeG]) pixelColors[i]->G = pixelColors[indices[blurRangeG]]->G;
-            else pixelColors[i]->G = 0;
+            if(valid[blurRangeG]) pixelColors[i].G = pixelColors[indices[blurRangeG]].G;
+            else pixelColors[i].G = 0;
             
-            if(valid[blurRangeB]) pixelColors[i]->B = pixelColors[indices[blurRangeB]]->B;
-            else pixelColors[i]->B = 0;
+            if(valid[blurRangeB]) pixelColors[i].B = pixelColors[indices[blurRangeB]].B;
+            else pixelColors[i].B = 0;
         }
     }
 

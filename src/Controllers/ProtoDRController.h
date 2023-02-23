@@ -32,21 +32,21 @@ private:
     Transform camRearMidTransform;
     Transform camFronMidTransform;
     
-    PixelGroup camFronTopPixels = PixelGroup(ProtoDRCamera, 306);
-    PixelGroup camRearTopPixels = PixelGroup(ProtoDRCamera, 306);
-    PixelGroup camFronBotPixels = PixelGroup(ProtoDRCamera, 306);
-    PixelGroup camRearBotPixels = PixelGroup(ProtoDRCamera, 306);
-    PixelGroup camRearMidPixels = PixelGroup(ProtoDRMini, 89);
-    PixelGroup camFronMidPixels = PixelGroup(ProtoDRMini, 89);
+    PixelGroup<306> camFronTopPixels = PixelGroup<306>(ProtoDRCamera);
+    PixelGroup<306> camRearTopPixels = PixelGroup<306>(ProtoDRCamera);
+    PixelGroup<306> camFronBotPixels = PixelGroup<306>(ProtoDRCamera);
+    PixelGroup<306> camRearBotPixels = PixelGroup<306>(ProtoDRCamera);
+    PixelGroup<89> camRearMidPixels = PixelGroup<89>(ProtoDRMini);
+    PixelGroup<89> camFronMidPixels = PixelGroup<89>(ProtoDRMini);
     
-    Camera camFronTop = Camera(&camFronTopTransform, &cameraLayout, &camFronTopPixels);
-    Camera camRearTop = Camera(&camRearTopTransform, &cameraLayout, &camRearTopPixels);
-    Camera camFronBot = Camera(&camFronBotTransform, &cameraLayout, &camFronBotPixels);
-    Camera camRearBot = Camera(&camRearBotTransform, &cameraLayout, &camRearBotPixels);
-    Camera camRearMid = Camera(&camRearMidTransform, &cameraLayout, &camRearMidPixels);
-    Camera camFronMid = Camera(&camFronMidTransform, &cameraLayout, &camFronMidPixels);
+    Camera<306> camFronTop = Camera<306>(&camFronTopTransform, &cameraLayout, &camFronTopPixels);
+    Camera<306> camRearTop = Camera<306>(&camRearTopTransform, &cameraLayout, &camRearTopPixels);
+    Camera<306> camFronBot = Camera<306>(&camFronBotTransform, &cameraLayout, &camFronBotPixels);
+    Camera<306> camRearBot = Camera<306>(&camRearBotTransform, &cameraLayout, &camRearBotPixels);
+    Camera<89> camRearMid = Camera<89>(&camRearMidTransform, &cameraLayout, &camRearMidPixels);
+    Camera<89> camFronMid = Camera<89>(&camFronMidTransform, &cameraLayout, &camFronMidPixels);
 
-    Camera* cameras[6] = { &camFronTop, &camRearTop, &camFronBot, &camRearBot, &camRearMid, &camFronMid };
+    CameraBase* cameras[6] = { &camFronTop, &camRearTop, &camFronBot, &camRearBot, &camRearMid, &camFronMid };
 
 public:
     ProtoDRController(uint8_t maxBrightness, Side side) : Controller(cameras, 6, maxBrightness, 0){
@@ -71,22 +71,22 @@ public:
 
     void Display() override {
         for (int i = 0; i < 306; i++) {
-            camFronTopPixels.GetPixel(i)->Color = camFronTopPixels.GetPixel(i)->Color.Scale(brightness);
-            camRearTopPixels.GetPixel(i)->Color = camRearTopPixels.GetPixel(i)->Color.Scale(brightness);
-            camFronBotPixels.GetPixel(i)->Color = camFronBotPixels.GetPixel(i)->Color.Scale(brightness);
-            camRearBotPixels.GetPixel(i)->Color = camRearBotPixels.GetPixel(i)->Color.Scale(brightness);
+            *camFronTopPixels.GetColor(i) = camFronTopPixels.GetColor(i)->Scale(brightness);
+            *camRearTopPixels.GetColor(i) = camRearTopPixels.GetColor(i)->Scale(brightness);
+            *camFronBotPixels.GetColor(i) = camFronBotPixels.GetColor(i)->Scale(brightness);
+            *camRearBotPixels.GetColor(i) = camRearBotPixels.GetColor(i)->Scale(brightness);
 
-            leds.setPixel(i + 2142,  camFronTopPixels.GetPixel(i)->Color.R, camFronTopPixels.GetPixel(i)->Color.G, camFronTopPixels.GetPixel(i)->Color.B);//918
-            leds.setPixel(i + 918,   camRearTopPixels.GetPixel(i)->Color.R, camRearTopPixels.GetPixel(i)->Color.G, camRearTopPixels.GetPixel(i)->Color.B);//306
-            leds.setPixel(i + 306,   camFronBotPixels.GetPixel(i)->Color.R, camFronBotPixels.GetPixel(i)->Color.G, camFronBotPixels.GetPixel(i)->Color.B);//1530
-            leds.setPixel(i + 1530,  camRearBotPixels.GetPixel(i)->Color.R, camRearBotPixels.GetPixel(i)->Color.G, camRearBotPixels.GetPixel(i)->Color.B);//2142
+            leds.setPixel(i + 2142,  camFronTopPixels.GetColor(i)->R, camFronTopPixels.GetColor(i)->G, camFronTopPixels.GetColor(i)->B);//918
+            leds.setPixel(i + 918,   camRearTopPixels.GetColor(i)->R, camRearTopPixels.GetColor(i)->G, camRearTopPixels.GetColor(i)->B);//306
+            leds.setPixel(i + 306,   camFronBotPixels.GetColor(i)->R, camFronBotPixels.GetColor(i)->G, camFronBotPixels.GetColor(i)->B);//1530
+            leds.setPixel(i + 1530,  camRearBotPixels.GetColor(i)->R, camRearBotPixels.GetColor(i)->G, camRearBotPixels.GetColor(i)->B);//2142
             
             if(i < 89){
-                camRearMidPixels.GetPixel(i)->Color = camRearMidPixels.GetPixel(i)->Color.Scale(brightness);
-                camFronMidPixels.GetPixel(i)->Color = camFronMidPixels.GetPixel(i)->Color.Scale(brightness);
+                *camRearMidPixels.GetColor(i) = camRearMidPixels.GetColor(i)->Scale(brightness);
+                *camFronMidPixels.GetColor(i) = camFronMidPixels.GetColor(i)->Scale(brightness);
                 
-                leds.setPixel(i + 1836, camRearMidPixels.GetPixel(i)->Color.R, camRearMidPixels.GetPixel(i)->Color.G, camRearMidPixels.GetPixel(i)->Color.B);//1224
-                leds.setPixel(i + 612,  camFronMidPixels.GetPixel(i)->Color.R, camFronMidPixels.GetPixel(i)->Color.G, camFronMidPixels.GetPixel(i)->Color.B);//1836
+                leds.setPixel(i + 1836, camRearMidPixels.GetColor(i)->R, camRearMidPixels.GetColor(i)->G, camRearMidPixels.GetColor(i)->B);//1224
+                leds.setPixel(i + 612,  camFronMidPixels.GetColor(i)->R, camFronMidPixels.GetColor(i)->G, camFronMidPixels.GetColor(i)->B);//1836
             }
         }
         

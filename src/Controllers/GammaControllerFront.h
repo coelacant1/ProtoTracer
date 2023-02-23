@@ -19,13 +19,13 @@ private:
     Transform camTopTransform = Transform(Vector3D(0.0f, 0.0f, -139.06f), Vector3D(46.445f, 130.121f, -500.0f), Vector3D(1, 1, 1));
     Transform camBotTransform = Transform(Vector3D(0.0f, 180.0f, 0.0f), Vector3D(0, 0, -500.0f), Vector3D(1, 1, 1));
 
-    PixelGroup camTopPixels = PixelGroup(KaiborgV1Pixels, 571, PixelGroup::ZEROTOMAX);
-    PixelGroup camBotPixels = PixelGroup(KaiborgV1Pixels, 571, PixelGroup::MAXTOZERO);
+    PixelGroup<571> camTopPixels = PixelGroup<571>(KaiborgV1Pixels, IPixelGroup::ZEROTOMAX);
+    PixelGroup<571> camBotPixels = PixelGroup<571>(KaiborgV1Pixels, IPixelGroup::MAXTOZERO);
 
-    Camera camTop = Camera(&camTopTransform, &cameraLayout, &camTopPixels);
-    Camera camBot = Camera(&camBotTransform, &cameraLayout, &camBotPixels);
+    Camera<571> camTop = Camera<571>(&camTopTransform, &cameraLayout, &camTopPixels);
+    Camera<571> camBot = Camera<571>(&camBotTransform, &cameraLayout, &camBotPixels);
 
-    Camera* cameras[2] = { &camTop, &camBot };
+    CameraBase* cameras[2] = { &camTop, &camBot };
 
 public:
     GammaControllerFront(uint8_t maxBrightness) : Controller(cameras, 2, maxBrightness, 0){}
@@ -39,8 +39,8 @@ public:
         int offset;
 
         for (int i = 0; i < 571; i++){
-            camBotPixels.GetPixel(i)->Color = camBotPixels.GetPixel(i)->Color.Scale(brightness);
-            camTopPixels.GetPixel(i)->Color = camTopPixels.GetPixel(i)->Color.Scale(brightness);
+            *camBotPixels.GetColor(i) = camBotPixels.GetColor(i)->Scale(brightness);
+            *camTopPixels.GetColor(i) = camTopPixels.GetColor(i)->Scale(brightness);
         }
 
         //0: BLT, RIGHT
@@ -55,19 +55,19 @@ public:
         for (int i = 0; i < 571; i++) {
             if (i < 346){
                 offset = i + 225;
-                leds.setPixel(i + 346 * 0, camTopPixels.GetPixel(i)->Color.R, camTopPixels.GetPixel(i)->Color.G, camTopPixels.GetPixel(i)->Color.B);//Top Right
-                leds.setPixel(570 - i + 346 * 4, camBotPixels.GetPixel(i)->Color.R, camBotPixels.GetPixel(i)->Color.G, camBotPixels.GetPixel(i)->Color.B);//Bottom Right
+                leds.setPixel(i + 346 * 0, camTopPixels.GetColor(i)->R, camTopPixels.GetColor(i)->G, camTopPixels.GetColor(i)->B);//Top Right
+                leds.setPixel(570 - i + 346 * 4, camBotPixels.GetColor(i)->R, camBotPixels.GetColor(i)->G, camBotPixels.GetColor(i)->B);//Bottom Right
 
-                leds.setPixel(i + 346 * 2, camTopPixels.GetPixel(570 - offset)->Color.R, camTopPixels.GetPixel(570 - offset)->Color.G, camTopPixels.GetPixel(570 - offset)->Color.B);//Top Left
-                leds.setPixel(i + 346 * 6, camBotPixels.GetPixel(offset)->Color.R, camBotPixels.GetPixel(offset)->Color.G, camBotPixels.GetPixel(offset)->Color.B);//Bottom Left
+                leds.setPixel(i + 346 * 2, camTopPixels.GetColor(570 - offset)->R, camTopPixels.GetColor(570 - offset)->G, camTopPixels.GetColor(570 - offset)->B);//Top Left
+                leds.setPixel(i + 346 * 6, camBotPixels.GetColor(offset)->R, camBotPixels.GetColor(offset)->G, camBotPixels.GetColor(offset)->B);//Bottom Left
             }
             else{
                 offset = i - 346;
-                leds.setPixel(i + 346 * 1 - 346, camTopPixels.GetPixel(i)->Color.R, camTopPixels.GetPixel(i)->Color.G, camTopPixels.GetPixel(i)->Color.B);//Top Right
-                leds.setPixel(570 - i + 346 * 5 - 346, camBotPixels.GetPixel(i)->Color.R, camBotPixels.GetPixel(i)->Color.G, camBotPixels.GetPixel(i)->Color.B);//Bottom Right
+                leds.setPixel(i + 346 * 1 - 346, camTopPixels.GetColor(i)->R, camTopPixels.GetColor(i)->G, camTopPixels.GetColor(i)->B);//Top Right
+                leds.setPixel(570 - i + 346 * 5 - 346, camBotPixels.GetColor(i)->R, camBotPixels.GetColor(i)->G, camBotPixels.GetColor(i)->B);//Bottom Right
 
-                leds.setPixel(i + 346 * 3 - 346, camTopPixels.GetPixel(570 - offset)->Color.R, camTopPixels.GetPixel(570 - offset)->Color.G, camTopPixels.GetPixel(570 - offset)->Color.B);//Top Left
-                leds.setPixel(i + 346 * 7 - 346, camBotPixels.GetPixel(offset)->Color.R, camBotPixels.GetPixel(offset)->Color.G, camBotPixels.GetPixel(offset)->Color.B);//Bottom Left
+                leds.setPixel(i + 346 * 3 - 346, camTopPixels.GetColor(570 - offset)->R, camTopPixels.GetColor(570 - offset)->G, camTopPixels.GetColor(570 - offset)->B);//Top Left
+                leds.setPixel(i + 346 * 7 - 346, camBotPixels.GetColor(offset)->R, camBotPixels.GetColor(offset)->G, camBotPixels.GetColor(offset)->B);//Bottom Left
             }
         }
         

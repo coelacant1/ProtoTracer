@@ -1,6 +1,6 @@
 #pragma once
 
-#include "..\Render\PixelGroup.h"
+#include "..\Render\IPixelGroup.h"
 
 class Effect {
 protected:
@@ -13,6 +13,6 @@ public:
         this->ratio = ratio;
     }
 
-    virtual void ApplyEffect(PixelGroup* pixelGroup) = 0;
+    virtual void ApplyEffect(IPixelGroup* pixelGroup) = 0;
 
 };

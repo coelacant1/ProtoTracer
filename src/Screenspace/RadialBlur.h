@@ -9,8 +9,8 @@ private:
 public:
     RadialBlur(uint8_t pixels) : pixels(pixels){}
 
-    void ApplyEffect(PixelGroup* pixelGroup){
-        RGBColor** pixelColors = pixelGroup->GetColors();
+    void ApplyEffect(IPixelGroup* pixelGroup){
+        RGBColor* pixelColors = pixelGroup->GetColors();
 
         for (unsigned int i = 0; i < pixelGroup->GetPixelCount(); i++){
             unsigned int indices[pixels][pixels];
@@ -40,16 +40,16 @@ public:
             for (uint8_t j = 0; j < blurRange; j++){
                 for (uint8_t k = 0; k < blurRange; k++){
                     if (valid[j][k]){
-                        R = R + pixelColors[indices[j][k]]->R;
-                        G = G + pixelColors[indices[j][k]]->G;
-                        B = B + pixelColors[indices[j][k]]->B;
+                        R = R + pixelColors[indices[j][k]].R;
+                        G = G + pixelColors[indices[j][k]].G;
+                        B = B + pixelColors[indices[j][k]].B;
                     }
                 }
             }
 
-            pixelColors[i]->R = R / (blurRange * blurRange);
-            pixelColors[i]->B = G / (blurRange * blurRange);
-            pixelColors[i]->G = B / (blurRange * blurRange);
+            pixelColors[i].R = R / (blurRange * blurRange);
+            pixelColors[i].B = G / (blurRange * blurRange);
+            pixelColors[i].G = B / (blurRange * blurRange);
         }
     }
 };

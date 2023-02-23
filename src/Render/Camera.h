@@ -3,17 +3,19 @@
 #include "..\Math\Rotation.h"
 #include "..\Math\Transform.h"
 #include "..\Render\CameraLayout.h"
+#include "CameraBase.h"
 #include "PixelGroup.h"
 #include "Scene.h"
 #include "Triangle2D.h"
 #include "QuadTree.h"
 #include "Node.h"
 
-class Camera {
+template<size_t pixelCount>
+class Camera : public CameraBase{
 private:
     Transform* transform;
     CameraLayout* cameraLayout;
-    PixelGroup* pixelGroup;
+    PixelGroup<pixelCount>* pixelGroup;
     Quaternion rayDirection;
     Quaternion lookDirection;
     Quaternion lookOffset;
@@ -57,14 +59,14 @@ private:
     }
 
 public:
-    Camera(Transform* transform, PixelGroup* pixelGroup){
+    Camera(Transform* transform, PixelGroup<pixelCount>* pixelGroup){
         this->transform = transform;
         this->pixelGroup = pixelGroup;
 
         is2D = true;
     }
 
-    Camera(Transform* transform, CameraLayout* cameraLayout, PixelGroup* pixelGroup){
+    Camera(Transform* transform, CameraLayout* cameraLayout, PixelGroup<pixelCount>* pixelGroup){
         this->transform = transform;
         this->pixelGroup = pixelGroup;
         this->cameraLayout = cameraLayout;
@@ -76,7 +78,7 @@ public:
         return transform;
     }
 
-    PixelGroup* GetPixelGroup(){
+    PixelGroup<pixelCount>* GetPixelGroup(){
         return pixelGroup;
     }
 
@@ -123,7 +125,7 @@ public:
         this->lookOffset = lookOffset;
     }
 
-    void Rasterize(Scene* scene) {
+    void Rasterize(Scene* scene) override {
         if (is2D){
             for (unsigned int i = 0; i < pixelGroup->GetPixelCount(); i++) {
                 Vector2D pixelRay = pixelGroup->GetCoordinate(i);//scale pixel location prior to rotating and moving

@@ -13,12 +13,10 @@ private:
 public:
     PhaseOffsetR(uint8_t pixels) : pixels(pixels){}
 
-    void ApplyEffect(PixelGroup* pixelGroup){
+    void ApplyEffect(IPixelGroup* pixelGroup) override{
         unsigned int pixelCount = pixelGroup->GetPixelCount();
-        RGBColor** pixelColors = pixelGroup->GetColors();
-        RGBColor** colorBuffer = new RGBColor*[pixelCount];
-
-        for (unsigned int i = 0; i < pixelCount; i++){ colorBuffer[i] = new RGBColor(); }
+        RGBColor* pixelColors = pixelGroup->GetColors();
+        RGBColor* colorBuffer = pixelGroup->GetColorBuffer();
 
         for (unsigned int i = 0; i < pixelCount; i++){
             unsigned int indexR, indexG, indexB;
@@ -44,26 +42,21 @@ public:
             validG = pixelGroup->GetRadialIndex(i, &indexG, blurRangeG, rotation + 120.0f);
             validB = pixelGroup->GetRadialIndex(i, &indexB, blurRangeB, rotation + 240.0f);
 
-            if(validR) colorBuffer[i]->R = pixelColors[indexR]->R;
-            else colorBuffer[i]->R = 0;
+            if(validR) colorBuffer[i].R = pixelColors[indexR].R;
+            else colorBuffer[i].R = 0;
             
-            if(validG) colorBuffer[i]->G = pixelColors[indexG]->G;
-            else colorBuffer[i]->G = 0;
+            if(validG) colorBuffer[i].G = pixelColors[indexG].G;
+            else colorBuffer[i].G = 0;
             
-            if(validB) colorBuffer[i]->B = pixelColors[indexB]->B;
-            else colorBuffer[i]->B = 0;
+            if(validB) colorBuffer[i].B = pixelColors[indexB].B;
+            else colorBuffer[i].B = 0;
         }
         
         for (unsigned int i = 0; i < pixelCount; i++){
-            pixelColors[i]->R = colorBuffer[i]->R;
-            pixelColors[i]->G = colorBuffer[i]->G;
-            pixelColors[i]->B = colorBuffer[i]->B;
-
-            delete[] colorBuffer[i];
+            pixelColors[i].R = colorBuffer[i].R;
+            pixelColors[i].G = colorBuffer[i].G;
+            pixelColors[i].B = colorBuffer[i].B;
         }
-
-        delete[] colorBuffer;
     }
-
 };
 

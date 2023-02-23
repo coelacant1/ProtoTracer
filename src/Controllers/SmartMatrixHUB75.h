@@ -47,13 +47,13 @@ private:
     Transform camTransform = Transform(Vector3D(), Vector3D(0, 0, -500.0f), Vector3D(1, 1, 1));
     Transform camSideTransform = Transform(Vector3D(), Vector3D(0, 0, -500.0f), Vector3D(1, 1, 1));
 
-    PixelGroup camPixels = PixelGroup(P3HUB75, 2048);
-    PixelGroup camSidePixels = PixelGroup(LinearPixels, 100);
+    PixelGroup<2048> camPixels = PixelGroup<2048>(P3HUB75);
+    PixelGroup<100> camSidePixels = PixelGroup<100>(LinearPixels);
 
-    Camera camMain = Camera(&camTransform, &cameraLayout, &camPixels);
-    Camera camSidePanels = Camera(&camSideTransform, &cameraLayout, &camSidePixels);
+    Camera<2048> camMain = Camera<2048>(&camTransform, &cameraLayout, &camPixels);
+    Camera<100> camSidePanels = Camera<100>(&camSideTransform, &cameraLayout, &camSidePixels);
 
-    Camera* cameras[2] = { &camMain, &camSidePanels };
+    CameraBase* cameras[2] = { &camMain, &camSidePanels };
 
 public:
     SmartMatrixHUB75(uint8_t maxBrightness, uint8_t maxAccentBrightness) : Controller(cameras, 2, maxBrightness, maxAccentBrightness){}

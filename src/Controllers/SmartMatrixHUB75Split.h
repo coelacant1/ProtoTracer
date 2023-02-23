@@ -30,13 +30,13 @@ private:
 
     Transform camTransform = Transform(Vector3D(), Vector3D(0, 0, -500.0f), Vector3D(1, 1, 1));
 
-    PixelGroup camPixelsLeft = PixelGroup(P3HUB75, 2048);
-    PixelGroup camPixelsRight = PixelGroup(P3HUB75, 2048);
+    PixelGroup<2048> camPixelsLeft = PixelGroup<2048>(P3HUB75);
+    PixelGroup<2048> camPixelsRight = PixelGroup<2048>(P3HUB75);
 
-    Camera camLeft = Camera(&camTransform, &cameraLayout, &camPixelsLeft);
-    Camera camRight = Camera(&camTransform, &cameraLayout, &camPixelsRight);
+    Camera<2048> camLeft = Camera<2048>(&camTransform, &cameraLayout, &camPixelsLeft);
+    Camera<2048> camRight = Camera<2048>(&camTransform, &cameraLayout, &camPixelsRight);
 
-    Camera* cameras[2] = { &camLeft, &camRight };
+    CameraBase* cameras[2] = { &camLeft, &camRight };
 
 public:
     SmartMatrixHUB75Split(uint8_t maxBrightness, uint8_t maxAccentBrightness) : Controller(cameras, 2, maxBrightness, maxAccentBrightness){}
@@ -57,8 +57,8 @@ public:
             for (uint16_t x = 0; x < 64; x++){
                 uint16_t pixelNum = y * 64 + x;
 
-                rgb24 rgbColorLeft = rgb24((uint16_t)camPixelsLeft.GetPixel(pixelNum)->Color.R, (uint16_t)camPixelsLeft.GetPixel(pixelNum)->Color.G, (uint16_t)camPixelsLeft.GetPixel(pixelNum)->Color.B);
-                rgb24 rgbColorRight = rgb24((uint16_t)camPixelsRight.GetPixel(pixelNum)->Color.R, (uint16_t)camPixelsRight.GetPixel(pixelNum)->Color.G, (uint16_t)camPixelsRight.GetPixel(pixelNum)->Color.B);
+                rgb24 rgbColorLeft = rgb24((uint16_t)camPixelsLeft.GetColor(pixelNum)->R, (uint16_t)camPixelsLeft.GetColor(pixelNum)->G, (uint16_t)camPixelsLeft.GetColor(pixelNum)->B);
+                rgb24 rgbColorRight = rgb24((uint16_t)camPixelsRight.GetColor(pixelNum)->R, (uint16_t)camPixelsRight.GetColor(pixelNum)->G, (uint16_t)camPixelsRight.GetColor(pixelNum)->B);
 
                 backgroundLayer.drawPixel(x, (31 - y), rgbColorLeft);
                 backgroundLayer.drawPixel(63 - x, (31 - y) + 32, rgbColorRight);

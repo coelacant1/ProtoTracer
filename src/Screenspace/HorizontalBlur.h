@@ -9,8 +9,8 @@ private:
 public:
     HorizontalBlur(uint8_t pixels) : pixels(pixels){}
 
-    void ApplyEffect(PixelGroup* pixelGroup){
-        RGBColor** pixelColors = pixelGroup->GetColors();
+    void ApplyEffect(IPixelGroup* pixelGroup) override {
+        RGBColor* pixelColors = pixelGroup->GetColors();
 
         for (unsigned int i = 0; i < pixelGroup->GetPixelCount(); i++){
             unsigned int indices[pixels + 1];
@@ -28,15 +28,15 @@ public:
 
             for (uint8_t j = 1; j < blurRange + 1; j++){
                 if (valid[j]){
-                    R = R + pixelColors[indices[j]]->R;
-                    G = G + pixelColors[indices[j]]->G;
-                    B = B + pixelColors[indices[j]]->B;
+                    R = R + pixelColors[indices[j]].R;
+                    G = G + pixelColors[indices[j]].G;
+                    B = B + pixelColors[indices[j]].B;
                 }
             }
 
-            pixelColors[i]->R = R / blurRange;
-            pixelColors[i]->B = G / blurRange;
-            pixelColors[i]->G = B / blurRange;
+            pixelColors[i].R = R / blurRange;
+            pixelColors[i].B = G / blurRange;
+            pixelColors[i].G = B / blurRange;
         }
     }
 
