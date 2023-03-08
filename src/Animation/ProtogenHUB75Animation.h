@@ -88,7 +88,7 @@ private:
 
     HorizontalBlur blurH = HorizontalBlur(20);
     VerticalBlur blurV = VerticalBlur(20);
-    RadialBlur blurR = RadialBlur(10);
+    RadialBlur blurR = RadialBlur(8);
     PhaseOffsetX phaseX = PhaseOffsetX(20);
     PhaseOffsetY phaseY = PhaseOffsetY(20);
     PhaseOffsetR phaseR = PhaseOffsetR(8);
@@ -170,8 +170,8 @@ private:
     }
 
     void Default(){
-        scene.SetEffect(&phaseR);
-        scene.EnableEffect();
+        //scene.SetEffect(&blurR);
+        //scene.EnableEffect();
     }
 
     void Angry(){
@@ -186,8 +186,8 @@ private:
     }
 
     void Surprised(){
-        scene.SetEffect(&phaseR);
-        scene.EnableEffect();
+        //scene.SetEffect(&phaseR);
+        //scene.EnableEffect();
 
         eEA.AddParameterFrame(NukudeFace::Surprised, 1.0f);
         eEA.AddParameterFrame(NukudeFace::HideBlush, 0.0f);
@@ -319,7 +319,7 @@ public:
 
         blurH.SetRatio(fGenBlur.Update());
         blurV.SetRatio(fGenBlur.Update());
-        blurR.SetRatio(fGenBlur.Update());
+        blurR.SetRatio(1.0f);//fGenBlur.Update());
         phaseX.SetRatio(fGenBlur.Update());
         phaseY.SetRatio(fGenBlur.Update());
         //phaseR.SetRatio(fGenBlur.Update());

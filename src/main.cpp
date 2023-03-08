@@ -1,9 +1,9 @@
 //#define ALPHARIGHT
 //#define ALPHALEFT
-//#define BETAWS35
+#define BETAWS35
 //#define GAMMAFRONT
 //#define GAMMABACK
-#define HUB75
+//#define HUB75
 //#define HUB75Split
 //#define HUB75Square
 //#define WS35
@@ -12,7 +12,7 @@
 //#define CUSTOMHUB75
 //#define CUSTOMWS35
 
-#define PRINTINFO
+//#define PRINTINFO
 
 #include <Arduino.h>
 
@@ -29,8 +29,9 @@ ProtoDRController controller = ProtoDRController(maxBrightness, ProtoDRControlle
 ProtoDRController controller = ProtoDRController(maxBrightness, ProtoDRController::LEFT);
 #elif defined(BETAWS35)
 #include "Controllers\BetaProtoController.h"
-#include "Animation\ProtoV3Animation.h"
+#include "Animation\BetaAnimation.h"
 BetaProtoController controller = BetaProtoController(maxBrightness);
+BetaAnimation animation = BetaAnimation();
 #elif defined(GAMMAFRONT)
 #include "Controllers\GammaControllerFront.h"
 #include "Animation\GammaAnimation.h"
@@ -41,9 +42,11 @@ GammaControllerFront controller = GammaControllerFront(maxBrightness);
 GammaControllerBack controller = GammaControllerBack(maxBrightness);
 #elif defined(HUB75)
 #include "Controllers\SmartMatrixHUB75.h"
-#include "Animation\ProtogenHUB75Animation.h"
+//#include "Animation\ProtogenHUB75Animation.h"
+#include "Animation\BetaAnimation.h"
 SmartMatrixHUB75 controller = SmartMatrixHUB75(maxBrightness, maxAccentBrightness);
-ProtogenHUB75Animation animation = ProtogenHUB75Animation();
+//ProtogenHUB75Animation animation = ProtogenHUB75Animation();
+BetaAnimation animation = BetaAnimation();
 #elif defined(HUB75Split)
 #include "Controllers\SmartMatrixHUB75Split.h"
 #include "Animation\ProtogenHUB75AnimationSplit.h"
@@ -179,8 +182,14 @@ void loop() {
     animation.SetCameraMirror(true);
     animation.UpdateTime(ratio);
     controller.RenderCamera(animation.GetScene(), 1);
+    #elif defined(BETAWS35)
+    controller.SetAccentBrightness(animation.GetAccentBrightness() * 25 + 5);
+    controller.SetBrightness(powf(animation.GetBrightness() + 3, 2) / 3);
+
+    animation.UpdateTime(ratio);
+    controller.Render(animation.GetScene());
     #else
-    Serial.print("not defined")
+    Serial.print("not defined");
     #endif
     
     //controller.

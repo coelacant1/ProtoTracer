@@ -187,6 +187,48 @@ public:
         }
     }
 
+    virtual bool GetAlternateXIndex(unsigned int count, unsigned int* index, int pixels){
+        unsigned int tempIndex = count;
+        bool isEven = count % 2;
+        bool valid = true;
+
+        for(unsigned int i = 0; i < count / 2; i++){
+            if (isEven){
+                valid = GetRightIndex(tempIndex, &tempIndex);
+            }
+            else{
+                valid = GetLeftIndex(tempIndex, &tempIndex);
+            }
+            
+            if (!valid) break;
+        }
+
+        *index = tempIndex;
+
+        return valid;
+    }
+
+    virtual bool GetAlternateYIndex(unsigned int count, unsigned int* index, int pixels){
+        unsigned int tempIndex = count;
+        bool isEven = count % 2;
+        bool valid = true;
+
+        for(unsigned int i = 0; i < count / 2; i++){
+            if (isEven){
+                valid = GetUpIndex(tempIndex, &tempIndex);
+            }
+            else{
+                valid = GetDownIndex(tempIndex, &tempIndex);
+            }
+            
+            if (!valid) break;
+        }
+        
+        *index = tempIndex;
+
+        return valid;
+    }
+
     virtual bool GetOffsetXYIndex(unsigned int count, unsigned int* index, int x1, int y1) override {
         unsigned int tempIndex = count;
         bool valid = true;
@@ -217,6 +259,7 @@ public:
         int y1 = int(float(pixels) * sinf(angle * Mathematics::MPID180));
 
         unsigned int tempIndex = count;
+        unsigned int tTempIndex = 0;
         bool valid = true;
 
         int previousX = 0;
@@ -229,20 +272,16 @@ public:
             x = Mathematics::Map(i, 0, pixels, 0, x1);
             y = Mathematics::Map(i, 0, pixels, 0, y1);
 
-            for (int k = 0; k < abs(x - previousX); k++){
-                if (x > previousX) valid = GetRightIndex(tempIndex, &tempIndex);
-                else if (x < previousX) valid = GetLeftIndex(tempIndex, &tempIndex);
-                if (!valid) break;
-            }
+            if (x > previousX) valid = GetRightIndex(tempIndex, &tTempIndex);
+            else if (x < previousX) valid = GetLeftIndex(tempIndex, &tTempIndex);
 
-            if (!valid) break;
+            tempIndex = tTempIndex;
 
-            for (int k = 0; k < abs(y - previousY); k++){
-                if (y > previousY) valid = GetUpIndex(tempIndex, &tempIndex);
-                else if (y < previousY) valid = GetDownIndex(tempIndex, &tempIndex);
-                if (!valid) break;
-            }
-            
+            if (y > previousY) valid = GetUpIndex(tempIndex, &tTempIndex);
+            else if (y < previousY) valid = GetDownIndex(tempIndex, &tTempIndex);
+
+            tempIndex = tTempIndex;
+        
             if (!valid) break;
 
             previousX = x;

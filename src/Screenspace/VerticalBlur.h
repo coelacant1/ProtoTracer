@@ -11,32 +11,47 @@ public:
 
     void ApplyEffect(IPixelGroup* pixelGroup){
         RGBColor* pixelColors = pixelGroup->GetColors();
+        RGBColor* colorBuffer = pixelGroup->GetColorBuffer();
 
         for (unsigned int i = 0; i < pixelGroup->GetPixelCount(); i++){
-            unsigned int indices[pixels + 1];
-            bool valid[pixels];
+            unsigned int indexUp = i;
+            unsigned int indexDown = i;
+            unsigned int tIndexUp = 0;
+            unsigned int tIndexDown = 0;
+            bool validL = true;
+            bool validR = true;
 
-            indices[0] = i;
+            uint16_t blurRange = uint16_t(Mathematics::Map(ratio, 0.0f, 1.0f, 1.0f, float(pixels / 2)));
 
-            uint8_t blurRange = uint8_t(Mathematics::Map(ratio, 0.0f, 1.0f, 1.0f, float(pixels)));
+            uint16_t R, G, B;
 
+            R = (uint16_t)pixelColors[i].R;
+            G = (uint16_t)pixelColors[i].G;
+            B = (uint16_t)pixelColors[i].B;
+            
             for (uint8_t j = 1; j < blurRange + 1; j++){
-                valid[j] = pixelGroup->GetUpIndex(indices[j - 1], &indices[j]);
-            }
+                validL = pixelGroup->GetUpIndex(indexUp, &tIndexUp);
+                validR = pixelGroup->GetDownIndex(indexDown, &tIndexDown);
 
-            uint16_t R = 0, G = 0, B = 0;
+                indexUp = tIndexUp;
+                indexDown = tIndexDown;
 
-            for (uint8_t j = 1; j < blurRange + 1; j++){
-                if (valid[j]){
-                    R = R + pixelColors[indices[j]].R;
-                    G = G + pixelColors[indices[j]].G;
-                    B = B + pixelColors[indices[j]].B;
+                if (validL && validR){
+                    R = R + (uint16_t)pixelColors[indexUp].R + (uint16_t)pixelColors[indexDown].R;
+                    G = G + (uint16_t)pixelColors[indexUp].G + (uint16_t)pixelColors[indexDown].G;
+                    B = B + (uint16_t)pixelColors[indexUp].B + (uint16_t)pixelColors[indexDown].B;
                 }
             }
+            
+            colorBuffer[i].R = Mathematics::Constrain(R / (blurRange * 2), 0, 255);
+            colorBuffer[i].B = Mathematics::Constrain(G / (blurRange * 2), 0, 255);
+            colorBuffer[i].G = Mathematics::Constrain(B / (blurRange * 2), 0, 255);
+        }
 
-            pixelColors[i].R = R / blurRange;
-            pixelColors[i].B = G / blurRange;
-            pixelColors[i].G = B / blurRange;
+        for (unsigned int i = 0; i < pixelGroup->GetPixelCount(); i++){
+            pixelColors[i].R = colorBuffer[i].R;
+            pixelColors[i].G = colorBuffer[i].G;
+            pixelColors[i].B = colorBuffer[i].B;
         }
     }
 };

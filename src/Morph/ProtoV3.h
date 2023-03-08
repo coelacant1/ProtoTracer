@@ -10,14 +10,14 @@
 class ProtoV3{
 public:
     enum Morphs {
-        HappyMouth,
-        FlatMouth,
-        ConfuseMouth,
-        AngryEye,
-        HappyEye,
-        SadEye,
+        HideBlush,
+        Doubt,
+        Frown,
+        Anger,
+        Surprised,
+        Sadness,
         EyeRidgeBigger,
-        EyeMove
+        MoveEye
     };
 
 private:
