@@ -1,6 +1,6 @@
 //#define ALPHARIGHT
 //#define ALPHALEFT
-#define BETAWS35
+//#define BETAWS35
 //#define GAMMAFRONT
 //#define GAMMABACK
 //#define HUB75
@@ -9,7 +9,7 @@
 //#define WS35
 //#define WS35SPLIT
 //#define ESP32HUB75
-//#define CUSTOMHUB75
+#define CUSTOMHUB75
 //#define CUSTOMWS35
 
 //#define PRINTINFO
@@ -42,11 +42,11 @@ GammaControllerFront controller = GammaControllerFront(maxBrightness);
 GammaControllerBack controller = GammaControllerBack(maxBrightness);
 #elif defined(HUB75)
 #include "Controllers\SmartMatrixHUB75.h"
-//#include "Animation\ProtogenHUB75Animation.h"
-#include "Animation\BetaAnimation.h"
+#include "Animation\ProtogenHUB75Animation.h"
+//#include "Animation\BetaAnimation.h"
 SmartMatrixHUB75 controller = SmartMatrixHUB75(maxBrightness, maxAccentBrightness);
-//ProtogenHUB75Animation animation = ProtogenHUB75Animation();
-BetaAnimation animation = BetaAnimation();
+ProtogenHUB75Animation animation = ProtogenHUB75Animation();
+//BetaAnimation animation = BetaAnimation();
 #elif defined(HUB75Split)
 #include "Controllers\SmartMatrixHUB75Split.h"
 #include "Animation\ProtogenHUB75AnimationSplit.h"
@@ -75,10 +75,10 @@ ESP32DevKitV1 controller = ESP32DevKitV1(maxBrightness);
 ESP32Clock animation = ESP32Clock();
 #elif defined(CUSTOMHUB75)
 #define HUB75
-#include "Controllers\SmartMatrixHUB75.h"
-#include "Animation\Commissions\InfraredAnimation.h"
-SmartMatrixHUB75 controller = SmartMatrixHUB75(maxBrightness, maxAccentBrightness);
-InfraredAnimation animation = InfraredAnimation();
+#include "Controllers\KaiborgV1D1Xenrax.h"
+#include "Animation\Commissions\XenraxAnimation.h"
+KaiborgV1D1Controller controller = KaiborgV1D1Controller(maxBrightness);
+XenraxAnimation animation = XenraxAnimation();
 #elif defined(CUSTOMWS35)
 #define WS35SPLIT
 #include "Controllers\KaiborgV1D1Controller.h"

@@ -28,11 +28,16 @@
 
 #include "..\Render\ObjectAlign.h"
 
+#include "..\Screenspace\GlitchX.h"
+#include "..\Screenspace\Fisheye.h"
 #include "..\Screenspace\HorizontalBlur.h"
 #include "..\Screenspace\PhaseOffsetX.h"
 #include "..\Screenspace\PhaseOffsetY.h"
 #include "..\Screenspace\PhaseOffsetR.h"
+#include "..\Screenspace\Magnet.h"
+#include "..\Screenspace\Overflow.h"
 #include "..\Screenspace\RadialBlur.h"
+#include "..\Screenspace\ShiftR.h"
 #include "..\Screenspace\VerticalBlur.h"
 
 class ProtogenHUB75Animation : public Animation<3> {
@@ -54,7 +59,7 @@ private:
     SimpleMaterial yellowMaterial = SimpleMaterial(RGBColor(255, 255, 0));
     SimpleMaterial purpleMaterial = SimpleMaterial(RGBColor(255, 0, 255));
     
-    RGBColor gradientSpectrum[2] = {RGBColor(109, 14, 14), RGBColor(235, 26, 26)};
+    RGBColor gradientSpectrum[2] = {RGBColor(82, 252, 233), RGBColor(65, 201, 185)};
     GradientMaterial<2> gradientMat = GradientMaterial<2>(gradientSpectrum, 350.0f, false);
     
     MaterialAnimator<10> materialAnimator;
@@ -85,13 +90,18 @@ private:
     FFTVoiceDetection<128> voiceDetection;
 
     ObjectAlign objA = ObjectAlign(Vector2D(0.0f, 0.0f), Vector2D(189.0f, 93.0f), Quaternion());
-
-    HorizontalBlur blurH = HorizontalBlur(20);
-    VerticalBlur blurV = VerticalBlur(20);
+    
+    Fisheye fisheye = Fisheye();
+    GlitchX glitchX = GlitchX(30);
+    HorizontalBlur blurH = HorizontalBlur(8);
+    VerticalBlur blurV = VerticalBlur(8);
+    Magnet magnet = Magnet();
     RadialBlur blurR = RadialBlur(8);
-    PhaseOffsetX phaseX = PhaseOffsetX(20);
-    PhaseOffsetY phaseY = PhaseOffsetY(20);
+    PhaseOffsetX phaseX = PhaseOffsetX(8);
+    PhaseOffsetY phaseY = PhaseOffsetY(8);
     PhaseOffsetR phaseR = PhaseOffsetR(8);
+    ShiftR shiftR = ShiftR(8);
+    Overflow overflow = Overflow(8);
 
     float offsetFace = 0.0f;
     float offsetFaceSA = 0.0f;
@@ -170,14 +180,13 @@ private:
     }
 
     void Default(){
-        //scene.SetEffect(&blurR);
-        //scene.EnableEffect();
+        scene.DisableEffect();
     }
 
     void Angry(){
         eEA.AddParameterFrame(NukudeFace::Anger, 1.0f);
         materialAnimator.AddMaterialFrame(redMaterial, 0.8f);
-    }
+    } 
 
     void Sad(){
         eEA.AddParameterFrame(NukudeFace::Sadness, 1.0f);
@@ -186,8 +195,8 @@ private:
     }
 
     void Surprised(){
-        //scene.SetEffect(&phaseR);
-        //scene.EnableEffect();
+        scene.SetEffect(&glitchX);
+        scene.DisableEffect();
 
         eEA.AddParameterFrame(NukudeFace::Surprised, 1.0f);
         eEA.AddParameterFrame(NukudeFace::HideBlush, 0.0f);
@@ -283,7 +292,7 @@ public:
 
         boop.Initialize(5);
 
-        MicrophoneFourierIT::Initialize(15, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
+        MicrophoneFourierIT::Initialize(A2, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
         //Menu::Initialize(9);//NeoTrellis
         Menu::Initialize(9, 20, 500);//7 is number of faces
 
@@ -316,13 +325,17 @@ public:
 
         //Menu::SetSize(Vector2D(280, 60));
         //Menu::SetPositionOffset(Vector2D(0.0f, -30.0f * yOffset));
-
+        
+        //glitchX.SetRatio(fGenBlur.Update());
+        magnet.SetRatio(ratio);
+        fisheye.SetRatio(fGenBlur.Update());
         blurH.SetRatio(fGenBlur.Update());
         blurV.SetRatio(fGenBlur.Update());
-        blurR.SetRatio(1.0f);//fGenBlur.Update());
+        blurR.SetRatio(fGenBlur.Update());
         phaseX.SetRatio(fGenBlur.Update());
         phaseY.SetRatio(fGenBlur.Update());
-        //phaseR.SetRatio(fGenBlur.Update());
+        phaseR.SetRatio(fGenBlur.Update());
+        shiftR.SetRatio(fGenBlur.Update());
 
         SetMaterialColor();
 
@@ -380,7 +393,8 @@ public:
         eEA.Update();
         pM.Update();
         
-        phaseR.SetRatio(eEA.GetValue(NukudeFace::Surprised));
+        //phaseR.SetRatio(eEA.GetValue(NukudeFace::Surprised));
+        glitchX.SetRatio(eEA.GetValue(NukudeFace::Surprised));
 
         rainbowNoise.Update(ratio);
         rainbowSpiral.Update(ratio);

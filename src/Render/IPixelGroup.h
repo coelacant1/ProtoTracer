@@ -10,6 +10,8 @@ public:
         MAXTOZERO
     };
 
+    virtual Vector2D GetCenterCoordinate() = 0;
+    virtual Vector2D GetSize() = 0;
     virtual Vector2D GetCoordinate(unsigned int count) = 0;
     virtual int GetPixelIndex(Vector2D location) = 0;
     virtual RGBColor* GetColor(unsigned int count) = 0;
@@ -24,6 +26,8 @@ public:
     virtual bool GetRightIndex(unsigned int count, unsigned int* rightIndex) = 0;
     virtual bool GetAlternateXIndex(unsigned int count, unsigned int* index, int pixels) = 0;
     virtual bool GetAlternateYIndex(unsigned int count, unsigned int* index, int pixels) = 0;
+    virtual bool GetOffsetXIndex(unsigned int count, unsigned int* index, int x1) = 0;
+    virtual bool GetOffsetYIndex(unsigned int count, unsigned int* index, int y1) = 0;
     virtual bool GetOffsetXYIndex(unsigned int count, unsigned int* index, int x1, int y1) = 0;
     virtual bool GetRadialIndex(unsigned int count, unsigned int* index, int pixels, float angle) = 0;
     virtual void GridSort() = 0;

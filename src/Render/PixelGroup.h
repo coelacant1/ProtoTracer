@@ -57,6 +57,14 @@ public:
 
     ~PixelGroup(){}
 
+    virtual Vector2D GetCenterCoordinate(){
+        return (bounds.GetMaximum() + bounds.GetMinimum()) / 2.0f;
+    }
+
+    virtual Vector2D GetSize(){
+        return bounds.GetMaximum() - bounds.GetMinimum();
+    }
+
     virtual Vector2D GetCoordinate(unsigned int count) override {
         count = Mathematics::Constrain<int>(count, 0, pixelCount);
 
@@ -229,7 +237,7 @@ public:
         return valid;
     }
 
-    virtual bool GetOffsetXYIndex(unsigned int count, unsigned int* index, int x1, int y1) override {
+    virtual bool GetOffsetXIndex(unsigned int count, unsigned int* index, int x1) override {
         unsigned int tempIndex = count;
         bool valid = true;
 
@@ -241,7 +249,41 @@ public:
             if (!valid) break;
         }
         
+        *index = tempIndex;
+
+        return valid;
+    }
+
+    virtual bool GetOffsetYIndex(unsigned int count, unsigned int* index, int y1) override {
+        unsigned int tempIndex = count;
+        bool valid = true;
+        
         for(int i = 0; i < y1; i++){
+            if (y1 > 0) valid = GetUpIndex(tempIndex, &tempIndex);
+            else if (y1 < 0) valid = GetDownIndex(tempIndex, &tempIndex);
+            else break;
+            
+            if (!valid) break;
+        }
+        
+        *index = tempIndex;
+
+        return valid;
+    }
+
+    virtual bool GetOffsetXYIndex(unsigned int count, unsigned int* index, int x1, int y1) override {
+        unsigned int tempIndex = count;
+        bool valid = true;
+
+        for(int i = 0; i < fabs(x1); i++){
+            if (x1 > 0) valid = GetRightIndex(tempIndex, &tempIndex);
+            else if (x1 < 0) valid = GetLeftIndex(tempIndex, &tempIndex);
+            else break;
+            
+            if (!valid) break;
+        }
+        
+        for(int i = 0; i < fabs(y1); i++){
             if (y1 > 0) valid = GetUpIndex(tempIndex, &tempIndex);
             else if (y1 < 0) valid = GetDownIndex(tempIndex, &tempIndex);
             else break;
@@ -259,7 +301,6 @@ public:
         int y1 = int(float(pixels) * sinf(angle * Mathematics::MPID180));
 
         unsigned int tempIndex = count;
-        unsigned int tTempIndex = 0;
         bool valid = true;
 
         int previousX = 0;
@@ -272,16 +313,20 @@ public:
             x = Mathematics::Map(i, 0, pixels, 0, x1);
             y = Mathematics::Map(i, 0, pixels, 0, y1);
 
-            if (x > previousX) valid = GetRightIndex(tempIndex, &tTempIndex);
-            else if (x < previousX) valid = GetLeftIndex(tempIndex, &tTempIndex);
+            for (int k = 0; k < abs(x - previousX); k++){
+                if (x > previousX) valid = GetRightIndex(tempIndex, &tempIndex);
+                else if (x < previousX) valid = GetLeftIndex(tempIndex, &tempIndex);
+                if (!valid) break;
+            }
 
-            tempIndex = tTempIndex;
+            if (!valid) break;
 
-            if (y > previousY) valid = GetUpIndex(tempIndex, &tTempIndex);
-            else if (y < previousY) valid = GetDownIndex(tempIndex, &tTempIndex);
-
-            tempIndex = tTempIndex;
-        
+            for (int k = 0; k < abs(y - previousY); k++){
+                if (y > previousY) valid = GetUpIndex(tempIndex, &tempIndex);
+                else if (y < previousY) valid = GetDownIndex(tempIndex, &tempIndex);
+                if (!valid) break;
+            }
+            
             if (!valid) break;
 
             previousX = x;
@@ -297,7 +342,7 @@ public:
         if(!isRectangular){
             // Loop through all pixels
             for (unsigned int i = 0; i < pixelCount; i++) {
-                Vector2D& currentPos = pixelPositions[i];
+                Vector2D& currentPos = direction == ZEROTOMAX ? pixelPositions[i] : pixelPositions[pixelCount - i - 1];
 
                 // Initialize the minimum distances and indices to the first pixel
                 float minUp = Mathematics::FLTMAX, minDown = Mathematics::FLTMAX, minLeft = Mathematics::FLTMAX, minRight = Mathematics::FLTMAX;
@@ -307,7 +352,7 @@ public:
                 for (unsigned int j = 0; j < pixelCount; j++) {
                     if (i == j) { continue; } // Skip the current pixel
 
-                    Vector2D& neighborPos = pixelPositions[j];
+                    Vector2D& neighborPos = direction == ZEROTOMAX ? pixelPositions[j] : pixelPositions[pixelCount - j - 1];
 
                     // Calculate the distances between the current pixel and the other pixel
                     float dist = currentPos.CalculateEuclideanDistance(neighborPos);

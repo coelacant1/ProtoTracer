@@ -1,0 +1,31 @@
+#pragma once
+
+Vector2D XenraxStrip[27] = {
+    Vector2D(3.88f,-4.46f),
+    Vector2D(10.00f,-4.00f),
+    Vector2D(15.00f,-4.00f),
+    Vector2D(20.00f,-4.00f),
+    Vector2D(25.00f,-4.00f),
+    Vector2D(30.00f,-4.00f),
+    Vector2D(35.00f,-4.00f),
+    Vector2D(40.00f,-4.00f),
+    Vector2D(45.00f,-4.00f),
+    Vector2D(50.00f,-4.00f),
+    Vector2D(55.00f,-4.00f),
+    Vector2D(60.00f,-4.00f),
+    Vector2D(65.00f,-4.00f),
+    Vector2D(70.00f,-4.00f),
+    Vector2D(75.00f,-4.00f),
+    Vector2D(80.00f,-4.00f),
+    Vector2D(85.00f,-4.00f),
+    Vector2D(90.00f,-4.00f),
+    Vector2D(95.00f,-4.00f),
+    Vector2D(100.20f,-5.90f),
+    Vector2D(104.90f,-8.10f),
+    Vector2D(109.40f,-10.80f),
+    Vector2D(113.60f,-13.80f),
+    Vector2D(117.40f,-17.30f),
+    Vector2D(120.70f,-21.40f),
+    Vector2D(124.40f,-25.90f),
+    Vector2D(127.60f,-30.20f)
+};

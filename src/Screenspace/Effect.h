@@ -10,7 +10,7 @@ public:
     Effect(){}
 
     void SetRatio(float ratio){
-        this->ratio = ratio;
+        this->ratio = Mathematics::Constrain(ratio, 0.0f, 1.0f);
     }
 
     virtual void ApplyEffect(IPixelGroup* pixelGroup) = 0;
