@@ -70,6 +70,36 @@ void Adafruit_Sensor::printSensorDetails(void) {
   case SENSOR_TYPE_NOX_INDEX:
     Serial.print(F("Nitrogen Oxides (Index)"));
     break;
+  case SENSOR_TYPE_CO2:
+    Serial.print(F("Carbon Dioxide (ppm)"));
+    break;
+  case SENSOR_TYPE_ECO2:
+    Serial.print(F("Equivalent/estimated CO2 (ppm)"));
+    break;
+  case SENSOR_TYPE_PM10_STD:
+    Serial.print(F("Standard Particulate Matter 1.0 (ppm)"));
+    break;
+  case SENSOR_TYPE_PM25_STD:
+    Serial.print(F("Standard Particulate Matter 2.5 (ppm)"));
+    break;
+  case SENSOR_TYPE_PM100_STD:
+    Serial.print(F("Standard Particulate Matter 10.0 (ppm)"));
+    break;
+  case SENSOR_TYPE_PM10_ENV:
+    Serial.print(F("Environmental Particulate Matter 1.0 (ppm)"));
+    break;
+  case SENSOR_TYPE_PM25_ENV:
+    Serial.print(F("Environmental Particulate Matter 2.5 (ppm)"));
+    break;
+  case SENSOR_TYPE_PM100_ENV:
+    Serial.print(F("Environmental Particulate Matter 10.0 (ppm)"));
+    break;
+  case SENSOR_TYPE_GAS_RESISTANCE:
+    Serial.print(F("Gas Resistance (ohms)"));
+    break;
+  case SENSOR_TYPE_UNITLESS_PERCENT:
+    Serial.print(F("Unitless Percent (%)"));
+    break;
   }
 
   Serial.println();

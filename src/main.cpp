@@ -9,8 +9,8 @@
 //#define WS35
 //#define WS35SPLIT
 //#define ESP32HUB75
-#define CUSTOMHUB75
-//#define CUSTOMWS35
+//#define CUSTOMHUB75
+#define CUSTOMWS35
 
 //#define PRINTINFO
 
@@ -75,17 +75,16 @@ ESP32DevKitV1 controller = ESP32DevKitV1(maxBrightness);
 ESP32Clock animation = ESP32Clock();
 #elif defined(CUSTOMHUB75)
 #define HUB75
+#include "Controllers\SmartMatrixHUB75.h"
+#include "Animation\ProtogenHUB75Animation.h"
+SmartMatrixHUB75 controller = SmartMatrixHUB75(maxBrightness, maxAccentBrightness);
+ProtogenHUB75Animation animation = ProtogenHUB75Animation();
+#elif defined(CUSTOMWS35)
+#define WS35
 #include "Controllers\KaiborgV1D1Xenrax.h"
 #include "Animation\Commissions\XenraxAnimation.h"
 KaiborgV1D1Controller controller = KaiborgV1D1Controller(maxBrightness);
 XenraxAnimation animation = XenraxAnimation();
-#elif defined(CUSTOMWS35)
-#define WS35SPLIT
-#include "Controllers\KaiborgV1D1Controller.h"
-#include "Animation\Commissions\GalaxyAnimation.h"
-
-KaiborgV1D1Controller controller = KaiborgV1D1Controller(maxBrightness);
-GalaxyAnimation animation = GalaxyAnimation();
 #else
 //Define your own here
 //--------------- ANIMATIONS ---------------
@@ -108,8 +107,6 @@ GalaxyAnimation animation = GalaxyAnimation();
 
 KaiborgV1D1Controller controller = KaiborgV1D1Controller(maxBrightness);
 FullScreenAnimation animation = FullScreenAnimation();
-
-
 #endif
 
 float FreeMem(){

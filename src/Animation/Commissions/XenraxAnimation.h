@@ -4,7 +4,7 @@
 #include "..\KeyFrameTrack.h"
 #include "..\EasyEaseAnimator.h"
 #include "..\..\Objects\Background.h"
-#include "..\..\Objects\LEDStripBackground.h"
+#include "..\..\Objects\LEDStripBackgroundWS35.h"
 
 #include "..\..\Morph\Commissions\XenraxFace.h"
 
@@ -49,7 +49,7 @@ private:
     static const uint8_t faceCount = 9;
     XenraxFace pM;
     Background background;
-    LEDStripBackground ledStripBackground;
+    LEDStripBackgroundWS35 ledStripBackground;
     EasyEaseAnimator<30> eEA = EasyEaseAnimator<30>(EasyEaseInterpolation::Overshoot, 1.0f, 0.35f);
     
     //Materials
@@ -70,10 +70,10 @@ private:
     RGBColor batterySpectrum[2] = {RGBColor(253, 0, 99), RGBColor(82, 246, 229)};
     GradientMaterial<2> batteryGrad = GradientMaterial<2>(batterySpectrum, 350.0f, false);
     
-    RGBColor audioSpectrum[3] = {RGBColor(255, 125, 0), RGBColor(100, 60, 154), RGBColor(57, 230, 62)};
+    RGBColor audioSpectrum[3] = {RGBColor(255, 165, 0), RGBColor(128, 0, 128), RGBColor(0, 255, 65)};
     GradientMaterial<3> audioGrad = GradientMaterial<3>(audioSpectrum, 350.0f, false);
     
-    MaterialAnimator<13> materialAnimator;
+    MaterialAnimator<15> materialAnimator;
     MaterialAnimator<5> backgroundMaterial;
     
     SpectrumAnalyzer sA = SpectrumAnalyzer(Vector2D(200, 100), Vector2D(100, 50), true, true); 
@@ -246,15 +246,11 @@ private:
     void Hypno(){
         scene.SetEffect(&magnet);
         scene.EnableEffect();
-        
-        eEA.AddParameterFrame(XenraxFace::BSOD, 1.0f);
-        materialAnimator.AddMaterialFrame(whiteMaterial, 1.0f);
-        backgroundMaterial.AddMaterialFrame(blueMaterial, 1.0f);
 
-        //eEA.AddParameterFrame(XenraxFace::Hypno, 1.0f);
-        //eEA.AddParameterFrame(XenraxFace::HideSpiral, 0.0f);
-        //eEA.AddParameterFrame(XenraxFace::SpinSpiral, fGenMove.Update());
-        //materialAnimator.AddMaterialFrame(pinkMaterial, 1.0f);
+        eEA.AddParameterFrame(XenraxFace::Hypno, 1.0f);
+        eEA.AddParameterFrame(XenraxFace::HideSpiral, 0.0f);
+        eEA.AddParameterFrame(XenraxFace::SpinSpiral, fGenMove.Update());
+        materialAnimator.AddMaterialFrame(pinkMaterial, 1.0f);
 
         blink.Pause();
     }
@@ -289,7 +285,8 @@ private:
     }
 
     void BSOD(){
-        scene.DisableEffect();
+        scene.SetEffect(&magnet);
+        scene.EnableEffect();
         
         eEA.AddParameterFrame(XenraxFace::BSOD, 1.0f);
         materialAnimator.AddMaterialFrame(whiteMaterial, 1.0f);
@@ -304,8 +301,6 @@ private:
         eEA.AddParameterFrame(offsetFaceInd, 1.0f);
         eEA.AddParameterFrame(offsetFaceIndSA, 1.0f);
 
-        audioGrad.SetRotationAngle(fGenMove.Update());
-
         materialAnimator.AddMaterialFrame(audioGrad, 1.0f);
         backgroundMaterial.AddMaterialFrame(sA, offsetFaceSA);
     }
@@ -316,8 +311,6 @@ private:
         eEA.AddParameterFrame(offsetFaceInd, 1.0f);
         eEA.AddParameterFrame(offsetFaceIndARG, 1.0f);
 
-        audioGrad.SetRotationAngle(fGenMove.Update());
-
         materialAnimator.AddMaterialFrame(audioGrad, 1.0f);
         backgroundMaterial.AddMaterialFrame(aRG, offsetFaceARG);
     }
@@ -327,8 +320,6 @@ private:
         
         eEA.AddParameterFrame(offsetFaceInd, 1.0f);
         eEA.AddParameterFrame(offsetFaceIndOSC, 1.0f);
-
-        audioGrad.SetRotationAngle(fGenMove.Update());
 
         materialAnimator.AddMaterialFrame(audioGrad, 1.0f);
         backgroundMaterial.AddMaterialFrame(oSC, offsetFaceOSC);
@@ -389,7 +380,7 @@ public:
 
         MicrophoneFourierIT::Initialize(22, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
         //Menu::Initialize(9);//NeoTrellis
-        Menu::Initialize(11, 0, 500);//11 is number of faces
+        Menu::Initialize(10, 0, 500);//11 is number of faces
 
         pinMode(3, INPUT);//Hall effect sensor
 
@@ -438,17 +429,15 @@ public:
         phaseR.SetRatio(fGenBlur.Update());
         shiftR.SetRatio(fGenBlur.Update());
 
+        audioGrad.GradientShift(ratio * 2.0f);
+        //audioGrad.SetPositionOffset(Vector2D)
+        //audioGrad.SetRotationAngle(fGenMove.Update());
+
         SetMaterialColor();
 
         bool isBooped = Menu::UseBoopSensor() ? boop.isBooped() : 0;
         Vector3D fieldPosition = magnetometer.EstimateMagnetPosition();
-        Vector3D fieldStrength = magnetometer.GetMagneticField();
         bool isMagn = magnetometer.IsDetected();
-
-        Serial.print(isMagn); Serial.print('\t');
-        Serial.print(magnetometer.GetMagnitude()); Serial.print('\t');
-        Serial.print(fieldPosition.ToString()); Serial.print('\t');
-        Serial.println(fieldStrength.ToString());
 
         magnet.SetAmplitude(magnetometer.GetMagnitude());
         magnet.SetPosition(Vector2D(fieldPosition.X - 80.0f, fieldPosition.Y + 50.0f));
@@ -479,7 +468,7 @@ public:
         if (isBooped && mode != 6){
             Boop();
         }
-        else if(isMagn){
+        else if(isMagn && mode != 6){
             Hypno();
         }
         else{

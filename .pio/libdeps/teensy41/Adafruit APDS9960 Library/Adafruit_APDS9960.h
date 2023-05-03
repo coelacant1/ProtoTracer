@@ -192,7 +192,7 @@ public:
   void disableProximityInterrupt();
   uint8_t readProximity();
   void setProximityInterruptThreshold(uint8_t low, uint8_t high,
-                                      uint8_t persistance = 4);
+                                      uint8_t persistence = 4);
   bool getProximityInterrupt();
 
   // gesture

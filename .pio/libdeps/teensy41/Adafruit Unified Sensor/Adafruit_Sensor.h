@@ -69,7 +69,17 @@ typedef enum {
   SENSOR_TYPE_COLOR = (17),
   SENSOR_TYPE_TVOC = (18),
   SENSOR_TYPE_VOC_INDEX = (19),
-  SENSOR_TYPE_NOX_INDEX = (20)
+  SENSOR_TYPE_NOX_INDEX = (20),
+  SENSOR_TYPE_CO2 = (21),
+  SENSOR_TYPE_ECO2 = (22),
+  SENSOR_TYPE_PM10_STD = (23),
+  SENSOR_TYPE_PM25_STD = (24),
+  SENSOR_TYPE_PM100_STD = (25),
+  SENSOR_TYPE_PM10_ENV = (26),
+  SENSOR_TYPE_PM25_ENV = (27),
+  SENSOR_TYPE_PM100_ENV = (28),
+  SENSOR_TYPE_GAS_RESISTANCE = (29),
+  SENSOR_TYPE_UNITLESS_PERCENT = (30)
 } sensors_type_t;
 
 /** struct sensors_vec_s is used to return a vector in a common format. */
@@ -123,7 +133,7 @@ typedef struct {
   int32_t reserved0; /**< reserved */
   int32_t timestamp; /**< time is in milliseconds */
   union {
-    float data[4];              ///< Raw data
+    float data[4];              ///< Raw data */
     sensors_vec_t acceleration; /**< acceleration values are in meter per second
                                    per second (m/s^2) */
     sensors_vec_t
@@ -142,8 +152,26 @@ typedef struct {
                           normal (unitless) */
     float nox_index; /**< NOx (Nitrogen Oxides) index where 100 is normal
                           (unitless) */
-    sensors_color_t color; /**< color in RGB component values */
-  };                       ///< Union for the wide ranges of data we can carry
+    float CO2;       /**< Measured CO2 in parts per million (ppm) */
+    float eCO2;      /**< equivalent/estimated CO2 in parts per million (ppm
+                        estimated from some other measurement) */
+    float pm10_std;  /**< Standard Particulate Matter <=1.0 in parts per million
+                        (ppm) */
+    float pm25_std;  /**< Standard Particulate Matter <=2.5 in parts per million
+                        (ppm) */
+    float pm100_std; /**< Standard Particulate Matter <=10.0 in parts per
+                        million (ppm) */
+    float pm10_env;  /**< Environmental Particulate Matter <=1.0 in parts per
+                        million (ppm) */
+    float pm25_env;  /**< Environmental Particulate Matter <=2.5 in parts per
+                        million (ppm) */
+    float pm100_env; /**< Environmental Particulate Matter <=10.0 in parts per
+                        million (ppm) */
+    float gas_resistance;   /**< Proportional to the amount of VOC particles in
+                               the air (Ohms) */
+    float unitless_percent; /**<Percentage, unit-less (%) */
+    sensors_color_t color;  /**< color in RGB component values */
+  };                        ///< Union for the wide ranges of data we can carry
 } sensors_event_t;
 
 /* Sensor details (40 bytes) */

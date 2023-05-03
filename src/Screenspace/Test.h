@@ -5,10 +5,7 @@
 
 class Test: public Effect {
 private:
-    FunctionGenerator fGenU = FunctionGenerator(FunctionGenerator::Sine, 0.0f, 255.0f, 1.0f);
     FunctionGenerator fGenD = FunctionGenerator(FunctionGenerator::Sine, 0.0f, 255.0f, 0.5f);
-    FunctionGenerator fGenL = FunctionGenerator(FunctionGenerator::Sine, 0.0f, 255.0f, 2.0f);
-    FunctionGenerator fGenR = FunctionGenerator(FunctionGenerator::Sine, 0.0f, 255.0f, 0.25f);
 
 public:
     Test(){}
@@ -32,10 +29,7 @@ public:
             unsigned int upIndex = i;
             unsigned int downIndex = i;
 
-            uint8_t u = fGenU.Update();
             uint8_t d = fGenD.Update();
-            uint8_t l = fGenL.Update();
-            uint8_t r = fGenR.Update();
 
             bool validLeft = pixelGroup->GetLeftIndex(leftIndex, &leftIndex);
             bool validRight = pixelGroup->GetRightIndex(rightIndex, &rightIndex);

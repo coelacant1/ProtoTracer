@@ -15,19 +15,10 @@ private:
     float rotationAngle = 0.0f;//rotate input xyPosition
     bool isRadial = false;
     bool isStepped = false;
+    float gradientShift = 0.0f;
   
 public:
-    GradientMaterial(RGBColor* rgbColors, float gradientPeriod, bool isRadial){
-        this->gradientPeriod = gradientPeriod;
-        this->isRadial = isRadial;
-        this->baseRGBColors = rgbColors;
-
-        for(uint8_t i = 0; i < colorCount; i++){
-            this->rgbColors[i] = rgbColors[i];
-        }
-    }
-
-    GradientMaterial(RGBColor* rgbColors, float gradientPeriod, bool isRadial, bool  ){
+    GradientMaterial(RGBColor* rgbColors, float gradientPeriod, bool isRadial, bool isStepped = false){
         this->gradientPeriod = gradientPeriod;
         this->isRadial = isRadial;
         this->isStepped = isStepped;
@@ -61,6 +52,10 @@ public:
         this->gradientPeriod = gradientPeriod;  
     }
 
+    void GradientShift(float ratio){
+        this->gradientShift = ratio;
+    }
+
     void HueShift(float hueDeg){
         for(uint8_t i = 0; i < colorCount; i++){
             rgbColors[i] = baseRGBColors[i].HueShift(hueDeg);
@@ -79,9 +74,10 @@ public:
 
             position = temp.RotateVector(position);
         }
-
+        
         float pos = 0;
         position = position - Vector3D(positionOffset.X, positionOffset.Y, 0);
+        position = position + Vector3D(gradientShift * gradientPeriod, 0, 0);
         
         if (isRadial){
             pos = sqrtf(position.X * position.X + position.Y * position.Y);
@@ -89,9 +85,9 @@ public:
         }
         else{
             //from x position, fit into bucket ratio
-            //modulo x value into x range from start position to end position
             pos = fabs(fmodf(position.X, gradientPeriod));
         }
+
         
         //map from modulo'd x value to color count minimum
         float ratio = Mathematics::Map(pos, 0.0f, gradientPeriod, 0.0f, float(colorCount));
@@ -104,7 +100,7 @@ public:
             rgb = rgbColors[startBox];
         }
         else{
-            float mu = Mathematics::Map(ratio, float(startBox), float(startBox + 1), 0.0f, 1.0f);//calculate mu between boxes
+            float mu = Mathematics::Map(ratio, float(startBox), float(startBox+1), 0.0f, 1.0f);//calculate mu between boxes
 
             rgb = RGBColor::InterpolateColors(rgbColors[startBox], rgbColors[endBox], mu);
         }

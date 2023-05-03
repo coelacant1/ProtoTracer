@@ -267,23 +267,23 @@ void Adafruit_APDS9960::disableProximityInterrupt() {
  *          Low threshold
  *  @param  high
  *          High threshold
- *  @param  persistance
- *          Persistance
+ *  @param  persistence
+ *          Persistence
  */
 void Adafruit_APDS9960::setProximityInterruptThreshold(uint8_t low,
                                                        uint8_t high,
-                                                       uint8_t persistance) {
+                                                       uint8_t persistence) {
   write8(APDS9960_PILT, low);
   write8(APDS9960_PIHT, high);
 
-  if (persistance > 7)
-    persistance = 7;
-  _pers.PPERS = persistance;
+  if (persistence > 7)
+    persistence = 7;
+  _pers.PPERS = persistence;
   write8(APDS9960_PERS, _pers.get());
 }
 
 /*!
- *  @brief  Returns proxmity interrupt status
+ *  @brief  Returns proximity interrupt status
  *  @return True if enabled, false otherwise.
  */
 bool Adafruit_APDS9960::getProximityInterrupt() {
@@ -309,8 +309,8 @@ bool Adafruit_APDS9960::gestureValid() {
 /*!
  *  @brief  Sets gesture dimensions
  *  @param  dims
- *          Dimensions (APDS9960_DIMENSIONS_ALL, APDS9960_DIMENSIONS_UP_DOWM,
- *          APDS9960_DIMENSIONS_UP_DOWN, APGS9960_DIMENSIONS_LEFT_RIGHT)
+ *          Dimensions (APDS9960_DIMENSIONS_ALL, APDS9960_DIMENSIONS_UP_DOWN,
+ *          APGS9960_DIMENSIONS_LEFT_RIGHT)
  */
 void Adafruit_APDS9960::setGestureDimensions(uint8_t dims) {
   _gconf3.GDIMS = dims;
