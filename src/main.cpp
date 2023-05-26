@@ -9,8 +9,8 @@
 //#define WS35
 //#define WS35SPLIT
 //#define ESP32HUB75
-//#define CUSTOMHUB75
-#define CUSTOMWS35
+#define CUSTOMHUB75
+//#define CUSTOMWS35
 
 //#define PRINTINFO
 
@@ -76,15 +76,15 @@ ESP32Clock animation = ESP32Clock();
 #elif defined(CUSTOMHUB75)
 #define HUB75
 #include "Controllers\SmartMatrixHUB75.h"
-#include "Animation\ProtogenHUB75Animation.h"
+#include "Animation\Commissions\BasilGardenAnimation.h"
 SmartMatrixHUB75 controller = SmartMatrixHUB75(maxBrightness, maxAccentBrightness);
-ProtogenHUB75Animation animation = ProtogenHUB75Animation();
+BasilGardenAnimation animation = BasilGardenAnimation();
 #elif defined(CUSTOMWS35)
 #define WS35
-#include "Controllers\KaiborgV1D1Xenrax.h"
-#include "Animation\Commissions\XenraxAnimation.h"
+#include "Controllers\KaiborgV1D1Controller.h"
+#include "Animation\Commissions\BasilGardenAnimation.h"
 KaiborgV1D1Controller controller = KaiborgV1D1Controller(maxBrightness);
-XenraxAnimation animation = XenraxAnimation();
+BasilGardenAnimation animation = BasilGardenAnimation();
 #else
 //Define your own here
 //--------------- ANIMATIONS ---------------

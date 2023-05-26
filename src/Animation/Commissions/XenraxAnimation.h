@@ -376,7 +376,7 @@ public:
         ledStripBackground.GetObject()->SetMaterial(&materialAnimator);
 
         boop.Initialize(5);
-        magnetometer.Initialize();
+        //magnetometer.Initialize();
 
         MicrophoneFourierIT::Initialize(22, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
         //Menu::Initialize(9);//NeoTrellis
@@ -436,10 +436,10 @@ public:
         SetMaterialColor();
 
         bool isBooped = Menu::UseBoopSensor() ? boop.isBooped() : 0;
-        Vector3D fieldPosition = magnetometer.EstimateMagnetPosition();
-        bool isMagn = magnetometer.IsDetected();
+        Vector3D fieldPosition;// = magnetometer.EstimateMagnetPosition();
+        bool isMagn = false;// = magnetometer.IsDetected();
 
-        magnet.SetAmplitude(magnetometer.GetMagnitude());
+        //magnet.SetAmplitude(magnetometer.GetMagnitude());
         magnet.SetPosition(Vector2D(fieldPosition.X - 80.0f, fieldPosition.Y + 50.0f));
 
         eEA.AddParameterFrame(magnetSKInd, isMagn);

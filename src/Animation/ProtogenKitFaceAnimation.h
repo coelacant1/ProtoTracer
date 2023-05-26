@@ -4,15 +4,19 @@
 #include "KeyFrameTrack.h"
 #include "EasyEaseAnimator.h"
 #include "..\Objects\Background.h"
-#include "..\Morph\NukudeFace.h"
+#include "..\Objects\LEDStripBackground.h"
+#include "..\Morph\NukudeFlat.h"
 #include "..\Render\Scene.h"
 #include "..\Signals\FunctionGenerator.h"
 #include "..\Menu\SingleButtonMenu.h"
+//#include "..\Menu\NeoTrellisMenu.h"
 #include "..\Sensors\APDS9960.h"
 
-#include "..\Materials\Animated\SpectrumAnalyzer.h"
 #include "..\Materials\Animated\RainbowNoise.h"
 #include "..\Materials\Animated\RainbowSpiral.h"
+#include "..\Materials\Animated\SpectrumAnalyzer.h"
+#include "..\Materials\Animated\AudioReactiveGradient.h"
+#include "..\Materials\Animated\Oscilloscope.h"
 
 #include "..\Materials\MaterialAnimator.h"
 
@@ -22,11 +26,27 @@
 
 #include "..\Sensors\MicrophoneFourier_MAX9814.h"
 
-class ProtogenKitFaceAnimation : public Animation<2> {
+#include "..\Render\ObjectAlign.h"
+
+#include "..\Screenspace\GlitchX.h"
+#include "..\Screenspace\Fisheye.h"
+#include "..\Screenspace\HorizontalBlur.h"
+#include "..\Screenspace\PhaseOffsetX.h"
+#include "..\Screenspace\PhaseOffsetY.h"
+#include "..\Screenspace\PhaseOffsetR.h"
+#include "..\Screenspace\Magnet.h"
+#include "..\Screenspace\Overflow.h"
+#include "..\Screenspace\RadialBlur.h"
+#include "..\Screenspace\ShiftR.h"
+#include "..\Screenspace\VerticalBlur.h"
+
+class ProtogenKitFaceAnimation : public Animation<3> {
 private:
+    static const uint8_t faceCount = 9;
     NukudeFace pM;
     Background background;
-    EasyEaseAnimator<20> eEA = EasyEaseAnimator<20>(EasyEaseInterpolation::Overshoot, 1.0f, 0.35f);
+    LEDStripBackground ledStripBackground;
+    EasyEaseAnimator<25> eEA = EasyEaseAnimator<25>(EasyEaseInterpolation::Overshoot, 1.0f, 0.35f);
     
     //Materials
     RainbowNoise rainbowNoise;
@@ -39,13 +59,15 @@ private:
     SimpleMaterial yellowMaterial = SimpleMaterial(RGBColor(255, 255, 0));
     SimpleMaterial purpleMaterial = SimpleMaterial(RGBColor(255, 0, 255));
     
-    RGBColor gradientSpectrum[2] = {RGBColor(5, 162, 232), RGBColor(10, 170, 255)};
+    RGBColor gradientSpectrum[2] = {RGBColor(82, 252, 233), RGBColor(65, 201, 185)};
     GradientMaterial<2> gradientMat = GradientMaterial<2>(gradientSpectrum, 350.0f, false);
     
     MaterialAnimator<10> materialAnimator;
-    MaterialAnimator<2> backgroundMaterial;
+    MaterialAnimator<4> backgroundMaterial;
     
     SpectrumAnalyzer sA = SpectrumAnalyzer(Vector2D(200, 100), Vector2D(100, 50), true, true); 
+    AudioReactiveGradient aRG = AudioReactiveGradient(Vector2D(160, 160), Vector2D(0, 0), true, true); 
+    Oscilloscope oSC = Oscilloscope(Vector2D(200, 100), Vector2D(0, 0));
 
     //Animation controllers
     BlinkTrack<1> blink;
@@ -57,12 +79,38 @@ private:
     FunctionGenerator fGenMatYMove = FunctionGenerator(FunctionGenerator::Sine, -2.0f, 2.0f, 6.7f);
     FunctionGenerator fGenMatHue = FunctionGenerator(FunctionGenerator::Triangle, 0.0f, 360.0f, 17.3f);
 
+    FunctionGenerator fGenMatXMenu = FunctionGenerator(FunctionGenerator::Sine, -10.0f, 10.0f, 1.1f);
+    FunctionGenerator fGenMatYMenu = FunctionGenerator(FunctionGenerator::Sine, -10.0f, 10.0f, 2.7f);
+    FunctionGenerator fGenMatRMenu = FunctionGenerator(FunctionGenerator::Sine, -5.0f, 5.0f, 1.7f);
+
+    FunctionGenerator fGenBlur = FunctionGenerator(FunctionGenerator::Sine, 0.0f, 1.0f, 1.5f);
+
     APDS9960 boop;
 
     FFTVoiceDetection<128> voiceDetection;
 
+    ObjectAlign objA = ObjectAlign(Vector2D(0.0f, 0.0f), Vector2D(189.0f, 93.0f), Quaternion());
+    
+    Fisheye fisheye = Fisheye();
+    GlitchX glitchX = GlitchX(30);
+    HorizontalBlur blurH = HorizontalBlur(8);
+    VerticalBlur blurV = VerticalBlur(8);
+    Magnet magnet = Magnet();
+    RadialBlur blurR = RadialBlur(8);
+    PhaseOffsetX phaseX = PhaseOffsetX(8);
+    PhaseOffsetY phaseY = PhaseOffsetY(8);
+    PhaseOffsetR phaseR = PhaseOffsetR(8);
+    ShiftR shiftR = ShiftR(8);
+    Overflow overflow = Overflow(8);
+
+    float offsetFace = 0.0f;
     float offsetFaceSA = 0.0f;
+    float offsetFaceARG = 0.0f;
+    float offsetFaceOSC = 0.0f;
     uint8_t offsetFaceInd = 50;
+    uint8_t offsetFaceIndSA = 51;
+    uint8_t offsetFaceIndARG = 52;
+    uint8_t offsetFaceIndOSC = 53;
 
     void LinkEasyEase(){
         eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::Anger), NukudeFace::Anger, 15, 0.0f, 1.0f);
@@ -85,7 +133,10 @@ private:
         eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::HideBlush), NukudeFace::HideBlush, 30, 1.0f, 0.0f);
         eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::HideBlush), NukudeFace::HideBlush, 30, 1.0f, 0.0f);
 
-        eEA.AddParameter(&offsetFaceSA, offsetFaceInd, 30, 0.0f, 1.0f);
+        eEA.AddParameter(&offsetFace, offsetFaceInd, 40, 0.0f, 1.0f);
+        eEA.AddParameter(&offsetFaceSA, offsetFaceIndSA, 40, 0.0f, 1.0f);
+        eEA.AddParameter(&offsetFaceARG, offsetFaceIndARG, 40, 0.0f, 1.0f);
+        eEA.AddParameter(&offsetFaceOSC, offsetFaceIndOSC, 40, 0.0f, 1.0f);
     }
 
     void LinkParameters(){
@@ -116,22 +167,26 @@ private:
         materialAnimator.AddMaterial(Material::Replace, &redMaterial, 40, 0.0f, 1.0f);//layer 6
         materialAnimator.AddMaterial(Material::Replace, &blueMaterial, 40, 0.0f, 1.0f);//layer 7
         materialAnimator.AddMaterial(Material::Replace, &rainbowSpiral, 40, 0.0f, 1.0f);//layer 8
-        materialAnimator.AddMaterial(Material::Lighten, &rainbowNoise, 40, 0.0f, 1.0f);//layer 9
+        materialAnimator.AddMaterial(Material::Replace, &rainbowNoise, 40, 0.15f, 1.0f);//layer 9
 
         backgroundMaterial.SetBaseMaterial(Material::Add, Menu::GetMaterial());
-        backgroundMaterial.AddMaterial(Material::Add, &sA, 40, 0.0f, 1.0f);
+        backgroundMaterial.AddMaterial(Material::Add, &sA, 20, 0.0f, 1.0f);
+        backgroundMaterial.AddMaterial(Material::Add, &aRG, 20, 0.0f, 1.0f);
+        backgroundMaterial.AddMaterial(Material::Add, &oSC, 20, 0.0f, 1.0f);
     }
 
     void UpdateKeyFrameTracks(){
         blink.Update();
     }
 
-    void Default(){}
+    void Default(){
+        scene.DisableEffect();
+    }
 
     void Angry(){
         eEA.AddParameterFrame(NukudeFace::Anger, 1.0f);
         materialAnimator.AddMaterialFrame(redMaterial, 0.8f);
-    }
+    } 
 
     void Sad(){
         eEA.AddParameterFrame(NukudeFace::Sadness, 1.0f);
@@ -140,6 +195,9 @@ private:
     }
 
     void Surprised(){
+        scene.SetEffect(&glitchX);
+        scene.DisableEffect();
+
         eEA.AddParameterFrame(NukudeFace::Surprised, 1.0f);
         eEA.AddParameterFrame(NukudeFace::HideBlush, 0.0f);
         materialAnimator.AddMaterialFrame(rainbowSpiral, 0.8f);
@@ -163,8 +221,23 @@ private:
 
     void SpectrumAnalyzerFace(){
         eEA.AddParameterFrame(offsetFaceInd, 1.0f);
+        eEA.AddParameterFrame(offsetFaceIndSA, 1.0f);
 
         backgroundMaterial.AddMaterialFrame(sA, offsetFaceSA);
+    }
+
+    void AudioReactiveGradientFace(){
+        eEA.AddParameterFrame(offsetFaceInd, 1.0f);
+        eEA.AddParameterFrame(offsetFaceIndARG, 1.0f);
+
+        backgroundMaterial.AddMaterialFrame(aRG, offsetFaceARG);
+    }
+
+    void OscilloscopeFace(){
+        eEA.AddParameterFrame(offsetFaceInd, 1.0f);
+        eEA.AddParameterFrame(offsetFaceIndOSC, 1.0f);
+
+        backgroundMaterial.AddMaterialFrame(oSC, offsetFaceOSC);
     }
 
     void UpdateFFTVisemes(){
@@ -204,6 +277,7 @@ public:
     ProtogenKitFaceAnimation() {
         scene.AddObject(pM.GetObject());
         scene.AddObject(background.GetObject());
+        scene.AddObject(ledStripBackground.GetObject());
 
         LinkEasyEase();
         LinkParameters();
@@ -214,14 +288,16 @@ public:
 
         pM.GetObject()->SetMaterial(&materialAnimator);
         background.GetObject()->SetMaterial(&backgroundMaterial);
+        ledStripBackground.GetObject()->SetMaterial(&materialAnimator);
 
         boop.Initialize(5);
 
         MicrophoneFourierIT::Initialize(22, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
-        Menu::Initialize(7, 0, 500);//7 is number of faces
+        //Menu::Initialize(9);//NeoTrellis
+        Menu::Initialize(9, 0, 500);//7 is number of faces
 
-        Menu::SetSize(Vector2D(280, 60));
-        Menu::SetPositionOffset(Vector2D(-40.0f, -30.0f));
+        objA.SetJustification(ObjectAlign::Stretch);
+        objA.SetMirrorX(true);
     }
 
     uint8_t GetAccentBrightness(){
@@ -231,7 +307,7 @@ public:
     uint8_t GetBrightness(){
         return Menu::GetBrightness();
     };
-    
+
     void FadeIn(float stepRatio) override {}
     void FadeOut(float stepRatio) override {}
 
@@ -247,17 +323,42 @@ public:
         
         Menu::Update(ratio);
 
+        //Menu::SetSize(Vector2D(280, 60));
+        //Menu::SetPositionOffset(Vector2D(0.0f, -30.0f * yOffset));
+        
+        //glitchX.SetRatio(fGenBlur.Update());
+        magnet.SetRatio(ratio);
+        fisheye.SetRatio(fGenBlur.Update());
+        blurH.SetRatio(fGenBlur.Update());
+        blurV.SetRatio(fGenBlur.Update());
+        blurR.SetRatio(fGenBlur.Update());
+        phaseX.SetRatio(fGenBlur.Update());
+        phaseY.SetRatio(fGenBlur.Update());
+        phaseR.SetRatio(fGenBlur.Update());
+        shiftR.SetRatio(fGenBlur.Update());
+
         SetMaterialColor();
 
         bool isBooped = Menu::UseBoopSensor() ? boop.isBooped() : 0;
         uint8_t mode = Menu::GetFaceState();//change by button press
 
         MicrophoneFourierIT::Update();
-        sA.Update(MicrophoneFourierIT::GetFourierFiltered());
         sA.SetHueAngle(ratio * 360.0f * 4.0f);
         sA.SetMirrorYState(Menu::MirrorSpectrumAnalyzer());
         sA.SetFlipYState(!Menu::MirrorSpectrumAnalyzer());
         
+        aRG.SetRadius((xOffset + 2.0f) * 2.0f + 25.0f);
+        aRG.SetSize(Vector2D((xOffset + 2.0f) * 10.0f + 50.0f, (xOffset + 2.0f) * 10.0f + 50.0f));
+        aRG.SetHueAngle(ratio * 360.0f * 8.0f);
+        aRG.SetRotation(ratio * 360.0f * 2.0f);
+        aRG.SetPosition(Vector2D(80.0f + xOffset * 4.0f, 48.0f + yOffset * 4.0f));
+
+        oSC.SetSize(Vector2D(200.0f, 100.0f));
+        oSC.SetHueAngle(ratio * 360.0f * 8.0f);
+        oSC.SetPosition(Vector2D(100.0f, 50.0f));
+        
+        voiceDetection.SetThreshold(map(Menu::GetMicLevel(), 0, 10, 1000, 50));
+
         UpdateFFTVisemes();
 
         if (isBooped && mode != 6){
@@ -270,36 +371,47 @@ public:
             else if (mode == 3) Frown();
             else if (mode == 4) LookUp();
             else if (mode == 5) Sad();
-            else SpectrumAnalyzerFace();
+            else if (mode == 6) {
+                aRG.Update(MicrophoneFourierIT::GetFourierFiltered());
+                AudioReactiveGradientFace();
+            }
+            else if (mode == 7){
+                oSC.Update(MicrophoneFourierIT::GetSamples());
+                OscilloscopeFace();
+            }
+            else {
+                sA.Update(MicrophoneFourierIT::GetFourierFiltered());
+                SpectrumAnalyzerFace();
+            }
         }
 
         UpdateKeyFrameTracks();
-
-        pM.SetMorphWeight(NukudeFace::BiggerNose, 0.75f);
+        
+        pM.SetMorphWeight(NukudeFace::BiggerNose, 1.0f);
         pM.SetMorphWeight(NukudeFace::MoveEye, 1.0f);
 
         eEA.Update();
         pM.Update();
         
-        float menuRatio = Menu::ShowMenu();
+        //phaseR.SetRatio(eEA.GetValue(NukudeFace::Surprised));
+        glitchX.SetRatio(eEA.GetValue(NukudeFace::Surprised));
 
         rainbowNoise.Update(ratio);
         rainbowSpiral.Update(ratio);
         materialAnimator.Update();
         backgroundMaterial.Update();
-        
-        pM.GetObject()->GetTransform()->SetRotation(Vector3D(0.0f, 0.0f, -7.5f));
 
         uint8_t faceSize = Menu::GetFaceSize();
-        float scale = menuRatio * 0.5f + 0.5f;
-        float xShift = (1.0f - menuRatio) * -10.0f;
-        float yShift = (1.0f - menuRatio) * 70.0f + offsetFaceSA * -150.0f;
-        float adjustFacePos = float(4 - faceSize) * 5.0f;
-        float adjustFaceX = float(faceSize) * 0.05f;
-        
-        pM.GetObject()->GetTransform()->SetPosition(Vector3D(100.0f + xOffset - xShift + adjustFacePos, -22.5f + yOffset + yShift, 600.0f));
-        pM.GetObject()->GetTransform()->SetScale(Vector3D(-0.975f + adjustFaceX, 0.65f, 0.8f).Multiply(scale));
+        float scale = Menu::ShowMenu() * 0.6f + 0.4f;
+        float faceSizeOffset = faceSize * 8.0f;
 
+        objA.SetPlaneOffsetAngle(0.0f);
+        objA.SetEdgeMargin(4.0f);
+        objA.SetCameraMax(Vector2D(110.0f + faceSizeOffset, 115.0f - 115.0f * offsetFace).Multiply(scale));
+
+        objA.AlignObjects(scene.GetObjects(), 1);
+        
+        pM.GetObject()->GetTransform()->SetPosition(Vector3D(xOffset, yOffset, 0.0f));
         pM.GetObject()->UpdateTransform();
     }
 };
