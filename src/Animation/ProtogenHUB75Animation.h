@@ -48,6 +48,8 @@ private:
     LEDStripBackground ledStripBackground;
     EasyEaseAnimator<25> eEA = EasyEaseAnimator<25>(EasyEaseInterpolation::Overshoot, 1.0f, 0.35f);
     
+    bool boopExists = false;
+    
     //Materials
     RainbowNoise rainbowNoise;
     RainbowSpiral rainbowSpiral;
@@ -290,7 +292,7 @@ public:
         background.GetObject()->SetMaterial(&backgroundMaterial);
         ledStripBackground.GetObject()->SetMaterial(&materialAnimator);
 
-        boop.Initialize(5);
+        this->boopExists = boop.Initialize(5);
 
         MicrophoneFourierIT::Initialize(A2, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
         //Menu::Initialize(9);//NeoTrellis
@@ -339,7 +341,12 @@ public:
 
         SetMaterialColor();
 
-        bool isBooped = Menu::UseBoopSensor() ? boop.isBooped() : 0;
+        bool isBooped = false;
+        
+        if (this->boopExists && Menu::UseBoopSensor()) {
+           isBooped = boop.isBooped();
+        }
+        
         uint8_t mode = Menu::GetFaceState();//change by button press
 
         MicrophoneFourierIT::Update();
