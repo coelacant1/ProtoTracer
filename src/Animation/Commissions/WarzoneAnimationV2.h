@@ -9,11 +9,11 @@
 #include "..\..\Morph\WarzoneFace.h"
 #include "..\..\Morph\WarzoneExtras.h"
 #include "..\..\Render\Scene.h"
-#include "..\..\Menu\Menu.h"
+#include "..\..\Menu\SingleButtonMenu.h"
 #include "..\..\Signals\FunctionGenerator.h"
 #include "..\..\Signals\FFTVoiceDetection.h"
 #include "..\..\Sensors\APDS9960.h"
-#include "..\..\Sensors\MicrophoneFourier_DMA.h"
+#include "..\..\Sensors\MicrophoneFourier_MAX9814.h"
 #include "..\..\Render\ObjectAlign.h"
 
 #include "..\..\Materials\Animated\RainbowNoise.h"
@@ -22,8 +22,6 @@
 #include "..\..\Materials\Animated\AudioReactiveGradient.h"
 #include "..\..\Materials\Animated\Oscilloscope.h"
 #include "..\..\Materials\MaterialAnimator.h"
-
-
 
 class Warzone2Animation : public Animation<4> {
 private:
@@ -260,10 +258,10 @@ private:
 
     void UpdateFFTVisemes(){
         if(Menu::UseMicrophone()){
-            eEA.AddParameterFrame(WarzoneFace::vrc_v_aa, MicrophoneFourier::GetCurrentMagnitude() / 2.0f);
+            eEA.AddParameterFrame(WarzoneFace::vrc_v_aa, MicrophoneFourierIT::GetCurrentMagnitude() / 2.0f);
 
-            if(MicrophoneFourier::GetCurrentMagnitude() > 0.05f){
-                voiceDetection.Update(MicrophoneFourier::GetFourierFiltered(), MicrophoneFourier::GetSampleRate());
+            if(MicrophoneFourierIT::GetCurrentMagnitude() > 0.05f){
+                voiceDetection.Update(MicrophoneFourierIT::GetFourierFiltered(), MicrophoneFourierIT::GetSampleRate());
         
                 eEA.AddParameterFrame(WarzoneFace::vrc_v_ee, voiceDetection.GetViseme(voiceDetection.EE));
                 eEA.AddParameterFrame(WarzoneFace::vrc_v_oo, voiceDetection.GetViseme(voiceDetection.AH));
@@ -312,8 +310,9 @@ public:
 
         boop.Initialize(5);
 
-        MicrophoneFourier::Initialize(A0, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
-        Menu::Initialize(12, 20, 500);//13 is number of faces
+        MicrophoneFourierIT::Initialize(22, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
+        //Menu::Initialize(9);//NeoTrellis
+        Menu::Initialize(12, 0, 500);//7 is number of faces
 
         gradientMat.SetRotationAngle(90);
 
@@ -327,6 +326,14 @@ public:
 
     Object3D* GetObject(){
         return pM.GetObject();
+    }
+
+    uint8_t GetAccentBrightness(){
+        return Menu::GetAccentBrightness();
+    }
+
+    uint8_t GetBrightness(){
+        return Menu::GetBrightness();
     }
 
     void Update(float ratio) override {
@@ -343,7 +350,7 @@ public:
         bool isBooped = Menu::UseBoopSensor() ? boop.isBooped() : 0;
         uint8_t mode = Menu::GetFaceState();//change by button press
 
-        MicrophoneFourier::Update();
+        MicrophoneFourierIT::Update();
         sA.SetHueAngle(ratio * 360.0f * 4.0f);
         sA.SetMirrorYState(Menu::MirrorSpectrumAnalyzer());
         sA.SetFlipYState(!Menu::MirrorSpectrumAnalyzer());
@@ -376,15 +383,15 @@ public:
             else if (mode == 7) Circle();
             else if (mode == 8) Upset();
             else if (mode == 9) {
-                aRG.Update(MicrophoneFourier::GetFourierFiltered());
+                aRG.Update(MicrophoneFourierIT::GetFourierFiltered());
                 AudioReactiveGradientFace();
             }
             else if (mode == 10){
-                oSC.Update(MicrophoneFourier::GetSamples());
+                oSC.Update(MicrophoneFourierIT::GetSamples());
                 OscilloscopeFace();
             }
             else {
-                sA.Update(MicrophoneFourier::GetFourierFiltered());
+                sA.Update(MicrophoneFourierIT::GetFourierFiltered());
                 SpectrumAnalyzerFace();
             }
         }
@@ -394,8 +401,6 @@ public:
         eEA.Update();
         pM.Update();
         pME.Update();
-        
-        float menuRatio = Menu::ShowMenu();
 
         rainbowNoise.Update(ratio);
         rainbowSpiral.Update(ratio);
@@ -403,19 +408,18 @@ public:
         backgroundMaterial.Update();
 
         uint8_t faceSize = Menu::GetFaceSize();
-
-        float scale = menuRatio * 0.6f + 0.4f;
+        float scale = Menu::ShowMenu() * 0.6f + 0.4f;
         float faceSizeOffset = faceSize * 8.0f;
 
-        //objA.SetPlaneOffsetAngle(360.0f * ratio);
-        objA.SetEdgeMargin(2.0f);
-        objA.SetCameraMax(Vector2D(110.0f + faceSizeOffset, 93.0f).Multiply(scale));
+        objA.SetPlaneOffsetAngle(0.0f);
+        objA.SetEdgeMargin(4.0f);
+        objA.SetCameraMax(Vector2D(110.0f + faceSizeOffset, 115.0f - 115.0f * offsetFace).Multiply(scale));
 
         objA.AlignObjects(scene.GetObjects(), 2);
         
-        pM.GetObject()->GetTransform()->SetPosition(Vector3D(xOffset, yOffset - 93.0f * offsetFace - 93.0f * offsetFaceZZZ, 0.0f));
+        pM.GetObject()->GetTransform()->SetPosition(Vector3D(xOffset, yOffset, 0.0f));
         pM.GetObject()->UpdateTransform();
-        pME.GetObject()->GetTransform()->SetPosition(Vector3D(xOffset, yOffset - 93.0f * offsetFace, 0.0f));
+        pME.GetObject()->GetTransform()->SetPosition(Vector3D(xOffset, yOffset, 0.0f));
         pME.GetObject()->UpdateTransform();
     }
 };

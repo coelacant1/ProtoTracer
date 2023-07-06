@@ -111,6 +111,7 @@ private:
     uint8_t offsetFaceIndSA = 51;
     uint8_t offsetFaceIndARG = 52;
     uint8_t offsetFaceIndOSC = 53;
+    bool mirror = false;
 
     void LinkEasyEase(){
         eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::Anger), NukudeFace::Anger, 15, 0.0f, 1.0f);
@@ -314,104 +315,119 @@ public:
     Object3D* GetObject(){
         return pM.GetObject();
     }
+    
+    void SetCameraMirror(bool mirror){
+        this->mirror = mirror;
+    }
 
     void Update(float ratio) override {
-        pM.Reset();
+        if(!mirror){
+            gradientSpectrum[0].SetColor(255, 175, 175);
+            gradientSpectrum[1].SetColor(255, 55, 225);
+            gradientMat.UpdateRGB();
 
-        float xOffset = fGenMatXMove.Update();
-        float yOffset = fGenMatYMove.Update();
-        
-        Menu::Update(ratio);
+            pM.Reset();
 
-        //Menu::SetSize(Vector2D(280, 60));
-        //Menu::SetPositionOffset(Vector2D(0.0f, -30.0f * yOffset));
-        
-        //glitchX.SetRatio(fGenBlur.Update());
-        magnet.SetRatio(ratio);
-        fisheye.SetRatio(fGenBlur.Update());
-        blurH.SetRatio(fGenBlur.Update());
-        blurV.SetRatio(fGenBlur.Update());
-        blurR.SetRatio(fGenBlur.Update());
-        phaseX.SetRatio(fGenBlur.Update());
-        phaseY.SetRatio(fGenBlur.Update());
-        phaseR.SetRatio(fGenBlur.Update());
-        shiftR.SetRatio(fGenBlur.Update());
+            float xOffset = fGenMatXMove.Update();
+            float yOffset = fGenMatYMove.Update();
+            
+            Menu::Update(ratio);
 
-        SetMaterialColor();
+            //Menu::SetSize(Vector2D(280, 60));
+            //Menu::SetPositionOffset(Vector2D(0.0f, -30.0f * yOffset));
+            
+            //glitchX.SetRatio(fGenBlur.Update());
+            magnet.SetRatio(ratio);
+            fisheye.SetRatio(fGenBlur.Update());
+            blurH.SetRatio(fGenBlur.Update());
+            blurV.SetRatio(fGenBlur.Update());
+            blurR.SetRatio(fGenBlur.Update());
+            phaseX.SetRatio(fGenBlur.Update());
+            phaseY.SetRatio(fGenBlur.Update());
+            phaseR.SetRatio(fGenBlur.Update());
+            shiftR.SetRatio(fGenBlur.Update());
 
-        bool isBooped = Menu::UseBoopSensor() ? boop.isBooped() : 0;
-        uint8_t mode = Menu::GetFaceState();//change by button press
+            SetMaterialColor();
 
-        MicrophoneFourierIT::Update();
-        sA.SetHueAngle(ratio * 360.0f * 4.0f);
-        sA.SetMirrorYState(Menu::MirrorSpectrumAnalyzer());
-        sA.SetFlipYState(!Menu::MirrorSpectrumAnalyzer());
-        
-        aRG.SetRadius((xOffset + 2.0f) * 2.0f + 25.0f);
-        aRG.SetSize(Vector2D((xOffset + 2.0f) * 10.0f + 50.0f, (xOffset + 2.0f) * 10.0f + 50.0f));
-        aRG.SetHueAngle(ratio * 360.0f * 8.0f);
-        aRG.SetRotation(ratio * 360.0f * 2.0f);
-        aRG.SetPosition(Vector2D(80.0f + xOffset * 4.0f, 48.0f + yOffset * 4.0f));
+            bool isBooped = Menu::UseBoopSensor() ? boop.isBooped() : 0;
+            uint8_t mode = Menu::GetFaceState();//change by button press
 
-        oSC.SetSize(Vector2D(200.0f, 100.0f));
-        oSC.SetHueAngle(ratio * 360.0f * 8.0f);
-        oSC.SetPosition(Vector2D(100.0f, 50.0f));
-        
-        voiceDetection.SetThreshold(map(Menu::GetMicLevel(), 0, 10, 1000, 50));
+            MicrophoneFourierIT::Update();
+            sA.SetHueAngle(ratio * 360.0f * 4.0f);
+            sA.SetMirrorYState(Menu::MirrorSpectrumAnalyzer());
+            sA.SetFlipYState(!Menu::MirrorSpectrumAnalyzer());
+            
+            aRG.SetRadius((xOffset + 2.0f) * 2.0f + 25.0f);
+            aRG.SetSize(Vector2D((xOffset + 2.0f) * 10.0f + 50.0f, (xOffset + 2.0f) * 10.0f + 50.0f));
+            aRG.SetHueAngle(ratio * 360.0f * 8.0f);
+            aRG.SetRotation(ratio * 360.0f * 2.0f);
+            aRG.SetPosition(Vector2D(80.0f + xOffset * 4.0f, 48.0f + yOffset * 4.0f));
 
-        UpdateFFTVisemes();
+            oSC.SetSize(Vector2D(200.0f, 100.0f));
+            oSC.SetHueAngle(ratio * 360.0f * 8.0f);
+            oSC.SetPosition(Vector2D(100.0f, 50.0f));
+            
+            voiceDetection.SetThreshold(map(Menu::GetMicLevel(), 0, 10, 1000, 50));
 
-        if (isBooped && mode != 6){
-            Surprised();
+            UpdateFFTVisemes();
+
+            if (isBooped && mode != 6){
+                Surprised();
+            }
+            else{
+                if (mode == 0) Default();
+                else if (mode == 1) Angry();
+                else if (mode == 2) Doubt();
+                else if (mode == 3) Frown();
+                else if (mode == 4) LookUp();
+                else if (mode == 5) Sad();
+                else if (mode == 6) {
+                    aRG.Update(MicrophoneFourierIT::GetFourierFiltered());
+                    AudioReactiveGradientFace();
+                }
+                else if (mode == 7){
+                    oSC.Update(MicrophoneFourierIT::GetSamples());
+                    OscilloscopeFace();
+                }
+                else {
+                    sA.Update(MicrophoneFourierIT::GetFourierFiltered());
+                    SpectrumAnalyzerFace();
+                }
+            }
+
+            UpdateKeyFrameTracks();
+            
+            pM.SetMorphWeight(NukudeFace::BiggerNose, 1.0f);
+            pM.SetMorphWeight(NukudeFace::MoveEye, 1.0f);
+
+            eEA.Update();
+            pM.Update();
+            
+            //phaseR.SetRatio(eEA.GetValue(NukudeFace::Surprised));
+            glitchX.SetRatio(eEA.GetValue(NukudeFace::Surprised));
+
+            rainbowNoise.Update(ratio);
+            rainbowSpiral.Update(ratio);
+            materialAnimator.Update();
+            backgroundMaterial.Update();
+
+            uint8_t faceSize = Menu::GetFaceSize();
+            float scale = Menu::ShowMenu() * 0.6f + 0.4f;
+            float faceSizeOffset = faceSize * 8.0f;
+
+            objA.SetPlaneOffsetAngle(0.0f);
+            objA.SetEdgeMargin(4.0f);
+            objA.SetCameraMax(Vector2D(110.0f + faceSizeOffset, 115.0f - 115.0f * offsetFace).Multiply(scale));
+
+            objA.AlignObjects(scene.GetObjects(), 1);
+            
+            pM.GetObject()->GetTransform()->SetPosition(Vector3D(xOffset, yOffset, 0.0f));
+            pM.GetObject()->UpdateTransform();
         }
         else{
-            if (mode == 0) Default();
-            else if (mode == 1) Angry();
-            else if (mode == 2) Doubt();
-            else if (mode == 3) Frown();
-            else if (mode == 4) LookUp();
-            else if (mode == 5) Sad();
-            else if (mode == 6) {
-                aRG.Update(MicrophoneFourierIT::GetFourierFiltered());
-                AudioReactiveGradientFace();
-            }
-            else if (mode == 7){
-                oSC.Update(MicrophoneFourierIT::GetSamples());
-                OscilloscopeFace();
-            }
-            else {
-                sA.Update(MicrophoneFourierIT::GetFourierFiltered());
-                SpectrumAnalyzerFace();
-            }
+            gradientSpectrum[0].SetColor(255, 175, 175);
+            gradientSpectrum[1].SetColor(255, 55, 225);
+            gradientMat.UpdateRGB();
         }
-
-        UpdateKeyFrameTracks();
-        
-        pM.SetMorphWeight(NukudeFace::BiggerNose, 1.0f);
-        pM.SetMorphWeight(NukudeFace::MoveEye, 1.0f);
-
-        eEA.Update();
-        pM.Update();
-        
-        //phaseR.SetRatio(eEA.GetValue(NukudeFace::Surprised));
-        glitchX.SetRatio(eEA.GetValue(NukudeFace::Surprised));
-
-        rainbowNoise.Update(ratio);
-        rainbowSpiral.Update(ratio);
-        materialAnimator.Update();
-        backgroundMaterial.Update();
-
-        uint8_t faceSize = Menu::GetFaceSize();
-        float scale = Menu::ShowMenu() * 0.6f + 0.4f;
-        float faceSizeOffset = faceSize * 8.0f;
-
-        objA.SetPlaneOffsetAngle(0.0f);
-        objA.SetEdgeMargin(4.0f);
-        objA.SetCameraMax(Vector2D(110.0f + faceSizeOffset, 115.0f - 115.0f * offsetFace).Multiply(scale));
-
-        objA.AlignObjects(scene.GetObjects(), 1);
-        
-        pM.GetObject()->GetTransform()->SetPosition(Vector3D(xOffset, yOffset, 0.0f));
-        pM.GetObject()->UpdateTransform();
     }
 };

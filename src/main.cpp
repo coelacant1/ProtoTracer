@@ -9,15 +9,16 @@
 //#define WS35
 //#define WS35SPLIT
 //#define ESP32HUB75
-#define CUSTOMHUB75
+//#define CUSTOMHUB75
 //#define CUSTOMWS35
+#define CUSTOMBETAWS35
 
 //#define PRINTINFO
 
 #include <Arduino.h>
 
 uint8_t maxBrightness = 50;
-uint8_t maxAccentBrightness = 100;
+uint8_t maxAccentBrightness = 50;
 
 #ifdef ALPHARIGHT
 #include "Controllers\ProtoDRController.h"
@@ -82,13 +83,19 @@ BasilGardenAnimation animation = BasilGardenAnimation();
 #elif defined(CUSTOMWS35)
 #define WS35
 #include "Controllers\KaiborgV1D1Controller.h"
-#include "Animation\Commissions\BasilGardenAnimation.h"
+#include "Animation\Commissions\WarzoneAnimationV2.h"
 KaiborgV1D1Controller controller = KaiborgV1D1Controller(maxBrightness);
-BasilGardenAnimation animation = BasilGardenAnimation();
+Warzone2Animation animation = Warzone2Animation();
+#elif defined(CUSTOMBETAWS35)
+#define BETAWS35
+#include "Controllers\BetaProtoController.h"
+#include "Animation\BetaAnimation.h"
+BetaProtoController controller = BetaProtoController(maxBrightness, maxAccentBrightness);
+BetaAnimation animation = BetaAnimation();
 #else
 //Define your own here
 //--------------- ANIMATIONS ---------------
-#include "Animation\Test\FullScreenAnimation.h"
+//#include "Animation\Test\FullScreenAnimation.h"
 //#include "Animation\VectorFieldAnimation.h"
 //#include "Animation\CoelaBonkAnimation.h"
 //#include "Animation\SpyroAnimation.h"
@@ -105,8 +112,10 @@ BasilGardenAnimation animation = BasilGardenAnimation();
 //#define HUB75
 #define WS35SPLIT
 
+#include "Animation\Commissions\SammyAnimation.h"
 KaiborgV1D1Controller controller = KaiborgV1D1Controller(maxBrightness);
-FullScreenAnimation animation = FullScreenAnimation();
+SammyAnimation animation = SammyAnimation();
+
 #endif
 
 float FreeMem(){
@@ -180,7 +189,7 @@ void loop() {
     animation.UpdateTime(ratio);
     controller.RenderCamera(animation.GetScene(), 1);
     #elif defined(BETAWS35)
-    controller.SetAccentBrightness(animation.GetAccentBrightness() * 25 + 5);
+    controller.SetAccentBrightness(powf(animation.GetAccentBrightness() + 3, 2) / 3);
     controller.SetBrightness(powf(animation.GetBrightness() + 3, 2) / 3);
 
     animation.UpdateTime(ratio);

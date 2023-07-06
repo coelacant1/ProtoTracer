@@ -8,7 +8,8 @@
 #include "..\Morph\NukudeFace.h"
 #include "..\Render\Scene.h"
 #include "..\Signals\FunctionGenerator.h"
-#include "..\Menu\Menu.h"
+#include "..\Menu\SingleButtonMenu.h"
+//#include "..\Menu\NeoTrellisMenu.h"
 #include "..\Sensors\APDS9960.h"
 
 #include "..\Materials\Animated\RainbowNoise.h"

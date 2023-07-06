@@ -1,46 +1,46 @@
 #pragma once
 
-#include "Animation.h"
-#include "KeyFrameTrack.h"
-#include "EasyEaseAnimator.h"
-#include "..\Objects\Background.h"
-#include "..\Objects\LEDStripBackground.h"
-#include "..\Morph\NukudeFlat.h"
-#include "..\Render\Scene.h"
-#include "..\Signals\FunctionGenerator.h"
-#include "..\Menu\SingleButtonMenu.h"
-//#include "..\Menu\NeoTrellisMenu.h"
-#include "..\Sensors\APDS9960.h"
+#include "..\Animation.h"
+#include "..\KeyFrameTrack.h"
+#include "..\EasyEaseAnimator.h"
+#include "..\..\Objects\Background.h"
+#include "..\..\Objects\LEDStripBackground.h"
+#include "..\..\Morph\NukudeFlat.h"
+#include "..\..\Render\Scene.h"
+#include "..\..\Signals\FunctionGenerator.h"
+#include "..\..\Menu\SingleButtonMenu.h"
+//#include "..\..\Menu\NeoTrellisMenu.h"
+#include "..\..\Sensors\APDS9960.h"
 
-#include "..\Materials\Animated\RainbowNoise.h"
-#include "..\Materials\Animated\RainbowSpiral.h"
-#include "..\Materials\Animated\SpectrumAnalyzer.h"
-#include "..\Materials\Animated\AudioReactiveGradient.h"
-#include "..\Materials\Animated\Oscilloscope.h"
+#include "..\..\Materials\Animated\RainbowNoise.h"
+#include "..\..\Materials\Animated\RainbowSpiral.h"
+#include "..\..\Materials\Animated\SpectrumAnalyzer.h"
+#include "..\..\Materials\Animated\AudioReactiveGradient.h"
+#include "..\..\Materials\Animated\Oscilloscope.h"
 
-#include "..\Materials\MaterialAnimator.h"
+#include "..\..\Materials\MaterialAnimator.h"
 
-#include "AnimationTracks\BlinkTrack.h"
+#include "..\AnimationTracks\BlinkTrack.h"
 
-#include "..\Signals\FFTVoiceDetection.h"
+#include "..\..\Signals\FFTVoiceDetection.h"
 
-#include "..\Sensors\MicrophoneFourier_MAX9814.h"
+#include "..\..\Sensors\MicrophoneFourier_MAX9814.h"
 
-#include "..\Render\ObjectAlign.h"
+#include "..\..\Render\ObjectAlign.h"
 
-#include "..\Screenspace\GlitchX.h"
-#include "..\Screenspace\Fisheye.h"
-#include "..\Screenspace\HorizontalBlur.h"
-#include "..\Screenspace\PhaseOffsetX.h"
-#include "..\Screenspace\PhaseOffsetY.h"
-#include "..\Screenspace\PhaseOffsetR.h"
-#include "..\Screenspace\Magnet.h"
-#include "..\Screenspace\Overflow.h"
-#include "..\Screenspace\RadialBlur.h"
-#include "..\Screenspace\ShiftR.h"
-#include "..\Screenspace\VerticalBlur.h"
+#include "..\..\Screenspace\GlitchX.h"
+#include "..\..\Screenspace\Fisheye.h"
+#include "..\..\Screenspace\HorizontalBlur.h"
+#include "..\..\Screenspace\PhaseOffsetX.h"
+#include "..\..\Screenspace\PhaseOffsetY.h"
+#include "..\..\Screenspace\PhaseOffsetR.h"
+#include "..\..\Screenspace\Magnet.h"
+#include "..\..\Screenspace\Overflow.h"
+#include "..\..\Screenspace\RadialBlur.h"
+#include "..\..\Screenspace\ShiftR.h"
+#include "..\..\Screenspace\VerticalBlur.h"
 
-class ProtogenKitFaceAnimation : public Animation<3> {
+class SammyAnimation : public Animation<3> {
 private:
     static const uint8_t faceCount = 9;
     NukudeFace pM;
@@ -51,16 +51,15 @@ private:
     //Materials
     RainbowNoise rainbowNoise;
     RainbowSpiral rainbowSpiral;
+    SimpleMaterial warmWhite = SimpleMaterial(RGBColor(247, 237, 237));
     SimpleMaterial redMaterial = SimpleMaterial(RGBColor(255, 0, 0));
-    SimpleMaterial orangeMaterial = SimpleMaterial(RGBColor(255, 165, 0));
-    SimpleMaterial whiteMaterial = SimpleMaterial(RGBColor(255, 255, 255));
-    SimpleMaterial greenMaterial = SimpleMaterial(RGBColor(0, 255, 0));
     SimpleMaterial blueMaterial = SimpleMaterial(RGBColor(0, 0, 255));
-    SimpleMaterial yellowMaterial = SimpleMaterial(RGBColor(255, 255, 0));
-    SimpleMaterial purpleMaterial = SimpleMaterial(RGBColor(255, 0, 255));
     
-    RGBColor gradientSpectrum[2] = {RGBColor(58, 254, 80), RGBColor(29, 128, 20)};
-    GradientMaterial<2> gradientMat = GradientMaterial<2>(gradientSpectrum, 350.0f, false);
+    RGBColor tealPinkSpectrum[2] = {RGBColor(250, 105, 206), RGBColor(5, 225, 245)};
+    GradientMaterial<2> tealPinkMat = GradientMaterial<2>(tealPinkSpectrum, 250.0f, false);
+
+    RGBColor heterochromiaSpectrum[2] = {RGBColor(58, 254, 80), RGBColor(29, 128, 20)};
+    GradientMaterial<2> heterochromiaMat = GradientMaterial<2>(heterochromiaSpectrum, 350.0f, false);
     
     MaterialAnimator<10> materialAnimator;
     MaterialAnimator<4> backgroundMaterial;
@@ -84,6 +83,8 @@ private:
     FunctionGenerator fGenMatRMenu = FunctionGenerator(FunctionGenerator::Sine, -5.0f, 5.0f, 1.7f);
 
     FunctionGenerator fGenBlur = FunctionGenerator(FunctionGenerator::Sine, 0.0f, 1.0f, 1.5f);
+
+    FunctionGenerator fGenSpiral = FunctionGenerator(FunctionGenerator::Sawtooth, 0.0f, 1.0f, 4.0f);
 
     APDS9960 boop;
 
@@ -111,6 +112,7 @@ private:
     uint8_t offsetFaceIndSA = 51;
     uint8_t offsetFaceIndARG = 52;
     uint8_t offsetFaceIndOSC = 53;
+    bool mirror = false;
 
     void LinkEasyEase(){
         eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::Anger), NukudeFace::Anger, 15, 0.0f, 1.0f);
@@ -158,12 +160,10 @@ private:
     }
 
     void SetMaterialLayers(){
-        materialAnimator.SetBaseMaterial(Material::Add, &gradientMat);
-        materialAnimator.AddMaterial(Material::Replace, &orangeMaterial, 40, 0.0f, 1.0f);//layer 1
-        materialAnimator.AddMaterial(Material::Replace, &whiteMaterial, 40, 0.0f, 1.0f);//layer 2
-        materialAnimator.AddMaterial(Material::Replace, &greenMaterial, 40, 0.0f, 1.0f);//layer 3
-        materialAnimator.AddMaterial(Material::Replace, &yellowMaterial, 40, 0.0f, 1.0f);//layer 4
-        materialAnimator.AddMaterial(Material::Replace, &purpleMaterial, 40, 0.0f, 1.0f);//layer 5
+        materialAnimator.SetBaseMaterial(Material::Add, &warmWhite);
+        materialAnimator.AddMaterial(Material::Replace, &warmWhite, 40, 0.0f, 1.0f);//layer 1
+        materialAnimator.AddMaterial(Material::Replace, &tealPinkMat, 40, 0.0f, 1.0f);//layer 2
+        materialAnimator.AddMaterial(Material::Replace, &heterochromiaMat, 40, 0.0f, 1.0f);//layer 3
         materialAnimator.AddMaterial(Material::Replace, &redMaterial, 40, 0.0f, 1.0f);//layer 6
         materialAnimator.AddMaterial(Material::Replace, &blueMaterial, 40, 0.0f, 1.0f);//layer 7
         materialAnimator.AddMaterial(Material::Replace, &rainbowSpiral, 40, 0.0f, 1.0f);//layer 8
@@ -260,13 +260,13 @@ private:
 
     void SetMaterialColor(){
         switch(Menu::GetFaceColor()){
-            case 1: materialAnimator.AddMaterialFrame(redMaterial, 0.8f); break;
-            case 2: materialAnimator.AddMaterialFrame(orangeMaterial, 0.8f); break;
-            case 3: materialAnimator.AddMaterialFrame(whiteMaterial, 0.8f); break;
-            case 4: materialAnimator.AddMaterialFrame(greenMaterial, 0.8f); break;
-            case 5: materialAnimator.AddMaterialFrame(blueMaterial, 0.8f); break;
-            case 6: materialAnimator.AddMaterialFrame(yellowMaterial, 0.8f); break;
-            case 7: materialAnimator.AddMaterialFrame(purpleMaterial, 0.8f); break;
+            case 1: materialAnimator.AddMaterialFrame(warmWhite, 1.0f); break;
+            case 2: materialAnimator.AddMaterialFrame(tealPinkMat, 0.8f); break;
+            case 3: materialAnimator.AddMaterialFrame(heterochromiaMat, 0.8f); break;
+            case 4: materialAnimator.AddMaterialFrame(rainbowSpiral, 0.3f); break;
+            case 5: materialAnimator.AddMaterialFrame(rainbowSpiral, 0.8f); break;
+            case 6: materialAnimator.AddMaterialFrame(redMaterial, 0.8f); break;
+            case 7: materialAnimator.AddMaterialFrame(blueMaterial, 0.8f); break;
             case 8: materialAnimator.AddMaterialFrame(rainbowSpiral, 0.8f); break;
             case 9: materialAnimator.AddMaterialFrame(rainbowNoise, 0.8f); break;
             default: break;
@@ -274,7 +274,7 @@ private:
     }
 
 public:
-    ProtogenKitFaceAnimation() {
+    SammyAnimation() {
         scene.AddObject(pM.GetObject());
         scene.AddObject(background.GetObject());
         scene.AddObject(ledStripBackground.GetObject());
@@ -302,11 +302,11 @@ public:
 
     uint8_t GetAccentBrightness(){
         return Menu::GetAccentBrightness();
-    };
+    }
 
     uint8_t GetBrightness(){
         return Menu::GetBrightness();
-    };
+    }
 
     void FadeIn(float stepRatio) override {}
     void FadeOut(float stepRatio) override {}
@@ -314,104 +314,119 @@ public:
     Object3D* GetObject(){
         return pM.GetObject();
     }
+    
+    void SetCameraMirror(bool mirror){
+        this->mirror = mirror;
+    }
 
     void Update(float ratio) override {
-        pM.Reset();
+        if(!mirror){
+            heterochromiaSpectrum[0].SetColor(0, 191, 255);
+            heterochromiaSpectrum[1].SetColor(0, 191, 255);
+            heterochromiaMat.UpdateRGB();
 
-        float xOffset = fGenMatXMove.Update();
-        float yOffset = fGenMatYMove.Update();
-        
-        Menu::Update(ratio);
+            pM.Reset();
 
-        //Menu::SetSize(Vector2D(280, 60));
-        //Menu::SetPositionOffset(Vector2D(0.0f, -30.0f * yOffset));
-        
-        //glitchX.SetRatio(fGenBlur.Update());
-        magnet.SetRatio(ratio);
-        fisheye.SetRatio(fGenBlur.Update());
-        blurH.SetRatio(fGenBlur.Update());
-        blurV.SetRatio(fGenBlur.Update());
-        blurR.SetRatio(fGenBlur.Update());
-        phaseX.SetRatio(fGenBlur.Update());
-        phaseY.SetRatio(fGenBlur.Update());
-        phaseR.SetRatio(fGenBlur.Update());
-        shiftR.SetRatio(fGenBlur.Update());
+            float xOffset = fGenMatXMove.Update();
+            float yOffset = fGenMatYMove.Update();
+            
+            Menu::Update(ratio);
 
-        SetMaterialColor();
+            //Menu::SetSize(Vector2D(280, 60));
+            //Menu::SetPositionOffset(Vector2D(0.0f, -30.0f * yOffset));
+            
+            //glitchX.SetRatio(fGenBlur.Update());
+            magnet.SetRatio(ratio);
+            fisheye.SetRatio(fGenBlur.Update());
+            blurH.SetRatio(fGenBlur.Update());
+            blurV.SetRatio(fGenBlur.Update());
+            blurR.SetRatio(fGenBlur.Update());
+            phaseX.SetRatio(fGenBlur.Update());
+            phaseY.SetRatio(fGenBlur.Update());
+            phaseR.SetRatio(fGenBlur.Update());
+            shiftR.SetRatio(fGenBlur.Update());
 
-        bool isBooped = Menu::UseBoopSensor() ? boop.isBooped() : 0;
-        uint8_t mode = Menu::GetFaceState();//change by button press
+            SetMaterialColor();
 
-        MicrophoneFourierIT::Update();
-        sA.SetHueAngle(ratio * 360.0f * 4.0f);
-        sA.SetMirrorYState(Menu::MirrorSpectrumAnalyzer());
-        sA.SetFlipYState(!Menu::MirrorSpectrumAnalyzer());
-        
-        aRG.SetRadius((xOffset + 2.0f) * 2.0f + 25.0f);
-        aRG.SetSize(Vector2D((xOffset + 2.0f) * 10.0f + 50.0f, (xOffset + 2.0f) * 10.0f + 50.0f));
-        aRG.SetHueAngle(ratio * 360.0f * 8.0f);
-        aRG.SetRotation(ratio * 360.0f * 2.0f);
-        aRG.SetPosition(Vector2D(80.0f + xOffset * 4.0f, 48.0f + yOffset * 4.0f));
+            bool isBooped = Menu::UseBoopSensor() ? boop.isBooped() : 0;
+            uint8_t mode = Menu::GetFaceState();//change by button press
 
-        oSC.SetSize(Vector2D(200.0f, 100.0f));
-        oSC.SetHueAngle(ratio * 360.0f * 8.0f);
-        oSC.SetPosition(Vector2D(100.0f, 50.0f));
-        
-        voiceDetection.SetThreshold(map(Menu::GetMicLevel(), 0, 10, 1000, 50));
+            MicrophoneFourierIT::Update();
+            sA.SetHueAngle(ratio * 360.0f * 4.0f);
+            sA.SetMirrorYState(Menu::MirrorSpectrumAnalyzer());
+            sA.SetFlipYState(!Menu::MirrorSpectrumAnalyzer());
+            
+            aRG.SetRadius((xOffset + 2.0f) * 2.0f + 25.0f);
+            aRG.SetSize(Vector2D((xOffset + 2.0f) * 10.0f + 50.0f, (xOffset + 2.0f) * 10.0f + 50.0f));
+            aRG.SetHueAngle(ratio * 360.0f * 8.0f);
+            aRG.SetRotation(ratio * 360.0f * 2.0f);
+            aRG.SetPosition(Vector2D(80.0f + xOffset * 4.0f, 48.0f + yOffset * 4.0f));
 
-        UpdateFFTVisemes();
+            oSC.SetSize(Vector2D(200.0f, 100.0f));
+            oSC.SetHueAngle(ratio * 360.0f * 8.0f);
+            oSC.SetPosition(Vector2D(100.0f, 50.0f));
+            
+            voiceDetection.SetThreshold(map(Menu::GetMicLevel(), 0, 10, 1000, 50));
 
-        if (isBooped && mode != 6){
-            Surprised();
+            UpdateFFTVisemes();
+
+            if (isBooped && mode != 6){
+                Surprised();
+            }
+            else{
+                if (mode == 0) Default();
+                else if (mode == 1) Angry();
+                else if (mode == 2) Doubt();
+                else if (mode == 3) Frown();
+                else if (mode == 4) LookUp();
+                else if (mode == 5) Sad();
+                else if (mode == 6) {
+                    aRG.Update(MicrophoneFourierIT::GetFourierFiltered());
+                    AudioReactiveGradientFace();
+                }
+                else if (mode == 7){
+                    oSC.Update(MicrophoneFourierIT::GetSamples());
+                    OscilloscopeFace();
+                }
+                else {
+                    sA.Update(MicrophoneFourierIT::GetFourierFiltered());
+                    SpectrumAnalyzerFace();
+                }
+            }
+
+            UpdateKeyFrameTracks();
+            
+            pM.SetMorphWeight(NukudeFace::BiggerNose, 1.0f);
+            pM.SetMorphWeight(NukudeFace::MoveEye, 1.0f);
+
+            eEA.Update();
+            pM.Update();
+            
+            //phaseR.SetRatio(eEA.GetValue(NukudeFace::Surprised));
+            //glitchX.SetRatio(eEA.GetValue(NukudeFace::Surprised));
+
+            rainbowNoise.Update(ratio);
+            rainbowSpiral.Update(fGenSpiral.Update());
+            materialAnimator.Update();
+            backgroundMaterial.Update();
+
+            uint8_t faceSize = Menu::GetFaceSize();
+            float scale = Menu::ShowMenu() * 0.6f + 0.4f;
+            float faceSizeOffset = faceSize * 8.0f;
+
+            objA.SetPlaneOffsetAngle(0.0f);
+            objA.SetEdgeMargin(4.0f);
+            objA.SetCameraMax(Vector2D(110.0f + faceSizeOffset, 115.0f - 115.0f * offsetFace).Multiply(scale));
+
+            objA.AlignObjects(scene.GetObjects(), 1);
+            
+            pM.GetObject()->GetTransform()->SetPosition(Vector3D(xOffset, yOffset, 0.0f));
+            pM.GetObject()->UpdateTransform();
         }
         else{
-            if (mode == 0) Default();
-            else if (mode == 1) Angry();
-            else if (mode == 2) Doubt();
-            else if (mode == 3) Frown();
-            else if (mode == 4) LookUp();
-            else if (mode == 5) Sad();
-            else if (mode == 6) {
-                aRG.Update(MicrophoneFourierIT::GetFourierFiltered());
-                AudioReactiveGradientFace();
-            }
-            else if (mode == 7){
-                oSC.Update(MicrophoneFourierIT::GetSamples());
-                OscilloscopeFace();
-            }
-            else {
-                sA.Update(MicrophoneFourierIT::GetFourierFiltered());
-                SpectrumAnalyzerFace();
-            }
+            heterochromiaSpectrum[0].SetColor(255, 165, 0);
+            heterochromiaSpectrum[1].SetColor(255, 165, 0);
+            heterochromiaMat.UpdateRGB();
         }
-
-        UpdateKeyFrameTracks();
-        
-        pM.SetMorphWeight(NukudeFace::BiggerNose, 1.0f);
-        pM.SetMorphWeight(NukudeFace::MoveEye, 1.0f);
-
-        eEA.Update();
-        pM.Update();
-        
-        //phaseR.SetRatio(eEA.GetValue(NukudeFace::Surprised));
-        glitchX.SetRatio(eEA.GetValue(NukudeFace::Surprised));
-
-        rainbowNoise.Update(ratio);
-        rainbowSpiral.Update(ratio);
-        materialAnimator.Update();
-        backgroundMaterial.Update();
-
-        uint8_t faceSize = Menu::GetFaceSize();
-        float scale = Menu::ShowMenu() * 0.6f + 0.4f;
-        float faceSizeOffset = faceSize * 8.0f;
-
-        objA.SetPlaneOffsetAngle(0.0f);
-        objA.SetEdgeMargin(4.0f);
-        objA.SetCameraMax(Vector2D(110.0f + faceSizeOffset, 115.0f - 115.0f * offsetFace).Multiply(scale));
-
-        objA.AlignObjects(scene.GetObjects(), 1);
-        
-        pM.GetObject()->GetTransform()->SetPosition(Vector3D(xOffset, yOffset, 0.0f));
-        pM.GetObject()->UpdateTransform();
     }
 };

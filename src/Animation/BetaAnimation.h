@@ -3,41 +3,52 @@
 #include "Animation.h"
 #include "KeyFrameTrack.h"
 #include "EasyEaseAnimator.h"
-//#include "..\Morph\NukudeFace.h"
-#include "..\Morph\NukudeFace.h"
-#include "..\Render\Scene.h"
-#include "..\Signals\FunctionGenerator.h"
 #include "..\Objects\Background.h"
+#include "..\Objects\LEDStripBackground.h"
+#include "..\Morph\BetaFront.h"
+#include "..\Morph\BetaRear.h"
 #include "..\Render\Scene.h"
-#include "..\Signals\FFTVoiceDetection.h"
 #include "..\Signals\FunctionGenerator.h"
 #include "..\Menu\SingleButtonMenu.h"
+//#include "..\Menu\NeoTrellisMenu.h"
+#include "..\Sensors\APDS9960.h"
 
 #include "..\Materials\Animated\RainbowNoise.h"
 #include "..\Materials\Animated\RainbowSpiral.h"
-#include "..\Materials\MaterialAnimator.h"
-
 #include "..\Materials\Animated\SpectrumAnalyzer.h"
 #include "..\Materials\Animated\AudioReactiveGradient.h"
 #include "..\Materials\Animated\Oscilloscope.h"
 
+#include "..\Materials\MaterialAnimator.h"
+
 #include "AnimationTracks\BlinkTrack.h"
 
-#include "..\Sensors\APDS9960.h"
+#include "..\Signals\FFTVoiceDetection.h"
+
 #include "..\Sensors\MicrophoneFourier_MAX9814.h"
 
+#include "..\Render\ObjectAlign.h"
+
+#include "..\Screenspace\GlitchX.h"
+#include "..\Screenspace\Fisheye.h"
 #include "..\Screenspace\HorizontalBlur.h"
 #include "..\Screenspace\PhaseOffsetX.h"
 #include "..\Screenspace\PhaseOffsetY.h"
 #include "..\Screenspace\PhaseOffsetR.h"
+#include "..\Screenspace\Magnet.h"
+#include "..\Screenspace\Overflow.h"
 #include "..\Screenspace\RadialBlur.h"
+#include "..\Screenspace\ShiftR.h"
 #include "..\Screenspace\VerticalBlur.h"
 
-class BetaAnimation : public Animation<2>{
+class BetaAnimation : public Animation<4> {
 private:
-    NukudeFace pM;
+    static const uint8_t faceCount = 9;
+    BetaFront pM;
+    BetaRear rear;
     Background background;
-    EasyEaseAnimator<20> eEA = EasyEaseAnimator<20>(EasyEaseInterpolation::Overshoot, 1.0f, 0.35f);
+    LEDStripBackground ledStripBackground;
+    EasyEaseAnimator<25> eEA = EasyEaseAnimator<25>(EasyEaseInterpolation::Overshoot, 1.0f, 0.35f);
     
     //Materials
     RainbowNoise rainbowNoise;
@@ -50,11 +61,11 @@ private:
     SimpleMaterial yellowMaterial = SimpleMaterial(RGBColor(255, 255, 0));
     SimpleMaterial purpleMaterial = SimpleMaterial(RGBColor(255, 0, 255));
     
-    RGBColor gradientSpectrum[2] = {RGBColor(5, 162, 232), RGBColor(10, 170, 255)};
-    GradientMaterial<2> gradientMat = GradientMaterial<2>(gradientSpectrum, 350.0f, false);
+    RGBColor gradientSpectrum[3] = {RGBColor(255, 255, 0), RGBColor(0, 255, 255), RGBColor(255, 0, 255)};
+    GradientMaterial<3> gradientMat = GradientMaterial<3>(gradientSpectrum, 450.0f, false);
     
     MaterialAnimator<10> materialAnimator;
-    MaterialAnimator<3> backgroundMaterial;
+    MaterialAnimator<4> backgroundMaterial;
     
     SpectrumAnalyzer sA = SpectrumAnalyzer(Vector2D(200, 100), Vector2D(100, 50), true, true); 
     AudioReactiveGradient aRG = AudioReactiveGradient(Vector2D(160, 160), Vector2D(0, 0), true, true); 
@@ -76,16 +87,29 @@ private:
 
     FunctionGenerator fGenBlur = FunctionGenerator(FunctionGenerator::Sine, 0.0f, 1.0f, 1.5f);
 
+    KeyFrameTrack<1, 10> botFinLR1 = KeyFrameTrack<1, 10>(0.0f, 1.0f, KeyFrameInterpolation::Cosine);
+    KeyFrameTrack<1, 10> botFinLR2 = KeyFrameTrack<1, 10>(0.0f, 1.0f, KeyFrameInterpolation::Cosine);
+    KeyFrameTrack<1, 10> botFinLR3 = KeyFrameTrack<1, 10>(0.0f, 1.0f, KeyFrameInterpolation::Cosine);
+    KeyFrameTrack<1, 10> botFinLR4 = KeyFrameTrack<1, 10>(0.0f, 1.0f, KeyFrameInterpolation::Cosine);
+    KeyFrameTrack<1, 10> botFinLR5 = KeyFrameTrack<1, 10>(0.0f, 1.0f, KeyFrameInterpolation::Cosine);
+
     APDS9960 boop;
 
     FFTVoiceDetection<128> voiceDetection;
+
+    ObjectAlign objA = ObjectAlign(Vector2D(0.0f, 0.0f), Vector2D(189.0f, 93.0f), Quaternion());
     
-    HorizontalBlur blurH = HorizontalBlur(20);
-    VerticalBlur blurV = VerticalBlur(20);
+    Fisheye fisheye = Fisheye();
+    GlitchX glitchX = GlitchX(30);
+    HorizontalBlur blurH = HorizontalBlur(8);
+    VerticalBlur blurV = VerticalBlur(8);
+    Magnet magnet = Magnet();
     RadialBlur blurR = RadialBlur(8);
-    PhaseOffsetX phaseX = PhaseOffsetX(20);
-    PhaseOffsetY phaseY = PhaseOffsetY(20);
+    PhaseOffsetX phaseX = PhaseOffsetX(8);
+    PhaseOffsetY phaseY = PhaseOffsetY(8);
     PhaseOffsetR phaseR = PhaseOffsetR(8);
+    ShiftR shiftR = ShiftR(8);
+    Overflow overflow = Overflow(8);
 
     float offsetFace = 0.0f;
     float offsetFaceSA = 0.0f;
@@ -97,23 +121,25 @@ private:
     uint8_t offsetFaceIndOSC = 53;
 
     void LinkEasyEase(){
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::Anger), NukudeFace::Anger, 15, 0.0f, 1.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::Sadness), NukudeFace::Sadness, 50, 0.0f, 1.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::Surprised), NukudeFace::Surprised, 10, 0.0f, 1.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::Doubt), NukudeFace::Doubt, 25, 0.0f, 1.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::Frown), NukudeFace::Frown, 45, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(BetaFront::BlushEye), BetaFront::BlushEye, 40, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(BetaFront::HideBlush), BetaFront::HideBlush, 10, 1.0f, 0.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(BetaFront::HideEyeBrow), BetaFront::HideEyeBrow, 10, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(BetaFront::HideSecondEye), BetaFront::HideSecondEye, 10, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(BetaFront::OwOMouth), BetaFront::OwOMouth, 60, 0.0f, 1.0f);
 
-        //eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_ee), NukudeFace::vrc_v_ee, 2, 0.0f, 1.0f);
-        //eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_ih), NukudeFace::vrc_v_ih, 2, 0.0f, 1.0f);
-        //eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_dd), NukudeFace::vrc_v_dd, 2, 0.0f, 1.0f);
-        //eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_rr), NukudeFace::vrc_v_rr, 2, 0.0f, 1.0f);
-        //eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_ch), NukudeFace::vrc_v_ch, 2, 0.0f, 1.0f);
-        //eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_aa), NukudeFace::vrc_v_aa, 2, 0.0f, 1.0f);
-        //eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_oh), NukudeFace::vrc_v_oh, 2, 0.0f, 1.0f);
-        //eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::vrc_v_ss), NukudeFace::vrc_v_ss, 2, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(BetaFront::SadEye), BetaFront::SadEye, 70, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(BetaFront::SadEyeBrow), BetaFront::SadEyeBrow, 80, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(BetaFront::SadMouth), BetaFront::SadMouth, 90, 0.0f, 1.0f);
+
+        eEA.AddParameter(pM.GetMorphWeightReference(BetaFront::FlatMouth), BetaFront::FlatMouth, 50, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(BetaFront::DeadEye), BetaFront::DeadEye, 1, 0.0f, 1.0f);
+
+        eEA.AddParameter(pM.GetMorphWeightReference(BetaFront::HeartEye), BetaFront::HeartEye, 30, 0.0f, 1.0f);
         
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::HideBlush), NukudeFace::HideBlush, 30, 1.0f, 0.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(NukudeFace::HideBlush), NukudeFace::HideBlush, 30, 1.0f, 0.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(BetaFront::AlphaGenCircle), BetaFront::AlphaGenCircle, 90, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(BetaFront::HideAll), BetaFront::HideAll, 90, 0.0f, 1.0f);
+
+        eEA.AddParameter(pM.GetMorphWeightReference(BetaFront::AngryEyeMouth), BetaFront::AngryEyeMouth, 90, 0.0f, 1.0f);
 
         eEA.AddParameter(&offsetFace, offsetFaceInd, 40, 0.0f, 1.0f);
         eEA.AddParameter(&offsetFaceSA, offsetFaceIndSA, 40, 0.0f, 1.0f);
@@ -122,25 +148,37 @@ private:
     }
 
     void LinkParameters(){
-        //blink.AddParameter(pM.GetMorphWeightReference(NukudeFace::Blink));
+        blink.AddParameter(pM.GetMorphWeightReference(BetaFront::ClosedEye));
+        
+        botFinLR1.AddParameter(rear.GetMorphWeightReference(BetaRear::Move1));
+        botFinLR2.AddParameter(rear.GetMorphWeightReference(BetaRear::Move2));
+        botFinLR3.AddParameter(rear.GetMorphWeightReference(BetaRear::Move3));
+        botFinLR4.AddParameter(rear.GetMorphWeightReference(BetaRear::Move4));
+        botFinLR5.AddParameter(rear.GetMorphWeightReference(BetaRear::Move5));
     }
 
     void ChangeInterpolationMethods(){
-        eEA.SetInterpolationMethod(NukudeFace::HideBlush, EasyEaseInterpolation::Cosine);
-        eEA.SetInterpolationMethod(NukudeFace::Sadness, EasyEaseInterpolation::Cosine);
+        eEA.SetInterpolationMethod(BetaFront::HideBlush, EasyEaseInterpolation::Cosine);
+        eEA.SetInterpolationMethod(BetaFront::SadEye, EasyEaseInterpolation::Cosine);
+        eEA.SetInterpolationMethod(BetaFront::SadEyeBrow, EasyEaseInterpolation::Cosine);
+        eEA.SetInterpolationMethod(BetaFront::SadMouth, EasyEaseInterpolation::Cosine);
+
+        eEA.SetInterpolationMethod(BetaFront::HideEyeBrow, EasyEaseInterpolation::Cosine);
+        eEA.SetInterpolationMethod(BetaFront::HideSecondEye, EasyEaseInterpolation::Cosine);
+        eEA.SetInterpolationMethod(BetaFront::AlphaGenCircle, EasyEaseInterpolation::Cosine);
         
-        //eEA.SetInterpolationMethod(NukudeFace::vrc_v_ee, EasyEaseInterpolation::Linear);
-        //eEA.SetInterpolationMethod(NukudeFace::vrc_v_ih, EasyEaseInterpolation::Linear);
-        //eEA.SetInterpolationMethod(NukudeFace::vrc_v_dd, EasyEaseInterpolation::Linear);
-        //eEA.SetInterpolationMethod(NukudeFace::vrc_v_rr, EasyEaseInterpolation::Linear);
-        //eEA.SetInterpolationMethod(NukudeFace::vrc_v_ch, EasyEaseInterpolation::Linear);
-        //eEA.SetInterpolationMethod(NukudeFace::vrc_v_aa, EasyEaseInterpolation::Linear);
-        //eEA.SetInterpolationMethod(NukudeFace::vrc_v_oh, EasyEaseInterpolation::Linear);
-        //eEA.SetInterpolationMethod(NukudeFace::vrc_v_ss, EasyEaseInterpolation::Linear);
+        eEA.SetInterpolationMethod(BetaFront::vrc_v_ee, EasyEaseInterpolation::Linear);
+        eEA.SetInterpolationMethod(BetaFront::vrc_v_ih, EasyEaseInterpolation::Linear);
+        eEA.SetInterpolationMethod(BetaFront::vrc_v_dd, EasyEaseInterpolation::Linear);
+        eEA.SetInterpolationMethod(BetaFront::vrc_v_rr, EasyEaseInterpolation::Linear);
+        eEA.SetInterpolationMethod(BetaFront::vrc_v_ch, EasyEaseInterpolation::Linear);
+        eEA.SetInterpolationMethod(BetaFront::vrc_v_aa, EasyEaseInterpolation::Linear);
+        eEA.SetInterpolationMethod(BetaFront::vrc_v_oh, EasyEaseInterpolation::Linear);
+        eEA.SetInterpolationMethod(BetaFront::vrc_v_ss, EasyEaseInterpolation::Linear);
     }
 
     void SetMaterialLayers(){
-        materialAnimator.SetBaseMaterial(Material::Add, &rainbowNoise);
+        materialAnimator.SetBaseMaterial(Material::Add, &gradientMat);
         materialAnimator.AddMaterial(Material::Replace, &orangeMaterial, 40, 0.0f, 1.0f);//layer 1
         materialAnimator.AddMaterial(Material::Replace, &whiteMaterial, 40, 0.0f, 1.0f);//layer 2
         materialAnimator.AddMaterial(Material::Replace, &greenMaterial, 40, 0.0f, 1.0f);//layer 3
@@ -149,7 +187,7 @@ private:
         materialAnimator.AddMaterial(Material::Replace, &redMaterial, 40, 0.0f, 1.0f);//layer 6
         materialAnimator.AddMaterial(Material::Replace, &blueMaterial, 40, 0.0f, 1.0f);//layer 7
         materialAnimator.AddMaterial(Material::Replace, &rainbowSpiral, 40, 0.0f, 1.0f);//layer 8
-        materialAnimator.AddMaterial(Material::Lighten, &gradientMat, 40, 0.0f, 1.0f);//layer 9
+        materialAnimator.AddMaterial(Material::Replace, &rainbowNoise, 40, 0.25f, 1.0f);//layer 9
 
         backgroundMaterial.SetBaseMaterial(Material::Add, Menu::GetMaterial());
         backgroundMaterial.AddMaterial(Material::Add, &sA, 20, 0.0f, 1.0f);
@@ -157,60 +195,131 @@ private:
         backgroundMaterial.AddMaterial(Material::Add, &oSC, 20, 0.0f, 1.0f);
     }
 
+    void AddBotFinKeyFrames(){
+        botFinLR1.AddKeyFrame(0.0f, 0.0f);
+        botFinLR2.AddKeyFrame(0.0f, 0.0f);
+        botFinLR3.AddKeyFrame(0.0f, 0.0f);
+        botFinLR4.AddKeyFrame(0.0f, 0.0f);
+        botFinLR5.AddKeyFrame(0.0f, 1.0f);
+
+        botFinLR1.AddKeyFrame(0.5f, 1.0f);
+        botFinLR2.AddKeyFrame(0.5f, 0.0f);
+        botFinLR3.AddKeyFrame(0.5f, 0.0f);
+        botFinLR4.AddKeyFrame(0.5f, 0.0f);
+        botFinLR5.AddKeyFrame(0.5f, 0.0f);
+
+        botFinLR1.AddKeyFrame(1.0f, 0.0f);
+        botFinLR2.AddKeyFrame(1.0f, 1.0f);
+        botFinLR3.AddKeyFrame(1.0f, 0.0f);
+        botFinLR4.AddKeyFrame(1.0f, 0.0f);
+        botFinLR5.AddKeyFrame(1.0f, 0.0f);
+
+        botFinLR1.AddKeyFrame(1.5f, 0.0f);
+        botFinLR2.AddKeyFrame(1.5f, 0.0f);
+        botFinLR3.AddKeyFrame(1.5f, 1.0f);
+        botFinLR4.AddKeyFrame(1.5f, 0.0f);
+        botFinLR5.AddKeyFrame(1.5f, 0.0f);
+
+        botFinLR1.AddKeyFrame(2.0f, 0.0f);
+        botFinLR2.AddKeyFrame(2.0f, 0.0f);
+        botFinLR3.AddKeyFrame(2.0f, 0.0f);
+        botFinLR4.AddKeyFrame(2.0f, 1.0f);
+        botFinLR5.AddKeyFrame(2.0f, 0.0f);
+        
+        botFinLR1.AddKeyFrame(2.5f, 0.0f);
+        botFinLR2.AddKeyFrame(2.5f, 0.0f);
+        botFinLR3.AddKeyFrame(2.5f, 0.0f);
+        botFinLR4.AddKeyFrame(2.5f, 0.0f);
+        botFinLR5.AddKeyFrame(2.5f, 1.0f);
+    }
+
     void UpdateKeyFrameTracks(){
+        botFinLR1.Update();
+        botFinLR2.Update();
+        botFinLR3.Update();
+        botFinLR4.Update();
+        botFinLR5.Update();
+
         blink.Update();
     }
 
     void Default(){
-        scene.DisableEffect();
+        pM.Reset();
+        blink.Play();
+
+        eEA.AddParameterFrame(BetaFront::HideSecondEye, 1.0f);
     }
 
-    void Angry(){
-        scene.SetEffect(&blurR);
-        scene.EnableEffect();
+    void OwO(){
+        blink.Pause();
+        eEA.AddParameterFrame(BetaFront::BlushEye, 1.0f);
+        eEA.AddParameterFrame(BetaFront::HideBlush, 0.0f);
+        eEA.AddParameterFrame(BetaFront::HideEyeBrow, 1.0f);
+        eEA.AddParameterFrame(BetaFront::HideSecondEye, 1.0f);
+        eEA.AddParameterFrame(BetaFront::OwOMouth, 1.0f);
 
-        eEA.AddParameterFrame(NukudeFace::Anger, 1.0f);
-        materialAnimator.AddMaterialFrame(redMaterial, 0.8f);
+        materialAnimator.AddMaterialFrame(rainbowSpiral, 0.8f);
     }
 
     void Sad(){
-        scene.DisableEffect();
-        eEA.AddParameterFrame(NukudeFace::Sadness, 1.0f);
-        eEA.AddParameterFrame(NukudeFace::Frown, 1.0f);
+        blink.Play();
+        eEA.AddParameterFrame(BetaFront::SadEye, 1.0f);
+        eEA.AddParameterFrame(BetaFront::SadEyeBrow, 1.0f);
+        eEA.AddParameterFrame(BetaFront::SadMouth, 1.0f);
+        eEA.AddParameterFrame(BetaFront::HideSecondEye, 1.0f);
+        
         materialAnimator.AddMaterialFrame(blueMaterial, 0.8f);
     }
 
-    void Surprised(){
-        scene.DisableEffect();
-        eEA.AddParameterFrame(NukudeFace::Surprised, 1.0f);
-        eEA.AddParameterFrame(NukudeFace::HideBlush, 0.0f);
+    void Dead(){
+        blink.Pause();
+        eEA.AddParameterFrame(BetaFront::FlatMouth, 1.0f);
+        eEA.AddParameterFrame(BetaFront::DeadEye, 1.0f);
+        eEA.AddParameterFrame(BetaFront::HideSecondEye, 1.0f);
+
+        materialAnimator.AddMaterialFrame(redMaterial, 0.8f);
+    }
+    
+    void Heart(){
+        blink.Pause();
+        eEA.AddParameterFrame(BetaFront::HeartEye, 1.0f);
+        eEA.AddParameterFrame(BetaFront::HideEyeBrow, 1.0f);
+        eEA.AddParameterFrame(BetaFront::OwOMouth, 1.0f);
+        eEA.AddParameterFrame(BetaFront::HideSecondEye, 1.0f);
+
         materialAnimator.AddMaterialFrame(rainbowSpiral, 0.8f);
     }
     
-    void Doubt(){
-        scene.DisableEffect();
-        eEA.AddParameterFrame(NukudeFace::Doubt, 1.0f);
-    }
-    
-    void Frown(){
-        scene.DisableEffect();
-        eEA.AddParameterFrame(NukudeFace::Frown, 1.0f);
+    void OwO2(){
+        blink.Pause();
+        eEA.AddParameterFrame(BetaFront::HideBlush, 0.0f);
+        eEA.AddParameterFrame(BetaFront::HideEyeBrow, 0.0f);
+        
+        materialAnimator.AddMaterialFrame(rainbowSpiral, 0.8f);
     }
 
-    void LookUp(){
-        scene.SetEffect(&phaseR);
-        scene.EnableEffect();
-        //eEA.AddParameterFrame(NukudeFace::LookUp, 1.0f);
+    void AlphaGenCircle(){
+        blink.Play();
+        eEA.AddParameterFrame(BetaFront::HideBlush, 0.0f);
+        eEA.AddParameterFrame(BetaFront::HideEyeBrow, 0.0f);
+        eEA.AddParameterFrame(BetaFront::AlphaGenCircle, 1.0f);
+
+        pM.SetMorphWeight(BetaFront::HideSecondEye, 0.0f);
     }
 
-    void LookDown(){
-        scene.SetEffect(&phaseX);
-        scene.EnableEffect();
-        //eEA.AddParameterFrame(NukudeFace::LookDown, 1.0f);
+    void AngryFace(){
+        blink.Play();
+        pM.SetMorphWeight(BetaFront::HideSecondEye, 1.0f);
+        
+        eEA.AddParameterFrame(BetaFront::HideBlush, 1.0f);
+        eEA.AddParameterFrame(BetaFront::HideEyeBrow, 1.0f);
+        eEA.AddParameterFrame(BetaFront::AngryEyeMouth, 1.0f);
+        pM.SetMorphWeight(BetaFront::HideSecondEye, 0.0f);
+        
+        materialAnimator.AddMaterialFrame(redMaterial, 0.8f);
     }
 
     void SpectrumAnalyzerFace(){
-        scene.DisableEffect();
         eEA.AddParameterFrame(offsetFaceInd, 1.0f);
         eEA.AddParameterFrame(offsetFaceIndSA, 1.0f);
 
@@ -218,7 +327,6 @@ private:
     }
 
     void AudioReactiveGradientFace(){
-        scene.DisableEffect();
         eEA.AddParameterFrame(offsetFaceInd, 1.0f);
         eEA.AddParameterFrame(offsetFaceIndARG, 1.0f);
 
@@ -226,7 +334,6 @@ private:
     }
 
     void OscilloscopeFace(){
-        scene.DisableEffect();
         eEA.AddParameterFrame(offsetFaceInd, 1.0f);
         eEA.AddParameterFrame(offsetFaceIndOSC, 1.0f);
 
@@ -235,18 +342,18 @@ private:
 
     void UpdateFFTVisemes(){
         if(Menu::UseMicrophone()){
-            //eEA.AddParameterFrame(NukudeFace::vrc_v_ss, MicrophoneFourierIT::GetCurrentMagnitude() / 2.0f);
+            eEA.AddParameterFrame(BetaFront::vrc_v_ss, MicrophoneFourierIT::GetCurrentMagnitude() / 2.0f);
 
             if(MicrophoneFourierIT::GetCurrentMagnitude() > 0.05f){
                 voiceDetection.Update(MicrophoneFourierIT::GetFourierFiltered(), MicrophoneFourierIT::GetSampleRate());
         
-                //eEA.AddParameterFrame(NukudeFace::vrc_v_ee, voiceDetection.GetViseme(voiceDetection.EE));
-                //eEA.AddParameterFrame(NukudeFace::vrc_v_ih, voiceDetection.GetViseme(voiceDetection.AH));
-                //eEA.AddParameterFrame(NukudeFace::vrc_v_dd, voiceDetection.GetViseme(voiceDetection.UH));
-                //eEA.AddParameterFrame(NukudeFace::vrc_v_rr, voiceDetection.GetViseme(voiceDetection.AR));
-                //eEA.AddParameterFrame(NukudeFace::vrc_v_ch, voiceDetection.GetViseme(voiceDetection.ER));
-                //eEA.AddParameterFrame(NukudeFace::vrc_v_aa, voiceDetection.GetViseme(voiceDetection.AH));
-                //eEA.AddParameterFrame(NukudeFace::vrc_v_oh, voiceDetection.GetViseme(voiceDetection.OO));
+                eEA.AddParameterFrame(BetaFront::vrc_v_ee, voiceDetection.GetViseme(voiceDetection.EE));
+                eEA.AddParameterFrame(BetaFront::vrc_v_ih, voiceDetection.GetViseme(voiceDetection.AH));
+                eEA.AddParameterFrame(BetaFront::vrc_v_dd, voiceDetection.GetViseme(voiceDetection.UH));
+                eEA.AddParameterFrame(BetaFront::vrc_v_rr, voiceDetection.GetViseme(voiceDetection.AR));
+                eEA.AddParameterFrame(BetaFront::vrc_v_ch, voiceDetection.GetViseme(voiceDetection.ER));
+                eEA.AddParameterFrame(BetaFront::vrc_v_aa, voiceDetection.GetViseme(voiceDetection.AH));
+                eEA.AddParameterFrame(BetaFront::vrc_v_oh, voiceDetection.GetViseme(voiceDetection.OO));
             }
         }
     }
@@ -266,10 +373,20 @@ private:
         }
     }
 
+    void UpdateKeyframeTracks(){
+        botFinLR1.Update();
+        botFinLR2.Update();
+        botFinLR3.Update();
+        botFinLR4.Update();
+        botFinLR5.Update();
+    }
+
 public:
-    BetaAnimation(){
+    BetaAnimation() {
         scene.AddObject(pM.GetObject());
+        scene.AddObject(rear.GetObject());
         scene.AddObject(background.GetObject());
+        scene.AddObject(ledStripBackground.GetObject());
 
         LinkEasyEase();
         LinkParameters();
@@ -278,18 +395,21 @@ public:
 
         SetMaterialLayers();
 
+        AddBotFinKeyFrames();
+
         pM.GetObject()->SetMaterial(&materialAnimator);
+        rear.GetObject()->SetMaterial(&materialAnimator);
         background.GetObject()->SetMaterial(&backgroundMaterial);
+        ledStripBackground.GetObject()->SetMaterial(&materialAnimator);
 
         boop.Initialize(5);
 
-        //MicrophoneFourierIT::Initialize(22, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
-        //Menu::Initialize(10, 0, 500);//7 is number of faces
-        MicrophoneFourierIT::Initialize(A2, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
-        Menu::Initialize(10, 20, 500);//7 is number of faces
+        MicrophoneFourierIT::Initialize(22, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
+        //Menu::Initialize(9);//NeoTrellis
+        Menu::Initialize(9, 0, 500);//7 is number of faces
 
-        Menu::SetSize(Vector2D(280, 60));
-        Menu::SetPositionOffset(Vector2D(-40.0f, -30.0f));
+        objA.SetJustification(ObjectAlign::Stretch);
+        objA.SetMirrorX(false);
     }
 
     uint8_t GetAccentBrightness(){
@@ -299,7 +419,7 @@ public:
     uint8_t GetBrightness(){
         return Menu::GetBrightness();
     };
-    
+
     void FadeIn(float stepRatio) override {}
     void FadeOut(float stepRatio) override {}
 
@@ -309,18 +429,26 @@ public:
 
     void Update(float ratio) override {
         pM.Reset();
+        rear.Reset();
 
         float xOffset = fGenMatXMove.Update();
         float yOffset = fGenMatYMove.Update();
         
         Menu::Update(ratio);
+
+        //Menu::SetSize(Vector2D(280, 60));
+        //Menu::SetPositionOffset(Vector2D(0.0f, -30.0f * yOffset));
         
+        //glitchX.SetRatio(fGenBlur.Update());
+        magnet.SetRatio(ratio);
+        fisheye.SetRatio(fGenBlur.Update());
         blurH.SetRatio(fGenBlur.Update());
         blurV.SetRatio(fGenBlur.Update());
         blurR.SetRatio(fGenBlur.Update());
         phaseX.SetRatio(fGenBlur.Update());
         phaseY.SetRatio(fGenBlur.Update());
         phaseR.SetRatio(fGenBlur.Update());
+        shiftR.SetRatio(fGenBlur.Update());
 
         SetMaterialColor();
 
@@ -328,29 +456,41 @@ public:
         uint8_t mode = Menu::GetFaceState();//change by button press
 
         MicrophoneFourierIT::Update();
-        sA.Update(MicrophoneFourierIT::GetFourierFiltered());
         sA.SetHueAngle(ratio * 360.0f * 4.0f);
         sA.SetMirrorYState(Menu::MirrorSpectrumAnalyzer());
         sA.SetFlipYState(!Menu::MirrorSpectrumAnalyzer());
         
+        aRG.SetRadius((xOffset + 2.0f) * 2.0f + 25.0f);
+        aRG.SetSize(Vector2D((xOffset + 2.0f) * 10.0f + 50.0f, (xOffset + 2.0f) * 10.0f + 50.0f));
+        aRG.SetHueAngle(ratio * 360.0f * 8.0f);
+        aRG.SetRotation(ratio * 360.0f * 2.0f);
+        aRG.SetPosition(Vector2D(80.0f + xOffset * 4.0f, 48.0f + yOffset * 4.0f));
+
+        oSC.SetSize(Vector2D(200.0f, 100.0f));
+        oSC.SetHueAngle(ratio * 360.0f * 8.0f);
+        oSC.SetPosition(Vector2D(100.0f, 50.0f));
+
+        gradientMat.HueShift(ratio * 720.0f);
+        
+        voiceDetection.SetThreshold(map(Menu::GetMicLevel(), 0, 10, 1000, 50));
+
         UpdateFFTVisemes();
 
-        if (isBooped){
-            Surprised();
+        if(isBooped){
+            OwO();
         }
         else{
             if (mode == 0) Default();
-            else if (mode == 1) Angry();
-            else if (mode == 2) Doubt();
-            else if (mode == 3) Frown();
-            else if (mode == 4) LookUp();
-            else if (mode == 5) LookDown();
-            else if (mode == 6) Sad();
-            else if (mode == 7) {
+            else if (mode == 1) Sad();
+            else if (mode == 2) Heart();
+            else if (mode == 3) Dead();
+            else if (mode == 4) AlphaGenCircle();
+            else if (mode == 5) AngryFace();
+            else if (mode == 6) {
                 aRG.Update(MicrophoneFourierIT::GetFourierFiltered());
                 AudioReactiveGradientFace();
             }
-            else if (mode == 8){
+            else if (mode == 7){
                 oSC.Update(MicrophoneFourierIT::GetSamples());
                 OscilloscopeFace();
             }
@@ -361,34 +501,34 @@ public:
         }
 
         UpdateKeyFrameTracks();
-        
-        //pM.SetMorphWeight(NukudeFace::EyeRidgeBigger, 1.0f);
-        pM.SetMorphWeight(NukudeFace::MoveEye, 1.0f);
 
         eEA.Update();
         pM.Update();
+        rear.Update();
         
-        phaseR.SetRatio(eEA.GetValue(NukudeFace::Surprised));
-        
-        float menuRatio = Menu::ShowMenu();
+        //phaseR.SetRatio(eEA.GetValue(BetaFront::Surprised));
+        //glitchX.SetRatio(eEA.GetValue(BetaFront::Surprised));
 
         rainbowNoise.Update(ratio);
         rainbowSpiral.Update(ratio);
         materialAnimator.Update();
         backgroundMaterial.Update();
-        
-        pM.GetObject()->GetTransform()->SetRotation(Vector3D(0.0f, 0.0f, -7.5f));
 
         uint8_t faceSize = Menu::GetFaceSize();
-        float scale = menuRatio * 0.5f + 0.5f;
-        float xShift = (1.0f - menuRatio) * -10.0f;
-        float yShift = (1.0f - menuRatio) * 70.0f + offsetFaceSA * -150.0f;
-        float adjustFacePos = float(4 - faceSize) * 5.0f;
-        float adjustFaceX = float(faceSize) * 0.05f;
-        
-        pM.GetObject()->GetTransform()->SetPosition(Vector3D(100.0f + xOffset - xShift + adjustFacePos, -22.5f + yOffset + yShift, 600.0f));
-        pM.GetObject()->GetTransform()->SetScale(Vector3D(-0.975f + adjustFaceX, 0.65f, 0.8f).Multiply(scale));
+        float scale = Menu::ShowMenu() * 0.6f + 0.4f;
+        float faceSizeOffset = faceSize * 8.0f;
 
+        objA.SetPlaneOffsetAngle(0.0f);
+        objA.SetEdgeMargin(4.0f);
+        objA.SetCameraMax(Vector2D(110.0f + faceSizeOffset, 107.5f - 107.5f * offsetFace).Multiply(scale));
+
+        objA.AlignObjects(scene.GetObjects(), 1);
+        
+        pM.GetObject()->GetTransform()->SetPosition(Vector3D(xOffset, yOffset, 0.0f));
         pM.GetObject()->UpdateTransform();
+
+        rear.GetObject()->GetTransform()->SetPosition(Vector3D(xOffset * 0.05f + 260.0f, yOffset * 0.05f + 30.0f, 0.0f));
+        rear.GetObject()->GetTransform()->SetRotation(Vector3D(0.0f, 0.0f, 20.0f));
+        rear.GetObject()->UpdateTransform();
     }
 };
