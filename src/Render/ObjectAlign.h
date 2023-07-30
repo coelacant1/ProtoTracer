@@ -232,6 +232,61 @@ public:
         this->scaleY = scaleY;
     }
 
+    void AlignObjectNoScale(Object3D* obj){
+        Object3D** objs = new Object3D*[1];
+
+		objs[0] = obj;
+
+        AlignObjectsNoScale(objs, 1);
+
+		delete[] objs;
+    }
+    
+    void AlignObjectsNoScale(Object3D** objs, uint8_t numObjects){
+        // calculate planes, assume flat object (largest axes are axis), best fit plane i.e. centroid + direction/normal
+        Vector3D centroid = GetCentroid(objs, numObjects);
+        Quaternion planeOrientation = GetPlaneNormal(objs, numObjects);
+        //Quaternion planeOrientation = GetPlaneOrientation(objs, numObjects, centroid);
+        Vector3D objectCenter = GetObjectCenter(objs, numObjects);//Get cameraCenter of objects
+        
+        //Normalize objects to plane orientation and cameraCenter of object
+        NormalizeObjectPlane(objs, numObjects, centroid, planeOrientation);
+
+        objectCenter = GetObjectCenter(objs, numObjects);//Get cameraCenter of objects
+
+        NormalizeObjectCenter(objs, numObjects, objectCenter);//Shift object back to center of view
+        
+        // calculate point 1000mm in front of camera
+        Vector3D cameraTarget = targetOrientation.RotateVector(Vector3D(forwardVector * 1000.0f) + Vector3D(cameraCenter.X, cameraCenter.Y, 0.0f));
+
+        for(uint8_t i = 0; i < numObjects; i++){
+            for (uint16_t j = 0; j < objs[i]->GetTriangleGroup()->GetVertexCount(); j++) {
+                Vector3D modifiedVector = objs[i]->GetTriangleGroup()->GetVertices()[j];
+
+                // mirror object normalized in default camera space
+                modifiedVector = modifiedVector * Vector3D(mirrorX ? -1.0f : 1.0f, mirrorY ? -1.0f : 1.0f, 1.0f);
+
+                // align object plane to camera plane
+                modifiedVector = targetOrientation.RotateVector(modifiedVector);
+
+                // move object to 1000mm point in front of camera
+                modifiedVector = modifiedVector + cameraTarget;//offset position
+                
+                objs[i]->GetTriangleGroup()->GetVertices()[j] = modifiedVector;
+            }
+        }
+    }
+
+    void AlignObject(Object3D* obj){
+        Object3D** objs = new Object3D*[1];
+
+		objs[0] = obj;
+
+        AlignObjects(objs, 1);
+
+		delete[] objs;
+    }
+
     void AlignObjects(Object3D** objs, uint8_t numObjects){
         // calculate planes, assume flat object (largest axes are axis), best fit plane i.e. centroid + direction/normal
         Vector3D centroid = GetCentroid(objs, numObjects);

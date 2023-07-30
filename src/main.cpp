@@ -1,6 +1,6 @@
 //#define ALPHARIGHT
 //#define ALPHALEFT
-//#define BETAWS35
+#define BETAWS35
 //#define GAMMAFRONT
 //#define GAMMABACK
 //#define HUB75
@@ -11,7 +11,7 @@
 //#define ESP32HUB75
 //#define CUSTOMHUB75
 //#define CUSTOMWS35
-#define CUSTOMBETAWS35
+//#define CUSTOMBETAWS35
 
 //#define PRINTINFO
 
@@ -31,7 +31,7 @@ ProtoDRController controller = ProtoDRController(maxBrightness, ProtoDRControlle
 #elif defined(BETAWS35)
 #include "Controllers\BetaProtoController.h"
 #include "Animation\BetaAnimation.h"
-BetaProtoController controller = BetaProtoController(maxBrightness);
+BetaProtoController controller = BetaProtoController(maxBrightness, maxAccentBrightness);
 BetaAnimation animation = BetaAnimation();
 #elif defined(GAMMAFRONT)
 #include "Controllers\GammaControllerFront.h"
@@ -89,9 +89,9 @@ Warzone2Animation animation = Warzone2Animation();
 #elif defined(CUSTOMBETAWS35)
 #define BETAWS35
 #include "Controllers\BetaProtoController.h"
-#include "Animation\BetaAnimation.h"
+#include "Animation\Commissions\TamamoAnimation.h"
 BetaProtoController controller = BetaProtoController(maxBrightness, maxAccentBrightness);
-BetaAnimation animation = BetaAnimation();
+TamamoAnimation animation = TamamoAnimation();
 #else
 //Define your own here
 //--------------- ANIMATIONS ---------------
