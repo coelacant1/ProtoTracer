@@ -40,7 +40,7 @@
 #include "..\Screenspace\ShiftR.h"
 #include "..\Screenspace\VerticalBlur.h"
 
-class ProtogenKitFaceAnimation : public Animation<3> {
+class WS35AnimationSplit : public Animation<3> {
 private:
     static const uint8_t faceCount = 9;
     NukudeFace pM;
@@ -275,7 +275,7 @@ private:
     }
 
 public:
-    ProtogenKitFaceAnimation() {
+    WS35AnimationSplit() {
         scene.AddObject(pM.GetObject());
         scene.AddObject(background.GetObject());
         scene.AddObject(ledStripBackground.GetObject());

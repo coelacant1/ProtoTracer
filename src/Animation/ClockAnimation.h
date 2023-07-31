@@ -94,7 +94,9 @@ public:
         clock.SetMaterial(&rainbowNoise);
 
         background.GetObject()->SetMaterial(&material);
+    }
 
+    void Initialize() override {
         apds.Initialize(100);
     }
 

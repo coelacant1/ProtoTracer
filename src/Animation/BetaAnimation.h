@@ -402,14 +402,16 @@ public:
         background.GetObject()->SetMaterial(&backgroundMaterial);
         ledStripBackground.GetObject()->SetMaterial(&materialAnimator);
 
+        objA.SetJustification(ObjectAlign::Stretch);
+        objA.SetMirrorX(false);
+    }
+
+    void Initialize() override {
         boop.Initialize(5);
 
         MicrophoneFourierIT::Initialize(22, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
         //Menu::Initialize(9);//NeoTrellis
         Menu::Initialize(9, 0, 500);//7 is number of faces
-
-        objA.SetJustification(ObjectAlign::Stretch);
-        objA.SetMirrorX(false);
     }
 
     uint8_t GetAccentBrightness(){

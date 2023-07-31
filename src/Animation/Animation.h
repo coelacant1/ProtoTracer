@@ -22,6 +22,8 @@ public:
     float GetAnimationTime(){
         return animationTime;
     }
+
+    virtual void Initialize() = 0;
     
     virtual uint8_t GetAccentBrightness() = 0;
     virtual uint8_t GetBrightness() = 0;

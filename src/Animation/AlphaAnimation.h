@@ -25,7 +25,7 @@
 #include "..\Sensors\SerialSync.h"
 #include "..\Sensors\MicrophoneFourier_MAX9814.h"
 
-class ProtoDRMorphAnimation : public Animation<2>{
+class AlphaAnimation : public Animation<2>{
 private:
     ProtoDR pM;
     Background background;
@@ -213,7 +213,7 @@ private:
     }
 
 public:
-    ProtoDRMorphAnimation() {
+    AlphaAnimation() {
         scene.AddObject(pM.GetObject());
         scene.AddObject(spyro.GetObject());
         scene.AddObject(background.GetObject());
@@ -231,12 +231,15 @@ public:
 
         pM.GetObject()->SetMaterial(&materialAnimator);
         background.GetObject()->SetMaterial(&sA);
-
+    }
+    
+    void Initialize() override {
         SerialSync::Initialize();
         MenuButtonHandler::Initialize(15, 13, 1000);//7 is number of faces
 
         MicrophoneFourier::Initialize(A8, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
     }
+
 
     void UpdateKeyFrameTracks(){
         blink.Update();

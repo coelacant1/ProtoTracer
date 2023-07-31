@@ -1,19 +1,19 @@
 //#define ALPHARIGHT
 //#define ALPHALEFT
-#define BETAWS35
+//#define BETAWS35
 //#define GAMMAFRONT
 //#define GAMMABACK
 //#define HUB75
 //#define HUB75Split
 //#define HUB75Square
-//#define WS35
+#define WS35
 //#define WS35SPLIT
 //#define ESP32HUB75
 //#define CUSTOMHUB75
 //#define CUSTOMWS35
 //#define CUSTOMBETAWS35
 
-//#define PRINTINFO
+#define PRINTINFO
 
 #include <Arduino.h>
 
@@ -22,11 +22,11 @@ uint8_t maxAccentBrightness = 50;
 
 #ifdef ALPHARIGHT
 #include "Controllers\ProtoDRController.h"
-#include "Animation\ProtoDRMorphAnimation.h"
+#include "Animation\AlphaAnimation.h"
 ProtoDRController controller = ProtoDRController(maxBrightness, ProtoDRController::RIGHT);
 #elif defined(ALPHALEFT)
 #include "Controllers\ProtoDRController.h"
-#include "Animation\ProtoDRMorphAnimation.h"
+#include "Animation\AlphaAnimation.h"
 ProtoDRController controller = ProtoDRController(maxBrightness, ProtoDRController::LEFT);
 #elif defined(BETAWS35)
 #include "Controllers\BetaProtoController.h"
@@ -43,16 +43,16 @@ GammaControllerFront controller = GammaControllerFront(maxBrightness);
 GammaControllerBack controller = GammaControllerBack(maxBrightness);
 #elif defined(HUB75)
 #include "Controllers\SmartMatrixHUB75.h"
-#include "Animation\ProtogenHUB75Animation.h"
+#include "Animation\HUB75Animation.h"
 //#include "Animation\BetaAnimation.h"
 SmartMatrixHUB75 controller = SmartMatrixHUB75(maxBrightness, maxAccentBrightness);
-ProtogenHUB75Animation animation = ProtogenHUB75Animation();
+HUB75Animation animation = HUB75Animation();
 //BetaAnimation animation = BetaAnimation();
 #elif defined(HUB75Split)
 #include "Controllers\SmartMatrixHUB75Split.h"
-#include "Animation\ProtogenHUB75AnimationSplit.h"
+#include "Animation\HUB75AnimationSplit.h"
 SmartMatrixHUB75Split controller = SmartMatrixHUB75Split(maxBrightness, maxAccentBrightness);
-ProtogenHUB75AnimationSplit animation = ProtogenHUB75AnimationSplit();
+HUB75AnimationSplit animation = HUB75AnimationSplit();
 #elif defined(HUB75Square)
 #include "Controllers\SmartMatrixHUB75Square.h"
 #include "Animation\ClockAnimation.h"
@@ -60,14 +60,14 @@ SmartMatrixHUB75Split controller = SmartMatrixHUB75Split(maxBrightness, maxAccen
 ClockAnimation animation = ClockAnimation();
 #elif defined(WS35)
 #include "Controllers\KaiborgV1D1Controller.h"
-#include "Animation\ProtogenKitFaceAnimation.h"
+#include "Animation\WS35Animation.h"
 KaiborgV1D1Controller controller = KaiborgV1D1Controller(maxBrightness);
-ProtogenKitFaceAnimation animation = ProtogenKitFaceAnimation();
+WS35Animation animation = WS35Animation();
 #elif defined(WS35SPLIT)
 #include "Controllers\KaiborgV1D1Controller.h"
-#include "Animation\ProtogenKitFaceAnimation.h"
+#include "Animation\WS35Animation.h"
 KaiborgV1D1Controller controller = KaiborgV1D1Controller(maxBrightness);
-ProtogenKitFaceAnimation animation = ProtogenKitFaceAnimation();
+WS35Animation animation = WS35Animation();
 #elif defined(ESP32HUB75)
 #include "Controllers\ESP32DevKitV1.h"
 #include "Animation\ESP32Clock.h"
@@ -139,6 +139,10 @@ void setup() {
     Serial.println("\nStarting...");
 
     controller.Initialize();
+    delay(100);
+
+    animation.Initialize();
+    delay(100);
 }
 
 void loop() {

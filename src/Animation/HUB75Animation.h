@@ -40,7 +40,7 @@
 #include "..\Screenspace\ShiftR.h"
 #include "..\Screenspace\VerticalBlur.h"
 
-class ProtogenHUB75Animation : public Animation<3> {
+class HUB75Animation : public Animation<3> {
 private:
     static const uint8_t faceCount = 9;
     NukudeFace pM;
@@ -276,7 +276,7 @@ private:
     }
 
 public:
-    ProtogenHUB75Animation() {
+    HUB75Animation() {
         scene.AddObject(pM.GetObject());
         scene.AddObject(background.GetObject());
         scene.AddObject(ledStripBackground.GetObject());
@@ -292,14 +292,16 @@ public:
         background.GetObject()->SetMaterial(&backgroundMaterial);
         ledStripBackground.GetObject()->SetMaterial(&materialAnimator);
 
+        objA.SetJustification(ObjectAlign::Stretch);
+        objA.SetMirrorX(true);
+    }
+
+    void Initialize() override {
         this->boopExists = boop.Initialize(5);
 
         MicrophoneFourierIT::Initialize(A2, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
         //Menu::Initialize(9);//NeoTrellis
         Menu::Initialize(9, 20, 500);//7 is number of faces
-
-        objA.SetJustification(ObjectAlign::Stretch);
-        objA.SetMirrorX(true);
     }
 
     uint8_t GetAccentBrightness(){
