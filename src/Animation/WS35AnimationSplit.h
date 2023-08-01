@@ -291,15 +291,18 @@ public:
         background.GetObject()->SetMaterial(&backgroundMaterial);
         ledStripBackground.GetObject()->SetMaterial(&materialAnimator);
 
+        objA.SetJustification(ObjectAlign::Stretch);
+        objA.SetMirrorX(true);
+    }
+
+    void Initialize() override {
         boop.Initialize(5);
 
         MicrophoneFourierIT::Initialize(22, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
         //Menu::Initialize(9);//NeoTrellis
         Menu::Initialize(9, 0, 500);//7 is number of faces
-
-        objA.SetJustification(ObjectAlign::Stretch);
-        objA.SetMirrorX(true);
     }
+
 
     uint8_t GetAccentBrightness(){
         return Menu::GetAccentBrightness();
@@ -322,8 +325,10 @@ public:
 
     void Update(float ratio) override {
         if(!mirror){
-            gradientSpectrum[0].SetColor(255, 175, 175);
-            gradientSpectrum[1].SetColor(255, 55, 225);
+            gradientSpectrum[0] = RGBColor(255, 0, 0).HueShift(Menu::GetHueF() * 36);
+            gradientSpectrum[1] = RGBColor(255, 0, 0).HueShift(Menu::GetHueB() * 36);
+
+            gradientMat.UpdateGradient(gradientSpectrum);
             gradientMat.UpdateRGB();
 
             pM.Reset();
@@ -425,8 +430,10 @@ public:
             pM.GetObject()->UpdateTransform();
         }
         else{
-            gradientSpectrum[0].SetColor(255, 175, 175);
-            gradientSpectrum[1].SetColor(255, 55, 225);
+            gradientSpectrum[0] = RGBColor(255, 0, 0).HueShift(Menu::GetHueF() * 36);
+            gradientSpectrum[1] = RGBColor(255, 0, 0).HueShift(Menu::GetHueB() * 36);
+
+            gradientMat.UpdateGradient(gradientSpectrum);
             gradientMat.UpdateRGB();
         }
     }

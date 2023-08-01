@@ -363,6 +363,11 @@ public:
 
         UpdateFFTVisemes();
 
+        gradientSpectrum[0] = RGBColor(255, 0, 0).HueShift(Menu::GetHueF() * 36);
+        gradientSpectrum[1] = RGBColor(255, 0, 0).HueShift(Menu::GetHueB() * 36);
+
+        gradientMat.UpdateGradient(gradientSpectrum);
+
         if (isBooped && mode != 6){
             Surprised();
         }

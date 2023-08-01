@@ -23,12 +23,15 @@ public:
         this->isRadial = isRadial;
         this->isStepped = isStepped;
         this->baseRGBColors = rgbColors;
+        
+        UpdateGradient(rgbColors);
+    }
 
+    void UpdateGradient(RGBColor* rgbColors){
         for(uint8_t i = 0; i < colorCount; i++){
             this->rgbColors[i] = rgbColors[i];
         }
     }
-
 
     //x 0->1 mapping all counts of colors, linearly interpolating
 

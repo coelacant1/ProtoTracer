@@ -17,11 +17,13 @@ public:
         BoopSensor,
         SpectrumMirror,
         FaceSize,
-        Color
+        Color,
+        HueF,
+        HueB
     };
 
 private:
-    static const uint8_t menuCount = 9;
+    static const uint8_t menuCount = 11;
     static RainbowNoise material;
     static DampedSpring dampedSpringX;
     static DampedSpring dampedSpringShow;
@@ -51,6 +53,8 @@ private:
     static uint8_t spectrumMirror;
     static uint8_t faceSize;
     static uint8_t color;
+    static uint8_t huef;
+    static uint8_t hueb;
     
     static String line1;
     static String line2;
@@ -65,6 +69,8 @@ private:
         MenuHandler<menuCount>::SetMenuMax(SpectrumMirror, 2);
         MenuHandler<menuCount>::SetMenuMax(FaceSize, 10);
         MenuHandler<menuCount>::SetMenuMax(Color, 10);
+        MenuHandler<menuCount>::SetMenuMax(HueF, 10);
+        MenuHandler<menuCount>::SetMenuMax(HueB, 10);
     }
 
     static void SetDefaultEntries(){
@@ -77,6 +83,8 @@ private:
         MenuHandler<menuCount>::SetDefaultValue(SpectrumMirror, 0);
         MenuHandler<menuCount>::SetDefaultValue(FaceSize, 0);
         MenuHandler<menuCount>::SetDefaultValue(Color, 0);
+        MenuHandler<menuCount>::SetDefaultValue(HueF, 0);
+        MenuHandler<menuCount>::SetDefaultValue(HueB, 0);
 
         MenuHandler<menuCount>::SetInitialized();
     }
@@ -263,6 +271,8 @@ public:
         line2 += MirrorSpectrumAnalyzer() ? "   on OFF   " : "   ON off   ";
         line2 += GenerateLine(10, GetFaceSize());
         line2 += GenerateLine(10, GetFaceColor());
+        line2 += GenerateLine(10, GetHueF());
+        line2 += GenerateLine(10, GetHueB());
 
         textEngine.SetText(1, line2, false);
     }
@@ -347,6 +357,24 @@ public:
         if(isSecondary) return color;
         else return MenuHandler<menuCount>::GetMenuValue(Color);
     }
+    
+    static void SetHueF(uint8_t huef){
+        Menu::huef = huef;
+    }
+
+    static uint8_t GetHueF(){
+        if(isSecondary) return huef;
+        else return MenuHandler<menuCount>::GetMenuValue(HueF);
+    }
+
+    static void SetHueB(uint8_t hueb){
+        Menu::hueb = hueb;
+    }
+
+    static uint8_t GetHueB(){
+        if(isSecondary) return hueb;
+        else return MenuHandler<menuCount>::GetMenuValue(HueB);
+    }
 
     static float ShowMenu(){
         return showMenuRatio / 100.0f;
@@ -382,7 +410,9 @@ uint8_t Menu::boopSensor = 0;
 uint8_t Menu::spectrumMirror = 0;
 uint8_t Menu::faceSize = 0;
 uint8_t Menu::color = 0;
+uint8_t Menu::huef = 0;
+uint8_t Menu::hueb = 0;
 
-//                    111111111111222222222222333333333333444444444444555555555555666666666666777777777777888888888888999999999999
-String Menu::line1 = "               BRIGHT     SIDEBRT       MIC        LEVEL        BOOP        SPEC        SIZE       COLOR    ";
-String Menu::line2 = " a b c d e f   12^45       12^45       ON off     123456|8     on OFF      ON off      12^45      123456|8  ";
+//                    111111111111222222222222333333333333444444444444555555555555666666666666777777777777888888888888999999999999111111111111222222222222
+String Menu::line1 = "               BRIGHT     SIDEBRT       MIC        LEVEL        BOOP        SPEC        SIZE       COLOR       HUE F       HUE B    ";
+String Menu::line2 = " a b c d e f   12^45       12^45       ON off     123456|8     on OFF      ON off      12^45      123456|8    123456|8    123456|8  ";

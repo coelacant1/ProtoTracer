@@ -61,8 +61,8 @@ private:
     SimpleMaterial yellowMaterial = SimpleMaterial(RGBColor(255, 255, 0));
     SimpleMaterial purpleMaterial = SimpleMaterial(RGBColor(255, 0, 255));
     
-    RGBColor gradientSpectrum[3] = {RGBColor(255, 255, 0), RGBColor(0, 255, 255), RGBColor(255, 0, 255)};
-    GradientMaterial<3> gradientMat = GradientMaterial<3>(gradientSpectrum, 450.0f, false);
+    RGBColor gradientSpectrum[2] = {RGBColor(255, 255, 0), RGBColor(0, 255, 255)};
+    GradientMaterial<2> gradientMat = GradientMaterial<2>(gradientSpectrum, 450.0f, false);
     
     MaterialAnimator<10> materialAnimator;
     MaterialAnimator<4> backgroundMaterial;
@@ -477,6 +477,11 @@ public:
         voiceDetection.SetThreshold(map(Menu::GetMicLevel(), 0, 10, 1000, 50));
 
         UpdateFFTVisemes();
+
+        gradientSpectrum[0] = RGBColor(255, 0, 0).HueShift(Menu::GetHueF() * 36);
+        gradientSpectrum[1] = RGBColor(255, 0, 0).HueShift(Menu::GetHueB() * 36);
+
+        gradientMat.UpdateGradient(gradientSpectrum);
 
         if(isBooped){
             OwO();

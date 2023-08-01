@@ -284,8 +284,10 @@ public:
 
     void Update(float ratio) override {
         if(!mirror){
-            gradientSpectrum[0].SetColor(255, 175, 175);
-            gradientSpectrum[1].SetColor(255, 55, 225);
+            gradientSpectrum[0] = RGBColor(255, 0, 0).HueShift(Menu::GetHueF() * 36);
+            gradientSpectrum[1] = RGBColor(255, 0, 0).HueShift(Menu::GetHueB() * 36);
+
+            gradientMat.UpdateGradient(gradientSpectrum);
             gradientMat.UpdateRGB();
 
             pM.Reset();
@@ -316,7 +318,7 @@ public:
             oSC.SetPosition(Vector2D(100.0f, 50.0f));
 
             UpdateFFTVisemes();
-            
+
             if (isBooped && mode != 6){
                 Surprised();
             }
@@ -368,8 +370,10 @@ public:
             pM.GetObject()->UpdateTransform();
         }
         else{
-            gradientSpectrum[0].SetColor(255, 175, 175);
-            gradientSpectrum[1].SetColor(255, 55, 225);
+            gradientSpectrum[0] = RGBColor(255, 0, 0).HueShift(Menu::GetHueF() * 36);
+            gradientSpectrum[1] = RGBColor(255, 0, 0).HueShift(Menu::GetHueB() * 36);
+
+            gradientMat.UpdateGradient(gradientSpectrum);
             gradientMat.UpdateRGB();
         }
     }

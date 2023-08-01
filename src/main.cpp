@@ -3,10 +3,10 @@
 //#define BETAWS35
 //#define GAMMAFRONT
 //#define GAMMABACK
-//#define HUB75
+#define HUB75
 //#define HUB75Split
 //#define HUB75Square
-#define WS35
+//#define WS35
 //#define WS35SPLIT
 //#define ESP32HUB75
 //#define CUSTOMHUB75
@@ -57,7 +57,7 @@ HUB75AnimationSplit animation = HUB75AnimationSplit();
 #include "Controllers\SmartMatrixHUB75Square.h"
 #include "Animation\ClockAnimation.h"
 SmartMatrixHUB75Split controller = SmartMatrixHUB75Split(maxBrightness, maxAccentBrightness);
-ClockAnimation animation = ClockAnimation();
+ClockAnimation animation = ClockAnimation(); 
 #elif defined(WS35)
 #include "Controllers\KaiborgV1D1Controller.h"
 #include "Animation\WS35Animation.h"

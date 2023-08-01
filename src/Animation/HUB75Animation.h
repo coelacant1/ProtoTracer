@@ -61,7 +61,7 @@ private:
     SimpleMaterial yellowMaterial = SimpleMaterial(RGBColor(255, 255, 0));
     SimpleMaterial purpleMaterial = SimpleMaterial(RGBColor(255, 0, 255));
     
-    RGBColor gradientSpectrum[2] = {RGBColor(82, 252, 233), RGBColor(65, 201, 185)};
+    RGBColor gradientSpectrum[2] = {RGBColor(255, 0, 0), RGBColor(255, 0, 0)};
     GradientMaterial<2> gradientMat = GradientMaterial<2>(gradientSpectrum, 350.0f, false);
     
     MaterialAnimator<10> materialAnimator;
@@ -161,10 +161,10 @@ private:
 
     void SetMaterialLayers(){
         materialAnimator.SetBaseMaterial(Material::Add, &gradientMat);
-        materialAnimator.AddMaterial(Material::Replace, &orangeMaterial, 40, 0.0f, 1.0f);//layer 1
-        materialAnimator.AddMaterial(Material::Replace, &whiteMaterial, 40, 0.0f, 1.0f);//layer 2
-        materialAnimator.AddMaterial(Material::Replace, &greenMaterial, 40, 0.0f, 1.0f);//layer 3
-        materialAnimator.AddMaterial(Material::Replace, &yellowMaterial, 40, 0.0f, 1.0f);//layer 4
+        materialAnimator.AddMaterial(Material::Replace, &yellowMaterial, 40, 0.0f, 1.0f);//layer 1
+        materialAnimator.AddMaterial(Material::Replace, &orangeMaterial, 40, 0.0f, 1.0f);//layer 2
+        materialAnimator.AddMaterial(Material::Replace, &whiteMaterial, 40, 0.0f, 1.0f);//layer 3
+        materialAnimator.AddMaterial(Material::Replace, &greenMaterial, 40, 0.0f, 1.0f);//layer 4
         materialAnimator.AddMaterial(Material::Replace, &purpleMaterial, 40, 0.0f, 1.0f);//layer 5
         materialAnimator.AddMaterial(Material::Replace, &redMaterial, 40, 0.0f, 1.0f);//layer 6
         materialAnimator.AddMaterial(Material::Replace, &blueMaterial, 40, 0.0f, 1.0f);//layer 7
@@ -262,13 +262,13 @@ private:
 
     void SetMaterialColor(){
         switch(Menu::GetFaceColor()){
-            case 1: materialAnimator.AddMaterialFrame(redMaterial, 0.8f); break;
+            case 1: materialAnimator.AddMaterialFrame(yellowMaterial, 0.8f); break;
             case 2: materialAnimator.AddMaterialFrame(orangeMaterial, 0.8f); break;
             case 3: materialAnimator.AddMaterialFrame(whiteMaterial, 0.8f); break;
             case 4: materialAnimator.AddMaterialFrame(greenMaterial, 0.8f); break;
-            case 5: materialAnimator.AddMaterialFrame(blueMaterial, 0.8f); break;
-            case 6: materialAnimator.AddMaterialFrame(yellowMaterial, 0.8f); break;
-            case 7: materialAnimator.AddMaterialFrame(purpleMaterial, 0.8f); break;
+            case 5: materialAnimator.AddMaterialFrame(purpleMaterial, 0.8f); break;
+            case 6: materialAnimator.AddMaterialFrame(redMaterial, 0.8f); break;
+            case 7: materialAnimator.AddMaterialFrame(blueMaterial, 0.8f); break;
             case 8: materialAnimator.AddMaterialFrame(rainbowSpiral, 0.8f); break;
             case 9: materialAnimator.AddMaterialFrame(rainbowNoise, 0.8f); break;
             default: break;
@@ -369,6 +369,11 @@ public:
         voiceDetection.SetThreshold(map(Menu::GetMicLevel(), 0, 10, 1000, 50));
 
         UpdateFFTVisemes();
+
+        gradientSpectrum[0] = RGBColor(255, 0, 0).HueShift(Menu::GetHueF() * 36);
+        gradientSpectrum[1] = RGBColor(255, 0, 0).HueShift(Menu::GetHueB() * 36);
+
+        gradientMat.UpdateGradient(gradientSpectrum);
 
         if (isBooped && mode != 6){
             Surprised();
