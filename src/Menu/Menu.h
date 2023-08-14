@@ -2,9 +2,28 @@
 
 #include <Arduino.h>
 #include "..\Controls\DampedSpring.h"
-#include "..\Sensors\SingleButtonMenuHandler.h"
 #include "..\Materials\Animated\RainbowNoise.h"
 #include "..\Materials\Menu\TextEngine.h"
+
+#include "..\Animation\AnimationTracks\EffectChangeTrack.h"
+#include "..\Screenspace\Passthrough.h"
+#include "..\Screenspace\GlitchX.h"
+#include "..\Screenspace\Fisheye.h"
+#include "..\Screenspace\HorizontalBlur.h"
+#include "..\Screenspace\PhaseOffsetX.h"
+#include "..\Screenspace\PhaseOffsetY.h"
+#include "..\Screenspace\PhaseOffsetR.h"
+#include "..\Screenspace\Magnet.h"
+#include "..\Screenspace\Overflow.h"
+#include "..\Screenspace\RadialBlur.h"
+#include "..\Screenspace\ShiftR.h"
+#include "..\Screenspace\VerticalBlur.h"
+
+#ifdef NEOTRELLISMENU
+#include "..\Sensors\NeoTrellisMenuHandler.h"
+#else
+#include "..\Sensors\SingleButtonMenuHandler.h"
+#endif
 
 class Menu{
 public:
@@ -19,11 +38,12 @@ public:
         FaceSize,
         Color,
         HueF,
-        HueB
+        HueB,
+        EffectS
     };
 
 private:
-    static const uint8_t menuCount = 11;
+    static const uint8_t menuCount = 12;
     static RainbowNoise material;
     static DampedSpring dampedSpringX;
     static DampedSpring dampedSpringShow;
@@ -55,9 +75,27 @@ private:
     static uint8_t color;
     static uint8_t huef;
     static uint8_t hueb;
+    static uint8_t effect;
     
     static String line1;
     static String line2;
+
+    static EffectChangeTrack<1> effectChange;
+    static float effectStrength;
+    static uint8_t previousMenu;
+    
+    static Passthrough passthrough;
+    static Fisheye fisheye;
+    static GlitchX glitchX;
+    static HorizontalBlur blurH;
+    static VerticalBlur blurV;
+    static Magnet magnet;
+    static RadialBlur blurR;
+    static PhaseOffsetX phaseX;
+    static PhaseOffsetY phaseY;
+    static PhaseOffsetR phaseR;
+    static ShiftR shiftR;
+    static Overflow overflow;
 
     static void SetMaxEntries(){
         MenuHandler<menuCount>::SetMenuMax(Faces, faceCount);
@@ -71,6 +109,7 @@ private:
         MenuHandler<menuCount>::SetMenuMax(Color, 10);
         MenuHandler<menuCount>::SetMenuMax(HueF, 10);
         MenuHandler<menuCount>::SetMenuMax(HueB, 10);
+        MenuHandler<menuCount>::SetMenuMax(EffectS, 10);
     }
 
     static void SetDefaultEntries(){
@@ -85,6 +124,7 @@ private:
         MenuHandler<menuCount>::SetDefaultValue(Color, 0);
         MenuHandler<menuCount>::SetDefaultValue(HueF, 0);
         MenuHandler<menuCount>::SetDefaultValue(HueB, 0);
+        MenuHandler<menuCount>::SetDefaultValue(EffectS, 0);
 
         MenuHandler<menuCount>::SetInitialized();
     }
@@ -102,14 +142,24 @@ public:
         textEngine.SetPositionOffset(position);
         textEngine.SetBlinkTime(200);
 
+        #ifdef NEOTRELLISMENU
+        if (!MenuHandler<menuCount>::Initialize()){
+            SetDefaultEntries();
+        }
+        #else
         if (!MenuHandler<menuCount>::Initialize(pin, holdingTime)){
             SetDefaultEntries();
         }
+        #endif
 
         SetMaxEntries();
 
+        #ifndef NEOTRELLISMENU
         MenuHandler<menuCount>::Begin();
+        #endif
         isSecondary = false;
+
+        effectChange.AddParameter(&effectStrength);
     }
 
     static void Initialize(uint8_t faceCount, Vector2D size = Vector2D(240, 50)){
@@ -131,6 +181,41 @@ public:
 
     static Material* GetMaterial(){
         return &textEngine;
+    }
+
+    static Effect* GetEffect(){
+        switch(GetEffectS()){
+            case 0:
+                return &passthrough;
+                break;
+            case 1:
+                return &phaseY;
+                break;
+            case 2:
+                return &phaseX;
+                break;
+            case 3:
+                return &phaseR;
+                break;
+            case 4:
+                return &glitchX;
+                break;
+            case 5:
+                return &magnet;
+                break;
+            case 6:
+                return &fisheye;
+                break;
+            case 7:
+                return &blurH;
+                break;
+            case 8:
+                return &blurV;
+                break;
+            default:
+                return &blurR;
+                break;
+        }
     }
 
     static void SetCurrentMenu(uint8_t currentMenu){
@@ -162,6 +247,15 @@ public:
         Menu::SetRotation(ratio);
 
         Menu::GenerateText();
+        
+        if (GetFaceState() != previousMenu){
+            effectChange.RestartTime();
+            previousMenu = GetFaceState();
+        }
+        
+        effectChange.Update();
+
+        GetEffect()->SetRatio(effectStrength);
     }
 
     static void SetWiggleRatio(float wiggleRatio){
@@ -273,6 +367,7 @@ public:
         line2 += GenerateLine(10, GetFaceColor());
         line2 += GenerateLine(10, GetHueF());
         line2 += GenerateLine(10, GetHueB());
+        line2 += GenerateLine(10, GetEffectS());
 
         textEngine.SetText(1, line2, false);
     }
@@ -376,6 +471,15 @@ public:
         else return MenuHandler<menuCount>::GetMenuValue(HueB);
     }
 
+    static void SetEffectS(uint8_t effect){
+        Menu::effect = effect;
+    }
+
+    static uint8_t GetEffectS(){
+        if(isSecondary) return effect;
+        else return MenuHandler<menuCount>::GetMenuValue(EffectS);
+    }
+
     static float ShowMenu(){
         return showMenuRatio / 100.0f;
     }
@@ -412,7 +516,26 @@ uint8_t Menu::faceSize = 0;
 uint8_t Menu::color = 0;
 uint8_t Menu::huef = 0;
 uint8_t Menu::hueb = 0;
+uint8_t Menu::effect = 0;
 
-//                    111111111111222222222222333333333333444444444444555555555555666666666666777777777777888888888888999999999999111111111111222222222222
-String Menu::line1 = "               BRIGHT     SIDEBRT       MIC        LEVEL        BOOP        SPEC        SIZE       COLOR       HUE F       HUE B    ";
-String Menu::line2 = " a b c d e f   12^45       12^45       ON off     123456|8     on OFF      ON off      12^45      123456|8    123456|8    123456|8  ";
+EffectChangeTrack<1> Menu::effectChange;
+float Menu::effectStrength = 0.0f;
+uint8_t Menu::previousMenu = 0;
+
+Passthrough Menu::passthrough = Passthrough();
+Fisheye Menu::fisheye = Fisheye();
+GlitchX Menu::glitchX = GlitchX(30);
+HorizontalBlur Menu::blurH = HorizontalBlur(16);
+VerticalBlur Menu::blurV = VerticalBlur(16);
+Magnet Menu::magnet = Magnet();
+RadialBlur Menu::blurR = RadialBlur(16);
+PhaseOffsetX Menu::phaseX = PhaseOffsetX(20);
+PhaseOffsetY Menu::phaseY = PhaseOffsetY(20);
+PhaseOffsetR Menu::phaseR = PhaseOffsetR(20);
+ShiftR Menu::shiftR = ShiftR(20);
+Overflow Menu::overflow = Overflow(20);
+
+//                    111111111111222222222222333333333333444444444444555555555555666666666666777777777777888888888888999999999999111111111111222222222222333333333333
+String Menu::line1 = "               BRIGHT     SIDEBRT       MIC        LEVEL        BOOP        SPEC        SIZE       COLOR       HUE F       HUE B      EFFECT    ";
+String Menu::line2 = " a b c d e f   12^45       12^45       ON off     123456|8     on OFF      ON off      12^45      123456|8    123456|8    123456|8    123456|8  ";
+

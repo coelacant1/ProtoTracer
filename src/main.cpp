@@ -13,7 +13,9 @@
 //#define CUSTOMWS35
 //#define CUSTOMBETAWS35
 
-#define PRINTINFO
+//#define PRINTINFO
+
+//#define NEOTRELLISMENU
 
 #include <Arduino.h>
 
@@ -77,9 +79,9 @@ ESP32Clock animation = ESP32Clock();
 #elif defined(CUSTOMHUB75)
 #define HUB75
 #include "Controllers\SmartMatrixHUB75.h"
-#include "Animation\Commissions\BasilGardenAnimation.h"
+#include "Animation\Commissions\BroookAnimation.h"
 SmartMatrixHUB75 controller = SmartMatrixHUB75(maxBrightness, maxAccentBrightness);
-BasilGardenAnimation animation = BasilGardenAnimation();
+BroookAnimation animation = BroookAnimation();
 #elif defined(CUSTOMWS35)
 #define WS35
 #include "Controllers\KaiborgV1D1Controller.h"

@@ -52,7 +52,7 @@ public:
     void Update(){
         float currentTime = fmod((millis() - startTime) / 1000.0f, frameTime) / frameTime;//normalize time to ratio
 
-        currentFrame = (unsigned int)Mathematics::Map(currentTime, 0.0f, 1.0f, 0, imageCount - 1);
+        currentFrame = (unsigned int)Mathematics::Map(currentTime, 0.0f, 1.0f, 0.0f, float(imageCount - 1));
 
         image->SetData(data[currentFrame]);
     }

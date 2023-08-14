@@ -26,7 +26,6 @@ private:
     float stopFrameTime = FLT_MIN;//initialize to out of bounds
     uint8_t currentFrames = 0;
     uint8_t currentParameters = 0;
-    long startTime = 0;
     bool isActive = true;
     float parameterValue = 0.0f;
     float currentTime = 0.0f;
@@ -43,7 +42,6 @@ public:
     KeyFrameTrack(float min, float max, InterpolationMethod interpMethod){
         this->min = min;
         this->max = max;
-        this->startTime = millis();
         this->interpMethod = interpMethod;
     }
 
@@ -54,10 +52,11 @@ public:
     }
 
     void SetCurrentTime(float setTime){
-        GetCurrentTime();
+        float currentSecs = millis() / 1000.0f;
 
         //Test case: current time = 1.32s, set time = 1.09s, 1.59s
-        timeOffset = setTime - currentTime;//1.59 - 1.32 = 0.27, 1.09 - 1.32 = -0.23
+        timeOffset = setTime - currentSecs;//1.59 - 1.32 = 0.27, 1.09 - 1.32 = -0.23
+
     }
 
     void Pause(){

@@ -23,6 +23,14 @@ public:
         track.Pause();
     }
 
+    void RestartTime(){
+        track.SetCurrentTime(0.0f);
+    }
+
+    void PrintTime(){
+        Serial.println(track.GetCurrentTime());
+    }
+
     void Reset(){
         track.Reset();
     }

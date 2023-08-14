@@ -9,8 +9,8 @@
 #include "..\..\Morph\Commissions\BroookExtras.h"
 #include "..\..\Render\Scene.h"
 #include "..\..\Signals\FunctionGenerator.h"
-#include "..\..\Menu\Menu.h"
-#include "..\..\Sensors\BoopSensor.h"
+#include "..\..\Menu\SingleButtonMenu.h"
+#include "..\..\Sensors\APDS9960.h"
 
 #include "..\..\Materials\Animated\RainbowNoise.h"
 #include "..\..\Materials\Animated\RainbowSpiral.h"
@@ -28,6 +28,8 @@
 
 #include "..\..\Render\ObjectAlign.h"
 
+#include "Flash\ImageSequences\BadApple.h"
+
 class BroookAnimation : public Animation<4> {
 private:
     BroookFace pM;
@@ -35,6 +37,8 @@ private:
     Background background;
     LEDStripBackground ledStripBackground;
     EasyEaseAnimator<25> eEA = EasyEaseAnimator<25>(EasyEaseInterpolation::Overshoot, 1.0f, 0.35f);
+    
+    bool boopExists = false;
     
     //Materials
     RainbowNoise rainbowNoise;
@@ -51,11 +55,12 @@ private:
     GradientMaterial<2> gradientMat = GradientMaterial<2>(gradientSpectrum, 50.0f, false);
     
     MaterialAnimator<10> materialAnimator;
-    MaterialAnimator<4> backgroundMaterial;
+    MaterialAnimator<5> backgroundMaterial;
     
     SpectrumAnalyzer sA = SpectrumAnalyzer(Vector2D(200, 100), Vector2D(100, 50), true, true); 
     AudioReactiveGradient aRG = AudioReactiveGradient(Vector2D(160, 160), Vector2D(0, 0), true, true); 
     Oscilloscope oSC = Oscilloscope(Vector2D(200, 100), Vector2D(0, 0));
+    BadAppleSequence gif = BadAppleSequence(Vector2D(200, 145), Vector2D(100, 70), 18);
 
     //Animation controllers
     BlinkTrack<1> blink;
@@ -71,7 +76,7 @@ private:
     FunctionGenerator fGenMatYMenu = FunctionGenerator(FunctionGenerator::Sine, -10.0f, 10.0f, 2.7f);
     FunctionGenerator fGenMatRMenu = FunctionGenerator(FunctionGenerator::Sine, -5.0f, 5.0f, 1.7f);
 
-    BoopSensor boop;
+    APDS9960 boop;
 
     FFTVoiceDetection<128> voiceDetection;
 
@@ -81,10 +86,12 @@ private:
     float offsetFaceSA = 0.0f;
     float offsetFaceARG = 0.0f;
     float offsetFaceOSC = 0.0f;
+    float offsetFaceBad = 0.0f;
     uint8_t offsetFaceInd = 50;
     uint8_t offsetFaceIndSA = 51;
     uint8_t offsetFaceIndARG = 52;
     uint8_t offsetFaceIndOSC = 53;
+    uint8_t offsetFaceIndBad = 54;
 
     void LinkEasyEase(){
         eEA.AddParameter(pM.GetMorphWeightReference(BroookFace::Determined2), BroookFace::Determined2, 15, 0.0f, 1.0f);
@@ -113,6 +120,7 @@ private:
         eEA.AddParameter(&offsetFaceSA, offsetFaceIndSA, 40, 0.0f, 1.0f);
         eEA.AddParameter(&offsetFaceARG, offsetFaceIndARG, 40, 0.0f, 1.0f);
         eEA.AddParameter(&offsetFaceOSC, offsetFaceIndOSC, 40, 0.0f, 1.0f);
+        eEA.AddParameter(&offsetFaceBad, offsetFaceIndBad, 40, 0.0f, 1.0f);
     }
 
     void LinkParameters(){
@@ -159,6 +167,7 @@ private:
         backgroundMaterial.AddMaterial(Material::Add, &sA, 20, 0.0f, 1.0f);
         backgroundMaterial.AddMaterial(Material::Add, &aRG, 20, 0.0f, 1.0f);
         backgroundMaterial.AddMaterial(Material::Add, &oSC, 20, 0.0f, 1.0f);
+        backgroundMaterial.AddMaterial(Material::Add, &gif, 20, 0.0f, 1.0f);
     }
 
     void UpdateKeyFrameTracks(){
@@ -197,8 +206,8 @@ private:
     }
 
     void Happy(){
-        eEA.AddParameterFrame(BroookFace::Happy6, 1.0f);
-        eEA.AddParameterFrame(BroookExtras::Happy + 100, 1.0f);
+        eEA.AddParameterFrame(BroookFace::Happy6, 0.8f);
+        eEA.AddParameterFrame(BroookExtras::Happy + 100, 0.8f);
         blink.Pause();
         materialAnimator.AddMaterialFrame(rainbowSpiral, 0.8f);
     }
@@ -214,8 +223,8 @@ private:
     }
     
     void Dot(){
-        eEA.AddParameterFrame(BroookFace::Dot8, 1.0f);
-        eEA.AddParameterFrame(BroookExtras::None + 100, 1.0f);
+        eEA.AddParameterFrame(BroookFace::Dot8, 0.95f);
+        eEA.AddParameterFrame(BroookExtras::None + 100, 0.95f);
         blink.Play();
     }
     
@@ -260,12 +269,19 @@ private:
         backgroundMaterial.AddMaterialFrame(oSC, offsetFaceOSC);
     }
 
+    void BadAppleFace(){
+        eEA.AddParameterFrame(offsetFaceInd, 1.0f);
+        eEA.AddParameterFrame(offsetFaceIndBad, 1.0f);
+
+        backgroundMaterial.AddMaterialFrame(gif, offsetFaceBad);
+    }
+
     void UpdateFFTVisemes(){
         if(Menu::UseMicrophone()){
-            eEA.AddParameterFrame(BroookFace::vrc_v_aa, MicrophoneFourier::GetCurrentMagnitude() / 2.0f);
+            eEA.AddParameterFrame(BroookFace::vrc_v_aa, MicrophoneFourierIT::GetCurrentMagnitude() / 2.0f);
 
-            if(MicrophoneFourier::GetCurrentMagnitude() > 0.05f){
-                voiceDetection.Update(MicrophoneFourier::GetFourierFiltered(), MicrophoneFourier::GetSampleRate());
+            if(MicrophoneFourierIT::GetCurrentMagnitude() > 0.05f){
+                voiceDetection.Update(MicrophoneFourierIT::GetFourierFiltered(), MicrophoneFourierIT::GetSampleRate());
         
                 eEA.AddParameterFrame(BroookFace::vrc_v_ee, voiceDetection.GetViseme(voiceDetection.EE));
                 eEA.AddParameterFrame(BroookFace::vrc_v_oh, voiceDetection.GetViseme(voiceDetection.AH));
@@ -312,17 +328,27 @@ public:
         background.GetObject()->SetMaterial(&backgroundMaterial);
         ledStripBackground.GetObject()->SetMaterial(&materialAnimator);
 
-        boop.Initialize(5);
-
-        MicrophoneFourier::Initialize(A0, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
-        Menu::Initialize(13, 20, 500);//13 is number of faces
-
         gradientMat.SetRotationAngle(90);
 
         objA.SetJustification(ObjectAlign::Stretch);
         objA.SetMirrorX(true);
         objA.SetMirrorY(true);
     }
+
+    void Initialize() override {
+        this->boopExists = boop.Initialize(5);
+
+        MicrophoneFourierIT::Initialize(A0, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
+        Menu::Initialize(14, 20, 500);//13 is number of faces
+    }
+
+    uint8_t GetAccentBrightness(){
+        return Menu::GetAccentBrightness();
+    };
+
+    uint8_t GetBrightness(){
+        return Menu::GetBrightness();
+    };
 
     void FadeIn(float stepRatio) override {}
     void FadeOut(float stepRatio) override {}
@@ -338,14 +364,14 @@ public:
         float xOffset = fGenMatXMove.Update();
         float yOffset = fGenMatYMove.Update();
         
-        Menu::Update();
+        Menu::Update(ratio);
 
         SetMaterialColor();
 
         bool isBooped = Menu::UseBoopSensor() ? boop.isBooped() : 0;
         uint8_t mode = Menu::GetFaceState();//change by button press
 
-        MicrophoneFourier::Update();
+        MicrophoneFourierIT::Update();
         sA.SetHueAngle(ratio * 360.0f * 4.0f);
         sA.SetMirrorYState(Menu::MirrorSpectrumAnalyzer());
         sA.SetFlipYState(!Menu::MirrorSpectrumAnalyzer());
@@ -359,6 +385,11 @@ public:
         oSC.SetSize(Vector2D(200.0f, 100.0f));
         oSC.SetHueAngle(ratio * 360.0f * 8.0f);
         oSC.SetPosition(Vector2D(100.0f, 50.0f));
+        
+        gif.SetPosition(Vector2D(96.0f, 48.0f));
+        gif.SetSize(Vector2D(191.0f, 95.0f));
+        //gif.SetRotation(15.0f);
+        gif.Update();
         
         voiceDetection.SetThreshold(map(Menu::GetMicLevel(), 0, 10, 1000, 50));
 
@@ -379,16 +410,19 @@ public:
             else if (mode == 8) Dead();
             else if (mode == 9) Question();
             else if (mode == 10) {
-                aRG.Update(MicrophoneFourier::GetFourierFiltered());
+                aRG.Update(MicrophoneFourierIT::GetFourierFiltered());
                 AudioReactiveGradientFace();
             }
             else if (mode == 11){
-                oSC.Update(MicrophoneFourier::GetSamples());
+                oSC.Update(MicrophoneFourierIT::GetSamples());
                 OscilloscopeFace();
             }
-            else {
-                sA.Update(MicrophoneFourier::GetFourierFiltered());
+            else if (mode == 12){
+                sA.Update(MicrophoneFourierIT::GetFourierFiltered());
                 SpectrumAnalyzerFace();
+            }
+            else{
+                BadAppleFace();
             }
         }
 
@@ -410,7 +444,7 @@ public:
         float scale = menuRatio * 0.6f + 0.4f;
         float faceSizeOffset = faceSize * 8.0f;
 
-        //objA.SetPlaneOffsetAngle(360.0f * ratio);
+        objA.SetPlaneOffsetAngle(0.0f);
         objA.SetEdgeMargin(2.0f);
         objA.SetCameraMax(Vector2D(110.0f + faceSizeOffset, 93.0f).Multiply(scale));
 

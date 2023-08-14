@@ -8,7 +8,7 @@
 #include "..\Morph\NukudeFlat.h"
 #include "..\Render\Scene.h"
 #include "..\Signals\FunctionGenerator.h"
-#include "..\Menu\SingleButtonMenu.h"
+#include "..\Menu\Menu.h"
 //#include "..\Menu\NeoTrellisMenu.h"
 #include "..\Sensors\APDS9960.h"
 
@@ -28,17 +28,6 @@
 
 #include "..\Render\ObjectAlign.h"
 
-#include "..\Screenspace\GlitchX.h"
-#include "..\Screenspace\Fisheye.h"
-#include "..\Screenspace\HorizontalBlur.h"
-#include "..\Screenspace\PhaseOffsetX.h"
-#include "..\Screenspace\PhaseOffsetY.h"
-#include "..\Screenspace\PhaseOffsetR.h"
-#include "..\Screenspace\Magnet.h"
-#include "..\Screenspace\Overflow.h"
-#include "..\Screenspace\RadialBlur.h"
-#include "..\Screenspace\ShiftR.h"
-#include "..\Screenspace\VerticalBlur.h"
 
 class HUB75Animation : public Animation<3> {
 private:
@@ -92,18 +81,6 @@ private:
     FFTVoiceDetection<128> voiceDetection;
 
     ObjectAlign objA = ObjectAlign(Vector2D(0.0f, 0.0f), Vector2D(189.0f, 93.0f), Quaternion());
-    
-    Fisheye fisheye = Fisheye();
-    GlitchX glitchX = GlitchX(30);
-    HorizontalBlur blurH = HorizontalBlur(8);
-    VerticalBlur blurV = VerticalBlur(8);
-    Magnet magnet = Magnet();
-    RadialBlur blurR = RadialBlur(8);
-    PhaseOffsetX phaseX = PhaseOffsetX(8);
-    PhaseOffsetY phaseY = PhaseOffsetY(8);
-    PhaseOffsetR phaseR = PhaseOffsetR(8);
-    ShiftR shiftR = ShiftR(8);
-    Overflow overflow = Overflow(8);
 
     float offsetFace = 0.0f;
     float offsetFaceSA = 0.0f;
@@ -181,9 +158,7 @@ private:
         blink.Update();
     }
 
-    void Default(){
-        scene.DisableEffect();
-    }
+    void Default(){}
 
     void Angry(){
         eEA.AddParameterFrame(NukudeFace::Anger, 1.0f);
@@ -197,9 +172,6 @@ private:
     }
 
     void Surprised(){
-        scene.SetEffect(&glitchX);
-        scene.DisableEffect();
-
         eEA.AddParameterFrame(NukudeFace::Surprised, 1.0f);
         eEA.AddParameterFrame(NukudeFace::HideBlush, 0.0f);
         materialAnimator.AddMaterialFrame(rainbowSpiral, 0.8f);
@@ -274,6 +246,7 @@ private:
             default: break;
         }
     }
+        
 
 public:
     HUB75Animation() {
@@ -294,6 +267,8 @@ public:
 
         objA.SetJustification(ObjectAlign::Stretch);
         objA.SetMirrorX(true);
+        
+        scene.EnableEffect();
     }
 
     void Initialize() override {
@@ -327,19 +302,7 @@ public:
         
         Menu::Update(ratio);
 
-        //Menu::SetSize(Vector2D(280, 60));
-        //Menu::SetPositionOffset(Vector2D(0.0f, -30.0f * yOffset));
-        
-        //glitchX.SetRatio(fGenBlur.Update());
-        magnet.SetRatio(ratio);
-        fisheye.SetRatio(fGenBlur.Update());
-        blurH.SetRatio(fGenBlur.Update());
-        blurV.SetRatio(fGenBlur.Update());
-        blurR.SetRatio(fGenBlur.Update());
-        phaseX.SetRatio(fGenBlur.Update());
-        phaseY.SetRatio(fGenBlur.Update());
-        phaseR.SetRatio(fGenBlur.Update());
-        shiftR.SetRatio(fGenBlur.Update());
+        scene.SetEffect(Menu::GetEffect());
 
         SetMaterialColor();
 
@@ -350,6 +313,7 @@ public:
         }
         
         uint8_t mode = Menu::GetFaceState();//change by button press
+
 
         MicrophoneFourierIT::Update();
         sA.SetHueAngle(ratio * 360.0f * 4.0f);
@@ -406,9 +370,6 @@ public:
 
         eEA.Update();
         pM.Update();
-        
-        //phaseR.SetRatio(eEA.GetValue(NukudeFace::Surprised));
-        glitchX.SetRatio(eEA.GetValue(NukudeFace::Surprised));
 
         rainbowNoise.Update(ratio);
         rainbowSpiral.Update(ratio);
