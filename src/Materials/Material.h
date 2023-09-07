@@ -17,7 +17,8 @@ public:
         Overlay,
         SoftLight,
         Replace,
-        EfficientMask
+        EfficientMask,
+        Bypass
     };
 
     virtual RGBColor GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) = 0;

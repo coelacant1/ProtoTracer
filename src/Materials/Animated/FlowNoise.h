@@ -7,25 +7,36 @@
 
 class FlowNoise : public AnimatedMaterial{
 private:
-    FunctionGenerator fGenMatGradient = FunctionGenerator(FunctionGenerator::Sine, 0.0f, 0.5f, 6.65f);
-    RGBColor noiseSpectrum[6] = {RGBColor(150, 10, 154), RGBColor(249, 0, 110), RGBColor(253, 20, 91), RGBColor(228, 124, 48), RGBColor(253, 147, 34), RGBColor(0, 0, 80)};
-    GradientMaterial<6> gNoiseMat = GradientMaterial<6>(noiseSpectrum, 2.0f, false);
-    SimplexNoise<6> sNoise = SimplexNoise<6>(1, &gNoiseMat);
+    FunctionGenerator fGenMatGradientP = FunctionGenerator(FunctionGenerator::Sine, 0.25f, 1.5f, 4.35f);
+    FunctionGenerator fGenMatGradientX = FunctionGenerator(FunctionGenerator::Sine, 0.0f, 0.5f, 3.12f);
+    FunctionGenerator fGenMatGradientY = FunctionGenerator(FunctionGenerator::Sine, 0.0f, 0.5f, 1.93f);
+    FunctionGenerator fGenMatGradientZ = FunctionGenerator(FunctionGenerator::Sine, 0.0f, 0.5f, 4.56f);
+    RGBColor noiseSpectrum[2] = {RGBColor(14, 33, 160), RGBColor(236, 83, 176)};
+    GradientMaterial<2> gNoiseMat = GradientMaterial<2>(noiseSpectrum, 2.0f, false);
+    SimplexNoise<2> sNoise = SimplexNoise<2>(1, &gNoiseMat);
     float simplexNoiseDepth = 0.0f;
-    //uint32_t iterate = 0;
-
+    
 public:
     FlowNoise(){}
 
+    void SetGradient(RGBColor color, uint8_t colorIndex){
+        noiseSpectrum[colorIndex] = color;
+
+        gNoiseMat.UpdateGradient(noiseSpectrum);
+    }
+
     void Update(float ratio){
-        float sweep = fGenMatGradient.Update();
-        float sShift = sweep * 0.005f + 0.007f;
+        float sweepX = fGenMatGradientX.Update();
+        float sweepY = fGenMatGradientY.Update();
+        float sweepZ = fGenMatGradientZ.Update();
+        float sShiftX = sweepX * 0.005f + 0.007f;
+        float sShiftY = sweepY * 0.005f + 0.007f;
+        float sShiftZ = sweepZ * 0.005f + 0.007f;
 
         simplexNoiseDepth += 0.0025f;
 
-        gNoiseMat.SetGradientPeriod(0.5f + sweep * 12.0f);
-        //gNoiseMat.HueShift(ratio * 360 * 2);
-        sNoise.SetScale(Vector3D(sShift, sShift, sShift));
+        gNoiseMat.SetGradientPeriod(fGenMatGradientP.Update());
+        sNoise.SetScale(Vector3D(sShiftX, sShiftY, sShiftZ));
         sNoise.SetZPosition(simplexNoiseDepth);
     }
 

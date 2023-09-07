@@ -15,11 +15,6 @@ public:
         RGBColor* pixelColors = pixelGroup->GetColors();
 
         for (unsigned int i = 0; i < pixelGroup->GetPixelCount(); i++){
-            unsigned int indices[pixels + 1];
-            bool valid[pixels];
-
-            indices[0] = i;
-
             float range = (pixels - 1) * ratio + 1;
             float coordX = pixelGroup->GetCoordinate(i).X / 10.0f;
             float mpiR = 2.0f * Mathematics::MPI * fGenPhase.Update();
@@ -31,19 +26,19 @@ public:
             uint8_t blurRangeG = Mathematics::Constrain(uint8_t(Mathematics::Map(sineG, -1.0f, 1.0f, 1.0f, range)), uint8_t(1), uint8_t(range));
             uint8_t blurRangeB = Mathematics::Constrain(uint8_t(Mathematics::Map(sineB, -1.0f, 1.0f, 1.0f, range)), uint8_t(1), uint8_t(range));
             
-            uint8_t maxValue = Mathematics::Max(blurRangeR, blurRangeG, blurRangeB);
+            unsigned int indexR = 0, indexG = 0, indexB = 0;
 
-            for (uint8_t j = 1; j < maxValue + 1; j++){
-                valid[j] = pixelGroup->GetUpIndex(indices[j - 1], &indices[j]);
-            }
+            bool validR = pixelGroup->GetOffsetYIndex(i, &indexR, blurRangeR);
+            bool validG = pixelGroup->GetOffsetYIndex(i, &indexG, blurRangeG);
+            bool validB = pixelGroup->GetOffsetYIndex(i, &indexB, blurRangeB);
 
-            if(valid[blurRangeR]) pixelColors[i].R = pixelColors[indices[blurRangeR]].R;
+            if(validR) pixelColors[i].R = pixelColors[indexR].R;
             else pixelColors[i].R = 0;
             
-            if(valid[blurRangeG]) pixelColors[i].G = pixelColors[indices[blurRangeG]].G;
+            if(validG) pixelColors[i].G = pixelColors[indexG].G;
             else pixelColors[i].G = 0;
             
-            if(valid[blurRangeB]) pixelColors[i].B = pixelColors[indices[blurRangeB]].B;
+            if(validB) pixelColors[i].B = pixelColors[indexB].B;
             else pixelColors[i].B = 0;
         }
     }

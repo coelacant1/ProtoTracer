@@ -9,7 +9,7 @@
 #include "..\..\Morph\WarzoneFace.h"
 #include "..\..\Morph\WarzoneExtras.h"
 #include "..\..\Render\Scene.h"
-#include "..\..\Menu\SingleButtonMenu.h"
+#include "..\..\Menu\Menu.h"
 #include "..\..\Signals\FunctionGenerator.h"
 #include "..\..\Signals\FFTVoiceDetection.h"
 #include "..\..\Sensors\APDS9960.h"
@@ -308,17 +308,21 @@ public:
         background.GetObject()->SetMaterial(&backgroundMaterial);
         ledStripBackground.GetObject()->SetMaterial(&materialAnimator);
 
-        boop.Initialize(5);
-
-        MicrophoneFourierIT::Initialize(22, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
-        //Menu::Initialize(9);//NeoTrellis
-        Menu::Initialize(12, 0, 500);//7 is number of faces
+        
 
         gradientMat.SetRotationAngle(90);
 
         objA.SetJustification(ObjectAlign::Stretch);
         objA.SetMirrorX(true);
         //objA.SetMirrorY(true);
+    }
+    
+    void Initialize() override {
+        boop.Initialize(5);
+
+        MicrophoneFourierIT::Initialize(22, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
+        //Menu::Initialize(9);//NeoTrellis
+        Menu::Initialize(12, 0, 500);//7 is number of faces
     }
 
     void FadeIn(float stepRatio) override {}

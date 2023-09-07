@@ -3,13 +3,13 @@
 //#define BETAWS35
 //#define GAMMAFRONT
 //#define GAMMABACK
-#define HUB75
+//#define HUB75
 //#define HUB75Split
 //#define HUB75Square
 //#define WS35
 //#define WS35SPLIT
 //#define ESP32HUB75
-//#define CUSTOMHUB75
+#define CUSTOMHUB75
 //#define CUSTOMWS35
 //#define CUSTOMBETAWS35
 
@@ -79,15 +79,15 @@ ESP32Clock animation = ESP32Clock();
 #elif defined(CUSTOMHUB75)
 #define HUB75
 #include "Controllers\SmartMatrixHUB75.h"
-#include "Animation\Commissions\BroookAnimation.h"
+#include "Animation\HUB75Protogen.h"
 SmartMatrixHUB75 controller = SmartMatrixHUB75(maxBrightness, maxAccentBrightness);
-BroookAnimation animation = BroookAnimation();
+HUB75Protogen animation = HUB75Protogen();
 #elif defined(CUSTOMWS35)
 #define WS35
 #include "Controllers\KaiborgV1D1Controller.h"
-#include "Animation\Commissions\WarzoneAnimationV2.h"
+#include "Animation\Test\FullScreenAnimation.h"
 KaiborgV1D1Controller controller = KaiborgV1D1Controller(maxBrightness);
-Warzone2Animation animation = Warzone2Animation();
+FullScreenAnimation animation = FullScreenAnimation();
 #elif defined(CUSTOMBETAWS35)
 #define BETAWS35
 #include "Controllers\BetaProtoController.h"
@@ -203,8 +203,6 @@ void loop() {
     #else
     Serial.print("not defined");
     #endif
-    
-    //controller.
 
     controller.Display();
 

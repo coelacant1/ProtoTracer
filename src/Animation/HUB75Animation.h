@@ -11,21 +11,19 @@
 #include "..\Menu\Menu.h"
 //#include "..\Menu\NeoTrellisMenu.h"
 #include "..\Sensors\APDS9960.h"
+#include "..\Sensors\HeadsUpDisplay.h"
+#include "..\Sensors\MicrophoneFourier_MAX9814.h"
 
+#include "..\Materials\MaterialAnimator.h"
+#include "..\Materials\Animated\FlowNoise.h"
 #include "..\Materials\Animated\RainbowNoise.h"
 #include "..\Materials\Animated\RainbowSpiral.h"
 #include "..\Materials\Animated\SpectrumAnalyzer.h"
 #include "..\Materials\Animated\AudioReactiveGradient.h"
 #include "..\Materials\Animated\Oscilloscope.h"
 
-#include "..\Materials\MaterialAnimator.h"
-
 #include "AnimationTracks\BlinkTrack.h"
-
 #include "..\Signals\FFTVoiceDetection.h"
-
-#include "..\Sensors\MicrophoneFourier_MAX9814.h"
-
 #include "..\Render\ObjectAlign.h"
 
 
@@ -40,7 +38,7 @@ private:
     bool boopExists = false;
     
     //Materials
-    RainbowNoise rainbowNoise;
+    FlowNoise flowNoise;
     RainbowSpiral rainbowSpiral;
     SimpleMaterial redMaterial = SimpleMaterial(RGBColor(255, 0, 0));
     SimpleMaterial orangeMaterial = SimpleMaterial(RGBColor(255, 165, 0));
@@ -53,7 +51,7 @@ private:
     RGBColor gradientSpectrum[2] = {RGBColor(255, 0, 0), RGBColor(255, 0, 0)};
     GradientMaterial<2> gradientMat = GradientMaterial<2>(gradientSpectrum, 350.0f, false);
     
-    MaterialAnimator<10> materialAnimator;
+    MaterialAnimator<11> materialAnimator;
     MaterialAnimator<4> backgroundMaterial;
     
     SpectrumAnalyzer sA = SpectrumAnalyzer(Vector2D(200, 100), Vector2D(100, 50), true, true); 
@@ -77,6 +75,7 @@ private:
     FunctionGenerator fGenBlur = FunctionGenerator(FunctionGenerator::Sine, 0.0f, 1.0f, 1.5f);
 
     APDS9960 boop;
+    HeadsUpDisplay hud = HeadsUpDisplay(Vector2D(0.0f, 0.0f), Vector2D(192.0f, 96.0f));
 
     FFTVoiceDetection<128> voiceDetection;
 
@@ -146,7 +145,7 @@ private:
         materialAnimator.AddMaterial(Material::Replace, &redMaterial, 40, 0.0f, 1.0f);//layer 6
         materialAnimator.AddMaterial(Material::Replace, &blueMaterial, 40, 0.0f, 1.0f);//layer 7
         materialAnimator.AddMaterial(Material::Replace, &rainbowSpiral, 40, 0.0f, 1.0f);//layer 8
-        materialAnimator.AddMaterial(Material::Replace, &rainbowNoise, 40, 0.15f, 1.0f);//layer 9
+        materialAnimator.AddMaterial(Material::Replace, &flowNoise, 40, 0.15f, 1.0f);//layer 9
 
         backgroundMaterial.SetBaseMaterial(Material::Add, Menu::GetMaterial());
         backgroundMaterial.AddMaterial(Material::Add, &sA, 20, 0.0f, 1.0f);
@@ -242,7 +241,7 @@ private:
             case 6: materialAnimator.AddMaterialFrame(redMaterial, 0.8f); break;
             case 7: materialAnimator.AddMaterialFrame(blueMaterial, 0.8f); break;
             case 8: materialAnimator.AddMaterialFrame(rainbowSpiral, 0.8f); break;
-            case 9: materialAnimator.AddMaterialFrame(rainbowNoise, 0.8f); break;
+            case 9: materialAnimator.AddMaterialFrame(flowNoise, 0.8f); break;
             default: break;
         }
     }
@@ -272,7 +271,9 @@ public:
     }
 
     void Initialize() override {
-        this->boopExists = boop.Initialize(5);
+        boopExists = boop.Initialize(5);
+
+        hud.Initialize();
 
         MicrophoneFourierIT::Initialize(A2, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
         //Menu::Initialize(9);//NeoTrellis
@@ -302,7 +303,6 @@ public:
         
         Menu::Update(ratio);
 
-        scene.SetEffect(Menu::GetEffect());
 
         SetMaterialColor();
 
@@ -311,10 +311,15 @@ public:
         if (this->boopExists && Menu::UseBoopSensor()) {
            isBooped = boop.isBooped();
         }
-        
+
+        hud.SetEffect(Menu::GetEffect());// Pull Effect from menu and store reference in hud for observing data
+        hud.Update();
+
+        scene.SetEffect(&hud);// Use HUD as effect for overlay/data extraction
+
+
         uint8_t mode = Menu::GetFaceState();//change by button press
-
-
+        
         MicrophoneFourierIT::Update();
         sA.SetHueAngle(ratio * 360.0f * 4.0f);
         sA.SetMirrorYState(Menu::MirrorSpectrumAnalyzer());
@@ -371,7 +376,7 @@ public:
         eEA.Update();
         pM.Update();
 
-        rainbowNoise.Update(ratio);
+        flowNoise.Update(ratio);
         rainbowSpiral.Update(ratio);
         materialAnimator.Update();
         backgroundMaterial.Update();

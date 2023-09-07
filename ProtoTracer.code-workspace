@@ -11,7 +11,15 @@
 			"limits": "cpp",
 			"string": "cpp",
 			"cmath": "cpp",
-			"initializer_list": "cpp"
+			"initializer_list": "cpp",
+			"array": "cpp",
+			"*.tcc": "cpp",
+			"deque": "cpp",
+			"unordered_map": "cpp",
+			"vector": "cpp",
+			"string_view": "cpp",
+			"memory": "cpp",
+			"random": "cpp"
 		}
 	}
 }

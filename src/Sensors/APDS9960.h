@@ -23,9 +23,14 @@ public:
         APDS9960::threshold = threshold;
 
         Wire.begin();
-
-        Wire.setSCL(19);
+        
+        #ifdef WS35
+        Wire.setSDA(19);
+        Wire.setSCL(18);
+        #else
         Wire.setSDA(18);
+        Wire.setSCL(19);
+        #endif
 
         didBegin = apds.begin();
 

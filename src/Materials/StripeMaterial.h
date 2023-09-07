@@ -78,7 +78,7 @@ public:
         
         pos = fabs(fmodf(position.X + sinf(position.Y * Mathematics::MPI * 2.0f / wavePeriod) * waveAmplitude, stripeWidth));
         
-        float ratio = Mathematics::Map(pos, 0, stripeWidth, 0, colorCount);
+        float ratio = Mathematics::Map(pos, 0.0f, stripeWidth, 0.0f, (float)colorCount);
         
         //map from modulo'd x value to color count minimum
         int startBox = floor(ratio);

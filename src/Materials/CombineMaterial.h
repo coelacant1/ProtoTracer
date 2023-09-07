@@ -179,6 +179,9 @@ public:
                         }
 
                         break;
+                    case Bypass:
+                        materials[i]->GetRGB(position, normal, uvw);
+                        break;
                     default:
 
                         break;

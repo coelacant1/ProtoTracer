@@ -195,7 +195,7 @@ public:
         }
     }
 
-    virtual bool GetAlternateXIndex(unsigned int count, unsigned int* index, int pixels){
+    virtual bool GetAlternateXIndex(unsigned int count, unsigned int* index){
         unsigned int tempIndex = count;
         bool isEven = count % 2;
         bool valid = true;
@@ -216,7 +216,7 @@ public:
         return valid;
     }
 
-    virtual bool GetAlternateYIndex(unsigned int count, unsigned int* index, int pixels){
+    virtual bool GetAlternateYIndex(unsigned int count, unsigned int* index){
         unsigned int tempIndex = count;
         bool isEven = count % 2;
         bool valid = true;

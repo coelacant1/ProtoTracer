@@ -10,19 +10,22 @@
 #include "..\Render\Triangle2D.h"
 #include "..\Math\Vector2D.h"
 
-template <size_t peakCount>
-class FFTVoiceDetection{
+class Viseme{
 public:
-    enum Viseme{
+    enum MouthShape{
         EE,
         AE,
         UH,
         AR,
         ER,
         AH,
-        OO
+        OO,
+        SS
     };
+};
 
+template <size_t peakCount>
+class FFTVoiceDetection : public Viseme{
 private:
     //F1 and F2
     static const uint8_t visemeCount = 7;
@@ -161,7 +164,7 @@ public:
         this->threshold = threshold;
     }
 
-    float GetViseme(Viseme viseme){
+    float GetViseme(MouthShape viseme){
         return *visRatios[viseme];
     }
 

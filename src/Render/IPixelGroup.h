@@ -24,8 +24,8 @@ public:
     virtual bool GetDownIndex(unsigned int count, unsigned int* downIndex) = 0;
     virtual bool GetLeftIndex(unsigned int count, unsigned int* leftIndex) = 0;
     virtual bool GetRightIndex(unsigned int count, unsigned int* rightIndex) = 0;
-    virtual bool GetAlternateXIndex(unsigned int count, unsigned int* index, int pixels) = 0;
-    virtual bool GetAlternateYIndex(unsigned int count, unsigned int* index, int pixels) = 0;
+    virtual bool GetAlternateXIndex(unsigned int count, unsigned int* index) = 0;
+    virtual bool GetAlternateYIndex(unsigned int count, unsigned int* index) = 0;
     virtual bool GetOffsetXIndex(unsigned int count, unsigned int* index, int x1) = 0;
     virtual bool GetOffsetYIndex(unsigned int count, unsigned int* index, int y1) = 0;
     virtual bool GetOffsetXYIndex(unsigned int count, unsigned int* index, int x1, int y1) = 0;

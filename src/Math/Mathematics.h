@@ -137,4 +137,10 @@ public:
 		else
 			return value + multiple - remainder;
 	}
+	
+	template<typename T>
+	static T ConstrainMap(T value, T inLow, T inMax, T outMin, T outMax){
+		T mappedValue = (value - inLow) * (outMax - outMin) / (inMax - inLow) + outMin;
+		return Constrain(mappedValue, outMin, outMax);
+	}
 };

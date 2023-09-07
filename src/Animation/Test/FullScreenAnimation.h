@@ -47,6 +47,18 @@ public:
         cube.GetObject()->SetMaterial(&spiral);
     }
 
+    void Initialize() override {
+        
+    }
+
+    uint8_t GetAccentBrightness(){
+        return 2;
+    };
+
+    uint8_t GetBrightness(){
+        return 2;
+    };
+
     void FadeIn(float stepRatio) override {}
     void FadeOut(float stepRatio) override {}
 
