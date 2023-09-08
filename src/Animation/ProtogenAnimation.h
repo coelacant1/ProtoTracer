@@ -9,7 +9,8 @@
 #include "..\Menu\Menu.h"
 #include "..\Sensors\APDS9960.h"
 #include "..\Sensors\HeadsUpDisplay.h"
-#include "..\Sensors\MicrophoneFourier_MAX9814.h"
+//#include "..\Sensors\MicrophoneFourier_MAX9814.h"
+#include "..\Sensors\MicrophoneFourier_DMA.h"
 
 #include "..\Materials\MaterialAnimator.h"
 #include "..\Materials\Animated\FlowNoise.h"
@@ -25,7 +26,7 @@
 
 //Default Animation base for Analog microphone, APDS9960 boop sensor, and button control
 template<size_t numObjects>
-class ProtogenAnimation : public Animation<numObjects> {
+class ProtogenAnimation : public Animation<numObjects + 1> {
 private:
     Background background;
     EasyEaseAnimator<40> eEA = EasyEaseAnimator<40>(EasyEaseInterpolation::Overshoot, 1.0f, 0.35f);
@@ -75,7 +76,6 @@ private:
     FunctionGenerator fGenMatYMove = FunctionGenerator(FunctionGenerator::Sine, -2.0f, 2.0f, 6.7f);
 
     APDS9960 boop;
-    HeadsUpDisplay hud = HeadsUpDisplay(Vector2D(0.0f, 0.0f), Vector2D(192.0f, 96.0f));
     FFTVoiceDetection<128> voiceDetection;
     
     float offsetFace = 0.0f;
@@ -122,10 +122,10 @@ private:
 
     void UpdateFFTVisemes(){
         if(Menu::UseMicrophone()){
-            eEA.AddParameterFrame(Viseme::SS + 100, MicrophoneFourierIT::GetCurrentMagnitude() / 2.0f);
+            eEA.AddParameterFrame(Viseme::SS + 100, MicrophoneFourier::GetCurrentMagnitude() / 2.0f);
 
-            if(MicrophoneFourierIT::GetCurrentMagnitude() > 0.05f){
-                voiceDetection.Update(MicrophoneFourierIT::GetFourierFiltered(), MicrophoneFourierIT::GetSampleRate());
+            if(MicrophoneFourier::GetCurrentMagnitude() > 0.05f){
+                voiceDetection.Update(MicrophoneFourier::GetFourierFiltered(), MicrophoneFourier::GetSampleRate());
         
                 eEA.AddParameterFrame(Viseme::EE + 100, voiceDetection.GetViseme(Viseme::EE));
                 eEA.AddParameterFrame(Viseme::AH + 100, voiceDetection.GetViseme(Viseme::AH));
@@ -165,12 +165,16 @@ protected:
         CRAINBOW,
         CRAINBOWNOISE
     };
-
+    
+    HeadsUpDisplay hud = HeadsUpDisplay(Vector2D(0.0f, 0.0f), Vector2D(192.0f, 96.0f));
 
     virtual void LinkControlParameters() = 0;
 
     void UpdateFace(float ratio) {        
         Menu::Update(ratio);
+        
+        xOffset = fGenMatXMove.Update();
+        yOffset = fGenMatYMove.Update();
         
         if (this->boopExists && Menu::UseBoopSensor()) {
            isBooped = boop.isBooped();
@@ -183,7 +187,7 @@ protected:
         voiceDetection.SetThreshold(map(Menu::GetMicLevel(), 0, 10, 1000, 50));
         UpdateFFTVisemes();
 
-        MicrophoneFourierIT::Update();
+        MicrophoneFourier::Update();
 
         sA.SetHueAngle(ratio * 360.0f * 4.0f);
         sA.SetMirrorYState(Menu::MirrorSpectrumAnalyzer());
@@ -300,7 +304,7 @@ protected:
     }
 
     void SpectrumAnalyzerFace(){
-        sA.Update(MicrophoneFourierIT::GetFourierFiltered());
+        sA.Update(MicrophoneFourier::GetFourierFiltered());
 
         eEA.AddParameterFrame(offsetFaceInd, 1.0f);
         eEA.AddParameterFrame(offsetFaceIndSA, 1.0f);
@@ -309,7 +313,7 @@ protected:
     }
 
     void AudioReactiveGradientFace(){
-        aRG.Update(MicrophoneFourierIT::GetFourierFiltered());
+        aRG.Update(MicrophoneFourier::GetFourierFiltered());
 
         eEA.AddParameterFrame(offsetFaceInd, 1.0f);
         eEA.AddParameterFrame(offsetFaceIndARG, 1.0f);
@@ -318,7 +322,7 @@ protected:
     }
 
     void OscilloscopeFace(){
-        oSC.Update(MicrophoneFourierIT::GetSamples());
+        oSC.Update(MicrophoneFourier::GetSamples());
 
         eEA.AddParameterFrame(offsetFaceInd, 1.0f);
         eEA.AddParameterFrame(offsetFaceIndOSC, 1.0f);
@@ -330,8 +334,8 @@ protected:
         return isBooped;
     }
 
-    Vector2D GetWiggleOffset(){
-        return Vector2D(xOffset, yOffset);
+    Vector3D GetWiggleOffset(){
+        return Vector3D(fGenMatXMove.Update(), fGenMatYMove.Update(), 0);
     }
 
 public:
@@ -363,6 +367,9 @@ public:
 
         oSC.SetSize(cameraSize);
         oSC.SetPosition(cameraSize / 2.0f);
+
+        hud.SetFaceMax(camMax);
+        hud.SetFaceMin(camMin);
     }
 
     Material* GetFaceMaterial(){
@@ -378,7 +385,7 @@ public:
 
         hud.Initialize();
 
-        MicrophoneFourierIT::Initialize(microphonePin, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
+        MicrophoneFourier::Initialize(microphonePin, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
         
         if(useNeoTrellis){
             Menu::Initialize(faceCount);//NeoTrellis

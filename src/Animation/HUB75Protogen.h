@@ -5,10 +5,12 @@
 #include "..\Objects\LEDStripBackground.h"
 #include "..\Morph\NukudeFlat.h"
 
-class HUB75Protogen : public ProtogenAnimation<3> {
+class HUB75Protogen : public ProtogenAnimation<2> {
 private:
     NukudeFace pM;
     LEDStripBackground ledStripBackground;
+    
+	const __FlashStringHelper* faceArray[10] = {F("no"), F("ANGRY"), F("DOUBT"), F("FROWN"), F("LOOKUP"), F("SAD"), F("AUDIO1"), F("AUDIO2"), F("AUDIO3")};
 
     void LinkControlParameters() override {
         AddParameter(NukudeFace::Anger, pM.GetMorphWeightReference(NukudeFace::Anger), 15);
@@ -76,6 +78,8 @@ public:
         ledStripBackground.GetObject()->SetMaterial(GetFaceMaterial());
 
         LinkControlParameters();
+
+        hud.SetFaceArray(faceArray);
     }
 
     void Update(float ratio) override {
@@ -110,7 +114,7 @@ public:
 
         AlignObject(pM.GetObject());
         
-        pM.GetObject()->GetTransform()->SetPosition(Vector3D(GetWiggleOffset().X, GetWiggleOffset().Y, 0));
+        pM.GetObject()->GetTransform()->SetPosition(GetWiggleOffset());
         pM.GetObject()->UpdateTransform();
     }
 };

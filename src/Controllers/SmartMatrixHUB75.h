@@ -11,7 +11,7 @@
 #include "Controller.h"
 #include "Render/Camera.h"
 #include "Flash/PixelGroups/P3HUB75.h"
-#include "Flash/PixelGroups/LinearPixels.h"
+#include "Flash/PixelGroups/DeltaDisplay.h"
 
 //HUB75
 #define ENABLE_HUB75_REFRESH    1
@@ -48,7 +48,7 @@ private:
     Transform camSideTransform = Transform(Vector3D(), Vector3D(0, 0, -500.0f), Vector3D(1, 1, 1));
 
     PixelGroup<2048> camPixels = PixelGroup<2048>(P3HUB75);
-    PixelGroup<100> camSidePixels = PixelGroup<100>(LinearPixels);
+    PixelGroup<100> camSidePixels = PixelGroup<100>(DeltaDisplay);
 
     Camera<2048> camMain = Camera<2048>(&camTransform, &cameraLayout, &camPixels);
     Camera<100> camSidePanels = Camera<100>(&camSideTransform, &cameraLayout, &camSidePixels);

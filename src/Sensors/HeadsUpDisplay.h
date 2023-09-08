@@ -21,6 +21,16 @@ private:
 	static const uint32_t splashTime = 2500;
 	static const int bufferSize = 2048;// 64 * 32
 
+	const __FlashStringHelper* percentArray[10] = {F("10%"), F("20%"), F("30%"), F("40%"), F("50%"), F("60%"), F("70%"), F("80%"), F("90%"), F("100%")};
+	const __FlashStringHelper* effectArray[10] = {F("NONE"), F("PHASEY"), F("PHASEX"), F("PHASER"), F("GLITCHX"), F("MAGNET"), F("FISHEYE"), F("BLURH"), F("BLURV"), F("BLURR")};
+	const __FlashStringHelper* colorArray[10] = {F("GRDIENT"), F("YELLOW"), F("ORANGE"), F("WHITE"), F("GREEN"), F("PURPLE"), F("RED"), F("BLUE"), F("RAINBOW"), F("NOISE")};
+	const __FlashStringHelper* onOffArray[2] = {F("OFFLINE"), F("ONLINE")};
+	const __FlashStringHelper* mirrorSpecArray[2] = {F("DEFAULT"), F("MIRROR")};
+	const __FlashStringHelper* hueArray[10] = {F("0 DEG"), F("36 DEG"), F("72 DEG"), F("108 DEG"), F("144 DEG"), F("180 DEG"), F("216 DEG"), F("252 DEG"), F("288 DEG"), F("324 DEG")};
+	const __FlashStringHelper* faceArray[10] = {F("DEFAULT"), F("ANGRY"), F("DOUBT"), F("FROWN"), F("LOOKUP"), F("SAD"), F("AUDIO1"), F("AUDIO2"), F("AUDIO3")};
+	const __FlashStringHelper** faceNames;
+	bool useExternalFace = false;
+
 	Effect* subEffect;// Effect that changes visuals in system
 	TimeStep timeStep = TimeStep(5);
     bool didBegin = false;
@@ -72,57 +82,45 @@ private:
 		display.setTextSize(1);             // Normal 1:1 pixel scale
 
 		//ROW 1
-		//Face
-		display.setCursor(3,13);
-		display.println(F("HAPPY"));
+		display.setCursor(3,13);//Face
+		if (useExternalFace) display.println(faceNames[Menu::GetFaceState()]);
+		else display.println(faceArray[Menu::GetFaceState()]);
+		
+		display.setCursor(34,13);//Brightness
+		display.println(percentArray[Menu::GetBrightness()]);
 
-		//Brightness
-		display.setCursor(34,13);
-		display.println(F("LOW"));
+		display.setCursor(66,13);//Face Size
+		display.println(percentArray[Menu::GetFaceSize()]);
 
-		//Face Size
-		display.setCursor(66,13);
-		display.println(F("SMALL"));
-
-		//Use Microphone
-		display.setCursor(98,13);
-		display.println(F("YES"));
+		display.setCursor(98,13);//Use Microphone
+		display.println(onOffArray[Menu::UseMicrophone()]);
 
 		//ROW 2
-		//Effect
-		display.setCursor(3,28);
-		display.println(F("GLITCH"));
+		display.setCursor(3,28);//Effect
+		display.println(effectArray[Menu::GetEffectS()]);
 
-		//Side Brightness
-		display.setCursor(34,28);
-		display.println(F("LOW"));
+		display.setCursor(34,28);//Side Brightness
+		display.println(percentArray[Menu::GetAccentBrightness()]);
 
-		//Face Color
-		display.setCursor(66,28);
-		display.println(F("RAINBOW"));
+		display.setCursor(66,28);//Face Color
+		display.println(colorArray[Menu::GetFaceColor()]);
 
-		//Use Boop
-		display.setCursor(98,28);
-		display.println(F("YES"));
+		display.setCursor(98,28);//Use Boop
+		display.println(onOffArray[Menu::UseBoopSensor()]);
 
 		//ROW 3
-		//Effect
-		display.setCursor(3,45);
-		display.println(F("30 DEG"));
+		display.setCursor(3,45);//Hue front
+		display.println(hueArray[Menu::GetHueF()]);
 
-
-		//Side Brightness
-		display.setCursor(34,45);
-		display.println(F("MEDIUM"));
+		display.setCursor(34,45);//Mic level
+		display.println(percentArray[Menu::GetMicLevel()]);
 
 		//ROW 4
-		//Effect
-		display.setCursor(3,60);
-		display.println(F("180 DEG"));
+		display.setCursor(3,60);//Hue back
+		display.println(hueArray[Menu::GetHueB()]);
 
-		//Side Brightness
-		display.setCursor(34,60);
-		display.println(F("MIRROR"));
+		display.setCursor(34,60);//Mirror spectrum analyzer
+		display.println(mirrorSpecArray[Menu::MirrorSpectrumAnalyzer()]);
 		
   		display.drawBitmap(66, 35, faceBitmap, 64, 32, 0);
 	}
@@ -130,6 +128,19 @@ private:
 public:
 	HeadsUpDisplay(Vector2D faceMin, Vector2D faceMax){
 		this->faceMin = faceMin;
+		this->faceMax = faceMax;
+	}
+
+	void SetFaceArray(const __FlashStringHelper** faceNames){
+		this->faceNames = faceNames;
+		useExternalFace = true;
+	}
+
+	void SetFaceMin(Vector2D faceMin){
+		this->faceMin = faceMin;
+	}
+
+	void SetFaceMax(Vector2D faceMax){
 		this->faceMax = faceMax;
 	}
 

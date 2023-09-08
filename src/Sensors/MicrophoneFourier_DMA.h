@@ -23,8 +23,7 @@ DMAMEM static volatile uint16_t __attribute__((aligned(32))) adc_buffer1[256];
 DMAMEM static volatile uint16_t __attribute__((aligned(32))) adc_buffer2[256];
 AnalogBufferDMA adc_dma_instance(adc_buffer1, 256, adc_buffer2, 256);
 
-class MicrophoneFourier
-{
+class MicrophoneFourier{
 private:
     static const uint16_t FFTSize = 256;
     static const uint16_t OutputBins = 128;
@@ -48,26 +47,22 @@ private:
 
     static arm_cfft_radix4_instance_f32 RadixFFT;
 
-    static void window_raw_fft_data(void *buffer, const void *window)
-    {
+    static void window_raw_fft_data(void *buffer, const void *window){
         int16_t *buf = (int16_t *)buffer;
         const int16_t *win = (int16_t *)window;
         ;
 
-        for (int i = 0; i < 256; i++)
-        {
+        for (int i = 0; i < 256; i++){
             int32_t val = *buf * *win++;
             *buf = val >> 15;
             buf += 2;
         }
     }
 
-    static float AverageMagnitude(uint16_t binL, uint16_t binH)
-    {
+    static float AverageMagnitude(uint16_t binL, uint16_t binH){
         float average = 0.0f;
 
-        for (uint16_t i = 1; i < FFTSize / 2; i++)
-        {
+        for (uint16_t i = 1; i < FFTSize / 2; i++){
             if (i >= binL && i <= binH)
                 average += outputMagn[i];
         }
@@ -75,8 +70,7 @@ private:
         return average / float(binH - binL + 1);
     }
 
-    static void SamplerCallback(AnalogBufferDMA *dma_buffer_instance, int8_t adc_num)
-    {
+    static void SamplerCallback(AnalogBufferDMA *dma_buffer_instance, int8_t adc_num){
         uint16_t samplePos = 0;
         uint16_t samplesStoragePos = 0;
         volatile uint16_t *data = dma_buffer_instance->bufferLastISRFilled();
@@ -85,8 +79,7 @@ private:
         if ((uint32_t)data >= 0x20200000u)
             arm_dcache_delete((void *)data, sizeof(adc_buffer1));
         // Copy DMA Buffer into the storage buffer
-        while (data < data_end)
-        {
+        while (data < data_end){
             inputStorage[samplesStoragePos++] = (float)*data;
             data++;
         }
@@ -96,16 +89,36 @@ private:
         window_raw_fft_data(inputStorage, Hanning256);
         // Interleave Real and Imaginary Numbers into a seperate buffer for the FFT DSP, eg {data[1], 0, data[2], 0, ect...}
         samplePos = 0;
-        for (int i = 0; i < 256; i++)
-        {
+        for (int i = 0; i < 256; i++){
             inputSamp[samplePos++] = inputStorage[i];
             inputSamp[samplePos++] = 0.0f;
         }
     }
 
 public:
-    static void Initialize(uint8_t pin, uint8_t gain_pin, uint32_t sampleRate, float minDB, float maxDB, bool microphoneGain_50db)
-    {
+    static void Initialize(uint8_t pin, uint32_t sampleRate, float minDB, float maxDB){
+        MicrophoneFourier::minDB = minDB;
+        MicrophoneFourier::maxDB = maxDB;
+        MicrophoneFourier::pin = pin;
+        MicrophoneFourier::gain_pin = gain_pin;
+        MicrophoneFourier::sampleRate = sampleRate;
+
+        pinMode(pin, INPUT);
+
+        adc->adc1->setAveraging(32);
+        adc->adc1->setResolution(16);
+        adc->adc1->calibrate();
+        adc->adc1->wait_for_cal();
+
+        adc_dma_instance.init(adc, ADC_1);
+
+        adc->adc1->startSingleRead(pin);
+        adc->adc1->startTimer(sampleRate);
+
+        isInitialized = true;
+    }
+
+    static void Initialize(uint8_t pin, uint8_t gain_pin, uint32_t sampleRate, float minDB, float maxDB, bool microphoneGain_50db){
         MicrophoneFourier::minDB = minDB;
         MicrophoneFourier::maxDB = maxDB;
         MicrophoneFourier::pin = pin;
@@ -130,53 +143,43 @@ public:
         isInitialized = true;
     }
 
-    static void setSamplingRate(uint32_t sampleRate)
-    {
+    static void setSamplingRate(uint32_t sampleRate){
         adc->adc1->stopTimer();
         MicrophoneFourier::sampleRate = sampleRate;
         adc->adc1->startTimer(sampleRate);
     }
 
-    static void setMicGain(bool is50db)
-    {
+    static void setMicGain(bool is50db){
         MicrophoneFourier::microphoneGain_50db = is50db;
         (!MicrophoneFourier::microphoneGain_50db) ? digitalWrite(gain_pin, 0) : digitalWrite(gain_pin, 1);
     }
 
-    static bool IsInitialized()
-    {
+    static bool IsInitialized(){
         return isInitialized;
     }
 
-    static float GetSampleRate()
-    {
+    static float GetSampleRate(){
         return sampleRate;
     }
 
-    static float *GetSamples()
-    {
+    static float *GetSamples(){
         return inputStorage;
     }
 
-    static float *GetFourier()
-    {
+    static float *GetFourier(){
         return outputData;
     }
 
-    static float *GetFourierFiltered()
-    {
+    static float *GetFourierFiltered(){
         return outputDataFilt;
     }
 
-    static float GetCurrentMagnitude()
-    {
+    static float GetCurrentMagnitude(){
         return threshold;
     }
 
-    static void Update()
-    {
-        if (adc_dma_instance.interrupted())
-        {
+    static void Update(){
+        if (adc_dma_instance.interrupted()){
             SamplerCallback(&adc_dma_instance, ADC_1);
             arm_cfft_radix4_init_f32(&RadixFFT, FFTSize, 0, 1);
             arm_cfft_radix4_f32(&RadixFFT, inputSamp);
@@ -184,8 +187,7 @@ public:
 
             float averageMagnitude = 0.0f;
 
-            for (uint16_t i = 0; i < OutputBins - 1; i++)
-            {
+            for (uint16_t i = 0; i < OutputBins - 1; i++){
                 float intensity = 20.0f * log10f(AverageMagnitude(i, i + 1));
 
                 intensity = map(intensity, minDB, maxDB, 0.0f, 1.0f);
