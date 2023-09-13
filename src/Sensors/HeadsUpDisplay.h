@@ -157,25 +157,34 @@ public:
         Wire.setSCL(19);
         #endif
 
-		didBegin = display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
+		Wire.beginTransmission(0x3C);
+		uint8_t error = Wire.endTransmission();
 
-		// Initialize the OLED display
-		if (!didBegin) {
-			// Handle initialization failure here
+		if(error == 0){// SSD1306 Found
+			didBegin = display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
+
+			// Initialize the OLED display
+			if (!didBegin) {
+				// Handle initialization failure here
+			}
+
+			display.setFont(&Picopixel);
+
+			// Clear the buffer and display
+			display.clearDisplay();
+			display.invertDisplay(true);
+			display.display();
+		}
+		else {
+			didBegin = false;
 		}
 
-		display.setFont(&Picopixel);
-
-		// Clear the buffer and display
-		display.clearDisplay();
-		display.invertDisplay(true);
-		display.display();
-
 		startMillis = millis();
+
 	}
 
 	void Update(){
-		if (timeStep.IsReady()){
+		if (timeStep.IsReady() && didBegin){
 			if (splashFinished){// Draw the bitmap to the display at the specified top-left coordinate
 				UpdateFaceInformation();
 			}

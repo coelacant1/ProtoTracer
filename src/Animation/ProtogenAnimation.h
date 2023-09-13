@@ -34,7 +34,6 @@ private:
     Vector2D camMin = Vector2D(0.0f, 0.0f);
     Vector2D camMax = Vector2D(189.0f, 93.0f);
     
-    bool boopExists = false;
     bool isBooped = false;
     bool blinkSet = false;
 
@@ -176,7 +175,7 @@ protected:
         xOffset = fGenMatXMove.Update();
         yOffset = fGenMatYMove.Update();
         
-        if (this->boopExists && Menu::UseBoopSensor()) {
+        if (Menu::UseBoopSensor()) {
            isBooped = boop.isBooped();
         }
 
@@ -381,7 +380,7 @@ public:
     }
 
     void Initialize() override {
-        boopExists = boop.Initialize(5);
+        boop.Initialize(5);
 
         hud.Initialize();
 

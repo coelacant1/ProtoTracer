@@ -16,6 +16,7 @@ private:
     static uint8_t faceChoices;
     static bool menuActive;
     static bool isReady;
+    static bool didBegin;
 
     static uint32_t Wheel(byte WheelPos){
         WheelPos = 255 - WheelPos;
@@ -93,28 +94,37 @@ private:
 
 public:
     static void Update(){
-        if(isReady){
+        if(didBegin){
             trellis.read();
         }
     }
 
     static bool Initialize(){//if true, eeprom needs set
-        Wire.setClock(100000);
+        Wire.setClock(100000);//for longer range transmissions
 
-        if (!trellis.begin()) {
-            Serial.println("Could not start Trellis, check wiring?");
+		Wire.beginTransmission(0x2E);
+		uint8_t error = Wire.endTransmission();
+
+		if(error == 0){// SSD1306 Found
+            if (!trellis.begin()) {
+                Serial.println("Could not start Trellis, check wiring?");
+                didBegin = false;
+            }
+            else {
+                //activate all keys and set callbacks
+                for(int i=0; i<NEO_TRELLIS_NUM_KEYS; i++){
+                    trellis.activateKey(i, SEESAW_KEYPAD_EDGE_RISING);
+                    trellis.activateKey(i, SEESAW_KEYPAD_EDGE_FALLING);
+                    trellis.registerCallback(i, blink);
+                }
+
+                didBegin = true;
+
+                Serial.println("NeoPixel Trellis started");
+            }
         }
         else {
-            //activate all keys and set callbacks
-            for(int i=0; i<NEO_TRELLIS_NUM_KEYS; i++){
-                trellis.activateKey(i, SEESAW_KEYPAD_EDGE_RISING);
-                trellis.activateKey(i, SEESAW_KEYPAD_EDGE_FALLING);
-                trellis.registerCallback(i, blink);
-            }
-
-            isReady = true;
-
-            Serial.println("NeoPixel Trellis started");
+            didBegin = false;
         }
 
         for (uint8_t i = 0; i < menuCount; i++){
@@ -165,4 +175,4 @@ uint8_t MenuHandler<menuCount>::faceChoices = 0;
 template<uint8_t menuCount>
 bool MenuHandler<menuCount>::menuActive = false;
 template<uint8_t menuCount>
-bool MenuHandler<menuCount>::isReady = false;
+bool MenuHandler<menuCount>::didBegin = false;
