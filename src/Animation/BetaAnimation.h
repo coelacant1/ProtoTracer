@@ -9,7 +9,7 @@
 #include "..\Morph\BetaRear.h"
 #include "..\Render\Scene.h"
 #include "..\Signals\FunctionGenerator.h"
-#include "..\Menu\SingleButtonMenu.h"
+#include "..\Menu\Menu.h"
 //#include "..\Menu\NeoTrellisMenu.h"
 #include "..\Sensors\APDS9960.h"
 
@@ -29,17 +29,6 @@
 
 #include "..\Render\ObjectAlign.h"
 
-#include "..\Screenspace\GlitchX.h"
-#include "..\Screenspace\Fisheye.h"
-#include "..\Screenspace\HorizontalBlur.h"
-#include "..\Screenspace\PhaseOffsetX.h"
-#include "..\Screenspace\PhaseOffsetY.h"
-#include "..\Screenspace\PhaseOffsetR.h"
-#include "..\Screenspace\Magnet.h"
-#include "..\Screenspace\Overflow.h"
-#include "..\Screenspace\RadialBlur.h"
-#include "..\Screenspace\ShiftR.h"
-#include "..\Screenspace\VerticalBlur.h"
 
 class BetaAnimation : public Animation<4> {
 private:
@@ -48,7 +37,7 @@ private:
     BetaRear rear;
     Background background;
     LEDStripBackground ledStripBackground;
-    EasyEaseAnimator<25> eEA = EasyEaseAnimator<25>(EasyEaseInterpolation::Overshoot, 1.0f, 0.35f);
+    EasyEaseAnimator<35> eEA = EasyEaseAnimator<35>(EasyEaseInterpolation::Overshoot, 1.0f, 0.35f);
     
     //Materials
     RainbowNoise rainbowNoise;
@@ -98,18 +87,6 @@ private:
     FFTVoiceDetection<128> voiceDetection;
 
     ObjectAlign objA = ObjectAlign(Vector2D(0.0f, 0.0f), Vector2D(189.0f, 93.0f), Quaternion());
-    
-    Fisheye fisheye = Fisheye();
-    GlitchX glitchX = GlitchX(30);
-    HorizontalBlur blurH = HorizontalBlur(8);
-    VerticalBlur blurV = VerticalBlur(8);
-    Magnet magnet = Magnet();
-    RadialBlur blurR = RadialBlur(8);
-    PhaseOffsetX phaseX = PhaseOffsetX(8);
-    PhaseOffsetY phaseY = PhaseOffsetY(8);
-    PhaseOffsetR phaseR = PhaseOffsetR(8);
-    ShiftR shiftR = ShiftR(8);
-    Overflow overflow = Overflow(8);
 
     float offsetFace = 0.0f;
     float offsetFaceSA = 0.0f;
@@ -140,6 +117,15 @@ private:
         eEA.AddParameter(pM.GetMorphWeightReference(BetaFront::HideAll), BetaFront::HideAll, 90, 0.0f, 1.0f);
 
         eEA.AddParameter(pM.GetMorphWeightReference(BetaFront::AngryEyeMouth), BetaFront::AngryEyeMouth, 90, 0.0f, 1.0f);
+
+        eEA.AddParameter(pM.GetMorphWeightReference(BetaFront::vrc_v_ee), BetaFront::vrc_v_ee, 2, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(BetaFront::vrc_v_ih), BetaFront::vrc_v_ih, 2, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(BetaFront::vrc_v_dd), BetaFront::vrc_v_dd, 2, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(BetaFront::vrc_v_rr), BetaFront::vrc_v_rr, 2, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(BetaFront::vrc_v_ch), BetaFront::vrc_v_ch, 2, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(BetaFront::vrc_v_aa), BetaFront::vrc_v_aa, 2, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(BetaFront::vrc_v_oh), BetaFront::vrc_v_oh, 2, 0.0f, 1.0f);
+        eEA.AddParameter(pM.GetMorphWeightReference(BetaFront::vrc_v_ss), BetaFront::vrc_v_ss, 2, 0.0f, 1.0f);
 
         eEA.AddParameter(&offsetFace, offsetFaceInd, 40, 0.0f, 1.0f);
         eEA.AddParameter(&offsetFaceSA, offsetFaceIndSA, 40, 0.0f, 1.0f);
@@ -440,17 +426,6 @@ public:
 
         //Menu::SetSize(Vector2D(280, 60));
         //Menu::SetPositionOffset(Vector2D(0.0f, -30.0f * yOffset));
-        
-        //glitchX.SetRatio(fGenBlur.Update());
-        magnet.SetRatio(ratio);
-        fisheye.SetRatio(fGenBlur.Update());
-        blurH.SetRatio(fGenBlur.Update());
-        blurV.SetRatio(fGenBlur.Update());
-        blurR.SetRatio(fGenBlur.Update());
-        phaseX.SetRatio(fGenBlur.Update());
-        phaseY.SetRatio(fGenBlur.Update());
-        phaseR.SetRatio(fGenBlur.Update());
-        shiftR.SetRatio(fGenBlur.Update());
 
         SetMaterialColor();
 

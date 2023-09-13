@@ -1,6 +1,6 @@
 //#define ALPHARIGHT
 //#define ALPHALEFT
-//#define BETAWS35
+#define BETAWS35
 //#define GAMMAFRONT
 //#define GAMMABACK
 //#define HUB75
@@ -9,7 +9,7 @@
 //#define WS35
 //#define WS35SPLIT
 //#define ESP32HUB75
-#define CUSTOMHUB75
+//#define CUSTOMHUB75
 //#define CUSTOMWS35
 //#define CUSTOMBETAWS35
 
