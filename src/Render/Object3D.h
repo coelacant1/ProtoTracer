@@ -63,6 +63,14 @@ public:
         }
     }
 
+    Vector3D GetSize(){
+        Vector3D min, max;
+
+        GetMinMaxDimensions(min, max);
+
+        return max - min;
+    }
+
     Transform* GetTransform(){
         return &transform;
     }

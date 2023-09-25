@@ -1,6 +1,6 @@
 //#define ALPHARIGHT
 //#define ALPHALEFT
-#define BETAWS35
+//#define BETAWS35
 //#define GAMMAFRONT
 //#define GAMMABACK
 //#define HUB75
@@ -10,7 +10,7 @@
 //#define WS35SPLIT
 //#define ESP32HUB75
 //#define CUSTOMHUB75
-//#define CUSTOMWS35
+#define CUSTOMWS35
 //#define CUSTOMBETAWS35
 
 //#define PRINTINFO
@@ -45,10 +45,10 @@ GammaControllerFront controller = GammaControllerFront(maxBrightness);
 GammaControllerBack controller = GammaControllerBack(maxBrightness);
 #elif defined(HUB75)
 #include "Controllers\SmartMatrixHUB75.h"
-#include "Animation\HUB75Animation.h"
+#include "Animation\ProtogenHUB75.h"
 //#include "Animation\BetaAnimation.h"
 SmartMatrixHUB75 controller = SmartMatrixHUB75(maxBrightness, maxAccentBrightness);
-HUB75Animation animation = HUB75Animation();
+ProtogenHUB75 animation = ProtogenHUB75();
 //BetaAnimation animation = BetaAnimation();
 #elif defined(HUB75Split)
 #include "Controllers\SmartMatrixHUB75Split.h"
@@ -62,9 +62,9 @@ SmartMatrixHUB75Split controller = SmartMatrixHUB75Split(maxBrightness, maxAccen
 ClockAnimation animation = ClockAnimation(); 
 #elif defined(WS35)
 #include "Controllers\KaiborgV1D1Controller.h"
-#include "Animation\WS35Animation.h"
+#include "Animation\ProtogenWS35.h"
 KaiborgV1D1Controller controller = KaiborgV1D1Controller(maxBrightness);
-WS35Animation animation = WS35Animation();
+ProtogenWS35 animation = ProtogenWS35();
 #elif defined(WS35SPLIT)
 #include "Controllers\KaiborgV1D1Controller.h"
 #include "Animation\WS35Animation.h"
@@ -85,9 +85,9 @@ HUB75Protogen animation = HUB75Protogen();
 #elif defined(CUSTOMWS35)
 #define WS35
 #include "Controllers\KaiborgV1D1Controller.h"
-#include "Animation\Test\FullScreenAnimation.h"
+#include "Animation\Commissions\AceAnimation.h"
 KaiborgV1D1Controller controller = KaiborgV1D1Controller(maxBrightness);
-FullScreenAnimation animation = FullScreenAnimation();
+AceAnimation animation = AceAnimation();
 #elif defined(CUSTOMBETAWS35)
 #define BETAWS35
 #include "Controllers\BetaProtoController.h"

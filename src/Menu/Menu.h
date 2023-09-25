@@ -62,6 +62,9 @@ private:
     static uint8_t faceCount;
     static uint8_t currentMenu;
     static float wiggleRatio;
+    static float wiggleSpeedX;
+    static float wiggleSpeedY;
+    static float wiggleSpeedR;
     static bool isSecondary;
     
     static uint8_t faceState;
@@ -240,11 +243,13 @@ public:
         showMenuRatio = dampedSpringShow.Calculate(menuTarget, 0.25f);
         material.Update(ratio);
 
-        ratio = sinf(ratio * Mathematics::MPI * 2.0f) * 4.0f;//Mathematics::Map(ratio, 0.0f, 1.0f, -4.0f, 4.0f);
+        float ratioX = sinf(ratio * Mathematics::MPI * 2.0f * wiggleSpeedX) * 4.0f;//Mathematics::Map(ratio, 0.0f, 1.0f, -4.0f, 4.0f);
+        float ratioY = sinf(ratio * Mathematics::MPI * 2.0f * wiggleSpeedY) * 4.0f;//Mathematics::Map(ratio, 0.0f, 1.0f, -4.0f, 4.0f);
+        float ratioR = sinf(ratio * Mathematics::MPI * 2.0f * wiggleSpeedR) * 4.0f;//Mathematics::Map(ratio, 0.0f, 1.0f, -4.0f, 4.0f);
 
-        Menu::SetPosition(Vector2D(-xPosition + ratio * wiggleRatio, ratio * wiggleRatio + 40.0f + showMenuRatio * 3.0f));
+        Menu::SetPosition(Vector2D(-xPosition + ratioX * wiggleRatio, ratioY * wiggleRatio + 40.0f + showMenuRatio * 3.0f));
         Menu::SetRotationOffset(Vector2D(200.0f / 2, 100.0f / 2));
-        Menu::SetRotation(ratio);
+        Menu::SetRotation(ratioR);
 
         Menu::GenerateText();
         
@@ -260,6 +265,12 @@ public:
 
     static void SetWiggleRatio(float wiggleRatio){
         Menu::wiggleRatio = wiggleRatio;
+    }
+
+    static void SetWiggleSpeed(float wiggleSpeedX, float wiggleSpeedY, float wiggleSpeedR){
+        Menu::wiggleSpeedX = wiggleSpeedX;
+        Menu::wiggleSpeedY = wiggleSpeedY;
+        Menu::wiggleSpeedR = wiggleSpeedR;
     }
 
     static void SetSize(Vector2D size){
@@ -503,6 +514,9 @@ TextEngine<Menu::menuRows, Menu::menuLength * Menu::menuCountEng> Menu::textEngi
 uint8_t Menu::faceCount;
 uint8_t Menu::currentMenu = 0;
 float Menu::wiggleRatio = 1.0f;
+float Menu::wiggleSpeedX = 1.0f;
+float Menu::wiggleSpeedY = 1.0f;
+float Menu::wiggleSpeedR = 1.0f;
 bool Menu::isSecondary = 0;
 
 uint8_t Menu::faceState = 0;

@@ -12,7 +12,7 @@
 #include "..\Filter\PeakDetection.h"
 #include "..\Signals\TimeStep.h"
 
-class MicrophoneFourierIT{
+class MicrophoneFourier{
 private:
     static IntervalTimer sampleTimer;
     static TimeStep timeStep;
@@ -75,17 +75,17 @@ private:
 
 public:
     static void Initialize(uint8_t pin, uint16_t sampleRate, float minDB, float maxDB, float refreshRate = 60.0f){
-        MicrophoneFourierIT::minDB = minDB;
-        MicrophoneFourierIT::maxDB = maxDB;
-        MicrophoneFourierIT::pin = pin;
-        MicrophoneFourierIT::refreshRate = refreshRate;
+        MicrophoneFourier::minDB = minDB;
+        MicrophoneFourier::maxDB = maxDB;
+        MicrophoneFourier::pin = pin;
+        MicrophoneFourier::refreshRate = refreshRate;
 
         pinMode(pin, INPUT);
         analogReadResolution(12);
 
-        MicrophoneFourierIT::sampleRate = sampleRate;
-        MicrophoneFourierIT::samples = 0;
-        MicrophoneFourierIT::samplesReady = false;
+        MicrophoneFourier::sampleRate = sampleRate;
+        MicrophoneFourier::samples = 0;
+        MicrophoneFourier::samplesReady = false;
 
         float windowRange = float(sampleRate) / 2.0f / float(OutputBins);
 
@@ -158,29 +158,29 @@ public:
     }
 };
 
-IntervalTimer MicrophoneFourierIT::sampleTimer;
-TimeStep MicrophoneFourierIT::timeStep = TimeStep(60);
+IntervalTimer MicrophoneFourier::sampleTimer;
+TimeStep MicrophoneFourier::timeStep = TimeStep(60);
 
-const uint16_t MicrophoneFourierIT::FFTSize;
-const uint8_t MicrophoneFourierIT::OutputBins;
-uint16_t MicrophoneFourierIT::sampleRate = 8000;
-uint16_t MicrophoneFourierIT::samples = 0;
-uint16_t MicrophoneFourierIT::samplesStorage = 0;
-uint8_t MicrophoneFourierIT::pin = 0;
-float MicrophoneFourierIT::minDB = 50.0f;
-float MicrophoneFourierIT::maxDB = 120.0f;
-float MicrophoneFourierIT::threshold = 400.0f;
-float MicrophoneFourierIT::refreshRate = 60.0f;
-bool MicrophoneFourierIT::samplesReady = false;
-bool MicrophoneFourierIT::isInitialized = false;
-DerivativeFilter MicrophoneFourierIT::peakFilterRate;
+const uint16_t MicrophoneFourier::FFTSize;
+const uint8_t MicrophoneFourier::OutputBins;
+uint16_t MicrophoneFourier::sampleRate = 8000;
+uint16_t MicrophoneFourier::samples = 0;
+uint16_t MicrophoneFourier::samplesStorage = 0;
+uint8_t MicrophoneFourier::pin = 0;
+float MicrophoneFourier::minDB = 50.0f;
+float MicrophoneFourier::maxDB = 120.0f;
+float MicrophoneFourier::threshold = 400.0f;
+float MicrophoneFourier::refreshRate = 60.0f;
+bool MicrophoneFourier::samplesReady = false;
+bool MicrophoneFourier::isInitialized = false;
+DerivativeFilter MicrophoneFourier::peakFilterRate;
 
-uint16_t MicrophoneFourierIT::frequencyBins[];
-float MicrophoneFourierIT::inputSamp[];
-float MicrophoneFourierIT::inputStorage[];
-float MicrophoneFourierIT::outputMagn[];
-float MicrophoneFourierIT::outputData[];
-float MicrophoneFourierIT::outputDataFilt[];
-FFTFilter MicrophoneFourierIT::fftFilters[];
+uint16_t MicrophoneFourier::frequencyBins[];
+float MicrophoneFourier::inputSamp[];
+float MicrophoneFourier::inputStorage[];
+float MicrophoneFourier::outputMagn[];
+float MicrophoneFourier::outputData[];
+float MicrophoneFourier::outputDataFilt[];
+FFTFilter MicrophoneFourier::fftFilters[];
 
-arm_cfft_radix4_instance_f32 MicrophoneFourierIT::RadixFFT;
+arm_cfft_radix4_instance_f32 MicrophoneFourier::RadixFFT;

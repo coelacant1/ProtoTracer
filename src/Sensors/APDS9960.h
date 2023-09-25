@@ -22,6 +22,7 @@ public:
     static bool Initialize(uint8_t threshold) {//timeout in milliseconds and threshold is minimum for detection (0 is far away, 255 is touching)
         APDS9960::threshold = threshold;
 
+        Wire.setClock(100000);//for longer range transmissions
         Wire.begin();
         
         #ifdef WS35
@@ -58,13 +59,26 @@ public:
         return proximity > minimum + threshold;
     }
 
+    static void ResetI2CBus() {
+        Wire.end();  // Disable the I2C hardware
+        delay(10);   // Wait a bit
+        Wire.begin();  // Re-enable the I2C hardware
+    }
+
     static uint8_t GetValue(){
+        unsigned long cmdTime = millis();
+
         if (didBegin){
             if(!isProx){
                 apds.enableProximity(true);
                 isProx = true;
             }
             proximity = apds.readProximity();
+        }
+
+        if (millis() - cmdTime > 100) {
+            // Timeout occurred
+            ResetI2CBus();
         }
 
         return proximity;

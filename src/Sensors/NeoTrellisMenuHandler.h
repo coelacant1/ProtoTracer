@@ -91,14 +91,28 @@ private:
     static void WriteEEPROM(uint16_t index, uint8_t value){
         EEPROM.write(index, value);
     }
+    
+    static void ResetI2CBus() {
+        Wire.end();  // Disable the I2C hardware
+        delay(10);   // Wait a bit
+        Wire.begin();  // Re-enable the I2C hardware
+    }
 
 public:
     static void Update(){
+        unsigned long cmdTime = millis();
+
         if(didBegin){
             trellis.read();
         }
-    }
 
+        if (millis() - cmdTime > 250) {
+            // Timeout occurred
+            ResetI2CBus();
+        }
+
+    }
+    
     static bool Initialize(){//if true, eeprom needs set
         Wire.setClock(100000);//for longer range transmissions
 

@@ -146,7 +146,8 @@ public:
 
 	void Initialize(){
 		ResetDisplayBuffer();
-		
+
+        Wire.setClock(100000);//for longer range transmissions
         Wire.begin();
         
         #ifdef WS35
@@ -182,6 +183,12 @@ public:
 		startMillis = millis();
 
 	}
+	
+    void ResetI2CBus() {
+        Wire.end();  // Disable the I2C hardware
+        delay(10);   // Wait a bit
+        Wire.begin();  // Re-enable the I2C hardware
+    }
 
 	void Update(){
 		if (timeStep.IsReady() && didBegin){
@@ -199,8 +206,16 @@ public:
 			else{
 				splashFinished = true;
 			}
+
+        	unsigned long cmdTime = millis();
 			
 			display.display();
+
+			if (millis() - cmdTime > 250) {
+				// Timeout occurred
+				ResetI2CBus();
+			}
+
 			ResetDisplayBuffer();
 		}
 	}

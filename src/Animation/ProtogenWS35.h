@@ -5,10 +5,9 @@
 #include "..\Objects\LEDStripBackground.h"
 #include "..\Morph\NukudeFlat.h"
 
-class HUB75Protogen : public ProtogenAnimation<2> {
+class ProtogenWS35 : public ProtogenAnimation<1> {
 private:
     NukudeFace pM;
-    LEDStripBackground ledStripBackground;
     
 	const __FlashStringHelper* faceArray[10] = {F("DEFAULT"), F("ANGRY"), F("DOUBT"), F("FROWN"), F("LOOKUP"), F("SAD"), F("AUDIO1"), F("AUDIO2"), F("AUDIO3")};
 
@@ -70,12 +69,10 @@ private:
     }
 
 public:
-    HUB75Protogen() : ProtogenAnimation(Vector2D(), Vector2D(192.0f, 96.0f), A2, 20, 9){
+    ProtogenWS35() : ProtogenAnimation(Vector2D(), Vector2D(192.0f, 105.0f), 22, 0, 9){
         scene.AddObject(pM.GetObject());
-        scene.AddObject(ledStripBackground.GetObject());
 
         pM.GetObject()->SetMaterial(GetFaceMaterial());
-        ledStripBackground.GetObject()->SetMaterial(GetFaceMaterial());
 
         LinkControlParameters();
 
@@ -105,10 +102,13 @@ public:
             }
             else {
                 SpectrumAnalyzerFace();
-            }
+            } 
         }
 
         UpdateFace(ratio);
+
+        pM.SetMorphWeight(NukudeFace::BiggerNose, 1.0f);
+        pM.SetMorphWeight(NukudeFace::MoveEye, 1.0f);
 
         pM.Update();
 

@@ -57,6 +57,17 @@ public:
         }
     }
 
+    float GetMaterialOpacity(Material &material){
+        for(uint8_t i = 0; i <= currentMaterials; i++){
+            if(dictionary[i] == &material){
+                return eEA.GetValue(i);
+                break;
+            }
+        }
+
+        return 0.0f;
+    }
+
     void Update(){
         eEA.Update();//update material opacities
 

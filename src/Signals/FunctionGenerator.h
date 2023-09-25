@@ -48,6 +48,14 @@ public:
         this->period = period;
     }
 
+    void SetPeriod(float period){
+        this->period = period;
+    }
+
+    void SetFunction(Function function){
+        this->function = function;
+    }
+
     float Update(){
         float currentTime = fmod(micros() / 1000000.0f, period);
         float ratio = currentTime / period;

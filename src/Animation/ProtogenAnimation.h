@@ -9,8 +9,8 @@
 #include "..\Menu\Menu.h"
 #include "..\Sensors\APDS9960.h"
 #include "..\Sensors\HeadsUpDisplay.h"
-//#include "..\Sensors\MicrophoneFourier_MAX9814.h"
-#include "..\Sensors\MicrophoneFourier_DMA.h"
+#include "..\Sensors\MicrophoneFourier_MAX9814.h"
+//#include "..\Sensors\MicrophoneFourier_DMA.h"
 
 #include "..\Materials\MaterialAnimator.h"
 #include "..\Materials\Animated\FlowNoise.h"
@@ -228,17 +228,31 @@ protected:
         
         aRG.SetPosition(Vector2D(xMaxCamera / 2.0f + xOffset * 4.0f, cameraSize.Y / 2.0f + yOffset * 4.0f));
 
-        objA.SetPlaneOffsetAngle(-7.5f);
-        objA.SetEdgeMargin(2.0f);
         objA.SetCameraMax(Vector2D(xMaxCamera, cameraSize.Y - cameraSize.Y * offsetFace).Multiply(scale));
     }
 
-    void AlignObject(Object3D* obj){
+    void AlignObject(Object3D* obj, float rotation = 0.0f, float margin = 2.0f){
+        objA.SetPlaneOffsetAngle(rotation);
+        objA.SetEdgeMargin(margin);
         objA.AlignObject(obj);
     }
 
-    void AlignObjects(Object3D** objects, uint8_t objectCount){
+    void AlignObjects(Object3D** objects, uint8_t objectCount, float rotation = 0.0f, float margin = 2.0f){
+        objA.SetPlaneOffsetAngle(rotation);
+        objA.SetEdgeMargin(margin);
         objA.AlignObjects(objects, objectCount);
+    }
+
+    void AlignObjectNoScale(Object3D* obj, float rotation = 0.0f, float margin = 2.0f){
+        objA.SetPlaneOffsetAngle(rotation);
+        objA.SetEdgeMargin(margin);
+        objA.AlignObjectNoScale(obj);
+    }
+    
+    void AlignObjectsNoScale(Object3D** objects, uint8_t objectCount, float rotation = 0.0f, float margin = 2.0f){
+        objA.SetPlaneOffsetAngle(rotation);
+        objA.SetEdgeMargin(margin);
+        objA.AlignObjectsNoScale(objects, objectCount);
     }
 
     void AddParameter(uint8_t index, float* parameter, uint8_t transitionFrames, EasyEaseInterpolation::InterpolationMethod interpolationMethod = EasyEaseInterpolation::InterpolationMethod::Overshoot, bool invertDirection = false){
@@ -329,12 +343,43 @@ protected:
         backgroundMaterial.AddMaterialFrame(oSC, offsetFaceOSC);
     }
 
+    void HideFace(){
+        eEA.AddParameterFrame(offsetFaceInd, 1.0f);
+    }
+
+    void DisableBlinking(){
+        blink.Pause();
+        blink.Reset();
+    }
+
+    void EnableBlinking(){
+        blink.Reset();
+        blink.Play();
+    }
+
     bool IsBooped(){
         return isBooped;
     }
 
     Vector3D GetWiggleOffset(){
         return Vector3D(fGenMatXMove.Update(), fGenMatYMove.Update(), 0);
+    }
+
+    void SetWiggleSpeed(float multiplier){
+        fGenMatXMove.SetPeriod(5.3f / multiplier);
+        fGenMatYMove.SetPeriod(6.7f / multiplier);
+    }
+
+    void SetMenuWiggleSpeed(float multiplierX, float multiplierY, float multiplierR){
+        Menu::SetWiggleSpeed(multiplierX, multiplierY, multiplierR);
+    }
+
+    void SetMenuOffset(Vector2D offset){
+        Menu::SetPositionOffset(offset);
+    }
+
+    void SetMenuSize(Vector2D size){
+        Menu::SetSize(size);
     }
 
 public:
@@ -354,6 +399,8 @@ public:
 
         SetMaterialLayers();
 
+        objA.SetCameraMax(camMax);
+        objA.SetCameraMin(camMin);
         objA.SetJustification(ObjectAlign::Stretch);
         objA.SetMirrorX(true);
         
