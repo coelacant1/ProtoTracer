@@ -11,6 +11,7 @@
 #include "..\Sensors\HeadsUpDisplay.h"
 #include "..\Sensors\MicrophoneFourier_MAX9814.h"
 //#include "..\Sensors\MicrophoneFourier_DMA.h"
+#include "..\Sensors\FanController.h"
 
 #include "..\Materials\MaterialAnimator.h"
 #include "..\Materials\Animated\FlowNoise.h"
@@ -44,7 +45,6 @@ private:
     uint8_t microphonePin = 0;
     uint8_t buttonPin = 0;
     uint8_t faceCount = 10;
-    bool useNeoTrellis = false;
     
     //Materials
     FlowNoise flowNoise;
@@ -74,6 +74,7 @@ private:
     FunctionGenerator fGenMatXMove = FunctionGenerator(FunctionGenerator::Sine, -2.0f, 2.0f, 5.3f);
     FunctionGenerator fGenMatYMove = FunctionGenerator(FunctionGenerator::Sine, -2.0f, 2.0f, 6.7f);
 
+    FanController fanController = FanController(15);
     APDS9960 boop;
     FFTVoiceDetection<128> voiceDetection;
     
@@ -171,6 +172,8 @@ protected:
 
     void UpdateFace(float ratio) {        
         Menu::Update(ratio);
+
+        fanController.SetPWM(Menu::GetFanSpeed() * 25);
         
         xOffset = fGenMatXMove.Update();
         yOffset = fGenMatYMove.Update();
@@ -383,13 +386,12 @@ protected:
     }
 
 public:
-    ProtogenAnimation(Vector2D camMin, Vector2D camMax, uint8_t microphonePin, uint8_t buttonPin, uint8_t faceCount, bool useNeoTrellis = false) {
+    ProtogenAnimation(Vector2D camMin, Vector2D camMax, uint8_t microphonePin, uint8_t buttonPin, uint8_t faceCount) {
         this->camMin = camMin;
         this->camMax = camMax;
         this->microphonePin = microphonePin;
         this->buttonPin = buttonPin;
         this->faceCount = faceCount;
-        this->useNeoTrellis = useNeoTrellis;
 
         this->scene.AddObject(background.GetObject());
         
@@ -431,14 +433,15 @@ public:
 
         hud.Initialize();
 
+        fanController.Initialize();
+
         MicrophoneFourier::Initialize(microphonePin, 8000, 50.0f, 120.0f);//8KHz sample rate, 50dB min, 120dB max
         
-        if(useNeoTrellis){
-            Menu::Initialize(faceCount);//NeoTrellis
-        }
-        else {
-            Menu::Initialize(faceCount, buttonPin, 500);//7 is number of faces
-        }
+        #ifdef NEOTRELLISMENU
+        Menu::Initialize(faceCount);//NeoTrellis
+        #else
+        Menu::Initialize(faceCount, buttonPin, 500);//7 is number of faces
+        #endif
     }
 
     uint8_t GetAccentBrightness(){

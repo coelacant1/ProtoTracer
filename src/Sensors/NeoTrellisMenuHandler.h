@@ -114,12 +114,12 @@ public:
     }
     
     static bool Initialize(){//if true, eeprom needs set
-        Wire.setClock(100000);//for longer range transmissions
+        Wire.setClock(50000);//for longer range transmissions
 
 		Wire.beginTransmission(0x2E);
 		uint8_t error = Wire.endTransmission();
 
-		if(error == 0){// SSD1306 Found
+		if(error == 0){// Neotrellis Found
             if (!trellis.begin()) {
                 Serial.println("Could not start Trellis, check wiring?");
                 didBegin = false;
@@ -139,6 +139,8 @@ public:
         }
         else {
             didBegin = false;
+
+            Serial.println("NeoPixel Trellis not found");
         }
 
         for (uint8_t i = 0; i < menuCount; i++){

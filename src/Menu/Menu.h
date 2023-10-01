@@ -39,11 +39,12 @@ public:
         Color,
         HueF,
         HueB,
-        EffectS
+        EffectS,
+        FanSpeed
     };
 
 private:
-    static const uint8_t menuCount = 12;
+    static const uint8_t menuCount = 13;
     static RainbowNoise material;
     static DampedSpring dampedSpringX;
     static DampedSpring dampedSpringShow;
@@ -79,6 +80,7 @@ private:
     static uint8_t huef;
     static uint8_t hueb;
     static uint8_t effect;
+    static uint8_t fanSpeed;
     
     static String line1;
     static String line2;
@@ -113,6 +115,7 @@ private:
         MenuHandler<menuCount>::SetMenuMax(HueF, 10);
         MenuHandler<menuCount>::SetMenuMax(HueB, 10);
         MenuHandler<menuCount>::SetMenuMax(EffectS, 10);
+        MenuHandler<menuCount>::SetMenuMax(FanSpeed, 10);
     }
 
     static void SetDefaultEntries(){
@@ -128,6 +131,7 @@ private:
         MenuHandler<menuCount>::SetDefaultValue(HueF, 0);
         MenuHandler<menuCount>::SetDefaultValue(HueB, 0);
         MenuHandler<menuCount>::SetDefaultValue(EffectS, 0);
+        MenuHandler<menuCount>::SetDefaultValue(FanSpeed, 0);
 
         MenuHandler<menuCount>::SetInitialized();
     }
@@ -145,11 +149,7 @@ public:
         textEngine.SetPositionOffset(position);
         textEngine.SetBlinkTime(200);
 
-        #ifdef NEOTRELLISMENU
-        if (!MenuHandler<menuCount>::Initialize()){
-            SetDefaultEntries();
-        }
-        #else
+        #ifndef NEOTRELLISMENU
         if (!MenuHandler<menuCount>::Initialize(pin, holdingTime)){
             SetDefaultEntries();
         }
@@ -176,10 +176,18 @@ public:
         textEngine.SetMaterial(&material);
         textEngine.SetPositionOffset(position);
         textEngine.SetBlinkTime(200);
+        
+        #ifdef NEOTRELLISMENU
+        if (!MenuHandler<menuCount>::Initialize()){
+            SetDefaultEntries();
+        }
+
+        isSecondary = false;
+        #else
+        isSecondary = true;
+        #endif
 
         SetMaxEntries();
-
-        isSecondary = true;
     }
 
     static Material* GetMaterial(){
@@ -226,6 +234,10 @@ public:
     }
 
     static void Update(float ratio){
+        #ifdef NEOTRELLISMENU
+        MenuHandler<menuCount>::Update();
+        #endif
+
         float target = 0.0f;
         float menuTarget = 0.0f;
 
@@ -355,7 +367,7 @@ public:
             }
         }
         
-        while(text.length() < 12){
+        while(text.length() < menuLength){
             text += " ";
         }
 
@@ -379,6 +391,7 @@ public:
         line2 += GenerateLine(10, GetHueF());
         line2 += GenerateLine(10, GetHueB());
         line2 += GenerateLine(10, GetEffectS());
+        line2 += GenerateLine(10, GetFanSpeed());
 
         textEngine.SetText(1, line2, false);
     }
@@ -491,6 +504,15 @@ public:
         else return MenuHandler<menuCount>::GetMenuValue(EffectS);
     }
 
+    static void SetFanSpeed(uint8_t fanSpeed){
+        Menu::fanSpeed = fanSpeed;
+    }
+
+    static uint8_t GetFanSpeed(){
+        if(isSecondary) return fanSpeed;
+        else return MenuHandler<menuCount>::GetMenuValue(FanSpeed);
+    }
+
     static float ShowMenu(){
         return showMenuRatio / 100.0f;
     }
@@ -531,6 +553,7 @@ uint8_t Menu::color = 0;
 uint8_t Menu::huef = 0;
 uint8_t Menu::hueb = 0;
 uint8_t Menu::effect = 0;
+uint8_t Menu::fanSpeed = 0;
 
 EffectChangeTrack<1> Menu::effectChange;
 float Menu::effectStrength = 0.0f;
@@ -549,7 +572,7 @@ PhaseOffsetR Menu::phaseR = PhaseOffsetR(20);
 ShiftR Menu::shiftR = ShiftR(20);
 Overflow Menu::overflow = Overflow(20);
 
-//                    111111111111222222222222333333333333444444444444555555555555666666666666777777777777888888888888999999999999111111111111222222222222333333333333
-String Menu::line1 = "               BRIGHT     SIDEBRT       MIC        LEVEL        BOOP        SPEC        SIZE       COLOR       HUE F       HUE B      EFFECT    ";
-String Menu::line2 = " a b c d e f   12^45       12^45       ON off     123456|8     on OFF      ON off      12^45      123456|8    123456|8    123456|8    123456|8  ";
+//                    111111111111222222222222333333333333444444444444555555555555666666666666777777777777888888888888999999999999111111111111222222222222333333333333444444444444
+String Menu::line1 = "               BRIGHT    SDE BRIGHT     MIC      MIC LEVEL      BOOP        SPEC        SIZE       COLOR       HUE F       HUE B       EFFECT    FAN SPEED  ";
+String Menu::line2 = " a b c d e f   12^45       12^45       ON off     123456|8     on OFF      ON off      12^45      123456|8    123456|8    123456|8    123456|8    123456|8  ";
 

@@ -69,7 +69,7 @@ private:
     }
 
 public:
-    ProtogenWS35() : ProtogenAnimation(Vector2D(), Vector2D(192.0f, 105.0f), 22, 0, 9){
+    ProtogenWS35() : ProtogenAnimation(Vector2D(), Vector2D(192.0f, 105.0f), 22, 23, 9){
         scene.AddObject(pM.GetObject());
 
         pM.GetObject()->SetMaterial(GetFaceMaterial());
@@ -112,7 +112,12 @@ public:
 
         pM.Update();
 
-        AlignObject(pM.GetObject());
+        AlignObject(pM.GetObject(), -7.5f);
+
+        SetWiggleSpeed(5.0f);
+        SetMenuWiggleSpeed(0.0f, 0.0f, 0.0f);
+        SetMenuOffset(Vector2D(2.5f, -3.0f));
+        SetMenuSize(Vector2D(240, 64));
         
         pM.GetObject()->GetTransform()->SetPosition(GetWiggleOffset());
         pM.GetObject()->UpdateTransform();

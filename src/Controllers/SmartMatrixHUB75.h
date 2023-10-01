@@ -29,7 +29,7 @@ SMARTMATRIX_ALLOCATE_BACKGROUND_LAYER(backgroundLayer, kMatrixWidth, kMatrixHeig
 
 //APA102
 #define ENABLE_APA102_REFRESH   1
-const uint16_t kApaMatrixWidth = 100;          // adjust this to your APA matrix/strip
+const uint16_t kApaMatrixWidth = 88;          // adjust this to your APA matrix/strip
 const uint16_t kApaMatrixHeight = 1;         // set kApaMatrixHeight to 1 for a strip
 const uint8_t kApaRefreshDepth = 36;        // not used for APA matrices as of now
 const uint8_t kApaDmaBufferRows = 1;        // not used for APA matrices as of now
@@ -45,13 +45,13 @@ private:
     CameraLayout cameraLayout = CameraLayout(CameraLayout::ZForward, CameraLayout::YUp);
 
     Transform camTransform = Transform(Vector3D(), Vector3D(0, 0, -500.0f), Vector3D(1, 1, 1));
-    Transform camSideTransform = Transform(Vector3D(), Vector3D(0, 0, -500.0f), Vector3D(1, 1, 1));
+    Transform camSideTransform = Transform(Vector3D(), Vector3D(204.0f, 0, -500.0f), Vector3D(1, 1, 1));
 
     PixelGroup<2048> camPixels = PixelGroup<2048>(P3HUB75);
-    PixelGroup<100> camSidePixels = PixelGroup<100>(DeltaDisplay);
+    PixelGroup<88> camSidePixels = PixelGroup<88>(DeltaDisplay);
 
     Camera<2048> camMain = Camera<2048>(&camTransform, &cameraLayout, &camPixels);
-    Camera<100> camSidePanels = Camera<100>(&camSideTransform, &cameraLayout, &camSidePixels);
+    Camera<88> camSidePanels = Camera<88>(&camSideTransform, &cameraLayout, &camSidePixels);
 
     CameraBase* cameras[2] = { &camMain, &camSidePanels };
 

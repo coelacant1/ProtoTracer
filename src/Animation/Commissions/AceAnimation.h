@@ -166,16 +166,12 @@ public:
         pM.GetObject()->GetTransform()->SetPosition(GetWiggleOffset());
         pM.GetObject()->UpdateTransform();
 
-
-        
         crash.GetObject()->GetTransform()->SetPosition(Vector3D(-8.0f, 60.0f, 600.0f) + GetWiggleOffset());
         crash.GetObject()->GetTransform()->SetScale(Vector3D(1.0f, crashMaterial.GetMaterialOpacity(whiteMaterial), 1.0f));
-        //crash.GetObject()->GetTransform()->SetRotation(Vector3D(90.0f * crashMaterial.GetMaterialOpacity(whiteMaterial), 0.0f, 0.0f));
         crash.GetObject()->UpdateTransform();
 
         crashBackground.GetObject()->GetTransform()->SetPosition(Vector3D(-8.0f, 60.0f, 700.0f) + GetWiggleOffset());
         crashBackground.GetObject()->GetTransform()->SetScale(Vector3D(1.0f, crashBackgroundMaterial.GetMaterialOpacity(lBlueMaterial), 1.0f));
-        //crashBackground.GetObject()->GetTransform()->SetRotation(Vector3D(90.0f * crashBackgroundMaterial.GetMaterialOpacity(lBlueMaterial), 0.0f, 0.0f));
         crashBackground.GetObject()->UpdateTransform();
     }
 };

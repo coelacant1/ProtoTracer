@@ -2,13 +2,13 @@
 
 #include "ProtogenAnimation.h"
 #include "..\Objects\Background.h"
-#include "..\Objects\LEDStripBackground.h"
+#include "..\Objects\DeltaDisplayBackground.h"
 #include "..\Morph\NukudeFlat.h"
 
 class ProtogenHUB75 : public ProtogenAnimation<2> {
 private:
     NukudeFace pM;
-    LEDStripBackground ledStripBackground;
+    DeltaDisplayBackground deltaDisplayBackground;
     
 	const __FlashStringHelper* faceArray[10] = {F("DEFAULT"), F("ANGRY"), F("DOUBT"), F("FROWN"), F("LOOKUP"), F("SAD"), F("AUDIO1"), F("AUDIO2"), F("AUDIO3")};
 
@@ -70,12 +70,12 @@ private:
     }
 
 public:
-    ProtogenHUB75() : ProtogenAnimation(Vector2D(), Vector2D(192.0f, 96.0f), A2, 20, 9){
+    ProtogenHUB75() : ProtogenAnimation(Vector2D(), Vector2D(192.0f, 96.0f), 22, 23, 9){
         scene.AddObject(pM.GetObject());
-        scene.AddObject(ledStripBackground.GetObject());
+        scene.AddObject(deltaDisplayBackground.GetObject());
 
         pM.GetObject()->SetMaterial(GetFaceMaterial());
-        ledStripBackground.GetObject()->SetMaterial(GetFaceMaterial());
+        deltaDisplayBackground.GetObject()->SetMaterial(GetFaceMaterial());
 
         LinkControlParameters();
 
@@ -112,7 +112,12 @@ public:
 
         pM.Update();
 
-        AlignObject(pM.GetObject());
+        AlignObject(pM.GetObject(), -7.5f);
+
+        SetWiggleSpeed(5.0f);
+        SetMenuWiggleSpeed(0.0f, 0.0f, 0.0f);
+        SetMenuOffset(Vector2D(17.5f, -3.0f));
+        SetMenuSize(Vector2D(192, 56));
         
         pM.GetObject()->GetTransform()->SetPosition(GetWiggleOffset());
         pM.GetObject()->UpdateTransform();
