@@ -34,6 +34,9 @@ private:
 
     Vector2D camMin = Vector2D(0.0f, 0.0f);
     Vector2D camMax = Vector2D(189.0f, 93.0f);
+
+    Vector2D camMinRear = Vector2D(214.0f, 5.0f);
+    Vector2D camMaxRear = Vector2D(279.0f, 100.0f);
     
     bool isBooped = false;
     bool blinkSet = false;
@@ -70,6 +73,7 @@ private:
     //Animation controllers
     BlinkTrack<1> blink;
     ObjectAlign objA = ObjectAlign(camMin, camMax, Quaternion());
+    ObjectAlign objARear = ObjectAlign(camMinRear, camMaxRear, Quaternion());
 
     FunctionGenerator fGenMatXMove = FunctionGenerator(FunctionGenerator::Sine, -2.0f, 2.0f, 5.3f);
     FunctionGenerator fGenMatYMove = FunctionGenerator(FunctionGenerator::Sine, -2.0f, 2.0f, 6.7f);
@@ -256,6 +260,30 @@ protected:
         objA.SetPlaneOffsetAngle(rotation);
         objA.SetEdgeMargin(margin);
         objA.AlignObjectsNoScale(objects, objectCount);
+    }
+
+    void AlignObjectRear(Object3D* obj, float rotation = 0.0f, float margin = 2.0f){
+        objARear.SetPlaneOffsetAngle(rotation);
+        objARear.SetEdgeMargin(margin);
+        objARear.AlignObject(obj);
+    }
+
+    void AlignObjectsRear(Object3D** objects, uint8_t objectCount, float rotation = 0.0f, float margin = 2.0f){
+        objARear.SetPlaneOffsetAngle(rotation);
+        objARear.SetEdgeMargin(margin);
+        objARear.AlignObjects(objects, objectCount);
+    }
+
+    void AlignObjectNoScaleRear(Object3D* obj, float rotation = 0.0f, float margin = 2.0f){
+        objARear.SetPlaneOffsetAngle(rotation);
+        objARear.SetEdgeMargin(margin);
+        objARear.AlignObjectNoScale(obj);
+    }
+    
+    void AlignObjectsNoScaleRear(Object3D** objects, uint8_t objectCount, float rotation = 0.0f, float margin = 2.0f){
+        objARear.SetPlaneOffsetAngle(rotation);
+        objARear.SetEdgeMargin(margin);
+        objARear.AlignObjectsNoScale(objects, objectCount);
     }
 
     void AddParameter(uint8_t index, float* parameter, uint8_t transitionFrames, EasyEaseInterpolation::InterpolationMethod interpolationMethod = EasyEaseInterpolation::InterpolationMethod::Overshoot, bool invertDirection = false){

@@ -77,7 +77,7 @@ public:
 
     void Display() override {
         matrix.setBrightness(brightness);
-        apamatrix.setBrightness(accentBrightness);
+        apamatrix.setBrightness(accentBrightness / 2);
 
         while(apaBackgroundLayer.isSwapPending());
         rgb24 *apabuffer = apaBackgroundLayer.backBuffer();

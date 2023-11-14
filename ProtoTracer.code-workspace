@@ -19,7 +19,8 @@
 			"vector": "cpp",
 			"string_view": "cpp",
 			"memory": "cpp",
-			"random": "cpp"
+			"random": "cpp",
+			"typeinfo": "cpp"
 		}
 	}
 }

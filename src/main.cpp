@@ -6,16 +6,17 @@
 //#define HUB75
 //#define HUB75Split
 //#define HUB75Square
-#define WS35
+//#define WS35
 //#define WS35SPLIT
 //#define ESP32HUB75
-//#define CUSTOMHUB75
+#define CUSTOMHUB75
 //#define CUSTOMWS35
 //#define CUSTOMBETAWS35
+//#define HARDWARETEST
 
 //#define PRINTINFO
 
-#define NEOTRELLISMENU
+//#define NEOTRELLISMENU
 
 #include <Arduino.h>
 
@@ -79,21 +80,23 @@ ESP32Clock animation = ESP32Clock();
 #elif defined(CUSTOMHUB75)
 #define HUB75
 #include "Controllers\SmartMatrixHUB75.h"
-#include "Animation\HUB75Protogen.h"
+#include "Animation\Commissions\SageAnimation.h"
 SmartMatrixHUB75 controller = SmartMatrixHUB75(maxBrightness, maxAccentBrightness);
-HUB75Protogen animation = HUB75Protogen();
+SageAnimation animation = SageAnimation();
 #elif defined(CUSTOMWS35)
 #define WS35
 #include "Controllers\KaiborgV1D1Controller.h"
-#include "Animation\Commissions\AceAnimation.h"
+#include "Animation\Test\FullScreenAnimation.h"
 KaiborgV1D1Controller controller = KaiborgV1D1Controller(maxBrightness);
-AceAnimation animation = AceAnimation();
+FullScreenAnimation animation = FullScreenAnimation();
 #elif defined(CUSTOMBETAWS35)
 #define BETAWS35
 #include "Controllers\BetaProtoController.h"
 #include "Animation\Commissions\TamamoAnimation.h"
 BetaProtoController controller = BetaProtoController(maxBrightness, maxAccentBrightness);
 TamamoAnimation animation = TamamoAnimation();
+#elif defined(HARDWARETEST)
+#include "Sensors/HardwareTest.h"
 #else
 //Define your own here
 //--------------- ANIMATIONS ---------------
@@ -140,11 +143,13 @@ void setup() {
     Serial.begin(115200);
     Serial.println("\nStarting...");
 
+    #ifndef HARDWARETEST
     controller.Initialize();
     delay(100);
 
     animation.Initialize();
     delay(100);
+    #endif
 }
 
 void loop() {
@@ -200,11 +205,19 @@ void loop() {
 
     animation.UpdateTime(ratio);
     controller.Render(animation.GetScene());
+    #elif defined(HARDWARETEST)
+    //HardwareTest::ScanDevices();
+    HardwareTest::TestBoopSensor();
+    HardwareTest::TestHUD();
+    delay(500);
+    Serial.println();
     #else
     Serial.print("not defined");
     #endif
 
+    #ifndef HARDWARETEST
     controller.Display();
+    #endif
 
     #ifdef PRINTINFO
     Serial.print("Animated in ");
