@@ -4,40 +4,14 @@
 
 class YawPitchRoll {
 public:
-	float Yaw = 0.0f;
-	float Pitch = 0.0f;
-	float Roll = 0.0f;
+    float Yaw;
+    float Pitch;
+    float Roll;
 
-	YawPitchRoll() {
-		this->Yaw = 0.0;
-		this->Pitch = 0.0;
-		this->Roll = 0.0;
-	}
+    YawPitchRoll();
+    YawPitchRoll(Vector3D vector);
+    YawPitchRoll(const YawPitchRoll& ypr);
+    YawPitchRoll(float yaw, float pitch, float roll);
 
-	YawPitchRoll(Vector3D vector) {
-		this->Yaw = vector.X;
-		this->Pitch = vector.Y;
-		this->Roll = vector.Z;
-	}
-
-	YawPitchRoll(const YawPitchRoll& ypr) {
-		this->Yaw = ypr.Yaw;
-		this->Pitch = ypr.Pitch;
-		this->Roll = ypr.Roll;
-	}
-
-	YawPitchRoll(float yaw, float pitch, float roll) {
-		this->Yaw = yaw;
-		this->Pitch = pitch;
-		this->Roll = roll;
-	}
-
-	String ToString() {
-		String y = Mathematics::DoubleToCleanString(this->Yaw);
-		String p = Mathematics::DoubleToCleanString(this->Pitch);
-		String r = Mathematics::DoubleToCleanString(this->Roll);
-
-		return "[" + y + ", " + p + ", " + r + "]";
-	}
-
+    String ToString() const;
 };

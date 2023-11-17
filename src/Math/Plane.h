@@ -1,25 +1,18 @@
 #pragma once
 
-#include "Mathematics.h"
 #include "Vector3D.h"
 
 class Plane {
 public:
-	Vector3D Centroid;
-	Vector3D Normal;
+    Vector3D Centroid;
+    Vector3D Normal;
 
-	Plane() {}
+    // Default constructor.
+    Plane();
 
-	Plane(Vector3D centroid, Vector3D normal) {
-        this->Centroid = centroid;
-        this->Normal = normal;
-    }
+    // Parameterized constructor.
+    Plane(Vector3D centroid, Vector3D normal);
 
-	String ToString() {
-		String centroid = Centroid.ToString();
-		String normal = Normal.ToString();
-
-		return "[ " + centroid + ", " + normal + " ]";
-	}
-
+    // Convert Plane to a string representation.
+    String ToString();
 };

@@ -1,30 +1,19 @@
 #pragma once
 
-#include "EulerConstants.h"
 #include "EulerOrder.h"
-#include "Mathematics.h"
 #include "Vector3D.h"
 
 class EulerAngles {
 public:
-	Vector3D Angles;
-	EulerOrder Order;
+    Vector3D Angles;
+    EulerOrder Order;
 
-	EulerAngles() {
-		Angles = Vector3D(0, 0, 0);
-		Order = EulerConstants::EulerOrderXYZS;
-	}
+    // Default constructor.
+    EulerAngles();
 
-	EulerAngles(Vector3D angles, EulerOrder order) {
-		Angles = angles;
-		Order = order;
-	}
+    // Constructor with angles and order.
+    EulerAngles(Vector3D angles, EulerOrder order);
 
-	String ToString() {
-		String angles = Angles.ToString();
-		String order = Order.ToString();
-
-		return "[ " + angles + ", " + order + " ]";
-	}
-
+    // Method to convert EulerAngles to a string representation.
+    String ToString();
 };

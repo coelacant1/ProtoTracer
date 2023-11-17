@@ -1,29 +1,18 @@
 #pragma once
 
-#include "Mathematics.h"
 #include "Vector3D.h"
 
 class AxisAngle {
 public:
-	float Rotation;
-	Vector3D Axis;
+    float Rotation;
+    Vector3D Axis;
 
-	AxisAngle(float rotation, float x, float y, float z) {
-		Rotation = rotation;
-		Axis = Vector3D(x, y, z);
-	}
+    // Constructor with individual components.
+    AxisAngle(float rotation, float x, float y, float z);
 
-	AxisAngle(float rotation, Vector3D axis) {
-		Rotation = rotation;
-		Axis = axis;
-	}
+    // Constructor with Vector3D.
+    AxisAngle(float rotation, Vector3D axis);
 
-	String ToString() {
-		String r = Mathematics::DoubleToCleanString(Rotation);
-		String x = Mathematics::DoubleToCleanString(Axis.X);
-		String y = Mathematics::DoubleToCleanString(Axis.Y);
-		String z = Mathematics::DoubleToCleanString(Axis.Z);
-
-		return r + ": [" + x + " " + y + " " + z + "]";
-	}
+    // Method to convert AxisAngle to a string representation.
+    String ToString();
 };

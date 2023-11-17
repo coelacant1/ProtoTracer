@@ -7,7 +7,8 @@
 
 Adafruit_seesaw ss;
 // on SAMD09, analog in can be 2, 3, or 4
-// on Attiny8x7, analog in can be 0-3, 6, 7, 18-20
+// on Attinyxy7, analog in can be 0-3, 6, 7, 18-20
+// on Attinyxy6, analog in can be 0-5, 14-16
 #define   ANALOGIN   2
 
 void setup() {

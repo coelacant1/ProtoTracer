@@ -7,16 +7,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        arduino-platform: ["uno", "leonardo", "mega2560", "zero", "esp8266", "esp32", "metro_m4", "nrf52840"]
+        arduino-platform: ["uno", "leonardo", "mega2560", "zero", "esp8266", "esp32", "feather_esp32s2_tft", "metro_m4", "nrf52840"]
 
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/setup-python@v1
+    - uses: actions/setup-python@v4
       with:
         python-version: '3.x'
-    - uses: actions/checkout@v2
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
+    - uses: actions/checkout@v3
       with:
          repository: adafruit/ci-arduino
          path: ci
@@ -31,12 +31,12 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-    - uses: actions/setup-python@v1
+    - uses: actions/setup-python@v4
       with:
         python-version: '3.x'
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
          repository: adafruit/ci-arduino
          path: ci

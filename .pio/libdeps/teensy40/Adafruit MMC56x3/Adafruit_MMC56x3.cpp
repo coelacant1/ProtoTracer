@@ -68,7 +68,6 @@ Adafruit_MMC5603::Adafruit_MMC5603(int32_t sensorID) {
  *    @return True if initialization was successful, otherwise false.
  */
 bool Adafruit_MMC5603::begin(uint8_t i2c_address, TwoWire *wire) {
-  delete (i2c_dev);
   if (!i2c_dev) {
     i2c_dev = new Adafruit_I2CDevice(i2c_address, wire);
   }

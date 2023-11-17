@@ -1,3 +1,5 @@
+#define TEST
+
 //#define ALPHARIGHT
 //#define ALPHALEFT
 //#define BETAWS35
@@ -17,8 +19,7 @@
 //#define PRINTINFO
 
 //#define NEOTRELLISMENU
-
-#include <Arduino.h>
+#include <stdint.h>
 
 uint8_t maxBrightness = 50;
 uint8_t maxAccentBrightness = 50;

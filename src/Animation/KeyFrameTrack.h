@@ -1,7 +1,5 @@
 #pragma once
 
-#include <Arduino.h>
-#include <float.h>
 #include "KeyFrame.h"
 #include "..\Math\Mathematics.h"
 
@@ -22,8 +20,8 @@ private:
     KeyFrame keyFrames[maxKeyFrames];
     float min = 0.0f;
     float max = 0.0f;
-    float startFrameTime = FLT_MAX;//initialize to out of bounds
-    float stopFrameTime = FLT_MIN;//initialize to out of bounds
+    float startFrameTime = Mathematics::FLTMAX;//initialize to out of bounds
+    float stopFrameTime = Mathematics::FLTMIN;//initialize to out of bounds
     uint8_t currentFrames = 0;
     uint8_t currentParameters = 0;
     bool isActive = true;

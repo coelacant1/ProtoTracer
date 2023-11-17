@@ -4,25 +4,15 @@
 
 class DirectionAngle {
 public:
-	float Rotation;
-	Vector3D Direction;
+    float Rotation;
+    Vector3D Direction;
 
-	DirectionAngle(float rotation, float x, float y, float z) {
-		Rotation = rotation;
-		Direction = Vector3D(x, y, z);
-	}
+    // Constructor with individual components.
+    DirectionAngle(float rotation, float x, float y, float z);
 
-	DirectionAngle(float rotation, Vector3D direction) {
-		Rotation = rotation;
-		Direction = direction;
-	}
+    // Constructor with Vector3D.
+    DirectionAngle(float rotation, Vector3D direction);
 
-	String ToString() {
-		String r = Mathematics::DoubleToCleanString(Rotation);
-		String x = Mathematics::DoubleToCleanString(Direction.X);
-		String y = Mathematics::DoubleToCleanString(Direction.Y);
-		String z = Mathematics::DoubleToCleanString(Direction.Z);
-
-		return r + ": [" + x + " " + y + " " + z + "]";
-	}
+    // Method to convert DirectionAngle to a string representation.
+    String ToString();
 };

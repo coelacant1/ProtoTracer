@@ -7,7 +7,8 @@
   The analogWrite() function uses PWM, so if you want to change the pin you're
   using, be sure to use another PWM capable pin. 
   On the SAMD09 breakout these are pins 5, 6, and 7
-  On the ATtiny8x7 breakout these are pins 0, 1, 9, 12, 13
+  On the ATtinyxy7 breakout these are pins 0, 1, 9, 12, 13
+  On the ATtinyxy6 breakout these are pins 0, 1, 7, 11, 16
 */
 
 #include "Adafruit_seesaw.h"

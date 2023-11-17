@@ -20,7 +20,11 @@
 			"string_view": "cpp",
 			"memory": "cpp",
 			"random": "cpp",
-			"typeinfo": "cpp"
+			"typeinfo": "cpp",
+			"cstddef": "cpp",
+			"system_error": "cpp",
+			"functional": "cpp",
+			"tuple": "cpp"
 		}
 	}
 }

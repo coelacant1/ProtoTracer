@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Arduino.h"
 #include "..\Math\Rotation.h"
 #include "Morph.h"
 #include "..\Materials\SimpleMaterial.h"
@@ -42,7 +41,7 @@ private:
     SimpleMaterial simpleMaterial = SimpleMaterial(RGBColor(128, 128, 128));
     Object3D basisObj = Object3D(&triangleGroup, &simpleMaterial);
 
-    static const byte morphCount = 23;
+    static const uint8_t morphCount = 23;
     int DoubtIndexes[15] = {28,29,30,31,32,33,34,35,36,37,38,39,40,41,42};
     int SurprisedIndexes[15] = {28,29,30,31,32,33,34,35,36,37,38,39,40,41,42};
     int SadnessIndexes[15] = {28,29,30,31,32,33,34,35,36,37,38,39,40,41,42};

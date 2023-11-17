@@ -189,14 +189,15 @@ enum {
 #endif
 
 /*=========================================================================*/
-
+// clang-format off
 #define SEESAW_HW_ID_CODE_SAMD09 0x55 ///< seesaw HW ID code for SAMD09
-
-#define SEESAW_HW_ID_CODE_TINY8X7 0x87 ///< seesaw HW ID code for ATtiny817
-
-#define SEESAW_EEPROM_I2C_ADDR                                                 \
-  0x3F ///< EEPROM address of i2c address to start up with (for devices that
-       ///< support this feature)
+#define SEESAW_HW_ID_CODE_TINY806 0x84 ///< seesaw HW ID code for ATtiny806
+#define SEESAW_HW_ID_CODE_TINY807 0x85 ///< seesaw HW ID code for ATtiny807
+#define SEESAW_HW_ID_CODE_TINY816 0x86 ///< seesaw HW ID code for ATtiny816
+#define SEESAW_HW_ID_CODE_TINY817 0x87 ///< seesaw HW ID code for ATtiny817
+#define SEESAW_HW_ID_CODE_TINY1616 0x88 ///< seesaw HW ID code for ATtiny1616
+#define SEESAW_HW_ID_CODE_TINY1617 0x89 ///< seesaw HW ID code for ATtiny1617
+// clang-format on
 
 /** raw key event stucture for keypad module */
 union keyEventRaw {
@@ -251,6 +252,7 @@ public:
   void pinModeBulk(uint32_t pinsa, uint32_t pinsb, uint8_t mode);
   virtual void analogWrite(uint8_t pin, uint16_t value, uint8_t width = 8);
   void digitalWrite(uint8_t pin, uint8_t value);
+  void digitalWriteBulk(uint32_t port_values);
   void digitalWriteBulk(uint32_t pins, uint8_t value);
   void digitalWriteBulk(uint32_t pinsa, uint32_t pinsb, uint8_t value);
 
@@ -304,6 +306,7 @@ protected:
   int8_t _flow; /*!< The flow control pin to use */
 
   uint8_t _hardwaretype = 0; /*!< what hardware type is attached! */
+  uint8_t getI2CaddrEEPROMloc();
 
   bool write8(byte regHigh, byte regLow, byte value);
   uint8_t read8(byte regHigh, byte regLow, uint16_t delay = 250);

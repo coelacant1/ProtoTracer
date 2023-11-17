@@ -26,6 +26,7 @@ void setup() {
   
   Serial.println(F("seesaw started OK!"));
 
+  pinMode(INT_PIN, INPUT_PULLUP);
   ss.pinModeBulk(mask, INPUT_PULLUP);
   ss.setGPIOInterrupts(mask, 1);
 }
