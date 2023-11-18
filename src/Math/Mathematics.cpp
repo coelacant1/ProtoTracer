@@ -98,6 +98,20 @@ float Mathematics::CubicLerp(float a, float b, float c, float d, float t){
     return t * t * t * p + t * t * ((a - b) - p) + t * (c - a) + b;
 }
 
+float Mathematics::BilinearInterpolation(float scaleX, float scaleY, float x1, float y1, float x2, float y2, float v11, float v12, float v21, float v22) {
+    // Calculate the interpolation weights
+    float s1 = x2 - scaleX;
+    float s2 = scaleX - x1;
+    float t1 = y2 - scaleY;
+    float t2 = scaleY - y1;
+
+    // Perform bilinear interpolation
+    float interpolatedValue = (s1 * t1 * v11 + s2 * t1 * v21 + s1 * t2 * v12 + s2 * t2 * v22) / ((x2 - x1) * (y2 - y1));
+
+    return interpolatedValue;
+}
+
+
 float Mathematics::PingPong(float t){
     t -= (int)(t * 0.5f) * 2;
     return t < 1 ? t : 2 - t;
