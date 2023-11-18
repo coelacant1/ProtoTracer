@@ -1,5 +1,3 @@
-#define TEST
-
 //#define ALPHARIGHT
 //#define ALPHALEFT
 //#define BETAWS35

@@ -1,11 +1,10 @@
 #pragma once
 
-#include <Arduino.h>
 #include "RunningAverageFilter.h"
 #include "MinFilter.h"
-#include "..\Math\Mathematics.h"
+#include "../Math/Mathematics.h"
 
-class DerivativeFilter{
+class DerivativeFilter {
 private:
     RunningAverageFilter<10> output = RunningAverageFilter<10>(0.2f);
     MinFilter<40> minFilter;
@@ -13,21 +12,8 @@ private:
     float outputValue = 0.0f;
 
 public:
-    DerivativeFilter(){}
+    DerivativeFilter();
 
-    float GetOutput(){
-        return outputValue;
-    }
-
-    float Filter(float value){
-        float amplitude = fabs(value - previousReading);
-        float normalized = output.Filter(amplitude);
-        float minimum = minFilter.Filter(normalized);
-        
-        previousReading = value;
-        outputValue = Mathematics::Constrain(normalized - minimum, 0.0f, 1.0f);
-        
-        return outputValue;
-    }
-
+    float GetOutput();
+    float Filter(float value);
 };

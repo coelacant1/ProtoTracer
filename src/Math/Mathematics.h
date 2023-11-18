@@ -35,6 +35,18 @@ public:
     static float CosineTransition(float beg, float fin, float ratio);
 
     static float BounceInterpolation(float beg, float fin, float ratio);
+	
+	static float FFloor(float f);
+	static float FAbs(float f);
+	static float FSqrt(float f);
+	static float HermiteInterpolation(float t);
+	static float QuinticInterpolation(float t);
+
+	static float Lerp(float a, float b, float t);
+
+	static float CubicLerp(float a, float b, float c, float d, float t);
+
+	static float PingPong(float t);
 
     static int RoundUpWindow(int value, int multiple);
 	
@@ -89,4 +101,5 @@ public:
 		T mappedValue = (value - inLow) * (outMax - outMin) / (inMax - inLow) + outMin;
 		return Constrain(mappedValue, outMin, outMax);
 	}
+
 };

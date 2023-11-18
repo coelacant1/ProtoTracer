@@ -30,6 +30,9 @@ float Mathematics::Pow(float value, float exponent) {
         int x[2];
     } u;
 
+    u.x[0] = 0;
+    u.x[1] = 0;
+
     u.d = value;
     u.x[1] = (int)(exponent * (u.x[1] - 1072632447) + 1072632447);
     u.x[0] = 0;
@@ -64,6 +67,40 @@ float Mathematics::BounceInterpolation(float beg, float fin, float ratio) {
     float bounce = baseLog + baseSine;
 
     return Map(ratio, 0.0f, bounce, beg, fin);
+}
+
+float Mathematics::FFloor(float f) { 
+    int fi = (int)f; return f < fi ? fi - 1 : fi; 
+}
+
+float Mathematics::FAbs(float f) { 
+    return f < 0 ? -f : f; 
+}
+
+float Mathematics::FSqrt(float f) { 
+    return sqrtf(f); 
+}
+
+float Mathematics::HermiteInterpolation(float t) { 
+    return t * t * (3 - 2 * t); 
+}
+
+float Mathematics::QuinticInterpolation(float t) {
+    return t * t * t * (t * (t * 6 - 15) + 10); 
+}
+
+float Mathematics::Lerp(float a, float b, float t) {
+    return a + t * (b - a); 
+}
+
+float Mathematics::CubicLerp(float a, float b, float c, float d, float t){
+    float p = (d - c) - (a - b);
+    return t * t * t * p + t * t * ((a - b) - p) + t * (c - a) + b;
+}
+
+float Mathematics::PingPong(float t){
+    t -= (int)(t * 0.5f) * 2;
+    return t < 1 ? t : 2 - t;
 }
 
 int Mathematics::RoundUpWindow(int value, int multiple) {
