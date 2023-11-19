@@ -7,20 +7,24 @@
 
 class Project{
 protected:
-    long previousTime;
+    long previousFrame;
+    long previousAnimationTime;
+    long previousRenderTime;
+    long previousDisplayTime;
     float fade = 0.0f;
+    float frameTime = 0.0f;
     float animationTime = 0.0f;
+    float renderTime = 0.0f;
+    float displayTime = 0.0f;
     
-    Scene scene;
     CameraManager* cameras;
     Controller* controller;
+    Scene scene;
     
-    void UpdateController(){
-        controller->SetAccentBrightness(GetAccentBrightness() * 25 + 5);
-        controller->SetBrightness(GetBrightness() * 25 + 5);
-
-        controller->Display();
-    }
+    virtual void Update(float ratio) = 0;
+    
+    virtual uint8_t GetAccentBrightness() = 0;
+    virtual uint8_t GetBrightness() = 0;
 
 public:
     Project(CameraManager* cameras, Controller* controller, uint8_t numObjects) : cameras(cameras), controller(controller), scene(numObjects) {}
@@ -29,24 +33,51 @@ public:
         return animationTime;
     }
 
-    void Render(){
-        RenderingEngine::Render(&scene, cameras);
+    float GetRenderTime(){
+        return renderTime;
+    }
+    
+    float GetDisplayTime(){
+        return displayTime;
+    }
+    
+    float GetFrameRate(){
+        return 1.0f / frameTime;
     }
 
-
     virtual void Initialize() = 0;
-    
-    virtual uint8_t GetAccentBrightness() = 0;
-    virtual uint8_t GetBrightness() = 0;
+
     virtual void FadeIn(float stepRatio) = 0;
     virtual void FadeOut(float stepRatio) = 0;
-    virtual void Update(float ratio) = 0;
 
-    void UpdateTime(float ratio){
-        previousTime = micros();
+    void Animate(float ratio){
+        previousAnimationTime = micros();
 
         Update(ratio);
 
-        animationTime = ((float)(micros() - previousTime)) / 1000000.0f;
+        animationTime = ((float)(micros() - previousAnimationTime)) / 1000000.0f;
+    }
+
+    void Render(){
+        previousRenderTime = micros();
+
+        RenderingEngine::Rasterize(&scene, cameras);
+        //RenderingEngine::DisplayWhite(cameras);
+
+        renderTime = ((float)(micros() - previousRenderTime)) / 1000000.0f;
+    }
+
+    void Display(){
+        previousDisplayTime = micros();
+
+        controller->SetAccentBrightness(GetAccentBrightness());
+        controller->SetBrightness(GetBrightness());
+
+        controller->Display();
+
+        displayTime = ((float)(micros() - previousDisplayTime)) / 1000000.0f;
+        
+        frameTime = ((float)(micros() - previousFrame)) / 1000000.0f;
+        previousFrame = micros();
     }
 };

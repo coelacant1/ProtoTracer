@@ -1,7 +1,7 @@
 #pragma once
 
 #include "..\Material.h"
-#include "..\..\..\..\..\Utils\Math\Vector2D.h"
+#include "..\..\..\Utils\Math\Vector2D.h"
 #include "..\..\..\Renderer\Lights\Light.h"
 
 template<size_t lightCount>

@@ -1,5 +1,4 @@
 #include "Image.h"
-#include "..\Math\Mathematics.h"
 
 Image::Image(const uint8_t* data, const uint8_t* rgbColors, unsigned int xPixels, unsigned int yPixels, uint8_t colors) {
     this->data = data;

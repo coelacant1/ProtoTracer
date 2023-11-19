@@ -1,12 +1,26 @@
 #pragma once
 
-#include "ProtogenAnimation.h"
-#include "..\Objects\Background.h"
-#include "..\Objects\LEDStripBackground.h"
-#include "..\Morph\NukudeFlat.h"
+#include "..\Templates\ProtogenProjectTemplate.h"
+#include "..\..\Assets\Models\FBX\NukudeFlat.h"
 
-class ProtogenWS35 : public ProtogenAnimation<1> {
+#include "..\..\Camera\CameraManager\Implementations\WS35SplitCameras.h"
+#include "..\..\Controller\WS35Controller.h"
+
+class ProtogenWS35Project : public ProtogenProject {
+protected:
+    uint8_t GetAccentBrightness(){
+        return Menu::GetAccentBrightness();
+    }
+
+    uint8_t GetBrightness(){
+        return Menu::GetBrightness();
+    }
+
 private:
+    const uint8_t maxBrightness = 50;
+
+    WS35SplitCameraManager cameras;
+    WS35Controller controller = WS35Controller(&cameras, maxBrightness);
     NukudeFace pM;
     
 	const __FlashStringHelper* faceArray[10] = {F("DEFAULT"), F("ANGRY"), F("DOUBT"), F("FROWN"), F("LOOKUP"), F("SAD"), F("AUDIO1"), F("AUDIO2"), F("AUDIO3")};
@@ -69,7 +83,7 @@ private:
     }
 
 public:
-    ProtogenWS35() : ProtogenAnimation(Vector2D(), Vector2D(192.0f, 105.0f), 22, 23, 9){
+    ProtogenWS35Project() : ProtogenProject(&cameras, &controller, 1, Vector2D(), Vector2D(192.0f, 105.0f), 22, 23, 9){
         scene.AddObject(pM.GetObject());
 
         pM.GetObject()->SetMaterial(GetFaceMaterial());

@@ -9,23 +9,14 @@
 
 class HUB75DeltaCameraManager : public CameraManager {
 private:
-    CameraLayout cameraLayout;
-    Transform camTransform;
-    Transform camSideTransform;
-    PixelGroup<2048> camPixels;
-    PixelGroup<88> camSidePixels;
-    Camera<2048> camMain;
-    Camera<88> camSidePanels;
+    CameraLayout cameraLayout = CameraLayout(CameraLayout::ZForward, CameraLayout::YUp);
+    Transform camTransform = Transform(Vector3D(), Vector3D(0, 0, -500.0f), Vector3D(1, 1, 1));
+    Transform camSideTransform = Transform(Vector3D(), Vector3D(204.0f, 0, -500.0f), Vector3D(1, 1, 1));
+    PixelGroup<2048> camPixels = PixelGroup<2048>(P3HUB75);
+    PixelGroup<88> camSidePixels = PixelGroup<88>(DeltaDisplay);
+    Camera<2048> camMain = Camera<2048>(&camTransform, &cameraLayout, &camPixels);
+    Camera<88> camSidePanels = Camera<88>(&camSideTransform, &cameraLayout, &camSidePixels);
 
 public:
-    HUB75DeltaCameraManager() 
-        : cameraLayout(CameraLayout::ZForward, CameraLayout::YUp),
-          camTransform(Vector3D(), Vector3D(0, 0, -500.0f), Vector3D(1, 1, 1)),
-          camSideTransform(Vector3D(), Vector3D(204.0f, 0, -500.0f), Vector3D(1, 1, 1)),
-          camPixels(P3HUB75),
-          camSidePixels(DeltaDisplay),
-          camMain(&camTransform, &cameraLayout, &camPixels),
-          camSidePanels(&camSideTransform, &cameraLayout, &camSidePixels),
-          CameraManager(new CameraBase*[2]{ &camMain, &camSidePanels }, 2) {
-    }
+    HUB75DeltaCameraManager() : CameraManager(new CameraBase*[2]{ &camMain, &camSidePanels }, 2) {}
 };

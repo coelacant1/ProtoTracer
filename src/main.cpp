@@ -1,10 +1,10 @@
-//#define HARDWARETEST
-
-//#define PRINTINFO
+#define PRINTINFO
 
 #include "Examples\Protogen\ProtogenHUB75Project.h"
+//#include "Examples\Protogen\ProtogenWS35Project.h"
+//#include "Examples\VerifyEngine.h"
 
-ProtogenHUB75 project;
+ProtogenHUB75Project project;
 
 void setup() {
     Serial.begin(115200);
@@ -12,24 +12,32 @@ void setup() {
     
     project.Initialize();
     delay(100);
+    
+    Serial.println("Hardware initialized...");
+    Serial.println("Beginning Render...");
+    delay(100);
 }
 
 void loop() {
     float ratio = (float)(millis() % 5000) / 5000.0f;
 
-    project.Update(ratio);
+    project.Animate(ratio);
+
+    project.Render();
+
+    project.Display();
 
     #ifdef PRINTINFO
-    Serial.print("Animated in ");
-    Serial.print(animation.GetAnimationTime(), 4);
+    Serial.print("FPS: ");
+    Serial.print(project.GetFrameRate(), 0);
+    Serial.print(", Animated in ");
+    Serial.print(project.GetAnimationTime(), 4);
 
     Serial.print("s, Rendered in ");
-    Serial.print(controller.GetRenderTime(), 4);
+    Serial.print(project.GetRenderTime(), 4);
 
-    
-    Serial.print("s, Free memory ");
-    Serial.print(FreeMem(),3);
-
-    Serial.println("Kb");
+    Serial.print("s, Displayed in ");
+    Serial.print(project.GetDisplayTime(), 4);
+    Serial.println("s");
     #endif
 }

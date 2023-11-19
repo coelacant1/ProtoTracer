@@ -1,5 +1,4 @@
 #include "UVMap.h"
-#include "../Math/Mathematics.h"
 
 UVMap::UVMap(const uint8_t* data, const uint8_t* rgbColors, uint16_t xPixels, uint16_t yPixels, uint8_t colors)
     : Image(data, rgbColors, xPixels, yPixels, colors) {

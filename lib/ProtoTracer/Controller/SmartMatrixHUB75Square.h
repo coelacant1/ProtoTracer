@@ -38,6 +38,8 @@ public:
     }
 
     void Display() override {
+        UpdateBrightness();
+
         matrix.setBrightness(brightness);
 
         PixelGroup* camPixelsRight = cameras->GetCameras()[0]->GetPixelGroup();
@@ -56,5 +58,21 @@ public:
         }
 
         backgroundLayer.swapBuffers();
+    }
+    
+    void SetBrightness(uint8_t maxBrightness){
+        this->maxBrightness = maxBrightness * 25 + 5;
+        
+        if(isOn){//past soft start
+            this->brightness = maxBrightness * 25 + 5;
+        }
+    }
+
+    void SetAccentBrightness(uint8_t maxAccentBrightness){
+        this->maxAccentBrightness = maxAccentBrightness * 12 + 5;
+        
+        if(isOn){//past soft start
+            this->accentBrightness = maxAccentBrightness * 12 + 5;
+        }
     }
 };

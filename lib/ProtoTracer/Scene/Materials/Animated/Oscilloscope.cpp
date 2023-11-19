@@ -1,5 +1,4 @@
 #include "Oscilloscope.h"
-#include "..\..\Math\Mathematics.h"
 
 Oscilloscope::Oscilloscope(Vector2D size, Vector2D offset) {
     this->size = size.Divide(2.0f);

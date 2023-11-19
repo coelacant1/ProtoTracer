@@ -5,6 +5,7 @@
 #include "..\..\..\Physics\Utils\BouncePhysics.h"
 #include "..\..\..\Utils\Filter\MaxFilter.h"
 #include "..\..\..\Utils\Filter\MinFilter.h"
+#include "..\..\..\Utils\Math\Mathematics.h"
 
 class Oscilloscope : public Material {
 private:

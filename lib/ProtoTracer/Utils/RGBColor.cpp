@@ -63,30 +63,16 @@ RGBColor RGBColor::Add(uint8_t value) {
 }
 
 RGBColor RGBColor::HueShift(float hueDeg) {
-    // Ensure the hue is in the range [0, 360)
-    hueDeg = fmodf(hueDeg, 360.0f);
-    if (hueDeg < 0.0f) {
-        hueDeg += 360.0f;
-    }
-
-    // Convert hue to radians
+    //hueDeg = (int)hueDeg % 360;
+    //shift color space by rotating rgb vector about diagonal vector (1, 1, 1)
     float hueRad = hueDeg * Mathematics::MPI / 180.0f;
+    float hueRat = 0.5f * sinf(hueRad / 2.0f);//2.0f for quaternion creation
+    Vector3D rgbVec = Vector3D(R, G, B);
+    Quaternion q = Quaternion(cosf(hueRad / 2.0f), hueRat, hueRat, hueRat);
 
-    // Calculate sine and cosine of half hue angle
-    float halfHueSin = sinf(hueRad / 2.0f);
-    float halfHueCos = cosf(hueRad / 2.0f);
-
-    // Calculate new RGB values
-    float r = R * halfHueCos - G * halfHueSin;
-    float g = R * halfHueSin + G * halfHueCos;
-    float b = B * halfHueCos - G * halfHueSin;
-
-    // Ensure RGB values are within the valid range
-    r = fmaxf(0.0f, fminf(r, 255.0f));
-    g = fmaxf(0.0f, fminf(g, 255.0f));
-    b = fmaxf(0.0f, fminf(b, 255.0f));
-
-    return RGBColor(r, g, b);
+    rgbVec = q.RotateVector(rgbVec).Constrain(0.0f, 255.0f);
+    
+    return RGBColor(rgbVec.X, rgbVec.Y, rgbVec.Z);
 }
 
 

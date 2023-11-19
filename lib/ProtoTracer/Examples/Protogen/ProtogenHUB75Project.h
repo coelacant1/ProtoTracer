@@ -10,7 +10,16 @@
 
 //#define NEOTRELLISMENU
 
-class ProtogenHUB75 : public ProtogenProject {
+class ProtogenHUB75Project : public ProtogenProject {
+protected:
+    uint8_t GetAccentBrightness(){
+        return Menu::GetAccentBrightness();
+    }
+
+    uint8_t GetBrightness(){
+        return Menu::GetBrightness();
+    }
+
 private:
     const uint8_t maxBrightness = 50;
     const uint8_t maxAccentBrightness = 50;
@@ -80,7 +89,7 @@ private:
     }
 
 public:
-    ProtogenHUB75() : ProtogenProject(&cameras, &controller, 2, Vector2D(), Vector2D(192.0f, 96.0f), 22, 23, 9){
+    ProtogenHUB75Project() : ProtogenProject(&cameras, &controller, 2, Vector2D(), Vector2D(192.0f, 96.0f), 22, 23, 9){
         scene.AddObject(pM.GetObject());
         scene.AddObject(deltaDisplayBackground.GetObject());
 

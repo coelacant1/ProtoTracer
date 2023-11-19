@@ -3,6 +3,7 @@
 #include "..\Material.h"
 #include "..\Static\GradientMaterial.h"
 #include "..\..\..\Physics\Utils\BouncePhysics.h"
+#include "..\..\..\Utils\Math\Mathematics.h"
 
 class AudioReactiveGradient : public Material {
 private:

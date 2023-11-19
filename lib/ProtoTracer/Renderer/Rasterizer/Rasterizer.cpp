@@ -1,5 +1,8 @@
 #include "Rasterizer.h"
 
+Quaternion Rasterizer::rayDirection;
+Quaternion Rasterizer::lookDirection;
+
 RGBColor Rasterizer::CheckRasterPixel(Triangle2D** triangles, int numTriangles, Vector2D pixelRay) {
     float zBuffer = 3.402823466e+38f;
     int triangle = 0;
@@ -39,26 +42,26 @@ RGBColor Rasterizer::CheckRasterPixel(Triangle2D** triangles, int numTriangles, 
 
 void Rasterizer::Rasterize(Scene* scene, CameraBase* camera) {
     if (camera->Is2D()) {
-        for (unsigned int i = 0; i < pixelGroup->GetPixelCount(); i++) {
-            Vector2D pixelRay = pixelGroup->GetCoordinate(i);
-            Vector3D pixelRay3D = Vector3D(pixelRay.X, pixelRay.Y, 0) + transform->GetPosition();
+        for (unsigned int i = 0; i < camera->GetPixelGroup()->GetPixelCount(); i++) {
+            Vector2D pixelRay = camera->GetPixelGroup()->GetCoordinate(i);
+            Vector3D pixelRay3D = Vector3D(pixelRay.X, pixelRay.Y, 0) + camera->GetTransform()->GetPosition();
 
             RGBColor color = scene->GetObjects()[0]->GetMaterial()->GetRGB(pixelRay3D, Vector3D(), Vector3D());
 
-            pixelGroup->GetColor(i)->R = color.R;
-            pixelGroup->GetColor(i)->G = color.G;
-            pixelGroup->GetColor(i)->B = color.B;
+            camera->GetPixelGroup()->GetColor(i)->R = color.R;
+            camera->GetPixelGroup()->GetColor(i)->G = color.G;
+            camera->GetPixelGroup()->GetColor(i)->B = color.B;
         }
     } else {
-        transform->SetBaseRotation(cameraLayout->GetRotation());
+        camera->GetTransform()->SetBaseRotation(camera->GetCameraLayout()->GetRotation());
 
-        lookDirection = transform->GetRotation().Conjugate() * lookOffset;
+        lookDirection = camera->GetTransform()->GetRotation().Conjugate() * camera->GetLookOffset();
         Quaternion normLookDir = lookDirection.UnitQuaternion();
-        rayDirection = transform->GetRotation().Multiply(lookDirection);
+        rayDirection = camera->GetTransform()->GetRotation().Multiply(lookDirection);
 
         BoundingBox2D transformedBounds;
-        for (unsigned int i = 0; i < pixelGroup->GetPixelCount(); ++i) {
-            Vector2D pixelRay = Vector2D(lookDirection.RotateVectorUnit(pixelGroup->GetCoordinate(i) * transform->GetScale(), normLookDir));
+        for (unsigned int i = 0; i < camera->GetPixelGroup()->GetPixelCount(); ++i) {
+            Vector2D pixelRay = Vector2D(lookDirection.RotateVectorUnit(camera->GetPixelGroup()->GetCoordinate(i) * camera->GetTransform()->GetScale(), normLookDir));
             transformedBounds.UpdateBounds(pixelRay);
         }
 
@@ -67,29 +70,29 @@ void Rasterizer::Rasterize(Scene* scene, CameraBase* camera) {
         for (int i = 0; i < scene->GetObjectCount(); i++) {
             if (scene->GetObjects()[i]->IsEnabled()) {
                 for (int j = 0; j < scene->GetObjects()[i]->GetTriangleGroup()->GetTriangleCount(); j++) {
-                    tree.Insert(Triangle2D(lookDirection, transform, &scene->GetObjects()[i]->GetTriangleGroup()->GetTriangles()[j], scene->GetObjects()[i]->GetMaterial()));
+                    tree.Insert(Triangle2D(lookDirection, camera->GetTransform(), &scene->GetObjects()[i]->GetTriangleGroup()->GetTriangles()[j], scene->GetObjects()[i]->GetMaterial()));
                 }
             }
         }
 
         tree.Rebuild();
 
-        for (unsigned int i = 0; i < pixelGroup->GetPixelCount(); i++) {
-            Vector2D pixelRay = Vector2D(lookDirection.RotateVectorUnit(pixelGroup->GetCoordinate(i) * transform->GetScale(), normLookDir));
+        for (unsigned int i = 0; i < camera->GetPixelGroup()->GetPixelCount(); i++) {
+            Vector2D pixelRay = Vector2D(lookDirection.RotateVectorUnit(camera->GetPixelGroup()->GetCoordinate(i) * camera->GetTransform()->GetScale(), normLookDir));
             Node* leafNode = tree.Intersect(pixelRay);
 
             if (!leafNode) {
-                pixelGroup->GetColor(i)->R = 0;
-                pixelGroup->GetColor(i)->G = 0;
-                pixelGroup->GetColor(i)->B = 0;
+                camera->GetPixelGroup()->GetColor(i)->R = 0;
+                camera->GetPixelGroup()->GetColor(i)->G = 0;
+                camera->GetPixelGroup()->GetColor(i)->B = 0;
                 continue;
             }
 
             RGBColor color = CheckRasterPixel(leafNode->GetEntities(), leafNode->GetCount(), pixelRay);
 
-            pixelGroup->GetColor(i)->R = color.R;
-            pixelGroup->GetColor(i)->G = color.G;
-            pixelGroup->GetColor(i)->B = color.B;
+            camera->GetPixelGroup()->GetColor(i)->R = color.R;
+            camera->GetPixelGroup()->GetColor(i)->G = color.G;
+            camera->GetPixelGroup()->GetColor(i)->B = color.B;
         }
     }
 }

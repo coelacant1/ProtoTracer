@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstdint>
+
 class Characters{
 public:
     static const uint8_t COLON[8];

@@ -5,6 +5,7 @@
 #include "..\..\..\..\..\Utils\Math\Mathematics.h"
 #include "..\..\..\..\..\Utils\Math\Rotation.h"
 #include "..\..\..\..\..\Utils\Math\Vector2D.h"
+#include "..\..\..\..\..\Utils\Math\Vector3D.h"
 
 template<uint8_t lineCount, uint8_t characterWidth>
 class TextEngine : public Material {

@@ -1,5 +1,4 @@
 #include "AudioReactiveGradient.h"
-#include "..\..\Math\Mathematics.h"
 
 AudioReactiveGradient::AudioReactiveGradient(Vector2D size, Vector2D offset, bool bounce, bool circular) {
     this->size = size.Divide(2.0f);

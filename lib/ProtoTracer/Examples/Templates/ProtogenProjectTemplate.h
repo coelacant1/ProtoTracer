@@ -235,9 +235,6 @@ protected:
         aRG.SetPosition(Vector2D(xMaxCamera / 2.0f + xOffset * 4.0f, cameraSize.Y / 2.0f + yOffset * 4.0f));
 
         objA.SetCameraMax(Vector2D(xMaxCamera, cameraSize.Y - cameraSize.Y * offsetFace).Multiply(scale));
-
-        UpdateController();
-        UpdateTime(ratio);
     }
 
     void AlignObject(Object3D* obj, float rotation = 0.0f, float margin = 2.0f){
@@ -415,6 +412,9 @@ protected:
         Menu::SetSize(size);
     }
 
+    virtual uint8_t GetAccentBrightness() = 0;
+    virtual uint8_t GetBrightness() = 0;
+
 public:
     ProtogenProject(CameraManager* cameras, Controller* controller, uint8_t numObjects, Vector2D camMin, Vector2D camMax, uint8_t microphonePin, uint8_t buttonPin, uint8_t faceCount) : Project(cameras, controller, numObjects) {
         this->camMin = camMin;
@@ -475,14 +475,6 @@ public:
         Menu::Initialize(faceCount, buttonPin, 500);//7 is number of faces
         #endif
     }
-
-    uint8_t GetAccentBrightness(){
-        return Menu::GetAccentBrightness();
-    };
-
-    uint8_t GetBrightness(){
-        return Menu::GetBrightness();
-    };
 
     void FadeIn(float stepRatio) override {}
     void FadeOut(float stepRatio) override {}

@@ -6,17 +6,33 @@
 
 class Controller {
 private:
-    const float softStart = 3000000;//microseconds
-    long previousTime;
-    float renderTime = 0.0f;
+    const uint32_t softStart = 5000000;//microseconds
+    uint32_t previousTime;
+
+protected:
+    CameraManager* cameras;
+    uint8_t brightness;
+    uint8_t accentBrightness;
     uint8_t maxBrightness;
     uint8_t maxAccentBrightness;
     bool isOn = false;
+    bool startTime = false;
+
+    Controller(CameraManager* cameras, uint8_t maxBrightness, uint8_t maxAccentBrightness){
+        this->cameras = cameras;
+        this->maxBrightness = maxBrightness;
+        this->maxAccentBrightness = maxAccentBrightness;
+    }
 
     void UpdateBrightness(){
-        if (!isOn && previousTime < softStart){
-            brightness = Mathematics::Map(float(previousTime), 0.0f, softStart, 0.0f, float(maxBrightness));
-            accentBrightness = Mathematics::Map(float(previousTime), 0.0f, softStart, 0.0f, float(maxAccentBrightness));
+        if(!startTime){
+            startTime = true;
+            previousTime = micros();
+        }
+
+        if (!isOn && micros() < softStart + previousTime){
+            brightness = Mathematics::Map(micros(), previousTime, softStart + previousTime, uint32_t(0), uint32_t(maxBrightness));
+            accentBrightness = Mathematics::Map(micros(), previousTime, softStart + previousTime, uint32_t(0), uint32_t(maxAccentBrightness));
         }
         else if (!isOn){
             brightness = maxBrightness;
@@ -25,20 +41,10 @@ private:
         }
     }
 
-protected:
-    CameraManager* cameras;
-    uint8_t brightness;
-    uint8_t accentBrightness;
-
-    Controller(CameraManager* cameras, uint8_t maxBrightness, uint8_t maxAccentBrightness){
-        this->cameras = cameras;
-        this->maxBrightness = maxBrightness;
-        this->maxAccentBrightness = maxAccentBrightness;
-
-        previousTime = micros();
-    }
-
 public:
+    virtual void Initialize() = 0;
+    virtual void Display() = 0;
+
     uint8_t GetBrightness(){
         return brightness;
     }
@@ -47,27 +53,8 @@ public:
         return accentBrightness;
     }
 
-    void SetBrightness(uint8_t maxBrightness){
-        this->maxBrightness = maxBrightness;
-        
-        if(isOn){//past soft start
-            this->brightness = maxBrightness;
-        }
-    }
+    virtual void SetBrightness(uint8_t maxBrightness) = 0;
 
-    void SetAccentBrightness(uint8_t maxAccentBrightness){
-        this->maxAccentBrightness = maxAccentBrightness;
-        
-        if(isOn){//past soft start
-            this->accentBrightness = maxAccentBrightness;
-        }
-    }
-
-    virtual void Initialize() = 0;
-    virtual void Display() = 0;
-
-    float GetRenderTime(){
-        return renderTime;
-    }
+    virtual void SetAccentBrightness(uint8_t maxAccentBrightness) = 0;
 
 };

@@ -1,14 +1,15 @@
-pedvide/Teensy_ADC@^9.1.0
+paulstoffregen/OctoWS2811@^1.4
 pixelmatix/SmartMatrix@^4.0.3
-adafruit/Adafruit MMC56x3@^1.0.0
-adafruit/Adafruit BusIO@^1.11.3
-adafruit/Adafruit seesaw Library@^1.6.3
-adafruit/Adafruit SSD1306@^2.5.7
-adafruit/Adafruit APDS9960 Library@^1.2.2
-powerbroker2/SerialTransfer@^3.1.2
-adafruit/Adafruit Unified Sensor@^1.1.4
 depau/APDS-9930 Ambient Light and Proximity Sensor@^1.5.1
+adafruit/Adafruit Unified Sensor@^1.1.4
+adafruit/Adafruit seesaw Library@^1.6.3
+ProtoTracer
+adafruit/Adafruit APDS9960 Library@^1.2.2
+adafruit/Adafruit BusIO@^1.11.3
+adafruit/Adafruit BNO055@^1.4.3
+pedvide/Teensy_ADC@^9.1.0
 Wire
 SPI
-paulstoffregen/OctoWS2811@^1.4
-adafruit/Adafruit BNO055@^1.4.3
+adafruit/Adafruit SSD1306@^2.5.7
+adafruit/Adafruit MMC56x3@^1.0.0
+powerbroker2/SerialTransfer@^3.1.2

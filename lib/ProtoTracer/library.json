@@ -1,0 +1,59 @@
+{
+    "name": "ProtoTracer",
+    "version": "1.0.0",
+    "description": "A 3D ray-tracing and animation engine for pixel matrices, designed for drawing live animations on Protogen style characters from 3D object files.",
+    "keywords": [
+        "3D",
+        "ray-tracing",
+        "animation",
+        "pixel matrix",
+        "Protogen"
+    ],
+    "authors": [
+        {
+            "name": "Coela Can't",
+            "email": "coelacannot@gmail.com",
+            "url": "http://coelacant.com",
+            "maintainer": true
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/coelacant1/ProtoTracer.git"
+    },
+    "license": "GNUGPL3",
+    "frameworks": ["arduino"],
+    "platforms": [
+        "teensy",
+        "espressif32"
+    ],
+    "dependencies": {
+        "SPI": "*",
+        "Wire": "*",
+        "adafruit/Adafruit Unified Sensor": "^1.1.4",
+        "adafruit/Adafruit BNO055": "^1.4.3",
+        "powerbroker2/SerialTransfer": "^3.1.2",
+        "adafruit/Adafruit APDS9960 Library": "^1.2.2",
+        "adafruit/Adafruit BusIO": "^1.11.3",
+        "adafruit/Adafruit SSD1306": "^2.5.7",
+        "adafruit/Adafruit seesaw Library": "^1.6.3",
+        "adafruit/Adafruit MMC56x3": "^1.0.0",
+        "depau/APDS-9930 Ambient Light and Proximity Sensor": "^1.5.1",
+        "fastled/FastLED": "^3.5.0",
+        "adafruit/Adafruit GFX Library": "^1.11.3",
+        "arduino-libraries/NTPClient": "^3.2.1",
+        "kosme/arduinoFFT": "^1.5.6"
+    },
+    "examples": [
+        "Examples/VerifyEngine.h",
+        "Examples/Protogen/ProtogenHardwareTest.h",
+        "Examples/Protogen/ProtogenHUB75Project.h",
+        "Examples/Protogen/ProtogenSpIitHUB75Project.h",
+        "Examples/Protogen/ProtogenSplitWS35Project.h",
+        "Examples/Protogen/ProtogenWS35Project.h"
+    ],
+    "build": {
+        "srcDir": ".",
+        "includeDir": "."
+    }
+}

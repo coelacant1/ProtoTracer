@@ -1,7 +1,7 @@
 #pragma once
 
 #include "..\Material.h"
-#include "..\..\..\..\..\Utils\Math\Mathematics.h"
+#include "..\..\..\Utils\Math\Mathematics.h"
 #include "GradientMaterial.h"
 
 // Converts gif to RGB XY pixel matrix

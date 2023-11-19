@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Material.h"
-#include "..\Math\Vector2D.h"
+#include "..\Material.h"
+#include "..\..\..\Utils\Math\Vector2D.h"
 #include "GradientMaterial.h"
 
 class NormalMaterial : public Material {
