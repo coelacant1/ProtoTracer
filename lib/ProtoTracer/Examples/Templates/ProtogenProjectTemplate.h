@@ -412,8 +412,13 @@ protected:
         Menu::SetSize(size);
     }
 
-    virtual uint8_t GetAccentBrightness() = 0;
-    virtual uint8_t GetBrightness() = 0;
+    Material* GetFaceMaterial(){
+        return &materialAnimator;
+    }
+
+    Material* GetBackgroundMaterial(){
+        return &backgroundMaterial;
+    }
 
 public:
     ProtogenProject(CameraManager* cameras, Controller* controller, uint8_t numObjects, Vector2D camMin, Vector2D camMax, uint8_t microphonePin, uint8_t buttonPin, uint8_t faceCount) : Project(cameras, controller, numObjects) {
@@ -450,14 +455,6 @@ public:
         hud.SetFaceMin(camMin);
     }
 
-    Material* GetFaceMaterial(){
-        return &materialAnimator;
-    }
-
-    Material* GetBackgroundMaterial(){
-        return &backgroundMaterial;
-    }
-
     void Initialize() override {
         controller->Initialize();
 
@@ -475,8 +472,5 @@ public:
         Menu::Initialize(faceCount, buttonPin, 500);//7 is number of faces
         #endif
     }
-
-    void FadeIn(float stepRatio) override {}
-    void FadeOut(float stepRatio) override {}
 
 };

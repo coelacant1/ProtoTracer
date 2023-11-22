@@ -7,20 +7,9 @@
 #include "..\..\Controller\WS35Controller.h"
 
 class ProtogenWS35Project : public ProtogenProject {
-protected:
-    uint8_t GetAccentBrightness(){
-        return Menu::GetAccentBrightness();
-    }
-
-    uint8_t GetBrightness(){
-        return Menu::GetBrightness();
-    }
-
 private:
-    const uint8_t maxBrightness = 50;
-
     WS35SplitCameraManager cameras;
-    WS35Controller controller = WS35Controller(&cameras, maxBrightness);
+    WS35Controller controller = WS35Controller(&cameras, 50);
     NukudeFace pM;
     
 	const __FlashStringHelper* faceArray[10] = {F("DEFAULT"), F("ANGRY"), F("DOUBT"), F("FROWN"), F("LOOKUP"), F("SAD"), F("AUDIO1"), F("AUDIO2"), F("AUDIO3")};

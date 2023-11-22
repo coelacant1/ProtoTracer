@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Arduino.h>
 #include "..\..\Engine\Engine.h"
 #include "..\..\Scene\Scene.h"
 #include "..\..\Camera\CameraManager\CameraManager.h"
@@ -22,9 +23,14 @@ protected:
     Scene scene;
     
     virtual void Update(float ratio) = 0;
-    
-    virtual uint8_t GetAccentBrightness() = 0;
-    virtual uint8_t GetBrightness() = 0;
+
+    void RenderStartTimer(){
+        previousRenderTime = micros();
+    }
+ 
+    void RenderEndTimer(){
+        renderTime = ((float)(micros() - previousRenderTime)) / 1000000.0f;
+    }
 
 public:
     Project(CameraManager* cameras, Controller* controller, uint8_t numObjects) : cameras(cameras), controller(controller), scene(numObjects) {}
@@ -47,9 +53,6 @@ public:
 
     virtual void Initialize() = 0;
 
-    virtual void FadeIn(float stepRatio) = 0;
-    virtual void FadeOut(float stepRatio) = 0;
-
     void Animate(float ratio){
         previousAnimationTime = micros();
 
@@ -69,9 +72,6 @@ public:
 
     void Display(){
         previousDisplayTime = micros();
-
-        controller->SetAccentBrightness(GetAccentBrightness());
-        controller->SetBrightness(GetBrightness());
 
         controller->Display();
 

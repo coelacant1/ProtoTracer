@@ -1,10 +1,10 @@
 #define PRINTINFO
 
-#include "Examples\Protogen\ProtogenHUB75Project.h"
+//#include "Examples\Protogen\ProtogenHUB75Project.h"
 //#include "Examples\Protogen\ProtogenWS35Project.h"
-//#include "Examples\VerifyEngine.h"
+#include "Examples\VerifyEngine.h"
 
-ProtogenHUB75Project project;
+VerifyEngine project;
 
 void setup() {
     Serial.begin(115200);

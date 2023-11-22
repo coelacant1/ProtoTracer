@@ -6,26 +6,14 @@
 #include "..\..\Assets\Models\FBX\NukudeFlat.h"
 
 #include "..\..\Camera\CameraManager\Implementations\HUB75DeltaCameras.h"
-#include "..\..\Controller\SmartMatrixHUB75.h"
+#include "..\..\Controller\HUB75Controller.h"
 
 //#define NEOTRELLISMENU
 
 class ProtogenHUB75Project : public ProtogenProject {
-protected:
-    uint8_t GetAccentBrightness(){
-        return Menu::GetAccentBrightness();
-    }
-
-    uint8_t GetBrightness(){
-        return Menu::GetBrightness();
-    }
-
 private:
-    const uint8_t maxBrightness = 50;
-    const uint8_t maxAccentBrightness = 50;
-
     HUB75DeltaCameraManager cameras;
-    SmartMatrixHUB75 controller = SmartMatrixHUB75(&cameras, maxBrightness, maxAccentBrightness);
+    HUB75Controller controller = HUB75Controller(&cameras, 50, 50);
     NukudeFace pM;
     DeltaDisplayBackground deltaDisplayBackground;
     
