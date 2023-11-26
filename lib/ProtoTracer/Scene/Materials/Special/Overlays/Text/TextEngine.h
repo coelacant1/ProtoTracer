@@ -1,7 +1,9 @@
 #pragma once
 
+#include <Arduino.h>
 #include "Characters.h"
 #include "..\..\..\Material.h"
+#include "..\..\..\Static\SimpleMaterial.h"
 #include "..\..\..\..\..\Utils\Math\Mathematics.h"
 #include "..\..\..\..\..\Utils\Math\Rotation.h"
 #include "..\..\..\..\..\Utils\Math\Vector2D.h"

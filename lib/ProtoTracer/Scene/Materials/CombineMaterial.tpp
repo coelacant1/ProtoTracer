@@ -1,6 +1,41 @@
 #pragma once
 
 template<size_t materialCount>
+CombineMaterial<materialCount>::CombineMaterial() {}
+
+template<size_t materialCount>
+void CombineMaterial<materialCount>::AddMaterial(Method method, Material* material, float opacity) {
+    if (materialsAdded < materialCount) {
+        this->method[materialsAdded] = method;
+        this->materials[materialsAdded] = material;
+        this->opacity[materialsAdded] = opacity;
+
+        materialsAdded++;
+    }
+}
+
+template<size_t materialCount>
+void CombineMaterial<materialCount>::SetMethod(uint8_t index, Method method) {
+    if (index < materialsAdded) {
+        this->method[index] = method;
+    }
+}
+
+template<size_t materialCount>
+void CombineMaterial<materialCount>::SetOpacity(uint8_t index, float opacity) {
+    if (index < materialsAdded) {
+        this->opacity[index] = opacity;
+    }
+}
+
+template<size_t materialCount>
+void CombineMaterial<materialCount>::SetMaterial(uint8_t index, Material* material) {
+    if (index < materialsAdded) {
+        materials[index] = material;
+    }
+}
+
+template<size_t materialCount>
 RGBColor CombineMaterial<materialCount>::GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) {
     Vector3D rgb;
     Vector3D tempV;

@@ -2,11 +2,9 @@
 
 #include "Effect.h"
 
-class Passthrough: public Effect {
+class Passthrough : public Effect {
 public:
-    Passthrough(){}
+    Passthrough();
 
-    void ApplyEffect(IPixelGroup* pixelGroup) override {}
-
+    void ApplyEffect(IPixelGroup* pixelGroup) override;
 };
-

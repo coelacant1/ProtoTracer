@@ -2,7 +2,7 @@
 
 RGBColor::RGBColor() {}
 
-RGBColor::RGBColor(uint8_t R, uint8_t G, uint8_t B) {
+RGBColor::RGBColor(const uint8_t& R, const uint8_t& G, const uint8_t& B) {
     this->R = R;
     this->G = G;
     this->B = B;
@@ -14,19 +14,19 @@ RGBColor::RGBColor(const RGBColor& rgbColor) {
     this->B = rgbColor.B;
 }
 
-RGBColor::RGBColor(Vector3D color) {
+RGBColor::RGBColor(const Vector3D& color) {
     this->R = color.X;
     this->G = color.Y;
     this->B = color.Z;
 }
 
-void RGBColor::SetColor(uint8_t R, uint8_t G, uint8_t B) {
+void RGBColor::SetColor(const uint8_t& R, const uint8_t& G, const uint8_t& B) {
     this->R = R;
     this->G = G;
     this->B = B;
 }
 
-RGBColor RGBColor::Scale(uint8_t maxBrightness) {
+RGBColor RGBColor::Scale(const uint8_t& maxBrightness) {
     uint8_t sR, sG, sB;
 
     sR = (uint8_t)R * (uint8_t)maxBrightness / 255;
@@ -44,7 +44,7 @@ RGBColor RGBColor::Scale(uint8_t maxBrightness) {
     return RGBColor(sR, sG, sB);
 }
 
-RGBColor RGBColor::Add(uint8_t value) {
+RGBColor RGBColor::Add(const uint8_t& value) {
     int sR, sG, sB;
 
     sR = (uint8_t)R + (uint8_t)value;
@@ -62,7 +62,7 @@ RGBColor RGBColor::Add(uint8_t value) {
     return RGBColor(sR, sG, sB);
 }
 
-RGBColor RGBColor::HueShift(float hueDeg) {
+RGBColor RGBColor::HueShift(const float& hueDeg) {
     //hueDeg = (int)hueDeg % 360;
     //shift color space by rotating rgb vector about diagonal vector (1, 1, 1)
     float hueRad = hueDeg * Mathematics::MPI / 180.0f;
@@ -76,7 +76,7 @@ RGBColor RGBColor::HueShift(float hueDeg) {
 }
 
 
-RGBColor RGBColor::InterpolateColors(RGBColor a, RGBColor b, float ratio) {
+RGBColor RGBColor::InterpolateColors(const RGBColor& a, const RGBColor& b, const float& ratio) {
     RGBColor c;
 
     c.R = a.R * (1.0f - ratio) + b.R * ratio;

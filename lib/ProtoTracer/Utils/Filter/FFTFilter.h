@@ -15,4 +15,3 @@ public:
     float Filter(float value);
 };
 
-#include "FFTFilter.tpp"

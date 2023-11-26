@@ -12,21 +12,21 @@ public:
 
     RGBColor();
 
-    RGBColor(uint8_t R, uint8_t G, uint8_t B);
+    RGBColor(const uint8_t& R, const uint8_t& G, const uint8_t& B);
 
     RGBColor(const RGBColor& rgbColor);
 
-    RGBColor(Vector3D color);
+    RGBColor(const Vector3D& color);
 
-    void SetColor(uint8_t R, uint8_t G, uint8_t B);
+    void SetColor(const uint8_t& R, const uint8_t& G, const uint8_t& B);
 
-    RGBColor Scale(uint8_t maxBrightness);
+    RGBColor Scale(const uint8_t& maxBrightness);
 
-    RGBColor Add(uint8_t value);
+    RGBColor Add(const uint8_t& value);
 
-    RGBColor HueShift(float hueDeg);
+    RGBColor HueShift(const float& hueDeg);
 
-    static RGBColor InterpolateColors(RGBColor a, RGBColor b, float ratio);
+    static RGBColor InterpolateColors(const RGBColor& a, const RGBColor& b, const float& ratio);
 
     String ToString();
 };

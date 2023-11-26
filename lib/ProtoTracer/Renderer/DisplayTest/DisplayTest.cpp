@@ -18,11 +18,11 @@ void DisplayTest::FillAltWhiteBlack(CameraBase* camera) {
         
         if (alternate){
             color = RGBColor(255, 255, 255);
-            alternate != alternate;
+            alternate = !alternate;
         }
         else{
             color = RGBColor(0, 0, 0);
-            alternate != alternate;
+            alternate = !alternate;
         }
 
         camera->GetPixelGroup()->GetColor(i)->R = color.R;

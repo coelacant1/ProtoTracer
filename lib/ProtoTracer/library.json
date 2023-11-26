@@ -30,6 +30,7 @@
     "dependencies": {
         "SPI": "*",
         "Wire": "*",
+        "EEPROM": "*",
         "adafruit/Adafruit Unified Sensor": "^1.1.4",
         "adafruit/Adafruit BNO055": "^1.4.3",
         "powerbroker2/SerialTransfer": "^3.1.2",
@@ -41,8 +42,7 @@
         "depau/APDS-9930 Ambient Light and Proximity Sensor": "^1.5.1",
         "fastled/FastLED": "^3.5.0",
         "adafruit/Adafruit GFX Library": "^1.11.3",
-        "arduino-libraries/NTPClient": "^3.2.1",
-        "kosme/arduinoFFT": "^1.5.6"
+        "arduino-libraries/NTPClient": "^3.2.1"
     },
     "examples": [
         "Examples/VerifyEngine.h",

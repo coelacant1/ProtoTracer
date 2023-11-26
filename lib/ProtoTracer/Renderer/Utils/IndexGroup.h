@@ -1,63 +1,21 @@
 #pragma once
 
-typedef struct IndexGroup {
+#include <Arduino.h>
+
+class IndexGroup {
 public:
-	unsigned int A = 0;
-	unsigned int B = 0;
-	unsigned int C = 0;
+    unsigned int A;
+    unsigned int B;
+    unsigned int C;
 
-    IndexGroup() {
-        this->A = 0;
-        this->B = 0;
-        this->C = 0;
-    }
+    IndexGroup();
+    IndexGroup(const IndexGroup& indexGroup);
+    IndexGroup(unsigned int X, unsigned int Y, unsigned int Z);
 
-    IndexGroup(const IndexGroup& indexGroup) {
-        this->A = indexGroup.A;
-        this->B = indexGroup.B;
-        this->C = indexGroup.C;
-    }
+    IndexGroup Add(IndexGroup indexGroup);
+    IndexGroup Subtract(IndexGroup indexGroup);
+    IndexGroup Multiply(IndexGroup indexGroup);
+    IndexGroup Divide(IndexGroup indexGroup);
 
-    IndexGroup(unsigned int X, unsigned int Y, unsigned int Z) {
-        this->A = X;
-        this->B = Y;
-        this->C = Z;
-    }
-
-    IndexGroup Add(IndexGroup indexGroup) {
-        return IndexGroup {
-            this->A + indexGroup.A,
-            this->B + indexGroup.B,
-            this->C + indexGroup.C 
-        };
-    }
-
-    IndexGroup Subtract(IndexGroup indexGroup) {
-        return IndexGroup {
-            this->A - indexGroup.A,
-            this->B - indexGroup.B,
-            this->C - indexGroup.C 
-        };
-    }
-
-    IndexGroup Multiply(IndexGroup indexGroup) {
-        return IndexGroup {
-            this->A * indexGroup.A,
-            this->B * indexGroup.B,
-            this->C * indexGroup.C 
-        };
-    }
-
-    IndexGroup Divide(IndexGroup indexGroup) {
-        return IndexGroup {
-            this->A / indexGroup.A,
-            this->B / indexGroup.B,
-            this->C / indexGroup.C 
-        };
-    }
-    
-    String ToString() {
-        return "[" + String(A) + ", " + String(B) + ", " + String(C) + "]";
-    }
-    
-} IndexGroup;
+    String ToString();
+};
