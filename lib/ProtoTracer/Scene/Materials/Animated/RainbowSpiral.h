@@ -15,5 +15,5 @@ public:
 
     void Update(float ratio);
     Material* GetMaterial();
-    RGBColor GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) override;
+    RGBColor GetRGB(const Vector3D& position, const Vector3D& normal, const Vector3D& uvw) override;
 };

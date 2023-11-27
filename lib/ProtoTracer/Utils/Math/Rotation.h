@@ -13,31 +13,31 @@ class Rotation {
 private:
     Quaternion quaternionRotation;
 
-    Quaternion AxisAngleToQuaternion(AxisAngle axisAngle);
-    Quaternion DirectionAngleToQuaternion(DirectionAngle directionAngle);
-    Quaternion RotationMatrixToQuaternion(RotationMatrix rM);
-    Quaternion RotationMatrixToQuaternion(Vector3D X, Vector3D Y, Vector3D Z);
-    Quaternion EulerAnglesToQuaternion(EulerAngles eulerAngles);
-    Quaternion YawPitchRollToQuaternion(YawPitchRoll ypr);
-    EulerAngles RotationMatrixToEulerAngles(RotationMatrix rM, EulerOrder order);
-    RotationMatrix EulerAnglesToRotationMatrix(EulerAngles eulerAngles);
-    Quaternion QuaternionFromDirectionVectors(Vector3D initial, Vector3D target);
+    Quaternion AxisAngleToQuaternion(const AxisAngle& axisAngle);
+    Quaternion DirectionAngleToQuaternion(const DirectionAngle& directionAngle);
+    Quaternion RotationMatrixToQuaternion(const RotationMatrix& rM);
+    Quaternion RotationMatrixToQuaternion(const Vector3D& X, const Vector3D& Y, const Vector3D& Z);
+    Quaternion EulerAnglesToQuaternion(const EulerAngles& eulerAngles);
+    Quaternion YawPitchRollToQuaternion(const YawPitchRoll& ypr);
+    EulerAngles RotationMatrixToEulerAngles(const RotationMatrix& rM, const EulerOrder& order);
+    RotationMatrix EulerAnglesToRotationMatrix(const EulerAngles& eulerAngles);
+    Quaternion QuaternionFromDirectionVectors(const Vector3D& initial, const Vector3D& target);
 
 public:
     Rotation();
-    Rotation(Quaternion quaternion);
-    Rotation(AxisAngle axisAngle);
-    Rotation(DirectionAngle directionAngle);
-    Rotation(RotationMatrix rotationMatrix);
-    Rotation(Vector3D X, Vector3D Y, Vector3D Z);
-    Rotation(EulerAngles eulerAngles);
-    Rotation(Vector3D initial, Vector3D target);
-    Rotation(YawPitchRoll ypr);
+    Rotation(const Quaternion& quaternion);
+    Rotation(const AxisAngle& axisAngle);
+    Rotation(const DirectionAngle& directionAngle);
+    Rotation(const RotationMatrix& rotationMatrix);
+    Rotation(const Vector3D& X, const Vector3D& Y, const Vector3D& Z);
+    Rotation(const EulerAngles& eulerAngles);
+    Rotation(const Vector3D& initial, const Vector3D& target);
+    Rotation(const YawPitchRoll& ypr);
 
     Quaternion GetQuaternion();
     AxisAngle GetAxisAngle();
     DirectionAngle GetDirectionAngle();
     RotationMatrix GetRotationMatrix();
-    EulerAngles GetEulerAngles(EulerOrder order);
+    EulerAngles GetEulerAngles(const EulerOrder& order);
     YawPitchRoll GetYawPitchRoll();
 };

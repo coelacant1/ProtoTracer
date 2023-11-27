@@ -69,37 +69,39 @@ void TextEngine<lineCount, characterWidth>::ClearText() {
 }
 
 template<uint8_t lineCount, uint8_t characterWidth>
-RGBColor TextEngine<lineCount, characterWidth>::GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) {
+RGBColor TextEngine<lineCount, characterWidth>::GetRGB(const Vector3D& position, const Vector3D& normal, const Vector3D& uvw) {
+    Vector3D positionL = position;
+    
     if(rotationAngle != 0 && !isEfficient){
-        position = position - Vector3D(rotationOffset.X, rotationOffset.Y, 0);
+        positionL = positionL - Vector3D(rotationOffset.X, rotationOffset.Y, 0);
 
         Quaternion temp = Rotation(EulerAngles(Vector3D(0, 0, rotationAngle), EulerConstants::EulerOrderXYZS)).GetQuaternion();
         
-        position = temp.RotateVector(position);// rotate
+        positionL = temp.RotateVector(positionL);// rotate
 
-        position = position + Vector3D(rotationOffset.X, rotationOffset.Y, 0);
+        positionL = positionL + Vector3D(rotationOffset.X, rotationOffset.Y, 0);
     }
     else{
-        Vector2D tempPos = position;
+        Vector2D tempPos = positionL;
 
         if(Mathematics::IsClose(int(rotationAngle) % 360, 90.0f, 45.0f)){
-            position.X = tempPos.Y;
-            position.Y = -tempPos.X;
+            positionL.X = tempPos.Y;
+            positionL.Y = -tempPos.X;
         }
         else if (Mathematics::IsClose(int(rotationAngle) % 360, 180.0f, 45.0f)){
-            position.X = -tempPos.X;
-            position.Y = -tempPos.Y;
+            positionL.X = -tempPos.X;
+            positionL.Y = -tempPos.Y;
         }
         else if (Mathematics::IsClose(int(rotationAngle) % 360, 270.0f, 45.0f)){
-            position.X = -tempPos.Y;
-            position.Y = tempPos.X;
+            positionL.X = -tempPos.Y;
+            positionL.Y = tempPos.X;
         }
     }
 
-    position = position - Vector3D(positionOffset.X, positionOffset.Y, 0);//offset position
+    positionL = positionL - Vector3D(positionOffset.X, positionOffset.Y, 0);//offset position
     
-    int x = floorf(Mathematics::Map(position.X, 0.0f, size.X, characterWidth * 10.0f, 0.0f));
-    int y = floorf(Mathematics::Map(position.Y, 0.0f, size.Y, lineCount * 10.0f, 0.0f));
+    int x = floorf(Mathematics::Map(positionL.X, 0.0f, size.X, characterWidth * 10.0f, 0.0f));
+    int y = floorf(Mathematics::Map(positionL.Y, 0.0f, size.Y, lineCount * 10.0f, 0.0f));
 
     if(x < 0 || x >= characterWidth * 10 || y < 0 || y >= lineCount * 10) return black;
 
@@ -112,7 +114,7 @@ RGBColor TextEngine<lineCount, characterWidth>::GetRGB(Vector3D position, Vector
 
     if(charYBit == 0 || charYBit == 9 || charXBit == 0 || charXBit == 9){//margin
         if (searchChar > 90 && blink) {
-            return material->GetRGB(position, normal, uvw).HueShift(180);
+            return material->GetRGB(positionL, normal, uvw).HueShift(180);
         }
         else return black;
     }
@@ -122,13 +124,13 @@ RGBColor TextEngine<lineCount, characterWidth>::GetRGB(Vector3D position, Vector
         bool xBit = 1 & (yCharacter >> (charXBit - 1));
         
         if (searchChar > 90 && blink){
-            return xBit ? black : material->GetRGB(position, normal, uvw).HueShift(180);
+            return xBit ? black : material->GetRGB(positionL, normal, uvw).HueShift(180);
         }
         else if (searchChar > 90){
-            return xBit ? material->GetRGB(position, normal, uvw).HueShift(180) : black;
+            return xBit ? material->GetRGB(positionL, normal, uvw).HueShift(180) : black;
         }
         else {
-            return xBit ? material->GetRGB(position, normal, uvw) : black;
+            return xBit ? material->GetRGB(positionL, normal, uvw) : black;
         }
     }
 }

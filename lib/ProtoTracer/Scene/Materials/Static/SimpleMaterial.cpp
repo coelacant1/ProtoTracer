@@ -14,6 +14,6 @@ void SimpleMaterial::SetRGB(RGBColor rgb) {
     this->baseRGB = rgb;
 }
 
-RGBColor SimpleMaterial::GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) {
+RGBColor SimpleMaterial::GetRGB(const Vector3D& position, const Vector3D& normal, const Vector3D& uvw) {
     return rgb;
 }

@@ -21,6 +21,6 @@ public:
         Bypass
     };
 
-    virtual RGBColor GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) = 0;
+    virtual RGBColor GetRGB(const Vector3D& position, const Vector3D& normal, const Vector3D& uvw) = 0;
   
 };

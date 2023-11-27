@@ -1,62 +1,52 @@
 #pragma once
 
 #include "..\..\Utils\RGBColor.h"
+#include "..\..\Utils\Math\Vector2D.h"
 
-typedef struct Pixel {
+class Pixel {
 private:
-	Vector2D* position;
-	bool sorted = false;
-	bool upExists = false;
-	bool downExists = false;
-	bool leftExists = false;
-	bool rightExists = false;
+    Vector2D* position;
+    bool sorted = false;
+    bool upExists = false;
+    bool downExists = false;
+    bool leftExists = false;
+    bool rightExists = false;
 
-	Pixel* up = nullptr;
-	Pixel* down = nullptr;
-	Pixel* left = nullptr;
-	Pixel* right = nullptr;
+    Pixel* up = nullptr;
+    Pixel* down = nullptr;
+    Pixel* left = nullptr;
+    Pixel* right = nullptr;
 
 public:
-  	RGBColor* Color;
-	
-	Pixel() {}
+    RGBColor* Color;
 
-	Pixel(Vector2D* position){
-		this->position = position;
-	}
+    Pixel();
 
-	Vector2D GetPosition(){
-		return *position;
-	}
+    Pixel(Vector2D* position);
 
-	void SetUpPixel(Pixel* pixel){
-		this->up = pixel;
-		this->upExists = true;
-	}
+    Vector2D GetPosition();
 
-	void SetDownPixel(Pixel* pixel){
-		this->down = pixel;
-		this->downExists = true;
-	}
+    void SetUpPixel(Pixel* pixel);
 
-	void SetLeftPixel(Pixel* pixel){
-		this->left = pixel;
-		this->leftExists = true;
-	}
+    void SetDownPixel(Pixel* pixel);
 
-	void SetRightPixel(Pixel* pixel){
-		this->right = pixel;
-		this->rightExists = true;
-	}
+    void SetLeftPixel(Pixel* pixel);
 
-	bool HasUpPixel(){ return upExists; }
-	bool HasDownPixel(){ return downExists; }
-	bool HasLeftPixel(){ return leftExists; }
-	bool HasRightPixel(){ return rightExists; }
+    void SetRightPixel(Pixel* pixel);
 
-	Pixel* GetUpPixel(){ return up; }
-	Pixel* GetDownPixel(){ return down; }
-	Pixel* GetLeftPixel(){ return left; }
-	Pixel* GetRightPixel(){ return right; }
+    bool HasUpPixel();
 
-} Pixel;
+    bool HasDownPixel();
+
+    bool HasLeftPixel();
+
+    bool HasRightPixel();
+
+    Pixel* GetUpPixel();
+
+    Pixel* GetDownPixel();
+
+    Pixel* GetLeftPixel();
+
+    Pixel* GetRightPixel();
+};

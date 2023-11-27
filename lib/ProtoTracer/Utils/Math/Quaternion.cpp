@@ -13,7 +13,7 @@ Quaternion::Quaternion(const Quaternion& quaternion) {
 }
 
 // Constructor from Vector3D
-Quaternion::Quaternion(Vector3D vector) {
+Quaternion::Quaternion(const Vector3D& vector) {
     this->W = 0;
     this->X = vector.X;
     this->Y = vector.Y;
@@ -21,7 +21,7 @@ Quaternion::Quaternion(Vector3D vector) {
 }
 
 // Constructor with individual components
-Quaternion::Quaternion(float w, float x, float y, float z) {
+Quaternion::Quaternion(const float& w, const float& x, const float& y, const float& z) {
     this->W = w;
     this->X = x;
     this->Y = y;
@@ -29,7 +29,7 @@ Quaternion::Quaternion(float w, float x, float y, float z) {
 }
 
 // Rotate vector
-Vector2D Quaternion::RotateVector(Vector2D v) {
+Vector2D Quaternion::RotateVector(const Vector2D& v) const {
     if (IsClose(Quaternion(), Mathematics::EPSILON)) return v;
 		
     Quaternion q = UnitQuaternion();
@@ -45,7 +45,7 @@ Vector2D Quaternion::RotateVector(Vector2D v) {
 }
 
 // Rotate vector with a unit quaternion
-Vector2D Quaternion::RotateVectorUnit(Vector2D v, const Quaternion& q) {
+Vector2D Quaternion::RotateVectorUnit(const Vector2D& v, const Quaternion& q) const {
     if (IsClose(Quaternion(), Mathematics::EPSILON)) return v;
 
     float s2 = q.W * 2.0f;
@@ -59,14 +59,14 @@ Vector2D Quaternion::RotateVectorUnit(Vector2D v, const Quaternion& q) {
 }
 
 // Unrotate vector
-Vector2D Quaternion::UnrotateVector(Vector2D coordinate) {
+Vector2D Quaternion::UnrotateVector(const Vector2D& coordinate) const {
     if (IsClose(Quaternion(), Mathematics::EPSILON)) return coordinate;
 
     return Conjugate().RotateVector(coordinate);
 }
 
 // Rotate vector
-Vector3D Quaternion::RotateVector(Vector3D v) {
+Vector3D Quaternion::RotateVector(const Vector3D& v) const {
     if (IsClose(Quaternion(), Mathematics::EPSILON)) return v;
 		
     Quaternion q = UnitQuaternion();
@@ -83,14 +83,14 @@ Vector3D Quaternion::RotateVector(Vector3D v) {
 }
 
 // Unrotate vector
-Vector3D Quaternion::UnrotateVector(Vector3D coordinate) {
+Vector3D Quaternion::UnrotateVector(const Vector3D& coordinate) const {
     if (IsClose(Quaternion(), Mathematics::EPSILON)) return coordinate;
 
     return UnitQuaternion().Conjugate().RotateVector(coordinate);
 }
 
 // Get Bivector
-Vector3D Quaternion::GetBiVector() {
+Vector3D Quaternion::GetBiVector() const {
     return Vector3D{
         this->X,
         this->Y,
@@ -99,22 +99,25 @@ Vector3D Quaternion::GetBiVector() {
 }
 
 // Spherical interpolation
-Quaternion Quaternion::SphericalInterpolation(Quaternion q1, Quaternion q2, float ratio) {
+Quaternion Quaternion::SphericalInterpolation(const Quaternion& q1, const Quaternion& q2, const float& ratio) {
     if (ratio <= Mathematics::EPSILON) return q1;
     if (ratio >= 1.0f - Mathematics::EPSILON) return q2; 
 
-    q1 = q1.UnitQuaternion();
-    q2 = q2.UnitQuaternion();
+    Quaternion q1U = q1;
+    Quaternion q2U = q2;
 
-    float dot = q1.DotProduct(q2);//Cosine between the two quaternions
+    q1U = q1U.UnitQuaternion();
+    q2U = q2U.UnitQuaternion();
+
+    float dot = q1U.DotProduct(q2U);//Cosine between the two quaternions
 
     if (dot < 0.0f){//Shortest path correction
-        q1 = q1.AdditiveInverse();
+        q1U = q1U.AdditiveInverse();
         dot = -dot;
     }
 
     if (dot > 0.999f){//Linearly interpolates if results are close
-        return (q1.Add( (q2.Subtract(q1)).Multiply(ratio) )).UnitQuaternion();
+        return (q1U.Add( (q2U.Subtract(q1U)).Multiply(ratio) )).UnitQuaternion();
     }
     else
     {
@@ -127,14 +130,15 @@ Quaternion Quaternion::SphericalInterpolation(Quaternion q1, Quaternion q2, floa
         float f1 = cosf(theta) - dot * sinf(theta) / sinf(theta0);
         float f2 = sinf(theta) / sinf(theta0);
 
-        return q1.Multiply(f1).Add(q2.Multiply(f2)).UnitQuaternion();
+        return q1U.Multiply(f1).Add(q2U.Multiply(f2)).UnitQuaternion();
     }
 }
 
 // Delta rotation
-Quaternion Quaternion::DeltaRotation(Vector3D angularVelocity, float timeDelta) {
+Quaternion Quaternion::DeltaRotation(const Vector3D& angularVelocity, const float& timeDelta) const {
     Quaternion current = Quaternion(this->W, this->X, this->Y, this->Z);
-    Vector3D halfAngle = angularVelocity * (timeDelta / 2.0f);
+    Vector3D angularVelocityL = angularVelocity;
+    Vector3D halfAngle = angularVelocityL * (timeDelta / 2.0f);
     float halfAngleLength = halfAngle.Magnitude();
 
     if(halfAngleLength > Mathematics::EPSILON){//exponential map
@@ -147,7 +151,7 @@ Quaternion Quaternion::DeltaRotation(Vector3D angularVelocity, float timeDelta) 
 }
 
 // Add quaternion
-Quaternion Quaternion::Add(Quaternion quaternion) {
+Quaternion Quaternion::Add(const Quaternion& quaternion) const {
     return Quaternion {
         W + quaternion.W,
         X + quaternion.X,
@@ -157,7 +161,7 @@ Quaternion Quaternion::Add(Quaternion quaternion) {
 }
 
 // Subtract quaternion
-Quaternion Quaternion::Subtract(Quaternion quaternion) {
+Quaternion Quaternion::Subtract(const Quaternion& quaternion) const {
     return Quaternion{
         W - quaternion.W,
         X - quaternion.X,
@@ -167,19 +171,50 @@ Quaternion Quaternion::Subtract(Quaternion quaternion) {
 }
 
 // Multiply quaternion
-Quaternion Quaternion::Multiply(Quaternion quaternion) {
+Quaternion Quaternion::Multiply(const Quaternion& quaternion) const {
     if(quaternion.IsClose(Quaternion(), Mathematics::EPSILON)) return Quaternion(W, X, Y, Z);
     
+    #ifndef _ARM_MATH_H
     return Quaternion{
         W * quaternion.W - X * quaternion.X - Y * quaternion.Y - Z * quaternion.Z,
         W * quaternion.X + X * quaternion.W + Y * quaternion.Z - Z * quaternion.Y,
         W * quaternion.Y - X * quaternion.Z + Y * quaternion.W + Z * quaternion.X,
         W * quaternion.Z + X * quaternion.Y - Y * quaternion.X + Z * quaternion.W
     };
+    #else
+    // 1    5   9   13
+    // 2    6   10  14
+    // 3    7   11  15
+    // 4    8   12  16
+    uint32_t multBlockSize = 16; // Increased to 4 for SIMD optimization
+
+    // Input vectors with an additional zero for padding
+    float32_t multA[multBlockSize] = {W, W, W, W, X, X, X, X, Y, Y, Y, Y, Z, Z, Z, Z};
+    float32_t multB[multBlockSize] = {  quaternion.W, quaternion.X, quaternion.Y, quaternion.Z,
+                                        quaternion.X, quaternion.W, quaternion.Z, quaternion.Y,
+                                        quaternion.Y, quaternion.Z, quaternion.W, quaternion.X,
+                                        quaternion.Z, quaternion.Y, quaternion.X, quaternion.W
+    };
+
+    // Output vector to store the result of the multiplication
+    float32_t multDst[multBlockSize];
+
+    // Call the function
+    arm_mult_f32(multA, multB, multDst, multBlockSize);
+
+    Quaternion q = Quaternion(  multDst[0] - multDst[4] - multDst[8]  - multDst[12],
+                                multDst[1] + multDst[5] + multDst[9]  - multDst[13],
+                                multDst[2] - multDst[6] + multDst[10] + multDst[14],
+                                multDst[3] + multDst[7] - multDst[11] + multDst[15]
+    );
+
+    return q;
+
+    #endif
 }
 
 // Multiply with scalar
-Quaternion Quaternion::Multiply(float scalar) {
+Quaternion Quaternion::Multiply(const float& scalar) const {
     if (Mathematics::IsClose(scalar, 0.0f, Mathematics::EPSILON)) return Quaternion();
     if (Mathematics::IsClose(scalar, 1.0f, Mathematics::EPSILON)) return Quaternion(W, X, Y, Z);
 
@@ -192,11 +227,12 @@ Quaternion Quaternion::Multiply(float scalar) {
 }
 
 // Divide quaternion
-Quaternion Quaternion::Divide(Quaternion quaternion) {
+Quaternion Quaternion::Divide(const Quaternion& quaternion) const {
     if(quaternion.IsClose(Quaternion(), Mathematics::EPSILON)) return Quaternion(W, X, Y, Z);
 
     float scale = 1.0f / (quaternion.W * quaternion.W + quaternion.X * quaternion.X + quaternion.Y * quaternion.Y + quaternion.Z * quaternion.Z);
-
+    
+    #ifndef _ARM_MATH_H
     return Quaternion
     {
         ( W * quaternion.W + X * quaternion.X + Y * quaternion.Y + Z * quaternion.Z) * scale,
@@ -204,26 +240,56 @@ Quaternion Quaternion::Divide(Quaternion quaternion) {
         (-W * quaternion.Y - X * quaternion.Z + Y * quaternion.W + Z * quaternion.X) * scale,
         (-W * quaternion.Z + X * quaternion.Y - Y * quaternion.X + Z * quaternion.W) * scale
     };
+    #else
+    // 1    5   9   13
+    // 2    6   10  14
+    // 3    7   11  15
+    // 4    8   12  16
+    uint32_t divBlockSize = 16; // Increased to 4 for SIMD optimization
+
+    // Input vectors with an additional zero for padding
+    float32_t divA[divBlockSize] = {W, W, W, W, X, X, X, X, Y, Y, Y, Y, Z, Z, Z, Z};
+    float32_t divB[divBlockSize] = {    quaternion.W, quaternion.X, quaternion.Y, quaternion.Z,
+                                        quaternion.X, quaternion.W, quaternion.Z, quaternion.Y,
+                                        quaternion.Y, quaternion.Z, quaternion.W, quaternion.X,
+                                        quaternion.Z, quaternion.Y, quaternion.X, quaternion.W
+    };
+
+    // Output vector to store the result of the multiplication
+    float32_t divDst[divBlockSize];
+
+    // Call the function
+    arm_mult_f32(divA, divB, divDst, divBlockSize);
+
+    Quaternion q = Quaternion(  ( divDst[0] + divDst[4] + divDst[8]  + divDst[12]) * scale,
+                                (-divDst[1] + divDst[5] + divDst[9]  - divDst[13]) * scale,
+                                (-divDst[2] - divDst[6] + divDst[10] + divDst[14]) * scale,
+                                (-divDst[3] + divDst[7] - divDst[11] + divDst[15]) * scale
+    );
+
+    return q;
+
+    #endif
 }
 
 // Divide by scalar
-Quaternion Quaternion::Divide(float scalar) {
+Quaternion Quaternion::Divide(const float& scalar) const {
     if (Mathematics::IsClose(scalar, 0.0f, Mathematics::EPSILON)) return Quaternion();
     if (Mathematics::IsClose(scalar, 1.0f, Mathematics::EPSILON)) return Quaternion(W, X, Y, Z);
     
-    scalar = 1.0f / scalar;
+    float invert = 1.0f / scalar;
 
     return Quaternion
     {
-        W * scalar,
-        X * scalar,
-        Y * scalar,
-        Z * scalar
+        W * invert,
+        X * invert,
+        Y * invert,
+        Z * invert
     };
 }
 
 // Power of quaternion
-Quaternion Quaternion::Power(Quaternion exponent) {
+Quaternion Quaternion::Power(const Quaternion& exponent) const {
     return Quaternion {
         Mathematics::Pow(W, exponent.W),
         Mathematics::Pow(X, exponent.X),
@@ -233,7 +299,7 @@ Quaternion Quaternion::Power(Quaternion exponent) {
 }
 
 // Power with scalar exponent
-Quaternion Quaternion::Power(float exponent) {
+Quaternion Quaternion::Power(const float& exponent) const {
     return Quaternion {
         Mathematics::Pow(W, exponent),
         Mathematics::Pow(X, exponent),
@@ -243,7 +309,7 @@ Quaternion Quaternion::Power(float exponent) {
 }
 
 // Permutate quaternion
-Quaternion Quaternion::Permutate(Vector3D permutation) {
+Quaternion Quaternion::Permutate(const Vector3D& permutation) const {
     Quaternion q = Quaternion(this->W, this->X, this->Y, this->Z);
     float perm[3];
 
@@ -259,7 +325,7 @@ Quaternion Quaternion::Permutate(Vector3D permutation) {
 }
 
 // Absolute value of quaternion
-Quaternion Quaternion::Absolute() {
+Quaternion Quaternion::Absolute() const {
     return Quaternion {
         fabsf(W),
         fabsf(X),
@@ -269,7 +335,7 @@ Quaternion Quaternion::Absolute() {
 }
 
 // Additive inverse of quaternion
-Quaternion Quaternion::AdditiveInverse() {
+Quaternion Quaternion::AdditiveInverse() const {
     return Quaternion {
         -W,
         -X,
@@ -279,7 +345,7 @@ Quaternion Quaternion::AdditiveInverse() {
 }
 
 // Multiplicative inverse of quaternion
-Quaternion Quaternion::MultiplicativeInverse() {
+Quaternion Quaternion::MultiplicativeInverse() const {
     float invNorm = 1.0f / Normal();
 
     if(Mathematics::IsClose(invNorm, 0.0f, Mathematics::EPSILON)) return Quaternion();
@@ -289,7 +355,7 @@ Quaternion Quaternion::MultiplicativeInverse() {
 }
 
 // Conjugate of quaternion
-Quaternion Quaternion::Conjugate() {
+Quaternion Quaternion::Conjugate() const {
     return Quaternion {
          W,
         -X,
@@ -299,7 +365,7 @@ Quaternion Quaternion::Conjugate() {
 }
 
 // Normalize quaternion to unit quaternion
-Quaternion Quaternion::UnitQuaternion() {
+Quaternion Quaternion::UnitQuaternion() const {
     float n = 1.0f / Normal();
 
     return Quaternion{
@@ -311,42 +377,42 @@ Quaternion Quaternion::UnitQuaternion() {
 }
 
 // Magnitude of quaternion
-float Quaternion::Magnitude() {
+float Quaternion::Magnitude() const {
     return Mathematics::Sqrt(Normal());
 }
 
 // Dot product of two quaternions
-float Quaternion::DotProduct(Quaternion q) {
+float Quaternion::DotProduct(const Quaternion& q) const {
     return (W * q.W) + (X * q.X) + (Y * q.Y) + (Z * q.Z);
 }
 
 // Norm of quaternion
-float Quaternion::Normal() {
+float Quaternion::Normal() const {
     return Mathematics::Sqrt(W * W + X * X + Y * Y + Z * Z);
 }
 
 // Check if quaternion is NaN
-bool Quaternion::IsNaN() {
+bool Quaternion::IsNaN() const {
     return Mathematics::IsNaN(W) || Mathematics::IsNaN(X) || Mathematics::IsNaN(Y) || Mathematics::IsNaN(Z);
 }
 
 // Check if quaternion is finite
-bool Quaternion::IsFinite() {
+bool Quaternion::IsFinite() const {
 	return Mathematics::IsInfinite(W) || Mathematics::IsInfinite(X) || Mathematics::IsInfinite(Y) || Mathematics::IsInfinite(Z);
 }
 
 // Check if quaternion is infinite
-bool Quaternion::IsInfinite() {
+bool Quaternion::IsInfinite() const {
 	return Mathematics::IsFinite(W) || Mathematics::IsFinite(X) || Mathematics::IsFinite(Y) || Mathematics::IsFinite(Z);
 }
 
 // Check if quaternion is non-zero
-bool Quaternion::IsNonZero() {
+bool Quaternion::IsNonZero() const {
     return W != 0 && X != 0 && Y != 0 && Z != 0;
 }
 
 // Check if two quaternions are equal
-bool Quaternion::IsEqual(Quaternion quaternion) {
+bool Quaternion::IsEqual(const Quaternion& quaternion) const {
     return !IsNaN() && !quaternion.IsNaN() &&
         W == quaternion.W &&
         X == quaternion.X &&
@@ -355,15 +421,15 @@ bool Quaternion::IsEqual(Quaternion quaternion) {
 }
 
 // Check if two quaternions are close within an epsilon
-bool Quaternion::IsClose(Quaternion quaternion, float epsilon) {
-    return fabs(W - quaternion.W) < epsilon &&
-        fabs(X - quaternion.X) < epsilon &&
-        fabs(Y - quaternion.Y) < epsilon &&
-        fabs(Z - quaternion.Z) < epsilon;
+bool Quaternion::IsClose(const Quaternion& quaternion, const float& epsilon) const {
+    return fabsf(W - quaternion.W) < epsilon &&
+        fabsf(X - quaternion.X) < epsilon &&
+        fabsf(Y - quaternion.Y) < epsilon &&
+        fabsf(Z - quaternion.Z) < epsilon;
 }
 
 // Convert quaternion to string
-String Quaternion::ToString() {
+String Quaternion::ToString() const {
     String w = Mathematics::DoubleToCleanString(this->W);
     String x = Mathematics::DoubleToCleanString(this->X);
     String y = Mathematics::DoubleToCleanString(this->Y);
@@ -373,15 +439,15 @@ String Quaternion::ToString() {
 }
 
 // Operator overloads
-bool Quaternion::operator ==(Quaternion quaternion) {
+bool Quaternion::operator ==(const Quaternion& quaternion) const {
     return this->IsEqual(quaternion);
 }
 
-bool Quaternion::operator !=(Quaternion quaternion) {
+bool Quaternion::operator !=(const Quaternion& quaternion) const {
     return !(this->IsEqual(quaternion));
 }
 
-Quaternion Quaternion::operator =(Quaternion quaternion) {
+Quaternion Quaternion::operator =(const Quaternion& quaternion) {
     this->W = quaternion.W;
     this->X = quaternion.X;
     this->Y = quaternion.Y;
@@ -390,94 +456,94 @@ Quaternion Quaternion::operator =(Quaternion quaternion) {
     return quaternion;
 }
 
-Quaternion Quaternion::operator +(Quaternion quaternion) {
+Quaternion Quaternion::operator +(const Quaternion& quaternion) const {
     return Add(quaternion);
 }
 
-Quaternion Quaternion::operator -(Quaternion quaternion) {
+Quaternion Quaternion::operator -(const Quaternion& quaternion) const {
     return Subtract(quaternion);
 }
 
-Quaternion Quaternion::operator *(Quaternion quaternion) {
+Quaternion Quaternion::operator *(const Quaternion& quaternion) const {
     return Multiply(quaternion);
 }
 
-Quaternion Quaternion::operator /(Quaternion quaternion) {
+Quaternion Quaternion::operator /(const Quaternion& quaternion) const {
     return Divide(quaternion);
 }
 
-Quaternion Quaternion::operator /(float scalar) {
+Quaternion Quaternion::operator /(const float& scalar) const {
     return Divide(scalar);
 }
 
 // Friend operator overloads
-Quaternion operator *(float scalar, Quaternion q) {
+Quaternion operator *(const float& scalar, const Quaternion& q) {
     return q.Multiply(scalar);
 }
 
-Quaternion operator *(Quaternion q, float scalar) {
+Quaternion operator *(const Quaternion& q, const float& scalar) {
     return q.Multiply(scalar);
 }
 
 
 // Static function definitions
 
-Quaternion Quaternion::Add(Quaternion q1, Quaternion q2) {
+Quaternion Quaternion::Add(const Quaternion& q1, const Quaternion& q2) {
     return q1.Add(q2);
 }
 
-Quaternion Quaternion::Subtract(Quaternion q1, Quaternion q2) {
+Quaternion Quaternion::Subtract(const Quaternion& q1, const Quaternion& q2) {
     return q1.Subtract(q2);
 }
 
-Quaternion Quaternion::Multiply(Quaternion q1, Quaternion q2) {
+Quaternion Quaternion::Multiply(const Quaternion& q1, const Quaternion& q2) {
     return q1.Multiply(q2);
 }
 
-Quaternion Quaternion::Divide(Quaternion q1, Quaternion q2) {
+Quaternion Quaternion::Divide(const Quaternion& q1, const Quaternion& q2) {
     return q1.Divide(q2);
 }
 
-Quaternion Quaternion::Power(Quaternion q1, Quaternion q2) {
+Quaternion Quaternion::Power(const Quaternion& q1, const Quaternion& q2) {
     return q1.Power(q2);
 }
 
-float Quaternion::DotProduct(Quaternion q1, Quaternion q2) {
+float Quaternion::DotProduct(const Quaternion& q1, const Quaternion& q2) {
     return q1.DotProduct(q2);
 }
 
-Quaternion Quaternion::Power(Quaternion quaternion, float exponent) {
+Quaternion Quaternion::Power(const Quaternion& quaternion, const float& exponent) {
     return quaternion.Power(exponent);
 }
 
-Quaternion Quaternion::Permutate(Quaternion quaternion, Vector3D vector) {
+Quaternion Quaternion::Permutate(const Quaternion& quaternion, const Vector3D& vector) {
     return quaternion.Permutate(vector);
 }
 
-Quaternion Quaternion::Absolute(Quaternion quaternion) {
+Quaternion Quaternion::Absolute(const Quaternion& quaternion) {
     return quaternion.Absolute();
 }
 
-Quaternion Quaternion::AdditiveInverse(Quaternion quaternion) {
+Quaternion Quaternion::AdditiveInverse(const Quaternion& quaternion) {
     return quaternion.AdditiveInverse();
 }
 
-Quaternion Quaternion::MultiplicativeInverse(Quaternion quaternion) {
+Quaternion Quaternion::MultiplicativeInverse(const Quaternion& quaternion) {
     return quaternion.MultiplicativeInverse();
 }
 
-Quaternion Quaternion::Conjugate(Quaternion quaternion) {
+Quaternion Quaternion::Conjugate(const Quaternion& quaternion) {
     return quaternion.Conjugate();
 }
 
-Quaternion Quaternion::UnitQuaternion(Quaternion quaternion) {
+Quaternion Quaternion::UnitQuaternion(const Quaternion& quaternion) {
     return quaternion.UnitQuaternion();
 }
 
-float Quaternion::Magnitude(Quaternion quaternion) {
+float Quaternion::Magnitude(const Quaternion& quaternion) {
     return quaternion.Magnitude();
 }
 
-float Quaternion::Normal(Quaternion quaternion) {
+float Quaternion::Normal(const Quaternion& quaternion) {
     return quaternion.Normal();
 }

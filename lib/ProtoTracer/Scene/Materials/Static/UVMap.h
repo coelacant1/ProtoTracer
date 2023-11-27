@@ -7,5 +7,5 @@ class UVMap : public Image {
 public:
     UVMap(const uint8_t* data, const uint8_t* rgbColors, uint16_t xPixels, uint16_t yPixels, uint8_t colors);
 
-    RGBColor GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) override;
+    RGBColor GetRGB(const Vector3D& position, const Vector3D& normal, const Vector3D& uvw) override;
 };

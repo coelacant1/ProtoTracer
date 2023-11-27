@@ -32,7 +32,7 @@ void Image::SetHueAngle(float hueAngle) {
     this->hueAngle = hueAngle;
 }
 
-RGBColor Image::GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) {
+RGBColor Image::GetRGB(const Vector3D& position, const Vector3D& normal, const Vector3D& uvw) {
     Vector2D rPos = angle != 0.0f ? Vector2D(position.X, position.Y).Rotate(angle, offset) - offset : Vector2D(position.X, position.Y) - offset;
 
     unsigned int x = (unsigned int)Mathematics::Map(rPos.X, size.X / -2.0f, size.X / 2.0f, float(xPixels), 0.0f);

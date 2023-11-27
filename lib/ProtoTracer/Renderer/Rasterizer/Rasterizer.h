@@ -14,6 +14,7 @@ private:
     static Quaternion lookDirection;
 
     static RGBColor CheckRasterPixel(Triangle2D** triangles, int numTriangles, Vector2D pixelRay);
+    static RGBColor CheckRasterPixelAccel(Triangle2D** triangles, int numTriangles, Vector2D pixelRay);
 
 public:
     static void Rasterize(Scene* scene, CameraBase* camera);

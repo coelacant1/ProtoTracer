@@ -16,36 +16,36 @@ private:
 
 public:
     Transform();
-    Transform(Vector3D eulerXYZS, Vector3D position, Vector3D scale);
-    Transform(Quaternion rotation, Vector3D position, Vector3D scale);
-    Transform(Vector3D eulerXYZS, Vector3D position, Vector3D scale, Vector3D rotationOffset, Vector3D scaleOffset);
-    Transform(Quaternion rotation, Vector3D position, Vector3D scale, Vector3D rotationOffset, Vector3D scaleOffset);
+    Transform(const Vector3D& eulerXYZS, const Vector3D& position, const Vector3D& scale);
+    Transform(const Quaternion& rotation, const Vector3D& position, const Vector3D& scale);
+    Transform(const Vector3D& eulerXYZS, const Vector3D& position, const Vector3D& scale, const Vector3D& rotationOffset, const Vector3D& scaleOffset);
+    Transform(const Quaternion& rotation, const Vector3D& position, const Vector3D& scale, const Vector3D& rotationOffset, const Vector3D& scaleOffset);
     Transform(const Transform& transform);
 
-    void SetBaseRotation(Quaternion baseRotation);
+    void SetBaseRotation(const Quaternion& baseRotation);
     Quaternion GetBaseRotation();
 
-    void SetRotation(Quaternion rotation);
-    void SetRotation(Vector3D eulerXYZS);
+    void SetRotation(const Quaternion& rotation);
+    void SetRotation(const Vector3D& eulerXYZS);
     Quaternion GetRotation();
 
-    void SetPosition(Vector3D position);
+    void SetPosition(const Vector3D& position);
     Vector3D GetPosition();
 
-    void SetScale(Vector3D scale);
+    void SetScale(const Vector3D& scale);
     Vector3D GetScale();
 
-    void SetScaleRotationOffset(Quaternion scaleRotationOffset);
+    void SetScaleRotationOffset(const Quaternion& scaleRotationOffset);
     Quaternion GetScaleRotationOffset();
 
-    void SetRotationOffset(Vector3D rotationOffset);
+    void SetRotationOffset(const Vector3D& rotationOffset);
     Vector3D GetRotationOffset();
 
-    void SetScaleOffset(Vector3D scaleOffset);
+    void SetScaleOffset(const Vector3D& scaleOffset);
     Vector3D GetScaleOffset();
 
-    void Rotate(Vector3D eulerXYZS);
-    void Rotate(Quaternion rotation);
-    void Translate(Vector3D offset);
-    void Scale(Vector3D scale);
+    void Rotate(const Vector3D& eulerXYZS);
+    void Rotate(const Quaternion& rotation);
+    void Translate(const Vector3D& offset);
+    void Scale(const Vector3D& scale);
 };

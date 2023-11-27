@@ -45,7 +45,7 @@ void Oscilloscope::Update(float* data) {
     midPoint = (maxValue - minValue) / 2.0f + minValue;
 }
 
-RGBColor Oscilloscope::GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) {
+RGBColor Oscilloscope::GetRGB(const Vector3D& position, const Vector3D& normal, const Vector3D& uvw) {
     Vector2D rPos = Mathematics::IsClose(angle, 0.0f, 0.1f) ? Vector2D(position.X, position.Y) - offset : Vector2D(position.X, position.Y).Rotate(angle, offset) - offset;
 
     // Outside of size bounds

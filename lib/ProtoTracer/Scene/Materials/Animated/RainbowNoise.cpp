@@ -16,6 +16,6 @@ Material* RainbowNoise::GetMaterial() {
     return &sNoise;
 }
 
-RGBColor RainbowNoise::GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) {
+RGBColor RainbowNoise::GetRGB(const Vector3D& position, const Vector3D& normal, const Vector3D& uvw) {
     return sNoise.GetRGB(position, normal, uvw);
 }

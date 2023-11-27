@@ -8,7 +8,7 @@ LightMaterial<lightCount>::LightMaterial() {
 }
 
 template<size_t lightCount>
-RGBColor LightMaterial<lightCount>::GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) {
+RGBColor LightMaterial<lightCount>::GetRGB(const Vector3D& position, const Vector3D& normal, const Vector3D& uvw) {
     Vector3D color;
 
     for (int l = 0; l < lightCount; l++) {

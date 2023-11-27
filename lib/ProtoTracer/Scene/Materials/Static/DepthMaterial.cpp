@@ -6,7 +6,7 @@ DepthMaterial::DepthMaterial(Axis axis, float depth, float zOffset){
     this->zOffset = zOffset;
 }
 
-RGBColor DepthMaterial::GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) {
+RGBColor DepthMaterial::GetRGB(const Vector3D& position, const Vector3D& normal, const Vector3D& uvw) {
     float axisValue = 0.0f;
 
     switch (axis) {

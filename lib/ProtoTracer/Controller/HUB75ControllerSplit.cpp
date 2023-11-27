@@ -12,17 +12,14 @@ HUB75ControllerSplit::HUB75ControllerSplit(CameraManager* cameras, uint8_t maxBr
 void HUB75ControllerSplit::Initialize(){
     matrix.addLayer(&backgroundLayer);
     matrix.begin();
-    
     matrix.setRefreshRate(240);
 
     backgroundLayer.swapBuffers();//for ESP32 - first is ignored
 
     //APA102
-    pinMode(SMARTLED_APA_ENABLE_PIN, OUTPUT);
-    digitalWrite(SMARTLED_APA_ENABLE_PIN, HIGH);  // enable access to LEDs
     apamatrix.addLayer(&apaBackgroundLayer);
-
     apamatrix.begin();
+    apamatrix.setRefreshRate(240);
 }
 
 void HUB75ControllerSplit::Display(){
@@ -30,9 +27,6 @@ void HUB75ControllerSplit::Display(){
 
     matrix.setBrightness(brightness);
     apamatrix.setBrightness(accentBrightness / 2);
-
-    while(apaBackgroundLayer.isSwapPending());
-    rgb24 *apabuffer = apaBackgroundLayer.backBuffer();
 
     IPixelGroup* camPixelsRight = cameras->GetCameras()[0]->GetPixelGroup();
     IPixelGroup* camPixelsLeft = cameras->GetCameras()[1]->GetPixelGroup();
@@ -49,12 +43,15 @@ void HUB75ControllerSplit::Display(){
             backgroundLayer.drawPixel(63 - x, (31 - y) + 32, rgbColorRight);
         }
     }
+    
+    backgroundLayer.swapBuffers(false);
 
     for (uint16_t x = 0; x < kApaMatrixWidth; x++){
-        apabuffer[x] = rgb24(camSidePixels->GetColor(x)->R, camSidePixels->GetColor(x)->G, camSidePixels->GetColor(x)->B);
+        rgb24 rgbColor = rgb24((uint16_t)camSidePixels->GetColor(x)->R, (uint16_t)camSidePixels->GetColor(x)->G, (uint16_t)camSidePixels->GetColor(x)->B);
+        
+        apaBackgroundLayer.drawPixel(x, 0, rgbColor);
     }
     
-    backgroundLayer.swapBuffers();
     apaBackgroundLayer.swapBuffers(false);
 }
 

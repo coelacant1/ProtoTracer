@@ -8,17 +8,8 @@ protected:
     uint8_t count;
 
 public:
-    CameraManager(CameraBase** cameras, uint8_t count) {
-        this->cameras = cameras;
-        this->count = count;
-    }
+    CameraManager(CameraBase** cameras, uint8_t count);
 
-    CameraBase** GetCameras() {
-        return cameras;
-    }
-
-    uint8_t GetCameraCount() {
-        return count;
-    }
-
+    CameraBase** GetCameras();
+    uint8_t GetCameraCount();
 };

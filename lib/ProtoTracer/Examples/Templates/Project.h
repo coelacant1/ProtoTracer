@@ -8,19 +8,17 @@
 
 class Project {
 protected:
-    long previousFrame;
-    long previousAnimationTime;
-    long previousRenderTime;
-    long previousDisplayTime;
-    float fade;
-    float frameTime;
-    float animationTime;
-    float renderTime;
-    float displayTime;
-
     CameraManager* cameras;
     Controller* controller;
     Scene scene;
+
+    long previousAnimationTime = 0;
+    long previousRenderTime = 0;
+    long previousDisplayTime = 0;
+    float fade = 0.0f;
+    float animationTime = 0.0f;
+    float renderTime = 0.0f;
+    float displayTime = 0.0f;
 
     virtual void Update(float ratio) = 0;
 

@@ -12,7 +12,6 @@ HUB75ControllerSquare::HUB75ControllerSquare(CameraManager* cameras, uint8_t max
 void HUB75ControllerSquare::Initialize(){
     matrix.addLayer(&backgroundLayer);
     matrix.begin();
-    
     matrix.setRefreshRate(240);
 
     backgroundLayer.swapBuffers();//for ESP32 - first is ignored
@@ -38,7 +37,7 @@ void HUB75ControllerSquare::Display(){
         }
     }
 
-    backgroundLayer.swapBuffers();
+    backgroundLayer.swapBuffers(false);
 }
 
 void HUB75ControllerSquare::SetBrightness(uint8_t maxBrightness){

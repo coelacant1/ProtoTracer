@@ -36,13 +36,13 @@ void CombineMaterial<materialCount>::SetMaterial(uint8_t index, Material* materi
 }
 
 template<size_t materialCount>
-RGBColor CombineMaterial<materialCount>::GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) {
+RGBColor CombineMaterial<materialCount>::GetRGB(const Vector3D& position, const Vector3D& normal, const Vector3D& uvw) {
     Vector3D rgb;
     Vector3D tempV;
     RGBColor temp;
 
     for (int i = 0; i < materialsAdded; i++) {
-        if (opacity[i] > 0.01f) {
+        if (opacity[i] > 0.025f) {
             switch (method[i]) {
                 case Base:
                     temp = materials[i]->GetRGB(position, normal, uvw);

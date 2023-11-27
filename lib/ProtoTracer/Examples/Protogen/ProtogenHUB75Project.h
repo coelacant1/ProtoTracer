@@ -16,6 +16,7 @@ private:
     HUB75Controller controller = HUB75Controller(&cameras, 50, 50);
     NukudeFace pM;
     DeltaDisplayBackground deltaDisplayBackground;
+    SimpleMaterial testMaterial = SimpleMaterial(RGBColor(255, 0, 0));
     
 	const __FlashStringHelper* faceArray[10] = {F("DEFAULT"), F("ANGRY"), F("DOUBT"), F("FROWN"), F("LOOKUP"), F("SAD"), F("AUDIO1"), F("AUDIO2"), F("AUDIO3")};
 
@@ -77,7 +78,7 @@ private:
     }
 
 public:
-    ProtogenHUB75Project() : ProtogenProject(&cameras, &controller, 2, Vector2D(), Vector2D(192.0f, 96.0f), 22, 23, 9){
+    ProtogenHUB75Project() : ProtogenProject(&cameras, &controller, 2, Vector2D(), Vector2D(192.0f, 94.0f), 22, 23, 9){
         scene.AddObject(pM.GetObject());
         scene.AddObject(deltaDisplayBackground.GetObject());
 
@@ -87,6 +88,11 @@ public:
         LinkControlParameters();
 
         hud.SetFaceArray(faceArray);
+        
+        SetWiggleSpeed(5.0f);
+        SetMenuWiggleSpeed(0.0f, 0.0f, 0.0f);
+        SetMenuOffset(Vector2D(17.5f, -3.0f));
+        SetMenuSize(Vector2D(192, 56));
     }
 
     void Update(float ratio) override {
@@ -121,11 +127,6 @@ public:
 
         AlignObject(pM.GetObject(), -7.5f);
 
-        SetWiggleSpeed(5.0f);
-        SetMenuWiggleSpeed(0.0f, 0.0f, 0.0f);
-        SetMenuOffset(Vector2D(17.5f, -3.0f));
-        SetMenuSize(Vector2D(192, 56));
-        
         pM.GetObject()->GetTransform()->SetPosition(GetWiggleOffset());
         pM.GetObject()->UpdateTransform();
     }

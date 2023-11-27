@@ -24,6 +24,6 @@ Material* FlowNoise::GetMaterial() {
     return &sNoise;
 }
 
-RGBColor FlowNoise::GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) {
+RGBColor FlowNoise::GetRGB(const Vector3D& position, const Vector3D& normal, const Vector3D& uvw) {
     return sNoise.GetRGB(position, normal, uvw);
 }

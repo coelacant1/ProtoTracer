@@ -8,43 +8,20 @@ protected:
     KeyFrameTrack<maxParameters, maxKeyFrames> track;
 
 private:
-    virtual void AddKeyFrames();
+    virtual void AddKeyFrames() = 0;
 
 public:
-    AnimationTrack() : track(KeyFrameTrack<maxParameters, maxKeyFrames>(0.0f, 1.0f, KeyFrameInterpolation::Cosine)){}
-    
-    AnimationTrack(float min, float max, KeyFrameInterpolation::InterpolationMethod interpMethod) : track(KeyFrameTrack<maxParameters, maxKeyFrames>(min, max, interpMethod)){}
+    AnimationTrack();
+    AnimationTrack(float min, float max, KeyFrameInterpolation::InterpolationMethod interpMethod);
 
-    void Play(){
-        track.Play();
-    }
-
-    void Pause(){
-        track.Pause();
-    }
-
-    void RestartTime(){
-        track.SetCurrentTime(0.0f);
-    }
-
-    void PrintTime(){
-        Serial.println(track.GetCurrentTime());
-    }
-
-    void Reset(){
-        track.Reset();
-    }
-
-    float GetParameterValue(){
-        return track.GetParameterValue();
-    }
-
-    float Update(){
-        return track.Update();
-    }
-
-    void AddParameter(float* parameter){
-        track.AddParameter(parameter);
-    }
-
+    void Play();
+    void Pause();
+    void RestartTime();
+    void PrintTime();
+    void Reset();
+    float GetParameterValue();
+    float Update();
+    void AddParameter(float* parameter);
 };
+
+#include "AnimationTrack.tpp"

@@ -14,7 +14,7 @@ float* MaterialMask::GetOpacityReference() {
     return &opacity;
 }
 
-RGBColor MaterialMask::GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) {
+RGBColor MaterialMask::GetRGB(const Vector3D& position, const Vector3D& normal, const Vector3D& uvw) {
     bool isInShape = shape->IsInShape(Vector2D(position.X, position.Y));
 
     if (opacity > 0.97f && isInShape) {

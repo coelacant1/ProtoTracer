@@ -1,8 +1,11 @@
 #include "Project.h"
 
 Project::Project(CameraManager* cameras, Controller* controller, uint8_t numObjects) 
-    : cameras(cameras), controller(controller), scene(numObjects), fade(0.0f), frameTime(0.0f), animationTime(0.0f), renderTime(0.0f), displayTime(0.0f) {
-    previousFrame = micros();
+    : cameras(cameras), controller(controller), scene(numObjects) {
+        
+    previousAnimationTime = micros();
+    previousRenderTime = micros();
+    previousDisplayTime = micros();
 }
 
 void Project::RenderStartTimer() {
@@ -26,7 +29,7 @@ float Project::GetDisplayTime() {
 }
 
 float Project::GetFrameRate() {
-    return 1.0f / frameTime;
+    return 1.0f / (renderTime + animationTime + displayTime);
 }
 
 void Project::Animate(float ratio) {
@@ -52,7 +55,4 @@ void Project::Display() {
     controller->Display();
 
     displayTime = ((float)(micros() - previousDisplayTime)) / 1000000.0f;
-    
-    frameTime = ((float)(micros() - previousFrame)) / 1000000.0f;
-    previousFrame = micros();
 }

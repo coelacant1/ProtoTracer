@@ -21,8 +21,8 @@ public:
     Triangle2D** GetEntities();
     uint16_t GetCount();
     void Expand(unsigned int newCount);
-    bool Insert(Triangle2D* triangle, BoundingBox2D& bbox, unsigned int depth = 0);
-    void Subdivide(BoundingBox2D& bbox, unsigned int depth = 0);
+    bool Insert(Triangle2D* triangle, BoundingBox2D* bbox, unsigned int depth = 0);
+    void Subdivide(BoundingBox2D* bbox, unsigned int depth = 0);
     bool IsLeaf();
-    void PrintStats(int& totalCount, BoundingBox2D& bbox);
+    void PrintStats(int& totalCount, BoundingBox2D* bbox);
 };

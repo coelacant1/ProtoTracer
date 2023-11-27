@@ -288,7 +288,7 @@ uint32_t VectorField2D::GetVectorAtPosition(float x, float y, bool &inBounds){
     return 0;
 }
 
-RGBColor VectorField2D::GetRGB(Vector3D position, Vector3D normal, Vector3D uvw){
+RGBColor VectorField2D::GetRGB(const Vector3D& position, const Vector3D& normal, const Vector3D& uvw){
     float x = uvw.X * size.X;
     float y = uvw.Y * size.Y;
     bool inBounds;

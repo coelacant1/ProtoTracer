@@ -77,6 +77,6 @@ void Clock::Update() {
     tE.SetText(2, dayOfWeek, false);
 }
 
-RGBColor Clock::GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) {
+RGBColor Clock::GetRGB(const Vector3D& position, const Vector3D& normal, const Vector3D& uvw) {
     return tE.GetRGB(position, normal, uvw);
 }

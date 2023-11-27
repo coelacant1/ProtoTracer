@@ -10,6 +10,6 @@ Material* RainbowSpiral::GetMaterial() {
     return &spiralMaterial;
 }
 
-RGBColor RainbowSpiral::GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) {
+RGBColor RainbowSpiral::GetRGB(const Vector3D& position, const Vector3D& normal, const Vector3D& uvw) {
     return spiralMaterial.GetRGB(position, normal, uvw);
 }

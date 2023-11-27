@@ -5,7 +5,7 @@ UVMap::UVMap(const uint8_t* data, const uint8_t* rgbColors, uint16_t xPixels, ui
     this->size = Vector2D(1.0f, 1.0f);
 }
 
-RGBColor UVMap::GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) {
+RGBColor UVMap::GetRGB(const Vector3D& position, const Vector3D& normal, const Vector3D& uvw) {
     Vector2D rPos = Vector2D(1.0f - uvw.X, uvw.Y);
 
     uint16_t x = (uint16_t)Mathematics::Map(rPos.X, 0.0f, size.X, float(xPixels), float(0));

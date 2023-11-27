@@ -2,7 +2,7 @@
 
 void DisplayTest::FillWhite(CameraBase* camera) {
     for (unsigned int i = 0; i < camera->GetPixelGroup()->GetPixelCount(); i++) {
-        RGBColor color = RGBColor(255, 255, 255);
+        RGBColor color = RGBColor(50, 50, 50);
 
         camera->GetPixelGroup()->GetColor(i)->R = color.R;
         camera->GetPixelGroup()->GetColor(i)->G = color.G;
@@ -17,7 +17,7 @@ void DisplayTest::FillAltWhiteBlack(CameraBase* camera) {
         RGBColor color;
         
         if (alternate){
-            color = RGBColor(255, 255, 255);
+            color = RGBColor(50, 50, 50);
             alternate = !alternate;
         }
         else{

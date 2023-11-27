@@ -2,7 +2,7 @@
 #include "Mathematics.h"
 
 // Define the private member functions
-Quaternion Rotation::AxisAngleToQuaternion(AxisAngle axisAngle) {
+Quaternion Rotation::AxisAngleToQuaternion(const AxisAngle& axisAngle) {
     float halfRotation = Mathematics::DegreesToRadians(axisAngle.Rotation) / 2.0f;
     float scale = sinf(halfRotation);
 
@@ -14,15 +14,16 @@ Quaternion Rotation::AxisAngleToQuaternion(AxisAngle axisAngle) {
     );
 }
 
-Quaternion Rotation::DirectionAngleToQuaternion(DirectionAngle directionAngle) {
+Quaternion Rotation::DirectionAngleToQuaternion(const DirectionAngle& directionAngle) {
     Vector3D right =   Vector3D(1, 0, 0);
     Vector3D up =      Vector3D(0, 1, 0);
     Vector3D forward = Vector3D(0, 0, 1);
 
     Vector3D rotatedRight;
     Vector3D rotatedForward;
-
-    Quaternion rotationChange = QuaternionFromDirectionVectors(up, directionAngle.Direction.UnitSphere());
+    Vector3D dir = directionAngle.Direction;
+    
+    Quaternion rotationChange = QuaternionFromDirectionVectors(up, dir.UnitSphere());
 
     Vector3D rightAngleRotated = RotationMatrix::RotateVector(Vector3D(0, -directionAngle.Rotation, 0), right);
     Vector3D forwardAngleRotated = RotationMatrix::RotateVector(Vector3D(0, -directionAngle.Rotation, 0), forward);
@@ -33,11 +34,11 @@ Quaternion Rotation::DirectionAngleToQuaternion(DirectionAngle directionAngle) {
     return RotationMatrixToQuaternion(RotationMatrix(rotatedRight, directionAngle.Direction, rotatedForward)).UnitQuaternion();
 }
 
-Quaternion Rotation::RotationMatrixToQuaternion(RotationMatrix rM) {
+Quaternion Rotation::RotationMatrixToQuaternion(const RotationMatrix& rM) {
     return RotationMatrixToQuaternion(rM.XAxis, rM.YAxis, rM.ZAxis);
 }
 
-Quaternion Rotation::RotationMatrixToQuaternion(Vector3D X, Vector3D Y, Vector3D Z) {
+Quaternion Rotation::RotationMatrixToQuaternion(const Vector3D& X, const Vector3D& Y, const Vector3D& Z) {
     Quaternion q = Quaternion();
 		
     float matrixTrace = X.X + Y.Y + Z.Z;
@@ -83,33 +84,34 @@ Quaternion Rotation::RotationMatrixToQuaternion(Vector3D X, Vector3D Y, Vector3D
     return q.UnitQuaternion().Conjugate();
 }
 
-Quaternion Rotation::EulerAnglesToQuaternion(EulerAngles eulerAngles) {
+Quaternion Rotation::EulerAnglesToQuaternion(const EulerAngles& eulerAngles) {
     Quaternion q = Quaternion(1, 0, 0, 0);
+    Vector3D eA = eulerAngles.Angles;
     float sx, sy, sz, cx, cy, cz, cc, cs, sc, ss;
 
-    eulerAngles.Angles.X = Mathematics::DegreesToRadians(eulerAngles.Angles.X);
-    eulerAngles.Angles.Y = Mathematics::DegreesToRadians(eulerAngles.Angles.Y);
-    eulerAngles.Angles.Z = Mathematics::DegreesToRadians(eulerAngles.Angles.Z);
+    eA.X = Mathematics::DegreesToRadians(eA.X);
+    eA.Y = Mathematics::DegreesToRadians(eA.Y);
+    eA.Z = Mathematics::DegreesToRadians(eA.Z);
 
     if (eulerAngles.Order.FrameTaken == EulerOrder::AxisFrame::Rotating)
     {
-        float t = eulerAngles.Angles.X;
-        eulerAngles.Angles.X = eulerAngles.Angles.Z;
-        eulerAngles.Angles.Z = t;
+        float t = eA.X;
+        eA.X = eA.Z;
+        eA.Z = t;
     }
 
     if (eulerAngles.Order.AxisPermutation == EulerOrder::Parity::Odd)
     {
-        eulerAngles.Angles.Y = -eulerAngles.Angles.Y;
+        eA.Y = -eA.Y;
     }
 
-    sx = sinf(eulerAngles.Angles.X * 0.5f);
-    sy = sinf(eulerAngles.Angles.Y * 0.5f);
-    sz = sinf(eulerAngles.Angles.Z * 0.5f);
+    sx = sinf(eA.X * 0.5f);
+    sy = sinf(eA.Y * 0.5f);
+    sz = sinf(eA.Z * 0.5f);
 
-    cx = cosf(eulerAngles.Angles.X * 0.5f);
-    cy = cosf(eulerAngles.Angles.Y * 0.5f);
-    cz = cosf(eulerAngles.Angles.Z * 0.5f);
+    cx = cosf(eA.X * 0.5f);
+    cy = cosf(eA.Y * 0.5f);
+    cz = cosf(eA.Z * 0.5f);
 
     cc = cx * cz;
     cs = cx * sz;
@@ -141,13 +143,13 @@ Quaternion Rotation::EulerAnglesToQuaternion(EulerAngles eulerAngles) {
     return q;
 }
 
-Quaternion Rotation::YawPitchRollToQuaternion(YawPitchRoll ypr) {
+Quaternion Rotation::YawPitchRollToQuaternion(const YawPitchRoll& ypr) {
     //std::cout << "YPR to Quaternion not implemented." << std::endl;
 
     return Quaternion();
 }
 
-EulerAngles Rotation::RotationMatrixToEulerAngles(RotationMatrix rM, EulerOrder order) {
+EulerAngles Rotation::RotationMatrixToEulerAngles(const RotationMatrix& rM, const EulerOrder& order) {
     EulerAngles eulerAngles = EulerAngles(Vector3D(0, 0, 0), order);
     //Vector3D p = order.Permutation;
 
@@ -207,33 +209,34 @@ EulerAngles Rotation::RotationMatrixToEulerAngles(RotationMatrix rM, EulerOrder 
     return eulerAngles;
 }
 
-RotationMatrix Rotation::EulerAnglesToRotationMatrix(EulerAngles eulerAngles) {
+RotationMatrix Rotation::EulerAnglesToRotationMatrix(const EulerAngles& eulerAngles) {
     RotationMatrix rM = RotationMatrix(Vector3D(0, 0, 0));
+    Vector3D eA = eulerAngles.Angles;
     float sx, sy, sz, cx, cy, cz, cc, cs, sc, ss; 
     //Vector3D p = eulerAngles.Order.Permutation;
 
-    eulerAngles.Angles.X = Mathematics::DegreesToRadians(eulerAngles.Angles.X);
-    eulerAngles.Angles.Y = Mathematics::DegreesToRadians(eulerAngles.Angles.Y);
-    eulerAngles.Angles.Z = Mathematics::DegreesToRadians(eulerAngles.Angles.Z);
+    eA.X = Mathematics::DegreesToRadians(eA.X);
+    eA.Y = Mathematics::DegreesToRadians(eA.Y);
+    eA.Z = Mathematics::DegreesToRadians(eA.Z);
 
     if (eulerAngles.Order.FrameTaken == EulerOrder::AxisFrame::Rotating){
-        float t = eulerAngles.Angles.X;
-        eulerAngles.Angles.X = eulerAngles.Angles.Z;
-        eulerAngles.Angles.Z = t;
+        float t = eA.X;
+        eA.X = eA.Z;
+        eA.Z = t;
     }
 
     if (eulerAngles.Order.AxisPermutation == EulerOrder::Parity::Odd){
-        eulerAngles.Angles.X = -eulerAngles.Angles.X;
-        eulerAngles.Angles.Y = -eulerAngles.Angles.Y;
-        eulerAngles.Angles.Z = -eulerAngles.Angles.Z;
+        eA.X = -eA.X;
+        eA.Y = -eA.Y;
+        eA.Z = -eA.Z;
     }
 
-    sx = sinf(eulerAngles.Angles.X);
-    sy = sinf(eulerAngles.Angles.Y);
-    sz = sinf(eulerAngles.Angles.Z);
-    cx = cosf(eulerAngles.Angles.X);
-    cy = cosf(eulerAngles.Angles.Y);
-    cz = cosf(eulerAngles.Angles.Z);
+    sx = sinf(eA.X);
+    sy = sinf(eA.Y);
+    sz = sinf(eA.Z);
+    cx = cosf(eA.X);
+    cy = cosf(eA.Y);
+    cz = cosf(eA.Z);
 
     cc = cx * cz;
     cs = cx * sz;
@@ -254,7 +257,7 @@ RotationMatrix Rotation::EulerAnglesToRotationMatrix(EulerAngles eulerAngles) {
     return rM;
 }
 
-Quaternion Rotation::QuaternionFromDirectionVectors(Vector3D initial, Vector3D target) {
+Quaternion Rotation::QuaternionFromDirectionVectors(const Vector3D& initial, const Vector3D& target) {
     Quaternion q = Quaternion(1, 0, 0, 0);
     Vector3D tempV = Vector3D(0, 0, 0);
     Vector3D xAxis = Vector3D(1, 0, 0);
@@ -302,35 +305,35 @@ Rotation::Rotation() {
     quaternionRotation = Quaternion();
 }
 
-Rotation::Rotation(Quaternion quaternion) {
+Rotation::Rotation(const Quaternion& quaternion) {
     quaternionRotation = quaternion;
 }
 
-Rotation::Rotation(AxisAngle axisAngle) {
+Rotation::Rotation(const AxisAngle& axisAngle) {
     quaternionRotation = AxisAngleToQuaternion(axisAngle);
 }
 
-Rotation::Rotation(DirectionAngle directionAngle) {
+Rotation::Rotation(const DirectionAngle& directionAngle) {
     quaternionRotation = DirectionAngleToQuaternion(directionAngle);
 }
 
-Rotation::Rotation(RotationMatrix rotationMatrix) {
+Rotation::Rotation(const RotationMatrix& rotationMatrix) {
     quaternionRotation = RotationMatrixToQuaternion(rotationMatrix);
 }
 
-Rotation::Rotation(Vector3D X, Vector3D Y, Vector3D Z) {
+Rotation::Rotation(const Vector3D& X, const Vector3D& Y, const Vector3D& Z) {
     quaternionRotation = RotationMatrixToQuaternion(X, Y, Z);
 }
 
-Rotation::Rotation(EulerAngles eulerAngles) {
+Rotation::Rotation(const EulerAngles& eulerAngles) {
     quaternionRotation = EulerAnglesToQuaternion(eulerAngles);
 }
 
-Rotation::Rotation(Vector3D initial, Vector3D target) {
+Rotation::Rotation(const Vector3D& initial, const Vector3D& target) {
     quaternionRotation = QuaternionFromDirectionVectors(initial, target);
 }
 
-Rotation::Rotation(YawPitchRoll ypr) {
+Rotation::Rotation(const YawPitchRoll& ypr) {
     quaternionRotation = YawPitchRollToQuaternion(ypr);
 }
 
@@ -400,7 +403,7 @@ RotationMatrix Rotation::GetRotationMatrix() {
     );
 }
 
-EulerAngles Rotation::GetEulerAngles(EulerOrder order) {
+EulerAngles Rotation::GetEulerAngles(const EulerOrder& order) {
     Quaternion q = Quaternion(quaternionRotation);
 
     float norm = q.Normal();

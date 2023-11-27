@@ -182,10 +182,12 @@ void SimplexNoise<colors>::SetZPosition(float zPosition){
 }
 
 template<size_t colors>
-RGBColor SimplexNoise<colors>::GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) {
-    position = position * noiseScale;
+RGBColor SimplexNoise<colors>::GetRGB(const Vector3D& position, const Vector3D& normal, const Vector3D& uvw) {
+    Vector3D positionL = position;
 
-    float noise = Noise(position.X, position.Y, zPosition);
+    positionL = positionL * noiseScale;
+
+    float noise = Noise(positionL.X, positionL.Y, zPosition);
     
     return gradientMaterial->GetRGB(Vector3D(noise, 0, 0), Vector3D(), Vector3D());
 }

@@ -68,6 +68,6 @@ void MaterialAnimator<materialCount>::Update() {
 }
 
 template<size_t materialCount>
-RGBColor MaterialAnimator<materialCount>::GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) {
+RGBColor MaterialAnimator<materialCount>::GetRGB(const Vector3D& position, const Vector3D& normal, const Vector3D& uvw) {
     return combineMaterial.GetRGB(position, normal, uvw);
 };

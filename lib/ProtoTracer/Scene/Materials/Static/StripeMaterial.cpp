@@ -45,7 +45,7 @@ void SpiralMaterial::HueShift(float hueDeg) {
     }
 }
 
-RGBColor SpiralMaterial::GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) {
+RGBColor SpiralMaterial::GetRGB(const Vector3D& position, const Vector3D& normal, const Vector3D& uvw) {
     if (rotationAngle != 0) {
         Quaternion temp = Rotation(EulerAngles(Vector3D(0, 0, rotationAngle), EulerConstants::EulerOrderXYZS)).GetQuaternion();
 

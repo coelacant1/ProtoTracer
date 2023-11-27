@@ -58,24 +58,26 @@ void GradientMaterial<colorCount>::UpdateRGB() {
 }
 
 template<size_t colorCount>
-RGBColor GradientMaterial<colorCount>::GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) {
+RGBColor GradientMaterial<colorCount>::GetRGB(const Vector3D& position, const Vector3D& normal, const Vector3D& uvw) {
+    Vector3D positionL = position;
+
     if (rotationAngle != 0) {
         Quaternion temp = Rotation(EulerAngles(Vector3D(0, 0, rotationAngle), EulerConstants::EulerOrderXYZS)).GetQuaternion();
 
-        position = temp.RotateVector(position);
+        positionL = temp.RotateVector(positionL);
     }
 
     float pos = 0;
-    position = position - Vector3D(positionOffset.X, positionOffset.Y, 0);
-    position = position + Vector3D(gradientShift * gradientPeriod, 0, 0);
+    positionL = positionL - Vector3D(positionOffset.X, positionOffset.Y, 0);
+    positionL = positionL + Vector3D(gradientShift * gradientPeriod, 0, 0);
 
     if (isRadial) {
-        pos = sqrtf(position.X * position.X + position.Y * position.Y);
+        pos = sqrtf(positionL.X * positionL.X + positionL.Y * positionL.Y);
         pos = fabs(fmodf(pos, gradientPeriod));
     }
     else {
         // from x position, fit into bucket ratio
-        pos = fabs(fmodf(position.X, gradientPeriod));
+        pos = fabs(fmodf(positionL.X, gradientPeriod));
     }
 
     // map from modulo'd x value to color count minimum

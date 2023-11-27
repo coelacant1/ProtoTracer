@@ -2,10 +2,12 @@
 
 NormalMaterial::NormalMaterial() {}
 
-RGBColor NormalMaterial::GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) {
-    normal = normal.UnitSphere();
+RGBColor NormalMaterial::GetRGB(const Vector3D& position, const Vector3D& normal, const Vector3D& uvw) {
+    Vector3D normalL = normal;
 
-    normal = (normal + 1.0f) * 0.5f * 255.0f;
+    normalL = normalL.UnitSphere();
 
-    return RGBColor(normal);
+    normalL = (normalL + 1.0f) * 0.5f * 255.0f;
+
+    return RGBColor(normalL);
 }

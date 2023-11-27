@@ -20,7 +20,7 @@ public:
     void SetOpacity(uint8_t index, float opacity);
     void SetMaterial(uint8_t index, Material* material);
 
-    RGBColor GetRGB(Vector3D position, Vector3D normal, Vector3D uvw) override;
+    RGBColor GetRGB(const Vector3D& position, const Vector3D& normal, const Vector3D& uvw) override;
 };
 
 #include "CombineMaterial.tpp"

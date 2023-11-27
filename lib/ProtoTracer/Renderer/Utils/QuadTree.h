@@ -17,7 +17,7 @@ public:
 
     bool Insert(Triangle2D* triangle);
     void Expand(int newCapacity);
-    bool Insert(Triangle2D triangle);
+    bool Insert(const Triangle2D& triangle);
     Node* Intersect(const Vector2D& p);
     void Rebuild();
     void PrintStats();

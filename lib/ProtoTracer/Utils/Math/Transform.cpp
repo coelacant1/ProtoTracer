@@ -4,19 +4,19 @@
 Transform::Transform() 
     : baseRotation(1, 0, 0, 0), rotation(1, 0, 0, 0), position(0, 0, 0), scale(1, 1, 1), scaleRotationOffset(1, 0, 0, 0) {}
 
-Transform::Transform(Vector3D eulerXYZS, Vector3D position, Vector3D scale) {
+Transform::Transform(const Vector3D& eulerXYZS, const Vector3D& position, const Vector3D& scale) {
     this->rotation = Rotation(EulerAngles(eulerXYZS, EulerConstants::EulerOrderXZYS)).GetQuaternion();
     this->position = position;
     this->scale = scale;
 }
 
-Transform::Transform(Quaternion rotation, Vector3D position, Vector3D scale) {
+Transform::Transform(const Quaternion& rotation, const Vector3D& position, const Vector3D& scale) {
     this->rotation = rotation;
     this->position = position;
     this->scale = scale;
 }
 
-Transform::Transform(Vector3D eulerXYZS, Vector3D position, Vector3D scale, Vector3D rotationOffset, Vector3D scaleOffset) {
+Transform::Transform(const Vector3D& eulerXYZS, const Vector3D& position, const Vector3D& scale, const Vector3D& rotationOffset, const Vector3D& scaleOffset) {
     this->rotation = Rotation(EulerAngles(eulerXYZS, EulerConstants::EulerOrderXZYS)).GetQuaternion();
     this->position = position;
     this->scale = scale;
@@ -24,7 +24,7 @@ Transform::Transform(Vector3D eulerXYZS, Vector3D position, Vector3D scale, Vect
     this->scaleOffset = scaleOffset;
 }
 
-Transform::Transform(Quaternion rotation, Vector3D position, Vector3D scale, Vector3D rotationOffset, Vector3D scaleOffset) {
+Transform::Transform(const Quaternion& rotation, const Vector3D& position, const Vector3D& scale, const Vector3D& rotationOffset, const Vector3D& scaleOffset) {
     this->rotation = rotation;
     this->position = position;
     this->scale = scale;
@@ -42,7 +42,7 @@ Transform::Transform(const Transform& transform) {
     this->scaleOffset = transform.scaleOffset;
 }
 
-void Transform::SetBaseRotation(Quaternion baseRotation) {
+void Transform::SetBaseRotation(const Quaternion& baseRotation) {
     this->baseRotation = baseRotation;
 }
 
@@ -50,11 +50,11 @@ Quaternion Transform::GetBaseRotation() {
     return baseRotation;
 }
 
-void Transform::SetRotation(Quaternion rotation) {
+void Transform::SetRotation(const Quaternion& rotation) {
     this->rotation = rotation;
 }
 
-void Transform::SetRotation(Vector3D eulerXYZS) {
+void Transform::SetRotation(const Vector3D& eulerXYZS) {
     this->rotation = Rotation(EulerAngles(eulerXYZS, EulerConstants::EulerOrderXYZS)).GetQuaternion();
 }
 
@@ -62,7 +62,7 @@ Quaternion Transform::GetRotation() {
     return rotation * baseRotation;
 }
 
-void Transform::SetPosition(Vector3D position) {
+void Transform::SetPosition(const Vector3D& position) {
     this->position = position;
 }
 
@@ -70,7 +70,7 @@ Vector3D Transform::GetPosition() {
     return position;
 }
 
-void Transform::SetScale(Vector3D scale) {
+void Transform::SetScale(const Vector3D& scale) {
     this->scale = scale;
 }
 
@@ -78,7 +78,7 @@ Vector3D Transform::GetScale() {
     return scale;
 }
 
-void Transform::SetScaleRotationOffset(Quaternion scaleRotationOffset) {
+void Transform::SetScaleRotationOffset(const Quaternion& scaleRotationOffset) {
     this->scaleRotationOffset = scaleRotationOffset;
 }
 
@@ -86,7 +86,7 @@ Quaternion Transform::GetScaleRotationOffset() {
     return scaleRotationOffset;
 }
 
-void Transform::SetRotationOffset(Vector3D rotationOffset) {
+void Transform::SetRotationOffset(const Vector3D& rotationOffset) {
     this->rotationOffset = rotationOffset;
 }
 
@@ -94,7 +94,7 @@ Vector3D Transform::GetRotationOffset() {
     return rotationOffset;
 }
 
-void Transform::SetScaleOffset(Vector3D scaleOffset) {
+void Transform::SetScaleOffset(const Vector3D& scaleOffset) {
     this->scaleOffset = scaleOffset;
 }
 
@@ -102,18 +102,18 @@ Vector3D Transform::GetScaleOffset() {
     return scaleOffset;
 }
 
-void Transform::Rotate(Vector3D eulerXYZS) {
+void Transform::Rotate(const Vector3D& eulerXYZS) {
     this->rotation = this->rotation * Rotation(EulerAngles(eulerXYZS, EulerConstants::EulerOrderXYZS)).GetQuaternion();
 }
 
-void Transform::Rotate(Quaternion rotation) {
+void Transform::Rotate(const Quaternion& rotation) {
     this->rotation = this->rotation * rotation;
 }
 
-void Transform::Translate(Vector3D offset) {
+void Transform::Translate(const Vector3D& offset) {
     this->position = this->position + offset;
 }
 
-void Transform::Scale(Vector3D scale) {
+void Transform::Scale(const Vector3D& scale) {
     this->scale = this->scale * scale;
 }

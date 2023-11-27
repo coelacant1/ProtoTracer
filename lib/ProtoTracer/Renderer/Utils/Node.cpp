@@ -36,7 +36,7 @@ void Node::Expand(unsigned int newCount) {
     capacity = newCount;
 }
 
-bool Node::Insert(Triangle2D* triangle, BoundingBox2D& bbox, unsigned int depth) {
+bool Node::Insert(Triangle2D* triangle, BoundingBox2D* bbox, unsigned int depth) {
     if (!triangle->DidIntersect(bbox)) {
         return false;
     }
@@ -50,21 +50,23 @@ bool Node::Insert(Triangle2D* triangle, BoundingBox2D& bbox, unsigned int depth)
     return true;
 }
 
-void Node::Subdivide(BoundingBox2D& bbox, unsigned int depth) {
+void Node::Subdivide(BoundingBox2D* bbox, unsigned int depth) {
     if (depth == maxDepth)
         return;
 
-    Vector2D mid = (bbox.GetMinimum() + bbox.GetMaximum()) * 0.5f;
-
-    BoundingBox2D bboxes[] = { {bbox.GetMinimum(), mid}, {{mid.X, bbox.GetMinimum().Y}, {bbox.GetMaximum().X, mid.Y}},
-        {{bbox.GetMinimum().X, mid.Y}, {mid.X, bbox.GetMaximum().Y}}, {mid, bbox.GetMaximum()} };
+    BoundingBox2D bboxes[] = {  
+        BoundingBox2D(bbox->GetMinimum(), bbox->GetCenter()),
+        BoundingBox2D(Vector2D(bbox->GetCenter().X, bbox->GetMinimum().Y), Vector2D(bbox->GetMaximum().X, bbox->GetCenter().Y)),
+        BoundingBox2D(Vector2D(bbox->GetMinimum().X, bbox->GetCenter().Y), Vector2D(bbox->GetCenter().X, bbox->GetMaximum().Y)),
+        BoundingBox2D(bbox->GetCenter(), bbox->GetMaximum())
+    };
 
     childNodes = new Node[4];
 
     for (int j = 0; j < count; ++j) {
         int entityCount = 0;
         for (int i = 0; i < 4; ++i) {
-            entityCount += childNodes[i].Insert(entities[j], bboxes[i], depth + 1);
+            entityCount += childNodes[i].Insert(entities[j], &bboxes[i], depth + 1);
         }
     }
 
@@ -86,7 +88,7 @@ void Node::Subdivide(BoundingBox2D& bbox, unsigned int depth) {
 
     for (int i = 0; i < 4; ++i) {
         if (childNodes[i].count > maxEntities)
-            childNodes[i].Subdivide(bboxes[i], depth + 1);
+            childNodes[i].Subdivide(&bboxes[i], depth + 1);
     }
 }
 
@@ -94,16 +96,16 @@ bool Node::IsLeaf() {
     return !childNodes;
 }
 
-void Node::PrintStats(int& totalCount, BoundingBox2D& bbox) {
+void Node::PrintStats(int& totalCount, BoundingBox2D* bbox) {
     if (IsLeaf()) {
         totalCount += count;
     }
     else {
-        Vector2D mid = (bbox.GetMinimum() + bbox.GetMaximum()) * 0.5f;
-        BoundingBox2D bboxes[] = { {bbox.GetMinimum(), mid}, {{mid.X, bbox.GetMinimum().Y}, {bbox.GetMaximum().X, mid.Y}},
-            {{bbox.GetMinimum().X, mid.Y}, {mid.X, bbox.GetMaximum().Y}}, {mid, bbox.GetMaximum()} };
+        Vector2D mid = (bbox->GetMinimum() + bbox->GetMaximum()) * 0.5f;
+        BoundingBox2D bboxes[] = { {bbox->GetMinimum(), mid}, {{mid.X, bbox->GetMinimum().Y}, {bbox->GetMaximum().X, mid.Y}},
+            {{bbox->GetMinimum().X, mid.Y}, {mid.X, bbox->GetMaximum().Y}}, {mid, bbox->GetMaximum()} };
         for (int i = 0; i < 4; ++i) {
-            childNodes[i].PrintStats(totalCount, bboxes[i]);
+            childNodes[i].PrintStats(totalCount, &bboxes[i]);
         }
     }
 }
