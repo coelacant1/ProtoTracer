@@ -42,6 +42,13 @@ bool BoundingBox2D::Overlaps(BoundingBox2D* bb) {
     return xOverlap && yOverlap;
 }
 
+bool BoundingBox2D::Overlaps(const Vector2D& minI, const Vector2D& maxI){
+    bool xOverlap = minI.X < max.X && maxI.X > min.X;
+    bool yOverlap = minI.Y < max.Y && maxI.Y > min.Y;
+
+    return xOverlap && yOverlap;
+}
+
 bool BoundingBox2D::Contains(const Vector2D& v) {
     return min.X <= v.X && v.X <= max.X && min.Y <= v.Y && v.Y <= max.Y;
 }

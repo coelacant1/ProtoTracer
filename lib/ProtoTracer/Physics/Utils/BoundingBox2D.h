@@ -17,5 +17,6 @@ public:
     Vector2D GetMaximum();
     Vector2D GetCenter();
     bool Overlaps(BoundingBox2D* bb);
+    bool Overlaps(const Vector2D& minI, const Vector2D& maxI);
     bool Contains(const Vector2D& v);
 };

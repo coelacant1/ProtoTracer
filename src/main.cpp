@@ -29,7 +29,7 @@ void loop() {
 
     #ifdef PRINTINFO
     Serial.print("FPS: ");
-    Serial.print(project.GetFrameRate(), 2);
+    Serial.print(project.GetFrameRate(), 0);
     Serial.print(", Animated in ");
     Serial.print(project.GetAnimationTime(), 4);
 

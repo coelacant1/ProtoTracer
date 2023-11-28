@@ -21,7 +21,7 @@ public:
     Vector2D Divide(const Vector2D& vector) const;
     Vector2D Multiply(const float& scalar) const;
     Vector2D Divide(const float& scalar) const;
-    Vector3D CrossProduct(const Vector2D& vector) const;
+    float CrossProduct(const Vector2D& vector) const;
     Vector2D UnitCircle() const;
     Vector2D Constrain(const float& minimum, const float& maximum) const;
     Vector2D Constrain(const Vector2D& minimum, const Vector2D& maximum) const;
@@ -44,7 +44,7 @@ public:
     static Vector2D Multiply(const Vector2D& vector, const float& scalar);
     static Vector2D Multiply(const float& scalar, const Vector2D& vector);
     static Vector2D Divide(const Vector2D& vector, const float& scalar);
-    static Vector3D CrossProduct(const Vector2D& v1, const Vector2D& v2);
+    static float CrossProduct(const Vector2D& v1, const Vector2D& v2);
     static float DotProduct(const Vector2D& v1, const Vector2D& v2);
     static float CalculateEuclideanDistance(const Vector2D& v1, const Vector2D& v2);
     static bool IsEqual(const Vector2D& v1, const Vector2D& v2);
@@ -53,6 +53,7 @@ public:
     static Vector2D LERP(const Vector2D& start, const Vector2D& finish, const float& ratio);
     static Vector2D DegreesToRadians(const Vector2D& degrees);
     static Vector2D RadiansToDegrees(const Vector2D& radians);
+    static bool LineSegmentsIntersect(const Vector2D& p1, const Vector2D& p2, const Vector2D& q1, const Vector2D& q2);
 
     // Operator overloads
     bool operator ==(const Vector2D& vector) const;

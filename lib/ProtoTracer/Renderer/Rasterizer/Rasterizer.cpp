@@ -136,7 +136,7 @@ RGBColor Rasterizer::CheckRasterPixel(Triangle2D** triangles, int numTriangles, 
     Vector3D uvw;
     RGBColor color;
 
-    for (int t = 0; t < numTriangles; t++) {
+    for (int t = 0; t < numTriangles; ++t) {
         if (triangles[t]->averageDepth < zBuffer) {
             if (triangles[t]->DidIntersect(pixelRay.X, pixelRay.Y, u, v, w)) {
                 uvw.X = u;
@@ -184,32 +184,39 @@ void Rasterizer::Rasterize(Scene* scene, CameraBase* camera) {
         Quaternion normLookDir = lookDirection.UnitQuaternion();
         rayDirection = camera->GetTransform()->GetRotation().Multiply(lookDirection);
 
-        Vector2D pixelRay;
-        BoundingBox2D transformedBounds;
-        bool cameraScale = !(Mathematics::IsClose(camera->GetTransform()->GetScale().X, 1.0f, 0.01f) && Mathematics::IsClose(camera->GetTransform()->GetScale().Y, 1.0f, 0.01f) && Mathematics::IsClose(camera->GetTransform()->GetScale().Z, 1.0f, 0.01f));
-        
-        for (unsigned int i = 0; i < camera->GetPixelGroup()->GetPixelCount(); ++i) {
-            if (cameraScale)
-                pixelRay = Vector2D(lookDirection.RotateVectorUnit(camera->GetPixelGroup()->GetCoordinate(i) * camera->GetTransform()->GetScale(), normLookDir));
-            else
-                pixelRay = Vector2D(lookDirection.RotateVectorUnit(camera->GetPixelGroup()->GetCoordinate(i), normLookDir));
+        Vector2D minCoord = Vector2D(lookDirection.RotateVectorUnit(camera->GetCameraMinCoordinate() * camera->GetTransform()->GetScale(), normLookDir));
+        Vector2D maxCoord = Vector2D(lookDirection.RotateVectorUnit(camera->GetCameraMaxCoordinate() * camera->GetTransform()->GetScale(), normLookDir));
 
-            transformedBounds.UpdateBounds(pixelRay);
+        QuadTree tree = QuadTree(minCoord, maxCoord);
+
+        uint16_t tCount = 1;
+
+        for (uint8_t i = 0; i < scene->GetObjectCount(); ++i) {
+            if (scene->GetObjects()[i]->IsEnabled()) {
+                tCount += scene->GetObjects()[i]->GetTriangleGroup()->GetTriangleCount();
+            }
         }
 
-        QuadTree tree(transformedBounds);
+        Triangle2D* triangles = new Triangle2D[tCount];
+        uint16_t iterCount = 0;
 
-        for (int i = 0; i < scene->GetObjectCount(); i++) {
+        for (uint8_t i = 0; i < scene->GetObjectCount(); ++i) {
             if (scene->GetObjects()[i]->IsEnabled()) {
-                for (int j = 0; j < scene->GetObjects()[i]->GetTriangleGroup()->GetTriangleCount(); j++) {
-                    tree.Insert(Triangle2D(lookDirection, camera->GetTransform(), &scene->GetObjects()[i]->GetTriangleGroup()->GetTriangles()[j], scene->GetObjects()[i]->GetMaterial()));
+                for (uint16_t j = 0; j < scene->GetObjects()[i]->GetTriangleGroup()->GetTriangleCount(); j++) {
+                    triangles[iterCount] = Triangle2D(lookDirection, camera->GetTransform(), &scene->GetObjects()[i]->GetTriangleGroup()->GetTriangles()[j], scene->GetObjects()[i]->GetMaterial());
+                    
+                    tree.Insert(&triangles[iterCount]);
+                    iterCount++;
                 }
             }
         }
 
         tree.Rebuild();
 
-        for (unsigned int i = 0; i < camera->GetPixelGroup()->GetPixelCount(); i++) {
+        Vector2D pixelRay;
+        bool cameraScale = !(Mathematics::IsClose(camera->GetTransform()->GetScale().X, 1.0f, 0.01f) && Mathematics::IsClose(camera->GetTransform()->GetScale().Y, 1.0f, 0.01f) && Mathematics::IsClose(camera->GetTransform()->GetScale().Z, 1.0f, 0.01f));
+
+        for (uint16_t i = 0; i < camera->GetPixelGroup()->GetPixelCount(); ++i) {
             if (cameraScale)
                 pixelRay = Vector2D(lookDirection.RotateVectorUnit(camera->GetPixelGroup()->GetCoordinate(i) * camera->GetTransform()->GetScale(), normLookDir));
             else
@@ -230,5 +237,8 @@ void Rasterizer::Rasterize(Scene* scene, CameraBase* camera) {
             camera->GetPixelGroup()->GetColor(i)->G = color.G;
             camera->GetPixelGroup()->GetColor(i)->B = color.B;
         }
+
+        delete[] triangles;
+        
     }
 }

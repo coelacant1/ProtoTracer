@@ -7,6 +7,10 @@ template<size_t pixelCount>
 class Camera : public CameraBase {
 private:
     PixelGroup<pixelCount>* pixelGroup;
+    Vector2D maxC;
+    Vector2D minC;
+    bool calculatedMax = false;
+    bool calculatedMin = false;
 
 public:
     Camera(Transform* transform, PixelGroup<pixelCount>* pixelGroup);

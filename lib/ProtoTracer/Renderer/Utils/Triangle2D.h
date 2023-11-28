@@ -10,6 +10,7 @@ class Triangle2D {
 public:
     float denominator = 0.0f;
     float p1X, p1Y, p2X, p2Y, p3X, p3Y, v0X, v0Y, v1X, v1Y, v2X, v2Y;
+    Vector2D min, max;
 
     Vector3D* normal;
     Material* material;
@@ -36,5 +37,6 @@ public:
     Material* GetMaterial();
     bool DidIntersect(const float& x, const float& y, float& u, float& v, float& w);
     bool DidIntersect(BoundingBox2D* bbox);
+    bool DidIntersectSAT(BoundingBox2D* bbox);
     String ToString();
 };

@@ -54,6 +54,25 @@ Triangle2D::Triangle2D(const Quaternion& lookDirection, Transform* camT, Triangl
     t3p1 = t->p1;
     t3p2 = t->p2;
     t3p3 = t->p3;
+
+    //for quadtree / min/max dimensions
+    if (p1X < p2X){
+        min.X = (p1X < p3X ? p1X : p3X);
+        max.X = (p2X > p3X ? p2X : p3X);
+    }
+    else{
+        min.X = (p2X < p3X ? p2X : p3X);
+        max.X = (p1X > p3X ? p1X : p3X);
+    }
+
+    if (p1Y < p2Y){
+        min.Y = (p1Y < p3Y ? p1Y : p3Y);
+        max.Y = (p2Y > p3Y ? p2Y : p3Y);
+    }
+    else{
+        min.Y = (p2Y < p3Y ? p2Y : p3Y);
+        max.Y = (p1Y > p3Y ? p1Y : p3Y);
+    }
 }
 
 Triangle2D::Triangle2D(Triangle3D* t) {
@@ -76,6 +95,25 @@ Triangle2D::Triangle2D(Triangle3D* t) {
     t3p1 = t->p1;
     t3p2 = t->p2;
     t3p3 = t->p3;
+    
+    //for quadtree / min/max dimensions
+    if (p1X < p2X){
+        min.X = (p1X < p3X ? p1X : p3X);
+        max.X = (p2X > p3X ? p2X : p3X);
+    }
+    else{
+        min.X = (p2X < p3X ? p2X : p3X);
+        max.X = (p1X > p3X ? p1X : p3X);
+    }
+
+    if (p1Y < p2Y){
+        min.Y = (p1Y < p3Y ? p1Y : p3Y);
+        max.Y = (p2Y > p3Y ? p2Y : p3Y);
+    }
+    else{
+        min.Y = (p2Y < p3Y ? p2Y : p3Y);
+        max.Y = (p1Y > p3Y ? p1Y : p3Y);
+    }
 }
 
 Vector2D Triangle2D::GetP1() {
@@ -109,6 +147,11 @@ bool Triangle2D::DidIntersect(const float& x, const float& y, float& u, float& v
 }
 
 bool Triangle2D::DidIntersect(BoundingBox2D* bbox) {
+    return bbox->Overlaps(min, max);
+}
+
+//Separating Axis Theorem (SAT) algorithm
+bool Triangle2D::DidIntersectSAT(BoundingBox2D* bbox) {
     if (!(bbox->GetMinimum().X < Mathematics::Max(p1X, p2X, p3X) && bbox->GetMaximum().X > Mathematics::Min(p1X, p2X, p3X))) { return false; }
     if (!(bbox->GetMinimum().Y < Mathematics::Max(p1Y, p2Y, p3Y) && bbox->GetMaximum().Y > Mathematics::Min(p1Y, p2Y, p3Y))) { return false; }
 

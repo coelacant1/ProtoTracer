@@ -5,12 +5,15 @@
 #include "..\..\Scene\Scene.h"
 #include "..\..\Camera\CameraManager\CameraManager.h"
 #include "..\..\Controller\Controller.h"
+#include "..\..\Utils\Filter\RunningAverageFilter.h"
 
 class Project {
 protected:
     CameraManager* cameras;
     Controller* controller;
     Scene scene;
+
+    RunningAverageFilter<50> avgFPS = RunningAverageFilter<50>(0.05f);
 
     long previousAnimationTime = 0;
     long previousRenderTime = 0;

@@ -77,12 +77,8 @@ Vector2D Vector2D::Divide(const float& scalar) const {
     };
 }
 
-Vector3D Vector2D::CrossProduct(const Vector2D& vector) const {
-    return Vector3D{
-        0.0f,
-        0.0f,
-        (X * vector.Y) - (Y * vector.X)
-    };
+float Vector2D::CrossProduct(const Vector2D& vector) const {
+    return (X * vector.Y) - (Y * vector.X);
 }
 
 Vector2D Vector2D::UnitCircle() const {
@@ -232,12 +228,8 @@ Vector2D Vector2D::Divide(const Vector2D& vector, const float& scalar) {
     return Vector2D(vector.X / scalar, vector.Y / scalar);
 }
 
-Vector3D Vector2D::CrossProduct(const Vector2D& v1, const Vector2D& v2) {
-    return Vector3D{
-        0.0f,
-        0.0f,
-        (v1.X * v2.Y) - (v1.Y * v2.X)
-    };
+float Vector2D::CrossProduct(const Vector2D& v1, const Vector2D& v2) {
+    return (v1.X * v2.Y) - (v1.Y * v2.X);
 }
 
 float Vector2D::DotProduct(const Vector2D& v1, const Vector2D& v2) {
@@ -252,6 +244,25 @@ float Vector2D::CalculateEuclideanDistance(const Vector2D& v1, const Vector2D& v
 
 bool Vector2D::IsEqual(const Vector2D& v1, const Vector2D& v2) {
     return (v1.X == v2.X) && (v1.Y == v2.Y);
+}
+
+bool Vector2D::LineSegmentsIntersect(const Vector2D& p1, const Vector2D& p2, const Vector2D& q1, const Vector2D& q2) {
+    Vector2D dirP = p2 - p1;
+    Vector2D dirQ = q2 - q1;
+    float crossPQ = dirP.CrossProduct(dirQ);
+
+    if (fabsf(crossPQ) < Mathematics::EPSILON) return false;
+
+    Vector2D diffPQ1 = q1 - p1;
+    Vector2D diffPQ2 = q2 - p1;
+    float crossPDiff1 = dirP.CrossProduct(diffPQ1);
+    float crossPDiff2 = dirP.CrossProduct(diffPQ2);
+    
+    if ((crossPDiff1 * crossPDiff2) <= 0) {
+        return true;
+    }
+    
+    return false;
 }
 
 // Operator overloads

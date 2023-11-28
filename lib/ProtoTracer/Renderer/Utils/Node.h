@@ -5,24 +5,25 @@
 
 class Node {
 private:
-    static const int maxEntities = 16;
-    static constexpr float maxSubdivRatio = 0.5f;
-    static const int maxDepth = 8;
+    static const uint16_t maxEntities = 8;
+    static const uint8_t maxDepth = 4;
     uint16_t count = 0;
     uint16_t capacity = 0;
     Node* childNodes = nullptr;
     Triangle2D** entities = nullptr;
+    BoundingBox2D bbox;
 
 public:
-    Node();
+    Node(const Vector2D& min, const Vector2D& max);
     ~Node();
 
+    BoundingBox2D* GetBBox();
     Node* GetChildNodes();
     Triangle2D** GetEntities();
     uint16_t GetCount();
-    void Expand(unsigned int newCount);
-    bool Insert(Triangle2D* triangle, BoundingBox2D* bbox, unsigned int depth = 0);
-    void Subdivide(BoundingBox2D* bbox, unsigned int depth = 0);
+    void Expand(uint16_t newCount);
+    bool Insert(Triangle2D* triangle);
+    void Subdivide(uint8_t depth = 0);
     bool IsLeaf();
-    void PrintStats(int& totalCount, BoundingBox2D* bbox);
+    
 };

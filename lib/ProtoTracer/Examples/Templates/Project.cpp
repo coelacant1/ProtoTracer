@@ -29,7 +29,7 @@ float Project::GetDisplayTime() {
 }
 
 float Project::GetFrameRate() {
-    return 1.0f / (renderTime + animationTime + displayTime);
+    return avgFPS.Filter(1.0f / (renderTime + animationTime + displayTime));
 }
 
 void Project::Animate(float ratio) {
