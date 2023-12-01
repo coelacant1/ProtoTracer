@@ -197,12 +197,14 @@ void Rasterizer::Rasterize(Scene* scene, CameraBase* camera) {
             }
         }
 
-        Triangle2D* triangles = new Triangle2D[tCount];
+        Triangle2D triangles[tCount];
         uint16_t iterCount = 0;
 
         for (uint8_t i = 0; i < scene->GetObjectCount(); ++i) {
             if (scene->GetObjects()[i]->IsEnabled()) {
-                for (uint16_t j = 0; j < scene->GetObjects()[i]->GetTriangleGroup()->GetTriangleCount(); j++) {
+                for (uint16_t j = 0; j < scene->GetObjects()[i]->GetTriangleGroup()->GetTriangleCount(); ++j) {
+                    //if (iterCount == 60) break;
+
                     triangles[iterCount] = Triangle2D(lookDirection, camera->GetTransform(), &scene->GetObjects()[i]->GetTriangleGroup()->GetTriangles()[j], scene->GetObjects()[i]->GetMaterial());
                     
                     tree.Insert(&triangles[iterCount]);
@@ -221,10 +223,10 @@ void Rasterizer::Rasterize(Scene* scene, CameraBase* camera) {
                 pixelRay = Vector2D(lookDirection.RotateVectorUnit(camera->GetPixelGroup()->GetCoordinate(i) * camera->GetTransform()->GetScale(), normLookDir));
             else
                 pixelRay = Vector2D(lookDirection.RotateVectorUnit(camera->GetPixelGroup()->GetCoordinate(i), normLookDir));
-
+            
             Node* leafNode = tree.Intersect(pixelRay);
 
-            if (!leafNode) {
+            if (!leafNode || leafNode->GetCount() == 0) {
                 camera->GetPixelGroup()->GetColor(i)->R = 0;
                 camera->GetPixelGroup()->GetColor(i)->G = 0;
                 camera->GetPixelGroup()->GetColor(i)->B = 0;
@@ -237,8 +239,5 @@ void Rasterizer::Rasterize(Scene* scene, CameraBase* camera) {
             camera->GetPixelGroup()->GetColor(i)->G = color.G;
             camera->GetPixelGroup()->GetColor(i)->B = color.B;
         }
-
-        delete[] triangles;
-        
     }
 }

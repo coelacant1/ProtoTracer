@@ -1,11 +1,15 @@
 #pragma once
 
-#include "Animation.h"
-#include "..\Objects\Cube.h"
-#include "..\Math\FunctionGenerator.h"
-#include "..\Objects\Creeper.h"
+#include "..\Templates\Project.h"
+#include "..\..\Utils\Signals\FunctionGenerator.h"
+#include "..\..\Assets\Models\OBJ\Creeper.h"
+#include "..\..\Scene\Materials\Static\NormalMaterial.h"
+#include "..\..\Scene\Objects\ObjectDeformer.h"
 
-class CreeperAnimation : public Animation{
+#include "..\..\Camera\CameraManager\Implementations\HUB75DeltaCameras.h"
+#include "..\..\Controller\HUB75Controller.h"
+
+class CreeperAnimation : public Project{
 private:
     Creeper creeper;
     FunctionGenerator fGenRotation = FunctionGenerator(FunctionGenerator::Sine, -30.0f, 30.0f, 2.6f);
@@ -16,9 +20,6 @@ public:
     CreeperAnimation() : Animation(1) {
         scene->AddObject(creeper.GetObject());
     }
-
-    void FadeIn(float stepRatio) override {}
-    void FadeOut(float stepRatio) override {}
 
     void Update(float ratio) override {
         float x = fGenRotation.Update();

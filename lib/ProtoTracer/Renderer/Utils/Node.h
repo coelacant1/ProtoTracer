@@ -6,12 +6,16 @@
 class Node {
 private:
     static const uint16_t maxEntities = 8;
-    static const uint8_t maxDepth = 4;
+    static const uint8_t maxDepth = 8;
     uint16_t count = 0;
     uint16_t capacity = 0;
     Node* childNodes = nullptr;
     Triangle2D** entities = nullptr;
     BoundingBox2D bbox;
+
+    void CreateChildNodes();
+    uint16_t DistributeEntities();
+    bool ShouldSubdivide(uint16_t childEntitySum);
 
 public:
     Node(const Vector2D& min, const Vector2D& max);

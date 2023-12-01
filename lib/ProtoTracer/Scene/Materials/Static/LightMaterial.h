@@ -12,5 +12,10 @@ private:
 public:
     LightMaterial();
 
+    Light* GetLights();
+    uint8_t GetLightCount();
+
     RGBColor GetRGB(const Vector3D& position, const Vector3D& normal, const Vector3D& uvw) override;
 };
+
+#include "LightMaterial.tpp"

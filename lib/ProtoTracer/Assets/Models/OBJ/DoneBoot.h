@@ -1,0 +1,22 @@
+#pragma once
+
+#include "..\..\..\Scene\Materials\Static\SimpleMaterial.h"
+#include "..\..\..\Scene\Materials\Static\UVMap.h"
+#include "..\..\..\Scene\Objects\Object3D.h"
+#include "..\..\..\Renderer\Utils\IndexGroup.h"
+
+class DoneBoot {
+private:
+	Vector3D basisVertices[72] = {Vector3D(22.4400f,4.4400f,0.0000f),Vector3D(26.9962f,4.4962f,0.0000f),Vector3D(26.9962f,36.0037f,0.0000f),Vector3D(22.5000f,36.0037f,0.0000f),Vector3D(22.5000f,40.4963f,0.0000f),Vector3D(0.0037f,40.4963f,0.0000f),Vector3D(0.0037f,0.0037f,0.0000f),Vector3D(22.5000f,0.0037f,0.0000f),Vector3D(18.0038f,4.4962f,0.0000f),Vector3D(18.0038f,36.0037f,0.0000f),Vector3D(8.9962f,36.0037f,0.0000f),Vector3D(8.9400f,4.4400f,0.0000f),Vector3D(53.9400f,4.4400f,0.0000f),Vector3D(58.4963f,4.4962f,0.0000f),Vector3D(58.4963f,27.0038f,0.0000f),Vector3D(54.0000f,27.0038f,0.0000f),Vector3D(54.0000f,31.4962f,0.0000f),Vector3D(36.0000f,31.4962f,0.0000f),Vector3D(36.0000f,27.0038f,0.0000f),Vector3D(31.5038f,27.0038f,0.0000f),Vector3D(31.5038f,4.4962f,0.0000f),Vector3D(36.0000f,4.4962f,0.0000f),Vector3D(36.0000f,0.0037f,0.0000f),Vector3D(54.0000f,0.0037f,0.0000f),Vector3D(49.5037f,4.4962f,0.0000f),Vector3D(49.5037f,27.0038f,0.0000f),Vector3D(40.4963f,27.0038f,0.0000f),Vector3D(40.4400f,4.4400f,0.0000f),Vector3D(71.9400f,27.0000f,0.0000f),Vector3D(81.0037f,27.0038f,0.0000f),Vector3D(81.0037f,0.0037f,0.0000f),Vector3D(89.9963f,0.0037f,0.0000f),Vector3D(89.9963f,27.0038f,0.0000f),Vector3D(85.5000f,27.0038f,0.0000f),Vector3D(85.5000f,31.4962f,0.0000f),Vector3D(63.0037f,31.4962f,0.0000f),Vector3D(63.0037f,0.0037f,0.0000f),Vector3D(71.9963f,0.0037f,0.0000f),Vector3D(116.9400f,4.5000f,0.0000f),Vector3D(121.4963f,4.5038f,0.0000f),Vector3D(121.4963f,8.9962f,0.0000f),Vector3D(112.5037f,8.9962f,0.0000f),Vector3D(112.5037f,4.4962f,0.0000f),Vector3D(103.4963f,4.4962f,0.0000f),Vector3D(103.4963f,13.5038f,0.0000f),Vector3D(121.4963f,13.5038f,0.0000f),Vector3D(121.4963f,27.0038f,0.0000f),Vector3D(117.0000f,27.0038f,0.0000f),Vector3D(117.0000f,31.4962f,0.0000f),Vector3D(99.0000f,31.4962f,0.0000f),Vector3D(99.0000f,27.0038f,0.0000f),Vector3D(94.5037f,27.0038f,0.0000f),Vector3D(94.5037f,4.5038f,0.0000f),Vector3D(99.0000f,4.5038f,0.0000f),Vector3D(99.0000f,0.0037f,0.0000f),Vector3D(117.0000f,0.0037f,0.0000f),Vector3D(112.5037f,17.9962f,0.0000f),Vector3D(112.5037f,27.0038f,0.0000f),Vector3D(103.4963f,27.0038f,0.0000f),Vector3D(103.4400f,17.9400f,0.0000f),Vector3D(134.9400f,0.0000f,0.0000f),Vector3D(134.9963f,8.9962f,0.0000f),Vector3D(126.0037f,8.9962f,0.0000f),Vector3D(126.0037f,0.0037f,0.0000f),Vector3D(148.4400f,0.0000f,0.0000f),Vector3D(148.4963f,8.9962f,0.0000f),Vector3D(139.5037f,8.9962f,0.0000f),Vector3D(139.5037f,0.0037f,0.0000f),Vector3D(161.9400f,0.0000f,0.0000f),Vector3D(161.9963f,8.9962f,0.0000f),Vector3D(153.0037f,8.9962f,0.0000f),Vector3D(153.0037f,0.0037f,0.0000f)};
+	IndexGroup basisIndexes[64] = {IndexGroup(1,0,3),IndexGroup(13,12,15),IndexGroup(34,29,28),IndexGroup(38,41,40),IndexGroup(62,61,60),IndexGroup(66,65,64),IndexGroup(70,69,68),IndexGroup(63,62,60),IndexGroup(67,66,64),IndexGroup(71,70,68),IndexGroup(4,3,9),IndexGroup(4,9,10),IndexGroup(5,10,11),IndexGroup(7,6,11),IndexGroup(8,0,7),IndexGroup(3,0,8),IndexGroup(16,15,25),IndexGroup(16,25,26),IndexGroup(26,18,17),IndexGroup(18,21,20),IndexGroup(27,22,21),IndexGroup(23,22,27),IndexGroup(24,12,23),IndexGroup(15,12,24),IndexGroup(21,18,26),IndexGroup(29,34,33),IndexGroup(31,30,33),IndexGroup(36,35,28),IndexGroup(38,55,42),IndexGroup(55,54,43),IndexGroup(53,44,43),IndexGroup(44,59,56),IndexGroup(45,56,47),IndexGroup(47,56,57),IndexGroup(58,49,48),IndexGroup(58,59,50),IndexGroup(51,50,53),IndexGroup(59,44,53),IndexGroup(5,4,10),IndexGroup(6,5,11),IndexGroup(8,7,11),IndexGroup(9,3,8),IndexGroup(17,16,26),IndexGroup(19,18,20),IndexGroup(24,23,27),IndexGroup(25,15,24),IndexGroup(27,21,26),IndexGroup(30,29,33),IndexGroup(32,31,33),IndexGroup(37,36,28),IndexGroup(41,38,42),IndexGroup(42,55,43),IndexGroup(54,53,43),IndexGroup(45,44,56),IndexGroup(46,45,47),IndexGroup(48,47,57),IndexGroup(57,58,48),IndexGroup(49,58,50),IndexGroup(52,51,53),IndexGroup(50,59,53),IndexGroup(2,1,3),IndexGroup(14,13,15),IndexGroup(35,34,28),IndexGroup(39,38,40)};
+	TriangleGroup triangleGroup = TriangleGroup(&basisVertices[0], &basisIndexes[0], 72, 64);
+	SimpleMaterial simpleMaterial = SimpleMaterial(RGBColor(128, 128, 128));
+	Object3D basisObj = Object3D(&triangleGroup, &simpleMaterial);
+
+public:
+	DoneBoot(){}
+
+	Object3D* GetObject(){
+		return &basisObj;
+	}
+};

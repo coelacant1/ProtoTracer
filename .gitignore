@@ -3,6 +3,8 @@ lib/ProtoTracer/Assets/Models/FBX/Commissions/*.vscode/.browse.c_cpp.db*
 .vscode/launch.json
 .vscode/ipch
 .pio/
+.pio/*
+.pio
 .pioenvs/
 .piolibdeps/
 .clang_complete

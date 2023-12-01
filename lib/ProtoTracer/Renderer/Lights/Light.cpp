@@ -42,3 +42,24 @@ void Light::SetCurve(float a, float b) {
     this->a = a;
     this->b = b;
 }
+
+
+Vector3D Light::GetPosition(){
+    return p;
+}
+
+Vector3D Light::GetIntensity(){
+    return intensity;
+}
+
+float Light::GetFalloff(){
+    return falloff;
+}
+
+float Light::GetCurveA(){
+    return a;
+}
+
+float Light::GetCurveB(){
+    return b;
+}

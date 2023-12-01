@@ -15,6 +15,12 @@ public:
     void SetFalloff(float falloff);
     void SetCurve(float a, float b);
 
+    Vector3D GetPosition();
+    float GetFalloff();
+    float GetCurveA();
+    float GetCurveB();
+    Vector3D GetIntensity();
+
 private:
     Vector3D p;
     Vector3D intensity;
