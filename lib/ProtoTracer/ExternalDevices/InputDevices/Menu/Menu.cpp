@@ -170,19 +170,21 @@ Effect* Menu::GetEffect() {
             return &glitchX;
             break;
         case 5:
-            return &magnet;
+            return &passthrough;//&magnet;
             break;
         case 6:
-            return &fisheye;
+            return &passthrough;//&fisheye;
             break;
         case 7:
-            return &blurH;
+            return &passthrough;//&blurH;
             break;
         case 8:
-            return &blurV;
+            return &passthrough;//&blurV;
             break;
+        case 9:
+            return &passthrough;//&blurR
         default:
-            return &blurR;
+            return &passthrough;
             break;
     }
 }

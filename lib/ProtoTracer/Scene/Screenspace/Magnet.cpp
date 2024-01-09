@@ -14,19 +14,14 @@ void Magnet::ApplyEffect(IPixelGroup* pixelGroup) {
     RGBColor* pixelColors = pixelGroup->GetColors();
     RGBColor* colorBuffer = pixelGroup->GetColorBuffer();
     Vector2D mid = pixelGroup->GetCenterCoordinate();
-    unsigned int tIndex = 0;
+    uint16_t tIndex = 0;
 
-    // amplitude = fGenWarp.Update() * ratio;
-
-    // offset.X = 65.0f;//fGenX.Update() * ratio;
-    // offset.Y = -50.0f;//fGenY.Update() * ratio;
-
-    for (unsigned int i = 0; i < pixelGroup->GetPixelCount(); i++) {
+    for (uint16_t i = 0; i < pixelGroup->GetPixelCount(); i++) {
         Vector2D pos = pixelGroup->GetCoordinate(i) + offset;
         Vector2D dif = pos - mid + Vector2D(0.0f, 50.0f);
         float distance = fabsf(pos.CalculateEuclideanDistance(mid));
 
-        float theta = atan2(dif.Y, dif.X);
+        float theta = atan2f(dif.Y, dif.X);
         float newDistance = (1.0f / distance) * 0.5f * amplitude * 4.0f; // * 10000.0f;//fGenSize.Update();
 
         int offsetX = (int)(newDistance * cosf(theta));
@@ -44,7 +39,7 @@ void Magnet::ApplyEffect(IPixelGroup* pixelGroup) {
         }
     }
 
-    for (unsigned int i = 0; i < pixelGroup->GetPixelCount(); i++) {
+    for (uint16_t i = 0; i < pixelGroup->GetPixelCount(); i++) {
         pixelColors[i].R = colorBuffer[i].R;
         pixelColors[i].G = colorBuffer[i].G;
         pixelColors[i].B = colorBuffer[i].B;

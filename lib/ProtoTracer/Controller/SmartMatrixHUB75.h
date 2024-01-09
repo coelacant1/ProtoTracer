@@ -24,7 +24,7 @@ const uint8_t kBackgroundLayerOptions = (SM_BACKGROUND_OPTIONS_NONE);
 
 //APA102
 #define ENABLE_APA102_REFRESH   1
-const uint16_t kApaMatrixWidth = 88;          // adjust this to your APA matrix/strip
+const uint16_t kApaMatrixWidth = 176;          // adjust this to your APA matrix/strip
 const uint16_t kApaMatrixHeight = 1;         // set kApaMatrixHeight to 1 for a strip
 const uint8_t kApaRefreshDepth = 36;        // not used for APA matrices as of now
 const uint8_t kApaDmaBufferRows = 1;        // not used for APA matrices as of now

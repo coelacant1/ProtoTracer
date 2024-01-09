@@ -142,7 +142,7 @@ void EasyEaseAnimator<maxParameters>::Update(){
                 *parameters[i] = dampedSpring[i].Calculate(parameterFrame[i], 0.25f);
                 break;
             default://Linear
-                *parameters[i] = set;
+                *parameters[i] = fullRange;
                 break;
         }
 

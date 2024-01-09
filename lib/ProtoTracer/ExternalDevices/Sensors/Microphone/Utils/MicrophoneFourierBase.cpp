@@ -18,7 +18,7 @@ float MicrophoneFourierBase::outputData[];
 float MicrophoneFourierBase::outputDataFilt[];
 FFTFilter MicrophoneFourierBase::fftFilters[];
 
-arm_cfft_radix4_instance_f32 MicrophoneFourierBase::RadixFFT;
+FFT<MicrophoneFourierBase::FFTSize> MicrophoneFourierBase::fft;
 
 float MicrophoneFourierBase::AverageMagnitude(uint16_t binL, uint16_t binH) {
     float average = 0.0f;

@@ -35,7 +35,8 @@
 			"ostream": "cpp",
 			"stdexcept": "cpp",
 			"streambuf": "cpp",
-			"algorithm": "cpp"
+			"algorithm": "cpp",
+			"numeric": "cpp"
 		}
 	}
 }

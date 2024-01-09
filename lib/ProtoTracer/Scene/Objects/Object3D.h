@@ -3,18 +3,18 @@
 #include "..\Materials\Material.h"
 #include "..\..\Utils\Math\Transform.h"
 #include "..\..\Renderer\Utils\TriangleGroup.h"
+#include "..\..\Renderer\Utils\StaticTriangleGroup.h"
 
 class Object3D {
 private:
     Transform transform;
-    TriangleGroup* originalTriangles;
-    TriangleGroup* modifiedTriangles;
+    IStaticTriangleGroup* originalTriangles;
+    ITriangleGroup* modifiedTriangles;
     Material* material;
     bool enabled = true;
 
 public:
-    Object3D(TriangleGroup* originalTriangles, Material* material);
-    Object3D(Object3D** objects, int objectCount);
+    Object3D(IStaticTriangleGroup* originalTriangles, ITriangleGroup* modifiedTriangles, Material* material);
     ~Object3D();
 
     void Enable();
@@ -24,9 +24,10 @@ public:
     void GetMinMaxDimensions(Vector3D& minimum, Vector3D& maximum);
     Vector3D GetSize();
     Transform* GetTransform();
+    void SetTransform(Transform& t);
     void ResetVertices();
     void UpdateTransform();
-    TriangleGroup* GetTriangleGroup();
+    ITriangleGroup* GetTriangleGroup();
     Material* GetMaterial();
     void SetMaterial(Material* material);
 };

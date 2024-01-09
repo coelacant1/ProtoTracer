@@ -1,7 +1,5 @@
 #pragma once
 
-#define ARM_MATH_CM4
-
 #include <Arduino.h>
 #include <ADC.h>
 #include <DMAChannel.h>

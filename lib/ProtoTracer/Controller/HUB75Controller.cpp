@@ -30,7 +30,8 @@ void HUB75Controller::Display(){
     apamatrix.setBrightness(accentBrightness);
 
     IPixelGroup* camPixels = cameras->GetCameras()[0]->GetPixelGroup();
-    IPixelGroup* camSidePixels = cameras->GetCameras()[1]->GetPixelGroup();
+    IPixelGroup* camSidePixelsL = cameras->GetCameras()[1]->GetPixelGroup();
+    IPixelGroup* camSidePixelsR = cameras->GetCameras()[2]->GetPixelGroup();
 
     for (uint16_t y = 0; y < 32; y++) {
         for (uint16_t x = 0; x < 64; x++){
@@ -46,9 +47,11 @@ void HUB75Controller::Display(){
     backgroundLayer.swapBuffers(false);
 
     for (uint16_t x = 0; x < kApaMatrixWidth; x++){
-        rgb24 rgbColor = rgb24((uint16_t)camSidePixels->GetColor(x)->R, (uint16_t)camSidePixels->GetColor(x)->G, (uint16_t)camSidePixels->GetColor(x)->B);
+        rgb24 rgbColorL = rgb24((uint16_t)camSidePixelsL->GetColor(x)->R, (uint16_t)camSidePixelsL->GetColor(x)->G, (uint16_t)camSidePixelsL->GetColor(x)->B);
+        rgb24 rgbColorR = rgb24((uint16_t)camSidePixelsR->GetColor(x)->R, (uint16_t)camSidePixelsR->GetColor(x)->G, (uint16_t)camSidePixelsR->GetColor(x)->B);
         
-        apaBackgroundLayer.drawPixel(x, 0, rgbColor);
+        apaBackgroundLayer.drawPixel(x + 88, 0, rgbColorL);
+        apaBackgroundLayer.drawPixel(x, 0, rgbColorR);
     }
     
     apaBackgroundLayer.swapBuffers(false);

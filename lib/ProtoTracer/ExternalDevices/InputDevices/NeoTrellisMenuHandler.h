@@ -4,11 +4,10 @@
 #include <EEPROM.h>
 #include "Adafruit_NeoTrellis.h"
 
-Adafruit_NeoTrellis trellis;
-
 template <uint8_t menuCount>
 class MenuHandler {
 private:
+    static Adafruit_NeoTrellis trellis;
     static uint8_t currentMenu;
     static uint8_t currentSetting;
     static uint8_t currentValue[menuCount];

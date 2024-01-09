@@ -4,7 +4,7 @@
 PhaseOffsetR::PhaseOffsetR(uint8_t pixels) : pixels(pixels){}
 
 void PhaseOffsetR::ApplyEffect(IPixelGroup* pixelGroup) {
-    unsigned int pixelCount = pixelGroup->GetPixelCount();
+    uint16_t pixelCount = pixelGroup->GetPixelCount();
     RGBColor* pixelColors = pixelGroup->GetColors();
     RGBColor* colorBuffer = pixelGroup->GetColorBuffer();
 
@@ -19,8 +19,8 @@ void PhaseOffsetR::ApplyEffect(IPixelGroup* pixelGroup) {
     float mpiR1B = mpiR1R + phase240;
     float mpiR2B = mpiR2R + phase240;
 
-    for (unsigned int i = 0; i < pixelCount; i++) {
-        unsigned int indexR, indexG, indexB;
+    for (uint16_t i = 0; i < pixelCount; i++) {
+        uint16_t indexR, indexG, indexB;
         bool validR, validG, validB;
 
         float coordX = pixelGroup->GetCoordinate(i).X / 10.0f;
@@ -55,7 +55,7 @@ void PhaseOffsetR::ApplyEffect(IPixelGroup* pixelGroup) {
             colorBuffer[i].B = 0;
     }
 
-    for (unsigned int i = 0; i < pixelCount; i++) {
+    for (uint16_t i = 0; i < pixelCount; i++) {
         pixelColors[i].R = colorBuffer[i].R;
         pixelColors[i].G = colorBuffer[i].G;
         pixelColors[i].B = colorBuffer[i].B;

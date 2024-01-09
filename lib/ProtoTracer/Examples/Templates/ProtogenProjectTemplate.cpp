@@ -129,25 +129,98 @@ void ProtogenProject::UpdateFace(float ratio) {
     objA.SetCameraMax(Vector2D(xMaxCamera, cameraSize.Y - cameraSize.Y * offsetFace).Multiply(scale));
 }
 
-void ProtogenProject::AlignObject(Object3D* obj, float rotation, float margin){
+
+void ProtogenProject::SetCameraMain(Vector2D min, Vector2D max){
+    this->camMin = min;
+    this->camMax = max;
+
+    objA.SetCameraMin(camMin);
+    objA.SetCameraMax(camMax);
+}
+
+void ProtogenProject::SetCameraRear(Vector2D min, Vector2D max){
+    this->camMinRear = min;
+    this->camMaxRear = max;
+
+    objARear.SetCameraMin(camMinRear);
+    objARear.SetCameraMax(camMaxRear);
+}
+
+Transform ProtogenProject::GetAlignmentTransform(Vector2D min, Vector2D max, Object3D* obj, float rotation, float margin){
+    objAOther.SetCameraMin(min);
+    objAOther.SetCameraMax(max);
+
+    objAOther.SetPlaneOffsetAngle(rotation);
+    objAOther.SetEdgeMargin(margin);
+    
+    return objAOther.GetTransform(obj);
+}
+
+Transform ProtogenProject::GetAlignmentTransform(Vector2D min, Vector2D max, Object3D** objects, uint8_t objectCount, float rotation, float margin){
+    objAOther.SetCameraMin(min);
+    objAOther.SetCameraMax(max);
+
+    objAOther.SetPlaneOffsetAngle(rotation);
+    objAOther.SetEdgeMargin(margin);
+    
+    return objAOther.GetTransform(objects, objectCount);
+}
+
+void ProtogenProject::AlignObject(Vector2D min, Vector2D max, Object3D* obj, float rotation, float margin){
+    objAOther.SetCameraMin(min);
+    objAOther.SetCameraMax(max);
+
+    objAOther.SetPlaneOffsetAngle(rotation);
+    objAOther.SetEdgeMargin(margin);
+    objAOther.AlignObject(obj);
+}
+
+void ProtogenProject::AlignObjects(Vector2D min, Vector2D max, Object3D** objects, uint8_t objectCount, float rotation, float margin){
+    objAOther.SetCameraMin(min);
+    objAOther.SetCameraMax(max);
+
+    objAOther.SetPlaneOffsetAngle(rotation);
+    objAOther.SetEdgeMargin(margin);
+    objAOther.AlignObjects(objects, objectCount);
+}
+
+void ProtogenProject::AlignObjectNoScale(Vector2D min, Vector2D max, Object3D* obj, float rotation, float margin){
+    objAOther.SetCameraMin(min);
+    objAOther.SetCameraMax(max);
+
+    objAOther.SetPlaneOffsetAngle(rotation);
+    objAOther.SetEdgeMargin(margin);
+    objAOther.AlignObjectNoScale(obj);
+}
+
+void ProtogenProject::AlignObjectsNoScale(Vector2D min, Vector2D max, Object3D** objects, uint8_t objectCount, float rotation, float margin){
+    objAOther.SetCameraMin(min);
+    objAOther.SetCameraMax(max);
+
+    objAOther.SetPlaneOffsetAngle(rotation);
+    objAOther.SetEdgeMargin(margin);
+    objAOther.AlignObjectsNoScale(objects, objectCount);
+}
+
+void ProtogenProject::AlignObjectFace(Object3D* obj, float rotation, float margin){
     objA.SetPlaneOffsetAngle(rotation);
     objA.SetEdgeMargin(margin);
     objA.AlignObject(obj);
 }
 
-void ProtogenProject::AlignObjects(Object3D** objects, uint8_t objectCount, float rotation, float margin){
+void ProtogenProject::AlignObjectsFace(Object3D** objects, uint8_t objectCount, float rotation, float margin){
     objA.SetPlaneOffsetAngle(rotation);
     objA.SetEdgeMargin(margin);
     objA.AlignObjects(objects, objectCount);
 }
 
-void ProtogenProject::AlignObjectNoScale(Object3D* obj, float rotation, float margin){
+void ProtogenProject::AlignObjectNoScaleFace(Object3D* obj, float rotation, float margin){
     objA.SetPlaneOffsetAngle(rotation);
     objA.SetEdgeMargin(margin);
     objA.AlignObjectNoScale(obj);
 }
 
-void ProtogenProject::AlignObjectsNoScale(Object3D** objects, uint8_t objectCount, float rotation, float margin){
+void ProtogenProject::AlignObjectsNoScaleFace(Object3D** objects, uint8_t objectCount, float rotation, float margin){
     objA.SetPlaneOffsetAngle(rotation);
     objA.SetEdgeMargin(margin);
     objA.AlignObjectsNoScale(objects, objectCount);
@@ -177,7 +250,15 @@ void ProtogenProject::AlignObjectsNoScaleRear(Object3D** objects, uint8_t object
     objARear.AlignObjectsNoScale(objects, objectCount);
 }
 
-void ProtogenProject::AddParameter(uint8_t index, float* parameter, uint8_t transitionFrames, EasyEaseInterpolation::InterpolationMethod interpolationMethod, bool invertDirection){
+float ProtogenProject::GetFaceScale(){
+    uint8_t faceSize = Menu::GetFaceSize();
+
+    float xSizeRatio = 1.0f - 0.5f + faceSize * (1.0f / 20.0f);
+
+    return xSizeRatio;
+}
+
+void ProtogenProject::AddParameter(uint8_t index, float* parameter, uint8_t transitionFrames, IEasyEaseAnimator::InterpolationMethod interpolationMethod, bool invertDirection){
     if(invertDirection){
         eEA.AddParameter(parameter, index, transitionFrames, 1.0f, 0.0f);
     }
@@ -191,7 +272,7 @@ void ProtogenProject::AddParameter(uint8_t index, float* parameter, uint8_t tran
 void ProtogenProject::AddViseme(Viseme::MouthShape visemeName, float* parameter){
     eEA.AddParameter(parameter, visemeName + 100, 2, 0.0f, 1.0f);
 
-    eEA.SetInterpolationMethod(visemeName + 100, EasyEaseInterpolation::Linear);
+    eEA.SetInterpolationMethod(visemeName + 100, IEasyEaseAnimator::Linear);
 }
 
 void ProtogenProject::AddBlinkParameter(float* blinkParameter){
@@ -312,7 +393,7 @@ Material* ProtogenProject::GetBackgroundMaterial(){
     return &backgroundMaterial;
 }
 
-ProtogenProject::ProtogenProject(CameraManager* cameras, Controller* controller, uint8_t numObjects, Vector2D camMin, Vector2D camMax, uint8_t microphonePin, uint8_t buttonPin, uint8_t faceCount) : Project(cameras, controller, numObjects) {
+ProtogenProject::ProtogenProject(CameraManager* cameras, Controller* controller, uint8_t numObjects, Vector2D camMin, Vector2D camMax, uint8_t microphonePin, uint8_t buttonPin, uint8_t faceCount) : Project(cameras, controller, numObjects + 1) {
     this->camMin = camMin;
     this->camMax = camMax;
     this->microphonePin = microphonePin;

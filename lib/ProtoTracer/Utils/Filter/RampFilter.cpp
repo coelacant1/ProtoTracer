@@ -12,11 +12,11 @@ RampFilter::RampFilter(int frames, float epsilon) {
 }
 
 float RampFilter::Filter(float value) {
-    if (Mathematics::IsClose(value, filter, epsilon)) return filter;
+    if (Mathematics::IsClose(value, filter, increment / 2.0f)) return filter;
 
-    if (value > filter) {
+    if (value > filter + epsilon) {
         filter = filter + increment < 1.0f ? filter + increment : 1.0f;
-    } else if (value < filter) {
+    } else if (value < filter - epsilon) {
         filter = filter - increment > 0.0f ? filter - increment : 0.0f;
     }
 

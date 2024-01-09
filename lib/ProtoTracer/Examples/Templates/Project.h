@@ -7,6 +7,8 @@
 #include "..\..\Controller\Controller.h"
 #include "..\..\Utils\Filter\RunningAverageFilter.h"
 
+#include "Utils\Debug.h"
+
 class Project {
 protected:
     CameraManager* cameras;
@@ -41,4 +43,6 @@ public:
     void Animate(float ratio);
     void Render();
     void Display();
+
+    void PrintStats();
 };

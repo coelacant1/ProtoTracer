@@ -1,16 +1,21 @@
 #pragma once
 
-#include "..\ProtogenAnimation.h"
-#include "..\..\Objects\Background.h"
-#include "..\..\Morph\Commissions\SageSchlo.h"
-#include "..\..\Morph\Commissions\SageSchloSideDisplay.h"
+#include "..\Templates\ProtogenProjectTemplate.h"
+#include "..\..\Assets\Models\FBX\Commissions\SageSchlo.h"
+#include "..\..\Assets\Models\FBX\Commissions\SageSchloSideDisplay.h"
 
-class SageAnimation : public ProtogenAnimation<2> {
+#include "..\..\Camera\CameraManager\Implementations\HUB75DeltaCameras.h"
+#include "..\..\Controller\HUB75Controller.h"
+
+class SageAnimation : public ProtogenProject {
 private:
     SageSchlo pM;
     SageSchloSideDisplay sageSideDisplay;
     
-	const __FlashStringHelper* faceArray[10] = {F("DEFAULT"), F("ANGRY"), F("DOUBT"), F("FROWN"), F("LOOKUP"), F("SAD"), F("AUDIO1"), F("AUDIO2"), F("AUDIO3")};
+    HUB75DeltaCameraManager cameras;
+    HUB75Controller controller = HUB75Controller(&cameras, 50, 50);
+    
+	const __FlashStringHelper* faceArray[14] = {F("NEUTRAL"), F("SURPRISE"), F("DIZZY"), F("ANGRY1"), F("ANGRY2"), F("ANGRY3"), F("OWO"), F("TIRED"), F("SAD"), F("AUDIO1"), F("AUDIO2"), F("AUDIO3")};
 
     FunctionGenerator batteryChargeFunc = FunctionGenerator(FunctionGenerator::Sawtooth, 0.0f, 1.0f, 6.0f);
 
@@ -18,14 +23,14 @@ private:
 
     void LinkControlParameters() override {
         AddParameter(SageSchlo::Surprised, pM.GetMorphWeightReference(SageSchlo::Surprised), 40);
-        AddParameter(SageSchlo::Blush, pM.GetMorphWeightReference(SageSchlo::Blush), 15, EasyEaseInterpolation::InterpolationMethod::Cosine);
+        AddParameter(SageSchlo::Blush, pM.GetMorphWeightReference(SageSchlo::Blush), 15, IEasyEaseAnimator::InterpolationMethod::Cosine);
         AddParameter(SageSchlo::Dizzy, pM.GetMorphWeightReference(SageSchlo::Dizzy), 25);
-        AddParameter(SageSchlo::Angry1, pM.GetMorphWeightReference(SageSchlo::Angry1), 20, EasyEaseInterpolation::InterpolationMethod::Cosine);
-        AddParameter(SageSchlo::Angry2, pM.GetMorphWeightReference(SageSchlo::Angry2), 15, EasyEaseInterpolation::InterpolationMethod::Cosine);
-        AddParameter(SageSchlo::Angry3, pM.GetMorphWeightReference(SageSchlo::Angry3), 10, EasyEaseInterpolation::InterpolationMethod::Cosine);
+        AddParameter(SageSchlo::Angry1, pM.GetMorphWeightReference(SageSchlo::Angry1), 20, IEasyEaseAnimator::InterpolationMethod::Cosine);
+        AddParameter(SageSchlo::Angry2, pM.GetMorphWeightReference(SageSchlo::Angry2), 15, IEasyEaseAnimator::InterpolationMethod::Cosine);
+        AddParameter(SageSchlo::Angry3, pM.GetMorphWeightReference(SageSchlo::Angry3), 10, IEasyEaseAnimator::InterpolationMethod::Cosine);
         AddParameter(SageSchlo::OwO, pM.GetMorphWeightReference(SageSchlo::OwO), 10);
-        AddParameter(SageSchlo::Tired, pM.GetMorphWeightReference(SageSchlo::Tired), 50, EasyEaseInterpolation::InterpolationMethod::Cosine);
-        AddParameter(SageSchlo::Sad, pM.GetMorphWeightReference(SageSchlo::Sad), 45, EasyEaseInterpolation::InterpolationMethod::Cosine);
+        AddParameter(SageSchlo::Tired, pM.GetMorphWeightReference(SageSchlo::Tired), 50, IEasyEaseAnimator::InterpolationMethod::Cosine);
+        AddParameter(SageSchlo::Sad, pM.GetMorphWeightReference(SageSchlo::Sad), 45, IEasyEaseAnimator::InterpolationMethod::Cosine);
 
         AddParameter(SageSchloSideDisplay::Battery + 20, sageSideDisplay.GetMorphWeightReference(SageSchloSideDisplay::Battery), 45);
         AddParameter(SageSchloSideDisplay::BatteryFull + 20, sageSideDisplay.GetMorphWeightReference(SageSchloSideDisplay::BatteryFull), 45);
@@ -49,6 +54,8 @@ private:
         AddParameterFrame(SageSchlo::Surprised, 1.0f);
 
         AddParameterFrame(SageSchloSideDisplay::Exclamation + 20, 1.0f);
+        
+        DisableBlinking();
     }
 
     void Blush(){
@@ -59,7 +66,6 @@ private:
 
     void Dizzy(){
         AddParameterFrame(SageSchlo::Dizzy, 1.0f);
-        AddMaterialFrame(Color::CRAINBOW);
 
         AddParameterFrame(SageSchloSideDisplay::Dizzy + 20, 1.0f);
 
@@ -90,6 +96,8 @@ private:
     
     void OwO(){
         AddParameterFrame(SageSchlo::OwO, 1.0f);
+        
+        DisableBlinking();
     }
 
     void Tired(){
@@ -103,11 +111,10 @@ private:
 
     void Sad(){
         AddParameterFrame(SageSchlo::Sad, 1.0f);
-        AddMaterialFrame(Color::CBLUE);
     }
 
 public:
-    SageAnimation() : ProtogenAnimation(Vector2D(), Vector2D(192.0f, 96.0f), 22, 23, 12){
+    SageAnimation() : ProtogenProject(&cameras, &controller, 2, Vector2D(), Vector2D(192.0f, 94.0f), 22, 23, 12){
         scene.AddObject(pM.GetObject());
         scene.AddObject(sageSideDisplay.GetObject());
 
@@ -125,6 +132,9 @@ public:
 
         EnableBlinking();
         wiggle = false;
+
+        controller.SetBrightness(Menu::GetBrightness());
+        controller.SetAccentBrightness(Menu::GetAccentBrightness());
 
         uint8_t mode = Menu::GetFaceState();//change by button press
 
@@ -157,7 +167,7 @@ public:
         pM.Update();
         sageSideDisplay.Update();
 
-        AlignObject(pM.GetObject(), 0.0f);
+        AlignObjectFace(pM.GetObject(), 0.0f);
         AlignObjectNoScaleRear(sageSideDisplay.GetObject(), 0.0f, 0.0f);
 
         SetWiggleSpeed(5.0f);

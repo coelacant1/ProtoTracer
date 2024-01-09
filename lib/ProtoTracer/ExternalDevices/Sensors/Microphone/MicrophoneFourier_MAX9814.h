@@ -1,9 +1,6 @@
 #pragma once
 
-#define ARM_MATH_CM4
-
 #include <Arduino.h>
-#include <arm_math.h>
 #include "..\..\..\Utils\Filter\DerivativeFilter.h"
 #include "..\..\..\Utils\Filter\FFTFilter.h"
 #include "..\..\..\Utils\Time\TimeStep.h"

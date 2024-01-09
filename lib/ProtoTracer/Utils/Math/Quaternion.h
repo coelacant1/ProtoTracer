@@ -1,9 +1,10 @@
 #pragma once
 
+#include "Mathematics.h"
 #include "Vector2D.h"
 #include "Vector3D.h"
 
-#include <arm_math.h>
+//#include <arm_math.h>
 
 class Quaternion {
 public:

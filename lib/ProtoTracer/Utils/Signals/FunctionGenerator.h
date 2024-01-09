@@ -9,7 +9,8 @@ public:
         Triangle,
         Square,
         Sine,
-        Sawtooth
+        Sawtooth,
+        Gravity
     };
 
 private:
@@ -22,6 +23,7 @@ private:
     float SquareWave(float ratio);
     float SineWave(float ratio);
     float SawtoothWave(float ratio);
+    float GravityFunction(float ratio);
 
 public:
     FunctionGenerator(Function function, float minimum, float maximum, float period);

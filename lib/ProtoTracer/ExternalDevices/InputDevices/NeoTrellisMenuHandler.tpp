@@ -1,6 +1,8 @@
 #pragma once
 
 template <uint8_t menuCount>
+Adafruit_NeoTrellis MenuHandler<menuCount>::trellis;
+template <uint8_t menuCount>
 uint8_t MenuHandler<menuCount>::currentMenu;
 template <uint8_t menuCount>
 uint8_t MenuHandler<menuCount>::currentSetting = 0;
@@ -109,29 +111,20 @@ template <uint8_t menuCount>
 bool MenuHandler<menuCount>::Initialize() {
     Wire.setClock(50000);  // for longer-range transmissions
 
-    Wire.beginTransmission(0x2E);
-    uint8_t error = Wire.endTransmission();
-
-    if (error == 0) {  // Neotrellis Found
-        if (!trellis.begin()) {
-            Serial.println("Could not start Trellis, check wiring?");
-            didBegin = false;
-        } else {
-            // Activate all keys and set callbacks
-            for (int i = 0; i < NEO_TRELLIS_NUM_KEYS; i++) {
-                trellis.activateKey(i, SEESAW_KEYPAD_EDGE_RISING);
-                trellis.activateKey(i, SEESAW_KEYPAD_EDGE_FALLING);
-                trellis.registerCallback(i, blink);
-            }
-
-            didBegin = true;
-
-            Serial.println("NeoPixel Trellis started");
-        }
-    } else {
+    if (!trellis.begin()) {
+        Serial.println("Could not start Trellis, check wiring?");
         didBegin = false;
+    } else {
+        // Activate all keys and set callbacks
+        for (int i = 0; i < NEO_TRELLIS_NUM_KEYS; i++) {
+            trellis.activateKey(i, SEESAW_KEYPAD_EDGE_RISING);
+            trellis.activateKey(i, SEESAW_KEYPAD_EDGE_FALLING);
+            trellis.registerCallback(i, blink);
+        }
 
-        Serial.println("NeoPixel Trellis not found");
+        didBegin = true;
+
+        Serial.println("NeoPixel Trellis started");
     }
 
     for (uint8_t i = 0; i < menuCount; i++) {

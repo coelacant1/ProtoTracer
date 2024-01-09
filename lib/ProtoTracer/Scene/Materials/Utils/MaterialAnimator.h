@@ -7,7 +7,7 @@
 template<size_t materialCount>
 class MaterialAnimator : public Material {
 private:
-    EasyEaseAnimator<materialCount> eEA = EasyEaseAnimator<materialCount>(EasyEaseInterpolation::Cosine);
+    EasyEaseAnimator<materialCount> eEA = EasyEaseAnimator<materialCount>(IEasyEaseAnimator::Cosine);
     CombineMaterial<materialCount> combineMaterial;
     float materialRatios[materialCount];
     Material* dictionary[materialCount];

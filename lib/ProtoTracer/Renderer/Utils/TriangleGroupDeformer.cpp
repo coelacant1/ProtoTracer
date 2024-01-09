@@ -1,14 +1,14 @@
 #include "TriangleGroupDeformer.h"
 
-TriangleGroupDeformer::TriangleGroupDeformer(TriangleGroup* object) {
-    objects = new TriangleGroup*[1];
+TriangleGroupDeformer::TriangleGroupDeformer(ITriangleGroup* object) {
+    objects = new ITriangleGroup*[1];
 
     objects[0] = object;
 
     objectCount = 1;
 }
 
-TriangleGroupDeformer::TriangleGroupDeformer(TriangleGroup** objects, int objectCount) {
+TriangleGroupDeformer::TriangleGroupDeformer(ITriangleGroup** objects, int objectCount) {
     this->objects = objects;
     this->objectCount = objectCount;
 }

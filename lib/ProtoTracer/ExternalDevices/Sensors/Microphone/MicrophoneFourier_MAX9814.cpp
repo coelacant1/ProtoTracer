@@ -67,9 +67,8 @@ void MicrophoneFourier::Reset() {
 void MicrophoneFourier::Update() {
     if (!samplesReady && timeStep.IsReady()) return;
 
-    arm_cfft_radix4_init_f32(&RadixFFT, FFTSize, 0, 1);
-    arm_cfft_radix4_f32(&RadixFFT, inputSamp);
-    arm_cmplx_mag_f32(inputSamp, outputMagn, FFTSize);
+    fft.Radix2FFT(inputSamp);
+    fft.ComplexMagnitude(inputSamp, outputMagn);
 
     float averageMagnitude = 0.0f;
 

@@ -1,31 +1,30 @@
 #pragma once
 
 #include "Triangle3D.h"
+#include "ITriangleGroup.h"
 #include "IndexGroup.h"
+#include "IStaticTriangleGroup.h"
 
-class TriangleGroup {
+template<int vertexCount, int triangleCount>
+class TriangleGroup : public ITriangleGroup {
 private:
-    Vector3D* vertices;
-    Triangle3D* triangles;
-    IndexGroup* indexGroup;
-    IndexGroup* uvIndexGroup;
-    Vector2D* uvVertices;
-    int vertexCount;
-    int triangleCount;
-    int uvVertexCount;
+    Triangle3D triangles[triangleCount];
+    Vector3D vertices[vertexCount];
+    const IndexGroup* indexGroup;
+    const IndexGroup* uvIndexGroup;
+    const Vector2D* uvVertices;
     bool hasUV = false;
 
 public:
-    TriangleGroup(Vector3D* vertices, IndexGroup* indexGroup, int vertexCount, int triangleCount);
-    TriangleGroup(Vector3D* vertices, IndexGroup* indexGroup, IndexGroup* uvIndexGroup, Vector2D* uvVertices, int vertexCount, int triangleCount, int uvVertexCount);
-    TriangleGroup(TriangleGroup* triangleGroup);
-    TriangleGroup(TriangleGroup** triangleGroups, const int triangleGroupCount);
-    ~TriangleGroup();
+    TriangleGroup(IStaticTriangleGroup* triangleGroup);
 
-    IndexGroup* GetIndexGroup();
-    int GetTriangleCount();
-    Vector3D* GetVertices();
-    int GetVertexCount();
-    Triangle3D* GetTriangles();
-    Vector2D* GetUVVertices();
+    const IndexGroup* GetIndexGroup() override;
+    int GetTriangleCount() override;
+    Vector3D* GetVertices() override;
+    int GetVertexCount() override;
+    Triangle3D* GetTriangles() override;
+    const Vector2D* GetUVVertices() override;
+    const IndexGroup* GetUVIndexGroup() override;
 };
+
+#include "TriangleGroup.tpp"

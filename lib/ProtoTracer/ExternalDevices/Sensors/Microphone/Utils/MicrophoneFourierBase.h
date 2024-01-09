@@ -1,12 +1,10 @@
 #pragma once
 
-#define ARM_MATH_CM4
-
 #include <Arduino.h>
-#include <arm_math.h>
 #include "..\..\..\..\Utils\Filter\DerivativeFilter.h"
 #include "..\..\..\..\Utils\Filter\FFTFilter.h"
 #include "..\..\..\..\Utils\Time\TimeStep.h"
+#include "..\..\..\..\Utils\Signals\FFT.h"
 
 class MicrophoneFourierBase {
 protected:
@@ -28,7 +26,7 @@ protected:
     static float outputDataFilt[OutputBins];
     static FFTFilter fftFilters[OutputBins];
 
-    static arm_cfft_radix4_instance_f32 RadixFFT;
+    static FFT<FFTSize> fft;
 
 public:
     static float AverageMagnitude(uint16_t binL, uint16_t binH);

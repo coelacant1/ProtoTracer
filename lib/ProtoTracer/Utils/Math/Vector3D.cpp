@@ -4,6 +4,8 @@ Vector3D::Vector3D() : X(0.0f), Y(0.0f), Z(0.0f) {}
 
 Vector3D::Vector3D(const Vector3D& vector) : X(vector.X), Y(vector.Y), Z(vector.Z) {}
 
+Vector3D::Vector3D(const Vector3D* vector) : X(vector->X), Y(vector->Y), Z(vector->Z) {}
+
 Vector3D::Vector3D(const float& X, const float& Y, const float& Z) : X(X), Y(Y), Z(Z) {}
 
 // Implementations of non-static member functions
@@ -248,6 +250,14 @@ bool Vector3D::operator ==(const Vector3D& vector) const {
 
 bool Vector3D::operator !=(const Vector3D& vector) const {
     return !(this->IsEqual(vector));
+}
+
+Vector3D Vector3D::operator +=(const Vector3D& vector) {
+    this->X += vector.X;
+    this->Y += vector.Y;
+    this->Z += vector.Z;
+
+    return *this;
 }
 
 Vector3D Vector3D::operator =(const Vector3D& vector) {

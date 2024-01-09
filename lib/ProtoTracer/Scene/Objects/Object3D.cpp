@@ -1,27 +1,10 @@
 #include "Object3D.h"
 
-Object3D::Object3D(TriangleGroup* originalTriangles, Material* material) {
-    this->originalTriangles = originalTriangles;
+Object3D::Object3D(IStaticTriangleGroup* originalTriangles, ITriangleGroup* modifiedTriangles, Material* material) : originalTriangles(originalTriangles), modifiedTriangles(modifiedTriangles) {
     this->material = material;
-
-    modifiedTriangles = new TriangleGroup(originalTriangles);
 }
 
-Object3D::Object3D(Object3D** objects, int objectCount) {
-    TriangleGroup** triangleGroups = new TriangleGroup*[objectCount];
-
-    for (int i = 0; i < objectCount; i++) {
-        triangleGroups[i] = objects[i]->GetTriangleGroup();
-    }
-
-    modifiedTriangles = new TriangleGroup(triangleGroups, objectCount);
-
-    delete[] triangleGroups;
-}
-
-Object3D::~Object3D() {
-    delete modifiedTriangles;
-}
+Object3D::~Object3D() {}
 
 void Object3D::Enable() {
     enabled = true;
@@ -64,6 +47,10 @@ Transform* Object3D::GetTransform() {
     return &transform;
 }
 
+void Object3D::SetTransform(Transform& t) {
+    transform = t;
+}
+
 void Object3D::ResetVertices() {
     for (int i = 0; i < modifiedTriangles->GetVertexCount(); i++) {
         modifiedTriangles->GetVertices()[i] = originalTriangles->GetVertices()[i];
@@ -82,7 +69,7 @@ void Object3D::UpdateTransform() {
     }
 }
 
-TriangleGroup* Object3D::GetTriangleGroup() {
+ITriangleGroup* Object3D::GetTriangleGroup() {
     return modifiedTriangles;
 }
 

@@ -67,6 +67,10 @@ public:
 
     void SetScale(float scaleX, float scaleY);
 
+    Transform GetTransform(Object3D* obj);
+
+    Transform GetTransform(Object3D** objs, uint8_t numObjects);
+
     void AlignObjectNoScale(Object3D* obj);
 
     void AlignObjectsNoScale(Object3D** objs, uint8_t numObjects);

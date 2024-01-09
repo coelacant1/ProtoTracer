@@ -6,9 +6,9 @@ void GlitchX::ApplyEffect(IPixelGroup* pixelGroup) {
     RGBColor* pixelColors = pixelGroup->GetColors();
     RGBColor* colorBuffer = pixelGroup->GetColorBuffer();
 
-    for (unsigned int i = 0; i < pixelGroup->GetPixelCount(); i++) {
-        unsigned int index = i;
-        unsigned int tIndex = 0;
+    for (uint16_t i = 0; i < pixelGroup->GetPixelCount(); i++) {
+        uint16_t index = i;
+        uint16_t tIndex = 0;
         bool valid = true;
         int blurRange = Mathematics::Map(ratio, 0.0f, 1.0f, 1.0f, float(pixels / 2));
         int randX = random(-blurRange, blurRange);
@@ -37,7 +37,7 @@ void GlitchX::ApplyEffect(IPixelGroup* pixelGroup) {
         }
     }
 
-    for (unsigned int i = 0; i < pixelGroup->GetPixelCount(); i++) {
+    for (uint16_t i = 0; i < pixelGroup->GetPixelCount(); i++) {
         pixelColors[i].R = colorBuffer[i].R;
         pixelColors[i].G = colorBuffer[i].G;
         pixelColors[i].B = colorBuffer[i].B;

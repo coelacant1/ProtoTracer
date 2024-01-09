@@ -46,19 +46,21 @@ void SpiralMaterial::HueShift(float hueDeg) {
 }
 
 RGBColor SpiralMaterial::GetRGB(const Vector3D& position, const Vector3D& normal, const Vector3D& uvw) {
+    Vector3D positionL = position;
+
     if (rotationAngle != 0) {
         Quaternion temp = Rotation(EulerAngles(Vector3D(0, 0, rotationAngle), EulerConstants::EulerOrderXYZS)).GetQuaternion();
 
-        position = position - Vector3D(positionOffset.X, positionOffset.Y, 0);
+        positionL = positionL - Vector3D(positionOffset.X, positionOffset.Y, 0.0f);
 
-        position = temp.RotateVector(position);
+        positionL = temp.RotateVector(positionL);
     }
 
     // From x position, fit into bucket ratio
     // Modulo x value into x range from start position to end position
 
-    float radius = Vector2D(position).Magnitude();
-    float angle = atan2(position.Y, position.X);
+    float radius = Vector2D(positionL).Magnitude();
+    float angle = atan2(positionL.Y, positionL.X);
     float ratio = Mathematics::Fract(width * angle / Mathematics::MPI + bend * powf(radius, 0.3f));
 
     int startBox = floor(ratio * colorCount);

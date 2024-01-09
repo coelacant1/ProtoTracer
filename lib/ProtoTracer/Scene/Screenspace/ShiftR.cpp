@@ -4,14 +4,14 @@
 ShiftR::ShiftR(uint8_t pixels) : pixels(pixels) {}
 
 void ShiftR::ApplyEffect(IPixelGroup* pixelGroup) {
-    unsigned int pixelCount = pixelGroup->GetPixelCount();
+    uint16_t pixelCount = pixelGroup->GetPixelCount();
     RGBColor* pixelColors = pixelGroup->GetColors();
     RGBColor* colorBuffer = pixelGroup->GetColorBuffer();
 
     float rotation = fGenRotation.Update();
 
-    for (unsigned int i = 0; i < pixelCount; i++) {
-        unsigned int indexR, indexG, indexB;
+    for (uint16_t i = 0; i < pixelCount; i++) {
+        uint16_t indexR, indexG, indexB;
         bool validR, validG, validB;
 
         uint8_t range = (uint8_t)Mathematics::Map(ratio, 0.0f, 1.0f, 0.0f, (float)pixels);
@@ -30,7 +30,7 @@ void ShiftR::ApplyEffect(IPixelGroup* pixelGroup) {
         else colorBuffer[i].B = 0;
     }
 
-    for (unsigned int i = 0; i < pixelCount; i++) {
+    for (uint16_t i = 0; i < pixelCount; i++) {
         pixelColors[i].R = colorBuffer[i].R;
         pixelColors[i].G = colorBuffer[i].G;
         pixelColors[i].B = colorBuffer[i].B;

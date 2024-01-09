@@ -189,6 +189,85 @@ void ObjectAlign::SetScale(float scaleX, float scaleY) {
     this->scaleY = scaleY;
 }
 
+//Aligns object, does not move or scale object
+Transform ObjectAlign::GetTransform(Object3D* obj){
+    Object3D** objs = new Object3D*[1];
+    objs[0] = obj;
+    Transform objectCenter = GetTransform(objs, 1);
+    delete[] objs;
+
+    return objectCenter;
+}
+
+Transform ObjectAlign::GetTransform(Object3D** objs, uint8_t numObjects){
+    Transform newTransform;
+    // calculate planes, assume flat object (largest axes are axis), best fit plane i.e. centroid + direction/normal
+    Vector3D centroid = GetCentroid(objs, numObjects);
+    Quaternion planeOrientation = GetPlaneOrientation(objs, numObjects, centroid);
+    Vector2D cameraSize = (camMax - camMin);
+    Vector3D objectCenter = GetObjectCenter(objs, numObjects); // Get cameraCenter of objects
+
+    // Get new size of objects after normalization
+    Vector3D objectSize = GetObjectSize(objs, numObjects);
+
+    float xRatio = (cameraSize.X - edgeMargin) / objectSize.X;
+    float yRatio = (cameraSize.Y - edgeMargin) / objectSize.Y;
+
+    if (jst != Stretch) {
+        // Uniform object scaling with modifier
+        xRatio = Mathematics::Min(xRatio, yRatio) * scaleX;
+        yRatio = Mathematics::Min(xRatio, yRatio) * scaleY;
+    }
+
+    float xOffset = ((cameraSize.X - edgeMargin) - (xRatio * objectSize.X)) / 2.0f; // get left over space between camera edge and object in X-axis view
+    float yOffset = ((cameraSize.Y - edgeMargin) - (yRatio * objectSize.Y)) / 2.0f; // get left over space between camera edge and object in Y-axis view
+
+    switch (jst) {
+        case UpperLeft:
+            // No Change
+            break;
+        case UpperMiddle:
+            xOffset = 0.0f;
+            break;
+        case UpperRight:
+            xOffset = -xOffset;
+            break;
+        case MiddleLeft:
+            yOffset = 0.0f;
+            break;
+        case MiddleRight:
+            xOffset = -xOffset;
+            yOffset = 0.0f;
+            break;
+        case LowerLeft:
+            yOffset = -yOffset;
+            break;
+        case LowerMiddle:
+            xOffset = 0.0f;
+            yOffset = -yOffset;
+            break;
+        case LowerRight:
+            xOffset = -xOffset;
+            yOffset = -yOffset;
+            break;
+        default: // Middle
+            xOffset = 0.0f;
+            yOffset = 0.0f;
+            break;
+    }
+
+    // calculate point 250mm in front of camera
+    Vector3D cameraTarget = targetOrientation.RotateVector(Vector3D(forwardVector * 250.0f) + Vector3D(cameraCenter.X, cameraCenter.Y, 0.0f));
+    Quaternion outputQuaternion = planeOrientation.Conjugate().Multiply(targetOrientation);
+
+    newTransform.SetPosition(Vector3D(xOffset, yOffset, 0.0f) + cameraTarget - objectCenter);
+    newTransform.SetRotation(outputQuaternion);
+    newTransform.SetRotationOffset(objectCenter);
+    newTransform.SetScale(Vector3D(xRatio, yRatio, 1.0f) * Vector3D(mirrorX ? -1.0f : 1.0f, mirrorY ? -1.0f : 1.0f, 1.0f));
+
+    return newTransform;
+}
+
 void ObjectAlign::AlignObjectNoScale(Object3D* obj) {
     Object3D** objs = new Object3D*[1];
     objs[0] = obj;

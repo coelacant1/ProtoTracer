@@ -18,6 +18,8 @@
 #include "..\..\..\Scene\Screenspace\ShiftR.h"
 #include "..\..\..\Scene\Screenspace\VerticalBlur.h"
 
+#include "..\..\..\Examples\UserConfiguration.h"
+
 #ifdef NEOTRELLISMENU
 #include "..\NeoTrellisMenuHandler.h"
 #else

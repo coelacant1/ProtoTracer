@@ -7,7 +7,7 @@ void PhaseOffsetX::ApplyEffect(IPixelGroup* pixelGroup) {
     RGBColor* pixelColors = pixelGroup->GetColors();
     RGBColor* colorBuffer = pixelGroup->GetColorBuffer();
 
-    for (unsigned int i = 0; i < pixelGroup->GetPixelCount(); i++) {
+    for (uint16_t i = 0; i < pixelGroup->GetPixelCount(); i++) {
         float range = ((pixels - 1) * ratio + 1) / 2.0f;
         float coordY = pixelGroup->GetCoordinate(i).Y / 10.0f;
         float mpiR = 2.0f * Mathematics::MPI * fGenPhase.Update();
@@ -19,7 +19,7 @@ void PhaseOffsetX::ApplyEffect(IPixelGroup* pixelGroup) {
         int8_t blurRangeG = Mathematics::Constrain(int8_t(Mathematics::Map(sineG, -1.0f, 1.0f, -range, range)), int8_t(-range), int8_t(range));
         int8_t blurRangeB = Mathematics::Constrain(int8_t(Mathematics::Map(sineB, -1.0f, 1.0f, -range, range)), int8_t(-range), int8_t(range));
 
-        unsigned int indexR = 0, indexG = 0, indexB = 0;
+        uint16_t indexR = 0, indexG = 0, indexB = 0;
 
         bool validR = pixelGroup->GetOffsetXIndex(i, &indexR, blurRangeR);
         bool validG = pixelGroup->GetOffsetXIndex(i, &indexG, blurRangeG);
@@ -41,7 +41,7 @@ void PhaseOffsetX::ApplyEffect(IPixelGroup* pixelGroup) {
             colorBuffer[i].B = 0;
     }
 
-    for (unsigned int i = 0; i < pixelGroup->GetPixelCount(); i++) {
+    for (uint16_t i = 0; i < pixelGroup->GetPixelCount(); i++) {
         pixelColors[i].R = colorBuffer[i].R;
         pixelColors[i].G = colorBuffer[i].G;
         pixelColors[i].B = colorBuffer[i].B;

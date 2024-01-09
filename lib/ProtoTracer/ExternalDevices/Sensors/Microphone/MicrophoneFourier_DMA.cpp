@@ -373,9 +373,9 @@ void MicrophoneFourier::setMicGain(bool is50db) {
 void MicrophoneFourier::UpdateDMA() {
     if (adc_dma_instance.interrupted()) {
         SamplerCallback(&adc_dma_instance, ADC_1);
-        arm_cfft_radix4_init_f32(&RadixFFT, FFTSize, 0, 1);
-        arm_cfft_radix4_f32(&RadixFFT, inputSamp);
-        arm_cmplx_mag_f32(inputSamp, outputMagn, FFTSize);
+        
+        fft.Radix2FFT(inputSamp);
+        fft.ComplexMagnitude(inputSamp, outputMagn);
 
         float averageMagnitude = 0.0f;
 

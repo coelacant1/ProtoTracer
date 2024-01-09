@@ -1,6 +1,6 @@
 #pragma once
 
-Vector2D WS35Pixels[571] = {
+DMAMEM Vector2D WS35Pixels[571] = {
     Vector2D(87.6388f,2.6312f),
     Vector2D(92.6388f,2.6312f),
     Vector2D(97.6388f,2.6312f),

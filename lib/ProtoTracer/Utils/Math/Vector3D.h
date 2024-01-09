@@ -10,6 +10,7 @@ public:
 
     Vector3D();
     Vector3D(const Vector3D& vector);
+    Vector3D(const Vector3D* vector);
     Vector3D(const float& X, const float& Y, const float& Z);
 
     Vector3D Absolute() const;
@@ -55,6 +56,7 @@ public:
     // Operator overloads
     bool operator ==(const Vector3D& vector) const;
     bool operator !=(const Vector3D& vector) const;
+    Vector3D operator +=(const Vector3D& vector);
     Vector3D operator =(const Vector3D& vector);
     Vector3D operator +(const Vector3D& vector) const;
     Vector3D operator -(const Vector3D& vector) const;

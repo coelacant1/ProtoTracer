@@ -1,5 +1,4 @@
 #include "Quaternion.h"
-#include "Mathematics.h"
 
 // Default constructor
 Quaternion::Quaternion() : W(1.0f), X(0.0f), Y(0.0f), Z(0.0f) {}

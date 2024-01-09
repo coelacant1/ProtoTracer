@@ -4,15 +4,15 @@
 RadialBlur::RadialBlur(uint8_t pixels) : pixels(pixels) {}
 
 void RadialBlur::ApplyEffect(IPixelGroup* pixelGroup) {
-    unsigned int pixelCount = pixelGroup->GetPixelCount();
+    uint16_t pixelCount = pixelGroup->GetPixelCount();
     RGBColor* pixelColors = pixelGroup->GetColors();
     RGBColor* colorBuffer = pixelGroup->GetColorBuffer();
 
     float rotation = fGenRotation.Update();
 
-    for (unsigned int i = 0; i < pixelCount; i++) {
-        unsigned int indexV = i, indexD = i;
-        unsigned int tIndexV = 0, tIndexD = 0;
+    for (uint16_t i = 0; i < pixelCount; i++) {
+        uint16_t indexV = i, indexD = i;
+        uint16_t tIndexV = 0, tIndexD = 0;
         bool validV = true, validD = true;
 
         uint16_t blurRange = uint16_t(Mathematics::Map(ratio, 0.0f, 1.0f, 1.0f, float(pixels)));
@@ -48,7 +48,7 @@ void RadialBlur::ApplyEffect(IPixelGroup* pixelGroup) {
         colorBuffer[i].G = Mathematics::Constrain(B / (blurRange * 2), 0, 255);
     }
 
-    for (unsigned int i = 0; i < pixelCount; i++) {
+    for (uint16_t i = 0; i < pixelCount; i++) {
         pixelColors[i].R = colorBuffer[i].R;
         pixelColors[i].G = colorBuffer[i].G;
         pixelColors[i].B = colorBuffer[i].B;

@@ -1,6 +1,9 @@
 #include "WS35Controller.h"
 
-WS35Controller::WS35Controller(CameraManager* cameras, uint8_t maxBrightness) : Controller(cameras, maxBrightness, 0){}
+DMAMEM int dmaDisplayMemory[346 * 6];
+
+WS35Controller::WS35Controller(CameraManager* cameras, uint8_t maxBrightness) : Controller(cameras, maxBrightness, 0), leds(OctoWS2811(ledsPerStrip, dmaDisplayMemory, drawingMemory, config)){
+}
 
 void WS35Controller::Initialize(){
     leds.begin();

@@ -6,7 +6,7 @@ PhaseOffsetY::PhaseOffsetY(uint8_t pixels) : pixels(pixels) {}
 void PhaseOffsetY::ApplyEffect(IPixelGroup* pixelGroup) {
     RGBColor* pixelColors = pixelGroup->GetColors();
 
-    for (unsigned int i = 0; i < pixelGroup->GetPixelCount(); i++) {
+    for (uint16_t i = 0; i < pixelGroup->GetPixelCount(); i++) {
         float range = (pixels - 1) * ratio + 1;
         float coordX = pixelGroup->GetCoordinate(i).X / 10.0f;
         float mpiR = 2.0f * Mathematics::MPI * fGenPhase.Update();
@@ -18,7 +18,7 @@ void PhaseOffsetY::ApplyEffect(IPixelGroup* pixelGroup) {
         uint8_t blurRangeG = Mathematics::Constrain(uint8_t(Mathematics::Map(sineG, -1.0f, 1.0f, 1.0f, range)), uint8_t(1), uint8_t(range));
         uint8_t blurRangeB = Mathematics::Constrain(uint8_t(Mathematics::Map(sineB, -1.0f, 1.0f, 1.0f, range)), uint8_t(1), uint8_t(range));
 
-        unsigned int indexR = 0, indexG = 0, indexB = 0;
+        uint16_t indexR = 0, indexG = 0, indexB = 0;
 
         bool validR = pixelGroup->GetOffsetYIndex(i, &indexR, blurRangeR);
         bool validG = pixelGroup->GetOffsetYIndex(i, &indexG, blurRangeG);

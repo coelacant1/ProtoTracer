@@ -1,7 +1,5 @@
 #pragma once
 
-#define DEBUG
-
 #include <Arduino.h>
 
 extern unsigned long _heap_start;

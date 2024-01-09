@@ -25,11 +25,12 @@
 #include "..\..\ExternalDevices\Sensors\Microphone\Utils\FFTVoiceDetection.h"
 #include "..\..\Scene\Objects\ObjectAlign.h"
 
+#include "..\UserConfiguration.h"
+
 //Default Project base for Analog microphone, APDS9960 boop sensor, and button control
 class ProtogenProject : public Project {
 private:
     Background background;
-    EasyEaseAnimator<40> eEA = EasyEaseAnimator<40>(EasyEaseInterpolation::Overshoot, 1.0f, 0.35f);
 
     Vector2D camMin = Vector2D(0.0f, 0.0f);
     Vector2D camMax = Vector2D(189.0f, 93.0f);
@@ -73,6 +74,7 @@ private:
     BlinkTrack<1> blink;
     ObjectAlign objA = ObjectAlign(camMin, camMax, Quaternion());
     ObjectAlign objARear = ObjectAlign(camMinRear, camMaxRear, Quaternion());
+    ObjectAlign objAOther = ObjectAlign(Vector2D(), Vector2D(), Quaternion());
 
     FunctionGenerator fGenMatXMove = FunctionGenerator(FunctionGenerator::Sine, -2.0f, 2.0f, 5.3f);
     FunctionGenerator fGenMatYMove = FunctionGenerator(FunctionGenerator::Sine, -2.0f, 2.0f, 6.7f);
@@ -111,21 +113,34 @@ protected:
         CRAINBOWNOISE
     };
     
+    EasyEaseAnimator<60> eEA = EasyEaseAnimator<60>(IEasyEaseAnimator::Overshoot, 1.0f, 0.35f);
     HeadsUpDisplay hud = HeadsUpDisplay(Vector2D(0.0f, 0.0f), Vector2D(192.0f, 96.0f));
 
     virtual void LinkControlParameters() = 0;
     void UpdateFace(float ratio);
 
-    void AlignObject(Object3D* obj, float rotation = 0.0f, float margin = 2.0f);
-    void AlignObjects(Object3D** objects, uint8_t objectCount, float rotation = 0.0f, float margin = 2.0f);
-    void AlignObjectNoScale(Object3D* obj, float rotation = 0.0f, float margin = 2.0f);
-    void AlignObjectsNoScale(Object3D** objects, uint8_t objectCount, float rotation = 0.0f, float margin = 2.0f);
+    void SetCameraMain(Vector2D min, Vector2D max);
+    void SetCameraRear(Vector2D min, Vector2D max);
+
+    Transform GetAlignmentTransform(Vector2D min, Vector2D max, Object3D* obj, float rotation = 0.0f, float margin = 2.0f);
+    Transform GetAlignmentTransform(Vector2D min, Vector2D max, Object3D** objects, uint8_t objectCount, float rotation = 0.0f, float margin = 2.0f);
+    void AlignObject(Vector2D min, Vector2D max, Object3D* obj, float rotation = 0.0f, float margin = 2.0f);
+    void AlignObjects(Vector2D min, Vector2D max, Object3D** obj, uint8_t objectCount, float rotation = 0.0f, float margin = 2.0f);
+    void AlignObjectNoScale(Vector2D min, Vector2D max, Object3D* obj, float rotation = 0.0f, float margin = 2.0f);
+    void AlignObjectsNoScale(Vector2D min, Vector2D max, Object3D** obj, uint8_t objectCount, float rotation = 0.0f, float margin = 2.0f);
+
+    void AlignObjectFace(Object3D* obj, float rotation = 0.0f, float margin = 2.0f);
+    void AlignObjectsFace(Object3D** objects, uint8_t objectCount, float rotation = 0.0f, float margin = 2.0f);
+    void AlignObjectNoScaleFace(Object3D* obj, float rotation = 0.0f, float margin = 2.0f);
+    void AlignObjectsNoScaleFace(Object3D** objects, uint8_t objectCount, float rotation = 0.0f, float margin = 2.0f);
     void AlignObjectRear(Object3D* obj, float rotation = 0.0f, float margin = 2.0f);
     void AlignObjectsRear(Object3D** objects, uint8_t objectCount, float rotation = 0.0f, float margin = 2.0f);
     void AlignObjectNoScaleRear(Object3D* obj, float rotation = 0.0f, float margin = 2.0f);
     void AlignObjectsNoScaleRear(Object3D** objects, uint8_t objectCount, float rotation = 0.0f, float margin = 2.0f);
 
-    void AddParameter(uint8_t index, float* parameter, uint8_t transitionFrames, EasyEaseInterpolation::InterpolationMethod interpolationMethod = EasyEaseInterpolation::InterpolationMethod::Overshoot, bool invertDirection = false);
+    float GetFaceScale();
+
+    void AddParameter(uint8_t index, float* parameter, uint8_t transitionFrames, IEasyEaseAnimator::InterpolationMethod interpolationMethod = IEasyEaseAnimator::InterpolationMethod::Overshoot, bool invertDirection = false);
     void AddViseme(Viseme::MouthShape visemeName, float* parameter);
     void AddBlinkParameter(float* blinkParameter);
     void AddParameterFrame(uint16_t ProjectIndex, float target);

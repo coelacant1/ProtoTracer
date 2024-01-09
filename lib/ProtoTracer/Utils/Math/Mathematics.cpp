@@ -1,5 +1,12 @@
 #include "Mathematics.h"
 
+const float Mathematics::EPSILON = 0.001f;
+const float Mathematics::MPI = 3.14159265358979323846f;
+const float Mathematics::MPID180 = 0.01745329251994329576f;
+const float Mathematics::M180DPI = 57.29577951308232087684f;
+const float Mathematics::FLTMAX = __FLT_MAX__;
+const float Mathematics::FLTMIN = __FLT_MIN__;
+
 String Mathematics::DoubleToCleanString(float value) {
     return String(value);
 }

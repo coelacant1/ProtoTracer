@@ -5,7 +5,7 @@
 
 class Pixel {
 private:
-    Vector2D* position;
+    const Vector2D* position;
     bool sorted = false;
     bool upExists = false;
     bool downExists = false;
@@ -22,9 +22,9 @@ public:
 
     Pixel();
 
-    Pixel(Vector2D* position);
+    Pixel(const Vector2D* position);
 
-    Vector2D GetPosition();
+    const Vector2D GetPosition();
 
     void SetUpPixel(Pixel* pixel);
 

@@ -11,14 +11,14 @@ public:
     };
 
 private:
-    TriangleGroup** objects;
+    ITriangleGroup** objects;
     int objectCount = 0;
 
     bool CheckClipAxis(Vector3D base, bool positive, Axis valueCheckAxis);
 
 public:
-    TriangleGroupDeformer(TriangleGroup* object);
-    TriangleGroupDeformer(TriangleGroup** objects, int objectCount);
+    TriangleGroupDeformer(ITriangleGroup* object);
+    TriangleGroupDeformer(ITriangleGroup** objects, int objectCount);
 
     void SinusoidalDeform(float magnitude, float timeRatio, float periodModifier, float frequencyModifier, Axis axis);
     void DropwaveDeform(float magnitude, float timeRatio, float periodModifier, float frequencyModifier, Axis axis);

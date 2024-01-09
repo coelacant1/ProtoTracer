@@ -29,9 +29,9 @@ Triangle2D::Triangle2D(const Quaternion& lookDirection, Transform* camT, Triangl
         this->hasUV = true;
     }
 
-    Vector3D p1 = camT->GetRotation().Multiply(lookDirection).UnrotateVector(*t->p1 - camT->GetPosition());
-    Vector3D p2 = camT->GetRotation().Multiply(lookDirection).UnrotateVector(*t->p2 - camT->GetPosition());
-    Vector3D p3 = camT->GetRotation().Multiply(lookDirection).UnrotateVector(*t->p3 - camT->GetPosition());
+    Vector3D p1 = camT->GetRotation().Multiply(lookDirection).UnrotateVector(*t->p1 * camT->GetScale() - camT->GetPosition());
+    Vector3D p2 = camT->GetRotation().Multiply(lookDirection).UnrotateVector(*t->p2 * camT->GetScale() - camT->GetPosition());
+    Vector3D p3 = camT->GetRotation().Multiply(lookDirection).UnrotateVector(*t->p3 * camT->GetScale() - camT->GetPosition());
 
     averageDepth = (p1.Z + p2.Z + p3.Z) / 3.0f;
 

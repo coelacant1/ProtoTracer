@@ -15,14 +15,14 @@ void Fisheye::ApplyEffect(IPixelGroup* pixelGroup) {
     RGBColor* colorBuffer = pixelGroup->GetColorBuffer();
     Vector2D mid = pixelGroup->GetCenterCoordinate();
     float halfWidth = 48.0f; // fGenSize.Update();
-    unsigned int tIndex = 0;
+    uint16_t tIndex = 0;
 
     amplitude = fGenWarp.Update() * ratio;
 
     offset.X = fGenX.Update() * ratio;
     offset.Y = fGenY.Update() * ratio;
 
-    for (unsigned int i = 0; i < pixelGroup->GetPixelCount(); i++) {
+    for (uint16_t i = 0; i < pixelGroup->GetPixelCount(); i++) {
         Vector2D pos = pixelGroup->GetCoordinate(i) + offset;
         Vector2D dif = pos - mid;
         float distance = fabsf(pos.CalculateEuclideanDistance(mid));
@@ -46,7 +46,7 @@ void Fisheye::ApplyEffect(IPixelGroup* pixelGroup) {
         }
     }
 
-    for (unsigned int i = 0; i < pixelGroup->GetPixelCount(); i++) {
+    for (uint16_t i = 0; i < pixelGroup->GetPixelCount(); i++) {
         pixelColors[i].R = colorBuffer[i].R;
         pixelColors[i].G = colorBuffer[i].G;
         pixelColors[i].B = colorBuffer[i].B;

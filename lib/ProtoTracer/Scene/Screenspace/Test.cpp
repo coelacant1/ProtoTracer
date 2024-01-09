@@ -3,21 +3,21 @@
 Test::Test() {}
 
 void Test::ApplyEffect(IPixelGroup* pixelGroup) {
-    unsigned int pixelCount = pixelGroup->GetPixelCount();
+    uint16_t pixelCount = pixelGroup->GetPixelCount();
     RGBColor* pixelColors = pixelGroup->GetColors();
     RGBColor* colorBuffer = pixelGroup->GetColorBuffer();
 
-    for (unsigned int i = 0; i < pixelCount; i++) {
+    for (uint16_t i = 0; i < pixelCount; i++) {
         colorBuffer[i].R = 0;
         colorBuffer[i].G = 0;
         colorBuffer[i].B = 0;
     }
 
-    for (unsigned int i = 0; i < pixelCount; i++) {
-        unsigned int leftIndex = i;
-        unsigned int rightIndex = i;
-        unsigned int upIndex = i;
-        unsigned int downIndex = i;
+    for (uint16_t i = 0; i < pixelCount; i++) {
+        uint16_t leftIndex = i;
+        uint16_t rightIndex = i;
+        uint16_t upIndex = i;
+        uint16_t downIndex = i;
 
         uint8_t d = fGenD.Update();
 
@@ -42,7 +42,7 @@ void Test::ApplyEffect(IPixelGroup* pixelGroup) {
         }
     }
 
-    for (unsigned int i = 0; i < pixelCount; i++) {
+    for (uint16_t i = 0; i < pixelCount; i++) {
         pixelColors[i].R = colorBuffer[i].R;
         pixelColors[i].G = colorBuffer[i].G;
         pixelColors[i].B = colorBuffer[i].B;

@@ -4,7 +4,7 @@
 
 class AnimatedMaterial : public Material{
 public:
-    virtual void Update(float ratio);
+    virtual void Update(float ratio) = 0;
 
-    virtual Material* GetMaterial();
+    virtual Material* GetMaterial() = 0;
 };

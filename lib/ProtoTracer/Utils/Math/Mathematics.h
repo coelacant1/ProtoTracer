@@ -4,12 +4,12 @@
 
 class Mathematics {
 public:
-    static constexpr float EPSILON = 0.001f;
-    static constexpr float MPI = 3.14159265358979323846f;
-    static constexpr float MPID180 = 0.01745329251994329576f;
-    static constexpr float M180DPI = 57.29577951308232087684f;
-    static constexpr float FLTMAX = __FLT_MAX__;
-    static constexpr float FLTMIN = __FLT_MIN__;
+    static const float EPSILON;
+    static const float MPI;
+    static const float MPID180;
+    static const float M180DPI;
+    static const float FLTMAX;
+    static const float FLTMIN;
 
     static String DoubleToCleanString(float value);
 

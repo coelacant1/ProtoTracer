@@ -19,9 +19,9 @@ public:
     Vector3D* t3p2;
     Vector3D* t3p3;
 
-    Vector2D* p1UV;
-    Vector2D* p2UV;
-    Vector2D* p3UV;
+    const Vector2D* p1UV;
+    const Vector2D* p2UV;
+    const Vector2D* p3UV;
 
     bool hasUV = false;
     float averageDepth = 0.0f;

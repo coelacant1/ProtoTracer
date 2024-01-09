@@ -1,22 +1,9 @@
 #pragma once
 
-#include "KeyFrame.h"
-#include "..\Utils\Math\Mathematics.h"
-#include "..\Physics\Utils\DampedSpring.h"
-#include "..\Utils\Filter\RampFilter.h"
-
-class EasyEaseInterpolation{
-public:
-    enum InterpolationMethod{
-        Cosine,
-        Bounce,
-        Linear,
-        Overshoot
-    };
-};
+#include "IEasyEaseAnimator.h"
 
 template<size_t maxParameters>
-class EasyEaseAnimator : public EasyEaseInterpolation{
+class EasyEaseAnimator : public IEasyEaseAnimator {
 private:
     InterpolationMethod interpMethod;
     DampedSpring dampedSpring[maxParameters];
@@ -34,17 +21,17 @@ private:
 public:
     EasyEaseAnimator(InterpolationMethod interpMethod, float springConstant = 1.0f, float dampingConstant = 0.5f);
 
-    void SetConstants(uint16_t dictionaryValue, float springConstant, float damping);
+    void SetConstants(uint16_t dictionaryValue, float springConstant, float damping) override;
 
-    float GetValue(uint16_t dictionaryValue);
-    float GetTarget(uint16_t dictionaryValue);
+    float GetValue(uint16_t dictionaryValue) override;
+    float GetTarget(uint16_t dictionaryValue) override;
 
-    void AddParameter(float* parameter, uint16_t dictionaryValue, uint16_t frames, float basis, float goal);
-    void AddParameterFrame(uint16_t dictionaryValue, float value);
-    void SetInterpolationMethod(uint16_t dictionaryValue, InterpolationMethod interpMethod);
-    void Reset();
-    void SetParameters();
-    void Update();
+    void AddParameter(float* parameter, uint16_t dictionaryValue, uint16_t frames, float basis, float goal) override;
+    void AddParameterFrame(uint16_t dictionaryValue, float value) override;
+    void SetInterpolationMethod(uint16_t dictionaryValue, InterpolationMethod interpMethod) override;
+    void Reset() override;
+    void SetParameters() override;
+    void Update() override;
 };
 
 #include "EasyEaseAnimator.tpp"

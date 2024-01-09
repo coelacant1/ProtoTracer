@@ -4,11 +4,11 @@ Pixel::Pixel() {
     // Default constructor
 }
 
-Pixel::Pixel(Vector2D* position) {
+Pixel::Pixel(const Vector2D* position) {
     this->position = position;
 }
 
-Vector2D Pixel::GetPosition() {
+const Vector2D Pixel::GetPosition() {
     return *position;
 }
 

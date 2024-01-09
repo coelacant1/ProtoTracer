@@ -9,26 +9,40 @@ PixelGroup<pixelCount>::PixelGroup(Vector2D size, Vector2D position, uint16_t ro
 
     isRectangular = true;
 
-    bounds.UpdateBounds(position - (size / 2.0f));
-    bounds.UpdateBounds(position + (size / 2.0f));
+    bounds.UpdateBounds(position);
+    bounds.UpdateBounds(position + size);
 
-    for(unsigned int i = 0; i < pixelCount; i++){
+    for(uint16_t i = 0; i < pixelCount; i++){
         pixelColors[i] = RGBColor();
         pixelBuffer[i] = RGBColor();
-    }
-}
 
-template<size_t pixelCount>
-PixelGroup<pixelCount>::PixelGroup(Vector2D* pixelLocations, Direction direction){
-    this->direction = direction;
-    pixelPositions = pixelLocations;
-
-    for(unsigned int i = 0; i < pixelCount; i++){
-        bounds.UpdateBounds(pixelLocations[i]);
+        up[i] = 65535;
+        down[i] = 65535;
+        left[i] = 65535;
+        right[i] = 65535;
     }
 
     GridSort();
-    //ListPixelNeighbors();
+}
+
+template<size_t pixelCount>
+PixelGroup<pixelCount>::PixelGroup(const Vector2D* pixelLocations, Direction direction){
+    this->direction = direction;
+    pixelPositions = pixelLocations;
+
+    for(uint16_t i = 0; i < pixelCount; i++){
+        pixelColors[i] = RGBColor();
+        pixelBuffer[i] = RGBColor();
+
+        bounds.UpdateBounds(pixelLocations[i]);
+
+        up[i] = 65535;
+        down[i] = 65535;
+        left[i] = 65535;
+        right[i] = 65535;
+    }
+
+    GridSort();
 }
 
 template<size_t pixelCount>
@@ -45,19 +59,17 @@ Vector2D PixelGroup<pixelCount>::GetSize(){
 }
 
 template<size_t pixelCount>
-Vector2D PixelGroup<pixelCount>::GetCoordinate(unsigned int count){
+Vector2D PixelGroup<pixelCount>::GetCoordinate(uint16_t count){
     count = Mathematics::Constrain<int>(count, 0, pixelCount);
 
     if (isRectangular){
         float row = count % rowCount;
         float col = (count - row) / rowCount;
 
-        Vector2D location;
+        tempLocation.X = Mathematics::Map(row, 0.0f, float(rowCount), position.X, position.X + size.X);
+        tempLocation.Y = Mathematics::Map(col, 0.0f, float(colCount), position.Y, position.Y + size.Y);
 
-        location.X = Mathematics::Map(row, 0.0f, float(rowCount), position.X - size.X / 2.0f, position.X + size.X / 2.0f);
-        location.Y = Mathematics::Map(col, 0.0f, float(colCount), position.Y - size.Y / 2.0f, position.Y + size.Y / 2.0f);
-
-        return location;
+        return tempLocation;
     }
     else{
         if(direction == ZEROTOMAX){
@@ -71,10 +83,10 @@ Vector2D PixelGroup<pixelCount>::GetCoordinate(unsigned int count){
 
 template<size_t pixelCount>
 int PixelGroup<pixelCount>::GetPixelIndex(Vector2D location){
-    float row = Mathematics::Map(location.X, position.X - size.X / 2.0f, position.X + size.X / 2.0f, 0.0f, float(rowCount));
-    float col = Mathematics::Map(location.Y, position.Y - size.Y / 2.0f, position.Y + size.Y / 2.0f, 0.0f, float(colCount));
+    float row = Mathematics::Map(location.X, position.X, position.X + size.X, 0.0f, float(rowCount));
+    float col = Mathematics::Map(location.Y, position.Y, position.Y + size.Y, 0.0f, float(colCount));
 
-    unsigned int count = row + col * rowCount;
+    uint16_t count = row + col * rowCount;
 
     if (count < pixelCount && count > 0 && row > 0 && row < rowCount && col > 0 && col < colCount){
         return count;
@@ -85,7 +97,7 @@ int PixelGroup<pixelCount>::GetPixelIndex(Vector2D location){
 }
 
 template<size_t pixelCount>
-RGBColor* PixelGroup<pixelCount>::GetColor(unsigned int count){
+RGBColor* PixelGroup<pixelCount>::GetColor(uint16_t count){
     return &pixelColors[count];
 }
 
@@ -100,7 +112,7 @@ RGBColor* PixelGroup<pixelCount>::GetColorBuffer(){
 }
 
 template<size_t pixelCount>
-unsigned int PixelGroup<pixelCount>::GetPixelCount(){
+uint16_t PixelGroup<pixelCount>::GetPixelCount(){
     return pixelCount;
 }
 
@@ -115,84 +127,40 @@ bool PixelGroup<pixelCount>::ContainsVector2D(Vector2D v){
 }
 
 template<size_t pixelCount>
-bool PixelGroup<pixelCount>::GetUpIndex(unsigned int count, unsigned int* upIndex){
-    if (isRectangular){
-        unsigned int index = count + rowCount;
+bool PixelGroup<pixelCount>::GetUpIndex(uint16_t count, uint16_t* upIndex){
+    *upIndex = up[count];
 
-        if (index < pixelCount){
-            *upIndex = index;
-            return true;
-        }
-        else{ return false; }
-    }
-    else{
-        *upIndex = up[count];
-
-        return upExists[count];
-    }
+    return up[count] < 65535;
 }
 
 template<size_t pixelCount>
-bool PixelGroup<pixelCount>::GetDownIndex(unsigned int count, unsigned int* downIndex){
-    if (isRectangular){
-        unsigned int index = count - rowCount;
+bool PixelGroup<pixelCount>::GetDownIndex(uint16_t count, uint16_t* downIndex){
+    *downIndex = down[count];
 
-        if (index > 0){
-            *downIndex = index;
-            return true;
-        }
-        else{ return false; }
-    }
-    else{
-        *downIndex = down[count];
-
-        return downExists[count];
-    }
+    return down[count] < 65535;
 }
 
 template<size_t pixelCount>
-bool PixelGroup<pixelCount>::GetLeftIndex(unsigned int count, unsigned int* leftIndex){
-    if (isRectangular){
-        unsigned int index = count - 1;
+bool PixelGroup<pixelCount>::GetLeftIndex(uint16_t count, uint16_t* leftIndex){
+    *leftIndex = left[count];
 
-        if (!count % rowCount == 0 && count > 0){
-            *leftIndex = index;
-            return true;
-        }
-        else{ return false; }
-    }
-    else{
-        *leftIndex = left[count];
-
-        return leftExists[count];
-    }
+    return left[count] < 65535;
 }
 
 template<size_t pixelCount>
-bool PixelGroup<pixelCount>::GetRightIndex(unsigned int count, unsigned int* rightIndex){
-    if (isRectangular){
-        unsigned int index = count + 1;
+bool PixelGroup<pixelCount>::GetRightIndex(uint16_t count, uint16_t* rightIndex){
+    *rightIndex = right[count];
 
-        if (!count % rowCount + 1 == 0 && count < pixelCount){
-            *rightIndex = index;
-            return true;
-        }
-        else{ return false; }
-    }
-    else{
-        *rightIndex = right[count];
-
-        return rightExists[count];
-    }
+    return right[count] < 65535;
 }
 
 template<size_t pixelCount>
-bool PixelGroup<pixelCount>::GetAlternateXIndex(unsigned int count, unsigned int* index){
-    unsigned int tempIndex = count;
+bool PixelGroup<pixelCount>::GetAlternateXIndex(uint16_t count, uint16_t* index){
+    uint16_t tempIndex = count;
     bool isEven = count % 2;
     bool valid = true;
 
-    for(unsigned int i = 0; i < count / 2; i++){
+    for(uint16_t i = 0; i < count / 2; i++){
         if (isEven){
             valid = GetRightIndex(tempIndex, &tempIndex);
         }
@@ -209,12 +177,12 @@ bool PixelGroup<pixelCount>::GetAlternateXIndex(unsigned int count, unsigned int
 }
 
 template<size_t pixelCount>
-bool PixelGroup<pixelCount>::GetAlternateYIndex(unsigned int count, unsigned int* index){
-    unsigned int tempIndex = count;
+bool PixelGroup<pixelCount>::GetAlternateYIndex(uint16_t count, uint16_t* index){
+    uint16_t tempIndex = count;
     bool isEven = count % 2;
     bool valid = true;
 
-    for(unsigned int i = 0; i < count / 2; i++){
+    for(uint16_t i = 0; i < count / 2; i++){
         if (isEven){
             valid = GetUpIndex(tempIndex, &tempIndex);
         }
@@ -231,8 +199,8 @@ bool PixelGroup<pixelCount>::GetAlternateYIndex(unsigned int count, unsigned int
 }
 
 template<size_t pixelCount>
-bool PixelGroup<pixelCount>::GetOffsetXIndex(unsigned int count, unsigned int* index, int x1){
-    unsigned int tempIndex = count;
+bool PixelGroup<pixelCount>::GetOffsetXIndex(uint16_t count, uint16_t* index, int x1){
+    uint16_t tempIndex = count;
     bool valid = true;
 
     for(int i = 0; i < x1; i++){
@@ -249,8 +217,8 @@ bool PixelGroup<pixelCount>::GetOffsetXIndex(unsigned int count, unsigned int* i
 }
 
 template<size_t pixelCount>
-bool PixelGroup<pixelCount>::GetOffsetYIndex(unsigned int count, unsigned int* index, int y1){
-    unsigned int tempIndex = count;
+bool PixelGroup<pixelCount>::GetOffsetYIndex(uint16_t count, uint16_t* index, int y1){
+    uint16_t tempIndex = count;
     bool valid = true;
     
     for(int i = 0; i < y1; i++){
@@ -267,11 +235,11 @@ bool PixelGroup<pixelCount>::GetOffsetYIndex(unsigned int count, unsigned int* i
 }
 
 template<size_t pixelCount>
-bool PixelGroup<pixelCount>::GetOffsetXYIndex(unsigned int count, unsigned int* index, int x1, int y1){
-    unsigned int tempIndex = count;
+bool PixelGroup<pixelCount>::GetOffsetXYIndex(uint16_t count, uint16_t* index, int x1, int y1){
+    uint16_t tempIndex = count;
     bool valid = true;
 
-    for(int i = 0; i < fabs(x1); i++){
+    for(int i = 0; i < abs(x1); i++){
         if (x1 > 0) valid = GetRightIndex(tempIndex, &tempIndex);
         else if (x1 < 0) valid = GetLeftIndex(tempIndex, &tempIndex);
         else break;
@@ -279,7 +247,7 @@ bool PixelGroup<pixelCount>::GetOffsetXYIndex(unsigned int count, unsigned int* 
         if (!valid) break;
     }
     
-    for(int i = 0; i < fabs(y1); i++){
+    for(int i = 0; i < abs(y1); i++){
         if (y1 > 0) valid = GetUpIndex(tempIndex, &tempIndex);
         else if (y1 < 0) valid = GetDownIndex(tempIndex, &tempIndex);
         else break;
@@ -293,11 +261,11 @@ bool PixelGroup<pixelCount>::GetOffsetXYIndex(unsigned int count, unsigned int* 
 }
 
 template<size_t pixelCount>
-bool PixelGroup<pixelCount>::GetRadialIndex(unsigned int count, unsigned int* index, int pixels, float angle){//walks in the direction of the angle to a target pixel to grab an index
+bool PixelGroup<pixelCount>::GetRadialIndex(uint16_t count, uint16_t* index, int pixels, float angle){//walks in the direction of the angle to a target pixel to grab an index
     int x1 = int(float(pixels) * cosf(angle * Mathematics::MPID180));
     int y1 = int(float(pixels) * sinf(angle * Mathematics::MPID180));
 
-    unsigned int tempIndex = count;
+    uint16_t tempIndex = count;
     bool valid = true;
 
     int previousX = 0;
@@ -339,18 +307,24 @@ template<size_t pixelCount>
 void PixelGroup<pixelCount>::GridSort(){
     if(!isRectangular){
         // Loop through all pixels
-        for (unsigned int i = 0; i < pixelCount; i++) {
-            Vector2D& currentPos = direction == ZEROTOMAX ? pixelPositions[i] : pixelPositions[pixelCount - i - 1];
+        for (uint16_t i = 0; i < pixelCount; i++) {
+            Vector2D currentPos;
+            
+            if(!isRectangular) currentPos = direction == ZEROTOMAX ? pixelPositions[i] : pixelPositions[pixelCount - i - 1];
+            else currentPos = direction == ZEROTOMAX ? GetCoordinate(i) : GetCoordinate(pixelCount - i - 1);
 
             // Initialize the minimum distances and indices to the first pixel
             float minUp = Mathematics::FLTMAX, minDown = Mathematics::FLTMAX, minLeft = Mathematics::FLTMAX, minRight = Mathematics::FLTMAX;
             int minUpIndex = -1, minDownIndex = -1, minLeftIndex = -1, minRightIndex = -1;
 
             // Loop through all other pixels
-            for (unsigned int j = 0; j < pixelCount; j++) {
+            for (uint16_t j = 0; j < pixelCount; j++) {
                 if (i == j) { continue; } // Skip the current pixel
 
-                Vector2D& neighborPos = direction == ZEROTOMAX ? pixelPositions[j] : pixelPositions[pixelCount - j - 1];
+                Vector2D neighborPos;
+                
+                if(!isRectangular) neighborPos = direction == ZEROTOMAX ? pixelPositions[j] : pixelPositions[pixelCount - j - 1];
+                else currentPos = direction == ZEROTOMAX ? GetCoordinate(j) : GetCoordinate(pixelCount - j - 1);
 
                 // Calculate the distances between the current pixel and the other pixel
                 float dist = currentPos.CalculateEuclideanDistance(neighborPos);
@@ -381,41 +355,20 @@ void PixelGroup<pixelCount>::GridSort(){
             }
 
             // Set the indices of the neighboring pixels
-            if (minUpIndex != -1) {
-                up[i] = minUpIndex;
-                upExists[i] = true;
-            }
+            if (minUpIndex != -1) up[i] = minUpIndex;
+            if (minDownIndex != -1) down[i] = minDownIndex;
 
-            if (minDownIndex != -1) {
-                down[i] = minDownIndex;
-                downExists[i] = true;
-            }
-
-            if (minLeftIndex != -1) {
-                left[i] = minLeftIndex;
-                leftExists[i] = true;
-            }
-
-            if (minRightIndex != -1) {
-                right[i] = minRightIndex;
-                rightExists[i] = true;
-            }
+            if (minLeftIndex != -1) left[i] = minLeftIndex;
+            if (minRightIndex != -1) right[i] = minRightIndex;
         }
     }
-    //else do nothing
-}
-
-template<size_t pixelCount>
-void PixelGroup<pixelCount>::ListPixelNeighbors(){
-    for(unsigned int i = 0; i < pixelCount; i++){
-        //Serial.print(i); Serial.print('\t');
-        //Serial.print(up[i]); Serial.print('\t');
-        //Serial.print(down[i]); Serial.print('\t');
-        //Serial.print(left[i]); Serial.print('\t');
-        //Serial.print(right[i]); Serial.print('\t');
-        //Serial.print(upExists[i]); Serial.print('\t');
-        //Serial.print(downExists[i]); Serial.print('\t');
-        //Serial.print(leftExists[i]); Serial.print('\t');
-        //Serial.print(rightExists[i]); Serial.print('\n');
+    else {//optimized algorithm for rectangular matrices
+        for (int i = 0; i < int(pixelCount); i++) {
+            if (i + int(rowCount) < int(pixelCount) - 1) up[i] = uint16_t(i) + rowCount;//up
+            if (i - int(rowCount) > 1) down[i] = uint16_t(i) - rowCount;//down
+            
+            if (!(i % rowCount == 0) && i > 1) left[i] = uint16_t(i) - 1;//left
+            if (!(i % rowCount + 1 == 0) && i < int(pixelCount) - 1) right[i] = uint16_t(i) + 1;//right
+        }
     }
 }

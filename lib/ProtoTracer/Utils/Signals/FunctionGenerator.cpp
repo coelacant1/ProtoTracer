@@ -28,6 +28,8 @@ float FunctionGenerator::Update() {
             return SineWave(ratio);
         case Sawtooth:
             return SawtoothWave(ratio);
+        case Gravity:
+            return GravityFunction(ratio);
         default:
             return 0.0f;
     }
@@ -50,4 +52,8 @@ float FunctionGenerator::SineWave(float ratio) {
 
 float FunctionGenerator::SawtoothWave(float ratio) {
     return Mathematics::Map(ratio, 0.0f, 1.0f, minimum, maximum);
+}
+
+float FunctionGenerator::GravityFunction(float ratio) {//drop for first half, then stay at the bottom for the second half
+    return (ratio * 2.0f) < 1.0f ? ratio * ratio * 4.0f : 1.0f;
 }

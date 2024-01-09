@@ -215,14 +215,11 @@ void Rasterizer::Rasterize(Scene* scene, CameraBase* camera) {
 
         tree.Rebuild();
 
-        Vector2D pixelRay;
-        bool cameraScale = !(Mathematics::IsClose(camera->GetTransform()->GetScale().X, 1.0f, 0.01f) && Mathematics::IsClose(camera->GetTransform()->GetScale().Y, 1.0f, 0.01f) && Mathematics::IsClose(camera->GetTransform()->GetScale().Z, 1.0f, 0.01f));
-
+        Vector2D scale, pixelRay;
         for (uint16_t i = 0; i < camera->GetPixelGroup()->GetPixelCount(); ++i) {
-            if (cameraScale)
-                pixelRay = Vector2D(lookDirection.RotateVectorUnit(camera->GetPixelGroup()->GetCoordinate(i) * camera->GetTransform()->GetScale(), normLookDir));
-            else
-                pixelRay = Vector2D(lookDirection.RotateVectorUnit(camera->GetPixelGroup()->GetCoordinate(i), normLookDir));
+            Vector2D scaledCoord = camera->GetPixelGroup()->GetCoordinate(i);// * camera->GetTransform()->GetScale();
+
+            pixelRay = Vector2D(lookDirection.RotateVectorUnit(scaledCoord, normLookDir));
             
             Node* leafNode = tree.Intersect(pixelRay);
 

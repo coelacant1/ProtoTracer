@@ -6,13 +6,13 @@ void VerticalBlur::ApplyEffect(IPixelGroup* pixelGroup) {
     RGBColor* pixelColors = pixelGroup->GetColors();
     RGBColor* colorBuffer = pixelGroup->GetColorBuffer();
 
-    for (unsigned int i = 0; i < pixelGroup->GetPixelCount(); i++) {
-        unsigned int indexUp = i;
-        unsigned int indexDown = i;
-        unsigned int tIndexUp = 0;
-        unsigned int tIndexDown = 0;
-        bool validL = true;
-        bool validR = true;
+    for (uint16_t i = 0; i < pixelGroup->GetPixelCount(); i++) {
+        uint16_t indexUp = i;
+        uint16_t indexDown = i;
+        uint16_t tIndexUp = 0;
+        uint16_t tIndexDown = 0;
+        bool validL = false;
+        bool validR = false;
 
         uint16_t blurRange = uint16_t(Mathematics::Map(ratio, 0.0f, 1.0f, 1.0f, float(pixels / 2)));
 
@@ -41,7 +41,7 @@ void VerticalBlur::ApplyEffect(IPixelGroup* pixelGroup) {
         colorBuffer[i].G = Mathematics::Constrain(B / (blurRange * 2), 0, 255);
     }
 
-    for (unsigned int i = 0; i < pixelGroup->GetPixelCount(); i++) {
+    for (uint16_t i = 0; i < pixelGroup->GetPixelCount(); i++) {
         pixelColors[i].R = colorBuffer[i].R;
         pixelColors[i].G = colorBuffer[i].G;
         pixelColors[i].B = colorBuffer[i].B;
