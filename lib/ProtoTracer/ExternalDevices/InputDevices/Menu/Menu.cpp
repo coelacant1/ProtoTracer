@@ -84,8 +84,8 @@ void Menu::SetDefaultEntries() {
     MenuHandler<menuCount>::SetDefaultValue(Microphone, 1);
     MenuHandler<menuCount>::SetDefaultValue(MicLevel, 5);
     MenuHandler<menuCount>::SetDefaultValue(BoopSensor, 1);
-    MenuHandler<menuCount>::SetDefaultValue(SpectrumMirror, 0);
-    MenuHandler<menuCount>::SetDefaultValue(FaceSize, 0);
+    MenuHandler<menuCount>::SetDefaultValue(SpectrumMirror, 1);
+    MenuHandler<menuCount>::SetDefaultValue(FaceSize, 7);
     MenuHandler<menuCount>::SetDefaultValue(Color, 0);
     MenuHandler<menuCount>::SetDefaultValue(HueF, 0);
     MenuHandler<menuCount>::SetDefaultValue(HueB, 0);
