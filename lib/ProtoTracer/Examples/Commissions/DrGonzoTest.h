@@ -1,29 +1,35 @@
 #pragma once
 
 #include "..\Templates\ProtogenProjectTemplate.h"
+#include "..\..\Assets\Models\OBJ\DeltaDisplayBackground.h"
 #include "..\..\Assets\Models\FBX\NukudeFlat.h"
+#include "..\..\Assets\Models\FBX\Commissions\DrGonzoFace2.h"
 
-#include "..\..\Camera\CameraManager\Implementations\WS35SplitCameras.h"
-#include "..\..\Controller\WS35Controller.h"
+#include "..\..\Camera\CameraManager\Implementations\HUB75DeltaCameras.h"
+#include "..\..\Controller\HUB75Controller.h"
 
-class ProtogenWS35Project : public ProtogenProject {
+//#define NEOTRELLISMENU
+
+class DrGonzoTest : public ProtogenProject {
 private:
-    WS35SplitCameraManager cameras;
-    WS35Controller controller = WS35Controller(&cameras, 50);
+    HUB75DeltaCameraManager cameras;
+    HUB75Controller controller = HUB75Controller(&cameras, 50, 50);
     NukudeFace pM;
+    DrGonzoFace pM2;
+    DeltaDisplayBackground deltaDisplayBackground;
     
 	const __FlashStringHelper* faceArray[10] = {F("DEFAULT"), F("ANGRY"), F("DOUBT"), F("FROWN"), F("LOOKUP"), F("SAD"), F("AUDIO1"), F("AUDIO2"), F("AUDIO3")};
 
-    void LinkControlParameters() override {
+    void LinkControlParameters() override {//Called from parent
         AddParameter(NukudeFace::Anger, pM.GetMorphWeightReference(NukudeFace::Anger), 15);
-        AddParameter(NukudeFace::Sadness, pM.GetMorphWeightReference(NukudeFace::Sadness), 15, IEasyEaseAnimator::InterpolationMethod::Cosine);
+        AddParameter(NukudeFace::Sadness, pM.GetMorphWeightReference(NukudeFace::Sadness), 15, EasyEaseInterpolation::InterpolationMethod::Cosine);
         AddParameter(NukudeFace::Surprised, pM.GetMorphWeightReference(NukudeFace::Surprised), 15);
         AddParameter(NukudeFace::Doubt, pM.GetMorphWeightReference(NukudeFace::Doubt), 15);
         AddParameter(NukudeFace::Frown, pM.GetMorphWeightReference(NukudeFace::Frown), 15);
         AddParameter(NukudeFace::LookUp, pM.GetMorphWeightReference(NukudeFace::LookUp), 15);
         AddParameter(NukudeFace::LookDown, pM.GetMorphWeightReference(NukudeFace::LookDown), 15);
 
-        AddParameter(NukudeFace::HideBlush, pM.GetMorphWeightReference(NukudeFace::HideBlush), 15, IEasyEaseAnimator::InterpolationMethod::Cosine, true);
+        AddParameter(NukudeFace::HideBlush, pM.GetMorphWeightReference(NukudeFace::HideBlush), 15, EasyEaseInterpolation::InterpolationMethod::Cosine, true);
 
         AddViseme(Viseme::MouthShape::EE, pM.GetMorphWeightReference(NukudeFace::vrc_v_ee));
         AddViseme(Viseme::MouthShape::AH, pM.GetMorphWeightReference(NukudeFace::vrc_v_aa));
@@ -72,21 +78,28 @@ private:
     }
 
 public:
-    ProtogenWS35Project() : ProtogenProject(&cameras, &controller, 1, Vector2D(), Vector2D(192.0f, 105.0f), 22, 23, 9){
+    DrGonzoTest() : ProtogenProject(&cameras, &controller, 2, Vector2D(), Vector2D(192.0f, 94.0f), 22, 23, 9){
         scene.AddObject(pM.GetObject());
+        scene.AddObject(deltaDisplayBackground.GetObject());
 
         pM.GetObject()->SetMaterial(GetFaceMaterial());
-
-        LinkControlParameters();
+        deltaDisplayBackground.GetObject()->SetMaterial(GetFaceMaterial());
 
         hud.SetFaceArray(faceArray);
+
+        LinkControlParameters();
+        
+        SetWiggleSpeed(5.0f);
+        SetMenuWiggleSpeed(0.0f, 0.0f, 0.0f);
+        SetMenuOffset(Vector2D(17.5f, -3.0f));
+        SetMenuSize(Vector2D(192, 56));
     }
 
     void Update(float ratio) override {
         pM.Reset();
 
         uint8_t mode = Menu::GetFaceState();//change by button press
-        
+
         controller.SetBrightness(Menu::GetBrightness());
         controller.SetAccentBrightness(Menu::GetAccentBrightness());
 
@@ -108,23 +121,15 @@ public:
             }
             else {
                 SpectrumAnalyzerFace();
-            } 
+            }
         }
 
         UpdateFace(ratio);
 
-        pM.SetMorphWeight(NukudeFace::BiggerNose, 1.0f);
-        pM.SetMorphWeight(NukudeFace::MoveEye, 1.0f);
-
         pM.Update();
 
-        AlignObjectFace(pM.GetObject(), -7.5f);
+        AlignObject(pM.GetObject(), -7.5f);
 
-        SetWiggleSpeed(5.0f);
-        SetMenuWiggleSpeed(0.0f, 0.0f, 0.0f);
-        SetMenuOffset(Vector2D(2.5f, -3.0f));
-        SetMenuSize(Vector2D(240, 64));
-        
         pM.GetObject()->GetTransform()->SetPosition(GetWiggleOffset());
         pM.GetObject()->UpdateTransform();
     }

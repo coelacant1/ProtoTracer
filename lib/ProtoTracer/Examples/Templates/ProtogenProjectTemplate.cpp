@@ -285,6 +285,10 @@ void ProtogenProject::AddParameterFrame(uint16_t ProjectIndex, float target){
     eEA.AddParameterFrame(ProjectIndex, target);
 }
 
+void ProtogenProject::AddMaterial(Material::Method method, Material* material, uint16_t frames, float minOpacity, float maxOpacity){
+    materialAnimator.AddMaterial(method, material, frames, minOpacity, maxOpacity);
+}
+
 void ProtogenProject::AddMaterialFrame(Color color){
     switch(color){
         case CYELLOW:
@@ -317,6 +321,18 @@ void ProtogenProject::AddMaterialFrame(Color color){
         default:
             break;
     }
+}
+
+void ProtogenProject::AddMaterialFrame(Material& material, float opacity){
+    materialAnimator.AddMaterialFrame(material, opacity);
+}
+
+void ProtogenProject::AddBackgroundMaterial(Material::Method method, Material* material, uint16_t frames, float minOpacity, float maxOpacity){
+    backgroundMaterial.AddMaterial(method, material, frames, minOpacity, maxOpacity);
+}
+
+void ProtogenProject::AddBackgroundMaterialFrame(Material& material, float opacity){
+    backgroundMaterial.AddMaterialFrame(material, opacity);
 }
 
 void ProtogenProject::SpectrumAnalyzerFace(){

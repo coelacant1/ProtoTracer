@@ -63,8 +63,8 @@ private:
     RGBColor gradientSpectrum[2] = {RGBColor(255, 0, 0), RGBColor(255, 0, 0)};
     GradientMaterial<2> gradientMat = GradientMaterial<2>(gradientSpectrum, 350.0f, false);
     
-    MaterialAnimator<11> materialAnimator;
-    MaterialAnimator<4> backgroundMaterial;
+    MaterialAnimator<15> materialAnimator;
+    MaterialAnimator<10> backgroundMaterial;
     
     SpectrumAnalyzer sA = SpectrumAnalyzer(Vector2D(200, 100), Vector2D(100, 50), true, true); 
     AudioReactiveGradient aRG = AudioReactiveGradient(Vector2D(160, 160), Vector2D(0, 0), true, true); 
@@ -144,7 +144,11 @@ protected:
     void AddViseme(Viseme::MouthShape visemeName, float* parameter);
     void AddBlinkParameter(float* blinkParameter);
     void AddParameterFrame(uint16_t ProjectIndex, float target);
+    void AddMaterial(Material::Method method, Material* material, uint16_t frames = 20, float minOpacity = 0.0f, float maxOpacity = 1.0f);
     void AddMaterialFrame(Color color);
+    void AddMaterialFrame(Material& material, float opacity = 1.0f);
+    void AddBackgroundMaterial(Material::Method method, Material* material, uint16_t frames = 20, float minOpacity = 0.0f, float maxOpacity = 1.0f);
+    void AddBackgroundMaterialFrame(Material& material, float opacity = 1.0f);
 
     void SpectrumAnalyzerFace();
     void AudioReactiveGradientFace();
