@@ -4,6 +4,8 @@
 PhaseOffsetX::PhaseOffsetX(uint8_t pixels) : pixels(pixels) {}
 
 void PhaseOffsetX::ApplyEffect(IPixelGroup* pixelGroup) {
+    if (ratio <= 0.001f) return;
+
     RGBColor* pixelColors = pixelGroup->GetColors();
     RGBColor* colorBuffer = pixelGroup->GetColorBuffer();
 
