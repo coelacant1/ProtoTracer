@@ -4,12 +4,12 @@
 #include "Examples\Protogen\ProtogenHardwareTest.h"
 #endif
 
-#include "Examples\Commissions\UnicornZhenjaAnimation.h"
-//#include "Examples\Protogen\ProtogenHUB75Project.h"
+//#include "Examples\Commissions\UnicornZhenjaAnimation.h"
+#include "Examples\Protogen\ProtogenHUB75Project.h"
 //#include "Examples\Protogen\ProtogenWS35Project.h"
 //#include "Examples\VerifyEngine.h"
 
-UnicornZhenjaAnimation project;
+ProtogenHUB75Project project;
 
 void setup() {
     Serial.begin(115200);
