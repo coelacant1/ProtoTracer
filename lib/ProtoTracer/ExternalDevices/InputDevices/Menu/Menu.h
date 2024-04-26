@@ -22,6 +22,8 @@
 
 #ifdef NEOTRELLISMENU
 #include "..\NeoTrellisMenuHandler.h"
+#elif defined MORSEBUTTON
+#include "..\SingleButtonMorseHandler.h"
 #else
 #include "..\SingleButtonMenuHandler.h"
 #endif
