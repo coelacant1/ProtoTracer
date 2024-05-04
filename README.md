@@ -10,6 +10,7 @@ As a quick way to showcase the capabilities of this software, here is a demo sho
 * 32-bit FPU
 * 200MHz+ processor
 * At least 80KB dynamic memory
+* Recommended Microcontrollers: Teensy 4.0/4.1
 
 This codebase has been tested on an Arduino Mega (smaller .OBJ file with a 89 pixel matrix) and on a Teensy 4.0 (2000 triangle scene with a 2,804 pixel matrix).
 
@@ -30,7 +31,12 @@ The following links give a detailed description on how to import files, set up c
 Any recommendations on additional information to add can be requested in the discussions tab. If you have additional questions, you can @ me in my [Discord server](https://discord.gg/YwaWnhJ) or direct message me on [Twitter](https://twitter.com/Coelacant1).
 
 # Contributing:
-Pull requests are very welcome. Any issues found should be reported first to open a discussion. Any recommendations can be requested in the discussions tab.
+Pull requests are very welcome. Any issues found should be reported first to open a discussion. Any recommendations can be requested in the discussions tab. For contributing, please follow the following steps:
+
+- Fork the repository on GitHub.
+- Commit your changes (git commit -m 'Add some YourFeature').
+- Push to the branch (git push origin main).
+- Submit a pull request through the GitHub website.
 
 If you would like to help me keep this project going, any support on Patreon would be greatly appreciated: https://www.patreon.com/coelacant1
 
