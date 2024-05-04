@@ -99,26 +99,11 @@ public:
         controller.SetBrightness(Menu::GetBrightness());
         controller.SetAccentBrightness(Menu::GetAccentBrightness());
 
-        if (IsBooped() && mode != 6){
-            Surprised();
-        }
-        else{
-            if (mode == 0) Default();
-            else if (mode == 1) Angry();
-            else if (mode == 2) Doubt();
-            else if (mode == 3) Frown();
-            else if (mode == 4) LookUp();
-            else if (mode == 5) Sad();
-            else if (mode == 6) {
-                AudioReactiveGradientFace();
-            }
-            else if (mode == 7){
-                OscilloscopeFace();
-            }
-            else {
-                SpectrumAnalyzerFace();
-            }
-        }
+#ifdef MORSEBUTTON
+        SelectFaceFromMorse(mode);
+#else
+        SelectFace(mode);
+#endif
 
         UpdateFace(ratio);
 
@@ -128,5 +113,45 @@ public:
 
         pM.GetObject()->GetTransform()->SetPosition(GetWiggleOffset());
         pM.GetObject()->UpdateTransform();
+    }
+
+    void SelectFace(uint8_t code) {
+        if (IsBooped() && code != 6) {
+            Surprised();
+            return;
+        }
+
+        switch(code) {
+            case 0: Default();  break;
+            case 1: Angry();    break;
+            case 2: Doubt();    break;
+            case 3: Frown();    break;
+            case 4: LookUp();   break;
+            case 5: Sad();      break;
+            case 6: AudioReactiveGradientFace();    break;
+            case 7: OscilloscopeFace();             break;
+            default: SpectrumAnalyzerFace();        break;
+        }
+    }
+
+    void SelectFaceFromMorse(uint8_t code) {
+        if (IsBooped() && code != 24) {
+            Surprised();
+            return;
+        }
+
+        switch(code) {
+            case 1: Angry();        break; // [A]ngry
+            case 2: Surprised();    break; // [B]lush
+            case 4: Doubt();        break; // [D]oubt
+            case 6: Frown();        break; // [F]rown
+            case 19: Sad();         break; // [S]ad
+            case 21: LookUp();      break; // Look [U]p
+            case 22: LookDown();    break; // Look [V] Down
+            case 24: AudioReactiveGradientFace();   break; // [X] X.X
+            case 25: OscilloscopeFace();            break; // [Y] Oscilloscope
+            case 26: SpectrumAnalyzerFace();        break; // [Z] Spectrum
+            default: Default();     break; // [H] Happy
+        }
     }
 };

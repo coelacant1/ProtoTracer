@@ -61,7 +61,11 @@ Overflow Menu::overflow = Overflow(20);
 
 void Menu::SetMaxEntries() {
     // Define your max entries here
+#ifdef MORSEBUTTON
+    MenuHandler<menuCount>::SetMenuMax(Faces, 27); // 1 unset + 26 letters
+#else
     MenuHandler<menuCount>::SetMenuMax(Faces, faceCount);
+#endif
     MenuHandler<menuCount>::SetMenuMax(Bright, 10);
     MenuHandler<menuCount>::SetMenuMax(AccentBright, 10);
     MenuHandler<menuCount>::SetMenuMax(Microphone, 2);
@@ -194,7 +198,7 @@ void Menu::SetCurrentMenu(uint8_t currentMenu) {
 }
 
 void Menu::Update(float ratio) {
-#ifdef NEOTRELLISMENU
+#if defined NEOTRELLISMENU || defined MORSEBUTTON
     MenuHandler<menuCount>::Update();
 #endif
 
