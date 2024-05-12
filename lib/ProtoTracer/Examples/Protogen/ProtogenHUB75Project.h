@@ -10,7 +10,7 @@
 class ProtogenHUB75Project : public ProtogenProject {
 private:
     HUB75DeltaCameraManager cameras;
-    HUB75Controller controller = HUB75Controller(&cameras, 50, 50);
+    HUB75Controller controller = HUB75Controller(&cameras, 70, 70);
     NukudeFace pM;
     DeltaDisplayBackground deltaDisplayBackground;
     
@@ -73,6 +73,36 @@ private:
         AddParameterFrame(NukudeFace::LookDown, 1.0f);
     }
 
+    // face color change functions
+
+    void Green(){
+        AddMaterialFrame(Color::CGREEN);
+    }
+    void Blue(){
+        AddMaterialFrame(Color::CBLUE);
+    }
+    void Red(){
+        AddMaterialFrame(Color::CRED);
+    }
+    void Purple(){
+        AddMaterialFrame(Color::CPURPLE);
+    }
+    void White(){
+        AddMaterialFrame(Color::CWHITE);
+    }
+    void Yellow(){
+        AddMaterialFrame(Color::CYELLOW);
+    }
+    void Orange(){
+        AddMaterialFrame(Color::CORANGE);
+    }
+    void Rainbow(){
+        AddMaterialFrame(Color::CRAINBOW);
+    }
+    void RainbowNoiseColor(){
+        AddMaterialFrame(Color::CRAINBOWNOISE);
+    }
+
 public:
     ProtogenHUB75Project() : ProtogenProject(&cameras, &controller, 2, Vector2D(), Vector2D(192.0f, 94.0f), 22, 23, 9){
         scene.AddObject(pM.GetObject());
@@ -130,6 +160,7 @@ public:
             case 5: Sad();      break;
             case 6: AudioReactiveGradientFace();    break;
             case 7: OscilloscopeFace();             break;
+            case 8: Surprised();                    break;
             default: SpectrumAnalyzerFace();        break;
         }
     }
@@ -153,5 +184,22 @@ public:
             case 26: SpectrumAnalyzerFace();        break; // [Z] Spectrum
             default: Default();     break; // [H] Happy
         }
+    }
+    void SelectColor(uint8_t ColorCode) {
+        switch(ColorCode) {
+            case 1: Green();              break;
+            case 2: Blue();               break;
+            case 3: Red();                break;
+            case 4: Purple();             break;
+            case 5: White();              break;
+            case 6: Yellow();             break;
+            case 7: Orange();             break;
+            case 8: Rainbow();            break;
+            default: Red();               break;
+        }
+    }
+
+    void CustomColor(Material& material){
+        AddMaterialFrame(material, 1.0f);
     }
 };
