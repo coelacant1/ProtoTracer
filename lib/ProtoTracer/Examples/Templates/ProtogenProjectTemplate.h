@@ -58,8 +58,9 @@ private:
     SimpleMaterial greenMaterial = SimpleMaterial(RGBColor(0, 255, 0));
     SimpleMaterial blueMaterial = SimpleMaterial(RGBColor(0, 0, 255));
     SimpleMaterial yellowMaterial = SimpleMaterial(RGBColor(255, 255, 0));
-    SimpleMaterial purpleMaterial = SimpleMaterial(RGBColor(255, 0, 255));
-    
+    SimpleMaterial purpleMaterial = SimpleMaterial(RGBColor(130, 0, 255));
+    SimpleMaterial roseMaterial = SimpleMaterial(RGBColor(255, 150, 255));
+
     RGBColor gradientSpectrum[2] = {RGBColor(255, 0, 0), RGBColor(255, 0, 0)};
     GradientMaterial<2> gradientMat = GradientMaterial<2>(gradientSpectrum, 350.0f, false);
     
@@ -109,6 +110,7 @@ protected:
         CPURPLE,
         CRED,
         CBLUE,
+        CPINK,
         CRAINBOW,
         CRAINBOWNOISE
     };

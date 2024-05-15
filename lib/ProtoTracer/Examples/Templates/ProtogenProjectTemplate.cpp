@@ -22,6 +22,7 @@ void ProtogenProject::SetMaterialLayers(){
     materialAnimator.AddMaterial(Material::Replace, &blueMaterial, 40, 0.0f, 1.0f);//layer 7
     materialAnimator.AddMaterial(Material::Replace, &flowNoise, 40, 0.15f, 1.0f);//layer 8
     materialAnimator.AddMaterial(Material::Replace, &rainbowSpiral, 40, 0.0f, 1.0f);//layer 9
+    materialAnimator.AddMaterial(Material::Replace, &roseMaterial, 40, 0.0f, 1.0f); // layer 10
 
     backgroundMaterial.SetBaseMaterial(Material::Add, Menu::GetMaterial());
     backgroundMaterial.AddMaterial(Material::Add, &sA, 20, 0.0f, 1.0f);
@@ -311,6 +312,9 @@ void ProtogenProject::AddMaterialFrame(Color color){
             break;
         case CBLUE:
             materialAnimator.AddMaterialFrame(blueMaterial, 0.8f);
+            break;
+        case CPINK:
+            materialAnimator.AddMaterialFrame(roseMaterial, 0.8f);
             break;
         case CRAINBOW:
             materialAnimator.AddMaterialFrame(rainbowSpiral, 0.8f);

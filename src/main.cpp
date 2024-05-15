@@ -15,20 +15,31 @@ void setup() {
     Serial.begin(115200);
     Serial.println("\nStarting...");
     
-    #ifndef TESTHARDWARE
     project.Initialize();
     delay(100);
-    #else
-    while(true){
-        HardwareTest::ScanDevices();
-        HardwareTest::TestNeoTrellis();
-        HardwareTest::TestBoopSensor();
-        HardwareTest::TestHUD();
-    }
-    #endif
 }
 
+unsigned long currentMillis = 0;
+unsigned long prevMillis = 0;
+uint8_t color = 1;
+
 void loop() {
+
+    currentMillis = millis();
+
+    if(currentMillis - prevMillis >= 2000) {
+        prevMillis = currentMillis;
+        
+        if (color >= 10){
+            color = 1;
+        } else {
+            color++;
+        }
+        Serial.println(color);
+    }
+
+    project.SelectColor(color);
+
     float ratio = (float)(millis() % 5000) / 5000.0f;
 
     project.Animate(ratio); 
