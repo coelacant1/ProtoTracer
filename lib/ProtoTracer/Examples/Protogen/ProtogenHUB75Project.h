@@ -204,7 +204,7 @@ public:
         }
     }
 
-    void CustomColor(Material& material){
-        AddMaterialFrame(material, 1.0f);
+    void CustomFaceColor(RGBColor color){
+        SetCustomColor(color);
     }
 };

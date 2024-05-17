@@ -23,6 +23,7 @@ void ProtogenProject::SetMaterialLayers(){
     materialAnimator.AddMaterial(Material::Replace, &flowNoise, 40, 0.15f, 1.0f);//layer 8
     materialAnimator.AddMaterial(Material::Replace, &rainbowSpiral, 40, 0.0f, 1.0f);//layer 9
     materialAnimator.AddMaterial(Material::Replace, &roseMaterial, 40, 0.0f, 1.0f); // layer 10
+    materialAnimator.AddMaterial(Material::Replace, &customMaterial, 40, 0.0f, 1.0f); // layer 11 for custom color
 
     backgroundMaterial.SetBaseMaterial(Material::Add, Menu::GetMaterial());
     backgroundMaterial.AddMaterial(Material::Add, &sA, 20, 0.0f, 1.0f);
@@ -288,6 +289,12 @@ void ProtogenProject::AddParameterFrame(uint16_t ProjectIndex, float target){
 
 void ProtogenProject::AddMaterial(Material::Method method, Material* material, uint16_t frames, float minOpacity, float maxOpacity){
     materialAnimator.AddMaterial(method, material, frames, minOpacity, maxOpacity);
+}
+
+void ProtogenProject::SetCustomColor(RGBColor color)
+{
+    customMaterial = color;
+    materialAnimator.AddMaterialFrame(customMaterial, 0.8f);
 }
 
 void ProtogenProject::AddMaterialFrame(Color color){

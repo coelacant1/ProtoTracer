@@ -60,6 +60,7 @@ private:
     SimpleMaterial yellowMaterial = SimpleMaterial(RGBColor(255, 255, 0));
     SimpleMaterial purpleMaterial = SimpleMaterial(RGBColor(130, 0, 255));
     SimpleMaterial roseMaterial = SimpleMaterial(RGBColor(255, 150, 255));
+    SimpleMaterial customMaterial = SimpleMaterial(RGBColor(100, 100, 100)); 
 
     RGBColor gradientSpectrum[2] = {RGBColor(255, 0, 0), RGBColor(255, 0, 0)};
     GradientMaterial<2> gradientMat = GradientMaterial<2>(gradientSpectrum, 350.0f, false);
@@ -151,6 +152,7 @@ protected:
     void AddMaterialFrame(Material& material, float opacity = 1.0f);
     void AddBackgroundMaterial(Material::Method method, Material* material, uint16_t frames = 20, float minOpacity = 0.0f, float maxOpacity = 1.0f);
     void AddBackgroundMaterialFrame(Material& material, float opacity = 1.0f);
+    void SetCustomColor(RGBColor color);
 
     void SpectrumAnalyzerFace();
     void AudioReactiveGradientFace();
