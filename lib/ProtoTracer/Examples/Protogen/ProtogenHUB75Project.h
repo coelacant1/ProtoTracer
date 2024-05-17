@@ -103,6 +103,10 @@ private:
         AddMaterialFrame(Color::CRAINBOWNOISE);
     }
 
+    void Rose(){
+        AddMaterialFrame(Color::CPINK);
+    }
+
 public:
     ProtogenHUB75Project() : ProtogenProject(&cameras, &controller, 2, Vector2D(), Vector2D(192.0f, 94.0f), 22, 23, 9){
         scene.AddObject(pM.GetObject());
@@ -191,10 +195,11 @@ public:
             case 2: Blue();               break;
             case 3: Red();                break;
             case 4: Purple();             break;
-            case 5: White();              break;
-            case 6: Yellow();             break;
-            case 7: Orange();             break;
-            case 8: Rainbow();            break;
+            case 5: Rose();               break;
+            case 6: White();              break;
+            case 7: Yellow();             break;
+            case 8: Orange();             break;
+            case 9: Rainbow();            break;
             default: Red();               break;
         }
     }

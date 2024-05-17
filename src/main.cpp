@@ -20,15 +20,26 @@ void setup() {
     delay(100);
 }
 
-void loop(){
+unsigned long currentMillis = 0;
+unsigned long prevMillis = 0;
+uint8_t color = 1;
 
-    
-    // project.CustomColor(customMaterial);
-    // project.SelectColor(9);
+void loop() {
 
-    // ButtonHandler::Initialize(14, 100, 100);
-     
-    project.SelectColor(5); // Set white color
+    currentMillis = millis();
+
+    if(currentMillis - prevMillis >= 2000) {
+        prevMillis = currentMillis;
+        
+        if (color >= 10){
+            color = 1;
+        } else {
+            color++;
+        }
+        Serial.println(color);
+    }
+
+    project.SelectColor(color);
 
     float ratio = (float)(millis() % 5000) / 5000.0f;
 
