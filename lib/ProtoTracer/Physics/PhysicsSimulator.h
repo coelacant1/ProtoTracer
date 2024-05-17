@@ -1,10 +1,10 @@
 #pragma once
 
-#include "..\Renderer\Lights\Light.h"
-#include "Utils\BoundaryMotionSimulator.h"
-#include "..\Scene\Objects\Object3D.h"
-#include "..\Utils\Math\Quaternion.h"
-#include "..\Scene\Scene.h"
+#include "../Renderer/Lights/Light.h"
+#include "Utils/BoundaryMotionSimulator.h"
+#include "../Scene/Objects/Object3D.h"
+#include "../Utils/Math/Quaternion.h"
+#include "../Scene/Scene.h"
 
 class PhysicsSimulator {
 private:

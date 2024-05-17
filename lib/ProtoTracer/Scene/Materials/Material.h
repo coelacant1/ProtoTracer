@@ -1,7 +1,7 @@
 #pragma once
 
-#include "..\..\Utils\RGBColor.h"
-#include "..\..\Utils\Math\Vector3D.h"
+#include "../../Utils/RGBColor.h"
+#include "../../Utils/Math/Vector3D.h"
 
 class Material{
 public:

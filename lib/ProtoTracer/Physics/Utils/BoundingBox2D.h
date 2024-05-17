@@ -1,6 +1,6 @@
 #pragma once
 
-#include "..\..\Utils\Math\Vector2D.h"
+#include "../../Utils/Math/Vector2D.h"
 
 class BoundingBox2D {
 private:

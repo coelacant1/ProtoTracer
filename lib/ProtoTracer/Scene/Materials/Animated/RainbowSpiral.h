@@ -1,8 +1,8 @@
 #pragma once
 
-#include "..\AnimatedMaterial.h"
-#include "..\..\..\Utils\Signals\FunctionGenerator.h"
-#include "..\Static\SpiralMaterial.h"
+#include "../AnimatedMaterial.h"
+#include "../../../Utils/Signals/FunctionGenerator.h"
+#include "../Static/SpiralMaterial.h"
 
 class RainbowSpiral : public AnimatedMaterial {
 private:

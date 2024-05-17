@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Effect.h"
-#include "..\..\Utils\Signals\FunctionGenerator.h"
-#include "..\..\Utils\Math\Vector2D.h"
+#include "../../Utils/Signals/FunctionGenerator.h"
+#include "../../Utils/Math/Vector2D.h"
 
 class Fisheye : public Effect {
 private:

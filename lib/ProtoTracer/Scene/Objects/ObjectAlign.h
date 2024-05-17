@@ -1,7 +1,7 @@
 #pragma once
 
-#include "..\..\Utils\Math\Plane.h"
-#include "..\..\Scene\Objects\Object3D.h"
+#include "../../Utils/Math/Plane.h"
+#include "../../Scene/Objects/Object3D.h"
 
 class ObjectAlign {
 public:

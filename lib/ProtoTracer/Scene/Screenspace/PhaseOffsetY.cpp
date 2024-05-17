@@ -1,5 +1,5 @@
 #include "PhaseOffsetY.h"
-#include "..\..\Utils\Math\Mathematics.h"
+#include "../../Utils/Math/Mathematics.h"
 
 PhaseOffsetY::PhaseOffsetY(uint8_t pixels) : pixels(pixels) {}
 

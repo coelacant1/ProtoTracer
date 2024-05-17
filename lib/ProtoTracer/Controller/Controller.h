@@ -1,8 +1,8 @@
 #pragma once
 
 #include <Arduino.h>
-#include "..\Utils\Math\Mathematics.h"
-#include "..\Camera\CameraManager\CameraManager.h"
+#include "../Utils/Math/Mathematics.h"
+#include "../Camera/CameraManager/CameraManager.h"
 
 class Controller {
 private:

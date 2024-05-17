@@ -1,9 +1,9 @@
 #pragma once
 
-#include "..\Camera\CameraManager\CameraManager.h"
-#include "..\Scene\Scene.h"
-#include "..\Renderer\Rasterizer\Rasterizer.h"
-#include "..\Renderer\DisplayTest\DisplayTest.h"
+#include "../Camera/CameraManager/CameraManager.h"
+#include "../Scene/Scene.h"
+#include "../Renderer/Rasterizer/Rasterizer.h"
+#include "../Renderer/DisplayTest/DisplayTest.h"
 
 class RenderingEngine {
 public:

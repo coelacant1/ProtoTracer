@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Animation.h"
-#include "..\Math\FunctionGenerator.h"
-#include "..\Objects\Rocks.h"
+#include "../Math/FunctionGenerator.h"
+#include "../Objects/Rocks.h"
 
 class RocksAnimation : public Animation{
 private:

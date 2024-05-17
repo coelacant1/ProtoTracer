@@ -1,6 +1,6 @@
 #pragma once
 
-#include "..\..\Materials\Image.h"
+#include "../../Materials/Image.h"
 
 class CoelaCant : public Image{
 private:

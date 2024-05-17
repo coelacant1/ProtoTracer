@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Image.h"
-#include "..\..\..\Utils\Math\Mathematics.h"
+#include "../../../Utils/Math/Mathematics.h"
 
 class UVMap : public Image {
 public:

@@ -4,8 +4,8 @@
 
 #include "Controller.h"
 #include "SmartMatrixHUB75.h"
-#include "..\Camera\CameraManager\CameraManager.h"
-#include "..\Camera\Pixels\PixelGroup.h"
+#include "../Camera/CameraManager/CameraManager.h"
+#include "../Camera/Pixels/PixelGroup.h"
 
 class HUB75Controller : public Controller {
 public:

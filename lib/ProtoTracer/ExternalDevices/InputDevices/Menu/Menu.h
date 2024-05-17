@@ -1,31 +1,31 @@
 #pragma once
 
-#include "..\..\..\Physics\Utils\DampedSpring.h"
-#include "..\..\..\Scene\Materials\Animated\RainbowNoise.h"
-#include "..\..\..\Scene\Materials\Special\Overlays\Text\TextEngine.h"
+#include "../../../Physics/Utils/DampedSpring.h"
+#include "../../../Scene/Materials/Animated/RainbowNoise.h"
+#include "../../../Scene/Materials/Special/Overlays/Text/TextEngine.h"
 
-#include "..\..\..\Animation\AnimationTracks\EffectChangeTrack.h"
-#include "..\..\..\Scene\Screenspace\Passthrough.h"
-#include "..\..\..\Scene\Screenspace\GlitchX.h"
-#include "..\..\..\Scene\Screenspace\Fisheye.h"
-#include "..\..\..\Scene\Screenspace\HorizontalBlur.h"
-#include "..\..\..\Scene\Screenspace\PhaseOffsetX.h"
-#include "..\..\..\Scene\Screenspace\PhaseOffsetY.h"
-#include "..\..\..\Scene\Screenspace\PhaseOffsetR.h"
-#include "..\..\..\Scene\Screenspace\Magnet.h"
-#include "..\..\..\Scene\Screenspace\Overflow.h"
-#include "..\..\..\Scene\Screenspace\RadialBlur.h"
-#include "..\..\..\Scene\Screenspace\ShiftR.h"
-#include "..\..\..\Scene\Screenspace\VerticalBlur.h"
+#include "../../../Animation/AnimationTracks/EffectChangeTrack.h"
+#include "../../../Scene/Screenspace/Passthrough.h"
+#include "../../../Scene/Screenspace/GlitchX.h"
+#include "../../../Scene/Screenspace/Fisheye.h"
+#include "../../../Scene/Screenspace/HorizontalBlur.h"
+#include "../../../Scene/Screenspace/PhaseOffsetX.h"
+#include "../../../Scene/Screenspace/PhaseOffsetY.h"
+#include "../../../Scene/Screenspace/PhaseOffsetR.h"
+#include "../../../Scene/Screenspace/Magnet.h"
+#include "../../../Scene/Screenspace/Overflow.h"
+#include "../../../Scene/Screenspace/RadialBlur.h"
+#include "../../../Scene/Screenspace/ShiftR.h"
+#include "../../../Scene/Screenspace/VerticalBlur.h"
 
-#include "..\..\..\Examples\UserConfiguration.h"
+#include "../../../Examples/UserConfiguration.h"
 
 #ifdef NEOTRELLISMENU
-#include "..\NeoTrellisMenuHandler.h"
+#include "../NeoTrellisMenuHandler.h"
 #elif defined MORSEBUTTON
-#include "..\SingleButtonMorseHandler.h"
+#include "../SingleButtonMorseHandler.h"
 #else
-#include "..\SingleButtonMenuHandler.h"
+#include "../SingleButtonMenuHandler.h"
 #endif
 
 class Menu {

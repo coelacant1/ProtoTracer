@@ -1,7 +1,7 @@
 #pragma once
 
-#include "..\..\..\Scene\Materials\Static\SimpleMaterial.h"
-#include "..\..\..\Scene\Objects\Object3D.h"
+#include "../../../Scene/Materials/Static/SimpleMaterial.h"
+#include "../../../Scene/Objects/Object3D.h"
 
 class LEDStripBackground{
 private:

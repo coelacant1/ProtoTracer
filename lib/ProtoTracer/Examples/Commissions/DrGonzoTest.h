@@ -1,12 +1,12 @@
 #pragma once
 
-#include "..\Templates\ProtogenProjectTemplate.h"
-#include "..\..\Assets\Models\OBJ\DeltaDisplayBackground.h"
-#include "..\..\Assets\Models\FBX\NukudeFlat.h"
-#include "..\..\Assets\Models\FBX\Commissions\DrGonzoFace2.h"
+#include "../Templates/ProtogenProjectTemplate.h"
+#include "../../Assets/Models/OBJ/DeltaDisplayBackground.h"
+#include "../../Assets/Models/FBX/NukudeFlat.h"
+#include "../../Assets/Models/FBX/Commissions/DrGonzoFace2.h"
 
-#include "..\..\Camera\CameraManager\Implementations\HUB75DeltaCameras.h"
-#include "..\..\Controller\HUB75Controller.h"
+#include "../../Camera/CameraManager/Implementations/HUB75DeltaCameras.h"
+#include "../../Controller/HUB75Controller.h"
 
 //#define NEOTRELLISMENU
 

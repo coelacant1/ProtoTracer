@@ -1,8 +1,8 @@
 #pragma once
 
-#include "..\Material.h"
-#include "..\Static\GradientMaterial.h"
-#include "..\..\..\Physics\Utils\BouncePhysics.h"
+#include "../Material.h"
+#include "../Static/GradientMaterial.h"
+#include "../../../Physics/Utils/BouncePhysics.h"
 
 class SpectrumAnalyzer : public Material {
 private:

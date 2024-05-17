@@ -1,11 +1,11 @@
 #pragma once
 
-#include "..\Templates\ProtogenProjectTemplate.h"
-#include "..\..\Assets\Models\FBX\Commissions\SageSchlo.h"
-#include "..\..\Assets\Models\FBX\Commissions\SageSchloSideDisplay.h"
+#include "../Templates/ProtogenProjectTemplate.h"
+#include "../../Assets/Models/FBX/Commissions/SageSchlo.h"
+#include "../../Assets/Models/FBX/Commissions/SageSchloSideDisplay.h"
 
-#include "..\..\Camera\CameraManager\Implementations\HUB75DeltaCameras.h"
-#include "..\..\Controller\HUB75Controller.h"
+#include "../../Camera/CameraManager/Implementations/HUB75DeltaCameras.h"
+#include "../../Controller/HUB75Controller.h"
 
 class SageAnimation : public ProtogenProject {
 private:

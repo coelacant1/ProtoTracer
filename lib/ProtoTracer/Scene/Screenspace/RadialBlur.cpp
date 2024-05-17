@@ -1,5 +1,5 @@
 #include "RadialBlur.h"
-#include "..\..\Utils\Math\Mathematics.h"
+#include "../../Utils/Math/Mathematics.h"
 
 RadialBlur::RadialBlur(uint8_t pixels) : pixels(pixels) {}
 

@@ -1,10 +1,10 @@
 #pragma once
 
-#include "..\..\..\..\Utils\Filter\RunningAverageFilter.h"
-#include "..\..\..\..\Utils\Filter\PeakDetection.h"
-#include "..\..\..\..\Renderer\Utils\IndexGroup.h"
-#include "..\..\..\..\Renderer\Utils\Triangle2D.h"
-#include "..\..\..\..\Utils\Math\Vector2D.h"
+#include "../../../../Utils/Filter/RunningAverageFilter.h"
+#include "../../../../Utils/Filter/PeakDetection.h"
+#include "../../../../Renderer/Utils/IndexGroup.h"
+#include "../../../../Renderer/Utils/Triangle2D.h"
+#include "../../../../Utils/Math/Vector2D.h"
 
 class Viseme {
 public:

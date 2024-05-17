@@ -1,31 +1,31 @@
 #pragma once
 
-#include "..\Animation.h"
-#include "..\KeyFrameTrack.h"
-#include "..\EasyEaseAnimator.h"
-#include "..\..\Objects\Background.h"
-#include "..\..\Morph\NukudeFace.h"
-#include "..\..\Morph\TechSane.h"
-#include "..\..\Morph\TechSaneM.h"
-#include "..\..\Render\Scene.h"
-#include "..\..\Signals\FunctionGenerator.h"
-#include "..\..\Menu\Menu.h"
-#include "..\..\Sensors\BoopSensor.h"
+#include "../Animation.h"
+#include "../KeyFrameTrack.h"
+#include "../EasyEaseAnimator.h"
+#include "../../Objects/Background.h"
+#include "../../Morph/NukudeFace.h"
+#include "../../Morph/TechSane.h"
+#include "../../Morph/TechSaneM.h"
+#include "../../Render/Scene.h"
+#include "../../Signals/FunctionGenerator.h"
+#include "../../Menu/Menu.h"
+#include "../../Sensors/BoopSensor.h"
 
-#include "..\..\Materials\Animated\RainbowNoise.h"
-#include "..\..\Materials\Animated\RainbowSpiral.h"
-#include "..\..\Materials\Animated\FlowNoise.h"
-#include "..\..\Materials\Animated\SpectrumAnalyzer.h"
-#include "..\..\Materials\Animated\AudioReactiveGradient.h"
-#include "..\..\Materials\Animated\Oscilloscope.h"
+#include "../../Materials/Animated/RainbowNoise.h"
+#include "../../Materials/Animated/RainbowSpiral.h"
+#include "../../Materials/Animated/FlowNoise.h"
+#include "../../Materials/Animated/SpectrumAnalyzer.h"
+#include "../../Materials/Animated/AudioReactiveGradient.h"
+#include "../../Materials/Animated/Oscilloscope.h"
 
-#include "..\..\Materials\MaterialAnimator.h"
+#include "../../Materials/MaterialAnimator.h"
 
-#include "..\AnimationTracks\BlinkTrack.h"
+#include "../AnimationTracks/BlinkTrack.h"
 
-#include "..\..\Signals\FFTVoiceDetection.h"
+#include "../../Signals/FFTVoiceDetection.h"
 
-#include "..\..\Sensors\MicrophoneFourier_MAX9814.h"
+#include "../../Sensors/MicrophoneFourier_MAX9814.h"
 
 class TechSaneAnimation : public Animation<4> {
 private:

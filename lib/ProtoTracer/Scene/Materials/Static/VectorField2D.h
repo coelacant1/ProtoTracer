@@ -1,10 +1,10 @@
 #pragma once
 
-#include "..\Material.h"
-#include "..\..\..\Utils\Math\Mathematics.h"
-#include "..\..\..\Utils\Math\Vector2D.h"
-#include "..\..\..\Renderer\Utils\Triangle2D.h"
-#include "..\..\Objects\Object3D.h"
+#include "../Material.h"
+#include "../../../Utils/Math/Mathematics.h"
+#include "../../../Utils/Math/Vector2D.h"
+#include "../../../Renderer/Utils/Triangle2D.h"
+#include "../../Objects/Object3D.h"
 
 class VectorField2D : public Material {
 private:

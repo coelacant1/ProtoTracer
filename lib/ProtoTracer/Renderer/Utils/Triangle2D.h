@@ -1,9 +1,9 @@
 #pragma once
 
-#include "..\..\Scene\Materials\Material.h"
-#include "..\..\Utils\Math\Transform.h"
-#include "..\..\Utils\Math\Vector2D.h"
-#include "..\..\Physics\Utils\BoundingBox2D.h"
+#include "../../Scene/Materials/Material.h"
+#include "../../Utils/Math/Transform.h"
+#include "../../Utils/Math/Vector2D.h"
+#include "../../Physics/Utils/BoundingBox2D.h"
 #include "Triangle3D.h"
 
 class Triangle2D {

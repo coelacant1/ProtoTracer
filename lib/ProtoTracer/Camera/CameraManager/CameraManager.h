@@ -1,6 +1,6 @@
 #pragma once
 
-#include "..\CameraBase.h"
+#include "../CameraBase.h"
 
 class CameraManager {
 protected:

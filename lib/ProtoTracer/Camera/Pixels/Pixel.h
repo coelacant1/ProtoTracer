@@ -1,7 +1,7 @@
 #pragma once
 
-#include "..\..\Utils\RGBColor.h"
-#include "..\..\Utils\Math\Vector2D.h"
+#include "../../Utils/RGBColor.h"
+#include "../../Utils/Math/Vector2D.h"
 
 class Pixel {
 private:

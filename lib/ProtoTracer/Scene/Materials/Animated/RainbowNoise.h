@@ -1,9 +1,9 @@
 #pragma once
 
-#include "..\AnimatedMaterial.h"
-#include "..\..\..\Utils\Signals\FunctionGenerator.h"
-#include "..\Static\GradientMaterial.h"
-#include "..\Static\SimplexNoise.h"
+#include "../AnimatedMaterial.h"
+#include "../../../Utils/Signals/FunctionGenerator.h"
+#include "../Static/GradientMaterial.h"
+#include "../Static/SimplexNoise.h"
 
 class RainbowNoise : public AnimatedMaterial {
 private:

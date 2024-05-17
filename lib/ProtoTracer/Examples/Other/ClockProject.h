@@ -5,22 +5,22 @@
 #include "Animation.h"
 #include "KeyFrameTrack.h"
 #include "EasyEaseAnimator.h"
-#include "..\Objects\Background.h"
-#include "..\Render\Scene.h"
-#include "..\Signals\FunctionGenerator.h"
+#include "../Objects/Background.h"
+#include "../Render/Scene.h"
+#include "../Signals/FunctionGenerator.h"
 
-#include "..\Materials\Animated\RainbowNoise.h"
-#include "..\Materials\Animated\RainbowNoise2.h"
-#include "..\Materials\Animated\RainbowSpiral.h"
-#include "..\Materials\CombineMaterial.h"
-#include "..\Materials\Clock.h"
+#include "../Materials/Animated/RainbowNoise.h"
+#include "../Materials/Animated/RainbowNoise2.h"
+#include "../Materials/Animated/RainbowSpiral.h"
+#include "../Materials/CombineMaterial.h"
+#include "../Materials/Clock.h"
 
-#include "..\Materials\MaterialMask.h"
-#include "..\Shapes\Circle.h"
-#include "..\Shapes\Rectangle.h"
+#include "../Materials/MaterialMask.h"
+#include "../Shapes/Circle.h"
+#include "../Shapes/Rectangle.h"
 
-#include "..\Sensors\APDS9960.h"
-#include "..\Filter\RunningAverageFilter.h"
+#include "../Sensors/APDS9960.h"
+#include "../Filter/RunningAverageFilter.h"
 
 time_t getTeensy3Time(){
     return Teensy3Clock.get();

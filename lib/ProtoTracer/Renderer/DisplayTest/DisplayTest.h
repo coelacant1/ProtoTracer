@@ -1,7 +1,7 @@
 #pragma once
 
-#include "..\..\Camera\Camera.h"
-#include "..\..\Scene\Scene.h"
+#include "../../Camera/Camera.h"
+#include "../../Scene/Scene.h"
 
 class DisplayTest {
 public:

@@ -1,5 +1,5 @@
 #include "ShiftR.h"
-#include "..\..\Utils\Math\Mathematics.h"
+#include "../../Utils/Math/Mathematics.h"
 
 ShiftR::ShiftR(uint8_t pixels) : pixels(pixels) {}
 

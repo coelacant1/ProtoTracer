@@ -1,6 +1,6 @@
 #pragma once
 
-#include "..\KeyFrameTrack.h"
+#include "../KeyFrameTrack.h"
 
 template<size_t maxParameters, size_t maxKeyFrames>
 class AnimationTrack{

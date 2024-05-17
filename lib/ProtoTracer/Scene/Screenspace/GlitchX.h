@@ -2,7 +2,7 @@
 
 #include <Arduino.h>
 #include "Effect.h"
-#include "..\..\Utils\Math\Mathematics.h"
+#include "../../Utils/Math/Mathematics.h"
 
 class GlitchX : public Effect {
 private:

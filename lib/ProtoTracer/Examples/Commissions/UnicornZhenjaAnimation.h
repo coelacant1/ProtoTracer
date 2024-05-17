@@ -1,12 +1,12 @@
 #pragma once
 
-#include "..\Templates\ProtogenProjectTemplate.h"
-#include "..\..\Assets\Models\OBJ\DeltaDisplayBackground.h"
-#include "..\..\Assets\Models\FBX\Commissions\UnicornZhenja.h"
-#include "..\..\Scene\Materials\Animated\TVStatic.h"
+#include "../Templates/ProtogenProjectTemplate.h"
+#include "../../Assets/Models/OBJ/DeltaDisplayBackground.h"
+#include "../../Assets/Models/FBX/Commissions/UnicornZhenja.h"
+#include "../../Scene/Materials/Animated/TVStatic.h"
 
-#include "..\..\Camera\CameraManager\Implementations\HUB75DeltaCameras.h"
-#include "..\..\Controller\HUB75Controller.h"
+#include "../../Camera/CameraManager/Implementations/HUB75DeltaCameras.h"
+#include "../../Controller/HUB75Controller.h"
 
 class UnicornZhenjaAnimation : public ProtogenProject {
 private:

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Effect.h"
-#include "..\..\Utils\Signals\FunctionGenerator.h"
+#include "../../Utils/Signals/FunctionGenerator.h"
 
 class Magnet : public Effect {
 private:

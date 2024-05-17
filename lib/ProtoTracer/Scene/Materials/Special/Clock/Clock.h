@@ -1,8 +1,8 @@
 #pragma once
 
-#include "..\..\Static\SimpleMaterial.h"
-#include "..\Overlays\Text\TextEngine.h"
-#include "..\..\Material.h"
+#include "../../Static/SimpleMaterial.h"
+#include "../Overlays/Text/TextEngine.h"
+#include "../../Material.h"
 
 class Clock : public Material {
 private:

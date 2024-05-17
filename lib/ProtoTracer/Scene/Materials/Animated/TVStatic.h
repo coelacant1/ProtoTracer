@@ -1,12 +1,12 @@
 #pragma once
 
-#include "..\AnimatedMaterial.h"
-#include "..\..\..\Utils\Signals\FunctionGenerator.h"
-#include "..\Static\GradientMaterial.h"
-#include "..\Static\SimplexNoise.h"
-#include "..\CombineMaterial.h"
+#include "../AnimatedMaterial.h"
+#include "../../../Utils/Signals/FunctionGenerator.h"
+#include "../Static/GradientMaterial.h"
+#include "../Static/SimplexNoise.h"
+#include "../CombineMaterial.h"
 
-#include "..\..\..\Assets\Textures\Static\ColorTest.h"
+#include "../../../Assets/Textures/Static/ColorTest.h"
 
 class TVStatic : public AnimatedMaterial {
 private:

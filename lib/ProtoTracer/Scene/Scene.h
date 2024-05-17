@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Screenspace\Effect.h"
-#include "Objects\Object3D.h"
+#include "Screenspace/Effect.h"
+#include "Objects/Object3D.h"
 
 class Scene {
 private:

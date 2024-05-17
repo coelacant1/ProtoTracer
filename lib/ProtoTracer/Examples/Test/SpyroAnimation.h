@@ -1,13 +1,13 @@
 #pragma once
 
-#include "..\Templates\Project.h"
-#include "..\..\Utils\Signals\FunctionGenerator.h"
-#include "..\..\Assets\Models\OBJ\Spyro.h"
-#include "..\..\Scene\Materials\Static\NormalMaterial.h"
-#include "..\..\Scene\Objects\ObjectDeformer.h"
+#include "../Templates/Project.h"
+#include "../../Utils/Signals/FunctionGenerator.h"
+#include "../../Assets/Models/OBJ/Spyro.h"
+#include "../../Scene/Materials/Static/NormalMaterial.h"
+#include "../../Scene/Objects/ObjectDeformer.h"
 
-#include "..\..\Camera\CameraManager\Implementations\HUB75DeltaCameras.h"
-#include "..\..\Controller\HUB75Controller.h"
+#include "../../Camera/CameraManager/Implementations/HUB75DeltaCameras.h"
+#include "../../Controller/HUB75Controller.h"
 
 class SpyroAnimation : public Project{
 private:

@@ -1,13 +1,13 @@
-#include "Examples\UserConfiguration.h"
-#include "..\lib\ProtoTracer\ExternalDevices\InputDevices\ButtonHandler.h"
+#include "Examples/UserConfiguration.h"
+#include "../lib/ProtoTracer/ExternalDevices/InputDevices/ButtonHandler.h"
 
 #ifdef TESTHARDWARE
-#include "Examples\Protogen\ProtogenHardwareTest.h"
+#include "Examples/Protogen/ProtogenHardwareTest.h"
 #endif
 
-//#include "Examples\Commissions\UnicornZhenjaAnimation.h"
-#include "Examples\Protogen\ProtogenHUB75Project.h"
-//#include "Examples\VerifyEngine.h"
+//#include "Examples/Commissions/UnicornZhenjaAnimation.h"
+#include "Examples/Protogen/ProtogenHUB75Project.h"
+//#include "Examples/VerifyEngine.h"
 
 ProtogenHUB75Project project;
 
@@ -22,24 +22,17 @@ void setup() {
 
 unsigned long currentMillis = 0;
 unsigned long prevMillis = 0;
-uint8_t color = 1;
 
 void loop() {
 
     currentMillis = millis();
 
-    if(currentMillis - prevMillis >= 2000) {
+    if(currentMillis - prevMillis >= 2000) { // timer thingy that does something every 2 seconds
         prevMillis = currentMillis;
-        
-        if (color >= 10){
-            color = 1;
-        } else {
-            color++;
-        }
-        Serial.println(color);
+
     }
 
-    project.SelectColor(color);
+    project.CustomFaceColor(RGBColor(0, 255, 150));
 
     float ratio = (float)(millis() % 5000) / 5000.0f;
 

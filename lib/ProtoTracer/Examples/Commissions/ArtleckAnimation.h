@@ -1,19 +1,19 @@
 #pragma once
 
-#include "..\Animation.h"
-#include "..\KeyFrameTrack.h"
-#include "..\EasyEaseAnimator.h"
-#include "..\..\Morph\ProtoArtleckMorph.h"
-#include "..\..\Render\Scene.h"
-#include "..\..\Materials\GradientMaterial.h"
-#include "..\..\Materials\SimplexNoise.h"
-#include "..\..\Signals\FunctionGenerator.h"
-#include "..\..\Sensors\MicrophoneSimple_MAX9814.h"
-#include "..\..\Sensors\ButtonHandler.h"
-#include "..\..\Sensors\BoopSensor.h"
-#include "..\..\Materials\NormalMaterial.h"
+#include "../Animation.h"
+#include "../KeyFrameTrack.h"
+#include "../EasyEaseAnimator.h"
+#include "../../Morph/ProtoArtleckMorph.h"
+#include "../../Render/Scene.h"
+#include "../../Materials/GradientMaterial.h"
+#include "../../Materials/SimplexNoise.h"
+#include "../../Signals/FunctionGenerator.h"
+#include "../../Sensors/MicrophoneSimple_MAX9814.h"
+#include "../../Sensors/ButtonHandler.h"
+#include "../../Sensors/BoopSensor.h"
+#include "../../Materials/NormalMaterial.h"
 
-#include "..\..\Materials\CombineMaterial.h"
+#include "../../Materials/CombineMaterial.h"
 
 
 class ProtogenArtleckAnimation : public Animation{

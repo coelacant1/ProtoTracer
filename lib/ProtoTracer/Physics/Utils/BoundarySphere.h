@@ -1,8 +1,8 @@
 #pragma once
 
-#include "..\..\Utils\Math\Rotation.h"
-#include "..\..\Utils\Math\Vector3D.h"
-#include "..\..\Scene\Objects\Object3D.h"
+#include "../../Utils/Math/Rotation.h"
+#include "../../Utils/Math/Vector3D.h"
+#include "../../Scene/Objects/Object3D.h"
 
 class BoundarySphere {
 private:

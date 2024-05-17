@@ -1,10 +1,10 @@
 #pragma once
 
-#include "..\Templates\ProtogenProjectTemplate.h"
-#include "..\..\Assets\Models\FBX\NukudeFlat.h"
+#include "../Templates/ProtogenProjectTemplate.h"
+#include "../../Assets/Models/FBX/NukudeFlat.h"
 
-#include "..\..\Camera\CameraManager\Implementations\WS35SplitCameras.h"
-#include "..\..\Controller\WS35Controller.h"
+#include "../../Camera/CameraManager/Implementations/WS35SplitCameras.h"
+#include "../../Controller/WS35Controller.h"
 
 class ProtogenWS35Project : public ProtogenProject {
 private:

@@ -1,34 +1,34 @@
 #pragma once
 
-#include "..\Animation.h"
-#include "..\KeyFrameTrack.h"
-#include "..\EasyEaseAnimator.h"
-#include "..\..\Objects\Background.h"
-#include "..\..\Objects\LEDStripBackground.h"
-#include "..\..\Morph\Commissions\AphoriFace.h"
-#include "..\..\Render\Scene.h"
-#include "..\..\Signals\FunctionGenerator.h"
-#include "..\..\Menu\NeoTrellisMenu.h"
-#include "..\..\Sensors\APDS9960.h"
+#include "../Animation.h"
+#include "../KeyFrameTrack.h"
+#include "../EasyEaseAnimator.h"
+#include "../../Objects/Background.h"
+#include "../../Objects/LEDStripBackground.h"
+#include "../../Morph/Commissions/AphoriFace.h"
+#include "../../Render/Scene.h"
+#include "../../Signals/FunctionGenerator.h"
+#include "../../Menu/NeoTrellisMenu.h"
+#include "../../Sensors/APDS9960.h"
 
-#include "..\..\Materials\Animated\RainbowNoise.h"
-#include "..\..\Materials\Animated\RainbowSpiral.h"
-#include "..\..\Materials\Animated\SpectrumAnalyzer.h"
-#include "..\..\Materials\Animated\AudioReactiveGradient.h"
-#include "..\..\Materials\Animated\Oscilloscope.h"
-#include "..\..\Materials\MaterialMask.h"
-#include "..\..\Shapes\Circle.h"
-#include "..\..\Shapes\Rectangle.h"
+#include "../../Materials/Animated/RainbowNoise.h"
+#include "../../Materials/Animated/RainbowSpiral.h"
+#include "../../Materials/Animated/SpectrumAnalyzer.h"
+#include "../../Materials/Animated/AudioReactiveGradient.h"
+#include "../../Materials/Animated/Oscilloscope.h"
+#include "../../Materials/MaterialMask.h"
+#include "../../Shapes/Circle.h"
+#include "../../Shapes/Rectangle.h"
 
-#include "..\..\Materials\MaterialAnimator.h"
+#include "../../Materials/MaterialAnimator.h"
 
-#include "..\AnimationTracks\BlinkTrack.h"
+#include "../AnimationTracks/BlinkTrack.h"
 
-#include "..\..\Signals\FFTVoiceDetection.h"
+#include "../../Signals/FFTVoiceDetection.h"
 
-#include "..\..\Sensors\MicrophoneFourier_MAX9814.h"
+#include "../../Sensors/MicrophoneFourier_MAX9814.h"
 
-#include "..\..\Render\ObjectAlign.h"
+#include "../../Render/ObjectAlign.h"
 
 class AphoriAnimation : public Animation<3> {
 private:

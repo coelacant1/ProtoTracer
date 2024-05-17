@@ -1,9 +1,9 @@
 #pragma once
 
-#include "..\Material.h"
-#include "..\..\..\Utils\Math\Mathematics.h"
-#include "..\..\..\Utils\Math\Rotation.h"
-#include "..\..\..\Utils\Math\Vector2D.h"
+#include "../Material.h"
+#include "../../../Utils/Math/Mathematics.h"
+#include "../../../Utils/Math/Rotation.h"
+#include "../../../Utils/Math/Vector2D.h"
 
 template<size_t colorCount>
 class GradientMaterial : public Material {

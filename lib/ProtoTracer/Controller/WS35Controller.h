@@ -4,8 +4,8 @@
 #include <OctoWS2811.h>
 
 #include "Controller.h"
-#include "..\Camera\CameraManager\CameraManager.h"
-#include "..\Camera\Pixels\PixelGroup.h"
+#include "../Camera/CameraManager/CameraManager.h"
+#include "../Camera/Pixels/PixelGroup.h"
 
 class WS35Controller : public Controller {
 private:

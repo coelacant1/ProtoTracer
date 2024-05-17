@@ -1,7 +1,7 @@
 #pragma once
 
-#include "..\..\Utils\Math\Mathematics.h"
-#include "..\..\Utils\Filter\RunningAverageFilter.h"
+#include "../../Utils/Math/Mathematics.h"
+#include "../../Utils/Filter/RunningAverageFilter.h"
 
 class BouncePhysics {
 private:

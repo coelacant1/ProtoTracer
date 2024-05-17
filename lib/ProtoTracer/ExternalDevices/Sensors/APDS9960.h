@@ -3,8 +3,8 @@
 #include <Arduino.h>
 #include <Wire.h>
 #include <Adafruit_APDS9960.h>
-#include "..\..\Utils\Filter\MinFilter.h"
-#include "..\..\Utils\Time\TimeStep.h"
+#include "../../Utils/Filter/MinFilter.h"
+#include "../../Utils/Time/TimeStep.h"
 
 class APDS9960 {
 private:

@@ -1,8 +1,8 @@
 #pragma once
 
 #include "CameraLayout.h"
-#include "Pixels\IPixelGroup.h"
-#include "..\Utils\Math\Transform.h"
+#include "Pixels/IPixelGroup.h"
+#include "../Utils/Math/Transform.h"
 
 class CameraBase {
 protected:

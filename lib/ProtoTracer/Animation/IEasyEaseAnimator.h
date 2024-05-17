@@ -1,9 +1,9 @@
 #pragma once
 
 #include "KeyFrame.h"
-#include "..\Utils\Math\Mathematics.h"
-#include "..\Physics\Utils\DampedSpring.h"
-#include "..\Utils\Filter\RampFilter.h"
+#include "../Utils/Math/Mathematics.h"
+#include "../Physics/Utils/DampedSpring.h"
+#include "../Utils/Filter/RampFilter.h"
 
 class IEasyEaseAnimator {
 public:

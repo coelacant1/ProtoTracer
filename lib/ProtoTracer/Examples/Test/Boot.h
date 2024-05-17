@@ -1,25 +1,25 @@
 #pragma once
 
-#include "..\Templates\Project.h"
-#include "..\..\Utils\Signals\FunctionGenerator.h"
-#include "..\..\Assets\Models\OBJ\Spyro.h"
-#include "..\..\Scene\Materials\Static\NormalMaterial.h"
-#include "..\..\Scene\Objects\ObjectDeformer.h"
-#include "..\..\Scene\Materials\CombineMaterial.h"
-#include "..\..\Scene\Materials\Utils\MaterialAnimator.h"
+#include "../Templates/Project.h"
+#include "../../Utils/Signals/FunctionGenerator.h"
+#include "../../Assets/Models/OBJ/Spyro.h"
+#include "../../Scene/Materials/Static/NormalMaterial.h"
+#include "../../Scene/Objects/ObjectDeformer.h"
+#include "../../Scene/Materials/CombineMaterial.h"
+#include "../../Scene/Materials/Utils/MaterialAnimator.h"
 
-#include "..\..\Scene\Materials\Static\LightMaterial.h"
+#include "../../Scene/Materials/Static/LightMaterial.h"
 
-#include "..\..\Assets\Models\OBJ\Cursor.h"
-#include "..\..\Assets\Models\OBJ\DoneBoot.h"
-#include "..\..\Assets\Models\OBJ\Init.h"
-#include "..\..\Assets\Models\OBJ\LoadingModules.h"
-#include "..\..\Assets\Models\OBJ\Plane.h"
-#include "..\..\Assets\Models\OBJ\ProtoDRV1.h"
-#include "..\..\Assets\Models\OBJ\RunningKernel.h"
+#include "../../Assets/Models/OBJ/Cursor.h"
+#include "../../Assets/Models/OBJ/DoneBoot.h"
+#include "../../Assets/Models/OBJ/Init.h"
+#include "../../Assets/Models/OBJ/LoadingModules.h"
+#include "../../Assets/Models/OBJ/Plane.h"
+#include "../../Assets/Models/OBJ/ProtoDRV1.h"
+#include "../../Assets/Models/OBJ/RunningKernel.h"
 
-#include "..\..\Camera\CameraManager\Implementations\HUB75DeltaCameras.h"
-#include "..\..\Controller\HUB75Controller.h"
+#include "../../Camera/CameraManager/Implementations/HUB75DeltaCameras.h"
+#include "../../Controller/HUB75Controller.h"
 
 class Boot : public Project {
 private:

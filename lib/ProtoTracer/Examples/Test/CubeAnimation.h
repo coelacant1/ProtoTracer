@@ -1,10 +1,10 @@
 #pragma once
 
 #include "Animation.h"
-#include "..\Objects\Cube.h"
-#include "..\Materials\DepthMaterial.h"
-#include "..\Materials\LightMaterial.h"
-#include "..\Math\FunctionGenerator.h"
+#include "../Objects/Cube.h"
+#include "../Materials/DepthMaterial.h"
+#include "../Materials/LightMaterial.h"
+#include "../Math/FunctionGenerator.h"
 
 class CubeAnimation : public Animation{
 private:

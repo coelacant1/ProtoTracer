@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Arduino.h>
-#include "..\..\Utils\Filter\RunningAverageFilter.h"
+#include "../../Utils/Filter/RunningAverageFilter.h"
 
 class SHARPGP2Y {
 private:

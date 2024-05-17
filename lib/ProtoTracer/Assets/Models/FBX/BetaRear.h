@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Utils\Morph.h"
-#include "..\..\..\Utils\Math\Rotation.h"
-#include "..\..\..\Scene\Materials\Static\SimpleMaterial.h"
-#include "..\..\..\Scene\Objects\Object3D.h"
-#include "..\..\..\Renderer\Utils\IndexGroup.h"
+#include "Utils/Morph.h"
+#include "../../../Utils/Math/Rotation.h"
+#include "../../../Scene/Materials/Static/SimpleMaterial.h"
+#include "../../../Scene/Objects/Object3D.h"
+#include "../../../Renderer/Utils/IndexGroup.h"
 
 class BetaRear{
 public:
