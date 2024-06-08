@@ -4,6 +4,7 @@
 #include "..\..\Assets\Models\OBJ\DeltaDisplayBackground.h"
 #include "..\..\Assets\Models\FBX\Commissions\UnicornZhenja.h"
 #include "..\..\Scene\Materials\Animated\TVStatic.h"
+#include "..\..\Scene\Materials\Animated\HorizontalRainbow.h"
 
 #include "..\..\Camera\CameraManager\Implementations\HUB75DeltaCameras.h"
 #include "..\..\Controller\HUB75Controller.h"
@@ -15,6 +16,8 @@ private:
     UnicornZhenja pM;
     DeltaDisplayBackground deltaDisplayBackground;
     TVStatic tvStatic;
+    HorizontalRainbow horizontalRainbow;
+
     
 	const __FlashStringHelper* faceArray[14] = {F("DEFAULT"), F("UPSET"), F("SALTY"), F("SLEEPY"), F("SAD"), F("LOADING"), F("DIZZY"), F("HEART"), F("DEAD"), F("PUPIL"), F("STATIC"), F("AUDIO1"), F("AUDIO2"), F("AUDIO3")};
 
@@ -50,7 +53,7 @@ private:
         AddParameterFrame(UnicornZhenja::HideLoading, 1.0f);
         AddParameterFrame(UnicornZhenja::HideSpiral, 1.0f);
 
-        AddMaterialFrame(tvStatic);
+        AddMaterialFrame(horizontalRainbow);
     }
 
     void Upset(){
@@ -59,7 +62,7 @@ private:
         AddParameterFrame(UnicornZhenja::HideLoading, 1.0f);
         AddParameterFrame(UnicornZhenja::HideSpiral, 1.0f);
 
-        AddMaterialFrame(Color::CRED);
+        AddMaterialFrame(horizontalRainbow);
     }
 
     void Salty(){
@@ -68,7 +71,7 @@ private:
         AddParameterFrame(UnicornZhenja::HideLoading, 1.0f);
         AddParameterFrame(UnicornZhenja::HideSpiral, 1.0f);
 
-        AddMaterialFrame(tvStatic);
+        AddMaterialFrame(Color::CRED);
     }
 
     void Sleepy(){
@@ -76,7 +79,7 @@ private:
         AddParameterFrame(UnicornZhenja::HideHeart, 1.0f);
         AddParameterFrame(UnicornZhenja::HideLoading, 1.0f);
 
-        AddMaterialFrame(tvStatic);
+        AddMaterialFrame(horizontalRainbow);
     }
 
     void Sad(){
@@ -93,7 +96,7 @@ private:
         AddParameterFrame(UnicornZhenja::HideHeart, 1.0f);
         AddParameterFrame(UnicornZhenja::HideSpiral, 1.0f);
 
-        AddMaterialFrame(tvStatic);
+        AddMaterialFrame(horizontalRainbow);
     }
 
     void Dizzy(){
@@ -101,7 +104,7 @@ private:
         AddParameterFrame(UnicornZhenja::HideHeart, 1.0f);
         AddParameterFrame(UnicornZhenja::HideLoading, 1.0f);
 
-        AddMaterialFrame(tvStatic);
+        AddMaterialFrame(horizontalRainbow);
     }
 
     void Heart(){
@@ -109,7 +112,7 @@ private:
         AddParameterFrame(UnicornZhenja::HideLoading, 1.0f);
         AddParameterFrame(UnicornZhenja::HideSpiral, 1.0f);
 
-        AddMaterialFrame(tvStatic);
+        AddMaterialFrame(horizontalRainbow);
     }
 
     void Dead(){
@@ -117,7 +120,7 @@ private:
         AddParameterFrame(UnicornZhenja::HideHeart, 1.0f);
         AddParameterFrame(UnicornZhenja::HideLoading, 1.0f);
 
-        AddMaterialFrame(tvStatic);
+        AddMaterialFrame(horizontalRainbow);
     }
 
     void Pupil(){
@@ -126,7 +129,7 @@ private:
         AddParameterFrame(UnicornZhenja::HideLoading, 1.0f);
         AddParameterFrame(UnicornZhenja::HideSpiral, 1.0f);
 
-        AddMaterialFrame(tvStatic);
+        AddMaterialFrame(horizontalRainbow);
     }
 
     void Static(){
@@ -149,8 +152,10 @@ public:
         pM.GetObject()->SetMaterial(GetFaceMaterial());
         deltaDisplayBackground.GetObject()->SetMaterial(GetFaceMaterial());
 
-        AddMaterial(Material::Add, &tvStatic, 40, 0.0f, 1.0f);
-        AddBackgroundMaterial(Material::Add, &tvStatic, 40, 0.0f, 1.0f);
+        AddMaterial(Material::Replace, &tvStatic, 40, 0.0f, 1.0f);
+        AddMaterial(Material::Replace, &horizontalRainbow, 40, 0.0f, 1.0f);
+        AddBackgroundMaterial(Material::Replace, &tvStatic, 40, 0.0f, 1.0f);
+        AddBackgroundMaterial(Material::Replace, &horizontalRainbow, 40, 0.0f, 1.0f);
 
         hud.SetFaceArray(faceArray);
 
@@ -185,17 +190,21 @@ public:
             else if (mode == 8) Dead();
             else if (mode == 9) Pupil();
             else if (mode == 10) {
+                AddMaterialFrame(horizontalRainbow);
                 AudioReactiveGradientFace();
             }
             else if (mode == 11){
+                AddMaterialFrame(horizontalRainbow);
                 OscilloscopeFace();
             }
             else {
+                AddMaterialFrame(horizontalRainbow);
                 SpectrumAnalyzerFace();
             }
         }
         
         tvStatic.Update(ratio);
+        horizontalRainbow.Update(ratio);
 
         UpdateFace(ratio);
 

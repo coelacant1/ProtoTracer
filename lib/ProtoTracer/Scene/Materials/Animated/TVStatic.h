@@ -21,7 +21,7 @@ private:
     RGBColor scanlineSpectrum[10] = {RGBColor(0, 0, 0), RGBColor(0, 0, 0), RGBColor(255, 255, 255), RGBColor(0, 0, 0), RGBColor(255, 255, 255), RGBColor(255, 255, 255), RGBColor(255, 255, 255), RGBColor(0, 0, 0), RGBColor(0, 0, 0), RGBColor(255, 255, 255)};
     GradientMaterial<10> scanlineGradient = GradientMaterial<10>(scanlineSpectrum, 100.0f, false, false);
 
-    ColorTest colorTest = ColorTest(Vector2D(192.0f, 96.0f), Vector2D(96.0f, 48.0f));
+    ColorTest colorTest = ColorTest(Vector2D(192.0f, 96.0f), Vector2D(140.0f, 72.0f));
     CombineMaterial<3> combineScanline = CombineMaterial<3>();
 
 public:
