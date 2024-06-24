@@ -1,11 +1,11 @@
 #pragma once
 
-#include "..\Templates\ProtogenProjectTemplate.h"
-#include "..\..\Assets\Models\OBJ\DeltaDisplayBackground.h"
-#include "..\..\Assets\Models\FBX\NukudeFlat.h"
+#include "../Templates/ProtogenProjectTemplate.h"
+#include "../../Assets/Models/OBJ/DeltaDisplayBackground.h"
+#include "../../Assets/Models/FBX/NukudeFlat.h"
 
-#include "..\..\Camera\CameraManager\Implementations\HUB75DeltaCameras.h"
-#include "..\..\Controller\HUB75Controller.h"
+#include "../../Camera/CameraManager/Implementations/HUB75DeltaCameras.h"
+#include "../../Controller/HUB75Controller.h"
 
 class ProtogenHUB75Project : public ProtogenProject {
 private:

@@ -1,9 +1,9 @@
 #pragma once
 
 #include "Animation.h"
-#include "..\Objects\Cube.h"
-#include "..\Math\FunctionGenerator.h"
-#include "..\Objects\Bee.h"
+#include "../Objects/Cube.h"
+#include "../Math/FunctionGenerator.h"
+#include "../Objects/Bee.h"
 
 class BeeAnimation : public Animation{
 private:

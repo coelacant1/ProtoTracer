@@ -1,12 +1,12 @@
 #pragma once
 
-#include "..\..\Utils\Math\Transform.h"
-#include "..\..\Utils\Math\Quaternion.h"
-#include "..\..\Camera\Camera.h"
-#include "..\..\Scene\Scene.h"
-#include "..\Utils\Triangle2D.h"
-#include "..\Utils\QuadTree.h"
-#include "..\Utils\Node.h"
+#include "../../Utils/Math/Transform.h"
+#include "../../Utils/Math/Quaternion.h"
+#include "../../Camera/Camera.h"
+#include "../../Scene/Scene.h"
+#include "../Utils/Triangle2D.h"
+#include "../Utils/QuadTree.h"
+#include "../Utils/Node.h"
 
 class Rasterizer {
 private:

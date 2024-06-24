@@ -1,6 +1,6 @@
 #pragma once
 
-#include "..\Math\Quaternion.h"
+#include "../Math/Quaternion.h"
 
 class QuaternionKalmanFilter {
 private:

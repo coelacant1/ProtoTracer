@@ -1,14 +1,14 @@
 #pragma once
 
-#include "..\Templates\ProtogenProjectTemplate.h"
-#include "..\..\Assets\Models\OBJ\Background.h"
-#include "..\..\Assets\Models\FBX\Commissions\AceFace.h"
-#include "..\..\Assets\Models\FBX\Commissions\AceCrash.h"
-#include "..\..\Assets\Models\FBX\Commissions\AceCrashBackground.h"
-#include "..\..\Scene\Materials\Utils\MaterialAnimator.h"
+#include "../Templates/ProtogenProjectTemplate.h"
+#include "../../Assets/Models/OBJ/Background.h"
+#include "../../Assets/Models/FBX/Commissions/AceFace.h"
+#include "../../Assets/Models/FBX/Commissions/AceCrash.h"
+#include "../../Assets/Models/FBX/Commissions/AceCrashBackground.h"
+#include "../../Scene/Materials/Utils/MaterialAnimator.h"
 
-#include "..\..\Camera\CameraManager\Implementations\WS35SplitCameras.h"
-#include "..\..\Controller\WS35Controller.h"
+#include "../../Camera/CameraManager/Implementations/WS35SplitCameras.h"
+#include "../../Controller/WS35Controller.h"
 
 class AceAnimation : public ProtogenProject {
 private:

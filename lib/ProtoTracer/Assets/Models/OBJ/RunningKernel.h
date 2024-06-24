@@ -1,9 +1,9 @@
 #pragma once
 
-#include "..\..\..\Scene\Materials\Static\SimpleMaterial.h"
-#include "..\..\..\Scene\Materials\Static\UVMap.h"
-#include "..\..\..\Scene\Objects\Object3D.h"
-#include "..\..\..\Renderer\Utils\IndexGroup.h"
+#include "../../../Scene/Materials/Static/SimpleMaterial.h"
+#include "../../../Scene/Materials/Static/UVMap.h"
+#include "../../../Scene/Objects/Object3D.h"
+#include "../../../Renderer/Utils/IndexGroup.h"
 
 class RunningKernel {
 private:

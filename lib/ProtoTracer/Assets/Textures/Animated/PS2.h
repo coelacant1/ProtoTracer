@@ -1,6 +1,6 @@
 #pragma once
 
-#include "..\..\Animation\ImageSequence.h"
+#include "../../Animation/ImageSequence.h"
 
 class PS2Sequence : public ImageSequence{
 private:

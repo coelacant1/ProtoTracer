@@ -1,13 +1,13 @@
 #pragma once
 
 #include "Animation.h"
-#include "..\Objects\SolidCube.h"
-#include "..\Materials\DepthMaterial.h"
-#include "..\Materials\LightMaterial.h"
-#include "..\Math\FunctionGenerator.h"
+#include "../Objects/SolidCube.h"
+#include "../Materials/DepthMaterial.h"
+#include "../Materials/LightMaterial.h"
+#include "../Math/FunctionGenerator.h"
 
 //#include "Flash\Images\CoelaToot.h"
-#include "Flash\ImageSequences\Nerd.h"
+#include "Flash/ImageSequences/Nerd.h"
 
 class CoelaNerdAnimation : public Animation{
 private:

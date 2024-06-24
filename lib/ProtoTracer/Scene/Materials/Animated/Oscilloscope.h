@@ -1,11 +1,11 @@
 #pragma once
 
-#include "..\Material.h"
-#include "..\Static\GradientMaterial.h"
-#include "..\..\..\Physics\Utils\BouncePhysics.h"
-#include "..\..\..\Utils\Filter\MaxFilter.h"
-#include "..\..\..\Utils\Filter\MinFilter.h"
-#include "..\..\..\Utils\Math\Mathematics.h"
+#include "../Material.h"
+#include "../Static/GradientMaterial.h"
+#include "../../../Physics/Utils/BouncePhysics.h"
+#include "../../../Utils/Filter/MaxFilter.h"
+#include "../../../Utils/Filter/MinFilter.h"
+#include "../../../Utils/Math/Mathematics.h"
 
 class Oscilloscope : public Material {
 private:

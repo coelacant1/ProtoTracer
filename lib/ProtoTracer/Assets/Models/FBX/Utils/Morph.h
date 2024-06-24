@@ -1,7 +1,7 @@
 #pragma once
 
-#include "..\..\..\..\Utils\Math\Mathematics.h"
-#include "..\..\..\..\Renderer\Utils\ITriangleGroup.h"
+#include "../../../../Utils/Math/Mathematics.h"
+#include "../../../../Renderer/Utils/ITriangleGroup.h"
 
 class Morph{
 private:

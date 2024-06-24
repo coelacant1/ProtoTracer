@@ -4,9 +4,9 @@
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BNO055.h>
 #include <utility/imumaths.h>
-#include "..\..\Utils\Filter\QuaternionKalmanFilter.h"
-#include "..\..\Utils\Filter\VectorRunningAverageFilter.h"
-#include "..\..\Utils\Math\Rotation.h"
+#include "../../Utils/Filter/QuaternionKalmanFilter.h"
+#include "../../Utils/Filter/VectorRunningAverageFilter.h"
+#include "../../Utils/Math/Rotation.h"
 
 class BNO055 {
 private:

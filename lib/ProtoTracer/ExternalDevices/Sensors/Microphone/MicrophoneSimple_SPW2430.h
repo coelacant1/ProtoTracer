@@ -1,9 +1,9 @@
 #pragma once
 
 #include <Arduino.h>
-#include "..\..\..\Utils\Math\Mathematics.h"
-#include "..\..\..\Utils\Filter\RunningAverageFilter.h"
-#include "..\..\..\Utils\Filter\MinFilter.h"
+#include "../../../Utils/Math/Mathematics.h"
+#include "../../../Utils/Filter/RunningAverageFilter.h"
+#include "../../../Utils/Filter/MinFilter.h"
 
 class MicrophoneSimple {
 private:

@@ -1,11 +1,11 @@
 #pragma once
 
 #include "Animation.h"
-#include "..\Objects\SolidCube.h"
-#include "..\Math\FunctionGenerator.h"
-#include "..\Morph\ProtoDRMorph.h"
+#include "../Objects/SolidCube.h"
+#include "../Math/FunctionGenerator.h"
+#include "../Morph/ProtoDRMorph.h"
 
-#include "..\Materials\VectorField2D.h"
+#include "../Materials/VectorField2D.h"
 
 class VectorFieldAnimation : public Animation{
 private:

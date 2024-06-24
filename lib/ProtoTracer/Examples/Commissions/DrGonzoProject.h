@@ -1,15 +1,15 @@
 #pragma once
 
-#include "..\Templates\ProtogenProjectTemplate.h"
+#include "../Templates/ProtogenProjectTemplate.h"
 //#include "..\..\Assets\Models\OBJ\DeltaDisplayBackground.h"
-#include "..\..\Assets\Models\FBX\Commissions\DrGonzoFace.h"
-#include "..\..\Assets\Models\FBX\Commissions\DrGonzoSD.h"
-#include "..\..\Assets\Models\FBX\Commissions\DrGonzoTears.h"
+#include "../../Assets/Models/FBX/Commissions/DrGonzoFace.h"
+#include "../../Assets/Models/FBX/Commissions/DrGonzoSD.h"
+#include "../../Assets/Models/FBX/Commissions/DrGonzoTears.h"
 
-#include "..\..\Camera\CameraManager\Implementations\HUB75DeltaCameras.h"
-#include "..\..\Controller\HUB75Controller.h"
+#include "../../Camera/CameraManager/Implementations/HUB75DeltaCameras.h"
+#include "../../Controller/HUB75Controller.h"
 
-#include "..\..\Animation\MorphTransform.h"
+#include "../../Animation/MorphTransform.h"
 
 //#define NEOTRELLISMENU
 

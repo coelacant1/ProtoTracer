@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Material.h"
-#include "..\..\Utils\Math\Vector2D.h"
-#include "..\..\Utils\Math\Vector3D.h"
+#include "../../Utils/Math/Vector2D.h"
+#include "../../Utils/Math/Vector3D.h"
 
 template<size_t materialCount>
 class CombineMaterial : public Material {

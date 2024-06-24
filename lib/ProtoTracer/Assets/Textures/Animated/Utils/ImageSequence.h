@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Arduino.h"
-#include "..\Materials\Image.h"
-#include "..\Materials\Material.h"
+#include "../Materials/Image.h"
+#include "../Materials/Material.h"
 
 class ImageSequence : public Material{
 private:

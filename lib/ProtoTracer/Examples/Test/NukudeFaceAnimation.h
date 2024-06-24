@@ -3,17 +3,17 @@
 #include "Animation.h"
 #include "KeyFrameTrack.h"
 #include "EasyEaseAnimator.h"
-#include "..\Morph\NukudeFace.h"
-#include "..\Render\Scene.h"
-#include "..\Materials\GradientMaterial.h"
-#include "..\Materials\SimplexNoise.h"
-#include "..\Math\FunctionGenerator.h"
-#include "..\Sensors\SerialSync.h"
-#include "..\Sensors\MicrophoneSimple.h"
-#include "..\Sensors\ButtonHandler.h"
-#include "..\Materials\NormalMaterial.h"
+#include "../Morph/NukudeFace.h"
+#include "../Render/Scene.h"
+#include "../Materials/GradientMaterial.h"
+#include "../Materials/SimplexNoise.h"
+#include "../Math/FunctionGenerator.h"
+#include "../Sensors/SerialSync.h"
+#include "../Sensors/MicrophoneSimple.h"
+#include "../Sensors/ButtonHandler.h"
+#include "../Materials/NormalMaterial.h"
 
-#include "Flash\ImageSequences\Rainbow.h"
+#include "Flash/ImageSequences/Rainbow.h"
 
 class NukudeFaceAnimation : public Animation{
 private:

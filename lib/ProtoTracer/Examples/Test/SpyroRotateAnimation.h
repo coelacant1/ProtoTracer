@@ -1,9 +1,9 @@
 #pragma once
 
 #include "Animation.h"
-#include "..\Math\FunctionGenerator.h"
-#include "..\Objects\Spyro.h"
-#include "..\Sensors\SerialInterpreter.h"
+#include "../Math/FunctionGenerator.h"
+#include "../Objects/Spyro.h"
+#include "../Sensors/SerialInterpreter.h"
 
 class SpyroRotateAnimation : public Animation{
 private:

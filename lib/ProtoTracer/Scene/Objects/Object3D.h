@@ -1,9 +1,9 @@
 #pragma once
 
-#include "..\Materials\Material.h"
-#include "..\..\Utils\Math\Transform.h"
-#include "..\..\Renderer\Utils\TriangleGroup.h"
-#include "..\..\Renderer\Utils\StaticTriangleGroup.h"
+#include "../Materials/Material.h"
+#include "../../Utils/Math/Transform.h"
+#include "../../Renderer/Utils/TriangleGroup.h"
+#include "../../Renderer/Utils/StaticTriangleGroup.h"
 
 class Object3D {
 private:

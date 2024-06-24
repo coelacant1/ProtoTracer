@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Arduino.h>
-#include "..\..\Utils\Math\Mathematics.h"
+#include "../../Utils/Math/Mathematics.h"
 
 class FanController {
 private:

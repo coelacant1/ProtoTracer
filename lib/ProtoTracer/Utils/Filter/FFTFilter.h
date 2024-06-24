@@ -1,7 +1,7 @@
 #pragma once
 
 #include "RunningAverageFilter.h"
-#include "..\Math\Mathematics.h"
+#include "../Math/Mathematics.h"
 
 class FFTFilter {
 private:

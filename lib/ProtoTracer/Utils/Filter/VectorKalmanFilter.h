@@ -1,7 +1,7 @@
 #pragma once
 
 #include "KalmanFilter.h"
-#include "..\Math\Vector3D.h"
+#include "../Math/Vector3D.h"
 
 template<typename T>
 class VectorKalmanFilter {

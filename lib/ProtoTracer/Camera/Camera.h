@@ -1,7 +1,7 @@
 #pragma once
 
 #include "CameraBase.h"
-#include "Pixels\PixelGroup.h"
+#include "Pixels/PixelGroup.h"
 
 template<size_t pixelCount>
 class Camera : public CameraBase {

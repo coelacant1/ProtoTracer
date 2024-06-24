@@ -1,29 +1,29 @@
 #pragma once
 
-#include "..\Animation.h"
-#include "..\KeyFrameTrack.h"
-#include "..\EasyEaseAnimator.h"
-#include "..\..\Objects\Background.h"
-#include "..\..\Morph\MyntFace.h"
-#include "..\..\Morph\MyntFood.h"
-#include "..\..\Morph\MyntPacman.h"
-#include "..\..\Morph\MyntSOS.h"
-#include "..\..\Morph\MyntZZZ.h"
-#include "..\..\Render\Scene.h"
-#include "..\..\Signals\FunctionGenerator.h"
-#include "..\..\Sensors\MenuButtonHandler.h"
-#include "..\..\Sensors\BoopSensor.h"
-#include "..\..\Sensors\MicrophoneFourier_MAX9814.h"
+#include "../Animation.h"
+#include "../KeyFrameTrack.h"
+#include "../EasyEaseAnimator.h"
+#include "../../Objects/Background.h"
+#include "../../Morph/MyntFace.h"
+#include "../../Morph/MyntFood.h"
+#include "../../Morph/MyntPacman.h"
+#include "../../Morph/MyntSOS.h"
+#include "../../Morph/MyntZZZ.h"
+#include "../../Render/Scene.h"
+#include "../../Signals/FunctionGenerator.h"
+#include "../../Sensors/MenuButtonHandler.h"
+#include "../../Sensors/BoopSensor.h"
+#include "../../Sensors/MicrophoneFourier_MAX9814.h"
 
-#include "..\..\Materials\Animated\SpectrumAnalyzer.h"
-#include "..\..\Materials\Animated\RainbowNoise.h"
-#include "..\..\Materials\Animated\RainbowSpiral.h"
+#include "../../Materials/Animated/SpectrumAnalyzer.h"
+#include "../../Materials/Animated/RainbowNoise.h"
+#include "../../Materials/Animated/RainbowSpiral.h"
 
-#include "..\..\Materials\CombineMaterial.h"
+#include "../../Materials/CombineMaterial.h"
 
-#include "..\AnimationTracks\BlinkTrack.h"
+#include "../AnimationTracks/BlinkTrack.h"
 
-#include "..\..\Signals\FFTVoiceDetection.h"
+#include "../../Signals/FFTVoiceDetection.h"
 
 class MyntAnimation : public Animation<6> {
 private:

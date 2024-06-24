@@ -1,11 +1,11 @@
 #pragma once
 
-#include "..\CameraManager.h"
-#include "..\..\Camera.h"
-#include "..\..\Pixels\PixelGroup.h"
-#include "..\..\Pixels\PixelGroups\DeltaDisplayFursuitL.h"
-#include "..\..\Pixels\PixelGroups\DeltaDisplayFursuitR.h"
-#include "..\..\..\Utils\Math\Transform.h"
+#include "../CameraManager.h"
+#include "../../Camera.h"
+#include "../../Pixels/PixelGroup.h"
+#include "../../Pixels/PixelGroups/DeltaDisplayFursuitL.h"
+#include "../../Pixels/PixelGroups/DeltaDisplayFursuitR.h"
+#include "../../../Utils/Math/Transform.h"
 
 class APA102CamerasV1 : public CameraManager {
 private:

@@ -1,11 +1,11 @@
 #pragma once
 
 #include <Adafruit_MMC56x3.h>
-#include "..\..\Utils\Filter\MinFilter.h"
-#include "..\..\Utils\Filter\RunningAverageFilter.h"
-#include "..\..\Utils\Math\Vector2D.h"
-#include "..\..\Utils\Math\Vector3D.h"
-#include "..\..\Utils\Time\TimeStep.h"
+#include "../../Utils/Filter/MinFilter.h"
+#include "../../Utils/Filter/RunningAverageFilter.h"
+#include "../../Utils/Math/Vector2D.h"
+#include "../../Utils/Math/Vector3D.h"
+#include "../../Utils/Time/TimeStep.h"
 
 class MMC56X3 {
 private:

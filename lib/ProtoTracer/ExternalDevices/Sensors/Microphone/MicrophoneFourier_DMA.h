@@ -4,7 +4,7 @@
 #include <ADC.h>
 #include <DMAChannel.h>
 #include <AnalogBufferDMA.h>
-#include "Utils\MicrophoneFourierBase.h"
+#include "Utils/MicrophoneFourierBase.h"
 
 class MicrophoneFourier : public MicrophoneFourierBase {
 private:

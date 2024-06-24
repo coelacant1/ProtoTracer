@@ -1,10 +1,10 @@
 #pragma once
 
-#include "..\CameraManager.h"
-#include "..\..\Camera.h"
-#include "..\..\Pixels\PixelGroup.h"
-#include "..\..\Pixels\PixelGroups\P3HUB75.h"
-#include "..\..\..\Utils\Math\Transform.h"
+#include "../CameraManager.h"
+#include "../../Camera.h"
+#include "../../Pixels/PixelGroup.h"
+#include "../../Pixels/PixelGroups/P3HUB75.h"
+#include "../../../Utils/Math/Transform.h"
 
 class HUB75DeltaCameraManager : public CameraManager {
 private:

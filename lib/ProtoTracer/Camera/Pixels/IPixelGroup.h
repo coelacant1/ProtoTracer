@@ -1,7 +1,7 @@
 #pragma once
 
-#include "..\..\Utils\RGBColor.h"
-#include "..\..\Physics\Utils\BoundingBox2D.h"
+#include "../../Utils/RGBColor.h"
+#include "../../Physics/Utils/BoundingBox2D.h"
 
 class IPixelGroup {
 public:

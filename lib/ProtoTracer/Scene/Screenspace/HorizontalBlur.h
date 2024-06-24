@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Effect.h"
-#include "..\..\Utils\Math\Mathematics.h"
+#include "../../Utils/Math/Mathematics.h"
 
 class HorizontalBlur : public Effect {
 private:

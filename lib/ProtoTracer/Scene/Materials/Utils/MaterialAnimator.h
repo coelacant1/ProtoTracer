@@ -1,8 +1,8 @@
 #pragma once
 
-#include "..\..\..\Animation\EasyEaseAnimator.h"
-#include "..\CombineMaterial.h"
-#include "..\Material.h"
+#include "../../../Animation/EasyEaseAnimator.h"
+#include "../CombineMaterial.h"
+#include "../Material.h"
 
 template<size_t materialCount>
 class MaterialAnimator : public Material {

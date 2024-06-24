@@ -1,9 +1,9 @@
 #pragma once
 
-#include "..\Material.h"
-#include "..\..\..\Utils\Math\Mathematics.h"
-#include "..\..\..\Utils\Math\Vector3D.h"
-#include "..\Static\GradientMaterial.h"
+#include "../Material.h"
+#include "../../../Utils/Math/Mathematics.h"
+#include "../../../Utils/Math/Vector3D.h"
+#include "../Static/GradientMaterial.h"
 
 template<size_t colors>
 class SimplexNoise : public Material {

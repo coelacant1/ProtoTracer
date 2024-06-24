@@ -1,13 +1,13 @@
 #pragma once
 
-#include "Templates\Project.h"
-#include "..\Assets\Models\OBJ\Background.h"
-#include "..\Assets\Models\OBJ\DeltaDisplayBackground.h"
+#include "Templates/Project.h"
+#include "../Assets/Models/OBJ/Background.h"
+#include "../Assets/Models/OBJ/DeltaDisplayBackground.h"
 
-#include "..\Camera\CameraManager\Implementations\HUB75DeltaCameras.h"
-#include "..\Controller\HUB75Controller.h"
+#include "../Camera/CameraManager/Implementations/HUB75DeltaCameras.h"
+#include "../Controller/HUB75Controller.h"
 
-#include "..\Scene\Materials\Animated\RainbowSpiral.h"
+#include "../Scene/Materials/Animated/RainbowSpiral.h"
 
 class VerifyEngine : public Project{
     HUB75DeltaCameraManager cameras;

@@ -1,10 +1,10 @@
 #pragma once
 
-#include "..\CameraManager.h"
-#include "..\..\Camera.h"
-#include "..\..\Pixels\PixelGroup.h"
-#include "..\..\Pixels\PixelGroups\WS35Pixels.h"
-#include "..\..\..\Utils\Math\Transform.h"
+#include "../CameraManager.h"
+#include "../../Camera.h"
+#include "../../Pixels/PixelGroup.h"
+#include "../../Pixels/PixelGroups/WS35Pixels.h"
+#include "../../../Utils/Math/Transform.h"
 
 class WS35CameraManager : public CameraManager {
 private:

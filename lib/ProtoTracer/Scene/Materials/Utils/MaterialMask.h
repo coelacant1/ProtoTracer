@@ -1,7 +1,7 @@
 #pragma once
 
-#include "..\Material.h"
-#include "..\..\..\Renderer\Primitives\2D\Shape.h"
+#include "../Material.h"
+#include "../../../Renderer/Primitives/2D/Shape.h"
 
 class MaterialMask : public Material {
 private:

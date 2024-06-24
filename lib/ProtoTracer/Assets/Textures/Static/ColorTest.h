@@ -1,6 +1,6 @@
 #pragma once
 
-#include "..\..\..\Scene\Materials\Static\Image.h"
+#include "../../../Scene/Materials/Static/Image.h"
 
 class ColorTest : public Image{
 private:

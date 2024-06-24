@@ -1,8 +1,8 @@
 #pragma once
 
-#include "..\Render\Object3D.h"
-#include "..\Render\ObjectDeformer.h"
-#include "..\Flash\CrashObjs.h"
+#include "../Render/Object3D.h"
+#include "../Render/ObjectDeformer.h"
+#include "../Flash/CrashObjs.h"
 #include "Animation.h"
 
 class Crash : public Animation {

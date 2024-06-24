@@ -1,7 +1,7 @@
 #pragma once
 
-#include "..\..\Camera\Pixels\IPixelGroup.h"
-#include "..\..\Utils\Math\Mathematics.h"
+#include "../../Camera/Pixels/IPixelGroup.h"
+#include "../../Utils/Math/Mathematics.h"
 
 class Effect {
 protected:

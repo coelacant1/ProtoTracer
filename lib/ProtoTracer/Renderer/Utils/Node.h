@@ -1,6 +1,6 @@
 #pragma once
 
-#include "..\..\Physics\Utils\BoundingBox2D.h"
+#include "../../Physics/Utils/BoundingBox2D.h"
 #include "Triangle2D.h"
 
 class Node {

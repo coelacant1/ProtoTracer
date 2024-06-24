@@ -1,13 +1,13 @@
 #pragma once
 
-#include "..\Templates\ProtogenProjectTemplate.h"
-#include "..\..\Assets\Models\OBJ\DeltaDisplayBackground.h"
-#include "..\..\Assets\Models\FBX\Commissions\RoboEyes.h"
+#include "../Templates/ProtogenProjectTemplate.h"
+#include "../../Assets/Models/OBJ/DeltaDisplayBackground.h"
+#include "../../Assets/Models/FBX/Commissions/RoboEyes.h"
 
-#include "..\..\Scene\Materials\Animated\TVStatic.h"
+#include "../../Scene/Materials/Animated/TVStatic.h"
 
-#include "..\..\Camera\CameraManager\Implementations\APA102CamerasV1.h"
-#include "..\..\Controller\APA102Controller.h"
+#include "../../Camera/CameraManager/Implementations/APA102CamerasV1.h"
+#include "../../Controller/APA102Controller.h"
 
 class FursuitEyesV1 : public ProtogenProject {
 private:

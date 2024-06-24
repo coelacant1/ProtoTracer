@@ -4,8 +4,8 @@
 
 #include "Controller.h"
 #include "SmartMatrixAPA102.h"
-#include "..\Camera\CameraManager\CameraManager.h"
-#include "..\Camera\Pixels\PixelGroup.h"
+#include "../Camera/CameraManager/CameraManager.h"
+#include "../Camera/Pixels/PixelGroup.h"
 
 class APA102Controller : public Controller {
 public:

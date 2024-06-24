@@ -1,10 +1,10 @@
 #pragma once
 
 #include <Arduino.h>
-#include "..\..\..\..\Utils\Filter\DerivativeFilter.h"
-#include "..\..\..\..\Utils\Filter\FFTFilter.h"
-#include "..\..\..\..\Utils\Time\TimeStep.h"
-#include "..\..\..\..\Utils\Signals\FFT.h"
+#include "../../../../Utils/Filter/DerivativeFilter.h"
+#include "../../../../Utils/Filter/FFTFilter.h"
+#include "../../../../Utils/Time/TimeStep.h"
+#include "../../../../Utils/Signals/FFT.h"
 
 class MicrophoneFourierBase {
 protected:

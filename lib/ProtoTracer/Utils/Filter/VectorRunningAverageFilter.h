@@ -1,7 +1,7 @@
 #pragma once
 
 #include "RunningAverageFilter.h"
-#include "..\Math\Vector3D.h"
+#include "../Math/Vector3D.h"
 
 template<size_t memory>
 class VectorRunningAverageFilter {

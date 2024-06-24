@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Math\Mathematics.h"
-#include "Math\Quaternion.h"
-#include "Math\Vector3D.h"
+#include "Math/Mathematics.h"
+#include "Math/Quaternion.h"
+#include "Math/Vector3D.h"
 
 class RGBColor {
 public:

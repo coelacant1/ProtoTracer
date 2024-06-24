@@ -1,8 +1,8 @@
 #pragma once
 
-#include "..\AnimatedMaterial.h"
-#include "..\Static\GradientMaterial.h"
-#include "..\Static\SimplexNoise.h"
+#include "../AnimatedMaterial.h"
+#include "../Static/GradientMaterial.h"
+#include "../Static/SimplexNoise.h"
 
 class HorizontalRainbow : public AnimatedMaterial {
 private:

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "..\..\Utils\Math\Vector3D.h"
+#include "../../Utils/Math/Vector3D.h"
 
 class Light {
 public:

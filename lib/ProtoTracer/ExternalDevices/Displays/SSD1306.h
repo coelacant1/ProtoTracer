@@ -6,10 +6,10 @@
 #include <Adafruit_SSD1306.h>
 #include <Fonts/Picopixel.h>
 
-#include "..\InputDevices\Menu\Menu.h"
-#include "..\..\Utils\Math\Mathematics.h"
-#include "..\..\Scene\Screenspace\Effect.h"
-#include "..\..\Utils\Time\TimeStep.h"
+#include "../InputDevices/Menu/Menu.h"
+#include "../../Utils/Math/Mathematics.h"
+#include "../../Scene/Screenspace/Effect.h"
+#include "../../Utils/Time/TimeStep.h"
 
 class HeadsUpDisplay : public Effect {
 private:

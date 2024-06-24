@@ -1,7 +1,7 @@
 #pragma once
 
 #include "KeyFrame.h"
-#include "..\Utils\Math\Mathematics.h"
+#include "../Utils/Math/Mathematics.h"
 
 class KeyFrameInterpolation{
 public:

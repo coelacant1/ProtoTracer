@@ -1,6 +1,6 @@
 #pragma once
 
-#include "..\..\Animation\ImageSequence.h"
+#include "../../Animation/ImageSequence.h"
 
 class VortexSequence : public ImageSequence{
 private:

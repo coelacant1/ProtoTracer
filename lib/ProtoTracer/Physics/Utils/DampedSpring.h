@@ -1,6 +1,6 @@
 #pragma once
 
-#include "..\..\Utils\Math\Mathematics.h"
+#include "../../Utils/Math/Mathematics.h"
 
 class DampedSpring {
 private:

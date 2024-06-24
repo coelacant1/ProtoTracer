@@ -3,36 +3,36 @@
 #include "Animation.h"
 #include "KeyFrameTrack.h"
 #include "EasyEaseAnimator.h"
-#include "..\Objects\Background.h"
-#include "..\Objects\LEDStripBackground.h"
-#include "..\Morph\GammaFace.h"
-#include "..\Render\Scene.h"
-#include "..\Signals\FunctionGenerator.h"
-#include "..\Menu\SingleButtonMenu.h"
-#include "..\Sensors\APDS9960.h"
+#include "../Objects/Background.h"
+#include "../Objects/LEDStripBackground.h"
+#include "../Morph/GammaFace.h"
+#include "../Render/Scene.h"
+#include "../Signals/FunctionGenerator.h"
+#include "../Menu/SingleButtonMenu.h"
+#include "../Sensors/APDS9960.h"
 
-#include "..\Materials\Animated\RainbowNoise.h"
-#include "..\Materials\Animated\RainbowSpiral.h"
-#include "..\Materials\Animated\SpectrumAnalyzer.h"
-#include "..\Materials\Animated\AudioReactiveGradient.h"
-#include "..\Materials\Animated\Oscilloscope.h"
+#include "../Materials/Animated/RainbowNoise.h"
+#include "../Materials/Animated/RainbowSpiral.h"
+#include "../Materials/Animated/SpectrumAnalyzer.h"
+#include "../Materials/Animated/AudioReactiveGradient.h"
+#include "../Materials/Animated/Oscilloscope.h"
 
-#include "..\Materials\MaterialAnimator.h"
+#include "../Materials/MaterialAnimator.h"
 
-#include "AnimationTracks\BlinkTrack.h"
+#include "AnimationTracks/BlinkTrack.h"
 
-#include "..\Signals\FFTVoiceDetection.h"
+#include "../Signals/FFTVoiceDetection.h"
 
-#include "..\Sensors\MicrophoneFourier_MAX9814.h"
+#include "../Sensors/MicrophoneFourier_MAX9814.h"
 
-#include "..\Render\ObjectAlign.h"
+#include "../Render/ObjectAlign.h"
 
-#include "..\Sensors\SHARPGP2Y.h"
-#include "..\Sensors\SerialSync.h"
-#include "..\Filter\KalmanFilter.h"
+#include "../Sensors/SHARPGP2Y.h"
+#include "../Sensors/SerialSync.h"
+#include "../Filter/KalmanFilter.h"
 
 #ifdef FRONTFACE
-#include "..\Sensors\SSD1306.h"
+#include "../Sensors/SSD1306.h"
 #endif
 
 //0x28, 0x39, 0x3C

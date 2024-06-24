@@ -1,6 +1,6 @@
 #pragma once
 
-#include "..\Math\Mathematics.h"
+#include "../Math/Mathematics.h"
 
 template<size_t memory>
 class MinFilter {

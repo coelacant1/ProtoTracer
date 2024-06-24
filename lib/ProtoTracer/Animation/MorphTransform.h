@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IEasyEaseAnimator.h"
-#include "..\Utils\Math\Vector3D.h"
+#include "../Utils/Math/Vector3D.h"
 
 template<size_t maxMorphs>
 class MorphTransform {

@@ -1,13 +1,13 @@
 #pragma once
 
 #include <Arduino.h>
-#include "..\..\Engine\Engine.h"
-#include "..\..\Scene\Scene.h"
-#include "..\..\Camera\CameraManager\CameraManager.h"
-#include "..\..\Controller\Controller.h"
-#include "..\..\Utils\Filter\RunningAverageFilter.h"
+#include "../../Engine/Engine.h"
+#include "../../Scene/Scene.h"
+#include "../../Camera/CameraManager/CameraManager.h"
+#include "../../Controller/Controller.h"
+#include "../../Utils/Filter/RunningAverageFilter.h"
 
-#include "Utils\Debug.h"
+#include "Utils/Debug.h"
 
 class Project {
 protected:
