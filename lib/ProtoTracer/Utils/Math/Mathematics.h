@@ -1,4 +1,6 @@
 #pragma once
+
+#include <cmath>
 #include <math.h>
 #include <WString.h>
 

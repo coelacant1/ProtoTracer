@@ -128,7 +128,7 @@ int Mathematics::RoundUpWindow(int value, int multiple) {
     if (multiple == 0)
         return value;
 
-    int remainder = std::abs(value) % multiple;
+    int remainder = abs(value) % multiple;
     if (remainder == 0)
         return value;
 

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstdlib>
 #include "../Material.h"
 #include "../../../Utils/Math/Mathematics.h"
 #include "../../../Utils/Math/Vector3D.h"
