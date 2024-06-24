@@ -61,4 +61,5 @@ public:
     void Update();
     void SetEffect(Effect* effect);
     void ApplyEffect(IPixelGroup* pixelGroup);
+    void CheckInvertPrintText(int16_t x, int16_t y, uint8_t menu, const String &str);
 };

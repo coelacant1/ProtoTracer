@@ -193,6 +193,14 @@ Effect* Menu::GetEffect() {
     }
 }
 
+uint8_t Menu::GetCurrentMenu(){
+    return MenuHandler<menuCount>::GetCurrentMenu();
+}
+
+uint8_t Menu::GetCurrentMenuValue(){
+    return MenuHandler<menuCount>::GetMenuValue(GetCurrentMenu());
+}
+
 void Menu::SetCurrentMenu(uint8_t currentMenu) {
     Menu::currentMenu = currentMenu;
 }

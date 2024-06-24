@@ -25,6 +25,8 @@
 #include "..\..\ExternalDevices\Sensors\Microphone\Utils\FFTVoiceDetection.h"
 #include "..\..\Scene\Objects\ObjectAlign.h"
 
+#include "..\..\Utils\Time\TimeStep.h"
+
 #include "..\UserConfiguration.h"
 
 //Default Project base for Analog microphone, APDS9960 boop sensor, and button control
@@ -64,14 +66,14 @@ private:
     GradientMaterial<2> gradientMat = GradientMaterial<2>(gradientSpectrum, 350.0f, false);
     
     MaterialAnimator<20> materialAnimator;
-    MaterialAnimator<10> backgroundMaterial;
+    MaterialAnimator<20> backgroundMaterial;
     
     SpectrumAnalyzer sA = SpectrumAnalyzer(Vector2D(200, 100), Vector2D(100, 50), true, true); 
     AudioReactiveGradient aRG = AudioReactiveGradient(Vector2D(160, 160), Vector2D(0, 0), true, true); 
     Oscilloscope oSC = Oscilloscope(Vector2D(200, 100), Vector2D(0, 0));
 
     //Project controllers
-    BlinkTrack<1> blink;
+    BlinkTrack<2> blink;
     ObjectAlign objA = ObjectAlign(camMin, camMax, Quaternion());
     ObjectAlign objARear = ObjectAlign(camMinRear, camMaxRear, Quaternion());
     ObjectAlign objAOther = ObjectAlign(Vector2D(), Vector2D(), Quaternion());
@@ -98,6 +100,8 @@ private:
     void UpdateKeyFrameTracks();
     void UpdateFFTVisemes();
     void SetMaterialColor();
+
+    TimeStep frameLimiter = TimeStep(120);
 
 protected:
     enum Color{
@@ -140,14 +144,15 @@ protected:
 
     float GetFaceScale();
 
-    void AddParameter(uint8_t index, float* parameter, uint8_t transitionFrames, IEasyEaseAnimator::InterpolationMethod interpolationMethod = IEasyEaseAnimator::InterpolationMethod::Overshoot, bool invertDirection = false);
+    void AddParameter(uint8_t index, float* parameter, uint16_t transitionFrames, IEasyEaseAnimator::InterpolationMethod interpolationMethod = IEasyEaseAnimator::InterpolationMethod::Overshoot, bool invertDirection = false);
     void AddViseme(Viseme::MouthShape visemeName, float* parameter);
     void AddBlinkParameter(float* blinkParameter);
     void AddParameterFrame(uint16_t ProjectIndex, float target);
     void AddMaterial(Material::Method method, Material* material, uint16_t frames = 20, float minOpacity = 0.0f, float maxOpacity = 1.0f);
-    void AddMaterialFrame(Color color);
+    void AddMaterialFrame(Color color, float opacity = 0.8f);
     void AddMaterialFrame(Material& material, float opacity = 1.0f);
     void AddBackgroundMaterial(Material::Method method, Material* material, uint16_t frames = 20, float minOpacity = 0.0f, float maxOpacity = 1.0f);
+    void AddBackgroundMaterialFrame(Color color, float opacity = 0.8f);
     void AddBackgroundMaterialFrame(Material& material, float opacity = 1.0f);
 
     void SpectrumAnalyzerFace();

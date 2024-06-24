@@ -113,6 +113,8 @@ public:
     static void Initialize(uint8_t faceCount, Vector2D size = Vector2D(240, 50));
     static Material* GetMaterial();
     static Effect* GetEffect();
+    static uint8_t GetCurrentMenu();
+    static uint8_t GetCurrentMenuValue();
     static void SetCurrentMenu(uint8_t currentMenu);
     static void Update(float ratio);
     static void SetWiggleRatio(float wiggleRatio);

@@ -345,45 +345,47 @@ void HeadsUpDisplay::UpdateFaceInformation() {
     display.setTextSize(1);             // Normal 1:1 pixel scale
 
     //ROW 1
-    display.setCursor(3,13);//Face
-    if (useExternalFace) display.println(faceNames[Menu::GetFaceState()]);
-    else display.println(faceArray[Menu::GetFaceState()]);
+    if (useExternalFace) CheckInvertPrintText(3, 13, 0, faceNames[Menu::GetFaceState()]);//Face
+    else CheckInvertPrintText(3, 13, 0, faceArray[Menu::GetFaceState()]);
     
-    display.setCursor(34,13);//Brightness
-    display.println(percentArray[Menu::GetBrightness()]);
-
-    display.setCursor(66,13);//Face Size
-    display.println(percentArray[Menu::GetFaceSize()]);
-
-    display.setCursor(98,13);//Use Microphone
-    display.println(onOffArray[Menu::UseMicrophone()]);
+    CheckInvertPrintText(34, 13, 1, percentArray[Menu::GetBrightness()]);//Brightness
+    CheckInvertPrintText(66, 13, 7, percentArray[Menu::GetFaceSize()]);//Face Size
+    CheckInvertPrintText(98, 13, 3, onOffArray[Menu::UseMicrophone()]);//Use Microphone
 
     //ROW 2
-    display.setCursor(3,28);//Effect
-    display.println(effectArray[Menu::GetEffectS()]);
-
-    display.setCursor(34,28);//Side Brightness
-    display.println(percentArray[Menu::GetAccentBrightness()]);
-
-    display.setCursor(66,28);//Face Color
-    display.println(colorArray[Menu::GetFaceColor()]);
-
-    display.setCursor(98,28);//Use Boop
-    display.println(onOffArray[Menu::UseBoopSensor()]);
+    CheckInvertPrintText(3, 28, 11, effectArray[Menu::GetEffectS()]);//Effect
+    CheckInvertPrintText(34, 28, 2, percentArray[Menu::GetAccentBrightness()]);//Side Brightness
+    CheckInvertPrintText(66, 28, 8, colorArray[Menu::GetFaceColor()]);//Face Color
+    CheckInvertPrintText(98, 28, 5, onOffArray[Menu::UseBoopSensor()]);//Use Boop
 
     //ROW 3
-    display.setCursor(3,45);//Hue front
-    display.println(hueArray[Menu::GetHueF()]);
-
-    display.setCursor(34,45);//Mic level
-    display.println(percentArray[Menu::GetMicLevel()]);
+    CheckInvertPrintText(3, 45, 9, hueArray[Menu::GetHueF()]);//Hue front
+    CheckInvertPrintText(34, 45, 4, percentArray[Menu::GetMicLevel()]);//Mic level
 
     //ROW 4
-    display.setCursor(3,60);//Hue back
-    display.println(hueArray[Menu::GetHueB()]);
-
-    display.setCursor(34,60);//Mirror spectrum analyzer
-    display.println(percentArray[Menu::GetFanSpeed()]);
+    CheckInvertPrintText(3, 60, 10, hueArray[Menu::GetHueB()]);//Hue back
+    CheckInvertPrintText(34, 60, 12, percentArray[Menu::GetFanSpeed()]);//Mirror spectrum analyzer
     
     display.drawBitmap(66, 35, faceBitmap, 64, 32, 0);
 }
+
+
+void HeadsUpDisplay::CheckInvertPrintText(int16_t x, int16_t y, uint8_t menu, const String &str){
+    int16_t x1, y1;
+    uint16_t w, h;
+    
+    if (Menu::GetCurrentMenu() == menu && millis() % 500 > 250){
+        display.getTextBounds(str, x, y, &x1, &y1, &w, &h);
+        
+        //display.setCursor(x, y + h);
+        display.fillRect(x, y - h + 1, w, h, 0);
+
+        display.setTextColor(1);
+    }
+
+    display.setCursor(x, y);
+    display.println(str);
+
+    display.setTextColor(0);
+}
+
