@@ -5,19 +5,12 @@
 class EulerOrder {
 public:
     enum Axis {
-        X,
-        Y,
-        Z
-    };
-
-    enum Parity {
-        Even,
-        Odd
-    };
-
-    enum AxisRepetition {
-        Yes,
-        No
+        XYZ,
+        XZY,
+        YXZ,
+        YZX,
+        ZXY,
+        ZYX
     };
 
     enum AxisFrame {
@@ -25,9 +18,7 @@ public:
         Rotating
     };
 
-    Axis InitialAxis;
-    Parity AxisPermutation;
-    AxisRepetition InitialAxisRepetition;
+    Axis AxisOrder;
     AxisFrame FrameTaken;
     Vector3D Permutation;
 
@@ -35,7 +26,7 @@ public:
     EulerOrder();
 
     // Parameterized constructor.
-    EulerOrder(Axis axis, Parity parity, AxisRepetition axisRepetition, AxisFrame axisFrame, Vector3D permutation);
+    EulerOrder(Axis axisOrder, AxisFrame axisFrame, Vector3D permutation);
 
     // Convert EulerOrder to a string representation.
     String ToString();

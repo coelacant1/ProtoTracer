@@ -20,9 +20,10 @@ public:
 private:
     Vector3D basisVertices[30] = {Vector3D(35.1173f,97.3756f,-65.0000f),Vector3D(45.1294f,85.4565f,-65.0000f),Vector3D(37.2243f,35.9136f,-65.0000f),Vector3D(12.3140f,19.4665f,-65.0000f),Vector3D(49.0064f,25.8081f,-65.0000f),Vector3D(58.5622f,7.0786f,-65.0000f),Vector3D(43.2223f,101.6665f,-65.0000f),Vector3D(80.8866f,99.2827f,-65.0000f),Vector3D(53.7111f,88.3171f,-65.0000f),Vector3D(68.4908f,83.5495f,-65.0000f),Vector3D(61.0067f,34.9704f,-65.0000f),Vector3D(71.9723f,24.0049f,-65.0000f),Vector3D(91.3754f,99.7594f,-65.0000f),Vector3D(103.2945f,90.7009f,-65.0000f),Vector3D(84.1957f,35.1965f,-65.0000f),Vector3D(108.8505f,47.3869f,-65.0000f),Vector3D(118.1553f,38.7117f,-65.0000f),Vector3D(125.7276f,26.0820f,-65.0000f),Vector3D(102.8177f,102.1432f,-65.0000f),Vector3D(134.2644f,99.3334f,-65.0000f),Vector3D(112.3530f,93.5615f,-65.0000f),Vector3D(122.8221f,87.8911f,-65.0000f),Vector3D(121.4033f,48.1674f,-65.0000f),Vector3D(133.3224f,40.5392f,-65.0000f),Vector3D(143.5457f,99.7594f,-65.0000f),Vector3D(152.0570f,93.8351f,-65.0000f),Vector3D(140.4541f,34.6771f,-65.0000f),Vector3D(152.0800f,54.2556f,-65.0000f),Vector3D(160.5519f,51.5981f,-65.0000f),Vector3D(164.5609f,42.7428f,-65.0000f)};
     IndexGroup basisIndexes[20] = {IndexGroup(2,1,0),IndexGroup(0,3,2),IndexGroup(3,4,2),IndexGroup(3,5,4),IndexGroup(8,7,6),IndexGroup(8,9,7),IndexGroup(10,7,9),IndexGroup(10,11,7),IndexGroup(14,13,12),IndexGroup(14,15,13),IndexGroup(14,16,15),IndexGroup(14,17,16),IndexGroup(20,19,18),IndexGroup(20,21,19),IndexGroup(21,22,19),IndexGroup(19,22,23),IndexGroup(26,25,24),IndexGroup(26,27,25),IndexGroup(26,28,27),IndexGroup(26,29,28)};
-    TriangleGroup triangleGroup = TriangleGroup(&basisVertices[0], &basisIndexes[0], 30, 20);
-    SimpleMaterial simpleMaterial = SimpleMaterial(RGBColor(128, 128, 128));
-    Object3D basisObj = Object3D(&triangleGroup, &simpleMaterial);
+    StaticTriangleGroup<30,20> triangleGroup = StaticTriangleGroup<30,20>(&basisVertices[0], &basisIndexes[0]);
+	TriangleGroup<30,20> triangleGroupMemory = TriangleGroup<30,20>(&triangleGroup);
+	SimpleMaterial simpleMaterial = SimpleMaterial(RGBColor(128, 128, 128));
+	Object3D basisObj = Object3D(&triangleGroup, &triangleGroupMemory, &simpleMaterial);
 
     static const byte morphCount = 6;
     int Move1Indexes[3] = {0,3,5};

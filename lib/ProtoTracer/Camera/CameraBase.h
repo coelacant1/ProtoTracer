@@ -17,6 +17,9 @@ public:
     virtual Vector2D GetCameraMinCoordinate() = 0;
     virtual Vector2D GetCameraMaxCoordinate() = 0;
     virtual Vector2D GetCameraCenterCoordinate() = 0;
+    virtual Vector3D GetCameraTransformMin() = 0;
+    virtual Vector3D GetCameraTransformMax() = 0;
+    virtual Vector3D GetCameraTransformCenter() = 0;
     virtual IPixelGroup* GetPixelGroup() = 0;
 
     CameraLayout* GetCameraLayout();

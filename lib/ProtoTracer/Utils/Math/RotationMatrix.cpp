@@ -19,7 +19,7 @@ void RotationMatrix::ReadjustMatrix() {
     ZAxis = Vector3D(Z, Z, Z);
 }
 
-void RotationMatrix::Rotate(Vector3D rotation) {
+Vector3D RotationMatrix::Rotate(Vector3D rotation) {
     if (rotation.X != 0) {
         RotateX(rotation.X);
         didRotate = true;
@@ -42,37 +42,51 @@ void RotationMatrix::Rotate(Vector3D rotation) {
         RotateZ(rotation.Z);
         didRotate = true;
     }
+
+    return ConvertCoordinateToVector();
 }
 
-void RotationMatrix::RotateX(float theta) {
+Vector3D RotationMatrix::RotateX(float theta) {
     float c = cosf(Mathematics::DegreesToRadians(theta));
     float s = sinf(Mathematics::DegreesToRadians(theta));
 
     XAxis = Vector3D(1, 0,  0).Multiply(XAxis);
     YAxis = Vector3D(0, c, -s).Multiply(YAxis);
     ZAxis = Vector3D(0, s,  c).Multiply(ZAxis);
+    
+    return ConvertCoordinateToVector();
 }
 
-void RotationMatrix::RotateY(float theta) {
+Vector3D RotationMatrix::RotateY(float theta) {
     float c = cosf(Mathematics::DegreesToRadians(theta));
     float s = sinf(Mathematics::DegreesToRadians(theta));
 
     XAxis = Vector3D( c, 0, s).Multiply(XAxis);
     YAxis = Vector3D( 0, 1, 0).Multiply(YAxis);
     ZAxis = Vector3D(-s, 0, c).Multiply(ZAxis);
+    
+    return ConvertCoordinateToVector();
 }
 
-void RotationMatrix::RotateZ(float theta) {
+Vector3D RotationMatrix::RotateZ(float theta) {
     float c = cosf(Mathematics::DegreesToRadians(theta));
     float s = sinf(Mathematics::DegreesToRadians(theta));
 
     XAxis = Vector3D(c, -s, 0).Multiply(XAxis);
     YAxis = Vector3D(s,  c, 0).Multiply(YAxis);
     ZAxis = Vector3D(0,  0, 1).Multiply(ZAxis);
+    
+    return ConvertCoordinateToVector();
 }
 
 void RotationMatrix::RotateRelative(RotationMatrix rM) {
     Multiply(rM);
+}
+
+RotationMatrix::RotationMatrix() {
+    XAxis = Vector3D(1.0f, 0.0f, 0.0f);
+    YAxis = Vector3D(0.0f, 1.0f, 0.0f);
+    ZAxis = Vector3D(0.0f, 0.0f, 1.0f);
 }
 
 RotationMatrix::RotationMatrix(Vector3D axes) {

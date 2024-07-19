@@ -8,6 +8,8 @@
 #include "../../Camera/CameraManager/Implementations/HUB75DeltaCameras.h"
 #include "../../Controller/HUB75Controller.h"
 
+#include "../../Scene/Materials/Animated/HorizontalRainbow.h"
+
 class SplatAnimation : public ProtogenProject {
 private:
     HUB75DeltaCameraManager cameras;
@@ -15,6 +17,7 @@ private:
     SplatFace pM;
     DeltaDisplayBackground deltaDisplayBackground;
     LEDStripBackground ledStripBackground;
+    HorizontalRainbow hRainbow;
     
 	const __FlashStringHelper* faceArray[13] = {F("DEFAULT"), F("ANGRY"), F("CONFUSE"), F("DISAPPO"), F("FCIRCLE"), F("EXCITED"), F("HEART"), F("HCIRCLE"), F("SLEEPY"), F("AUDIO1"), F("AUDIO2"), F("AUDIO3")};
 
@@ -46,7 +49,10 @@ private:
     }
 
     void Default(){
-        AddMaterialFrame(Color::CWHITE, 0.8f);
+        //AddMaterialFrame(Color::CWHITE, 0.8f);
+        AddMaterialFrame(hRainbow, 0.8f);
+        
+        ledStripBackground.GetObject()->SetMaterial(GetFaceMaterial());
     }
 
     void Angry(){
@@ -59,41 +65,62 @@ private:
         AddParameterFrame(SplatFace::ConfusedEyes, 1.0f);
         AddParameterFrame(SplatFace::ConfusedMouth, 1.0f);
         AddParameterFrame(SplatFace::HideBlush, 0.0f);
-        AddMaterialFrame(Color::CRAINBOW, 0.8f);
+        //AddMaterialFrame(Color::CRAINBOW, 0.8f);
+        AddMaterialFrame(hRainbow, 0.8f);
     }
 
     void Disappointed(){
         AddParameterFrame(SplatFace::DisappointedEyes, 1.0f);
         AddParameterFrame(SplatFace::DisappointedMouth, 1.0f);
-        AddMaterialFrame(Color::CRAINBOW, 0.8f);
+        //AddMaterialFrame(Color::CRAINBOW, 0.8f);
+        AddMaterialFrame(hRainbow, 0.8f);
     }
 
     void Excited(){
         AddParameterFrame(SplatFace::ExcitedEyes, 1.0f);
         AddParameterFrame(SplatFace::HideBlush, 0.0f);
-        AddMaterialFrame(Color::CRAINBOW, 0.8f);
+        //AddMaterialFrame(Color::CRAINBOW, 0.8f);
+        AddMaterialFrame(hRainbow, 0.8f);
     }
     
     void FullCircle(){
         AddParameterFrame(SplatFace::FullCircleEyes, 1.0f);
-        AddMaterialFrame(Color::CRAINBOW, 0.8f);
+        //AddMaterialFrame(Color::CRAINBOW, 0.8f);
+        AddMaterialFrame(hRainbow, 0.8f);
     }
 
     void Heart(){
         AddParameterFrame(SplatFace::HeartEyes, 1.0f);
         AddParameterFrame(SplatFace::HideBlush, 0.0f);
-        AddMaterialFrame(Color::CRAINBOW, 0.8f);
+        //AddMaterialFrame(Color::CRAINBOW, 0.8f);
+        AddMaterialFrame(hRainbow, 0.8f);
     }
 
     void HollowCircle(){
         AddParameterFrame(SplatFace::HollowCircleEyes, 1.0f);
-        AddMaterialFrame(Color::CRAINBOW, 0.8f);
+        //AddMaterialFrame(Color::CRAINBOW, 0.8f);
+        AddMaterialFrame(hRainbow, 0.8f);
     }
 
     void Sleepy(){
         AddParameterFrame(SplatFace::SleepyEyes, 1.0f);
         AddParameterFrame(SplatFace::SleepyMouth, 1.0f);
         AddMaterialFrame(Color::CBLUE, 0.8f);
+    }
+
+    void SpectrumAnalyzerCallback() override {
+        deltaDisplayBackground.GetObject()->SetMaterial(&hRainbow);
+        ledStripBackground.GetObject()->SetMaterial(&hRainbow);
+    }
+
+    void AudioReactiveGradientCallback() override {
+        deltaDisplayBackground.GetObject()->SetMaterial(&hRainbow);
+        ledStripBackground.GetObject()->SetMaterial(&hRainbow);
+    }
+
+    void OscilloscopeCallback() override {
+        deltaDisplayBackground.GetObject()->SetMaterial(&hRainbow);
+        ledStripBackground.GetObject()->SetMaterial(&hRainbow);
     }
 
 public:
@@ -105,6 +132,8 @@ public:
         pM.GetObject()->SetMaterial(GetFaceMaterial());
         deltaDisplayBackground.GetObject()->SetMaterial(GetFaceMaterial());
         ledStripBackground.GetObject()->SetMaterial(GetFaceMaterial());
+
+        AddMaterial(Material::Replace, &hRainbow, 40, 0.0f, 1.0f);
 
         hud.SetFaceArray(faceArray);
 
@@ -125,6 +154,8 @@ public:
         controller.SetAccentBrightness(Menu::GetAccentBrightness());
 
         SelectFace(mode);
+        
+        hRainbow.Update(ratio);
 
         UpdateFace(ratio);
 

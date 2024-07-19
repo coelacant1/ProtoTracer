@@ -5,11 +5,15 @@
 #endif
 
 //#include "Examples\Commissions\UnicornZhenjaAnimation.h"
-#include "Examples/Protogen/ProtogenHUB75Project.h"
+//#include "Examples/Protogen/ProtogenHUB75Project.h"
 //#include "Examples\Protogen\ProtogenWS35Project.h"
 //#include "Examples\VerifyEngine.h"
 
-ProtogenHUB75Project project;
+
+//#include "Examples/Commissions/ArrowAnimation.h"
+#include "../lib/ProtoTracer/Examples/Protogen/BetaProject.h"
+
+BetaProject project;
 
 void setup() {
     Serial.begin(115200);

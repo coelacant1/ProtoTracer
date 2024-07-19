@@ -71,6 +71,18 @@ private:
         AddParameterFrame(NukudeFace::LookDown, 1.0f);
     }
 
+    void SpectrumAnalyzerCallback() override {
+        AddMaterialFrame(Color::CHORIZONTALRAINBOW, 0.8f);
+    }
+
+    void AudioReactiveGradientCallback() override {
+        AddMaterialFrame(Color::CHORIZONTALRAINBOW, 0.8f);
+    }
+
+    void OscilloscopeCallback() override {
+        AddMaterialFrame(Color::CHORIZONTALRAINBOW, 0.8f);
+    }
+
 public:
     ProtogenWS35Project() : ProtogenProject(&cameras, &controller, 1, Vector2D(), Vector2D(192.0f, 105.0f), 22, 23, 9){
         scene.AddObject(pM.GetObject());
@@ -80,6 +92,11 @@ public:
         LinkControlParameters();
 
         hud.SetFaceArray(faceArray);
+
+        SetWiggleSpeed(5.0f);
+        SetMenuWiggleSpeed(0.0f, 0.0f, 0.0f);
+        SetMenuOffset(Vector2D(2.5f, -3.0f));
+        SetMenuSize(Vector2D(240, 64));
     }
 
     void Update(float ratio) override {
@@ -120,11 +137,6 @@ public:
 
         AlignObjectFace(pM.GetObject(), -7.5f);
 
-        SetWiggleSpeed(5.0f);
-        SetMenuWiggleSpeed(0.0f, 0.0f, 0.0f);
-        SetMenuOffset(Vector2D(2.5f, -3.0f));
-        SetMenuSize(Vector2D(240, 64));
-        
         pM.GetObject()->GetTransform()->SetPosition(GetWiggleOffset());
         pM.GetObject()->UpdateTransform();
     }

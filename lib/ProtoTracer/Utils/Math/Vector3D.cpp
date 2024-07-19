@@ -133,6 +133,21 @@ Vector3D Vector3D::Constrain(const Vector3D& minimum, const Vector3D& maximum) c
     };
 }
 
+Vector3D Vector3D::Permutate(const Vector3D& permutation) const {
+    Vector3D v = Vector3D(this->X, this->Y, this->Z);
+    float perm[3];
+
+    perm[(int)permutation.X] = v.X;
+    perm[(int)permutation.Y] = v.Y;
+    perm[(int)permutation.Z] = v.Z;
+
+    v.X = perm[0];
+    v.Y = perm[1];
+    v.Z = perm[2];
+
+    return v;
+}
+
 float Vector3D::Magnitude() const {
     return Mathematics::Sqrt(X * X + Y * Y + Z * Z);
 }
