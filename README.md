@@ -1,7 +1,7 @@
 # **ProtoTracer: 3D Rendering and Animation Engine**
 This project is a real-time 3D rendering and animation engine designed for use on the Teensy 4.0. It supports 64x32 HUB75 panels, as well as a custom panel design based on WS2812b LEDs.
 
-Before startint this project, it is _highly_ recommended that you have experience with other microcontroller projects first. This is not a simple or easy project to complete, and support can only be provided for issues with the base project, not with your specific setup. If you rea looking for a simple, easy solution, please consider:
+Before startint this project, it is _highly_ recommended that you have experience with other microcontroller projects first. This is not a simple or easy project to complete, and support can only be provided for issues with the base project, not with your specific setup. If you are looking for a simple, easy solution, please consider:
 - Hudu WF-1
   - 🗸 RGB, works with HUB75 panels
   - 🗸 Easy Wi-Fi configuration, quick setup with an app
