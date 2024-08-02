@@ -162,6 +162,25 @@ float Vector3D::CalculateEuclideanDistance(const Vector3D& vector) const {
     return offset.Magnitude();
 }
 
+float Vector3D::AverageHighestTwoComponents() const {
+    Vector3D absV = this->Absolute();
+
+    // Find the two largest absolute values
+    float max1 = absV.Max();
+    float max2 = (max1 == absV.X) ? Mathematics::Max(absV.Y, absV.Z) : (max1 == absV.Y) ? Mathematics::Max(absV.X, absV.Z) : Mathematics::Max(absV.X, absV.Y);
+
+    // Compute the average of the two largest values
+    return (max1 + max2) / 2.0f;
+}
+
+float Vector3D::Max() const{
+    return Mathematics::Max(X, Y, Z);
+}
+
+float Vector3D::Min() const{
+    return Mathematics::Min(X, Y, Z);
+}
+
 bool Vector3D::IsEqual(const Vector3D& vector) const {
     return (this->X == vector.X) && (this->Y == vector.Y) && (this->Z == vector.Z);
 

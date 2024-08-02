@@ -92,6 +92,10 @@ Vector3D Quaternion::GetBiVector() const {
     };
 }
 
+Vector3D Quaternion::GetNormal() const {
+    return this->RotateVector(Vector3D(0, 0, 1.0f));
+}
+
 // Spherical interpolation
 Quaternion Quaternion::SphericalInterpolation(const Quaternion& q1, const Quaternion& q2, const float& ratio) {
     if (ratio <= Mathematics::EPSILON) return q1;

@@ -5,6 +5,8 @@
 #include "../../Assets/Models/FBX/BetaRear.h"
 #include "../../Assets/Models/OBJ/LEDStripBackground.h"
 #include "../../Assets/Models/FBX/NukudeFlat.h"
+#include "../../Assets/Models/OBJ/RectangularPrism.h"
+#include "../../Assets/Models/OBJ/Spyro.h"
 
 #include "../../Animation/KeyFrameTrack.h"
 
@@ -15,8 +17,11 @@ class BetaProject : public ProtogenProject {
 private:
     WS35BetaCameraManager cameras;
     WS35BetaController controller = WS35BetaController(&cameras, 50);
-    NukudeFace pM;
-    NukudeFace rear;
+    BetaFront pM;
+    BetaRear rear;
+    NukudeFace nukude;
+    RectangularPrism cube;
+    Spyro spyro;
     LEDStripBackground ledStripBackground;
     
 	const __FlashStringHelper* faceArray[10] = {F("DEFAULT"), F("SAD"), F("HEART"), F("DEAD"), F("CIRCLE"), F("ANGRY"), F("AUDIO1"), F("AUDIO2"), F("AUDIO3")};
@@ -28,27 +33,6 @@ private:
     KeyFrameTrack<1, 10> botFinLR5 = KeyFrameTrack<1, 10>(0.0f, 1.0f, KeyFrameInterpolation::Cosine);
 
     void LinkControlParameters() override {
-        AddParameter(NukudeFace::Anger, pM.GetMorphWeightReference(NukudeFace::Anger), 15);
-        AddParameter(NukudeFace::Sadness, pM.GetMorphWeightReference(NukudeFace::Sadness), 15, IEasyEaseAnimator::InterpolationMethod::Cosine);
-        AddParameter(NukudeFace::Surprised, pM.GetMorphWeightReference(NukudeFace::Surprised), 15);
-        AddParameter(NukudeFace::Doubt, pM.GetMorphWeightReference(NukudeFace::Doubt), 15);
-        AddParameter(NukudeFace::Frown, pM.GetMorphWeightReference(NukudeFace::Frown), 15);
-        AddParameter(NukudeFace::LookUp, pM.GetMorphWeightReference(NukudeFace::LookUp), 15);
-        AddParameter(NukudeFace::LookDown, pM.GetMorphWeightReference(NukudeFace::LookDown), 15);
-
-        AddParameter(NukudeFace::HideBlush, pM.GetMorphWeightReference(NukudeFace::HideBlush), 15, IEasyEaseAnimator::InterpolationMethod::Cosine, true);
-
-        AddViseme(Viseme::MouthShape::EE, pM.GetMorphWeightReference(NukudeFace::vrc_v_ee));
-        AddViseme(Viseme::MouthShape::AH, pM.GetMorphWeightReference(NukudeFace::vrc_v_aa));
-        AddViseme(Viseme::MouthShape::UH, pM.GetMorphWeightReference(NukudeFace::vrc_v_dd));
-        AddViseme(Viseme::MouthShape::AR, pM.GetMorphWeightReference(NukudeFace::vrc_v_rr));
-        AddViseme(Viseme::MouthShape::ER, pM.GetMorphWeightReference(NukudeFace::vrc_v_ch));
-        AddViseme(Viseme::MouthShape::OO, pM.GetMorphWeightReference(NukudeFace::vrc_v_oh));
-        AddViseme(Viseme::MouthShape::SS, pM.GetMorphWeightReference(NukudeFace::vrc_v_ss));
-
-        AddBlinkParameter(pM.GetMorphWeightReference(NukudeFace::Blink));
-
-        /*
         AddParameter(BetaFront::BlushEye, pM.GetMorphWeightReference(BetaFront::BlushEye), 40);
         AddParameter(BetaFront::HideBlush, pM.GetMorphWeightReference(BetaFront::HideBlush), 10, IEasyEaseAnimator::InterpolationMethod::Cosine, true);
         AddParameter(BetaFront::HideEyeBrow, pM.GetMorphWeightReference(BetaFront::HideEyeBrow), 10, IEasyEaseAnimator::InterpolationMethod::Cosine);
@@ -79,7 +63,6 @@ private:
         botFinLR3.AddParameter(rear.GetMorphWeightReference(BetaRear::Move3));
         botFinLR4.AddParameter(rear.GetMorphWeightReference(BetaRear::Move4));
         botFinLR5.AddParameter(rear.GetMorphWeightReference(BetaRear::Move5));
-        */
     }
 
     void AddBotFinKeyFrames(){
@@ -129,44 +112,6 @@ private:
     }
 
     
-    void Default(){
-        AddBackgroundMaterialFrame(Color::CRAINBOW);
-    }
-
-    void Angry(){
-        AddParameterFrame(NukudeFace::Anger, 1.0f);
-        AddMaterialFrame(Color::CRED);
-    } 
-
-    void Sad(){
-        AddParameterFrame(NukudeFace::Sadness, 1.0f);
-        AddParameterFrame(NukudeFace::Frown, 1.0f);
-        AddMaterialFrame(Color::CBLUE);
-    }
-
-    void Surprised(){
-        AddParameterFrame(NukudeFace::Surprised, 1.0f);
-        AddParameterFrame(NukudeFace::HideBlush, 0.0f);
-        AddMaterialFrame(Color::CRAINBOW);
-    }
-    
-    void Doubt(){
-        AddParameterFrame(NukudeFace::Doubt, 1.0f);
-    }
-    
-    void Frown(){
-        AddParameterFrame(NukudeFace::Frown, 1.0f);
-    }
-
-    void LookUp(){
-        AddParameterFrame(NukudeFace::LookUp, 1.0f);
-    }
-
-    void LookDown(){
-        AddParameterFrame(NukudeFace::LookDown, 1.0f);
-    }
-
-    /*
     void Default(){
         EnableBlinking();
 
@@ -249,7 +194,6 @@ private:
         botFinLR4.Update();
         botFinLR5.Update();
     }
-    */
 
     void SpectrumAnalyzerCallback() override {
         AddMaterialFrame(Color::CHORIZONTALRAINBOW, 0.8f);
@@ -306,26 +250,31 @@ public:
 
         UpdateFace(ratio);
         
+        GetObjectAlignFace()->GetObjectPlanarityRatio(spyro.GetObject());
+        GetObjectAlignFace()->GetObjectPlanarityRatio(cube.GetObject());
+        GetObjectAlignFace()->GetObjectPlanarityRatio(pM.GetObject());
+        GetObjectAlignFace()->GetObjectPlanarityRatio(rear.GetObject());
+        GetObjectAlignFace()->GetObjectPlanarityRatio(nukude.GetObject());
+        /*
+        Serial.print(Rotation(GetObjectAlignFace()->GetPlaneOrientation(spyro.GetObject(), GetObjectAlignFace()->GetCentroid(spyro.GetObject()))).GetEulerAngles(EulerConstants::EulerOrderXYZS).Angles.ToString()); Serial.print('\t');
+        Serial.print(Rotation(GetObjectAlignFace()->GetPlaneOrientation(cube.GetObject(), GetObjectAlignFace()->GetCentroid(cube.GetObject()))).GetEulerAngles(EulerConstants::EulerOrderXYZS).Angles.ToString()); Serial.print('\t');
+        Serial.print(Rotation(GetObjectAlignFace()->GetPlaneOrientation(pM.GetObject(), GetObjectAlignFace()->GetCentroid(pM.GetObject()))).GetEulerAngles(EulerConstants::EulerOrderXYZS).Angles.ToString()); Serial.print('\t');
+        Serial.print(Rotation(GetObjectAlignFace()->GetPlaneOrientation(rear.GetObject(), GetObjectAlignFace()->GetCentroid(rear.GetObject()))).GetEulerAngles(EulerConstants::EulerOrderXYZS).Angles.ToString()); Serial.print('\t');
+        Serial.print(Rotation(GetObjectAlignFace()->GetPlaneOrientation(nukude.GetObject(), GetObjectAlignFace()->GetCentroid(nukude.GetObject()))).GetEulerAngles(EulerConstants::EulerOrderXYZS).Angles.ToString()); Serial.print('\t');
 
-        //cameras.GetCameras()[1]->GetTransform()->SetRotation(Vector3D(0, 0, 360.0f * ratio));
+        Serial.print(GetObjectAlignFace()->GetObjectPlanarityRatio(spyro.GetObject())); Serial.print('\t');
+        Serial.print(GetObjectAlignFace()->GetObjectPlanarityRatio(cube.GetObject())); Serial.print('\t');
+        Serial.print(GetObjectAlignFace()->GetObjectPlanarityRatio(pM.GetObject())); Serial.print('\t');
+        Serial.print(GetObjectAlignFace()->GetObjectPlanarityRatio(rear.GetObject())); Serial.print('\t');
+        Serial.print(GetObjectAlignFace()->GetObjectPlanarityRatio(nukude.GetObject())); Serial.print('\n');
+        */
         
-        Serial.print(Rotation(cameras.GetCameras()[0]->GetTransform()->GetRotation()).GetEulerAngles(EulerConstants::EulerOrderXYZS).Angles.ToString()); Serial.print('\t');
-        Serial.print(Rotation(cameras.GetCameras()[1]->GetTransform()->GetRotation()).GetEulerAngles(EulerConstants::EulerOrderXYZS).Angles.ToString()); Serial.print('\t');
 
+        //AlignObjectFace(pM.GetObject(), 360.0f * ratio, 2.0f, true);
+        //AlignObjectRear(rear.GetObject(), 360.0f * ratio);
         
-        Serial.print(cameras.GetCameras()[0]->GetCameraTransformMax().ToString()); Serial.print('\t');
-        Serial.print(cameras.GetCameras()[1]->GetCameraTransformMax().ToString()); Serial.print('\t');
-
-        Serial.print(pM.GetObject()->GetCenterOffset().ToString()); Serial.print('\t');
-        AlignObjectFace(pM.GetObject(), 360.0f * ratio, 2.0f, true);
-        Serial.print(pM.GetObject()->GetCenterOffset().ToString()); Serial.print('\t');
-
-        Serial.print(rear.GetObject()->GetCenterOffset().ToString()); Serial.print('\t');
-        AlignObjectRear(rear.GetObject(), 360.0f * ratio);
-        Serial.print(rear.GetObject()->GetCenterOffset().ToString()); Serial.print('\n');
-        
-        pM.GetObject()->GetTransform()->SetPosition(GetWiggleOffset());
-        pM.GetObject()->UpdateTransform();
+        //pM.GetObject()->GetTransform()->SetPosition(GetWiggleOffset());
+        //pM.GetObject()->UpdateTransform();
         
         rear.GetObject()->GetTransform()->SetPosition(GetWiggleOffset());
         rear.GetObject()->UpdateTransform();
@@ -334,28 +283,6 @@ public:
     }
     
     void SelectFace(uint8_t code) {
-
-        if (IsBooped() && code != 6){
-            Surprised();
-        }
-        else{
-            if (code == 0) Default();
-            else if (code == 1) Angry();
-            else if (code == 2) Doubt();
-            else if (code == 3) Frown();
-            else if (code == 4) LookUp();
-            else if (code == 5) Sad();
-            else if (code == 6) {
-                AudioReactiveGradientFace();
-            }
-            else if (code == 7){
-                OscilloscopeFace();
-            }
-            else {
-                SpectrumAnalyzerFace();
-            } 
-        }
-        /*
         if (IsBooped()) {
             OwO();
             return;
@@ -372,6 +299,5 @@ public:
             case 7: OscilloscopeFace();             break;
             default: SpectrumAnalyzerFace();        break;
         }
-        */
     }
 };

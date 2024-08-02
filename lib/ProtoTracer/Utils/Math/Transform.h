@@ -48,4 +48,6 @@ public:
     void Rotate(const Quaternion& rotation);
     void Translate(const Vector3D& offset);
     void Scale(const Vector3D& scale);
+
+    String ToString();
 };

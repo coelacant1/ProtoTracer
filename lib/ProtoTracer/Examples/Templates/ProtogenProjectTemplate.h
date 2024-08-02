@@ -136,7 +136,6 @@ protected:
     void AlignObjects(Vector2D min, Vector2D max, Object3D** obj, uint8_t objectCount, float rotation = 0.0f, float margin = 2.0f, bool mirror = true);
     void AlignObjectNoScale(Vector2D min, Vector2D max, Object3D* obj, float rotation = 0.0f, float margin = 2.0f, bool mirror = true);
     void AlignObjectsNoScale(Vector2D min, Vector2D max, Object3D** obj, uint8_t objectCount, float rotation = 0.0f, float margin = 2.0f, bool mirror = true);
-
     void AlignObjectFace(Object3D* obj, float rotation = 0.0f, float margin = 2.0f, bool mirror = true);
     void AlignObjectsFace(Object3D** objects, uint8_t objectCount, float rotation = 0.0f, float margin = 2.0f, bool mirror = true);
     void AlignObjectNoScaleFace(Object3D* obj, float rotation = 0.0f, float margin = 2.0f, bool mirror = true);
@@ -145,6 +144,10 @@ protected:
     void AlignObjectsRear(Object3D** objects, uint8_t objectCount, float rotation = 0.0f, float margin = 2.0f, bool mirror = true);
     void AlignObjectNoScaleRear(Object3D* obj, float rotation = 0.0f, float margin = 2.0f, bool mirror = true);
     void AlignObjectsNoScaleRear(Object3D** objects, uint8_t objectCount, float rotation = 0.0f, float margin = 2.0f, bool mirror = true);
+    
+    ObjectAlign* GetObjectAlign();
+    ObjectAlign* GetObjectAlignFace();
+    ObjectAlign* GetObjectAlignRear();
 
     float GetFaceScale();
 

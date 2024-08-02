@@ -117,3 +117,7 @@ void Transform::Translate(const Vector3D& offset) {
 void Transform::Scale(const Vector3D& scale) {
     this->scale = this->scale * scale;
 }
+
+String Transform::ToString(){
+    return "[" + Rotation(this->rotation).GetEulerAngles(EulerConstants::EulerOrderXYZS).Angles.ToString() + " " + this->position.ToString() + " " + this->scale.ToString() + "]";
+}

@@ -31,51 +31,44 @@ private:
     float scaleY = 1.0f;
     bool mirrorX = false;
     bool mirrorY = false;
-
-    Vector3D GetCentroid(Object3D** objs, uint8_t numObjects);
-
-    Vector3D GetObjectCenter(Object3D** objs, uint8_t numObjects);
-
-    Vector3D GetObjectSize(Object3D** objs, uint8_t numObjects);
-
+    
     void NormalizeObjectPlane(Object3D** objs, uint8_t numObjects, Vector3D center, Quaternion planeOrientation);
-
     void NormalizeObjectCenter(Object3D** objs, uint8_t numObjects, Vector3D center);
-
-    Quaternion GetPlaneNormal(Object3D** objs, uint8_t numObjects);
-
-    Quaternion GetPlaneOrientation(Object3D** objs, uint8_t numObjects, Vector3D centroid);
 
 public:
     ObjectAlign(Vector2D camMin, Vector2D camMax, Quaternion targetOrientation = Quaternion());
 
-    void SetPlaneOffsetAngle(float offsetPlaneAngle);
+    Vector3D GetCentroid(Object3D* obj);
+    Vector3D GetCentroid(Object3D** objs, uint8_t numObjects);
+    Vector3D GetObjectCenter(Object3D* obj);
+    Vector3D GetObjectCenter(Object3D** objs, uint8_t numObjects);
+    Vector3D GetObjectSize(Object3D* obj);
+    Vector3D GetObjectSize(Object3D** objs, uint8_t numObjects);
 
-    void SetEdgeMargin(float edgeMargin);
-
-    void SetForwardVector(Vector3D forwardVector);
-
-    void SetCameraMin(Vector2D camMin);
-
-    void SetCameraMax(Vector2D camMax);
-
-    void SetMirrorX(bool mirrorX);
-
-    void SetMirrorY(bool mirrorY);
-
-    void SetJustification(Justification jst);
-
-    void SetScale(float scaleX, float scaleY);
+    Quaternion GetPlaneNormal(Object3D* obj);
+    Quaternion GetPlaneNormal(Object3D** objs, uint8_t numObjects);
+    Quaternion GetPlaneOrientation(Object3D* obj, Vector3D centroid);
+    Quaternion GetPlaneOrientation(Object3D** objs, uint8_t numObjects, Vector3D centroid);
 
     Transform GetTransform(Object3D* obj);
-
     Transform GetTransform(Object3D** objs, uint8_t numObjects);
+    
+    float GetObjectPlanarityRatio(Object3D* obj);
+    float GetObjectPlanarityRatio(Object3D** objs, uint8_t numObjects);
+
+    void SetPlaneOffsetAngle(float offsetPlaneAngle);
+    void SetEdgeMargin(float edgeMargin);
+    void SetForwardVector(Vector3D forwardVector);
+    void SetCameraMin(Vector2D camMin);
+    void SetCameraMax(Vector2D camMax);
+    void SetMirrorX(bool mirrorX);
+    void SetMirrorY(bool mirrorY);
+    void SetJustification(Justification jst);
+    void SetScale(float scaleX, float scaleY);
+
 
     void AlignObjectNoScale(Object3D* obj);
-
     void AlignObjectsNoScale(Object3D** objs, uint8_t numObjects);
-
     void AlignObject(Object3D* obj);
-
     void AlignObjects(Object3D** objs, uint8_t numObjects);
 };

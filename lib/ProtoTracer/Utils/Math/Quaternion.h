@@ -24,6 +24,7 @@ public:
     Vector3D RotateVector(const Vector3D& v) const;
     Vector3D UnrotateVector(const Vector3D& coordinate) const;
     Vector3D GetBiVector() const;
+    Vector3D GetNormal() const;
 
     static Quaternion SphericalInterpolation(const Quaternion& q1, const Quaternion& q2, const float& ratio);
     Quaternion DeltaRotation(const Vector3D& angularVelocity, const float& timeDelta) const;

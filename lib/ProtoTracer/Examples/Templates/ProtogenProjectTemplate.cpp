@@ -284,6 +284,19 @@ void ProtogenProject::AlignObjectsNoScaleRear(Object3D** objects, uint8_t object
     objARear.SetMirrorX(mirror);
 }
 
+
+ObjectAlign* ProtogenProject::GetObjectAlign(){
+    return &objAOther;
+}
+
+ObjectAlign* ProtogenProject::GetObjectAlignFace(){
+    return &objA;
+}
+
+ObjectAlign* ProtogenProject::GetObjectAlignRear(){
+    return &objARear;
+}
+
 float ProtogenProject::GetFaceScale(){
     uint8_t faceSize = Menu::GetFaceSize();
 

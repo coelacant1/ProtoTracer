@@ -31,6 +31,9 @@ public:
     float Magnitude() const;
     float DotProduct(const Vector3D& vector) const;
     float CalculateEuclideanDistance(const Vector3D& vector) const;
+    float AverageHighestTwoComponents() const;
+    float Max() const;
+    float Min() const;
     bool IsEqual(const Vector3D& vector) const;
     String ToString() const;
 

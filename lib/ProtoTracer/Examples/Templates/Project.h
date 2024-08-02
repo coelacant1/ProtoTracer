@@ -9,6 +9,8 @@
 
 #include "Utils/Debug.h"
 
+#include "../UserConfiguration.h"
+
 class Project {
 protected:
     CameraManager* cameras;
