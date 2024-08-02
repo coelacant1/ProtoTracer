@@ -1,5 +1,16 @@
 #include "ObjectAlign.h"
 
+Vector3D ObjectAlign::GetCentroid(Object3D* obj) {
+    Object3D** objs = new Object3D*[1];
+    objs[0] = obj;
+
+    Vector3D output = GetCentroid(objs, 1);
+
+    delete[] objs;
+
+    return output;
+}
+
 Vector3D ObjectAlign::GetCentroid(Object3D** objs, uint8_t numObjects) {
     Vector3D centroid;
     uint16_t vertexCount = 0;
@@ -16,6 +27,17 @@ Vector3D ObjectAlign::GetCentroid(Object3D** objs, uint8_t numObjects) {
     return centroid;
 }
 
+Vector3D ObjectAlign::GetObjectCenter(Object3D* obj) {
+    Object3D** objs = new Object3D*[1];
+    objs[0] = obj;
+
+    Vector3D output = GetObjectCenter(objs, 1);
+
+    delete[] objs;
+
+    return output;
+}
+
 Vector3D ObjectAlign::GetObjectCenter(Object3D** objs, uint8_t numObjects) {
     Vector3D min = Vector3D(100000.0f, 100000.0f, 100000.0f), max = Vector3D(-100000.0f, -100000.0f, -100000.0f);
 
@@ -29,6 +51,17 @@ Vector3D ObjectAlign::GetObjectCenter(Object3D** objs, uint8_t numObjects) {
     }
 
     return (max + min) / 2.0f;
+}
+
+Vector3D ObjectAlign::GetObjectSize(Object3D* obj) {
+    Object3D** objs = new Object3D*[1];
+    objs[0] = obj;
+
+    Vector3D output = GetObjectSize(objs, 1);
+
+    delete[] objs;
+
+    return output;
 }
 
 Vector3D ObjectAlign::GetObjectSize(Object3D** objs, uint8_t numObjects) {
@@ -73,6 +106,55 @@ void ObjectAlign::NormalizeObjectCenter(Object3D** objs, uint8_t numObjects, Vec
     }
 }
 
+float ObjectAlign::GetObjectPlanarityRatio(Object3D* obj) {
+    Object3D** objs = new Object3D*[1];
+    objs[0] = obj;
+
+    float planarity = GetObjectPlanarityRatio(objs, 1);
+
+    delete[] objs;
+
+    return planarity;
+}
+
+// Main function to check planarity of objects
+float ObjectAlign::GetObjectPlanarityRatio(Object3D** objs, uint8_t numObjects) {
+    // Calculate centroid and plane orientation
+    Vector3D centroid = GetCentroid(objs, numObjects);
+    Quaternion planeOrientation = GetPlaneOrientation(objs, numObjects, centroid);
+
+    uint16_t totalVertices = 0;
+    Vector3D diffSum = Vector3D();
+
+    for (uint8_t i = 0; i < numObjects; i++) {
+        totalVertices += objs[i]->GetTriangleGroup()->GetVertexCount();// Determine total number of vertices
+
+        for (uint16_t j = 0; j < objs[i]->GetTriangleGroup()->GetVertexCount(); j++) {
+            Vector3D vertex = objs[i]->GetTriangleGroup()->GetVertices()[j];
+            Vector3D diff = vertex - centroid;
+            Vector3D diffRot = planeOrientation.RotateVector(diff);
+
+            diffSum = diffSum + diffRot.Absolute();
+        }
+    }
+
+    diffSum = diffSum / totalVertices;
+
+    // Inverse of difference in scale of object in reference to best fit plane orientation. 0.0f for a sphere -> 1.0f for a plane
+    return 1.0f - 1.0f / (diffSum / Mathematics::Min(diffSum.X, diffSum.Y, diffSum.Z)).AverageHighestTwoComponents();
+}
+
+Quaternion ObjectAlign::GetPlaneNormal(Object3D* obj) {
+    Object3D** objs = new Object3D*[1];
+    objs[0] = obj;
+
+    Quaternion output = GetPlaneNormal(objs, 1);
+
+    delete[] objs;
+
+    return output;
+}
+
 Quaternion ObjectAlign::GetPlaneNormal(Object3D** objs, uint8_t numObjects) {
     Vector3D normal;
     uint16_t count = 0;
@@ -93,6 +175,17 @@ Quaternion ObjectAlign::GetPlaneNormal(Object3D** objs, uint8_t numObjects) {
     rotation = rotation * Rotation(EulerAngles(Vector3D(0.0f, 0.0f, offsetPlaneAngle), EulerConstants::EulerOrderXYZS)).GetQuaternion();
 
     return rotation;
+}
+
+Quaternion ObjectAlign::GetPlaneOrientation(Object3D* obj, Vector3D centroid) {
+    Object3D** objs = new Object3D*[1];
+    objs[0] = obj;
+
+    Quaternion output = GetPlaneOrientation(objs, 1, centroid);
+
+    delete[] objs;
+
+    return output;
 }
 
 Quaternion ObjectAlign::GetPlaneOrientation(Object3D** objs, uint8_t numObjects, Vector3D centroid) {
@@ -139,6 +232,12 @@ Quaternion ObjectAlign::GetPlaneOrientation(Object3D** objs, uint8_t numObjects,
     }
 
     dir = dir.UnitSphere();
+
+    Serial.print(dir.ToString()); Serial.print('\t');
+    Serial.print(xD); Serial.print('\t');
+    Serial.print(yD); Serial.print('\t');
+    Serial.print(zD); Serial.print('\t');
+    Serial.print(Rotation(Vector3D(0.0f, 0.0f, 1.0f), dir).GetEulerAngles(EulerConstants::EulerOrderXYZS).Angles.ToString()); Serial.print('\n'); Serial.print('\n');
 
     return Rotation(Vector3D(0.0f, 0.0f, 1.0f), dir).GetQuaternion() * Rotation(EulerAngles(Vector3D(0.0f, 0.0f, offsetPlaneAngle), EulerConstants::EulerOrderXYZS)).GetQuaternion();
 }

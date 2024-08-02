@@ -16,6 +16,7 @@
 #include "../../Scene/Materials/Animated/FlowNoise.h"
 #include "../../Scene/Materials/Animated/RainbowNoise.h"
 #include "../../Scene/Materials/Animated/RainbowSpiral.h"
+#include "../../Scene/Materials/Animated/HorizontalRainbow.h"
 #include "../../Scene/Materials/Animated/SpectrumAnalyzer.h"
 #include "../../Scene/Materials/Animated/AudioReactiveGradient.h"
 #include "../../Scene/Materials/Animated/Oscilloscope.h"
@@ -54,6 +55,7 @@ private:
     //Materials
     FlowNoise flowNoise;
     RainbowSpiral rainbowSpiral;
+    HorizontalRainbow hRainbow;
     SimpleMaterial redMaterial = SimpleMaterial(RGBColor(255, 0, 0));
     SimpleMaterial orangeMaterial = SimpleMaterial(RGBColor(255, 165, 0));
     SimpleMaterial whiteMaterial = SimpleMaterial(RGBColor(255, 255, 255));
@@ -114,7 +116,8 @@ protected:
         CRED,
         CBLUE,
         CRAINBOW,
-        CRAINBOWNOISE
+        CRAINBOWNOISE,
+        CHORIZONTALRAINBOW
     };
     
     EasyEaseAnimator<60> eEA = EasyEaseAnimator<60>(IEasyEaseAnimator::Overshoot, 1.0f, 0.35f);
@@ -128,19 +131,23 @@ protected:
 
     Transform GetAlignmentTransform(Vector2D min, Vector2D max, Object3D* obj, float rotation = 0.0f, float margin = 2.0f);
     Transform GetAlignmentTransform(Vector2D min, Vector2D max, Object3D** objects, uint8_t objectCount, float rotation = 0.0f, float margin = 2.0f);
-    void AlignObject(Vector2D min, Vector2D max, Object3D* obj, float rotation = 0.0f, float margin = 2.0f);
-    void AlignObjects(Vector2D min, Vector2D max, Object3D** obj, uint8_t objectCount, float rotation = 0.0f, float margin = 2.0f);
-    void AlignObjectNoScale(Vector2D min, Vector2D max, Object3D* obj, float rotation = 0.0f, float margin = 2.0f);
-    void AlignObjectsNoScale(Vector2D min, Vector2D max, Object3D** obj, uint8_t objectCount, float rotation = 0.0f, float margin = 2.0f);
 
-    void AlignObjectFace(Object3D* obj, float rotation = 0.0f, float margin = 2.0f);
-    void AlignObjectsFace(Object3D** objects, uint8_t objectCount, float rotation = 0.0f, float margin = 2.0f);
-    void AlignObjectNoScaleFace(Object3D* obj, float rotation = 0.0f, float margin = 2.0f);
-    void AlignObjectsNoScaleFace(Object3D** objects, uint8_t objectCount, float rotation = 0.0f, float margin = 2.0f);
-    void AlignObjectRear(Object3D* obj, float rotation = 0.0f, float margin = 2.0f);
-    void AlignObjectsRear(Object3D** objects, uint8_t objectCount, float rotation = 0.0f, float margin = 2.0f);
-    void AlignObjectNoScaleRear(Object3D* obj, float rotation = 0.0f, float margin = 2.0f);
-    void AlignObjectsNoScaleRear(Object3D** objects, uint8_t objectCount, float rotation = 0.0f, float margin = 2.0f);
+    void AlignObject(Vector2D min, Vector2D max, Object3D* obj, float rotation = 0.0f, float margin = 2.0f, bool mirror = true);
+    void AlignObjects(Vector2D min, Vector2D max, Object3D** obj, uint8_t objectCount, float rotation = 0.0f, float margin = 2.0f, bool mirror = true);
+    void AlignObjectNoScale(Vector2D min, Vector2D max, Object3D* obj, float rotation = 0.0f, float margin = 2.0f, bool mirror = true);
+    void AlignObjectsNoScale(Vector2D min, Vector2D max, Object3D** obj, uint8_t objectCount, float rotation = 0.0f, float margin = 2.0f, bool mirror = true);
+    void AlignObjectFace(Object3D* obj, float rotation = 0.0f, float margin = 2.0f, bool mirror = true);
+    void AlignObjectsFace(Object3D** objects, uint8_t objectCount, float rotation = 0.0f, float margin = 2.0f, bool mirror = true);
+    void AlignObjectNoScaleFace(Object3D* obj, float rotation = 0.0f, float margin = 2.0f, bool mirror = true);
+    void AlignObjectsNoScaleFace(Object3D** objects, uint8_t objectCount, float rotation = 0.0f, float margin = 2.0f, bool mirror = true);
+    void AlignObjectRear(Object3D* obj, float rotation = 0.0f, float margin = 2.0f, bool mirror = true);
+    void AlignObjectsRear(Object3D** objects, uint8_t objectCount, float rotation = 0.0f, float margin = 2.0f, bool mirror = true);
+    void AlignObjectNoScaleRear(Object3D* obj, float rotation = 0.0f, float margin = 2.0f, bool mirror = true);
+    void AlignObjectsNoScaleRear(Object3D** objects, uint8_t objectCount, float rotation = 0.0f, float margin = 2.0f, bool mirror = true);
+    
+    ObjectAlign* GetObjectAlign();
+    ObjectAlign* GetObjectAlignFace();
+    ObjectAlign* GetObjectAlignRear();
 
     float GetFaceScale();
 
@@ -177,4 +184,8 @@ public:
 
     void Initialize() override;
 
+    
+    virtual void SpectrumAnalyzerCallback() = 0;
+    virtual void AudioReactiveGradientCallback() = 0;
+    virtual void OscilloscopeCallback() = 0;
 };

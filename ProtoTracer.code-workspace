@@ -36,7 +36,22 @@
 			"stdexcept": "cpp",
 			"streambuf": "cpp",
 			"algorithm": "cpp",
-			"numeric": "cpp"
+			"numeric": "cpp",
+			"bit": "cpp",
+			"cctype": "cpp",
+			"clocale": "cpp",
+			"compare": "cpp",
+			"concepts": "cpp",
+			"cstdarg": "cpp",
+			"cstdint": "cpp",
+			"cstdio": "cpp",
+			"cstdlib": "cpp",
+			"cwchar": "cpp",
+			"cwctype": "cpp",
+			"exception": "cpp",
+			"iosfwd": "cpp",
+			"numbers": "cpp",
+			"cinttypes": "cpp"
 		}
 	}
 }

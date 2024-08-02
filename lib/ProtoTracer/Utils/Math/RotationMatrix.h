@@ -8,19 +8,20 @@ private:
     Vector3D InitialVector;
     bool didRotate;
 
-    Vector3D ConvertCoordinateToVector();
-    void ReadjustMatrix();
-    void Rotate(Vector3D rotation);
-    void RotateX(float theta);
-    void RotateY(float theta);
-    void RotateZ(float theta);
-    void RotateRelative(RotationMatrix rM);
-
 public:
     Vector3D XAxis;
     Vector3D YAxis;
     Vector3D ZAxis;
 
+    Vector3D ConvertCoordinateToVector();
+    void ReadjustMatrix();
+    Vector3D Rotate(Vector3D rotation);
+    Vector3D RotateX(float theta);
+    Vector3D RotateY(float theta);
+    Vector3D RotateZ(float theta);
+    void RotateRelative(RotationMatrix rM);
+
+    RotationMatrix();
     RotationMatrix(Vector3D axes);
     RotationMatrix(Vector3D X, Vector3D Y, Vector3D Z);
 

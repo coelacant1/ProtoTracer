@@ -5,7 +5,7 @@
 
 class Background{
 private:
-	Vector3D basisVertices[3] = {Vector3D(10000.0000f,-10000.0000f,1200.0000f),Vector3D(-10000.0000f,-10000.0000f,1200.0000f),Vector3D(0.0000f,10000.0000f,1200.0000f)};
+	Vector3D basisVertices[3] = {Vector3D(2000.0000f,-2000.0000f,1200.0000f),Vector3D(-2000.0000f,-2000.0000f,1200.0000f),Vector3D(0.0000f,2000.0000f,1200.0000f)};
 	IndexGroup basisIndexes[1] = {IndexGroup(0,1,2)};
 	StaticTriangleGroup<3,1> triangleGroup = StaticTriangleGroup<3,1>(&basisVertices[0], &basisIndexes[0]);
 	TriangleGroup<3,1> triangleGroupMemory = TriangleGroup<3,1>(&triangleGroup);

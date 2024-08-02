@@ -133,6 +133,21 @@ Vector3D Vector3D::Constrain(const Vector3D& minimum, const Vector3D& maximum) c
     };
 }
 
+Vector3D Vector3D::Permutate(const Vector3D& permutation) const {
+    Vector3D v = Vector3D(this->X, this->Y, this->Z);
+    float perm[3];
+
+    perm[(int)permutation.X] = v.X;
+    perm[(int)permutation.Y] = v.Y;
+    perm[(int)permutation.Z] = v.Z;
+
+    v.X = perm[0];
+    v.Y = perm[1];
+    v.Z = perm[2];
+
+    return v;
+}
+
 float Vector3D::Magnitude() const {
     return Mathematics::Sqrt(X * X + Y * Y + Z * Z);
 }
@@ -145,6 +160,25 @@ float Vector3D::CalculateEuclideanDistance(const Vector3D& vector) const {
     Vector3D offset = Vector3D(X - vector.X, Y - vector.Y, Z - vector.Z);
 
     return offset.Magnitude();
+}
+
+float Vector3D::AverageHighestTwoComponents() const {
+    Vector3D absV = this->Absolute();
+
+    // Find the two largest absolute values
+    float max1 = absV.Max();
+    float max2 = (max1 == absV.X) ? Mathematics::Max(absV.Y, absV.Z) : (max1 == absV.Y) ? Mathematics::Max(absV.X, absV.Z) : Mathematics::Max(absV.X, absV.Y);
+
+    // Compute the average of the two largest values
+    return (max1 + max2) / 2.0f;
+}
+
+float Vector3D::Max() const{
+    return Mathematics::Max(X, Y, Z);
+}
+
+float Vector3D::Min() const{
+    return Mathematics::Min(X, Y, Z);
 }
 
 bool Vector3D::IsEqual(const Vector3D& vector) const {

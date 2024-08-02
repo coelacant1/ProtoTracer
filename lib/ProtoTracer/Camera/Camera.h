@@ -20,6 +20,9 @@ public:
     Vector2D GetCameraMinCoordinate() override;
     Vector2D GetCameraMaxCoordinate() override;
     Vector2D GetCameraCenterCoordinate() override;
+    Vector3D GetCameraTransformMin() override;
+    Vector3D GetCameraTransformMax() override;
+    Vector3D GetCameraTransformCenter() override;
 };
 
 #include "Camera.tpp"

@@ -3,9 +3,12 @@
 #include "../Templates/ProtogenProjectTemplate.h"
 #include "../../Assets/Models/OBJ/DeltaDisplayBackground.h"
 #include "../../Assets/Models/FBX/Commissions/ArrowFace.h"
+#include "../../Assets/Models/OBJ/LEDStripBackground.h"
 
 #include "../../Camera/CameraManager/Implementations/HUB75DeltaCameras.h"
 #include "../../Controller/HUB75Controller.h"
+
+#include "../../Scene/Materials/Animated/HorizontalRainbow.h"
 
 class ArrowAnimation : public ProtogenProject {
 private:
@@ -13,6 +16,8 @@ private:
     HUB75Controller controller = HUB75Controller(&cameras, 50, 50);
     ArrowFace pM;
     DeltaDisplayBackground deltaDisplayBackground;
+    LEDStripBackground ledStripBackground;
+    HorizontalRainbow hRainbow;
     
 	const __FlashStringHelper* faceArray[12] = {F("DEFAULT"), F("ANGRY"), F("EXCITED"), F("HAPPY"), F("HEART"), F("OWO"), F("UNAMUSE"), F("UWU"), F("AUDIO1"), F("AUDIO2"), F("AUDIO3")};
 
@@ -40,7 +45,9 @@ private:
         AddBlinkParameter(pM.GetMorphWeightReference(ArrowFace::Blink));
     }
 
-    void Default(){}
+    void Default(){
+        ledStripBackground.GetObject()->SetMaterial(GetFaceMaterial());
+    }
 
     void Angry(){
         AddParameterFrame(ArrowFace::AngryEyesFlip, 1.0f);
@@ -81,13 +88,30 @@ private:
         AddMaterialFrame(Color::CRAINBOW, 0.8f);
     }
 
+    void SpectrumAnalyzerCallback() override {
+        deltaDisplayBackground.GetObject()->SetMaterial(&hRainbow);
+        ledStripBackground.GetObject()->SetMaterial(&hRainbow);
+    }
+
+    void AudioReactiveGradientCallback() override {
+        deltaDisplayBackground.GetObject()->SetMaterial(&hRainbow);
+        ledStripBackground.GetObject()->SetMaterial(&hRainbow);
+    }
+
+    void OscilloscopeCallback() override {
+        deltaDisplayBackground.GetObject()->SetMaterial(&hRainbow);
+        ledStripBackground.GetObject()->SetMaterial(&hRainbow);
+    }
+
 public:
-    ArrowAnimation() : ProtogenProject(&cameras, &controller, 2, Vector2D(), Vector2D(192.0f, 94.0f), A0, 20, 11){
+    ArrowAnimation() : ProtogenProject(&cameras, &controller, 3, Vector2D(), Vector2D(192.0f, 94.0f), A0, 20, 11){
         scene.AddObject(pM.GetObject());
         scene.AddObject(deltaDisplayBackground.GetObject());
+        scene.AddObject(ledStripBackground.GetObject());
 
         pM.GetObject()->SetMaterial(GetFaceMaterial());
         deltaDisplayBackground.GetObject()->SetMaterial(GetFaceMaterial());
+        ledStripBackground.GetObject()->SetMaterial(GetFaceMaterial());
 
         hud.SetFaceArray(faceArray);
 

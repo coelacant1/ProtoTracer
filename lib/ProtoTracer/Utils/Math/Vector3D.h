@@ -27,9 +27,13 @@ public:
     Vector3D UnitSphere() const;
     Vector3D Constrain(const float& minimum, const float& maximum) const;
     Vector3D Constrain(const Vector3D& minimum, const Vector3D& maximum) const;
+    Vector3D Permutate(const Vector3D& permutation) const;
     float Magnitude() const;
     float DotProduct(const Vector3D& vector) const;
     float CalculateEuclideanDistance(const Vector3D& vector) const;
+    float AverageHighestTwoComponents() const;
+    float Max() const;
+    float Min() const;
     bool IsEqual(const Vector3D& vector) const;
     String ToString() const;
 

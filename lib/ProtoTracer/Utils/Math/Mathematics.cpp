@@ -8,7 +8,7 @@ const float Mathematics::FLTMAX = __FLT_MAX__;
 const float Mathematics::FLTMIN = __FLT_MIN__;
 
 String Mathematics::DoubleToCleanString(float value) {
-    return String(value);
+    return String(value, 3);
 }
 
 bool Mathematics::IsNaN(float value) {
@@ -32,19 +32,7 @@ int Mathematics::Sign(float value) {
 }
 
 float Mathematics::Pow(float value, float exponent) {
-    union {
-        float d;
-        int x[2];
-    } u;
-
-    u.x[0] = 0;
-    u.x[1] = 0;
-
-    u.d = value;
-    u.x[1] = (int)(exponent * (u.x[1] - 1072632447) + 1072632447);
-    u.x[0] = 0;
-
-    return u.d;
+    return powf(value, exponent);
 }
 
 float Mathematics::Sqrt(float value) {
@@ -102,7 +90,11 @@ float Mathematics::Lerp(float a, float b, float t) {
 
 float Mathematics::CubicLerp(float a, float b, float c, float d, float t){
     float p = (d - c) - (a - b);
-    return t * t * t * p + t * t * ((a - b) - p) + t * (c - a) + b;
+    float q = (a - b) - p;
+    float r = c - a;
+    float s = b;
+
+    return p * t * t * t + q * t * t + r * t + s;
 }
 
 float Mathematics::BilinearInterpolation(float scaleX, float scaleY, float x1, float y1, float x2, float y2, float v11, float v12, float v21, float v22) {

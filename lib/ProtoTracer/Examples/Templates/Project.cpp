@@ -65,15 +65,15 @@ void Project::PrintStats(){
         Serial.print("Kb, ");
         #endif
         Serial.print("FPS: ");
-        Serial.print(project.GetFrameRate(), 0);
+        Serial.print(GetFrameRate(), 0);
         Serial.print(", Animated in ");
-        Serial.print(project.GetAnimationTime(), 4);
+        Serial.print(GetAnimationTime(), 4);
 
         Serial.print("s, Rendered in ");
-        Serial.print(project.GetRenderTime(), 4);
+        Serial.print(GetRenderTime(), 4);
 
         Serial.print("s, Displayed in ");
-        Serial.print(project.GetDisplayTime(), 4);
+        Serial.print(GetDisplayTime(), 4);
         Serial.println("s");
     #endif
 }

@@ -1,7 +1,6 @@
 #include "Rasterizer.h"
 
 Quaternion Rasterizer::rayDirection;
-Quaternion Rasterizer::lookDirection;
 
 RGBColor Rasterizer::CheckRasterPixelAccel(Triangle2D** triangles, int numTriangles, Vector2D pixelRay) {
     float zBuffer = 3.402823466e+38f;
@@ -114,13 +113,9 @@ RGBColor Rasterizer::CheckRasterPixelAccel(Triangle2D** triangles, int numTriang
     
     if (didIntersect) {
         Vector3D intersect = (*triangles[triangle]->t3p1 * uvw.X) + (*triangles[triangle]->t3p2 * uvw.Y) + (*triangles[triangle]->t3p3 * uvw.Z);
-
-        intersect = rayDirection.UnrotateVector(intersect);
         Vector2D uv;
 
-        if (triangles[triangle]->hasUV) {
-            uv = *triangles[triangle]->p1UV * uvw.X + *triangles[triangle]->p2UV * uvw.Y + *triangles[triangle]->p3UV * uvw.Z;
-        }
+        if (triangles[triangle]->hasUV) uv = *triangles[triangle]->p1UV * uvw.X + *triangles[triangle]->p2UV * uvw.Y + *triangles[triangle]->p3UV * uvw.Z;
 
         color = triangles[triangle]->GetMaterial()->GetRGB(intersect, *triangles[triangle]->normal, Vector3D(uv.X, uv.Y, 0.0f));
     }
@@ -151,13 +146,9 @@ RGBColor Rasterizer::CheckRasterPixel(Triangle2D** triangles, int numTriangles, 
     
     if (didIntersect) {
         Vector3D intersect = (*triangles[triangle]->t3p1 * uvw.X) + (*triangles[triangle]->t3p2 * uvw.Y) + (*triangles[triangle]->t3p3 * uvw.Z);
-
-        intersect = rayDirection.UnrotateVector(intersect);
         Vector2D uv;
 
-        if (triangles[triangle]->hasUV) {
-            uv = *triangles[triangle]->p1UV * uvw.X + *triangles[triangle]->p2UV * uvw.Y + *triangles[triangle]->p3UV * uvw.Z;
-        }
+        if (triangles[triangle]->hasUV) uv = *triangles[triangle]->p1UV * uvw.X + *triangles[triangle]->p2UV * uvw.Y + *triangles[triangle]->p3UV * uvw.Z;
 
         color = triangles[triangle]->GetMaterial()->GetRGB(intersect, *triangles[triangle]->normal, Vector3D(uv.X, uv.Y, 0.0f));
     }
@@ -178,14 +169,13 @@ void Rasterizer::Rasterize(Scene* scene, CameraBase* camera) {
             camera->GetPixelGroup()->GetColor(i)->B = color.B;
         }
     } else {
-        camera->GetTransform()->SetBaseRotation(camera->GetCameraLayout()->GetRotation());
+        camera->GetTransform()->SetBaseRotation(camera->GetCameraLayout()->GetRotation());//Set camera layout
 
-        lookDirection = camera->GetTransform()->GetRotation().Conjugate() * camera->GetLookOffset();
-        Quaternion normLookDir = lookDirection.UnitQuaternion();
-        rayDirection = camera->GetTransform()->GetRotation().Multiply(lookDirection);
+        rayDirection = camera->GetTransform()->GetRotation().Multiply(camera->GetLookOffset());//Apply offset to camera if set
 
-        Vector2D minCoord = Vector2D(lookDirection.RotateVectorUnit(camera->GetCameraMinCoordinate() * camera->GetTransform()->GetScale(), normLookDir));
-        Vector2D maxCoord = Vector2D(lookDirection.RotateVectorUnit(camera->GetCameraMaxCoordinate() * camera->GetTransform()->GetScale(), normLookDir));
+        //Set quad tree space to local camera coordinates
+        Vector2D minCoord = camera->GetCameraMinCoordinate();
+        Vector2D maxCoord = camera->GetCameraMaxCoordinate();
 
         QuadTree tree = QuadTree(minCoord, maxCoord);
 
@@ -203,9 +193,8 @@ void Rasterizer::Rasterize(Scene* scene, CameraBase* camera) {
         for (uint8_t i = 0; i < scene->GetObjectCount(); ++i) {
             if (scene->GetObjects()[i]->IsEnabled()) {
                 for (uint16_t j = 0; j < scene->GetObjects()[i]->GetTriangleGroup()->GetTriangleCount(); ++j) {
-                    //if (iterCount == 60) break;
-
-                    triangles[iterCount] = Triangle2D(lookDirection, camera->GetTransform(), &scene->GetObjects()[i]->GetTriangleGroup()->GetTriangles()[j], scene->GetObjects()[i]->GetMaterial());
+                    //Create 2D triangle mapping for rasterize, stores 3D coordinates for mapping material to 3d global coordinate space
+                    triangles[iterCount] = Triangle2D(camera->GetLookOffset(), camera->GetTransform(), &scene->GetObjects()[i]->GetTriangleGroup()->GetTriangles()[j], scene->GetObjects()[i]->GetMaterial());
                     
                     tree.Insert(&triangles[iterCount]);
                     iterCount++;
@@ -215,11 +204,10 @@ void Rasterizer::Rasterize(Scene* scene, CameraBase* camera) {
 
         tree.Rebuild();
 
-        Vector2D scale, pixelRay;
+        Vector2D scale, pixelRay, materialRay;
         for (uint16_t i = 0; i < camera->GetPixelGroup()->GetPixelCount(); ++i) {
-            Vector2D scaledCoord = camera->GetPixelGroup()->GetCoordinate(i);// * camera->GetTransform()->GetScale();
-
-            pixelRay = Vector2D(lookDirection.RotateVectorUnit(scaledCoord, normLookDir));
+            //Render camera in local camera space
+            pixelRay = camera->GetPixelGroup()->GetCoordinate(i);
             
             Node* leafNode = tree.Intersect(pixelRay);
 
@@ -230,6 +218,7 @@ void Rasterizer::Rasterize(Scene* scene, CameraBase* camera) {
                 continue;
             }
 
+            //Render individual pixel, transformed to camera coordinate space
             RGBColor color = CheckRasterPixel(leafNode->GetEntities(), leafNode->GetCount(), pixelRay);
 
             camera->GetPixelGroup()->GetColor(i)->R = color.R;

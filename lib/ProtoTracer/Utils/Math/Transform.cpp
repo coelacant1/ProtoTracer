@@ -5,7 +5,7 @@ Transform::Transform()
     : baseRotation(1, 0, 0, 0), rotation(1, 0, 0, 0), position(0, 0, 0), scale(1, 1, 1), scaleRotationOffset(1, 0, 0, 0) {}
 
 Transform::Transform(const Vector3D& eulerXYZS, const Vector3D& position, const Vector3D& scale) {
-    this->rotation = Rotation(EulerAngles(eulerXYZS, EulerConstants::EulerOrderXZYS)).GetQuaternion();
+    this->rotation = Rotation(EulerAngles(eulerXYZS, EulerConstants::EulerOrderXYZS)).GetQuaternion();
     this->position = position;
     this->scale = scale;
 }
@@ -17,7 +17,7 @@ Transform::Transform(const Quaternion& rotation, const Vector3D& position, const
 }
 
 Transform::Transform(const Vector3D& eulerXYZS, const Vector3D& position, const Vector3D& scale, const Vector3D& rotationOffset, const Vector3D& scaleOffset) {
-    this->rotation = Rotation(EulerAngles(eulerXYZS, EulerConstants::EulerOrderXZYS)).GetQuaternion();
+    this->rotation = Rotation(EulerAngles(eulerXYZS, EulerConstants::EulerOrderXYZS)).GetQuaternion();
     this->position = position;
     this->scale = scale;
     this->rotationOffset = rotationOffset;
@@ -116,4 +116,8 @@ void Transform::Translate(const Vector3D& offset) {
 
 void Transform::Scale(const Vector3D& scale) {
     this->scale = this->scale * scale;
+}
+
+String Transform::ToString(){
+    return "[" + Rotation(this->rotation).GetEulerAngles(EulerConstants::EulerOrderXYZS).Angles.ToString() + " " + this->position.ToString() + " " + this->scale.ToString() + "]";
 }

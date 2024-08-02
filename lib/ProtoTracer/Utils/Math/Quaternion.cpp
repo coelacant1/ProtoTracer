@@ -67,18 +67,13 @@ Vector2D Quaternion::UnrotateVector(const Vector2D& coordinate) const {
 // Rotate vector
 Vector3D Quaternion::RotateVector(const Vector3D& v) const {
     if (IsClose(Quaternion(), Mathematics::EPSILON)) return v;
-		
+	
+    Quaternion qV = Quaternion(0.0f, v.X, v.Y, v.Z);
     Quaternion q = UnitQuaternion();
+    Quaternion qConj = q.Conjugate();
+    Quaternion rotated = q * qV * qConj;
 
-    float s2 = q.W * 2.0f;
-    float dPUV = (q.X * v.X + q.Y * v.Y + q.Z * v.Z) * 2.0f;
-    float dPUU = q.W * q.W - (q.X * q.X + q.Y * q.Y + q.Z * q.Z);
-
-    return Vector3D{
-        X * dPUV + v.X * dPUU + ((q.Y * v.Z) - (q.Z * v.Y)) * s2,
-        Y * dPUV + v.Y * dPUU + ((q.Z * v.X) - (q.X * v.Z)) * s2,
-        Z * dPUV + v.Z * dPUU + ((q.X * v.Y) - (q.Y * v.X)) * s2
-    };
+    return Vector3D(rotated.X, rotated.Y, rotated.Z);
 }
 
 // Unrotate vector
@@ -95,6 +90,10 @@ Vector3D Quaternion::GetBiVector() const {
         this->Y,
         this->Z
     };
+}
+
+Vector3D Quaternion::GetNormal() const {
+    return this->RotateVector(Vector3D(0, 0, 1.0f));
 }
 
 // Spherical interpolation
@@ -229,46 +228,12 @@ Quaternion Quaternion::Multiply(const float& scalar) const {
 Quaternion Quaternion::Divide(const Quaternion& quaternion) const {
     if(quaternion.IsClose(Quaternion(), Mathematics::EPSILON)) return Quaternion(W, X, Y, Z);
 
-    float scale = 1.0f / (quaternion.W * quaternion.W + quaternion.X * quaternion.X + quaternion.Y * quaternion.Y + quaternion.Z * quaternion.Z);
-    
-    #ifndef _ARM_MATH_H
-    return Quaternion
-    {
-        ( W * quaternion.W + X * quaternion.X + Y * quaternion.Y + Z * quaternion.Z) * scale,
-        (-W * quaternion.X + X * quaternion.W + Y * quaternion.Z - Z * quaternion.Y) * scale,
-        (-W * quaternion.Y - X * quaternion.Z + Y * quaternion.W + Z * quaternion.X) * scale,
-        (-W * quaternion.Z + X * quaternion.Y - Y * quaternion.X + Z * quaternion.W) * scale
-    };
-    #else
-    // 1    5   9   13
-    // 2    6   10  14
-    // 3    7   11  15
-    // 4    8   12  16
-    uint32_t divBlockSize = 16; // Increased to 4 for SIMD optimization
-
-    // Input vectors with an additional zero for padding
-    float32_t divA[divBlockSize] = {W, W, W, W, X, X, X, X, Y, Y, Y, Y, Z, Z, Z, Z};
-    float32_t divB[divBlockSize] = {    quaternion.W, quaternion.X, quaternion.Y, quaternion.Z,
-                                        quaternion.X, quaternion.W, quaternion.Z, quaternion.Y,
-                                        quaternion.Y, quaternion.Z, quaternion.W, quaternion.X,
-                                        quaternion.Z, quaternion.Y, quaternion.X, quaternion.W
-    };
-
-    // Output vector to store the result of the multiplication
-    float32_t divDst[divBlockSize];
-
-    // Call the function
-    arm_mult_f32(divA, divB, divDst, divBlockSize);
-
-    Quaternion q = Quaternion(  ( divDst[0] + divDst[4] + divDst[8]  + divDst[12]) * scale,
-                                (-divDst[1] + divDst[5] + divDst[9]  - divDst[13]) * scale,
-                                (-divDst[2] - divDst[6] + divDst[10] + divDst[14]) * scale,
-                                (-divDst[3] + divDst[7] - divDst[11] + divDst[15]) * scale
+    return Quaternion(
+        (W * quaternion.W - X * quaternion.X - Y * quaternion.Y - Z * quaternion.Z),
+        (W * quaternion.X + X * quaternion.W + Y * quaternion.Z - Z * quaternion.Y),
+        (W * quaternion.Y - X * quaternion.Z + Y * quaternion.W + Z * quaternion.X),
+        (W * quaternion.Z + X * quaternion.Y - Y * quaternion.X + Z * quaternion.W)
     );
-
-    return q;
-
-    #endif
 }
 
 // Divide by scalar

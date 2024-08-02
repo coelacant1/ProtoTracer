@@ -2,17 +2,13 @@
 
 // Default constructor.
 EulerOrder::EulerOrder()
-    : InitialAxis(Axis::X),
-      AxisPermutation(Parity::Even),
-      InitialAxisRepetition(AxisRepetition::No),
+    : AxisOrder(Axis::XYZ),
       FrameTaken(AxisFrame::Static),
       Permutation(0, 1, 2) {}
 
 // Parameterized constructor.
-EulerOrder::EulerOrder(Axis axis, Parity parity, AxisRepetition axisRepetition, AxisFrame axisFrame, Vector3D permutation)
-    : InitialAxis(axis),
-      AxisPermutation(parity),
-      InitialAxisRepetition(axisRepetition),
+EulerOrder::EulerOrder(Axis axisOrder, AxisFrame axisFrame, Vector3D permutation)
+    : AxisOrder(axisOrder),
       FrameTaken(axisFrame),
       Permutation(permutation) {}
 

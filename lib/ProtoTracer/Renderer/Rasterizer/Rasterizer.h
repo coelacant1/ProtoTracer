@@ -11,7 +11,6 @@
 class Rasterizer {
 private:
     static Quaternion rayDirection;
-    static Quaternion lookDirection;
 
     static RGBColor CheckRasterPixel(Triangle2D** triangles, int numTriangles, Vector2D pixelRay);
     static RGBColor CheckRasterPixelAccel(Triangle2D** triangles, int numTriangles, Vector2D pixelRay);
