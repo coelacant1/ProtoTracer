@@ -139,6 +139,9 @@ float ObjectAlign::GetObjectPlanarityRatio(Object3D** objs, uint8_t numObjects) 
     }
 
     diffSum = diffSum / totalVertices;
+    
+    // Check for null rotation
+    if (planeOrientation.RotateVector(Vector3D(0.0f, 1.0f, 0.0f)).CalculateEuclideanDistance(Vector3D(0.0f, 1.0f, 0.0f)) < 0.01f) return 1.0f;
 
     // Inverse of difference in scale of object in reference to best fit plane orientation. 0.0f for a sphere -> 1.0f for a plane
     return 1.0f - 1.0f / (diffSum / Mathematics::Min(diffSum.X, diffSum.Y, diffSum.Z)).AverageHighestTwoComponents();
@@ -189,13 +192,16 @@ Quaternion ObjectAlign::GetPlaneOrientation(Object3D* obj, Vector3D centroid) {
 }
 
 Quaternion ObjectAlign::GetPlaneOrientation(Object3D** objs, uint8_t numObjects, Vector3D centroid) {
-    float xx = 0.0f, xy = 0.0f, xz = 0.0f, yy = 0.0f, yz = 0.0f, zz = 0.0f;
+    double x = 0.0f, y = 0.0f, z = 0.0f, xx = 0.0f, xy = 0.0f, xz = 0.0f, yy = 0.0f, yz = 0.0f, zz = 0.0f;
     uint16_t count = 0;
 
     for (uint8_t i = 0; i < numObjects; i++) {
         for (uint16_t j = 0; j < objs[i]->GetTriangleGroup()->GetVertexCount(); j++) {
             Vector3D off = objs[i]->GetTriangleGroup()->GetVertices()[j] - centroid;
 
+            x += off.X;
+            y += off.Y;
+            z += off.Z;
             xx += off.X * off.X;
             xy += off.X * off.Y;
             xz += off.X * off.Z;
@@ -207,39 +213,35 @@ Quaternion ObjectAlign::GetPlaneOrientation(Object3D** objs, uint8_t numObjects,
         }
     }
 
-    float xD = yy * zz - yz * yz;
-    float yD = xx * zz - xz * xz;
-    float zD = xx * yy - xy * xy;
+    x /= count;
+    y /= count;
+    z /= count;
+    xx /= count;
+    xy /= count;
+    xz /= count;
+    yy /= count;
+    yz /= count;
+    zz /= count;
 
-    float maxDeterm = Mathematics::Max(xD, yD, zD);
+    float a = xx + yy + zz;
+    float b = x * x + y * y + z * z;
 
-    if (maxDeterm <= 0.0f) return Quaternion();
+    Vector3D normal;
 
-    Vector3D dir;
-
-    if (Mathematics::IsClose(maxDeterm, xD, 0.001f)) {
-        dir.X = xD;
-        dir.Y = xz * yz - xy * zz;
-        dir.Z = xy * yz - xz * yy;
-    } else if (Mathematics::IsClose(maxDeterm, yD, 0.001f)) {
-        dir.X = xz * yz - xy * zz;
-        dir.Y = yD;
-        dir.Z = xy * xz - yz * xx;
-    } else {
-        dir.X = xy * yz - xz * yy;
-        dir.Y = xy * xz - yz * xx;
-        dir.Z = xD;
+    if (a > b){
+        normal.X = yz - y * z;
+        normal.Y = xz - x * z;
+        normal.Z = xy - x * y;
+    }
+    else{
+        normal.X = yy + zz - y * y - z * z;
+        normal.Y = xx + zz - x * x - z * z;
+        normal.Z = xx + yy - x * x - y * y;
     }
 
-    dir = dir.UnitSphere();
+    normal = normal.UnitSphere();
 
-    Serial.print(dir.ToString()); Serial.print('\t');
-    Serial.print(xD); Serial.print('\t');
-    Serial.print(yD); Serial.print('\t');
-    Serial.print(zD); Serial.print('\t');
-    Serial.print(Rotation(Vector3D(0.0f, 0.0f, 1.0f), dir).GetEulerAngles(EulerConstants::EulerOrderXYZS).Angles.ToString()); Serial.print('\n'); Serial.print('\n');
-
-    return Rotation(Vector3D(0.0f, 0.0f, 1.0f), dir).GetQuaternion() * Rotation(EulerAngles(Vector3D(0.0f, 0.0f, offsetPlaneAngle), EulerConstants::EulerOrderXYZS)).GetQuaternion();
+    return Rotation(Vector3D(0.0f, 0.0f, 1.0f), normal).GetQuaternion() * Rotation(EulerAngles(Vector3D(0.0f, 0.0f, offsetPlaneAngle), EulerConstants::EulerOrderXYZS)).GetQuaternion();
 }
 
 ObjectAlign::ObjectAlign(Vector2D camMin, Vector2D camMax, Quaternion targetOrientation) {
