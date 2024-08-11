@@ -1,6 +1,10 @@
 #include "SSD1306.h"
 
+#ifdef SH1106
+Adafruit_SH1106 HeadsUpDisplay::display(OLED_RESET);
+#else
 Adafruit_SSD1306 HeadsUpDisplay::display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+#endif
 
 uint8_t HeadsUpDisplay::faceBitmap[];
 
@@ -241,7 +245,12 @@ void HeadsUpDisplay::Initialize() {
     uint8_t error = Wire.endTransmission();
 
     if(error == 0){// SSD1306 Found
+        #ifdef SH1106
+        display.begin(SH1106_SWITCHCAPVCC, 0x3C);
+        didBegin = true;
+        #else
         didBegin = display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
+        #endif
 
         // Initialize the OLED display
         if (!didBegin) {
