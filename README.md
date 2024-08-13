@@ -5,13 +5,14 @@ Before startint this project, it is _highly_ recommended that you have experienc
 - Hudu WF-1
   - 🗸 RGB, works with HUB75 panels
   - 🗸 Easy Wi-Fi configuration, quick setup with an app
-  - ❌ Not interactive, only shows static images
+  - ❌ Only shows static images, GIFs, and slideshows
+  - ❌ Can't react to things like buttons or sensors
 - MAX7219-based Protogen Designs
   - 🗸 Very cheap, readily available on Amazon / alternatives
-  - 🗸 Uses an Arduino Nano as a controller
+  - 🗸 Can use an Arduino Nano or similar as a controller
   - 🗸 Interactive (depending on the controller firmware)
   - 🗸 Uses less power than HUB75-based designs
-  - ❌ Single color, pixels can only be on or off.
+  - ❌ Single color, pixels can only be on or off
   - ❌ Lots of soldering required to connect the panels together
   
 # FREQUENTLY ASKED QUESTIONS
