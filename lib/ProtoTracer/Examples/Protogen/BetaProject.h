@@ -4,6 +4,9 @@
 #include "../../Assets/Models/FBX/BetaFront.h"
 #include "../../Assets/Models/FBX/BetaRear.h"
 #include "../../Assets/Models/OBJ/LEDStripBackground.h"
+#include "../../Assets/Models/FBX/NukudeFlat.h"
+#include "../../Assets/Models/OBJ/RectangularPrism.h"
+#include "../../Assets/Models/OBJ/Spyro.h"
 
 #include "../../Animation/KeyFrameTrack.h"
 
@@ -16,9 +19,12 @@ private:
     WS35BetaController controller = WS35BetaController(&cameras, 50);
     BetaFront pM;
     BetaRear rear;
+    NukudeFace nukude;
+    RectangularPrism cube;
+    Spyro spyro;
     LEDStripBackground ledStripBackground;
     
-	const __FlashStringHelper* faceArray[9] = {F("DEFAULT"), F("SAD"), F("HEART"), F("DEAD"), F("ANGRY"), F("AUDIO1"), F("AUDIO2"), F("AUDIO3")};
+	const __FlashStringHelper* faceArray[10] = {F("DEFAULT"), F("SAD"), F("HEART"), F("DEAD"), F("CIRCLE"), F("ANGRY"), F("AUDIO1"), F("AUDIO2"), F("AUDIO3")};
 
     KeyFrameTrack<1, 10> botFinLR1 = KeyFrameTrack<1, 10>(0.0f, 1.0f, KeyFrameInterpolation::Cosine);
     KeyFrameTrack<1, 10> botFinLR2 = KeyFrameTrack<1, 10>(0.0f, 1.0f, KeyFrameInterpolation::Cosine);
@@ -202,14 +208,14 @@ private:
     }
 
 public:
-    BetaProject() : ProtogenProject(&cameras, &controller, 3, Vector2D(), Vector2D(192.0f, 105.0f), 22, 23, 8){
+    BetaProject() : ProtogenProject(&cameras, &controller, 2, Vector2D(), Vector2D(192.0f, 105.0f), 22, 23, 9){
         scene.AddObject(pM.GetObject());
         scene.AddObject(rear.GetObject());
-        scene.AddObject(ledStripBackground.GetObject());
+        //scene.AddObject(ledStripBackground.GetObject());
         
         pM.GetObject()->SetMaterial(GetFaceMaterial());
         rear.GetObject()->SetMaterial(GetFaceMaterial());
-        ledStripBackground.GetObject()->SetMaterial(GetFaceMaterial());
+        //ledStripBackground.GetObject()->SetMaterial(GetFaceMaterial());
 
         LinkControlParameters();
         AddBotFinKeyFrames();
@@ -235,21 +241,45 @@ public:
         controller.SetBrightness(Menu::GetBrightness());
         controller.SetAccentBrightness(Menu::GetAccentBrightness());
 
-        UpdateKeyFrameTracks();
         SelectFace(mode);
-        UpdateFace(ratio);
+
+        UpdateKeyFrameTracks();
 
         pM.Update();
         rear.Update();
 
-        AlignObjectFace(pM.GetObject(), 0.0f, 2.0f, false);
-        AlignObjectRear(rear.GetObject(), -25.0f, 2.0f, false);
+        UpdateFace(ratio);
         
-        pM.GetObject()->GetTransform()->SetPosition(GetWiggleOffset());
-        pM.GetObject()->UpdateTransform();
+        GetObjectAlignFace()->GetObjectPlanarityRatio(spyro.GetObject());
+        GetObjectAlignFace()->GetObjectPlanarityRatio(cube.GetObject());
+        GetObjectAlignFace()->GetObjectPlanarityRatio(pM.GetObject());
+        GetObjectAlignFace()->GetObjectPlanarityRatio(rear.GetObject());
+        GetObjectAlignFace()->GetObjectPlanarityRatio(nukude.GetObject());
+        /*
+        Serial.print(Rotation(GetObjectAlignFace()->GetPlaneOrientation(spyro.GetObject(), GetObjectAlignFace()->GetCentroid(spyro.GetObject()))).GetEulerAngles(EulerConstants::EulerOrderXYZS).Angles.ToString()); Serial.print('\t');
+        Serial.print(Rotation(GetObjectAlignFace()->GetPlaneOrientation(cube.GetObject(), GetObjectAlignFace()->GetCentroid(cube.GetObject()))).GetEulerAngles(EulerConstants::EulerOrderXYZS).Angles.ToString()); Serial.print('\t');
+        Serial.print(Rotation(GetObjectAlignFace()->GetPlaneOrientation(pM.GetObject(), GetObjectAlignFace()->GetCentroid(pM.GetObject()))).GetEulerAngles(EulerConstants::EulerOrderXYZS).Angles.ToString()); Serial.print('\t');
+        Serial.print(Rotation(GetObjectAlignFace()->GetPlaneOrientation(rear.GetObject(), GetObjectAlignFace()->GetCentroid(rear.GetObject()))).GetEulerAngles(EulerConstants::EulerOrderXYZS).Angles.ToString()); Serial.print('\t');
+        Serial.print(Rotation(GetObjectAlignFace()->GetPlaneOrientation(nukude.GetObject(), GetObjectAlignFace()->GetCentroid(nukude.GetObject()))).GetEulerAngles(EulerConstants::EulerOrderXYZS).Angles.ToString()); Serial.print('\t');
+
+        Serial.print(GetObjectAlignFace()->GetObjectPlanarityRatio(spyro.GetObject())); Serial.print('\t');
+        Serial.print(GetObjectAlignFace()->GetObjectPlanarityRatio(cube.GetObject())); Serial.print('\t');
+        Serial.print(GetObjectAlignFace()->GetObjectPlanarityRatio(pM.GetObject())); Serial.print('\t');
+        Serial.print(GetObjectAlignFace()->GetObjectPlanarityRatio(rear.GetObject())); Serial.print('\t');
+        Serial.print(GetObjectAlignFace()->GetObjectPlanarityRatio(nukude.GetObject())); Serial.print('\n');
+        */
+        
+
+        //AlignObjectFace(pM.GetObject(), 360.0f * ratio, 2.0f, true);
+        //AlignObjectRear(rear.GetObject(), 360.0f * ratio);
+        
+        //pM.GetObject()->GetTransform()->SetPosition(GetWiggleOffset());
+        //pM.GetObject()->UpdateTransform();
         
         rear.GetObject()->GetTransform()->SetPosition(GetWiggleOffset());
         rear.GetObject()->UpdateTransform();
+
+        //Serial.print(rear.GetObject()->GetCenterOffset().ToString()); Serial.print('\n');
     }
     
     void SelectFace(uint8_t code) {
@@ -263,9 +293,10 @@ public:
             case 1: Sad();    break;
             case 2: Heart();    break;
             case 3: Dead();    break;
-            case 4: AngryFace();      break;
-            case 5: AudioReactiveGradientFace();    break;
-            case 6: OscilloscopeFace();             break;
+            case 4: AlphaGenCircle();   break;
+            case 5: AngryFace();      break;
+            case 6: AudioReactiveGradientFace();    break;
+            case 7: OscilloscopeFace();             break;
             default: SpectrumAnalyzerFace();        break;
         }
     }
