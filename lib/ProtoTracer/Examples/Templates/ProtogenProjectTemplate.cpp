@@ -23,6 +23,7 @@ void ProtogenProject::SetMaterialLayers(){
     materialAnimator.AddMaterial(Material::Replace, &flowNoise, 40, 0.15f, 1.0f);//layer 8
     materialAnimator.AddMaterial(Material::Replace, &rainbowSpiral, 40, 0.0f, 1.0f);//layer 9
     materialAnimator.AddMaterial(Material::Replace, &hRainbow, 40, 0.0f, 1.0f);//layer 10
+    materialAnimator.AddMaterial(Material::Replace, &blackMaterial, 40, 0.0f, 1.0f);//layer 11
     materialAnimator.AddMaterial(Material::Replace, &sA, 20, 0.0f, 1.0f);
     materialAnimator.AddMaterial(Material::Replace, &aRG, 20, 0.0f, 1.0f);
     materialAnimator.AddMaterial(Material::Replace, &oSC, 20, 0.0f, 1.0f);
@@ -38,6 +39,7 @@ void ProtogenProject::SetMaterialLayers(){
     backgroundMaterial.AddMaterial(Material::Replace, &flowNoise, 40, 0.0f, 1.0f);//layer 8
     backgroundMaterial.AddMaterial(Material::Replace, &rainbowSpiral, 40, 0.0f, 1.0f);//layer 9
     backgroundMaterial.AddMaterial(Material::Replace, &hRainbow, 40, 0.0f, 1.0f);//layer 10
+    backgroundMaterial.AddMaterial(Material::Replace, &blackMaterial, 40, 0.0f, 1.0f);//layer 11
     backgroundMaterial.AddMaterial(Material::Add, &sA, 20, 0.0f, 1.0f);
     backgroundMaterial.AddMaterial(Material::Add, &aRG, 20, 0.0f, 1.0f);
     backgroundMaterial.AddMaterial(Material::Add, &oSC, 20, 0.0f, 1.0f);
@@ -76,6 +78,7 @@ void ProtogenProject::SetMaterialColor(){
         case 8: materialAnimator.AddMaterialFrame(rainbowSpiral, 0.8f); break;
         case 9: materialAnimator.AddMaterialFrame(flowNoise, 0.8f); break;
         case 10: materialAnimator.AddMaterialFrame(hRainbow, 0.8f); break;
+        case 11: materialAnimator.AddMaterialFrame(blackMaterial, 0.8f); break;
         default: break;
     }
 }
@@ -368,6 +371,9 @@ void ProtogenProject::AddMaterialFrame(Color color, float opacity){
         case CHORIZONTALRAINBOW:
             materialAnimator.AddMaterialFrame(hRainbow, opacity);
             break;
+        case CBLACK:
+            materialAnimator.AddMaterialFrame(blackMaterial, opacity);
+            break;
         default:
             break;
     }
@@ -412,6 +418,9 @@ void ProtogenProject::AddBackgroundMaterialFrame(Color color, float opacity){
             break;
         case CHORIZONTALRAINBOW:
             backgroundMaterial.AddMaterialFrame(hRainbow, opacity);
+            break;
+        case CBLACK:
+            backgroundMaterial.AddMaterialFrame(blackMaterial, opacity);
             break;
         default:
             break;

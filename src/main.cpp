@@ -1,25 +1,29 @@
 #include "Examples/UserConfiguration.h"
 
-#ifdef TESTHARDWARE
-#include "Examples/Protogen/ProtogenHardwareTest.h"
+// Define the project based on a preprocessor macro
+#if defined(PROJECT_PROTOGEN_HUB75)
+    #include "Examples/Protogen/ProtogenHUB75Project.h"
+    ProtogenHUB75Project project;
+#elif defined(PROJECT_PROTOGEN_WS35)
+    #include "Examples/Protogen/ProtogenWS35Project.h"
+    ProtogenWS35Project project;
+#elif defined(PROJECT_PROTOGEN_BETA)
+    #include "Examples/Protogen/BetaProject.h"
+    BetaProject project;
+#elif defined(PROJECT_VERIFY_ENGINE)
+    #include "Examples/VerifyEngine.h"
+    VerifyEngine project;
+#elif defined(PROJECT_VERIFY_HARDWARE)
+    #include "Examples/Protogen/ProtogenHardwareTest.h"
+#else
+    #error "No project defined! Please define one of PROJECT_PROTOGEN_HUB75, PROJECT_PROTOGEN_WS35, or PROJECT_VERIFY_ENGINE."
 #endif
-
-//#include "Examples\Commissions\UnicornZhenjaAnimation.h"
-#include "Examples/Protogen/ProtogenHUB75Project.h"
-//#include "Examples\Protogen\ProtogenWS35Project.h"
-//#include "Examples\VerifyEngine.h"
-
-
-//#include "Examples/Commissions/ArrowAnimation.h"
-//#include "../lib/ProtoTracer/Examples/Protogen/BetaProject.h"
-
-ProtogenHUB75Project project;
 
 void setup() {
     Serial.begin(115200);
     Serial.println("\nStarting...");
     
-    #ifndef TESTHARDWARE
+    #ifndef PROJECT_VERIFY_HARDWARE
     project.Initialize();
     delay(100);
     #else
@@ -33,13 +37,13 @@ void setup() {
 }
 
 void loop() {
+    
+    #ifndef PROJECT_VERIFY_HARDWARE
     float ratio = (float)(millis() % 5000) / 5000.0f;
 
     project.Animate(ratio); 
-
     project.Render();
-
     project.Display();
-
     project.PrintStats();
+    #endif
 }

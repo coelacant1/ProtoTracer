@@ -1,0 +1,98 @@
+name: Build and Release Firmware HEX Files
+
+on:
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - 'firmware_builds/**'
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        environment: [teensy40hub75, teensy40ws35, teensy40beta, teensy40verifyrender, teensy40verifyhardware, teensy41hub75, teensy41ws35, teensy41beta, teensy41verifyrender, teensy41verifyhardware]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        persist-credentials: false
+        fetch-depth: 0
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install PlatformIO
+      run: |
+        python -m pip install --upgrade pip
+        pip install platformio
+
+    - name: Build Firmware
+      run: |
+        platformio run -e ${{ matrix.environment }}
+
+    - name: Archive HEX Files
+      run: |
+        mkdir -p firmware_builds/${{ matrix.environment }}
+        cp .pio/build/${{ matrix.environment }}/firmware.hex firmware_builds/${{ matrix.environment }}/
+
+    - name: Upload HEX Files as Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ matrix.environment }}.hex
+        path: firmware_builds/${{ matrix.environment }}/firmware.hex
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Download HEX Artifacts
+      uses: actions/download-artifact@v3
+      with:
+        name: '*.hex'
+        path: firmware_builds/
+
+    - name: Create GitHub Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: "v1.${{ github.run_number }}"
+        release_name: "Firmware Build v1.${{ github.run_number }}"
+        body: |
+          Automated firmware build for environments:
+          - teensy40hub75, teensy40ws35, teensy40beta, teensy40verifyrender, teensy40verifyhardware, teensy41hub75, teensy41ws35, teensy41beta, teensy41verifyrender, teensy41verifyhardware
+        draft: false
+        prerelease: false
+
+    - name: Zip HEX Files with Version Number
+      id: zip_hex
+      run: |
+        cd firmware_builds
+        # Extract version number by stripping the leading 'v' from the tag_name
+        VERSION_NUMBER="${{ steps.create_release.outputs.tag_name }}"
+        VERSION_NUMBER="${VERSION_NUMBER#v}"
+        zip ../firmware_build_${VERSION_NUMBER}.zip *.hex
+        echo "zip_name=firmware_build_${VERSION_NUMBER}.zip" >> $GITHUB_OUTPUT
+
+    - name: Upload ZIP to Release
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./firmware_build_${{ steps.zip_hex.outputs.zip_name }}
+        asset_name: "firmware_build_${{ steps.zip_hex.outputs.zip_name }}"
+        asset_content_type: application/zip

@@ -63,6 +63,7 @@ private:
     SimpleMaterial blueMaterial = SimpleMaterial(RGBColor(0, 0, 255));
     SimpleMaterial yellowMaterial = SimpleMaterial(RGBColor(255, 255, 0));
     SimpleMaterial purpleMaterial = SimpleMaterial(RGBColor(255, 0, 255));
+    SimpleMaterial blackMaterial = SimpleMaterial(RGBColor(0, 0, 0));
     
     RGBColor gradientSpectrum[2] = {RGBColor(255, 0, 0), RGBColor(255, 0, 0)};
     GradientMaterial<2> gradientMat = GradientMaterial<2>(gradientSpectrum, 350.0f, false);
@@ -117,7 +118,8 @@ protected:
         CBLUE,
         CRAINBOW,
         CRAINBOWNOISE,
-        CHORIZONTALRAINBOW
+        CHORIZONTALRAINBOW,
+        CBLACK
     };
     
     EasyEaseAnimator<60> eEA = EasyEaseAnimator<60>(IEasyEaseAnimator::Overshoot, 1.0f, 0.35f);

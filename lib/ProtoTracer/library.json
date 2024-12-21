@@ -40,7 +40,6 @@
         "adafruit/Adafruit seesaw Library": "^1.6.3",
         "adafruit/Adafruit MMC56x3": "^1.0.0",
         "depau/APDS-9930 Ambient Light and Proximity Sensor": "^1.5.1",
-        "fastled/FastLED": "^3.5.0",
         "adafruit/Adafruit GFX Library": "^1.11.3",
         "arduino-libraries/NTPClient": "^3.2.1"
     },
