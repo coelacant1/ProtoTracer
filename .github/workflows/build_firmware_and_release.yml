@@ -24,12 +24,25 @@ jobs:
         with:
           python-version: '3.x'
 
+      - name: Cache PlatformIO
+        uses: actions/cache@v3
+        with:
+          path: ~/.platformio
+          key: ${{ runner.os }}-platformio-${{ hashFiles('**/platformio.ini') }}
+          restore-keys: |
+            ${{ runner.os }}-platformio-
+
       - name: Install PlatformIO
         run: |
           python -m pip install --upgrade pip
           pip install platformio
 
-      - name: Build All Environments
+      - name: Install GNU Parallel
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y parallel
+
+      - name: Build All Environments in Parallel
         run: |
           # Define all build environments
           environments=(
@@ -48,11 +61,11 @@ jobs:
           # Create a directory to store HEX files
           mkdir -p firmware_builds
 
-          # Iterate through each environment, build, and collect HEX files
-          for env in "${environments[@]}"
-          do
-            echo "Building environment: $env"
-            platformio run -e $env
+          # Function to build a single environment
+          build_env() {
+            local env=$1
+            echo "[$(date +%T)] Building environment: $env"
+            platformio run -e "$env"
 
             # Define the source HEX file path
             # Replace 'firmware.hex' with your actual HEX file name if different
@@ -66,15 +79,22 @@ jobs:
               # Copy the HEX file to the firmware_builds directory
               cp "$source_hex" "$dest_hex"
 
-              echo "Collected HEX file for $env at $dest_hex"
+              echo "[$(date +%T)] Collected HEX file for $env at $dest_hex"
             else
-              echo "Error: HEX file not found for $env at $source_hex"
+              echo "[$(date +%T)] Error: HEX file not found for $env at $source_hex"
               exit 1
             fi
-          done
+          }
+
+          export -f build_env
+
+          # Export the environments array as input to parallel
+          printf "%s\n" "${environments[@]}" | parallel -j 4 build_env {}
+
+          echo "[$(date +%T)] All build environments completed."
 
       - name: Upload Firmware Builds as Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: firmware_builds
           path: firmware_builds/
@@ -83,6 +103,8 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    env:
+      VERSION_NUMBER: "v1.${{ github.run_number }}"  # Define VERSION_NUMBER here
 
     steps:
       - name: Checkout repository
@@ -94,14 +116,26 @@ jobs:
           name: firmware_builds
           path: firmware_builds/
 
-      - name: Create GitHub Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Zip Firmware Builds with Version Number
+        run: |
+          # Navigate to the firmware_builds directory
+          cd firmware_builds
+
+          # Strip the leading 'v' from VERSION_NUMBER for the ZIP file name
+          VERSION_NUM_ONLY="${{ env.VERSION_NUMBER }}"
+          VERSION_NUM_ONLY="${VERSION_NUM_ONLY#v}"
+
+          # Create a ZIP file named firmware_build_VERSIONNUMBER.zip in the root directory
+          zip ../firmware_build_${VERSION_NUM_ONLY}.zip *.hex
+
+          # Set the ZIP file name as an environment variable
+          echo "ZIP_NAME=firmware_build_${VERSION_NUM_ONLY}.zip" >> $GITHUB_ENV
+
+      - name: Create GitHub Release and Upload ZIP
+        uses: ncipollo/release-action@v1
         with:
-          tag_name: "v1.${{ github.run_number }}"
-          release_name: "Firmware Build v1.${{ github.run_number }}"
+          tag: "${{ env.VERSION_NUMBER }}"
+          name: "Firmware Build ${{ env.VERSION_NUMBER }}"
           body: |
             Automated firmware build for environments:
             - teensy40hub75
@@ -114,26 +148,4 @@ jobs:
             - teensy41beta
             - teensy41verifyrender
             - teensy41verifyhardware
-          draft: false
-          prerelease: false
-
-      - name: Zip Firmware Builds with Version Number
-        id: zip_firmware
-        run: |
-          cd firmware_builds
-          # Extract version number by stripping the leading 'v' from the tag_name
-          VERSION_NUMBER="${{ steps.create_release.outputs.tag_name }}"
-          VERSION_NUMBER="${VERSION_NUMBER#v}"
-          # Create a ZIP file named firmware_build_VERSIONNUMBER.zip
-          zip ../firmware_build_${VERSION_NUMBER}.zip *.hex
-          echo "zip_name=firmware_build_${VERSION_NUMBER}.zip" >> $GITHUB_OUTPUT
-
-      - name: Upload ZIP to Release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./firmware_build_${{ steps.zip_firmware.outputs.zip_name }}
-          asset_name: "firmware_build_${{ steps.zip_firmware.outputs.zip_name }}"
-          asset_content_type: application/zip
+          files: firmware_build_${{ env.VERSION_NUMBER }}.zip
