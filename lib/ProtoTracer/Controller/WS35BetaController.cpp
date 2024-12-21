@@ -15,19 +15,12 @@ void WS35BetaController::Display(){
 
     IPixelGroup* camRghtFrntPixels = cameras->GetCameras()[0]->GetPixelGroup();
     IPixelGroup* camRghtRearPixels = cameras->GetCameras()[1]->GetPixelGroup();
-    IPixelGroup* camRghtMiniPixels = cameras->GetCameras()[2]->GetPixelGroup();
-    IPixelGroup* camLeftMiniPixels = cameras->GetCameras()[3]->GetPixelGroup();
 
     int offset, inverseOffset;
 
     for (int i = 0; i < 571; i++){
         *camRghtFrntPixels->GetColor(i) = camRghtFrntPixels->GetColor(i)->Scale(brightness);
         *camRghtRearPixels->GetColor(i) = camRghtRearPixels->GetColor(i)->Scale(brightness);
-        
-        if(i < 4){
-            *camRghtMiniPixels->GetColor(i) = camRghtMiniPixels->GetColor(i)->Scale(brightness * 4);
-            *camLeftMiniPixels->GetColor(i) = camLeftMiniPixels->GetColor(i)->Scale(brightness * 4);
-        }
     }
 
     for (int i = 0; i < 571; i++) {
@@ -56,13 +49,6 @@ void WS35BetaController::Display(){
             leds.setPixel(i + 346 * 7 - 346, camRghtFrntPixels->GetColor(i)->R, camRghtFrntPixels->GetColor(i)->G, camRghtFrntPixels->GetColor(i)->B);//Pin 8
         }
     }
-    
-    for(int i = 0; i < 4; i++){
-        //Front Panels
-        leds.setPixel(i + 346 * 2 + 225, camLeftMiniPixels->GetColor(i)->R, camLeftMiniPixels->GetColor(i)->G, camLeftMiniPixels->GetColor(i)->B);//Pin 8
-        leds.setPixel(i + 346 * 3 + 225, camRghtMiniPixels->GetColor(i)->R, camRghtMiniPixels->GetColor(i)->G, camRghtMiniPixels->GetColor(i)->B);//Pin 8
-    }
-
 
     leds.show();
 }

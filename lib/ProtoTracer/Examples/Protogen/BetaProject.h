@@ -5,6 +5,9 @@
 #include "../../Assets/Models/FBX/BetaRear.h"
 #include "../../Assets/Models/FBX/Standby.h"
 #include "../../Assets/Models/OBJ/LEDStripBackground.h"
+#include "../../Assets/Models/FBX/NukudeFlat.h"
+#include "../../Assets/Models/OBJ/RectangularPrism.h"
+#include "../../Assets/Models/OBJ/Spyro.h"
 
 #include "../../Animation/KeyFrameTrack.h"
 
@@ -323,9 +326,9 @@ public:
         controller.SetBrightness(Menu::GetBrightness());
         controller.SetAccentBrightness(Menu::GetAccentBrightness());
 
-        UpdateKeyFrameTracks();
         SelectFace(mode);
-        UpdateFace(ratio);
+
+        UpdateKeyFrameTracks();
 
         pM.Update();
         rear.Update();
@@ -349,6 +352,8 @@ public:
 
         rear.GetObject()->GetTransform()->SetPosition(GetWiggleOffset());
         rear.GetObject()->UpdateTransform();
+
+        //Serial.print(rear.GetObject()->GetCenterOffset().ToString()); Serial.print('\n');
     }
     
     void SelectFace(uint8_t code) {
