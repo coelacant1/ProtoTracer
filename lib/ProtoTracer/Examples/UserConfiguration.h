@@ -1,5 +1,7 @@
 #pragma once
 
+//#define HUB75_RBG // Uses modified Matrix Hardware file for RBG color order panels
+
 #define PRINTINFO      //Prints live stats, FPS,etc
 //#define DEBUG        //Prints debug information
 //#define TESTHARDWARE //Tests for default hardware on the protocontroller, apds9960, ssd1306, neotrellis
