@@ -8,7 +8,6 @@
 #include "../../ExternalDevices/Sensors/APDS9960.h"
 #include "../../ExternalDevices/Displays/SSD1306.h"
 #include "../../ExternalDevices/Sensors/Microphone/MicrophoneFourier_MAX9814.h"
-//#include "..\Sensors\MicrophoneFourier_DMA.h"
 #include "../../ExternalDevices/OutputDevices/FanController.h"
 
 #include "../../Scene/Materials/Utils/MaterialAnimator.h"

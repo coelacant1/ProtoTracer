@@ -3,7 +3,6 @@
 #include "../CameraManager.h"
 #include "../../Camera.h"
 #include "../../Pixels/PixelGroup.h"
-//#include "..\..\Pixels\PixelGroups\P3HUB75.h"
 #include "../../Pixels/PixelGroups/DeltaDisplayL.h"
 #include "../../Pixels/PixelGroups/DeltaDisplayR.h"
 #include "../../../Utils/Math/Transform.h"
