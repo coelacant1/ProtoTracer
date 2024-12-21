@@ -2,12 +2,9 @@
 
 #include "../Animation.h"
 #include "../../Objects/SolidCube.h"
-//#include "..\..\Materials\DepthMaterial.h"
 #include "../../Materials/LightMaterial.h"
 #include "../../Signals/FunctionGenerator.h"
 
-//#include "Flash\Images\CoelaToot.h"
-//#include "Flash\ImageSequences\Hex2.h"
 #include "../../Materials/StripeMaterial.h"
 #include "../../Materials/SpiralMaterial.h"
 #include "../../Materials/CombineMaterial.h"

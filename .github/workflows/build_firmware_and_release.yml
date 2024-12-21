@@ -1,0 +1,139 @@
+name: Build and Release Firmware HEX Files
+
+on:
+  push:
+    branches: [ main, Testing ]
+    paths-ignore:
+      - 'firmware_builds/**'
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install PlatformIO
+        run: |
+          python -m pip install --upgrade pip
+          pip install platformio
+
+      - name: Build All Environments
+        run: |
+          # Define all build environments
+          environments=(
+            teensy40hub75
+            teensy40ws35
+            teensy40beta
+            teensy40verifyrender
+            teensy40verifyhardware
+            teensy41hub75
+            teensy41ws35
+            teensy41beta
+            teensy41verifyrender
+            teensy41verifyhardware
+          )
+
+          # Create a directory to store HEX files
+          mkdir -p firmware_builds
+
+          # Iterate through each environment, build, and collect HEX files
+          for env in "${environments[@]}"
+          do
+            echo "Building environment: $env"
+            platformio run -e $env
+
+            # Define the source HEX file path
+            # Replace 'firmware.hex' with your actual HEX file name if different
+            source_hex=".pio/build/$env/firmware.hex"
+
+            # Check if HEX file exists
+            if [ -f "$source_hex" ]; then
+              # Define the destination HEX file path with environment-specific naming
+              dest_hex="firmware_builds/${env}.hex"
+
+              # Copy the HEX file to the firmware_builds directory
+              cp "$source_hex" "$dest_hex"
+
+              echo "Collected HEX file for $env at $dest_hex"
+            else
+              echo "Error: HEX file not found for $env at $source_hex"
+              exit 1
+            fi
+          done
+
+      - name: Upload Firmware Builds as Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: firmware_builds
+          path: firmware_builds/
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Download Firmware Builds Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: firmware_builds
+          path: firmware_builds/
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: "v1.${{ github.run_number }}"
+          release_name: "Firmware Build v1.${{ github.run_number }}"
+          body: |
+            Automated firmware build for environments:
+            - teensy40hub75
+            - teensy40ws35
+            - teensy40beta
+            - teensy40verifyrender
+            - teensy40verifyhardware
+            - teensy41hub75
+            - teensy41ws35
+            - teensy41beta
+            - teensy41verifyrender
+            - teensy41verifyhardware
+          draft: false
+          prerelease: false
+
+      - name: Zip Firmware Builds with Version Number
+        id: zip_firmware
+        run: |
+          cd firmware_builds
+          # Extract version number by stripping the leading 'v' from the tag_name
+          VERSION_NUMBER="${{ steps.create_release.outputs.tag_name }}"
+          VERSION_NUMBER="${VERSION_NUMBER#v}"
+          # Create a ZIP file named firmware_build_VERSIONNUMBER.zip
+          zip ../firmware_build_${VERSION_NUMBER}.zip *.hex
+          echo "zip_name=firmware_build_${VERSION_NUMBER}.zip" >> $GITHUB_OUTPUT
+
+      - name: Upload ZIP to Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./firmware_build_${{ steps.zip_firmware.outputs.zip_name }}
+          asset_name: "firmware_build_${{ steps.zip_firmware.outputs.zip_name }}"
+          asset_content_type: application/zip

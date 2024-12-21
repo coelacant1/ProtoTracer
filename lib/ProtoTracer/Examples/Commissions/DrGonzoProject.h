@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../Templates/ProtogenProjectTemplate.h"
-//#include "..\..\Assets\Models\OBJ\DeltaDisplayBackground.h"
 #include "../../Assets/Models/FBX/Commissions/DrGonzoFace.h"
 #include "../../Assets/Models/FBX/Commissions/DrGonzoSD.h"
 #include "../../Assets/Models/FBX/Commissions/DrGonzoTears.h"
