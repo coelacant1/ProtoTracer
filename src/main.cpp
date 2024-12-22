@@ -1,6 +1,5 @@
 #include "Examples/UserConfiguration.h"
 
-// Define the project based on a preprocessor macro
 #if defined(PROJECT_PROTOGEN_HUB75)
     #include "Examples/Protogen/ProtogenHUB75Project.h"
     ProtogenHUB75Project project;

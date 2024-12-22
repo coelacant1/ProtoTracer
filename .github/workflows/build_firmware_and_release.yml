@@ -6,6 +6,7 @@ on:
     paths-ignore:
       - 'firmware_builds/**'
       - '.github/workflows/**'
+      - '.site/**'
   workflow_dispatch:
 
 jobs:
@@ -128,5 +129,5 @@ jobs:
             - teensy41verifyrender
             - teensy41verifyhardware
   
-            [Download the firmware here!](https://github.com/<owner>/<repo>/releases/latest/download/firmware_build_${{ env.VERSION_NUMBER }}.zip)
-          artifact: "firmware_build_${{ env.VERSION_NUMBER }}.zip"
+            [Download the firmware here!](https://github.com/coelacant1/ProtoTracer/releases/latest/download/firmware_build_${{ env.VERSION_NUMBER }}.zip)
+          artifacts: "firmware_build_${{ env.VERSION_NUMBER }}.zip"
