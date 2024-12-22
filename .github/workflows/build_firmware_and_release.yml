@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -25,7 +25,7 @@ jobs:
           python-version: '3.x'
 
       - name: Cache PlatformIO
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.platformio
           key: ${{ runner.os }}-platformio-${{ hashFiles('**/platformio.ini') }}
@@ -44,7 +44,6 @@ jobs:
 
       - name: Build All Environments in Parallel
         run: |
-          # Define all build environments
           environments=(
             teensy40hub75
             teensy40ws35
@@ -58,27 +57,17 @@ jobs:
             teensy41verifyhardware
           )
 
-          # Create a directory to store HEX files
           mkdir -p firmware_builds
 
-          # Function to build a single environment
           build_env() {
             local env=$1
             echo "[$(date +%T)] Building environment: $env"
             platformio run -e "$env"
 
-            # Define the source HEX file path
-            # Replace 'firmware.hex' with your actual HEX file name if different
             source_hex=".pio/build/$env/firmware.hex"
-
-            # Check if HEX file exists
             if [ -f "$source_hex" ]; then
-              # Define the destination HEX file path with environment-specific naming
               dest_hex="firmware_builds/${env}.hex"
-
-              # Copy the HEX file to the firmware_builds directory
               cp "$source_hex" "$dest_hex"
-
               echo "[$(date +%T)] Collected HEX file for $env at $dest_hex"
             else
               echo "[$(date +%T)] Error: HEX file not found for $env at $source_hex"
@@ -87,10 +76,7 @@ jobs:
           }
 
           export -f build_env
-
-          # Export the environments array as input to parallel
           printf "%s\n" "${environments[@]}" | parallel -j 4 build_env {}
-
           echo "[$(date +%T)] All build environments completed."
 
       - name: Upload Firmware Builds as Artifact
@@ -104,31 +90,24 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     env:
-      VERSION_NUMBER: "v1.${{ github.run_number }}"  # Define VERSION_NUMBER here
+      VERSION_NUMBER: "v1.${{ github.run_number }}"
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Download Firmware Builds Artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: firmware_builds
           path: firmware_builds/
 
       - name: Zip Firmware Builds with Version Number
         run: |
-          # Navigate to the firmware_builds directory
           cd firmware_builds
-
-          # Strip the leading 'v' from VERSION_NUMBER for the ZIP file name
           VERSION_NUM_ONLY="${{ env.VERSION_NUMBER }}"
           VERSION_NUM_ONLY="${VERSION_NUM_ONLY#v}"
-
-          # Create a ZIP file named firmware_build_VERSIONNUMBER.zip in the root directory
           zip ../firmware_build_${VERSION_NUM_ONLY}.zip *.hex
-
-          # Set the ZIP file name as an environment variable
           echo "ZIP_NAME=firmware_build_${VERSION_NUM_ONLY}.zip" >> $GITHUB_ENV
 
       - name: Create GitHub Release and Upload ZIP
