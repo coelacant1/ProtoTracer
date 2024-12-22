@@ -120,7 +120,14 @@ jobs:
             exit 1
           fi
 
-      - name: Create GitHub Release and Upload ZIP
+      - name: Prepare Release Assets
+        run: |
+          # Create a directory for individual hex files
+          mkdir -p release_assets
+          cp firmware_builds/*.hex release_assets/
+          cp ${{ env.ZIP_NAME }} release_assets/
+
+      - name: Create GitHub Release with All Assets
         uses: ncipollo/release-action@v1
         with:
           tag: "${{ env.VERSION_NUMBER }}"
@@ -137,7 +144,20 @@ jobs:
             - teensy41beta
             - teensy41verifyrender
             - teensy41verifyhardware
-  
-            [Download the firmware here!](https://github.com/coelacant1/ProtoTracer/releases/latest/download/${{ env.ZIP_NAME }})
-          artifacts: "${{ env.ZIP_NAME }}"
-
+            
+            ### Downloads
+            - [Complete Firmware Package (ZIP)](https://github.com/coelacant1/ProtoTracer/releases/download/${{ env.VERSION_NUMBER }}/${{ env.ZIP_NAME }})
+            
+            Individual Firmware Files:
+            - [teensy40hub75.hex](https://github.com/coelacant1/ProtoTracer/releases/download/${{ env.VERSION_NUMBER }}/teensy40hub75.hex)
+            - [teensy40ws35.hex](https://github.com/coelacant1/ProtoTracer/releases/download/${{ env.VERSION_NUMBER }}/teensy40ws35.hex)
+            - [teensy40beta.hex](https://github.com/coelacant1/ProtoTracer/releases/download/${{ env.VERSION_NUMBER }}/teensy40beta.hex)
+            - [teensy40verifyrender.hex](https://github.com/coelacant1/ProtoTracer/releases/download/${{ env.VERSION_NUMBER }}/teensy40verifyrender.hex)
+            - [teensy40verifyhardware.hex](https://github.com/coelacant1/ProtoTracer/releases/download/${{ env.VERSION_NUMBER }}/teensy40verifyhardware.hex)
+            - [teensy41hub75.hex](https://github.com/coelacant1/ProtoTracer/releases/download/${{ env.VERSION_NUMBER }}/teensy41hub75.hex)
+            - [teensy41ws35.hex](https://github.com/coelacant1/ProtoTracer/releases/download/${{ env.VERSION_NUMBER }}/teensy41ws35.hex)
+            - [teensy41beta.hex](https://github.com/coelacant1/ProtoTracer/releases/download/${{ env.VERSION_NUMBER }}/teensy41beta.hex)
+            - [teensy41verifyrender.hex](https://github.com/coelacant1/ProtoTracer/releases/download/${{ env.VERSION_NUMBER }}/teensy41verifyrender.hex)
+            - [teensy41verifyhardware.hex](https://github.com/coelacant1/ProtoTracer/releases/download/${{ env.VERSION_NUMBER }}/teensy41verifyhardware.hex)
+          artifacts: "release_assets/*"
+          artifactErrorsFailBuild: true
