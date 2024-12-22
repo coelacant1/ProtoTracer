@@ -111,6 +111,15 @@ jobs:
           zip ../firmware_build_${VERSION_NUM_ONLY}.zip *.hex
           echo "ZIP_NAME=firmware_build_${VERSION_NUM_ONLY}.zip" >> $GITHUB_ENV
 
+      - name: Verify ZIP file exists
+        run: |
+          ls -la
+          echo "Looking for file: ${{ env.ZIP_NAME }}"
+          if [ ! -f "${{ env.ZIP_NAME }}" ]; then
+            echo "Error: ZIP file not found!"
+            exit 1
+          fi
+
       - name: Create GitHub Release and Upload ZIP
         uses: ncipollo/release-action@v1
         with:
@@ -130,4 +139,5 @@ jobs:
             - teensy41verifyhardware
   
             [Download the firmware here!](https://github.com/coelacant1/ProtoTracer/releases/latest/download/firmware_build_${{ env.VERSION_NUMBER }}.zip)
-          artifacts: "firmware_build_${{ env.VERSION_NUMBER }}.zip"
+          artifacts: "${{ env.ZIP_NAME }}"
+
