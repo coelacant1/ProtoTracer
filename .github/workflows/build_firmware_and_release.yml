@@ -127,4 +127,6 @@ jobs:
             - teensy41beta
             - teensy41verifyrender
             - teensy41verifyhardware
+  
+            [Download the firmware here!](https://github.com/<owner>/<repo>/releases/latest/download/firmware_build_${{ env.VERSION_NUMBER }}.zip)
           artifact: "firmware_build_${{ env.VERSION_NUMBER }}.zip"
