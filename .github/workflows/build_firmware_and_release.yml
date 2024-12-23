@@ -2,11 +2,13 @@ name: Build and Release Firmware HEX Files
 
 on:
   push:
-    branches: [ main, Testing ]
+    branches: [ main ]
     paths-ignore:
-      - 'firmware_builds/**'
-      - '.github/workflows/**'
+      - '.github/**'
       - '.site/**'
+      - '.docs/**'
+      - '.pio/**'
+      - '.vscode/**'
   workflow_dispatch:
 
 jobs:

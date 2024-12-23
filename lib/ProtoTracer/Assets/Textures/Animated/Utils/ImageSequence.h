@@ -1,63 +1,103 @@
+/**
+ * @file ImageSequence.h
+ * @brief Declares the ImageSequence class for managing and rendering image sequences.
+ *
+ * This file defines the ImageSequence class, which extends the Material class to
+ * support animations by cycling through a sequence of images at a specified frame rate.
+ *
+ * @author Coela Can't
+ * @date 22/12/2024
+ */
+
 #pragma once
 
-#include "Arduino.h"
-#include "../Materials/Image.h"
-#include "../Materials/Material.h"
+#include "Arduino.h" ///< Include for Arduino platform compatibility.
+#include "../../../../Utils/Math/Mathematics.h" ///< Include for math operations.
+#include "../../../../Scene/Materials/Static/Image.h" ///< Include for handling individual images.
+#include "../../../../Scene/Materials/Material.h" ///< Include for base Material functionality.
 
-class ImageSequence : public Material{
+/**
+ * @class ImageSequence
+ * @brief Manages and renders a sequence of images as an animation.
+ *
+ * The ImageSequence class allows rendering animations by cycling through a series of
+ * images at a specified frame rate. It provides controls for position, size, rotation,
+ * and color manipulation of the animation.
+ */
+class ImageSequence : public Material {
 private:
-    Image* image;
-    const uint8_t** data;
-    unsigned long startTime = 0;
-    unsigned int imageCount = 0;
-    float fps = 24.0f;
-    float frameTime = 0.0f;
-    unsigned int currentFrame = 0;
+    Image* image; ///< Pointer to the Image object used for rendering.
+    const uint8_t** data; ///< Pointer to an array of image data.
+    unsigned long startTime = 0; ///< Timestamp of when the sequence started.
+    unsigned int imageCount = 0; ///< Total number of images in the sequence.
+    float fps = 24.0f; ///< Frames per second for the animation.
+    float frameTime = 0.0f; ///< Time interval between frames.
+    unsigned int currentFrame = 0; ///< Current frame index in the sequence.
 
 protected:
-    ImageSequence(Image* image, const uint8_t** data, unsigned int imageCount, float fps){
-        this->startTime = millis();
-        this->image = image;
-        this->data = data;
-        this->imageCount = imageCount;
-        this->fps = fps;
-        this->frameTime = ((float)imageCount) / fps;
-    }
+    /**
+     * @brief Constructs an ImageSequence object.
+     *
+     * @param image Pointer to the base Image object.
+     * @param data Pointer to the image data array.
+     * @param imageCount Total number of images in the sequence.
+     * @param fps Frame rate of the animation.
+     */
+    ImageSequence(Image* image, const uint8_t** data, unsigned int imageCount, float fps);
 
 public:
-    void SetFPS(float fps){
-        this->fps = fps;
-    }
-    
-    void SetSize(Vector2D size){
-        image->SetSize(size);
-    }
+    /**
+     * @brief Sets the frames per second (FPS) for the animation.
+     *
+     * @param fps The desired frame rate.
+     */
+    void SetFPS(float fps);
 
-    void SetPosition(Vector2D offset){
-        image->SetPosition(offset);
-    }
+    /**
+     * @brief Sets the size of the image sequence.
+     *
+     * @param size A Vector2D object specifying the width and height.
+     */
+    void SetSize(Vector2D size);
 
-    void SetRotation(float angle){
-        image->SetRotation(angle);
-    }
+    /**
+     * @brief Sets the position offset of the image sequence.
+     *
+     * @param offset A Vector2D object specifying the position offset.
+     */
+    void SetPosition(Vector2D offset);
 
-    void SetHueAngle(float hueAngle){
-        image->SetHueAngle(hueAngle);
-    }
+    /**
+     * @brief Sets the rotation angle of the image sequence.
+     *
+     * @param angle The rotation angle in degrees.
+     */
+    void SetRotation(float angle);
 
-    void Reset(){
-        startTime = millis();
-    }
+    /**
+     * @brief Sets the hue adjustment angle for the image sequence.
+     *
+     * @param hueAngle The hue adjustment angle in degrees.
+     */
+    void SetHueAngle(float hueAngle);
 
-    void Update(){
-        float currentTime = fmod((millis() - startTime) / 1000.0f, frameTime) / frameTime;//normalize time to ratio
+    /**
+     * @brief Resets the image sequence to its initial state.
+     */
+    void Reset();
 
-        currentFrame = (unsigned int)Mathematics::Map(currentTime, 0.0f, 1.0f, 0.0f, float(imageCount - 1));
+    /**
+     * @brief Updates the current frame based on elapsed time.
+     */
+    void Update();
 
-        image->SetData(data[currentFrame]);
-    }
-
-    RGBColor GetRGB(Vector3D intersection, Vector3D normal, Vector3D uvw){
-        return image->GetRGB(intersection, normal, uvw);
-    }
+    /**
+     * @brief Retrieves the RGB color at a specified intersection point.
+     *
+     * @param intersection The intersection point in 3D space.
+     * @param normal The surface normal at the intersection point.
+     * @param uvw The UVW coordinates for texture mapping.
+     * @return An RGBColor object representing the color at the specified point.
+     */
+    RGBColor GetRGB(Vector3D intersection, Vector3D normal, Vector3D uvw);
 };
