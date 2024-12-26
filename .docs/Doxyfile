@@ -6,8 +6,8 @@
 PROJECT_NAME           = "ProtoTracer"
 PROJECT_NUMBER        = "1.0"
 PROJECT_BRIEF         = "Real-time 3D rendering and animation engine"
-PROJECT_LOGO          = images/CoelaCantText.png
-OUTPUT_DIRECTORY      = ../.docs/
+PROJECT_LOGO          = .docs/images/CoelaCantText.png
+OUTPUT_DIRECTORY      = .docs/
 CREATE_SUBDIRS        = NO
 ALLOW_UNICODE_NAMES   = NO
 OUTPUT_LANGUAGE       = English
@@ -21,19 +21,19 @@ EXTRACT_LOCAL_METHODS = YES
 EXTRACT_ANON_NSPACES = NO
 
 # Input settings
-INPUT                 = ../src/
-INPUT                += ../lib/ProtoTracer/
-INPUT                += ../lib/ProtoTracer/Assets/Textures/Animated/Utils
-INPUT                += ../lib/ProtoTracer/Assets/Models/FBX/Utils
-INPUT                += ../README.md
+INPUT                 = src/
+INPUT                += lib/ProtoTracer/
+INPUT                += lib/ProtoTracer/Assets/Textures/Animated/Utils
+INPUT                += lib/ProtoTracer/Assets/Models/FBX/Utils
+INPUT                += README.md
 INPUT_ENCODING        = UTF-8
 FILE_PATTERNS        = *.cpp *.hpp *.h *.tpp
 RECURSIVE            = YES
-EXCLUDE              = ../lib/ProtoTracer/Assets/Models/FBX
-EXCLUDE             += ../lib/ProtoTracer/Assets/Models/OBJ
-EXCLUDE             += ../lib/ProtoTracer/Assets/Textures
+EXCLUDE              = lib/ProtoTracer/Assets/Models/FBX
+EXCLUDE             += lib/ProtoTracer/Assets/Models/OBJ
+EXCLUDE             += lib/ProtoTracer/Assets/Textures
 EXCLUDE_PATTERNS     = 
-EXAMPLE_PATH         = ../lib/ProtoTracer/Examples
+EXAMPLE_PATH         = lib/ProtoTracer/Examples
 IMAGE_PATH           = .docs/images
 PREDEFINED           = "DOXYGEN=1"
 
@@ -41,20 +41,20 @@ PREDEFINED           = "DOXYGEN=1"
 # HTML Theme settings
 GENERATE_TREEVIEW      = YES # required!
 DISABLE_INDEX          = NO
-FULL_SIDEBAR           = NO
-HTML_EXTRA_STYLESHEET  = ../doxygen-awesome-css/doxygen-awesome.css \
-                        ../doxygen-awesome-css/doxygen-awesome-sidebar-only.css \
-                        ../doxygen-awesome-css/doxygen-awesome-darkmode-toggle.js \
-                        ../doxygen-awesome-css/doxygen-awesome-fragment-copy-button.js \
-                        ../doxygen-awesome-css/doxygen-awesome-interactive-toc.js \
-                        ../doxygen-awesome-css/doxygen-awesome-paragraph-link.js \
-                        ../doxygen-awesome-css/doxygen-awesome-tabs.js
+#FULL_SIDEBAR           = NO
+HTML_EXTRA_STYLESHEET  = doxygen-awesome-css/doxygen-awesome.css \
+                        doxygen-awesome-css/doxygen-awesome-sidebar-only.css \
+                        doxygen-awesome-css/doxygen-awesome-darkmode-toggle.js \
+                        doxygen-awesome-css/doxygen-awesome-fragment-copy-button.js \
+                        doxygen-awesome-css/doxygen-awesome-interactive-toc.js \
+                        doxygen-awesome-css/doxygen-awesome-paragraph-link.js \
+                        doxygen-awesome-css/doxygen-awesome-tabs.js
 HTML_COLORSTYLE        = LIGHT # required with Doxygen
-HTML_HEADER = header.html
+HTML_HEADER = .docs/header.html
 
 
 MARKDOWN_SUPPORT        = YES
-USE_MDFILE_AS_MAINPAGE = ../README.md
+USE_MDFILE_AS_MAINPAGE = README.md
 
 GENERATE_LATEX           = NO
 USE_MATHJAX              = YES        # Enable MathJax for HTML output
