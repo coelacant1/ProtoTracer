@@ -31,7 +31,7 @@ jobs:
       run: doxygen .docs/Doxyfile
 
     - name: Copy images
-      run: mv -r .docs/images/ .docs/html/images/
+      run: mv .docs/images/ .docs/html/images/
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3

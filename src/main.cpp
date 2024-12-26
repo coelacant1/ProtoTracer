@@ -78,4 +78,3 @@ void loop() {
     project.PrintStats(); ///< Outputs debugging and performance statistics.
     #endif
 }
- 
