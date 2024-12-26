@@ -11,7 +11,7 @@
 
 #pragma once
 
-#include "AnimationTrack.h" ///< Include for base AnimationTrack class.
+#include "AnimationTrack.h" // Include for base AnimationTrack class.
 
 /**
  * @class EyeMoveTrack

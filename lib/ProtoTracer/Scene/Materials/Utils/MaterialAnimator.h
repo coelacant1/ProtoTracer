@@ -91,4 +91,4 @@ public:
     RGBColor GetRGB(const Vector3D& position, const Vector3D& normal, const Vector3D& uvw) override;
 };
 
-#include "MaterialAnimator.tpp" ///< Includes the template implementation.
+#include "MaterialAnimator.tpp" // Includes the template implementation.

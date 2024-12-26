@@ -1,5 +1,5 @@
 /**
- * @file RenderingEngine.h
+ * @file Engine.h
  * @brief Declares the RenderingEngine class for rendering and display operations.
  *
  * This file defines the RenderingEngine class, which provides static methods
@@ -11,10 +11,10 @@
 
 #pragma once
 
-#include "../Camera/CameraManager/CameraManager.h" ///< Include for camera management.
-#include "../Scene/Scene.h" ///< Include for scene management.
-#include "../Renderer/Rasterizer/Rasterizer.h" ///< Include for rasterization operations.
-#include "../Renderer/DisplayTest/DisplayTest.h" ///< Include for display test utilities.
+#include "../Camera/CameraManager/CameraManager.h" // Include for camera management.
+#include "../Scene/Scene.h" // Include for scene management.
+#include "../Renderer/Rasterizer/Rasterizer.h" // Include for rasterization operations.
+#include "../Renderer/DisplayTest/DisplayTest.h" // Include for display test utilities.
 
 /**
  * @class RenderingEngine

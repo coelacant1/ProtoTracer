@@ -11,8 +11,8 @@
 
 #pragma once
 
-#include "../../Utils/RGBColor.h" ///< Include for RGB color representation.
-#include "../../Physics/Utils/BoundingBox2D.h" ///< Include for 2D bounding box representation.
+#include "../../Utils/RGBColor.h" // Include for RGB color representation.
+#include "../../Physics/Utils/BoundingBox2D.h" // Include for 2D bounding box representation.
 
 /**
  * @class IPixelGroup

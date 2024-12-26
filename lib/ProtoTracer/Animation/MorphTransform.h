@@ -12,8 +12,8 @@
 
 #pragma once
 
-#include "IEasyEaseAnimator.h" ///< Include for animation controller interface.
-#include "../Utils/Math/Vector3D.h" ///< Include for 3D vector operations.
+#include "IEasyEaseAnimator.h" // Include for animation controller interface.
+#include "../Utils/Math/Vector3D.h" // Include for 3D vector operations.
 
 /**
  * @class MorphTransform
@@ -116,4 +116,4 @@ public:
     Vector3D GetRotationOffset();
 };
 
-#include "MorphTransform.tpp" ///< Include the template implementation.
+#include "MorphTransform.tpp" // Include the template implementation.

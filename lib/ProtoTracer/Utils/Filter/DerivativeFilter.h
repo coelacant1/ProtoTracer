@@ -12,9 +12,9 @@
 
 #pragma once
 
-#include "RunningAverageFilter.h" ///< Includes the running average filter utility.
-#include "MinFilter.h" ///< Includes the minimum filter utility.
-#include "../Math/Mathematics.h" ///< Includes mathematical utilities for constraints and operations.
+#include "RunningAverageFilter.h" // Includes the running average filter utility.
+#include "MinFilter.h" // Includes the minimum filter utility.
+#include "../Math/Mathematics.h" // Includes mathematical utilities for constraints and operations.
 
 /**
  * @class DerivativeFilter

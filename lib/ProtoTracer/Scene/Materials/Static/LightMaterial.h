@@ -11,9 +11,9 @@
 
 #pragma once
 
-#include "../Material.h" ///< Base class for materials.
-#include "../../../Utils/Math/Vector2D.h" ///< Vector utilities.
-#include "../../../Renderer/Lights/Light.h" ///< Light source definitions.
+#include "../Material.h" // Base class for materials.
+#include "../../../Utils/Math/Vector2D.h" // Vector utilities.
+#include "../../../Renderer/Lights/Light.h" // Light source definitions.
 
 /**
  * @class LightMaterial
@@ -61,4 +61,4 @@ public:
     RGBColor GetRGB(const Vector3D& position, const Vector3D& normal, const Vector3D& uvw) override;
 };
 
-#include "LightMaterial.tpp" ///< Include the template implementation.
+#include "LightMaterial.tpp" // Include the template implementation.

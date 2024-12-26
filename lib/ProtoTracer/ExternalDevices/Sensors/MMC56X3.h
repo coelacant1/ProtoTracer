@@ -12,12 +12,12 @@
 
 #pragma once
 
-#include <Adafruit_MMC56x3.h> ///< Include for Adafruit MMC56x3 library.
-#include "../../Utils/Filter/MinFilter.h" ///< Include for minimum filtering.
-#include "../../Utils/Filter/RunningAverageFilter.h" ///< Include for running average filtering.
-#include "../../Utils/Math/Vector2D.h" ///< Include for 2D vector mathematics.
-#include "../../Utils/Math/Vector3D.h" ///< Include for 3D vector mathematics.
-#include "../../Utils/Time/TimeStep.h" ///< Include for timing utilities.
+#include <Adafruit_MMC56x3.h> // Include for Adafruit MMC56x3 library.
+#include "../../Utils/Filter/MinFilter.h" // Include for minimum filtering.
+#include "../../Utils/Filter/RunningAverageFilter.h" // Include for running average filtering.
+#include "../../Utils/Math/Vector2D.h" // Include for 2D vector mathematics.
+#include "../../Utils/Math/Vector3D.h" // Include for 3D vector mathematics.
+#include "../../Utils/Time/TimeStep.h" // Include for timing utilities.
 
 /**
  * @class MMC56X3

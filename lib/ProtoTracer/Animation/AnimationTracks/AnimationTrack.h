@@ -13,7 +13,7 @@
 
 #pragma once
 
-#include "../KeyFrameTrack.h" ///< Include for KeyFrameTrack dependency.
+#include "../KeyFrameTrack.h" // Include for KeyFrameTrack dependency.
 
 /**
  * @class AnimationTrack
@@ -116,4 +116,4 @@ public:
     void AddParameter(float* parameter);
 };
 
-#include "AnimationTrack.tpp" ///< Include the template implementation.
+#include "AnimationTrack.tpp" // Include the template implementation.

@@ -1,5 +1,5 @@
 /**
- * @file Main.cpp
+ * @file main.cpp
  * @brief Entry point for various projects, managing initialization and main loop operations.
  *
  * This file determines which project to run based on the defined preprocessor directive

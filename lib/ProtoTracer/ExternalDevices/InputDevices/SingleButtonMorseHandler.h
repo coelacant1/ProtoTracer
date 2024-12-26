@@ -1,5 +1,5 @@
 /**
- * @file MenuHandler.h
+ * @file SingleButtonMorseHandler.h
  * @brief Declares the MenuHandler template class for managing single-button menu interactions with Morse code input.
  *
  * This file defines the MenuHandler template class, which provides functionality for handling
@@ -11,8 +11,8 @@
 
 #pragma once
 
-#include <Arduino.h> ///< Include for Arduino compatibility.
-#include <EEPROM.h> ///< Include for EEPROM functionality.
+#include <Arduino.h> // Include for Arduino compatibility.
+#include <EEPROM.h> // Include for EEPROM functionality.
 
 /**
  * @class MenuHandler
@@ -108,4 +108,4 @@ public:
     static uint8_t GetCurrentMenu();
 };
 
-#include "SingleButtonMorseHandler.tpp" ///< Include the template implementation.
+#include "SingleButtonMorseHandler.tpp" // Include the template implementation.

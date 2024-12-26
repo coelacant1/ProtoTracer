@@ -11,8 +11,8 @@
 
 #pragma once
 
-#include "CameraBase.h" ///< Include for base camera functionality.
-#include "Pixels/PixelGroup.h" ///< Include for pixel group management.
+#include "CameraBase.h" // Include for base camera functionality.
+#include "Pixels/PixelGroup.h" // Include for pixel group management.
 
 /**
  * @class Camera
@@ -100,4 +100,4 @@ public:
     Vector3D GetCameraTransformCenter() override;
 };
 
-#include "Camera.tpp" ///< Include the template implementation.
+#include "Camera.tpp" // Include the template implementation.

@@ -12,10 +12,10 @@
 
 #pragma once
 
-#include "../Material.h" ///< Base class for material types.
-#include "../Static/GradientMaterial.h" ///< Include for static gradient materials.
-#include "../../../Physics/Utils/BouncePhysics.h" ///< Include for bounce physics utilities.
-#include "../../../Utils/Math/Mathematics.h" ///< Include for mathematical utilities.
+#include "../Material.h" // Base class for material types.
+#include "../Static/GradientMaterial.h" // Include for static gradient materials.
+#include "../../../Physics/Utils/BouncePhysics.h" // Include for bounce physics utilities.
+#include "../../../Utils/Math/Mathematics.h" // Include for mathematical utilities.
 
 /**
  * @class AudioReactiveGradient

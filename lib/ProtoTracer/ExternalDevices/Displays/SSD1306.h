@@ -1,5 +1,5 @@
 /**
- * @file HeadsUpDisplay.h
+ * @file SSD1306.h
  * @brief Declares the HeadsUpDisplay class for rendering and displaying information on SSD1306/SH1106 displays.
  *
  * This file defines the HeadsUpDisplay class, which extends the Effect interface to capture and process
@@ -11,21 +11,21 @@
 
 #pragma once
 
-#include <Arduino.h> ///< Include for Arduino compatibility.
-#include <Wire.h> ///< Include for I2C communication.
-#include <Adafruit_GFX.h> ///< Include for Adafruit GFX library.
-#include <Fonts/Picopixel.h> ///< Include for additional font support.
+#include <Arduino.h> // Include for Arduino compatibility.
+#include <Wire.h> // Include for I2C communication.
+#include <Adafruit_GFX.h> // Include for Adafruit GFX library.
+#include <Fonts/Picopixel.h> // Include for additional font support.
 
-#include "../../Examples/UserConfiguration.h" ///< Include for user-specific configurations.
-#include "../InputDevices/Menu/Menu.h" ///< Include for menu input handling.
-#include "../../Utils/Math/Mathematics.h" ///< Include for mathematical utilities.
-#include "../../Scene/Screenspace/Effect.h" ///< Include for effect interface.
-#include "../../Utils/Time/TimeStep.h" ///< Include for timestep utility.
+#include "../../Examples/UserConfiguration.h" // Include for user-specific configurations.
+#include "../InputDevices/Menu/Menu.h" // Include for menu input handling.
+#include "../../Utils/Math/Mathematics.h" // Include for mathematical utilities.
+#include "../../Scene/Screenspace/Effect.h" // Include for effect interface.
+#include "../../Utils/Time/TimeStep.h" // Include for timestep utility.
 
 #ifdef SH1106
-#include "Adafruit_SH1106.h" ///< Include for SH1106 display (untested).
+#include "Adafruit_SH1106.h" // Include for SH1106 display (untested).
 #else
-#include <Adafruit_SSD1306.h> ///< Include for SSD1306 display.
+#include <Adafruit_SSD1306.h> // Include for SSD1306 display.
 #endif
 
 /**

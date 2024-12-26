@@ -12,7 +12,7 @@
 
 #pragma once
 
-#include "IEasyEaseAnimator.h" ///< Include for base interface class.
+#include "IEasyEaseAnimator.h" // Include for base interface class.
 
 /**
  * @class EasyEaseAnimator
@@ -117,4 +117,4 @@ public:
     void Update() override;
 };
 
-#include "EasyEaseAnimator.tpp" ///< Include the template implementation.
+#include "EasyEaseAnimator.tpp" // Include the template implementation.

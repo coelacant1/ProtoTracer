@@ -1,5 +1,5 @@
 /**
- * @file MicrophoneFourier.h
+ * @file MicrophoneFourier_DMA.h
  * @brief Declares the MicrophoneFourier class for performing FFT on microphone input.
  *
  * This file defines the MicrophoneFourier class, which extends MicrophoneFourierBase to provide
@@ -11,11 +11,11 @@
 
 #pragma once
 
-#include <Arduino.h> ///< Include for Arduino compatibility.
-#include <ADC.h> ///< Include for analog-to-digital conversion support.
-#include <DMAChannel.h> ///< Include for DMA channel handling.
-#include <AnalogBufferDMA.h> ///< Include for DMA-based analog buffer management.
-#include "Utils/MicrophoneFourierBase.h" ///< Base class for microphone FFT operations.
+#include <Arduino.h> // Include for Arduino compatibility.
+#include <ADC.h> // Include for analog-to-digital conversion support.
+#include <DMAChannel.h> // Include for DMA channel handling.
+#include <AnalogBufferDMA.h> // Include for DMA-based analog buffer management.
+#include "Utils/MicrophoneFourierBase.h" // Base class for microphone FFT operations.
 
 /**
  * @class MicrophoneFourier

@@ -11,8 +11,8 @@
 
 #pragma once
 
-#include "../Material.h" ///< Base class for materials.
-#include "../../../Utils/Math/Vector2D.h" ///< Utility for 2D vector operations.
+#include "../Material.h" // Base class for materials.
+#include "../../../Utils/Math/Vector2D.h" // Utility for 2D vector operations.
 
 /**
  * @class SimpleMaterial

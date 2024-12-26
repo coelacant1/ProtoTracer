@@ -11,8 +11,8 @@
 
 #pragma once
 
-#include <Arduino.h> ///< Include for Arduino compatibility.
-#include "../../Utils/Math/Mathematics.h" ///< Include for mathematical utilities.
+#include <Arduino.h> // Include for Arduino compatibility.
+#include "../../Utils/Math/Mathematics.h" // Include for mathematical utilities.
 
 /**
  * @class FanController

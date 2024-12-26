@@ -11,9 +11,9 @@
 
 #pragma once
 
-#include <Arduino.h> ///< Include for Arduino compatibility.
-#include "../Utils/Math/Mathematics.h" ///< Include for mathematical utilities.
-#include "../Camera/CameraManager/CameraManager.h" ///< Include for camera management.
+#include <Arduino.h> // Include for Arduino compatibility.
+#include "../Utils/Math/Mathematics.h" // Include for mathematical utilities.
+#include "../Camera/CameraManager/CameraManager.h" // Include for camera management.
 
 /**
  * @class Controller

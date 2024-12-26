@@ -11,12 +11,12 @@
 
 #pragma once
 
-#include "../Material.h" ///< Base class for material types.
-#include "../Static/GradientMaterial.h" ///< Include for gradient materials.
-#include "../../../Physics/Utils/BouncePhysics.h" ///< Include for bounce physics utilities.
-#include "../../../Utils/Filter/MaxFilter.h" ///< Include for maximum value filtering.
-#include "../../../Utils/Filter/MinFilter.h" ///< Include for minimum value filtering.
-#include "../../../Utils/Math/Mathematics.h" ///< Include for mathematical utilities.
+#include "../Material.h" // Base class for material types.
+#include "../Static/GradientMaterial.h" // Include for gradient materials.
+#include "../../../Physics/Utils/BouncePhysics.h" // Include for bounce physics utilities.
+#include "../../../Utils/Filter/MaxFilter.h" // Include for maximum value filtering.
+#include "../../../Utils/Filter/MinFilter.h" // Include for minimum value filtering.
+#include "../../../Utils/Math/Mathematics.h" // Include for mathematical utilities.
 
 /**
  * @class Oscilloscope

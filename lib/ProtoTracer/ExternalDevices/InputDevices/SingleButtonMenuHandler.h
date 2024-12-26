@@ -1,5 +1,5 @@
 /**
- * @file MenuHandler.h
+ * @file SingleButtonMenuHandler.h
  * @brief Declares the MenuHandler template class for managing single-button menu interactions.
  *
  * This file defines the MenuHandler template class, which provides functionality for handling
@@ -12,9 +12,9 @@
 
 #pragma once
 
-#include <Arduino.h> ///< Include for Arduino compatibility.
-#include <EEPROM.h> ///< Include for EEPROM functionality.
-#include <IntervalTimer.h> ///< Include for IntervalTimer support.
+#include <Arduino.h> // Include for Arduino compatibility.
+#include <EEPROM.h> // Include for EEPROM functionality.
+#include <IntervalTimer.h> // Include for IntervalTimer support.
 
 /**
  * @class MenuHandler
@@ -112,4 +112,4 @@ public:
     static uint8_t GetCurrentMenu();
 };
 
-#include "SingleButtonMenuHandler.tpp" ///< Include the template implementation.
+#include "SingleButtonMenuHandler.tpp" // Include the template implementation.

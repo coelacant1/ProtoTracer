@@ -12,9 +12,9 @@
 
 #pragma once
 
-#include "../../Static/SimpleMaterial.h" ///< For rendering static materials.
-#include "../Overlays/Text/TextEngine.h" ///< For rendering text overlays.
-#include "../../Material.h" ///< Base class for all materials.
+#include "../../Static/SimpleMaterial.h" // For rendering static materials.
+#include "../Overlays/Text/TextEngine.h" // For rendering text overlays.
+#include "../../Material.h" // Base class for all materials.
 
 /**
  * @class Clock

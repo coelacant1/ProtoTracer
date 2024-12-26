@@ -11,9 +11,9 @@
 
 #pragma once
 
-#include "CameraLayout.h" ///< Include for camera layout management.
-#include "Pixels/IPixelGroup.h" ///< Include for pixel group interface.
-#include "../Utils/Math/Transform.h" ///< Include for transformation utilities.
+#include "CameraLayout.h" // Include for camera layout management.
+#include "Pixels/IPixelGroup.h" // Include for pixel group interface.
+#include "../Utils/Math/Transform.h" // Include for transformation utilities.
 
 /**
  * @class CameraBase

@@ -11,14 +11,14 @@
 
 #pragma once
 
-#include <Arduino.h> ///< Include for Arduino compatibility.
-#include "../../Engine/Engine.h" ///< Include for rendering engine.
-#include "../../Scene/Scene.h" ///< Include for scene management.
-#include "../../Camera/CameraManager/CameraManager.h" ///< Include for camera management.
-#include "../../Controller/Controller.h" ///< Include for controller operations.
-#include "../../Utils/Filter/RunningAverageFilter.h" ///< Include for filtering utilities.
-#include "Utils/Debug.h" ///< Include for debugging utilities.
-#include "../UserConfiguration.h" ///< Include for user-specific configuration.
+#include <Arduino.h> // Include for Arduino compatibility.
+#include "../../Engine/Engine.h" // Include for rendering engine.
+#include "../../Scene/Scene.h" // Include for scene management.
+#include "../../Camera/CameraManager/CameraManager.h" // Include for camera management.
+#include "../../Controller/Controller.h" // Include for controller operations.
+#include "../../Utils/Filter/RunningAverageFilter.h" // Include for filtering utilities.
+#include "Utils/Debug.h" // Include for debugging utilities.
+#include "../UserConfiguration.h" // Include for user-specific configuration.
 
 /**
  * @class Project

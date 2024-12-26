@@ -11,7 +11,7 @@
 
 #pragma once
 
-#include "../Utils/Math/Transform.h" ///< Include for mathematical transformations.
+#include "../Utils/Math/Transform.h" // Include for mathematical transformations.
 
 /**
  * @class CameraLayout

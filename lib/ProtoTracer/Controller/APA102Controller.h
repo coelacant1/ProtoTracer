@@ -11,11 +11,11 @@
 
 #pragma once
 
-#include <stdint.h> ///< Include for fixed-width integer types.
-#include "Controller.h" ///< Include for base controller functionality.
-#include "SmartMatrixAPA102.h" ///< Include for APA102-specific matrix utilities.
-#include "../Camera/CameraManager/CameraManager.h" ///< Include for camera management.
-#include "../Camera/Pixels/PixelGroup.h" ///< Include for pixel group management.
+#include <stdint.h> // Include for fixed-width integer types.
+#include "Controller.h" // Include for base controller functionality.
+#include "SmartMatrixAPA102.h" // Include for APA102-specific matrix utilities.
+#include "../Camera/CameraManager/CameraManager.h" // Include for camera management.
+#include "../Camera/Pixels/PixelGroup.h" // Include for pixel group management.
 
 /**
  * @class APA102Controller

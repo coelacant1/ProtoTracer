@@ -12,12 +12,12 @@
 
 #pragma once
 
-#include "../AnimatedMaterial.h" ///< Base class for animated materials.
-#include "../../../Utils/Signals/FunctionGenerator.h" ///< For generating animated signals.
-#include "../Static/GradientMaterial.h" ///< For gradient-based coloring.
-#include "../Static/SimplexNoise.h" ///< For generating noise patterns.
-#include "../CombineMaterial.h" ///< For combining multiple materials.
-#include "../../../Assets/Textures/Static/ColorTest.h" ///< For additional color test effects.
+#include "../AnimatedMaterial.h" // Base class for animated materials.
+#include "../../../Utils/Signals/FunctionGenerator.h" // For generating animated signals.
+#include "../Static/GradientMaterial.h" // For gradient-based coloring.
+#include "../Static/SimplexNoise.h" // For generating noise patterns.
+#include "../CombineMaterial.h" // For combining multiple materials.
+#include "../../../Assets/Textures/Static/ColorTest.h" // For additional color test effects.
 
 /**
  * @class TVStatic

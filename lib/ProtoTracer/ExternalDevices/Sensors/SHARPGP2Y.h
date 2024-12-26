@@ -11,8 +11,8 @@
 
 #pragma once
 
-#include <Arduino.h> ///< Include for Arduino compatibility.
-#include "../../Utils/Filter/RunningAverageFilter.h" ///< Include for running average filtering.
+#include <Arduino.h> // Include for Arduino compatibility.
+#include "../../Utils/Filter/RunningAverageFilter.h" // Include for running average filtering.
 
 /**
  * @class SHARPGP2Y

@@ -58,4 +58,4 @@ public:
     float Filter(float value);
 };
 
-#include "MinFilter.tpp" ///< Includes the implementation of the template class.
+#include "MinFilter.tpp" // Includes the implementation of the template class.

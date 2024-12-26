@@ -11,10 +11,10 @@
 
 #pragma once
 
-#include "Arduino.h" ///< Include for Arduino platform compatibility.
-#include "../../../../Utils/Math/Mathematics.h" ///< Include for math operations.
-#include "../../../../Scene/Materials/Static/Image.h" ///< Include for handling individual images.
-#include "../../../../Scene/Materials/Material.h" ///< Include for base Material functionality.
+#include "Arduino.h" // Include for Arduino platform compatibility.
+#include "../../../../Utils/Math/Mathematics.h" // Include for math operations.
+#include "../../../../Scene/Materials/Static/Image.h" // Include for handling individual images.
+#include "../../../../Scene/Materials/Material.h" // Include for base Material functionality.
 
 /**
  * @class ImageSequence

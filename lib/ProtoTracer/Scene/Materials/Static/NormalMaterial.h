@@ -11,9 +11,9 @@
 
 #pragma once
 
-#include "../Material.h" ///< Base class for materials.
-#include "../../../Utils/Math/Vector2D.h" ///< Vector utilities.
-#include "GradientMaterial.h" ///< Optional gradient utilities for advanced extensions.
+#include "../Material.h" // Base class for materials.
+#include "../../../Utils/Math/Vector2D.h" // Vector utilities.
+#include "GradientMaterial.h" // Optional gradient utilities for advanced extensions.
 
 /**
  * @class NormalMaterial

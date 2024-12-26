@@ -11,7 +11,7 @@
 
 #pragma once
 
-#include "IPixelGroup.h" ///< Include for the base pixel group interface.
+#include "IPixelGroup.h" // Include for the base pixel group interface.
 
 /**
  * @class PixelGroup
@@ -89,4 +89,4 @@ public:
     void GridSort() override;
 };
 
-#include "PixelGroup.tpp" ///< Include the template implementation.
+#include "PixelGroup.tpp" // Include the template implementation.

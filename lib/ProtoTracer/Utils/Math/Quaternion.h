@@ -64,8 +64,43 @@ public:
 
     /**
      * @brief Rotates a 2D vector by this quaternion, projecting it in 2D.
+     * 
+     * This method uses quaternion-based rotation to transform a 2D vector. 
+     * 
+     * Mathematical formulation:
+     * 
+     * @f[
+     * s_2 = 2 \cdot w
+     * @f]
+     * 
+     * @f[
+     * d_{PUV} = 2 \cdot (x \cdot v_x + y \cdot v_y)
+     * @f]
+     * 
+     * @f[
+     * d_{PUU} = w^2 - (x^2 + y^2 + z^2)
+     * @f]
+     * 
+     * The rotated vector is computed as:
+     * 
+     * @f[
+     * v'_x = x \cdot d_{PUV} + v_x \cdot d_{PUU} + (-z \cdot v_y) \cdot s_2
+     * @f]
+     * 
+     * @f[
+     * v'_y = y \cdot d_{PUV} + v_y \cdot d_{PUU} + (z \cdot v_x) \cdot s_2
+     * @f]
+     * 
+     * Resulting in:
+     * 
+     * @f[
+     * \vec{v'} = (v'_x, v'_y)
+     * @f]
+     * 
      * @param v The 2D vector to rotate.
      * @return A new 2D vector that has been rotated.
+     * 
+     * @note If the quaternion is close to zero (no rotation), the input vector is returned unchanged.
      */
     Vector2D RotateVector(const Vector2D& v) const;
 

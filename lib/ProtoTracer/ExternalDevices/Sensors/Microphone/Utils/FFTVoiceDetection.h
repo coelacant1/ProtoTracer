@@ -11,11 +11,11 @@
 
 #pragma once
 
-#include "../../../../Utils/Filter/RunningAverageFilter.h" ///< Include for smoothing peaks.
-#include "../../../../Utils/Filter/PeakDetection.h" ///< Include for peak detection in FFT data.
-#include "../../../../Renderer/Utils/IndexGroup.h" ///< Include for utility structures.
-#include "../../../../Renderer/Utils/Triangle2D.h" ///< Include for 2D triangle utilities.
-#include "../../../../Utils/Math/Vector2D.h" ///< Include for 2D vector utilities.
+#include "../../../../Utils/Filter/RunningAverageFilter.h" // Include for smoothing peaks.
+#include "../../../../Utils/Filter/PeakDetection.h" // Include for peak detection in FFT data.
+#include "../../../../Renderer/Utils/IndexGroup.h" // Include for utility structures.
+#include "../../../../Renderer/Utils/Triangle2D.h" // Include for 2D triangle utilities.
+#include "../../../../Utils/Math/Vector2D.h" // Include for 2D vector utilities.
 
 /**
  * @class Viseme
@@ -140,4 +140,4 @@ public:
     void Update(float* peaks, float maxFrequency);
 };
 
-#include "FFTVoiceDetection.tpp" ///< Include the template implementation.
+#include "FFTVoiceDetection.tpp" // Include the template implementation.

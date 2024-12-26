@@ -11,8 +11,8 @@
 
 #pragma once
 
-#include "../../Utils/RGBColor.h" ///< Include for color representation.
-#include "../../Utils/Math/Vector2D.h" ///< Include for 2D positional data.
+#include "../../Utils/RGBColor.h" // Include for color representation.
+#include "../../Utils/Math/Vector2D.h" // Include for 2D positional data.
 
 /**
  * @class Pixel

@@ -12,11 +12,11 @@
 
 #pragma once
 
-#include <Arduino.h> ///< Include for Arduino compatibility.
-#include "../../../../Utils/Filter/DerivativeFilter.h" ///< Include for derivative filtering.
-#include "../../../../Utils/Filter/FFTFilter.h" ///< Include for FFT-based filtering.
-#include "../../../../Utils/Time/TimeStep.h" ///< Include for time management.
-#include "../../../../Utils/Signals/FFT.h" ///< Include for FFT processing.
+#include <Arduino.h> // Include for Arduino compatibility.
+#include "../../../../Utils/Filter/DerivativeFilter.h" // Include for derivative filtering.
+#include "../../../../Utils/Filter/FFTFilter.h" // Include for FFT-based filtering.
+#include "../../../../Utils/Time/TimeStep.h" // Include for time management.
+#include "../../../../Utils/Signals/FFT.h" // Include for FFT processing.
 
 /**
  * @class MicrophoneFourierBase

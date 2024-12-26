@@ -1,5 +1,5 @@
 /**
- * @file MenuHandler.h
+ * @file NeoTrellisMenuHandler.h
  * @brief Declares the MenuHandler template class for managing menu interactions using Adafruit NeoTrellis.
  *
  * This file defines the MenuHandler template class, which provides functionality for managing
@@ -12,9 +12,9 @@
 
 #pragma once
 
-#include <Arduino.h> ///< Include for Arduino compatibility.
-#include <EEPROM.h> ///< Include for EEPROM functionality.
-#include "Adafruit_NeoTrellis.h" ///< Include for Adafruit NeoTrellis keypad support.
+#include <Arduino.h> // Include for Arduino compatibility.
+#include <EEPROM.h> // Include for EEPROM functionality.
+#include "Adafruit_NeoTrellis.h" // Include for Adafruit NeoTrellis keypad support.
 
 /**
  * @class MenuHandler
@@ -125,4 +125,4 @@ public:
     static uint8_t GetCurrentMenu();
 };
 
-#include "NeoTrellisMenuHandler.tpp" ///< Include the template implementation.
+#include "NeoTrellisMenuHandler.tpp" // Include the template implementation.

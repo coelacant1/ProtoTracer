@@ -12,11 +12,11 @@
 
 #pragma once
 
-#include <stdint.h> ///< Include for fixed-width integer types.
-#include <OctoWS2811.h> ///< Include for OctoWS2811 LED library.
-#include "Controller.h" ///< Include for base controller functionality.
-#include "../Camera/CameraManager/CameraManager.h" ///< Include for camera management.
-#include "../Camera/Pixels/PixelGroup.h" ///< Include for pixel group management.
+#include <stdint.h> // Include for fixed-width integer types.
+#include <OctoWS2811.h> // Include for OctoWS2811 LED library.
+#include "Controller.h" // Include for base controller functionality.
+#include "../Camera/CameraManager/CameraManager.h" // Include for camera management.
+#include "../Camera/Pixels/PixelGroup.h" // Include for pixel group management.
 
 /**
  * @class WS35Controller

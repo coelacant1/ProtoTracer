@@ -17,18 +17,27 @@
  * @brief Define this macro to use a modified Matrix Hardware file for panels with RBG color order.
  */
 //#define HUB75_RBG
+#if DOXYGEN
+#define HUB75_RBG
+#endif
 
 /**
  * @def PRINTINFO
  * @brief Define this macro to enable printing live stats, such as FPS and other information.
  */
 //#define PRINTINFO
+#if DOXYGEN
+#define PRINTINFO
+#endif
 
 /**
  * @def DEBUG
  * @brief Define this macro to enable debug information output.
  */
 //#define DEBUG
+#if DOXYGEN
+#define DEBUG
+#endif
 
 /**
  * @def NEOTRELLISMENU
@@ -37,6 +46,9 @@
  * If this macro is undefined, the button controller is used instead.
  */
 //#define NEOTRELLISMENU
+#if DOXYGEN
+#define NEOTRELLISMENU
+#endif
 
 /**
  * @def MORSEBUTTON
@@ -45,3 +57,6 @@
  * Note: This feature cannot be used simultaneously with NEOTRELLISMENU.
  */
 //#define MORSEBUTTON
+#if DOXYGEN
+#define MORSEBUTTON
+#endif

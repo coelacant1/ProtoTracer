@@ -11,8 +11,8 @@
 
 #pragma once
 
-#include "../../../../Utils/Math/Mathematics.h" ///< Include for mathematical operations.
-#include "../../../../Renderer/Utils/ITriangleGroup.h" ///< Include for rendering triangle groups.
+#include "../../../../Utils/Math/Mathematics.h" // Include for mathematical operations.
+#include "../../../../Renderer/Utils/ITriangleGroup.h" // Include for rendering triangle groups.
 
 /**
  * @class Morph

@@ -11,9 +11,9 @@
 
 #pragma once
 
-#include "../AnimatedMaterial.h" ///< Base class for animated materials.
-#include "../Static/GradientMaterial.h" ///< Include for gradient materials.
-#include "../Static/SimplexNoise.h" ///< Include for simplex noise generation.
+#include "../AnimatedMaterial.h" // Base class for animated materials.
+#include "../Static/GradientMaterial.h" // Include for gradient materials.
+#include "../Static/SimplexNoise.h" // Include for simplex noise generation.
 
 /**
  * @class HorizontalRainbow

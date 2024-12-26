@@ -11,13 +11,13 @@
 
 #pragma once
 
-#include <Wire.h> ///< Include for I2C communication.
-#include <Adafruit_Sensor.h> ///< Include for Adafruit sensor base class.
-#include <Adafruit_BNO055.h> ///< Include for Adafruit BNO055 sensor library.
-#include <utility/imumaths.h> ///< Include for mathematical utilities for IMU sensors.
-#include "../../Utils/Filter/QuaternionKalmanFilter.h" ///< Include for quaternion filtering.
-#include "../../Utils/Filter/VectorRunningAverageFilter.h" ///< Include for vector filtering.
-#include "../../Utils/Math/Rotation.h" ///< Include for rotation mathematics.
+#include <Wire.h> // Include for I2C communication.
+#include <Adafruit_Sensor.h> // Include for Adafruit sensor base class.
+#include <Adafruit_BNO055.h> // Include for Adafruit BNO055 sensor library.
+#include <utility/imumaths.h> // Include for mathematical utilities for IMU sensors.
+#include "../../Utils/Filter/QuaternionKalmanFilter.h" // Include for quaternion filtering.
+#include "../../Utils/Filter/VectorRunningAverageFilter.h" // Include for vector filtering.
+#include "../../Utils/Math/Rotation.h" // Include for rotation mathematics.
 
 /**
  * @class BNO055

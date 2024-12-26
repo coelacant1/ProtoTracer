@@ -63,4 +63,4 @@ public:
     void Calculate(float* data, bool* peaks);
 };
 
-#include "PeakDetection.tpp" ///< Includes the implementation of the template class.
+#include "PeakDetection.tpp" // Includes the implementation of the template class.

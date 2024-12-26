@@ -1,5 +1,5 @@
 /**
- * @file MicrophoneSimple.h
+ * @file MicrophoneSimple_SPW2430.h
  * @brief A simple microphone processing class for analog input.
  *
  * This file defines the MicrophoneSimple class, which provides basic functionality
@@ -13,10 +13,10 @@
 
 #pragma once
 
-#include <Arduino.h> ///< Include for Arduino compatibility.
-#include "../../../Utils/Math/Mathematics.h" ///< Include for mathematical utilities.
-#include "../../../Utils/Filter/RunningAverageFilter.h" ///< Include for running average filtering.
-#include "../../../Utils/Filter/MinFilter.h" ///< Include for minimum filtering.
+#include <Arduino.h> // Include for Arduino compatibility.
+#include "../../../Utils/Math/Mathematics.h" // Include for mathematical utilities.
+#include "../../../Utils/Filter/RunningAverageFilter.h" // Include for running average filtering.
+#include "../../../Utils/Filter/MinFilter.h" // Include for minimum filtering.
 
 /**
  * @class MicrophoneSimple

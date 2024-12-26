@@ -11,9 +11,9 @@
 
 #pragma once
 
-#include "../Material.h" ///< Base material class.
-#include "../Static/GradientMaterial.h" ///< For managing gradient colors.
-#include "../../../Physics/Utils/BouncePhysics.h" ///< For adding bounce physics to spectrum data.
+#include "../Material.h" // Base material class.
+#include "../Static/GradientMaterial.h" // For managing gradient colors.
+#include "../../../Physics/Utils/BouncePhysics.h" // For adding bounce physics to spectrum data.
 
 /**
  * @class SpectrumAnalyzer

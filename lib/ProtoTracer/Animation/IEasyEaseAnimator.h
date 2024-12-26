@@ -11,10 +11,10 @@
 
 #pragma once
 
-#include "KeyFrame.h" ///< Include for keyframe management.
-#include "../Utils/Math/Mathematics.h" ///< Include for mathematical utilities.
-#include "../Physics/Utils/DampedSpring.h" ///< Include for damped spring physics.
-#include "../Utils/Filter/RampFilter.h" ///< Include for ramp filtering utilities.
+#include "KeyFrame.h" // Include for keyframe management.
+#include "../Utils/Math/Mathematics.h" // Include for mathematical utilities.
+#include "../Physics/Utils/DampedSpring.h" // Include for damped spring physics.
+#include "../Utils/Filter/RampFilter.h" // Include for ramp filtering utilities.
 
 /**
  * @class IEasyEaseAnimator

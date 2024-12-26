@@ -1,5 +1,5 @@
 /**
- * @file MicrophoneFourier.h
+ * @file MicrophoneFourier_MAX9814.h
  * @brief Extends the MicrophoneFourierBase class for real-time FFT microphone analysis.
  *
  * This file defines the MicrophoneFourier class, which builds upon MicrophoneFourierBase to include
@@ -14,11 +14,11 @@
 
 #pragma once
 
-#include <Arduino.h> ///< Include for Arduino compatibility.
-#include "../../../Utils/Filter/DerivativeFilter.h" ///< Include for derivative filtering.
-#include "../../../Utils/Filter/FFTFilter.h" ///< Include for FFT filtering.
-#include "../../../Utils/Time/TimeStep.h" ///< Include for time management.
-#include "Utils/MicrophoneFourierBase.h" ///< Include the base class for microphone FFT processing.
+#include <Arduino.h> // Include for Arduino compatibility.
+#include "../../../Utils/Filter/DerivativeFilter.h" // Include for derivative filtering.
+#include "../../../Utils/Filter/FFTFilter.h" // Include for FFT filtering.
+#include "../../../Utils/Time/TimeStep.h" // Include for time management.
+#include "Utils/MicrophoneFourierBase.h" // Include the base class for microphone FFT processing.
 
 /**
  * @class MicrophoneFourier

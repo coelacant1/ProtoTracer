@@ -11,11 +11,11 @@
 
 #pragma once
 
-#include <Arduino.h> ///< Include for Arduino compatibility.
-#include <Wire.h> ///< Include for I2C communication.
-#include <Adafruit_APDS9960.h> ///< Include for Adafruit APDS9960 sensor library.
-#include "../../Utils/Filter/MinFilter.h" ///< Include for minimum filtering.
-#include "../../Utils/Time/TimeStep.h" ///< Include for timing utilities.
+#include <Arduino.h> // Include for Arduino compatibility.
+#include <Wire.h> // Include for I2C communication.
+#include <Adafruit_APDS9960.h> // Include for Adafruit APDS9960 sensor library.
+#include "../../Utils/Filter/MinFilter.h" // Include for minimum filtering.
+#include "../../Utils/Time/TimeStep.h" // Include for timing utilities.
 
 /**
  * @class APDS9960

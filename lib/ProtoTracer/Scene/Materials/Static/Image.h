@@ -12,9 +12,9 @@
 
 #pragma once
 
-#include "../Material.h" ///< Base class for materials.
-#include "../../../Utils/Math/Vector2D.h" ///< 2D vector operations.
-#include "../../../Utils/Math/Mathematics.h" ///< Mathematical utilities.
+#include "../Material.h" // Base class for materials.
+#include "../../../Utils/Math/Vector2D.h" // 2D vector operations.
+#include "../../../Utils/Math/Mathematics.h" // Mathematical utilities.
 
 /**
  * @class Image

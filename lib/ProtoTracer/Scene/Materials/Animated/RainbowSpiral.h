@@ -11,9 +11,9 @@
 
 #pragma once
 
-#include "../AnimatedMaterial.h" ///< Base class for animated materials.
-#include "../../../Utils/Signals/FunctionGenerator.h" ///< Utility for generating animated functions.
-#include "../Static/SpiralMaterial.h" ///< Include for the spiral material implementation.
+#include "../AnimatedMaterial.h" // Base class for animated materials.
+#include "../../../Utils/Signals/FunctionGenerator.h" // Utility for generating animated functions.
+#include "../Static/SpiralMaterial.h" // Include for the spiral material implementation.
 
 /**
  * @class RainbowSpiral

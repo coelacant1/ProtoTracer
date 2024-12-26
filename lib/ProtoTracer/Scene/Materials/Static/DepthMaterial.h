@@ -11,9 +11,9 @@
 
 #pragma once
 
-#include "../Material.h" ///< Base class for materials.
-#include "../../../Utils/Math/Mathematics.h" ///< Utilities for mathematical operations.
-#include "GradientMaterial.h" ///< For creating gradient-based color mapping.
+#include "../Material.h" // Base class for materials.
+#include "../../../Utils/Math/Mathematics.h" // Utilities for mathematical operations.
+#include "GradientMaterial.h" // For creating gradient-based color mapping.
 
 /**
  * @class DepthMaterial

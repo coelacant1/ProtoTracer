@@ -12,10 +12,10 @@
 
 #pragma once
 
-#include "../Material.h" ///< Base class for materials.
-#include "../../../Utils/Math/Mathematics.h" ///< Mathematical utilities.
-#include "../../../Utils/Math/Rotation.h" ///< Rotation utilities.
-#include "../../../Utils/Math/Vector2D.h" ///< 2D vector operations.
+#include "../Material.h" // Base class for materials.
+#include "../../../Utils/Math/Mathematics.h" // Mathematical utilities.
+#include "../../../Utils/Math/Rotation.h" // Rotation utilities.
+#include "../../../Utils/Math/Vector2D.h" // 2D vector operations.
 
 /**
  * @class GradientMaterial
@@ -115,4 +115,4 @@ public:
     RGBColor GetRGB(const Vector3D& position, const Vector3D& normal, const Vector3D& uvw) override;
 };
 
-#include "GradientMaterial.tpp" ///< Include the template implementation.
+#include "GradientMaterial.tpp" // Include the template implementation.

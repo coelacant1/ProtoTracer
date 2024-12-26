@@ -11,7 +11,7 @@
 
 #pragma once
 
-#include <Arduino.h> ///< Include for Arduino compatibility.
+#include <Arduino.h> // Include for Arduino compatibility.
 
 /**
  * @class ButtonHandler

@@ -12,11 +12,11 @@
 
 #pragma once
 
-#include <stdint.h> ///< Include for fixed-width integer types.
-#include "Controller.h" ///< Include for base controller functionality.
-#include "SmartMatrixHUB75.h" ///< Include for HUB75-specific matrix utilities.
-#include "../Camera/CameraManager/CameraManager.h" ///< Include for camera management.
-#include "../Camera/Pixels/PixelGroup.h" ///< Include for pixel group management.
+#include <stdint.h> // Include for fixed-width integer types.
+#include "Controller.h" // Include for base controller functionality.
+#include "SmartMatrixHUB75.h" // Include for HUB75-specific matrix utilities.
+#include "../Camera/CameraManager/CameraManager.h" // Include for camera management.
+#include "../Camera/Pixels/PixelGroup.h" // Include for pixel group management.
 
 /**
  * @class HUB75ControllerSquare

@@ -55,4 +55,4 @@ public:
     float Filter(float value);
 };
 
-#include "MaxFilter.tpp" ///< Includes the implementation of the template class.
+#include "MaxFilter.tpp" // Includes the implementation of the template class.

@@ -11,8 +11,8 @@
 
 #pragma once
 
-#include "KeyFrame.h" ///< Include for keyframe data structure.
-#include "../Utils/Math/Mathematics.h" ///< Include for mathematical utilities.
+#include "KeyFrame.h" // Include for keyframe data structure.
+#include "../Utils/Math/Mathematics.h" // Include for mathematical utilities.
 
 /**
  * @class KeyFrameInterpolation
@@ -141,4 +141,4 @@ public:
     float Update();
 };
 
-#include "KeyFrameTrack.tpp" ///< Include the template implementation.
+#include "KeyFrameTrack.tpp" // Include the template implementation.

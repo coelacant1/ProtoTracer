@@ -49,4 +49,4 @@ public:
     T Filter(T value);
 };
 
-#include "KalmanFilter.tpp" ///< Includes the implementation of the template.
+#include "KalmanFilter.tpp" // Includes the implementation of the template.

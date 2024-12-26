@@ -11,7 +11,7 @@
 
 #pragma once
 
-#include "../CameraBase.h" ///< Include for base camera functionality.
+#include "../CameraBase.h" // Include for base camera functionality.
 
 /**
  * @class CameraManager

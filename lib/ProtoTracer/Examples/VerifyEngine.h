@@ -11,14 +11,14 @@
 
 #pragma once
 
-#include "Templates/Project.h" ///< Base project template.
-#include "../Assets/Models/OBJ/Background.h" ///< Background model.
-#include "../Assets/Models/OBJ/DeltaDisplayBackground.h" ///< Delta display background model.
+#include "Templates/Project.h" // Base project template.
+#include "../Assets/Models/OBJ/Background.h" // Background model.
+#include "../Assets/Models/OBJ/DeltaDisplayBackground.h" // Delta display background model.
 
-#include "../Camera/CameraManager/Implementations/HUB75DeltaCameras.h" ///< Camera manager for HUB75 Delta displays.
-#include "../Controller/HUB75Controller.h" ///< Controller for HUB75 displays.
+#include "../Camera/CameraManager/Implementations/HUB75DeltaCameras.h" // Camera manager for HUB75 Delta displays.
+#include "../Controller/HUB75Controller.h" // Controller for HUB75 displays.
 
-#include "../Scene/Materials/Animated/RainbowSpiral.h" ///< Animated material for rendering.
+#include "../Scene/Materials/Animated/RainbowSpiral.h" // Animated material for rendering.
 
 /**
  * @class VerifyEngine
