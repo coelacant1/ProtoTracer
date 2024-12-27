@@ -1,3 +1,14 @@
+/**
+ * @file StripeMaterial.h
+ * @brief A material class for generating striped patterns with configurable properties.
+ *
+ * This class provides functionality for creating dynamic striped patterns with wave effects,
+ * color gradients, and rotational transformations.
+ *
+ * @date 22/12/2024
+ * @author Coela Can't
+ */
+
 #pragma once
 
 #include "../Material.h"
@@ -5,86 +16,94 @@
 #include "../../../../../Utils/Math/Vector2D.h"
 #include "../../../../../Utils/Math/Rotation.h"
 
+/**
+ * @class StripeMaterial
+ * @brief Generates striped patterns with configurable properties.
+ *
+ * The `StripeMaterial` class provides methods for creating and manipulating
+ * striped patterns that can include wave effects, color gradients, and rotational
+ * transformations.
+ */
 class StripeMaterial : public Material {
 private:
-    RGBColor* rgbColors;
-    RGBColor* baseRGBColors;
-    uint8_t colorCount;
-    Vector2D positionOffset;
-    Vector2D rotationOffset;//point to rotate about
-    float stripeWidth;
-    float wavePeriod;
-    float waveAmplitude;
-    float rotationAngle;//rotate input xyPosition
-  
+    RGBColor* rgbColors; ///< Array of colors used for the stripes.
+    RGBColor* baseRGBColors; ///< Backup of the original colors for hue adjustments.
+    uint8_t colorCount; ///< Number of colors in the stripe pattern.
+    Vector2D positionOffset; ///< Offset for the stripe position.
+    Vector2D rotationOffset; ///< Rotation center for the pattern.
+    float stripeWidth; ///< Width of each stripe in the pattern.
+    float wavePeriod; ///< Period of the sinusoidal wave effect.
+    float waveAmplitude; ///< Amplitude of the sinusoidal wave effect.
+    float rotationAngle; ///< Angle for rotating the pattern.
+
 public:
-    StripeMaterial(uint8_t colorCount, RGBColor* rgbColors, float stripeWidth, float wavePeriod, float waveAmplitude){
-        this->colorCount = colorCount;
-        this->stripeWidth = stripeWidth;
-        this->wavePeriod = wavePeriod;
-        this->waveAmplitude = waveAmplitude;
+    /**
+     * @brief Constructs a StripeMaterial with given properties.
+     *
+     * @param colorCount Number of colors in the stripe pattern.
+     * @param rgbColors Array of RGB colors for the stripes.
+     * @param stripeWidth Width of each stripe.
+     * @param wavePeriod Period of the wave effect.
+     * @param waveAmplitude Amplitude of the wave effect.
+     */
+    StripeMaterial(uint8_t colorCount, RGBColor* rgbColors, float stripeWidth, float wavePeriod, float waveAmplitude);
 
-        this->rgbColors = new RGBColor[colorCount];
-        this->baseRGBColors = new RGBColor[colorCount];
+    /**
+     * @brief Sets the position offset for the pattern.
+     *
+     * @param positionOffset The desired position offset.
+     */
+    void SetPositionOffset(Vector2D positionOffset);
 
-        for(int i = 0; i < colorCount; i++){
-            this->rgbColors[i] = rgbColors[i];
-            this->baseRGBColors[i] = rgbColors[i];
-        }
-    }
+    /**
+     * @brief Sets the rotation offset (center point) for the pattern.
+     *
+     * @param rotationOffset The center point for rotation.
+     */
+    void SetRotationOffset(Vector2D rotationOffset);
 
-    void SetPositionOffset(Vector2D positionOffset){
-        this->positionOffset = positionOffset;
-    }
-    
-    void SetRotationOffset(Vector2D rotationOffset){
-        this->rotationOffset = rotationOffset;
-    }
+    /**
+     * @brief Sets the rotation angle for the pattern.
+     *
+     * @param rotationAngle The desired rotation angle in degrees.
+     */
+    void SetRotationAngle(float rotationAngle);
 
-    void SetRotationAngle(float rotationAngle){
-        this->rotationAngle = rotationAngle;
-    }
+    /**
+     * @brief Sets the stripe width.
+     *
+     * @param stripeWidth The desired stripe width.
+     */
+    void SetStripeWidth(float stripeWidth);
 
-    void SetStripeWidth(float stripeWidth){
-        this->stripeWidth = stripeWidth;
-    }
+    /**
+     * @brief Sets the wave period for the sinusoidal effect.
+     *
+     * @param wavePeriod The desired wave period.
+     */
+    void SetWavePeriod(float wavePeriod);
 
-    void SetWavePeriod(float wavePeriod){
-        this->wavePeriod = wavePeriod;  
-    }
+    /**
+     * @brief Sets the wave amplitude for the sinusoidal effect.
+     *
+     * @param waveAmplitude The desired wave amplitude.
+     */
+    void SetWaveAmplitude(float waveAmplitude);
 
-    void SetWaveAmplitude(float waveAmplitude){
-        this->waveAmplitude = waveAmplitude;  
-    }
+    /**
+     * @brief Applies a hue shift to the stripe colors.
+     *
+     * @param hueDeg The degree of hue shift to apply.
+     */
+    void HueShift(float hueDeg);
 
-    void HueShift(float hueDeg){
-        for(int i = 0; i < colorCount; i++){
-            rgbColors[i] = baseRGBColors[i].HueShift(hueDeg);
-        }
-    }
-    
-    RGBColor GetRGB(const Vector3D& position, const Vector3D& normal, const Vector3D& uvw) override {
-        if(rotationAngle != 0){
-            Quaternion temp = Rotation(EulerAngles(Vector3D(0, 0, rotationAngle), EulerConstants::EulerOrderXYZS)).GetQuaternion();
-
-            position = temp.RotateVector(position);
-        }
-
-        float pos = 0;
-        position = position - Vector3D(positionOffset.X, positionOffset.Y, 0);
-        
-        //from x position, fit into bucket ratio
-        //modulo x value into x range from start position to end position
-        
-        pos = fabs(fmodf(position.X + sinf(position.Y * Mathematics::MPI * 2.0f / wavePeriod) * waveAmplitude, stripeWidth));
-        
-        float ratio = Mathematics::Map(pos, 0.0f, stripeWidth, 0.0f, (float)colorCount);
-        
-        //map from modulo'd x value to color count minimum
-        int startBox = floor(ratio);
-
-        RGBColor rgb = rgbColors[startBox];
-
-        return rgb;
-    }
+    /**
+     * @brief Computes the color at a given position.
+     *
+     * @param position 3D position in the scene.
+     * @param normal Normal vector at the position (not used for this material).
+     * @param uvw Texture coordinates at the position (not used for this material).
+     * @return The RGB color corresponding to the given position.
+     */
+    RGBColor GetRGB(const Vector3D& position, const Vector3D& normal, const Vector3D& uvw) override;
 };

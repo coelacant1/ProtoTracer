@@ -1,0 +1,42 @@
+name: Generate Documentation
+
+on:
+  push:
+    branches: [ main, documentation ]
+    paths-ignore:
+        - '.github/**'
+        - '.site/**'
+        - '.docs/**'
+        - '.pio/**'
+        - '.vscode/**'
+        - 'include/**'
+
+jobs:
+  build-documentation:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install Doxygen
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y doxygen graphviz
+
+    - name: Setup Doxygen Awesome
+      run: |
+        git clone https://github.com/jothepro/doxygen-awesome-css.git
+        
+    - name: Generate Documentation
+      run: doxygen .docs/Doxyfile
+
+    - name: Copy images
+      run: mv .docs/images/ .docs/html/images/
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: .docs/html
+        force_orphan: true
+        commit_message: 'docs: update documentation'
