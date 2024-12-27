@@ -1,7 +1,7 @@
 # ProtoTracer: 3D Rendering and Animation Engine
 This project is a real-time 3D rendering and animation engine designed for use on the Teensy 4.0. It supports 64x32 HUB75 panels, as well as a custom panel design based on WS2812b LEDs.
 
-Before startint this project, it is _highly_ recommended that you have experience with other microcontroller projects first. This is not a simple or easy project to complete, and support can only be provided for issues with the base project, not with your specific setup. If you are looking for a simple, easy solution, please consider:
+Before starting this project, it is _highly_ recommended that you have experience with other microcontroller projects first. This is not a simple or easy project to complete, and support can only be provided for issues with the base project, not with your specific setup. If you are looking for a simple, easy solution, please consider:
 - Huidu WF-1
   - 🗸 RGB, works with HUB75 panels
   - 🗸 Easy Wi-Fi configuration, quick setup with an app
@@ -39,16 +39,7 @@ This codebase has been tested a Teensy 4.0 (2000 triangle scene with a 4,096 pix
 
 # Usage
 The following links give a detailed description on how to import files, set up controllers, manipulate objects, and render to displays:
-- [Creating a controller](https://github.com/coelacant1/ProtoTracer/wiki/Creating-a-custom-controller)
-- [Using an existing controller](https://github.com/coelacant1/ProtoTracer/wiki/Using-an-Existing-Controller)
-- [Creating an animation](https://github.com/coelacant1/ProtoTracer/wiki/Creating-an-Animation)
-  - [Adding (.OBJ) objects with UV maps](https://github.com/coelacant1/ProtoTracer/wiki/Adding-.OBJ-Objects-with-UV-Maps)
-  - [Adding (.FBX) objects with blend shapes](https://github.com/coelacant1/ProtoTracer/wiki/Adding-.FBX-objects-with-Blend-Shapes)
-  - [Adding image materials](https://github.com/coelacant1/ProtoTracer/wiki/Adding-Image-Materials)
-  - [Adding gif materials](https://github.com/coelacant1/ProtoTracer/wiki/Adding-GIF-Materials)
-  - [Creating a shader material](https://github.com/coelacant1/ProtoTracer/wiki/Creating-a-Shader-Material)
-  - [Modifying 3D objects](https://github.com/coelacant1/ProtoTracer/wiki/Modifying-3D-Objects)
-  - [Keyframing animations](https://github.com/coelacant1/ProtoTracer/wiki/Keyframing-Animations)
+[ProtoTracer Documentation](https://coelacant1.github.io/ProtoTracer)
 
 # Questions
 Any recommendations on additional information to add can be requested in the discussions tab. If you have additional questions, feel free to ask in my [Discord server](https://discord.gg/YwaWnhJ). Please note that help can only be provided for the base project, and not for problems with your specific setup.

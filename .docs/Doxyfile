@@ -26,8 +26,9 @@ INPUT                += lib/ProtoTracer/
 INPUT                += lib/ProtoTracer/Assets/Textures/Animated/Utils
 INPUT                += lib/ProtoTracer/Assets/Models/FBX/Utils
 INPUT                += README.md
+INPUT                += tutorial/
 INPUT_ENCODING        = UTF-8
-FILE_PATTERNS        = *.cpp *.hpp *.h *.tpp
+FILE_PATTERNS        = *.cpp *.hpp *.h *.tpp *.md
 RECURSIVE            = YES
 EXCLUDE              = lib/ProtoTracer/Assets/Models/FBX
 EXCLUDE             += lib/ProtoTracer/Assets/Models/OBJ
@@ -36,6 +37,8 @@ EXCLUDE_PATTERNS     =
 EXAMPLE_PATH         = lib/ProtoTracer/Examples
 IMAGE_PATH           = .docs/images
 PREDEFINED           = "DOXYGEN=1"
+LAYOUT_FILE          = .docs/DoxygenLayout.xml
+HIDE_SCOPE_NAMES     = YES
 
 
 # HTML Theme settings
@@ -48,7 +51,8 @@ HTML_EXTRA_STYLESHEET  = doxygen-awesome-css/doxygen-awesome.css \
                         doxygen-awesome-css/doxygen-awesome-fragment-copy-button.js \
                         doxygen-awesome-css/doxygen-awesome-interactive-toc.js \
                         doxygen-awesome-css/doxygen-awesome-paragraph-link.js \
-                        doxygen-awesome-css/doxygen-awesome-tabs.js
+                        doxygen-awesome-css/doxygen-awesome-tabs.js \
+                        .docs/doxygen-awesome-tweaks.css
 HTML_COLORSTYLE        = LIGHT # required with Doxygen
 HTML_HEADER = .docs/header.html
 
