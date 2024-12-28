@@ -3,7 +3,7 @@ name: Generate Documentation
 on:
   workflow_run:
     workflows:
-      - Build Firmware and Release
+      - Build and Release Firmware HEX Files
     types:
       - completed
 
