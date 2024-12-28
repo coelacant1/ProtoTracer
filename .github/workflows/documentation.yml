@@ -37,7 +37,7 @@ jobs:
 
     - name: Create firmware index
       run: |
-        ls .docs/html/firmware/*.hex | xargs -n 1 basename > .docs/firmware/index.json
+        ls .docs/html/firmware/*.hex | xargs -n 1 basename > .docs/html/firmware/index.json
 
     - name: Copy images
       run: mv .docs/images/ .docs/html/images/

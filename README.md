@@ -3,9 +3,7 @@
 ProtoTracer is a real-time 3D rendering and animation engine designed for microcontrollers. While it has broad applicability, this is a project made for free and it will be down to you to customize support for other hardware other than the examples provided. Support for other microcontrollers may be possible through custom implementations, but users should be prepared to develop their own adaptations if working with platforms other than the Teensy 4/4.1.
 
 [![Build and Release Firmware HEX Files](https://github.com/coelacant1/ProtoTracer/actions/workflows/build_firmware_and_release.yml/badge.svg)](https://github.com/coelacant1/ProtoTracer/actions/workflows/build_firmware_and_release.yml)
-
 [![Generate Documentation](https://github.com/coelacant1/ProtoTracer/actions/workflows/documentation.yml/badge.svg)](https://github.com/coelacant1/ProtoTracer/actions/workflows/documentation.yml)
-
 [![pages-build-deployment](https://github.com/coelacant1/ProtoTracer/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/coelacant1/ProtoTracer/actions/workflows/pages/pages-build-deployment)
 
 ProtoTracer supports:
