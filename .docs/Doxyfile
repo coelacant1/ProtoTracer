@@ -52,7 +52,8 @@ HTML_EXTRA_STYLESHEET  = doxygen-awesome-css/doxygen-awesome.css \
                         doxygen-awesome-css/doxygen-awesome-interactive-toc.js \
                         doxygen-awesome-css/doxygen-awesome-paragraph-link.js \
                         doxygen-awesome-css/doxygen-awesome-tabs.js \
-                        .docs/doxygen-awesome-tweaks.css
+                        .docs/doxygen-awesome-tweaks.css \
+                        .docs/prototracer-firmware-uploader.js
 HTML_COLORSTYLE        = LIGHT # required with Doxygen
 HTML_HEADER = .docs/header.html
 

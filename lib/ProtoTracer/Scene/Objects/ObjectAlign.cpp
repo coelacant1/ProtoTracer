@@ -233,11 +233,11 @@ Quaternion ObjectAlign::GetPlaneOrientation(Object3D** objs, uint8_t numObjects,
 
     dir = dir.UnitSphere();
 
-    Serial.print(dir.ToString()); Serial.print('\t');
-    Serial.print(xD); Serial.print('\t');
-    Serial.print(yD); Serial.print('\t');
-    Serial.print(zD); Serial.print('\t');
-    Serial.print(Rotation(Vector3D(0.0f, 0.0f, 1.0f), dir).GetEulerAngles(EulerConstants::EulerOrderXYZS).Angles.ToString()); Serial.print('\n'); Serial.print('\n');
+    //Serial.print(dir.ToString()); Serial.print('\t');
+    //Serial.print(xD); Serial.print('\t');
+    //Serial.print(yD); Serial.print('\t');
+    //Serial.print(zD); Serial.print('\t');
+    //Serial.print(Rotation(Vector3D(0.0f, 0.0f, 1.0f), dir).GetEulerAngles(EulerConstants::EulerOrderXYZS).Angles.ToString()); Serial.print('\n'); Serial.print('\n');
 
     return Rotation(Vector3D(0.0f, 0.0f, 1.0f), dir).GetQuaternion() * Rotation(EulerAngles(Vector3D(0.0f, 0.0f, offsetPlaneAngle), EulerConstants::EulerOrderXYZS)).GetQuaternion();
 }

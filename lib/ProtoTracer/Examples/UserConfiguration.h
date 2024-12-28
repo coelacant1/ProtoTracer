@@ -25,7 +25,7 @@
  * @def PRINTINFO
  * @brief Define this macro to enable printing live stats, such as FPS and other information.
  */
-//#define PRINTINFO
+#define PRINTINFO
 #if DOXYGEN
 #define PRINTINFO
 #endif

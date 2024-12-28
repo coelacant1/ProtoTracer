@@ -85,8 +85,8 @@ For additional information or recommendations, use the **Discussions** tab on Gi
 
 Contributions are welcome! To contribute:
 1. Fork the repository on GitHub.
-2. Commit your changes with a descriptive message (`git commit -m 'Add YourFeature'`).
-3. Push the branch (`git push origin main`).
+2. Commit your changes with a descriptive message (git commit -m 'Add YourFeature').
+3. Push the branch (git push origin main).
 4. Submit a pull request on GitHub.
 
 ---
