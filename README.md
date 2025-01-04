@@ -25,7 +25,6 @@ This project is complex and requires prior experience with microcontroller proje
   - ❌ Single-color, on/off pixels only
   - ❌ Requires significant soldering
 
----
 
 # Frequently Asked Questions
 
@@ -41,7 +40,6 @@ This project is complex and requires prior experience with microcontroller proje
 ## Will this project work on an Arduino Nano/Uno/Mega?
 - **No**, ProtoTracer cannot practically run on these platforms due to hardware limitations.
 
----
 
 # Demonstration
 
@@ -49,7 +47,6 @@ Here’s an example showcasing ProtoTracer's capabilities, demonstrating live re
 
 ![SpyroExample](https://user-images.githubusercontent.com/77935580/130149757-41306da9-5296-42f5-86bc-87f785d9e56b.gif)
 
----
 
 # Recommended Platform Requirements
 
@@ -59,7 +56,6 @@ Here’s an example showcasing ProtoTracer's capabilities, demonstrating live re
 
 ProtoTracer has been tested on a Teensy 4.0 using a 2,000-triangle scene with a 4,096-pixel matrix.
 
----
 
 # Usage
 
@@ -69,13 +65,13 @@ To get started with ProtoTracer, refer to the [ProtoTracer Documentation](https:
 - Manipulating objects
 - Rendering to displays
 
----
 
 # Customization
 
 While ProtoTracer is designed for the Teensy 4 series, advanced users can create custom controllers for other microcontrollers. This requires a deep understanding of the codebase and the target microcontroller's capabilities. Refer to the [documentation](https://coelacant1.github.io/ProtoTracer) for guidance.
 
----
+For the ProtoTracer Helper programs for converting FBX, OBJ, GIF, PNG/JPG, CSV to ProtoTracer compatible files, go to the [ProtoTracer Helper Github Repository](https://github.com/coelacant1/ProtoTracer-Helpers/tree/main)
+
 
 # Questions and Support
 
@@ -83,7 +79,6 @@ For additional information or recommendations, use the **Discussions** tab on Gi
 - There is no dedicated support, this project is provided for free.
 - Assistance is not guaranteed for problems specific to your custom setup, assume you are on your own.
 
----
 
 # Contributing
 
@@ -93,12 +88,10 @@ Contributions are welcome! To contribute:
 3. Push the branch (git push origin main).
 4. Submit a pull request on GitHub.
 
----
 
 # Sponsoring
 If you would like to help me keep this project going, any support on Patreon would be greatly appreciated: https://www.patreon.com/coelacant1
 
----
 
 # License Agreement
 
