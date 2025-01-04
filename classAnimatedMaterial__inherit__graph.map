@@ -1,0 +1,10 @@
+<map id="AnimatedMaterial" name="AnimatedMaterial">
+<area shape="rect" id="node1" title="Base class for dynamically updating materials." alt="" coords="349,80,488,107"/>
+<area shape="rect" id="node3" href="$classFlowNoise.html" title="A dynamic simplex noise gradient material for a flowing effect." alt="" coords="5,155,96,181"/>
+<area shape="rect" id="node4" href="$classHorizontalRainbow.html" title="A dynamic horizontal rainbow gradient material." alt="" coords="121,155,266,181"/>
+<area shape="rect" id="node5" href="$classRainbowNoise.html" title="A dynamic material that creates a rainbow effect using simplex noise." alt="" coords="291,155,405,181"/>
+<area shape="rect" id="node6" href="$classRainbowNoise2.html" title="A dynamic material that creates a rainbow effect using simplex noise with black&#45;to&#45;color transitions." alt="" coords="429,155,552,181"/>
+<area shape="rect" id="node7" href="$classRainbowSpiral.html" title="A dynamic material creating a colorful rainbow spiral animation." alt="" coords="576,155,691,181"/>
+<area shape="rect" id="node8" href="$classTVStatic.html" title="Simulates a TV static effect with noise, scanlines, and color variations." alt="" coords="715,155,791,181"/>
+<area shape="rect" id="node2" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="381,5,457,32"/>
+</map>

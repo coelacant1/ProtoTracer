@@ -1,0 +1,15 @@
+<map id="PixelGroup.h" name="PixelGroup.h">
+<area shape="rect" id="node1" title="Declares the PixelGroup template class for managing a collection of pixels." alt="" coords="231,5,335,32"/>
+<area shape="rect" id="node2" href="$IPixelGroup_8h.html" title="Declares the IPixelGroup interface for managing collections of pixels." alt="" coords="161,80,269,107"/>
+<area shape="rect" id="node13" href="$PixelGroup_8tpp.html" title=" " alt="" coords="294,80,411,107"/>
+<area shape="rect" id="node3" href="$RGBColor_8h.html" title="Defines the RGBColor class for managing and manipulating RGB color values." alt="" coords="221,155,375,181"/>
+<area shape="rect" id="node12" href="$BoundingBox2D_8h.html" title="Defines the BoundingBox2D class for managing 2D bounding boxes." alt="" coords="5,229,148,271"/>
+<area shape="rect" id="node4" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="203,468,359,495"/>
+<area shape="rect" id="node9" href="$Quaternion_8h.html" title="Defines the Quaternion class for 3D rotations and transformations." alt="" coords="172,237,315,263"/>
+<area shape="rect" id="node11" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="277,393,370,420"/>
+<area shape="rect" id="node5" title=" " alt="" coords="109,543,172,569"/>
+<area shape="rect" id="node6" title=" " alt="" coords="196,543,264,569"/>
+<area shape="rect" id="node7" title=" " alt="" coords="289,543,374,569"/>
+<area shape="rect" id="node8" href="$Mathematics_8tpp.html" title=" " alt="" coords="399,543,531,569"/>
+<area shape="rect" id="node10" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="109,319,202,345"/>
+</map>

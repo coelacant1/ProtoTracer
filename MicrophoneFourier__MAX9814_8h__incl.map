@@ -1,0 +1,19 @@
+<map id="MicrophoneFourier_MAX9814.h" name="MicrophoneFourier_MAX9814.h">
+<area shape="rect" id="node1" title="Extends the MicrophoneFourierBase class for real&#45;time FFT microphone analysis." alt="" coords="188,5,412,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="45,244,129,271"/>
+<area shape="rect" id="node3" href="$DerivativeFilter_8h.html" title="Provides a DerivativeFilter class for calculating the rate of change of input values." alt="" coords="549,155,688,196"/>
+<area shape="rect" id="node13" href="$FFTFilter_8h.html" title="Provides the FFTFilter class for processing and normalizing FFT data." alt="" coords="400,155,525,196"/>
+<area shape="rect" id="node14" href="$TimeStep_8h.html" title="Utility class for timing operations based on a set frequency." alt="" coords="24,155,149,196"/>
+<area shape="rect" id="node15" href="$MicrophoneFourierBase_8h.html" title="Provides a base class for FFT&#45;based microphone signal processing." alt="" coords="189,80,411,107"/>
+<area shape="rect" id="node4" href="$RunningAverageFilter_8h.html" title="Implements a running average filter for smoothing data." alt="" coords="409,244,581,271"/>
+<area shape="rect" id="node5" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="433,319,601,345"/>
+<area shape="rect" id="node11" href="$MinFilter_8h.html" title="Implements a moving minimum filter for processing data streams." alt="" coords="656,244,747,271"/>
+<area shape="rect" id="node10" href="$RunningAverageFilter_8tpp.html" title=" " alt="" coords="223,319,409,345"/>
+<area shape="rect" id="node6" title=" " alt="" coords="346,393,409,420"/>
+<area shape="rect" id="node7" title=" " alt="" coords="433,393,501,420"/>
+<area shape="rect" id="node8" title=" " alt="" coords="525,393,611,420"/>
+<area shape="rect" id="node9" href="$Mathematics_8tpp.html" title=" " alt="" coords="635,393,767,420"/>
+<area shape="rect" id="node12" href="$MinFilter_8tpp.html" title=" " alt="" coords="650,319,753,345"/>
+<area shape="rect" id="node16" href="$FFT_8h.html" title="Provides an implementation of the Radix&#45;2 FFT algorithm and related utilities." alt="" coords="225,155,375,196"/>
+<area shape="rect" id="node17" href="$FFT_8tpp.html" title=" " alt="" coords="213,244,283,271"/>
+</map>

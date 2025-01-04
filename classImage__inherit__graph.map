@@ -1,0 +1,5 @@
+<map id="Image" name="Image">
+<area shape="rect" id="node1" title="Represents an image&#45;based material with support for transformations and palette adjustments." alt="" coords="12,80,75,107"/>
+<area shape="rect" id="node3" href="$classUVMap.html" title="A material for mapping UV texture coordinates to image colors." alt="" coords="9,155,78,181"/>
+<area shape="rect" id="node2" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="5,5,81,32"/>
+</map>

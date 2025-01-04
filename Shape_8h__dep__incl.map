@@ -1,0 +1,12 @@
+<map id="Shape.h" name="Shape.h">
+<area shape="rect" id="node1" title="Defines the Shape base class for representing geometric shapes in 2D space." alt="" coords="237,5,311,32"/>
+<area shape="rect" id="node2" href="$Circle_8h.html" title="Defines the Circle class for representing circular shapes in 2D space." alt="" coords="21,80,92,107"/>
+<area shape="rect" id="node4" href="$Ellipse_8h.html" title="Defines the Ellipse class for representing elliptical shapes in 2D space." alt="" coords="123,80,201,107"/>
+<area shape="rect" id="node6" href="$Rectangle_8h.html" title="Defines the Rectangle class for representing rectangular shapes in 2D space." alt="" coords="225,80,323,107"/>
+<area shape="rect" id="node8" href="$Shape_8cpp.html" title=" " alt="" coords="348,80,437,107"/>
+<area shape="rect" id="node9" href="$MaterialMask_8h.html" title="Defines the MaterialMask class, which blends materials with a mask defined by a shape." alt="" coords="462,80,585,107"/>
+<area shape="rect" id="node3" href="$Circle_8cpp.html" title=" " alt="" coords="5,155,92,181"/>
+<area shape="rect" id="node5" href="$Ellipse_8cpp.html" title=" " alt="" coords="116,155,208,181"/>
+<area shape="rect" id="node7" href="$Rectangle_8cpp.html" title=" " alt="" coords="233,155,347,181"/>
+<area shape="rect" id="node10" href="$MaterialMask_8cpp.html" title=" " alt="" coords="454,155,593,181"/>
+</map>

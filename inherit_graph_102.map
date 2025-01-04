@@ -1,0 +1,5 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classViseme.html" title="Defines the available mouth shapes (visemes)." alt="" coords="5,46,76,73"/>
+<area shape="rect" id="node2" href="$classFFTVoiceDetection.html" title=" " alt="" coords="124,5,279,47"/>
+<area shape="rect" id="node3" href="$classFFTVoiceDetection.html" title="Detects visemes based on FFT voice analysis." alt="" coords="124,71,279,112"/>
+</map>

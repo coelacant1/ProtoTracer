@@ -1,0 +1,4 @@
+<map id="ShiftR" name="ShiftR">
+<area shape="rect" id="node1" title="Radially shifts the red, green, and blue channels of the pixels." alt="" coords="5,80,65,107"/>
+<area shape="rect" id="node2" href="$classEffect.html" title="Abstract base class for applying visual effects to pixel groups." alt="" coords="6,5,65,32"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="HeadsUpDisplay" name="HeadsUpDisplay">
+<area shape="rect" id="node1" title="Renders and displays information on an SSD1306/SH1106 display." alt="" coords="39,109,169,136"/>
+<area shape="rect" id="node2" href="$classEffect.html" title="Abstract base class for applying visual effects to pixel groups." alt="" coords="5,5,64,32"/>
+<area shape="rect" id="node3" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="111,5,193,32"/>
+<area shape="rect" id="node4" href="$classTimeStep.html" title="Provides a mechanism to trigger actions at a specified frequency." alt="" coords="217,5,301,32"/>
+</map>

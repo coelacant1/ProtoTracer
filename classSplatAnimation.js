@@ -1,0 +1,26 @@
+var classSplatAnimation =
+[
+    [ "SplatAnimation", "classSplatAnimation.html#a7bbad354beead7b7660ebbc567d467ff", null ],
+    [ "Angry", "classSplatAnimation.html#aed5ce1bf8f52a8ac7a6c6a8711f71b27", null ],
+    [ "AudioReactiveGradientCallback", "classSplatAnimation.html#aed167008531273fddf3333b81bd6c208", null ],
+    [ "Confused", "classSplatAnimation.html#a2d8f724feebcb69f276e5e469b8142a5", null ],
+    [ "Default", "classSplatAnimation.html#acfba9b93596eb9a86e9771d396bbe281", null ],
+    [ "Disappointed", "classSplatAnimation.html#a8242cb141c32228be5526f31e19ed734", null ],
+    [ "Excited", "classSplatAnimation.html#a778c799f2877b95fbc387b12f48f9bc4", null ],
+    [ "FullCircle", "classSplatAnimation.html#a574ca8c349a7ca67d3ecbb603f68e5ec", null ],
+    [ "Heart", "classSplatAnimation.html#ac1f9753e22c34b4cd1422822751637f2", null ],
+    [ "HollowCircle", "classSplatAnimation.html#af238b4f2b7712ac3ec3d160f98b0565e", null ],
+    [ "LinkControlParameters", "classSplatAnimation.html#a0e3f5f158cebb3db9a6c5bdd05103687", null ],
+    [ "OscilloscopeCallback", "classSplatAnimation.html#a19397afc4019fa9f7c79f05c12fb3019", null ],
+    [ "SelectFace", "classSplatAnimation.html#a00ddb265757b11763ffac466dcef9a40", null ],
+    [ "Sleepy", "classSplatAnimation.html#ae3b755f2e4044bdfbc6862f9856b446e", null ],
+    [ "SpectrumAnalyzerCallback", "classSplatAnimation.html#a436ef986a74b79e34e0a598ad447ec3f", null ],
+    [ "Update", "classSplatAnimation.html#ab62e7b3735f20c02fd813b0697223ef4", null ],
+    [ "cameras", "classSplatAnimation.html#ac3dca357988463deb651e7e367f76cac", null ],
+    [ "controller", "classSplatAnimation.html#abffd324b8fa5f267e56e33cad04b3ba3", null ],
+    [ "deltaDisplayBackground", "classSplatAnimation.html#abfc7859e3c54e485eb80977a0ba9713d", null ],
+    [ "faceArray", "classSplatAnimation.html#a053be350e358e1f32134acd8510c1fd8", null ],
+    [ "hRainbow", "classSplatAnimation.html#abaa0bd028972d9dbf96f72adfd116af0", null ],
+    [ "ledStripBackground", "classSplatAnimation.html#a679ba85bab8cd970854e036900714e9d", null ],
+    [ "pM", "classSplatAnimation.html#ae350d1583085041727b256c11366d111", null ]
+];

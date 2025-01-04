@@ -1,0 +1,13 @@
+<map id="IPixelGroup.h" name="IPixelGroup.h">
+<area shape="rect" id="node1" title="Declares the IPixelGroup interface for managing collections of pixels." alt="" coords="161,5,269,32"/>
+<area shape="rect" id="node2" href="$RGBColor_8h.html" title="Defines the RGBColor class for managing and manipulating RGB color values." alt="" coords="221,80,375,107"/>
+<area shape="rect" id="node11" href="$BoundingBox2D_8h.html" title="Defines the BoundingBox2D class for managing 2D bounding boxes." alt="" coords="5,155,148,196"/>
+<area shape="rect" id="node3" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="203,393,359,420"/>
+<area shape="rect" id="node8" href="$Quaternion_8h.html" title="Defines the Quaternion class for 3D rotations and transformations." alt="" coords="172,162,315,189"/>
+<area shape="rect" id="node10" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="277,319,370,345"/>
+<area shape="rect" id="node4" title=" " alt="" coords="109,468,172,495"/>
+<area shape="rect" id="node5" title=" " alt="" coords="196,468,264,495"/>
+<area shape="rect" id="node6" title=" " alt="" coords="289,468,374,495"/>
+<area shape="rect" id="node7" href="$Mathematics_8tpp.html" title=" " alt="" coords="399,468,531,495"/>
+<area shape="rect" id="node9" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="109,244,202,271"/>
+</map>

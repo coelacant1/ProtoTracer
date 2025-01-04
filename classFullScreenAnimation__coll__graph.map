@@ -1,0 +1,10 @@
+<map id="FullScreenAnimation" name="FullScreenAnimation">
+<area shape="rect" id="node1" title=" " alt="" coords="269,333,425,360"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,118,132,145"/>
+<area shape="rect" id="node3" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="305,5,389,32"/>
+<area shape="rect" id="node5" href="$classStripeMaterial.html" title="Generates striped patterns with configurable properties." alt="" coords="446,118,561,145"/>
+<area shape="rect" id="node8" href="$classSpiralMaterial.html" title="Generates a spiral pattern with configurable properties." alt="" coords="585,118,699,145"/>
+<area shape="rect" id="node4" href="$classFunctionGenerator.html" title="A class to generate various waveform functions with customizable parameters." alt="" coords="279,118,421,145"/>
+<area shape="rect" id="node6" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="489,5,565,32"/>
+<area shape="rect" id="node7" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="708,5,789,32"/>
+</map>

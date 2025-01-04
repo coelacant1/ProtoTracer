@@ -1,0 +1,10 @@
+<map id="BouncePhysics.h" name="BouncePhysics.h">
+<area shape="rect" id="node1" title="Defines the BouncePhysics class for simulating basic bouncing physics with velocity and gravity." alt="" coords="174,5,305,32"/>
+<area shape="rect" id="node2" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="69,169,284,196"/>
+<area shape="rect" id="node7" href="$RunningAverageFilter_8h.html" title="Implements a running average filter for smoothing data." alt="" coords="214,80,390,121"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,244,68,271"/>
+<area shape="rect" id="node4" title=" " alt="" coords="92,244,160,271"/>
+<area shape="rect" id="node5" title=" " alt="" coords="185,244,270,271"/>
+<area shape="rect" id="node6" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,244,427,271"/>
+<area shape="rect" id="node8" href="$RunningAverageFilter_8tpp.html" title=" " alt="" coords="308,169,493,196"/>
+</map>

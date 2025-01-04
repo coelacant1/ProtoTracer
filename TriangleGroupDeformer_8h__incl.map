@@ -1,0 +1,18 @@
+<map id="TriangleGroupDeformer.h" name="TriangleGroupDeformer.h">
+<area shape="rect" id="node1" title="Provides functionality to deform groups of 3D triangles in various ways." alt="" coords="372,5,557,32"/>
+<area shape="rect" id="node2" href="$TriangleGroup_8h.html" title="Defines the TriangleGroup class for dynamic manipulation of triangles in 3D space." alt="" coords="403,80,527,107"/>
+<area shape="rect" id="node3" href="$Triangle3D_8h.html" title="Defines the Triangle3D class for representing and manipulating 3D triangles." alt="" coords="192,304,295,331"/>
+<area shape="rect" id="node12" href="$ITriangleGroup_8h.html" title="Defines the ITriangleGroup interface for managing a collection of mutable 3D triangles." alt="" coords="299,155,427,181"/>
+<area shape="rect" id="node13" href="$IndexGroup_8h.html" title="Defines the IndexGroup class for handling a group of three unsigned integer indices." alt="" coords="429,304,538,331"/>
+<area shape="rect" id="node15" href="$IStaticTriangleGroup_8h.html" title="Defines the IStaticTriangleGroup interface for managing a collection of static 3D triangles." alt="" coords="281,229,446,256"/>
+<area shape="rect" id="node16" href="$TriangleGroup_8tpp.html" title=" " alt="" coords="572,155,709,181"/>
+<area shape="rect" id="node4" href="$Quaternion_8h.html" title="Defines the Quaternion class for 3D rotations and transformations." alt="" coords="73,379,275,405"/>
+<area shape="rect" id="node11" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="214,528,307,555"/>
+<area shape="rect" id="node5" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="117,603,236,629"/>
+<area shape="rect" id="node10" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="130,453,223,480"/>
+<area shape="rect" id="node6" title=" " alt="" coords="5,677,68,704"/>
+<area shape="rect" id="node7" title=" " alt="" coords="92,677,160,704"/>
+<area shape="rect" id="node8" title=" " alt="" coords="185,677,270,704"/>
+<area shape="rect" id="node9" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,677,427,704"/>
+<area shape="rect" id="node14" title=" " alt="" coords="441,379,525,405"/>
+</map>

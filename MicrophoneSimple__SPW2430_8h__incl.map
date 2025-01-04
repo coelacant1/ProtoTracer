@@ -1,0 +1,13 @@
+<map id="MicrophoneSimple_SPW2430.h" name="MicrophoneSimple_SPW2430.h">
+<area shape="rect" id="node1" title="A simple microphone processing class for analog input." alt="" coords="153,5,376,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,87,89,114"/>
+<area shape="rect" id="node3" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="265,169,390,211"/>
+<area shape="rect" id="node8" href="$RunningAverageFilter_8h.html" title="Implements a running average filter for smoothing data." alt="" coords="114,80,290,121"/>
+<area shape="rect" id="node10" href="$MinFilter_8h.html" title="Implements a moving minimum filter for processing data streams." alt="" coords="365,80,490,121"/>
+<area shape="rect" id="node4" title=" " alt="" coords="156,259,219,285"/>
+<area shape="rect" id="node5" title=" " alt="" coords="243,259,311,285"/>
+<area shape="rect" id="node6" title=" " alt="" coords="335,259,421,285"/>
+<area shape="rect" id="node7" href="$Mathematics_8tpp.html" title=" " alt="" coords="445,259,577,285"/>
+<area shape="rect" id="node9" href="$RunningAverageFilter_8tpp.html" title=" " alt="" coords="55,177,240,203"/>
+<area shape="rect" id="node11" href="$MinFilter_8tpp.html" title=" " alt="" coords="415,177,517,203"/>
+</map>

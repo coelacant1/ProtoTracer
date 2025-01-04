@@ -1,0 +1,8 @@
+<map id="BoundaryCube.h" name="BoundaryCube.h">
+<area shape="rect" id="node1" title="Defines the BoundaryCube class for representing and managing axis&#45;aligned bounding cubes." alt="" coords="111,5,241,32"/>
+<area shape="rect" id="node2" href="$BoundaryCube_8cpp.html" title=" " alt="" coords="5,80,149,107"/>
+<area shape="rect" id="node3" href="$BoundaryMotionSimulator_8h.html" title="Defines the BoundaryMotionSimulator class for simulating motion and collisions of boundary objects." alt="" coords="173,80,376,107"/>
+<area shape="rect" id="node4" href="$PhysicsSimulator_8h.html" title="Defines the PhysicsSimulator class for managing physics simulations within a scene." alt="" coords="99,155,245,181"/>
+<area shape="rect" id="node6" href="$BoundaryMotionSimulator_8cpp.html" title=" " alt="" coords="269,155,488,181"/>
+<area shape="rect" id="node5" href="$PhysicsSimulator_8cpp.html" title=" " alt="" coords="92,229,252,256"/>
+</map>

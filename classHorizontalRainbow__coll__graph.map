@@ -1,0 +1,7 @@
+<map id="HorizontalRainbow" name="HorizontalRainbow">
+<area shape="rect" id="node1" title="A dynamic horizontal rainbow gradient material." alt="" coords="181,171,326,197"/>
+<area shape="rect" id="node2" href="$classAnimatedMaterial.html" title="Base class for dynamically updating materials." alt="" coords="5,81,144,108"/>
+<area shape="rect" id="node3" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="125,5,201,32"/>
+<area shape="rect" id="node5" href="$classGradientMaterial.html" title=" " alt="" coords="168,81,339,108"/>
+<area shape="rect" id="node4" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="363,81,447,108"/>
+</map>

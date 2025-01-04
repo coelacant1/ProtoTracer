@@ -1,0 +1,14 @@
+<map id="Effect.h" name="Effect.h">
+<area shape="rect" id="node1" title="Defines the base Effect class for applying transformations or effects to pixel groups." alt="" coords="97,5,168,32"/>
+<area shape="rect" id="node2" href="$IPixelGroup_8h.html" title="Declares the IPixelGroup interface for managing collections of pixels." alt="" coords="139,80,278,121"/>
+<area shape="rect" id="node4" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="99,483,255,509"/>
+<area shape="rect" id="node3" href="$RGBColor_8h.html" title="Defines the RGBColor class for managing and manipulating RGB color values." alt="" coords="132,169,285,196"/>
+<area shape="rect" id="node12" href="$BoundingBox2D_8h.html" title="Defines the BoundingBox2D class for managing 2D bounding boxes." alt="" coords="413,244,556,285"/>
+<area shape="rect" id="node9" href="$Quaternion_8h.html" title="Defines the Quaternion class for 3D rotations and transformations." alt="" coords="247,251,389,278"/>
+<area shape="rect" id="node11" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="222,408,315,435"/>
+<area shape="rect" id="node5" title=" " alt="" coords="5,557,68,584"/>
+<area shape="rect" id="node6" title=" " alt="" coords="92,557,160,584"/>
+<area shape="rect" id="node7" title=" " alt="" coords="185,557,270,584"/>
+<area shape="rect" id="node8" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,557,427,584"/>
+<area shape="rect" id="node10" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="315,333,409,360"/>
+</map>

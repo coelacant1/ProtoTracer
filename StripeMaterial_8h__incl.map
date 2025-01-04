@@ -1,0 +1,16 @@
+<map id="StripeMaterial.h" name="StripeMaterial.h">
+<area shape="rect" id="node1" title="A material class for generating striped patterns with configurable properties." alt="" coords="496,5,623,32"/>
+<area shape="rect" id="node2" href="$Material_8h.html" title="Base class for materials defining shading and rendering behavior." alt="" coords="271,87,371,114"/>
+<area shape="rect" id="node12" title=" " alt="" coords="394,80,554,121"/>
+<area shape="rect" id="node13" title=" " alt="" coords="579,80,713,121"/>
+<area shape="rect" id="node14" title=" " alt="" coords="738,80,869,121"/>
+<area shape="rect" id="node3" href="$RGBColor_8h.html" title="Defines the RGBColor class for managing and manipulating RGB color values." alt="" coords="187,169,340,196"/>
+<area shape="rect" id="node11" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="265,393,358,420"/>
+<area shape="rect" id="node4" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="99,468,255,495"/>
+<area shape="rect" id="node9" href="$Quaternion_8h.html" title="Defines the Quaternion class for 3D rotations and transformations." alt="" coords="168,244,311,271"/>
+<area shape="rect" id="node5" title=" " alt="" coords="5,543,68,569"/>
+<area shape="rect" id="node6" title=" " alt="" coords="92,543,160,569"/>
+<area shape="rect" id="node7" title=" " alt="" coords="185,543,270,569"/>
+<area shape="rect" id="node8" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,543,427,569"/>
+<area shape="rect" id="node10" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="181,319,274,345"/>
+</map>

@@ -1,0 +1,12 @@
+<map id="Pixel.h" name="Pixel.h">
+<area shape="rect" id="node1" title="Declares the Pixel class for managing pixel data and relationships in a 2D grid." alt="" coords="55,5,121,32"/>
+<area shape="rect" id="node2" href="$RGBColor_8h.html" title="Defines the RGBColor class for managing and manipulating RGB color values." alt="" coords="121,80,274,107"/>
+<area shape="rect" id="node9" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="5,229,99,256"/>
+<area shape="rect" id="node3" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="99,379,255,405"/>
+<area shape="rect" id="node8" href="$Quaternion_8h.html" title="Defines the Quaternion class for 3D rotations and transformations." alt="" coords="69,155,211,181"/>
+<area shape="rect" id="node10" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="173,304,267,331"/>
+<area shape="rect" id="node4" title=" " alt="" coords="6,453,69,480"/>
+<area shape="rect" id="node5" title=" " alt="" coords="93,453,161,480"/>
+<area shape="rect" id="node6" title=" " alt="" coords="185,453,271,480"/>
+<area shape="rect" id="node7" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,453,427,480"/>
+</map>

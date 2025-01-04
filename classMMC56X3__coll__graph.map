@@ -1,0 +1,7 @@
+<map id="MMC56X3" name="MMC56X3">
+<area shape="rect" id="node1" title="A class for managing the Adafruit MMC56x3 magnetometer sensor." alt="" coords="234,139,322,165"/>
+<area shape="rect" id="node2" href="$classTimeStep.html" title="Provides a mechanism to trigger actions at a specified frequency." alt="" coords="5,13,89,39"/>
+<area shape="rect" id="node3" href="$classRunningAverageFilter.html" title=" " alt="" coords="113,5,275,47"/>
+<area shape="rect" id="node4" href="$classMinFilter.html" title=" " alt="" coords="299,13,425,39"/>
+<area shape="rect" id="node5" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="449,13,531,39"/>
+</map>

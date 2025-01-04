@@ -1,0 +1,8 @@
+<map id="TriangleGroup&lt; vertexCount, triangleCount &gt;" name="TriangleGroup&lt; vertexCount, triangleCount &gt;">
+<area shape="rect" id="node1" title="Represents a dynamic group of 3D triangles." alt="" coords="207,272,418,313"/>
+<area shape="rect" id="node2" href="$classITriangleGroup.html" title="Interface for managing a dynamic group of 3D triangles and associated data." alt="" coords="5,168,121,195"/>
+<area shape="rect" id="node3" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="181,5,263,32"/>
+<area shape="rect" id="node4" href="$classTriangle3D.html" title="Represents a 3D triangle with support for UV mapping and ray intersection testing." alt="" coords="267,168,358,195"/>
+<area shape="rect" id="node5" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="305,5,387,32"/>
+<area shape="rect" id="node6" href="$classIndexGroup.html" title="Represents a group of three unsigned integer indices." alt="" coords="488,168,585,195"/>
+</map>

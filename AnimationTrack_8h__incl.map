@@ -1,0 +1,12 @@
+<map id="AnimationTrack.h" name="AnimationTrack.h">
+<area shape="rect" id="node1" title="Declares the AnimationTrack template class for managing animation tracks with keyframes." alt="" coords="247,5,382,32"/>
+<area shape="rect" id="node2" href="$KeyFrameTrack_8h.html" title="Declares the KeyFrameTrack template class for managing keyframe&#45;based animations." alt="" coords="157,80,302,107"/>
+<area shape="rect" id="node10" href="$AnimationTrack_8tpp.html" title=" " alt="" coords="326,80,474,107"/>
+<area shape="rect" id="node3" href="$KeyFrame_8h.html" title="Declares the KeyFrame class for representing individual animation keyframes." alt="" coords="5,155,104,181"/>
+<area shape="rect" id="node4" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="128,155,331,181"/>
+<area shape="rect" id="node9" href="$KeyFrameTrack_8tpp.html" title=" " alt="" coords="355,155,501,181"/>
+<area shape="rect" id="node5" title=" " alt="" coords="58,229,121,256"/>
+<area shape="rect" id="node6" title=" " alt="" coords="145,229,213,256"/>
+<area shape="rect" id="node7" title=" " alt="" coords="237,229,323,256"/>
+<area shape="rect" id="node8" href="$Mathematics_8tpp.html" title=" " alt="" coords="347,229,479,256"/>
+</map>

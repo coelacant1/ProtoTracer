@@ -1,0 +1,4 @@
+<map id="FFTFilter" name="FFTFilter">
+<area shape="rect" id="node1" title="Processes and normalizes FFT data." alt="" coords="47,109,125,136"/>
+<area shape="rect" id="node2" href="$classRunningAverageFilter.html" title=" " alt="" coords="5,5,167,47"/>
+</map>

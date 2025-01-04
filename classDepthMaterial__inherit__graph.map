@@ -1,0 +1,4 @@
+<map id="DepthMaterial" name="DepthMaterial">
+<area shape="rect" id="node1" title="Maps depth along a specified axis to an RGB color using a gradient." alt="" coords="5,80,120,107"/>
+<area shape="rect" id="node2" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="25,5,101,32"/>
+</map>

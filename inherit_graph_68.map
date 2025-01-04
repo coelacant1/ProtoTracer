@@ -1,0 +1,19 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classProject.html" title="Manages animations, rendering, and display operations." alt="" coords="5,259,72,285"/>
+<area shape="rect" id="node2" href="$classBoot.html" title=" " alt="" coords="164,157,216,184"/>
+<area shape="rect" id="node3" href="$classCreeperAnimation.html" title=" " alt="" coords="120,208,260,235"/>
+<area shape="rect" id="node4" href="$classProtogenProject.html" title="A default project template that includes functionality for an analog microphone, APDS9960 boop sensor..." alt="" coords="127,259,253,285"/>
+<area shape="rect" id="node16" href="$classSpyroAnimation.html" title=" " alt="" coords="127,309,253,336"/>
+<area shape="rect" id="node17" href="$classVerifyEngine.html" title="A project class to validate the rendering engine functionality." alt="" coords="139,360,241,387"/>
+<area shape="rect" id="node5" href="$classAceAnimation.html" title=" " alt="" coords="343,5,457,32"/>
+<area shape="rect" id="node6" href="$classArrowAnimation.html" title=" " alt="" coords="337,56,463,83"/>
+<area shape="rect" id="node7" href="$classBetaProject.html" title=" " alt="" coords="351,107,449,133"/>
+<area shape="rect" id="node8" href="$classDrGonzoProject.html" title=" " alt="" coords="339,157,461,184"/>
+<area shape="rect" id="node9" href="$classDrGonzoTest.html" title=" " alt="" coords="348,208,452,235"/>
+<area shape="rect" id="node10" href="$classFursuitEyesV1.html" title=" " alt="" coords="343,259,457,285"/>
+<area shape="rect" id="node11" href="$classProtogenHUB75Project.html" title=" " alt="" coords="315,309,485,336"/>
+<area shape="rect" id="node12" href="$classProtogenWS35Project.html" title=" " alt="" coords="319,360,481,387"/>
+<area shape="rect" id="node13" href="$classSageAnimation.html" title=" " alt="" coords="339,411,461,437"/>
+<area shape="rect" id="node14" href="$classSplatAnimation.html" title=" " alt="" coords="339,461,461,488"/>
+<area shape="rect" id="node15" href="$classUnicornZhenjaAnimation.html" title=" " alt="" coords="308,512,492,539"/>
+</map>

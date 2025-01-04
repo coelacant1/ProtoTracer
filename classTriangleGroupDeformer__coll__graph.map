@@ -1,0 +1,4 @@
+<map id="TriangleGroupDeformer" name="TriangleGroupDeformer">
+<area shape="rect" id="node1" title="Provides deformation effects for groups of triangles." alt="" coords="5,95,180,121"/>
+<area shape="rect" id="node2" href="$classITriangleGroup.html" title="Interface for managing a dynamic group of 3D triangles and associated data." alt="" coords="35,5,151,32"/>
+</map>

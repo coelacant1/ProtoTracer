@@ -1,0 +1,26 @@
+<map id="ClockAnimation" name="ClockAnimation">
+<area shape="rect" id="node1" title=" " alt="" coords="944,477,1069,504"/>
+<area shape="rect" id="node2" title=" " alt="" coords="651,43,777,69"/>
+<area shape="rect" id="node3" href="$classRainbowNoise2.html" title="A dynamic material that creates a rainbow effect using simplex noise with black&#45;to&#45;color transitions." alt="" coords="653,520,775,547"/>
+<area shape="rect" id="node4" href="$classAnimatedMaterial.html" title="Base class for dynamically updating materials." alt="" coords="259,581,397,608"/>
+<area shape="rect" id="node18" href="$classRainbowSpiral.html" title="A dynamic material creating a colorful rainbow spiral animation." alt="" coords="657,883,771,909"/>
+<area shape="rect" id="node20" href="$classRainbowNoise.html" title="A dynamic material that creates a rainbow effect using simplex noise." alt="" coords="657,445,771,472"/>
+<area shape="rect" id="node5" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="9,236,85,263"/>
+<area shape="rect" id="node7" href="$classGradientMaterial.html" title=" " alt="" coords="243,393,413,420"/>
+<area shape="rect" id="node8" href="$classSimplexNoise.html" title=" " alt="" coords="253,343,403,369"/>
+<area shape="rect" id="node10" href="$classMaterialMask.html" title="Combines two materials using a shape as a mask." alt="" coords="659,93,769,120"/>
+<area shape="rect" id="node14" href="$classClock.html" title="Renders a real&#45;time clock and date as a material." alt="" coords="685,144,743,171"/>
+<area shape="rect" id="node15" href="$classSimpleMaterial.html" title="A material that applies a single, solid RGB color to surfaces." alt="" coords="267,281,389,308"/>
+<area shape="rect" id="node16" href="$classTextEngine.html" title=" " alt="" coords="251,168,405,195"/>
+<area shape="rect" id="node19" href="$classSpiralMaterial.html" title="Generates a spiral pattern with configurable properties." alt="" coords="271,935,385,961"/>
+<area shape="rect" id="node21" href="$classCombineMaterial.html" title=" " alt="" coords="437,192,609,219"/>
+<area shape="rect" id="node6" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="5,676,89,703"/>
+<area shape="rect" id="node9" href="$classFunctionGenerator.html" title="A class to generate various waveform functions with customizable parameters." alt="" coords="257,821,399,848"/>
+<area shape="rect" id="node11" href="$classShape.html" title="Abstract base class for 2D geometric shapes." alt="" coords="297,771,359,797"/>
+<area shape="rect" id="node13" href="$classRectangle.html" title="Represents a rectangle in 2D space." alt="" coords="671,652,757,679"/>
+<area shape="rect" id="node12" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="7,917,88,944"/>
+<area shape="rect" id="node17" href="$classRunningAverageFilter.html" title=" " alt="" coords="633,571,795,613"/>
+<area shape="rect" id="node22" href="$classAPDS9960.html" title="A class for managing the Adafruit APDS9960 sensor." alt="" coords="669,985,759,1012"/>
+<area shape="rect" id="node23" href="$classTimeStep.html" title="Provides a mechanism to trigger actions at a specified frequency." alt="" coords="286,985,370,1012"/>
+<area shape="rect" id="node24" href="$classMinFilter.html" title=" " alt="" coords="265,1036,391,1063"/>
+</map>

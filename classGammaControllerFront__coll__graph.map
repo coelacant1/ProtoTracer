@@ -1,0 +1,13 @@
+<map id="GammaControllerFront" name="GammaControllerFront">
+<area shape="rect" id="node1" title=" " alt="" coords="156,528,327,555"/>
+<area shape="rect" id="node2" href="$classController.html" title="Base class for managing brightness and display operations of lighting controllers." alt="" coords="237,423,323,449"/>
+<area shape="rect" id="node3" href="$classCameraManager.html" title="Manages multiple CameraBase objects." alt="" coords="228,319,359,345"/>
+<area shape="rect" id="node4" href="$classCameraBase.html" title="Base class for managing camera properties and transformations." alt="" coords="138,228,243,255"/>
+<area shape="rect" id="node9" href="$classCamera.html" title=" " alt="" coords="33,371,159,397"/>
+<area shape="rect" id="node5" href="$classCameraLayout.html" title="Manages camera orientation and axis alignment." alt="" coords="15,139,132,165"/>
+<area shape="rect" id="node6" href="$classQuaternion.html" title="A mathematical construct representing a rotation in 3D space." alt="" coords="143,5,238,32"/>
+<area shape="rect" id="node7" href="$classTransform.html" title="Represents a 3D transformation including position, rotation, and scale." alt="" coords="319,139,406,165"/>
+<area shape="rect" id="node8" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="354,5,435,32"/>
+<area shape="rect" id="node10" href="$classPixelGroup.html" title=" " alt="" coords="488,423,635,449"/>
+<area shape="rect" id="node11" href="$classIPixelGroup.html" title="Interface for managing and interacting with a collection of pixels." alt="" coords="551,319,647,345"/>
+</map>

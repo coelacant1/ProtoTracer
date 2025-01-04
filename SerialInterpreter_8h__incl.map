@@ -1,0 +1,13 @@
+<map id="SerialInterpreter.h" name="SerialInterpreter.h">
+<area shape="rect" id="node1" title=" " alt="" coords="201,5,339,32"/>
+<area shape="rect" id="node2" href="$Quaternion_8h.html" title="Defines the Quaternion class for 3D rotations and transformations." alt="" coords="87,155,213,196"/>
+<area shape="rect" id="node10" href="$RGBColor_8h.html" title="Defines the RGBColor class for managing and manipulating RGB color values." alt="" coords="187,80,353,107"/>
+<area shape="rect" id="node11" title=" " alt="" coords="377,80,499,107"/>
+<area shape="rect" id="node3" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="117,393,236,420"/>
+<area shape="rect" id="node8" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="89,244,182,271"/>
+<area shape="rect" id="node9" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="173,319,266,345"/>
+<area shape="rect" id="node4" title=" " alt="" coords="5,468,68,495"/>
+<area shape="rect" id="node5" title=" " alt="" coords="92,468,160,495"/>
+<area shape="rect" id="node6" title=" " alt="" coords="185,468,270,495"/>
+<area shape="rect" id="node7" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,468,427,495"/>
+</map>

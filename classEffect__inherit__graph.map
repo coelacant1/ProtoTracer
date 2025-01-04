@@ -1,0 +1,17 @@
+<map id="Effect" name="Effect">
+<area shape="rect" id="node1" title="Abstract base class for applying visual effects to pixel groups." alt="" coords="5,335,64,361"/>
+<area shape="rect" id="node2" href="$classFisheye.html" title="Implements a fisheye distortion effect for pixel groups." alt="" coords="141,5,213,32"/>
+<area shape="rect" id="node3" href="$classGlitchX.html" title="Implements a glitch effect along the X&#45;axis for pixel groups." alt="" coords="143,56,212,83"/>
+<area shape="rect" id="node4" href="$classHeadsUpDisplay.html" title="Renders and displays information on an SSD1306/SH1106 display." alt="" coords="112,107,243,133"/>
+<area shape="rect" id="node5" href="$classHorizontalBlur.html" title="Implements a horizontal blur effect for pixel groups." alt="" coords="120,157,235,184"/>
+<area shape="rect" id="node6" href="$classMagnet.html" title="Implements a magnetic distortion effect for pixel groups." alt="" coords="142,208,213,235"/>
+<area shape="rect" id="node7" href="$classOverflow.html" title="Implements an overflow distortion effect for pixel groups." alt="" coords="137,259,217,285"/>
+<area shape="rect" id="node8" href="$classPassthrough.html" title="A no&#45;operation effect that leaves pixel groups unchanged." alt="" coords="127,309,228,336"/>
+<area shape="rect" id="node9" href="$classPhaseOffsetR.html" title="Applies rotational phase offsets to pixel groups." alt="" coords="123,360,232,387"/>
+<area shape="rect" id="node10" href="$classPhaseOffsetX.html" title="Applies horizontal phase offsets to pixel groups." alt="" coords="123,411,232,437"/>
+<area shape="rect" id="node11" href="$classPhaseOffsetY.html" title="Applies vertical phase offsets to pixel groups." alt="" coords="123,461,231,488"/>
+<area shape="rect" id="node12" href="$classRadialBlur.html" title="Applies a radial blur effect to pixel groups." alt="" coords="133,512,222,539"/>
+<area shape="rect" id="node13" href="$classShiftR.html" title="Radially shifts the red, green, and blue channels of the pixels." alt="" coords="147,563,207,589"/>
+<area shape="rect" id="node14" href="$classTest.html" title="A debugging effect used to identify memory issues in pixel rendering." alt="" coords="153,613,201,640"/>
+<area shape="rect" id="node15" href="$classVerticalBlur.html" title="An effect that applies a vertical blur to a pixel group." alt="" coords="129,664,226,691"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classAnimationTrack.html" title=" " alt="" coords="5,99,223,141"/>
+<area shape="rect" id="node2" href="$classBlinkTrack.html" title=" " alt="" coords="318,5,445,32"/>
+<area shape="rect" id="node3" href="$classBlinkTrack.html" title=" " alt="" coords="318,56,445,83"/>
+<area shape="rect" id="node4" href="$classEyeMoveTrack.html" title=" " alt="" coords="304,107,459,133"/>
+<area shape="rect" id="node5" href="$classBlinkTrack.html" title="A template class for animating eye blinking using keyframes." alt="" coords="284,157,479,184"/>
+<area shape="rect" id="node6" href="$classEyeMoveTrack.html" title="A template class for animating eye movements using keyframes." alt="" coords="271,208,492,235"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="AxisAngle.h" name="AxisAngle.h">
+<area shape="rect" id="node1" title="Represents a rotation defined by an axis and an angle." alt="" coords="127,5,226,32"/>
+<area shape="rect" id="node2" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="130,80,223,107"/>
+<area shape="rect" id="node3" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="117,155,236,181"/>
+<area shape="rect" id="node4" title=" " alt="" coords="5,229,68,256"/>
+<area shape="rect" id="node5" title=" " alt="" coords="92,229,160,256"/>
+<area shape="rect" id="node6" title=" " alt="" coords="185,229,270,256"/>
+<area shape="rect" id="node7" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,229,427,256"/>
+</map>

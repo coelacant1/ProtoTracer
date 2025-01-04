@@ -1,0 +1,16 @@
+<map id="HorizontalBlur.cpp" name="HorizontalBlur.cpp">
+<area shape="rect" id="node1" title=" " alt="" coords="281,5,423,32"/>
+<area shape="rect" id="node2" href="$HorizontalBlur_8h.html" title="Defines the HorizontalBlur effect class for applying horizontal blur to pixel groups." alt="" coords="289,80,415,107"/>
+<area shape="rect" id="node3" href="$Effect_8h.html" title="Defines the base Effect class for applying transformations or effects to pixel groups." alt="" coords="211,155,282,181"/>
+<area shape="rect" id="node6" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="219,632,375,659"/>
+<area shape="rect" id="node4" href="$IPixelGroup_8h.html" title="Declares the IPixelGroup interface for managing collections of pixels." alt="" coords="177,229,316,271"/>
+<area shape="rect" id="node5" href="$RGBColor_8h.html" title="Defines the RGBColor class for managing and manipulating RGB color values." alt="" coords="253,319,406,345"/>
+<area shape="rect" id="node14" href="$BoundingBox2D_8h.html" title="Defines the BoundingBox2D class for managing 2D bounding boxes." alt="" coords="43,393,186,435"/>
+<area shape="rect" id="node11" href="$Quaternion_8h.html" title="Defines the Quaternion class for 3D rotations and transformations." alt="" coords="210,401,353,427"/>
+<area shape="rect" id="node13" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="209,557,303,584"/>
+<area shape="rect" id="node7" title=" " alt="" coords="126,707,189,733"/>
+<area shape="rect" id="node8" title=" " alt="" coords="213,707,281,733"/>
+<area shape="rect" id="node9" title=" " alt="" coords="305,707,391,733"/>
+<area shape="rect" id="node10" href="$Mathematics_8tpp.html" title=" " alt="" coords="415,707,547,733"/>
+<area shape="rect" id="node12" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="132,483,225,509"/>
+</map>

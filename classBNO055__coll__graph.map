@@ -1,0 +1,6 @@
+<map id="BNO055" name="BNO055">
+<area shape="rect" id="node1" title="A class for managing the Adafruit BNO055 sensor." alt="" coords="189,183,263,209"/>
+<area shape="rect" id="node2" href="$classQuaternion.html" title="A mathematical construct representing a rotation in 3D space." alt="" coords="5,13,100,39"/>
+<area shape="rect" id="node3" href="$classVectorRunningAverageFilter.html" title=" " alt="" coords="125,5,327,47"/>
+<area shape="rect" id="node4" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="352,13,433,39"/>
+</map>

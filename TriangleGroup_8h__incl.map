@@ -1,0 +1,17 @@
+<map id="TriangleGroup.h" name="TriangleGroup.h">
+<area shape="rect" id="node1" title="Defines the TriangleGroup class for dynamic manipulation of triangles in 3D space." alt="" coords="403,5,527,32"/>
+<area shape="rect" id="node2" href="$Triangle3D_8h.html" title="Defines the Triangle3D class for representing and manipulating 3D triangles." alt="" coords="192,229,295,256"/>
+<area shape="rect" id="node11" href="$ITriangleGroup_8h.html" title="Defines the ITriangleGroup interface for managing a collection of mutable 3D triangles." alt="" coords="299,80,427,107"/>
+<area shape="rect" id="node12" href="$IndexGroup_8h.html" title="Defines the IndexGroup class for handling a group of three unsigned integer indices." alt="" coords="429,229,538,256"/>
+<area shape="rect" id="node14" href="$IStaticTriangleGroup_8h.html" title="Defines the IStaticTriangleGroup interface for managing a collection of static 3D triangles." alt="" coords="281,155,446,181"/>
+<area shape="rect" id="node15" href="$TriangleGroup_8tpp.html" title=" " alt="" coords="572,80,709,107"/>
+<area shape="rect" id="node3" href="$Quaternion_8h.html" title="Defines the Quaternion class for 3D rotations and transformations." alt="" coords="73,304,275,331"/>
+<area shape="rect" id="node10" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="214,453,307,480"/>
+<area shape="rect" id="node4" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="117,528,236,555"/>
+<area shape="rect" id="node9" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="130,379,223,405"/>
+<area shape="rect" id="node5" title=" " alt="" coords="5,603,68,629"/>
+<area shape="rect" id="node6" title=" " alt="" coords="92,603,160,629"/>
+<area shape="rect" id="node7" title=" " alt="" coords="185,603,270,629"/>
+<area shape="rect" id="node8" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,603,427,629"/>
+<area shape="rect" id="node13" title=" " alt="" coords="441,304,525,331"/>
+</map>

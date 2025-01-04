@@ -1,0 +1,7 @@
+<map id="Clock" name="Clock">
+<area shape="rect" id="node1" title="Renders a real&#45;time clock and date as a material." alt="" coords="199,199,258,225"/>
+<area shape="rect" id="node2" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="191,5,267,32"/>
+<area shape="rect" id="node3" href="$classSimpleMaterial.html" title="A material that applies a single, solid RGB color to surfaces." alt="" coords="5,109,127,136"/>
+<area shape="rect" id="node5" href="$classTextEngine.html" title=" " alt="" coords="151,109,306,136"/>
+<area shape="rect" id="node4" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="24,5,108,32"/>
+</map>

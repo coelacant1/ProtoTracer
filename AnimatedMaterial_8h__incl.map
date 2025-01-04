@@ -1,0 +1,13 @@
+<map id="AnimatedMaterial.h" name="AnimatedMaterial.h">
+<area shape="rect" id="node1" title="Declares the AnimatedMaterial class for time&#45;based material updates." alt="" coords="245,5,396,32"/>
+<area shape="rect" id="node2" href="$Material_8h.html" title="Base class for materials defining shading and rendering behavior." alt="" coords="277,80,365,107"/>
+<area shape="rect" id="node3" href="$RGBColor_8h.html" title="Defines the RGBColor class for managing and manipulating RGB color values." alt="" coords="187,155,340,181"/>
+<area shape="rect" id="node11" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="265,379,358,405"/>
+<area shape="rect" id="node4" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="99,453,255,480"/>
+<area shape="rect" id="node9" href="$Quaternion_8h.html" title="Defines the Quaternion class for 3D rotations and transformations." alt="" coords="168,229,311,256"/>
+<area shape="rect" id="node5" title=" " alt="" coords="5,528,68,555"/>
+<area shape="rect" id="node6" title=" " alt="" coords="92,528,160,555"/>
+<area shape="rect" id="node7" title=" " alt="" coords="185,528,270,555"/>
+<area shape="rect" id="node8" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,528,427,555"/>
+<area shape="rect" id="node10" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="181,304,274,331"/>
+</map>

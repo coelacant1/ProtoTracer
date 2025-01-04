@@ -1,0 +1,25 @@
+<map id="NukudeFaceAnimation" name="NukudeFaceAnimation">
+<area shape="rect" id="node1" title=" " alt="" coords="916,292,1083,319"/>
+<area shape="rect" id="node2" title=" " alt="" coords="598,44,687,71"/>
+<area shape="rect" id="node3" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="189,176,273,203"/>
+<area shape="rect" id="node8" href="$classGradientMaterial.html" title="Creates a customizable gradient material for rendering." alt="" coords="527,240,759,267"/>
+<area shape="rect" id="node4" href="$classSimplexNoise.html" title="A material class for rendering Simplex Noise." alt="" coords="552,95,733,121"/>
+<area shape="rect" id="node5" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="5,176,81,203"/>
+<area shape="rect" id="node6" href="$classGradientMaterial.html" title=" " alt="" coords="131,11,332,37"/>
+<area shape="rect" id="node11" href="$classNormalMaterial.html" title="A material that visualizes surface normals as RGB colors." alt="" coords="356,337,480,364"/>
+<area shape="rect" id="node7" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="191,63,272,89"/>
+<area shape="rect" id="node9" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="191,289,272,316"/>
+<area shape="rect" id="node10" href="$classFunctionGenerator.html" title="A class to generate various waveform functions with customizable parameters." alt="" coords="571,356,714,383"/>
+<area shape="rect" id="node12" href="$classKeyFrameTrack.html" title="A template class for managing animations with multiple parameters and keyframes." alt="" coords="521,409,764,450"/>
+<area shape="rect" id="node13" href="$classKeyFrameInterpolation.html" title="Base class providing interpolation methods for keyframe animations." alt="" coords="146,441,317,468"/>
+<area shape="rect" id="node14" href="$classKeyFrame.html" title="Represents a single keyframe in an animation." alt="" coords="188,391,275,417"/>
+<area shape="rect" id="node15" href="$classMicrophoneSimple.html" title="A simple class for processing microphone signals." alt="" coords="571,565,714,592"/>
+<area shape="rect" id="node16" href="$classRunningAverageFilter.html" title=" " alt="" coords="151,558,312,599"/>
+<area shape="rect" id="node17" href="$classMinFilter.html" title=" " alt="" coords="165,624,298,651"/>
+<area shape="rect" id="node18" href="$classRunningAverageFilter.html" title=" " alt="" coords="132,675,331,701"/>
+<area shape="rect" id="node19" href="$classRunningAverageFilter.html" title=" " alt="" coords="151,493,312,534"/>
+<area shape="rect" id="node20" href="$classEasyEaseAnimator.html" title="A template class for implementing advanced animation easing." alt="" coords="504,751,781,777"/>
+<area shape="rect" id="node21" href="$classIEasyEaseAnimator.html" title="Interface for defining animation behaviors with easing and interpolation." alt="" coords="157,827,305,853"/>
+<area shape="rect" id="node22" href="$classDampedSpring.html" title="Simulates the motion of a damped spring." alt="" coords="172,725,291,752"/>
+<area shape="rect" id="node23" href="$classRampFilter.html" title="Smooths transitions between values using a linear ramp approach." alt="" coords="185,776,278,803"/>
+</map>

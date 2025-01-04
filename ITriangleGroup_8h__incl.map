@@ -1,0 +1,15 @@
+<map id="ITriangleGroup.h" name="ITriangleGroup.h">
+<area shape="rect" id="node1" title="Defines the ITriangleGroup interface for managing a collection of mutable 3D triangles." alt="" coords="262,5,390,32"/>
+<area shape="rect" id="node2" href="$Triangle3D_8h.html" title="Defines the Triangle3D class for representing and manipulating 3D triangles." alt="" coords="209,155,312,181"/>
+<area shape="rect" id="node11" href="$IndexGroup_8h.html" title="Defines the IndexGroup class for handling a group of three unsigned integer indices." alt="" coords="363,155,473,181"/>
+<area shape="rect" id="node13" href="$IStaticTriangleGroup_8h.html" title="Defines the IStaticTriangleGroup interface for managing a collection of static 3D triangles." alt="" coords="243,80,409,107"/>
+<area shape="rect" id="node3" href="$Quaternion_8h.html" title="Defines the Quaternion class for 3D rotations and transformations." alt="" coords="73,229,275,256"/>
+<area shape="rect" id="node10" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="214,379,307,405"/>
+<area shape="rect" id="node4" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="117,453,236,480"/>
+<area shape="rect" id="node9" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="130,304,223,331"/>
+<area shape="rect" id="node5" title=" " alt="" coords="5,528,68,555"/>
+<area shape="rect" id="node6" title=" " alt="" coords="92,528,160,555"/>
+<area shape="rect" id="node7" title=" " alt="" coords="185,528,270,555"/>
+<area shape="rect" id="node8" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,528,427,555"/>
+<area shape="rect" id="node12" title=" " alt="" coords="376,229,460,256"/>
+</map>

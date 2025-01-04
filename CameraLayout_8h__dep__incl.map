@@ -1,0 +1,52 @@
+<map id="CameraLayout.h" name="CameraLayout.h">
+<area shape="rect" id="node1" title="Declares the CameraLayout class for managing camera orientation and axis alignment." alt="" coords="1370,5,1499,32"/>
+<area shape="rect" id="node2" href="$CameraBase_8h.html" title="Declares the CameraBase class for defining camera functionality." alt="" coords="1299,80,1416,107"/>
+<area shape="rect" id="node50" href="$CameraLayout_8cpp.html" title=" " alt="" coords="1440,80,1584,107"/>
+<area shape="rect" id="node3" href="$Camera_8h.html" title="Declares the Camera template class for managing camera behavior and pixel groups." alt="" coords="611,155,696,181"/>
+<area shape="rect" id="node33" href="$CameraBase_8cpp.html" title=" " alt="" coords="1453,155,1585,181"/>
+<area shape="rect" id="node34" href="$CameraManager_8h.html" title="Declares the CameraManager class for managing multiple camera instances." alt="" coords="1287,155,1428,181"/>
+<area shape="rect" id="node4" href="$APA102CamerasV1_8h.html" title=" " alt="" coords="23,229,182,256"/>
+<area shape="rect" id="node6" href="$HUB75Cameras_8h.html" title=" " alt="" coords="742,229,879,256"/>
+<area shape="rect" id="node7" href="$HUB75DeltaCameras_8h.html" title=" " alt="" coords="859,379,1031,405"/>
+<area shape="rect" id="node19" href="$HUB75SplitCameras_8h.html" title=" " alt="" coords="903,229,1070,256"/>
+<area shape="rect" id="node20" href="$HUB75Square_8h.html" title=" " alt="" coords="1094,229,1218,256"/>
+<area shape="rect" id="node21" href="$WS35Beta_8h.html" title=" " alt="" coords="463,229,564,256"/>
+<area shape="rect" id="node23" href="$WS35Cameras_8h.html" title=" " alt="" coords="589,229,718,256"/>
+<area shape="rect" id="node24" href="$WS35SplitCameras_8h.html" title=" " alt="" coords="3201,229,3359,256"/>
+<area shape="rect" id="node27" href="$DisplayTest_8h.html" title="Defines the DisplayTest class for testing camera displays with various patterns." alt="" coords="207,229,316,256"/>
+<area shape="rect" id="node31" href="$Rasterizer_8h.html" title="Provides functionality for rasterizing 3D scenes into 2D camera views." alt="" coords="340,229,439,256"/>
+<area shape="rect" id="node5" href="$FursuitEyesV1_8h.html" title=" " alt="" coords="1055,379,1182,405"/>
+<area shape="rect" id="node8" href="$ArrowAnimation_8h.html" title=" " alt="" coords="737,453,876,480"/>
+<area shape="rect" id="node9" href="$DrGonzoProject_8h.html" title=" " alt="" coords="901,453,1035,480"/>
+<area shape="rect" id="node10" href="$DrGonzoTest_8h.html" title=" " alt="" coords="1059,453,1175,480"/>
+<area shape="rect" id="node11" href="$SageAnimation_8h.html" title=" " alt="" coords="1200,453,1333,480"/>
+<area shape="rect" id="node12" href="$SplatAnimation_8h.html" title=" " alt="" coords="1358,453,1493,480"/>
+<area shape="rect" id="node13" href="$UnicornZhenjaAnimation_8h.html" title=" " alt="" coords="310,453,506,480"/>
+<area shape="rect" id="node14" href="$ProtogenHUB75Project_8h.html" title=" " alt="" coords="530,453,713,480"/>
+<area shape="rect" id="node15" href="$Boot_8h.html" title=" " alt="" coords="1656,453,1720,480"/>
+<area shape="rect" id="node16" href="$CreeperAnimation_8h.html" title=" " alt="" coords="1744,453,1896,480"/>
+<area shape="rect" id="node17" href="$SpyroAnimation_8h.html" title=" " alt="" coords="1920,453,2059,480"/>
+<area shape="rect" id="node18" href="$VerifyEngine_8h.html" title="Implementation of a test project to verify the engine functionality." alt="" coords="1517,453,1632,480"/>
+<area shape="rect" id="node22" href="$BetaProject_8h.html" title=" " alt="" coords="1207,379,1316,405"/>
+<area shape="rect" id="node25" href="$AceAnimation_8h.html" title=" " alt="" coords="2571,379,2696,405"/>
+<area shape="rect" id="node26" href="$ProtogenWS35Project_8h.html" title=" " alt="" coords="3107,379,3282,405"/>
+<area shape="rect" id="node28" href="$Engine_8h.html" title="Declares the RenderingEngine class for rendering and display operations." alt="" coords="742,304,821,331"/>
+<area shape="rect" id="node30" href="$DisplayTest_8cpp.html" title=" " alt="" coords="191,304,315,331"/>
+<area shape="rect" id="node29" href="$Project_8h.html" title="Declares the Project class for managing animations, rendering, and display operations." alt="" coords="1693,379,1771,405"/>
+<area shape="rect" id="node32" href="$Rasterizer_8cpp.html" title=" " alt="" coords="340,304,455,331"/>
+<area shape="rect" id="node35" href="$CameraManager_8cpp.html" title=" " alt="" coords="1395,229,1551,256"/>
+<area shape="rect" id="node36" href="$APA102Controller_8h.html" title="Declares the APA102Controller class for managing APA102 LED strips." alt="" coords="1405,304,1552,331"/>
+<area shape="rect" id="node38" href="$Controller_8h.html" title="Declares the Controller base class for managing lighting controllers." alt="" coords="2026,229,2123,256"/>
+<area shape="rect" id="node45" href="$HUB75Controller_8h.html" title="Declares the HUB75Controller class for managing HUB75 LED matrices." alt="" coords="1526,379,1669,405"/>
+<area shape="rect" id="node46" href="$HUB75ControllerSplit_8h.html" title="Declares the HUB75ControllerSplit class for managing HUB75 LED matrices and secondary LED displays." alt="" coords="3102,304,3274,331"/>
+<area shape="rect" id="node47" href="$HUB75ControllerSquare_8h.html" title="Declares the HUB75ControllerSquare class for managing a square display using two vertical HUB75 panel..." alt="" coords="3298,304,3486,331"/>
+<area shape="rect" id="node48" href="$WS35BetaController_8h.html" title="Declares the WS35BetaController class for managing WS2812&#45;based displays on the Beta Protogen head." alt="" coords="1217,304,1381,331"/>
+<area shape="rect" id="node49" href="$WS35Controller_8h.html" title="Declares the WS35Controller class for managing WS2812&#45;based displays on the Delta,..." alt="" coords="1779,304,1914,331"/>
+<area shape="rect" id="node37" href="$APA102Controller_8cpp.html" title=" " alt="" coords="1341,379,1502,405"/>
+<area shape="rect" id="node39" href="$Controller_8cpp.html" title=" " alt="" coords="1939,304,2051,331"/>
+<area shape="rect" id="node40" href="$BetaProtoController_8h.html" title=" " alt="" coords="2074,304,2235,331"/>
+<area shape="rect" id="node41" href="$BetaProtoControllerOctoWS2811_8h.html" title=" " alt="" coords="2260,304,2505,331"/>
+<area shape="rect" id="node42" href="$ESP32DevKitV1_8h.html" title=" " alt="" coords="2530,304,2665,331"/>
+<area shape="rect" id="node43" href="$GammaControllerBack_8h.html" title=" " alt="" coords="2689,304,2871,331"/>
+<area shape="rect" id="node44" href="$GammaControllerFront_8h.html" title=" " alt="" coords="2895,304,3078,331"/>
+</map>

@@ -1,0 +1,10 @@
+<map id="Shape.h" name="Shape.h">
+<area shape="rect" id="node1" title="Defines the Shape base class for representing geometric shapes in 2D space." alt="" coords="139,5,214,32"/>
+<area shape="rect" id="node2" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="114,80,239,121"/>
+<area shape="rect" id="node3" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="117,244,236,271"/>
+<area shape="rect" id="node8" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="173,169,266,196"/>
+<area shape="rect" id="node4" title=" " alt="" coords="5,319,68,345"/>
+<area shape="rect" id="node5" title=" " alt="" coords="92,319,160,345"/>
+<area shape="rect" id="node6" title=" " alt="" coords="185,319,270,345"/>
+<area shape="rect" id="node7" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,319,427,345"/>
+</map>

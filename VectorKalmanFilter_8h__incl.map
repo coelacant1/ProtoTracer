@@ -1,0 +1,11 @@
+<map id="VectorKalmanFilter.h" name="VectorKalmanFilter.h">
+<area shape="rect" id="node1" title="Implements a Kalman filter for 3D vector smoothing." alt="" coords="67,5,225,32"/>
+<area shape="rect" id="node2" href="$KalmanFilter_8h.html" title="Provides a template&#45;based implementation of a Kalman Filter." alt="" coords="12,80,128,107"/>
+<area shape="rect" id="node4" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="152,80,295,107"/>
+<area shape="rect" id="node3" href="$KalmanFilter_8tpp.html" title=" " alt="" coords="5,155,135,181"/>
+<area shape="rect" id="node5" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="164,155,283,181"/>
+<area shape="rect" id="node6" title=" " alt="" coords="52,229,115,256"/>
+<area shape="rect" id="node7" title=" " alt="" coords="139,229,207,256"/>
+<area shape="rect" id="node8" title=" " alt="" coords="231,229,317,256"/>
+<area shape="rect" id="node9" href="$Mathematics_8tpp.html" title=" " alt="" coords="341,229,473,256"/>
+</map>

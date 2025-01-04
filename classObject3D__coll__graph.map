@@ -1,0 +1,9 @@
+<map id="Object3D" name="Object3D">
+<area shape="rect" id="node1" title="Represents a 3D object with geometry, material, and transformation data." alt="" coords="215,228,298,255"/>
+<area shape="rect" id="node2" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="5,139,81,165"/>
+<area shape="rect" id="node3" href="$classIStaticTriangleGroup.html" title="Interface for managing a static group of 3D triangles and associated data." alt="" coords="105,139,259,165"/>
+<area shape="rect" id="node4" href="$classITriangleGroup.html" title="Interface for managing a dynamic group of 3D triangles and associated data." alt="" coords="283,139,399,165"/>
+<area shape="rect" id="node5" href="$classTransform.html" title="Represents a 3D transformation including position, rotation, and scale." alt="" coords="440,139,527,165"/>
+<area shape="rect" id="node6" href="$classQuaternion.html" title="A mathematical construct representing a rotation in 3D space." alt="" coords="356,5,451,32"/>
+<area shape="rect" id="node7" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="523,5,604,32"/>
+</map>

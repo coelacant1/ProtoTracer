@@ -1,0 +1,6 @@
+<map id="Shape" name="Shape">
+<area shape="rect" id="node1" title="Abstract base class for 2D geometric shapes." alt="" coords="90,5,153,32"/>
+<area shape="rect" id="node2" href="$classCircle.html" title="Represents a circle in 2D space." alt="" coords="5,80,64,107"/>
+<area shape="rect" id="node3" href="$classEllipse.html" title="Represents an ellipse in 2D space." alt="" coords="89,80,154,107"/>
+<area shape="rect" id="node4" href="$classRectangle.html" title="Represents a rectangle in 2D space." alt="" coords="178,80,265,107"/>
+</map>

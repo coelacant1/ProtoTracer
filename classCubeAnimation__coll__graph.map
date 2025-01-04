@@ -1,0 +1,12 @@
+<map id="CubeAnimation" name="CubeAnimation">
+<area shape="rect" id="node1" title=" " alt="" coords="207,303,330,329"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,199,95,225"/>
+<area shape="rect" id="node3" href="$classDepthMaterial.html" title="Maps depth along a specified axis to an RGB color using a gradient." alt="" coords="119,199,234,225"/>
+<area shape="rect" id="node4" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="91,5,167,32"/>
+<area shape="rect" id="node6" href="$classGradientMaterial.html" title=" " alt="" coords="43,109,214,136"/>
+<area shape="rect" id="node8" href="$classLightMaterial.html" title="A material class that incorporates multiple light sources for rendering." alt="" coords="258,199,463,225"/>
+<area shape="rect" id="node5" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="239,109,323,136"/>
+<area shape="rect" id="node7" href="$classFunctionGenerator.html" title="A class to generate various waveform functions with customizable parameters." alt="" coords="488,199,631,225"/>
+<area shape="rect" id="node9" href="$classLight.html" title="Represents a light source with position, intensity, and falloff properties." alt="" coords="399,109,453,136"/>
+<area shape="rect" id="node10" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="385,5,467,32"/>
+</map>

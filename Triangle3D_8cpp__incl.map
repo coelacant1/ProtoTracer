@@ -1,0 +1,12 @@
+<map id="Triangle3D.cpp" name="Triangle3D.cpp">
+<area shape="rect" id="node1" title=" " alt="" coords="184,5,303,32"/>
+<area shape="rect" id="node2" href="$Triangle3D_8h.html" title="Defines the Triangle3D class for representing and manipulating 3D triangles." alt="" coords="192,80,295,107"/>
+<area shape="rect" id="node3" href="$Quaternion_8h.html" title="Defines the Quaternion class for 3D rotations and transformations." alt="" coords="73,155,275,181"/>
+<area shape="rect" id="node10" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="214,304,307,331"/>
+<area shape="rect" id="node4" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="117,379,236,405"/>
+<area shape="rect" id="node9" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="130,229,223,256"/>
+<area shape="rect" id="node5" title=" " alt="" coords="5,453,68,480"/>
+<area shape="rect" id="node6" title=" " alt="" coords="92,453,160,480"/>
+<area shape="rect" id="node7" title=" " alt="" coords="185,453,270,480"/>
+<area shape="rect" id="node8" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,453,427,480"/>
+</map>

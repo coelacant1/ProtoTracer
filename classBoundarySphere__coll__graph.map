@@ -1,0 +1,10 @@
+<map id="BoundarySphere" name="BoundarySphere">
+<area shape="rect" id="node1" title="Represents a spherical boundary object for motion and collision simulations." alt="" coords="252,347,382,373"/>
+<area shape="rect" id="node2" href="$classQuaternion.html" title="A mathematical construct representing a rotation in 3D space." alt="" coords="24,5,119,32"/>
+<area shape="rect" id="node7" href="$classTransform.html" title="Represents a 3D transformation including position, rotation, and scale." alt="" coords="75,139,162,165"/>
+<area shape="rect" id="node3" href="$classObject3D.html" title="Represents a 3D object with geometry, material, and transformation data." alt="" coords="276,257,358,284"/>
+<area shape="rect" id="node4" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="186,139,262,165"/>
+<area shape="rect" id="node5" href="$classIStaticTriangleGroup.html" title="Interface for managing a static group of 3D triangles and associated data." alt="" coords="286,139,439,165"/>
+<area shape="rect" id="node6" href="$classITriangleGroup.html" title="Interface for managing a dynamic group of 3D triangles and associated data." alt="" coords="463,139,579,165"/>
+<area shape="rect" id="node8" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="486,5,567,32"/>
+</map>

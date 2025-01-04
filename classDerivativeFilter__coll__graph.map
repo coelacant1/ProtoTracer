@@ -1,0 +1,5 @@
+<map id="DerivativeFilter" name="DerivativeFilter">
+<area shape="rect" id="node1" title="Calculates the derivative (rate of change) of input values with filtering for stability." alt="" coords="91,109,213,136"/>
+<area shape="rect" id="node2" href="$classMinFilter.html" title=" " alt="" coords="5,13,131,39"/>
+<area shape="rect" id="node3" href="$classRunningAverageFilter.html" title=" " alt="" coords="155,5,317,47"/>
+</map>

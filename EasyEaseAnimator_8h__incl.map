@@ -1,0 +1,13 @@
+<map id="EasyEaseAnimator.h" name="EasyEaseAnimator.h">
+<area shape="rect" id="node1" title="Declares the EasyEaseAnimator template class for advanced animation easing." alt="" coords="233,5,388,32"/>
+<area shape="rect" id="node2" href="$IEasyEaseAnimator_8h.html" title="Declares the IEasyEaseAnimator interface for defining animation behaviors." alt="" coords="138,80,297,107"/>
+<area shape="rect" id="node11" href="$EasyEaseAnimator_8tpp.html" title=" " alt="" coords="321,80,489,107"/>
+<area shape="rect" id="node3" href="$KeyFrame_8h.html" title="Declares the KeyFrame class for representing individual animation keyframes." alt="" coords="5,155,104,181"/>
+<area shape="rect" id="node4" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="192,229,395,256"/>
+<area shape="rect" id="node9" href="$DampedSpring_8h.html" title="Defines the DampedSpring class for simulating damped spring motion." alt="" coords="179,155,408,181"/>
+<area shape="rect" id="node10" href="$RampFilter_8h.html" title="Provides a class for smooth value transitions using a ramp filter." alt="" coords="432,155,619,181"/>
+<area shape="rect" id="node5" title=" " alt="" coords="122,304,185,331"/>
+<area shape="rect" id="node6" title=" " alt="" coords="209,304,277,331"/>
+<area shape="rect" id="node7" title=" " alt="" coords="301,304,387,331"/>
+<area shape="rect" id="node8" href="$Mathematics_8tpp.html" title=" " alt="" coords="411,304,543,331"/>
+</map>

@@ -1,0 +1,52 @@
+<map id="DrGonzoProject.h" name="DrGonzoProject.h">
+<area shape="rect" id="node1" title=" " alt="" coords="3539,5,3674,32"/>
+<area shape="rect" id="node2" href="$ProtogenProjectTemplate_8h.html" title="Contains the class definition for ProtogenProject, a default project template for handling microphone..." alt="" coords="1205,80,1413,121"/>
+<area shape="rect" id="node36" title=" " alt="" coords="2953,80,3199,121"/>
+<area shape="rect" id="node37" title=" " alt="" coords="3223,80,3457,121"/>
+<area shape="rect" id="node38" title=" " alt="" coords="3481,80,3732,121"/>
+<area shape="rect" id="node39" href="$HUB75DeltaCameras_8h.html" title=" " alt="" coords="3947,80,4237,121"/>
+<area shape="rect" id="node46" href="$HUB75Controller_8h.html" title="Declares the HUB75Controller class for managing HUB75 LED matrices." alt="" coords="3511,184,3745,211"/>
+<area shape="rect" id="node49" href="$MorphTransform_8h.html" title="Declares the MorphTransform template class for handling 3D transformations." alt="" coords="4647,184,4881,211"/>
+<area shape="rect" id="node3" href="$Project_8h.html" title="Declares the Project class for managing animations, rendering, and display operations." alt="" coords="3161,184,3324,211"/>
+<area shape="rect" id="node11" href="$UserConfiguration_8h.html" title="User&#45;configurable settings for the project." alt="" coords="605,370,768,397"/>
+<area shape="rect" id="node12" href="$KeyFrameTrack_8h.html" title="Declares the KeyFrameTrack template class for managing keyframe&#45;based animations." alt="" coords="1557,363,1739,404"/>
+<area shape="rect" id="node14" href="$EasyEaseAnimator_8h.html" title="Declares the EasyEaseAnimator template class for advanced animation easing." alt="" coords="1763,273,1941,315"/>
+<area shape="rect" id="node16" title=" " alt="" coords="682,177,825,218"/>
+<area shape="rect" id="node17" href="$Menu_8h.html" title="Provides the Menu class for controlling various parameters of the program." alt="" coords="724,273,927,315"/>
+<area shape="rect" id="node18" href="$RainbowNoise_8h.html" title="A dynamic material generating a rainbow effect using simplex noise." alt="" coords="842,363,1041,404"/>
+<area shape="rect" id="node19" href="$FunctionGenerator_8h.html" title="Provides a generator for common mathematical wave functions." alt="" coords="1073,452,1231,493"/>
+<area shape="rect" id="node20" href="$APDS9960_8h.html" title="A class for interfacing with the Adafruit APDS9960 sensor." alt="" coords="5,177,165,218"/>
+<area shape="rect" id="node21" href="$TimeStep_8h.html" title="Utility class for timing operations based on a set frequency." alt="" coords="263,281,454,307"/>
+<area shape="rect" id="node22" href="$SSD1306_8h.html" title="Declares the HeadsUpDisplay class for rendering and displaying information on SSD1306/SH1106 displays..." alt="" coords="502,177,658,218"/>
+<area shape="rect" id="node23" href="$MicrophoneFourier__MAX9814_8h.html" title="Extends the MicrophoneFourierBase class for real&#45;time FFT microphone analysis." alt="" coords="240,169,477,225"/>
+<area shape="rect" id="node24" href="$FanController_8h.html" title="Declares the FanController class for managing PWM&#45;based fan speed control." alt="" coords="694,452,917,493"/>
+<area shape="rect" id="node25" href="$MaterialAnimator_8h.html" title="Provides functionality for animating transitions and blends between materials." alt="" coords="1490,177,1675,218"/>
+<area shape="rect" id="node26" href="$SimpleMaterial_8h.html" title="A material class that applies a single RGB color to all surfaces." alt="" coords="1204,184,1415,211"/>
+<area shape="rect" id="node27" href="$FlowNoise_8h.html" title="A dynamic simplex noise gradient material for a lava lamp effect." alt="" coords="1065,363,1239,404"/>
+<area shape="rect" id="node28" href="$RainbowSpiral_8h.html" title="A dynamic material that creates a colorful, animated rainbow spiral effect." alt="" coords="1263,363,1462,404"/>
+<area shape="rect" id="node29" href="$HorizontalRainbow_8h.html" title="A dynamic horizontal rainbow gradient material." alt="" coords="1915,177,2141,218"/>
+<area shape="rect" id="node30" href="$SpectrumAnalyzer_8h.html" title="A material for visualizing audio data as a colorful spectrum analyzer." alt="" coords="2166,177,2389,218"/>
+<area shape="rect" id="node31" href="$AudioReactiveGradient_8h.html" title="A material class for creating an audio&#45;reactive gradient effect." alt="" coords="2413,177,2667,218"/>
+<area shape="rect" id="node32" href="$Oscilloscope_8h.html" title="A dynamic oscilloscope material for visualizing audio signals." alt="" coords="2743,177,2929,218"/>
+<area shape="rect" id="node33" href="$BlinkTrack_8h.html" title="Declares the BlinkTrack template class for animating eye blinking." alt="" coords="2953,177,3137,218"/>
+<area shape="rect" id="node34" href="$FFTVoiceDetection_8h.html" title="Declares the FFTVoiceDetection template class for real&#45;time viseme detection based on FFT data." alt="" coords="1699,169,1890,225"/>
+<area shape="rect" id="node35" href="$ObjectAlign_8h.html" title="Provides the ObjectAlign class for aligning 3D objects within defined 2D camera bounds." alt="" coords="3348,177,3487,218"/>
+<area shape="rect" id="node4" title=" " alt="" coords="763,541,847,568"/>
+<area shape="rect" id="node5" href="$Engine_8h.html" title="Declares the RenderingEngine class for rendering and display operations." alt="" coords="3091,281,3242,307"/>
+<area shape="rect" id="node6" href="$CameraManager_8h.html" title="Declares the CameraManager class for managing multiple camera instances." alt="" coords="3313,363,3511,404"/>
+<area shape="rect" id="node7" href="$Scene_8h.html" title="Defines the Scene class for managing objects and effects in a 3D environment." alt="" coords="3072,370,3200,397"/>
+<area shape="rect" id="node8" href="$Controller_8h.html" title="Declares the Controller base class for managing lighting controllers." alt="" coords="3317,281,3507,307"/>
+<area shape="rect" id="node9" href="$RunningAverageFilter_8h.html" title="Implements a running average filter for smoothing data." alt="" coords="2005,273,2181,315"/>
+<area shape="rect" id="node10" href="$Debug_8h.html" title="Utility class for debugging and monitoring system memory." alt="" coords="2903,459,3014,486"/>
+<area shape="rect" id="node13" href="$KeyFrame_8h.html" title="Declares the KeyFrame class for representing individual animation keyframes." alt="" coords="1700,459,1799,486"/>
+<area shape="rect" id="node15" href="$IEasyEaseAnimator_8h.html" title="Declares the IEasyEaseAnimator interface for defining animation behaviors." alt="" coords="1773,370,1931,397"/>
+<area shape="rect" id="node40" href="$Camera_8h.html" title="Declares the Camera template class for managing camera behavior and pixel groups." alt="" coords="4010,184,4174,211"/>
+<area shape="rect" id="node41" href="$PixelGroup_8h.html" title="Declares the PixelGroup template class for managing a collection of pixels." alt="" coords="3899,281,4045,307"/>
+<area shape="rect" id="node42" href="$DeltaDisplayL_8h.html" title=" " alt="" coords="4199,177,4364,218"/>
+<area shape="rect" id="node43" href="$DeltaDisplayR_8h.html" title=" " alt="" coords="3769,177,3935,218"/>
+<area shape="rect" id="node44" href="$Transform_8h.html" title="Defines the Transform class for managing position, rotation, and scale of objects." alt="" coords="4439,184,4622,211"/>
+<area shape="rect" id="node45" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="4527,281,4620,307"/>
+<area shape="rect" id="node47" title=" " alt="" coords="3531,281,3602,307"/>
+<area shape="rect" id="node48" href="$SmartMatrixHUB75_8h.html" title="Configuration file for SmartMatrix library with HUB75 panels and APA102 support." alt="" coords="3627,281,3787,307"/>
+<area shape="rect" id="node50" href="$MorphTransform_8tpp.html" title=" " alt="" coords="4687,281,4841,307"/>
+</map>

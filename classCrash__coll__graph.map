@@ -1,0 +1,13 @@
+<map id="Crash" name="Crash">
+<area shape="rect" id="node1" title=" " alt="" coords="134,509,193,536"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,375,95,401"/>
+<area shape="rect" id="node3" href="$classLight.html" title="Represents a light source with position, intensity, and falloff properties." alt="" coords="105,189,160,216"/>
+<area shape="rect" id="node4" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="139,5,220,32"/>
+<area shape="rect" id="node10" href="$classTransform.html" title="Represents a 3D transformation including position, rotation, and scale." alt="" coords="200,139,287,165"/>
+<area shape="rect" id="node5" href="$classObjectDeformer.html" title="Applies geometric transformations to one or more 3D objects." alt="" coords="344,375,471,401"/>
+<area shape="rect" id="node6" href="$classObject3D.html" title="Represents a 3D object with geometry, material, and transformation data." alt="" coords="317,240,399,267"/>
+<area shape="rect" id="node7" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="311,139,387,165"/>
+<area shape="rect" id="node8" href="$classIStaticTriangleGroup.html" title="Interface for managing a static group of 3D triangles and associated data." alt="" coords="411,139,564,165"/>
+<area shape="rect" id="node9" href="$classITriangleGroup.html" title="Interface for managing a dynamic group of 3D triangles and associated data." alt="" coords="588,139,704,165"/>
+<area shape="rect" id="node11" href="$classQuaternion.html" title="A mathematical construct representing a rotation in 3D space." alt="" coords="299,5,393,32"/>
+</map>

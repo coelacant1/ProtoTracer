@@ -1,0 +1,39 @@
+<map id="StrawberryAnimation" name="StrawberryAnimation">
+<area shape="rect" id="node1" title=" " alt="" coords="1121,913,1281,940"/>
+<area shape="rect" id="node2" title=" " alt="" coords="812,32,939,59"/>
+<area shape="rect" id="node3" href="$classEasyEaseAnimator.html" title=" " alt="" coords="780,83,971,109"/>
+<area shape="rect" id="node4" href="$classIEasyEaseAnimator.html" title="Interface for defining animation behaviors with easing and interpolation." alt="" coords="367,67,515,93"/>
+<area shape="rect" id="node5" href="$classMaterialMask.html" title="Combines two materials using a shape as a mask." alt="" coords="820,1053,931,1080"/>
+<area shape="rect" id="node6" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="48,1239,124,1265"/>
+<area shape="rect" id="node10" href="$classSpectrumAnalyzer.html" title="A material that visualizes audio data as a spectrum." alt="" coords="805,1149,946,1176"/>
+<area shape="rect" id="node11" href="$classGradientMaterial.html" title=" " alt="" coords="355,869,526,896"/>
+<area shape="rect" id="node14" href="$classGradientMaterial.html" title=" " alt="" coords="579,1443,750,1469"/>
+<area shape="rect" id="node19" href="$classOscilloscope.html" title="A dynamic oscilloscope material for visualizing audio signals." alt="" coords="823,449,927,476"/>
+<area shape="rect" id="node27" href="$classAudioReactiveGradient.html" title="A material class for creating an audio&#45;reactive gradient effect." alt="" coords="789,913,961,940"/>
+<area shape="rect" id="node28" href="$classMaterialAnimator.html" title=" " alt="" coords="573,1401,756,1428"/>
+<area shape="rect" id="node29" href="$classSimpleMaterial.html" title="A material that applies a single, solid RGB color to surfaces." alt="" coords="380,1957,501,1984"/>
+<area shape="rect" id="node31" href="$classAnimatedMaterial.html" title="Base class for dynamically updating materials." alt="" coords="371,1743,510,1769"/>
+<area shape="rect" id="node32" href="$classSpiralMaterial.html" title="Generates a spiral pattern with configurable properties." alt="" coords="384,1793,497,1820"/>
+<area shape="rect" id="node34" href="$classGradientMaterial.html" title=" " alt="" coords="355,1516,526,1543"/>
+<area shape="rect" id="node35" href="$classSimplexNoise.html" title=" " alt="" coords="365,1629,516,1656"/>
+<area shape="rect" id="node36" href="$classMaterialAnimator.html" title=" " alt="" coords="577,835,752,861"/>
+<area shape="rect" id="node7" href="$classShape.html" title="Abstract base class for 2D geometric shapes." alt="" coords="409,168,472,195"/>
+<area shape="rect" id="node23" href="$classEllipse.html" title="Represents an ellipse in 2D space." alt="" coords="843,360,908,387"/>
+<area shape="rect" id="node37" href="$classCircle.html" title="Represents a circle in 2D space." alt="" coords="846,233,905,260"/>
+<area shape="rect" id="node8" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="45,443,127,469"/>
+<area shape="rect" id="node24" href="$classObjectAlign.html" title="Handles aligning and transforming 3D objects to fit within specified 2D camera bounds." alt="" coords="392,117,489,144"/>
+<area shape="rect" id="node9" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="44,1761,128,1788"/>
+<area shape="rect" id="node30" href="$classRainbowSpiral.html" title="A dynamic material creating a colorful rainbow spiral animation." alt="" coords="818,1725,933,1752"/>
+<area shape="rect" id="node33" href="$classRainbowNoise.html" title="A dynamic material that creates a rainbow effect using simplex noise." alt="" coords="818,1632,933,1659"/>
+<area shape="rect" id="node12" href="$classBouncePhysics.html" title="Simulates bouncing physics with gravity and velocity damping." alt="" coords="381,768,500,795"/>
+<area shape="rect" id="node13" href="$classRunningAverageFilter.html" title=" " alt="" coords="5,701,167,742"/>
+<area shape="rect" id="node15" href="$classFFTVoiceDetection.html" title=" " alt="" coords="798,642,953,683"/>
+<area shape="rect" id="node16" href="$classViseme.html" title="Defines the available mouth shapes (visemes)." alt="" coords="405,573,476,600"/>
+<area shape="rect" id="node17" href="$classBlinkTrack.html" title=" " alt="" coords="812,747,939,773"/>
+<area shape="rect" id="node18" href="$classAnimationTrack.html" title=" " alt="" coords="332,625,549,666"/>
+<area shape="rect" id="node20" href="$classMinFilter.html" title=" " alt="" coords="378,296,503,323"/>
+<area shape="rect" id="node21" href="$classMaxFilter.html" title=" " alt="" coords="376,347,505,373"/>
+<area shape="rect" id="node22" href="$classFunctionGenerator.html" title="A class to generate various waveform functions with customizable parameters." alt="" coords="369,1907,512,1933"/>
+<area shape="rect" id="node25" href="$classQuaternion.html" title="A mathematical construct representing a rotation in 3D space." alt="" coords="39,56,133,83"/>
+<area shape="rect" id="node26" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="45,5,127,32"/>
+</map>

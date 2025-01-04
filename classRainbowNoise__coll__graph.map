@@ -1,0 +1,9 @@
+<map id="RainbowNoise" name="RainbowNoise">
+<area shape="rect" id="node1" title="A dynamic material that creates a rainbow effect using simplex noise." alt="" coords="381,171,496,197"/>
+<area shape="rect" id="node2" href="$classAnimatedMaterial.html" title="Base class for dynamically updating materials." alt="" coords="5,81,144,108"/>
+<area shape="rect" id="node3" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="215,5,291,32"/>
+<area shape="rect" id="node5" href="$classGradientMaterial.html" title=" " alt="" coords="168,81,339,108"/>
+<area shape="rect" id="node6" href="$classSimplexNoise.html" title=" " alt="" coords="363,81,514,108"/>
+<area shape="rect" id="node4" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="538,81,622,108"/>
+<area shape="rect" id="node7" href="$classFunctionGenerator.html" title="A class to generate various waveform functions with customizable parameters." alt="" coords="646,81,789,108"/>
+</map>

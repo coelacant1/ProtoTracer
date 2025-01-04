@@ -1,0 +1,5 @@
+<map id="FlowNoise" name="FlowNoise">
+<area shape="rect" id="node1" title="A dynamic simplex noise gradient material for a flowing effect." alt="" coords="29,155,120,181"/>
+<area shape="rect" id="node2" href="$classAnimatedMaterial.html" title="Base class for dynamically updating materials." alt="" coords="5,80,144,107"/>
+<area shape="rect" id="node3" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="37,5,113,32"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="EasyEaseAnimator&lt; maxParameters &gt;" name="EasyEaseAnimator&lt; maxParameters &gt;">
+<area shape="rect" id="node1" title="A template class for implementing advanced animation easing." alt="" coords="98,95,375,121"/>
+<area shape="rect" id="node2" href="$classIEasyEaseAnimator.html" title="Interface for defining animation behaviors with easing and interpolation." alt="" coords="5,5,153,32"/>
+<area shape="rect" id="node3" href="$classDampedSpring.html" title="Simulates the motion of a damped spring." alt="" coords="177,5,296,32"/>
+<area shape="rect" id="node4" href="$classRampFilter.html" title="Smooths transitions between values using a linear ramp approach." alt="" coords="321,5,414,32"/>
+</map>

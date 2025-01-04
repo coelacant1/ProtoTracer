@@ -1,0 +1,27 @@
+<map id="BNO055.h" name="BNO055.h">
+<area shape="rect" id="node1" title="A class for interfacing with the Adafruit BNO055 sensor." alt="" coords="453,5,539,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,87,69,114"/>
+<area shape="rect" id="node3" title=" " alt="" coords="93,87,229,114"/>
+<area shape="rect" id="node4" title=" " alt="" coords="253,87,400,114"/>
+<area shape="rect" id="node5" title=" " alt="" coords="425,87,567,114"/>
+<area shape="rect" id="node6" href="$QuaternionKalmanFilter_8h.html" title="Implements a Kalman filter for smoothing quaternion data." alt="" coords="643,80,835,121"/>
+<area shape="rect" id="node15" href="$VectorRunningAverageFilter_8h.html" title="Implements a running average filter for 3D vector smoothing." alt="" coords="470,244,687,285"/>
+<area shape="rect" id="node18" href="$Rotation_8h.html" title="Defines the Rotation class for handling 3D rotations using various representations." alt="" coords="953,87,1137,114"/>
+<area shape="rect" id="node7" href="$Quaternion_8h.html" title="Defines the Quaternion class for 3D rotations and transformations." alt="" coords="661,169,816,196"/>
+<area shape="rect" id="node8" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="750,408,869,435"/>
+<area shape="rect" id="node13" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="763,251,856,278"/>
+<area shape="rect" id="node14" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="991,333,1084,360"/>
+<area shape="rect" id="node9" title=" " alt="" coords="638,483,701,509"/>
+<area shape="rect" id="node10" title=" " alt="" coords="725,483,793,509"/>
+<area shape="rect" id="node11" title=" " alt="" coords="817,483,903,509"/>
+<area shape="rect" id="node12" href="$Mathematics_8tpp.html" title=" " alt="" coords="927,483,1059,509"/>
+<area shape="rect" id="node16" href="$RunningAverageFilter_8h.html" title="Implements a running average filter for smoothing data." alt="" coords="505,333,677,360"/>
+<area shape="rect" id="node17" href="$RunningAverageFilter_8tpp.html" title=" " alt="" coords="498,408,683,435"/>
+<area shape="rect" id="node19" href="$AxisAngle_8h.html" title="Represents a rotation defined by an axis and an angle." alt="" coords="1032,251,1131,278"/>
+<area shape="rect" id="node20" href="$DirectionAngle_8h.html" title="Represents a rotation defined by a direction vector and an angle." alt="" coords="1375,169,1505,196"/>
+<area shape="rect" id="node21" href="$EulerAngles_8h.html" title="Represents rotations in 3D space using Euler angles." alt="" coords="1083,169,1194,196"/>
+<area shape="rect" id="node23" href="$EulerConstants_8h.html" title="Provides predefined constants for common Euler rotation orders." alt="" coords="1218,169,1350,196"/>
+<area shape="rect" id="node24" href="$RotationMatrix_8h.html" title="Defines the RotationMatrix class for representing and manipulating 3D rotation matrices." alt="" coords="1435,251,1565,278"/>
+<area shape="rect" id="node25" href="$YawPitchRoll_8h.html" title="Represents an orientation using yaw, pitch, and roll angles." alt="" coords="841,169,957,196"/>
+<area shape="rect" id="node22" href="$EulerOrder_8h.html" title="Defines the EulerOrder class for specifying rotation orders in 3D space." alt="" coords="1206,251,1309,278"/>
+</map>

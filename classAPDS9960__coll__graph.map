@@ -1,0 +1,5 @@
+<map id="APDS9960" name="APDS9960">
+<area shape="rect" id="node1" title="A class for managing the Adafruit APDS9960 sensor." alt="" coords="67,95,156,121"/>
+<area shape="rect" id="node2" href="$classTimeStep.html" title="Provides a mechanism to trigger actions at a specified frequency." alt="" coords="5,5,89,32"/>
+<area shape="rect" id="node3" href="$classMinFilter.html" title=" " alt="" coords="114,5,239,32"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="Transform" name="Transform">
+<area shape="rect" id="node1" title="Represents a 3D transformation including position, rotation, and scale." alt="" coords="89,139,176,165"/>
+<area shape="rect" id="node2" href="$classQuaternion.html" title="A mathematical construct representing a rotation in 3D space." alt="" coords="5,5,100,32"/>
+<area shape="rect" id="node3" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="172,5,253,32"/>
+</map>

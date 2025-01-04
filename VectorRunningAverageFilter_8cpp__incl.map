@@ -1,0 +1,12 @@
+<map id="VectorRunningAverageFilter.cpp" name="VectorRunningAverageFilter.cpp">
+<area shape="rect" id="node1" title=" " alt="" coords="153,5,381,32"/>
+<area shape="rect" id="node2" href="$VectorRunningAverageFilter_8h.html" title="Implements a running average filter for 3D vector smoothing." alt="" coords="161,80,374,107"/>
+<area shape="rect" id="node3" href="$RunningAverageFilter_8h.html" title="Implements a running average filter for smoothing data." alt="" coords="272,155,444,181"/>
+<area shape="rect" id="node10" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="105,155,248,181"/>
+<area shape="rect" id="node4" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="93,229,261,256"/>
+<area shape="rect" id="node9" href="$RunningAverageFilter_8tpp.html" title=" " alt="" coords="285,229,471,256"/>
+<area shape="rect" id="node5" title=" " alt="" coords="5,304,68,331"/>
+<area shape="rect" id="node6" title=" " alt="" coords="92,304,160,331"/>
+<area shape="rect" id="node7" title=" " alt="" coords="185,304,270,331"/>
+<area shape="rect" id="node8" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,304,427,331"/>
+</map>

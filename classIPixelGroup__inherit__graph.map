@@ -1,0 +1,11 @@
+<map id="IPixelGroup" name="IPixelGroup">
+<area shape="rect" id="node1" title="Interface for managing and interacting with a collection of pixels." alt="" coords="5,183,101,209"/>
+<area shape="rect" id="node2" href="$classPixelGroup.html" title=" " alt="" coords="171,5,318,32"/>
+<area shape="rect" id="node3" href="$classPixelGroup.html" title=" " alt="" coords="175,56,314,83"/>
+<area shape="rect" id="node4" href="$classPixelGroup.html" title=" " alt="" coords="175,107,314,133"/>
+<area shape="rect" id="node5" href="$classPixelGroup.html" title=" " alt="" coords="167,157,322,184"/>
+<area shape="rect" id="node6" href="$classPixelGroup.html" title=" " alt="" coords="175,208,314,235"/>
+<area shape="rect" id="node7" href="$classPixelGroup.html" title=" " alt="" coords="175,259,314,285"/>
+<area shape="rect" id="node8" href="$classPixelGroup.html" title=" " alt="" coords="171,309,318,336"/>
+<area shape="rect" id="node9" href="$classPixelGroup.html" title="Manages a collection of pixels with positions, colors, and spatial relationships." alt="" coords="149,360,340,387"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="PixelGroup&lt; pixelCount &gt;" name="PixelGroup&lt; pixelCount &gt;">
+<area shape="rect" id="node1" title="Manages a collection of pixels with positions, colors, and spatial relationships." alt="" coords="110,260,301,287"/>
+<area shape="rect" id="node2" href="$classIPixelGroup.html" title="Interface for managing and interacting with a collection of pixels." alt="" coords="5,140,101,167"/>
+<area shape="rect" id="node3" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="130,5,211,32"/>
+<area shape="rect" id="node5" href="$classBoundingBox2D.html" title="Represents a 2D axis&#45;aligned bounding box." alt="" coords="269,140,395,167"/>
+<area shape="rect" id="node4" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="419,140,503,167"/>
+</map>

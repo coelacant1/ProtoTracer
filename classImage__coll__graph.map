@@ -1,0 +1,5 @@
+<map id="Image" name="Image">
+<area shape="rect" id="node1" title="Represents an image&#45;based material with support for transformations and palette adjustments." alt="" coords="63,109,125,136"/>
+<area shape="rect" id="node2" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="5,5,81,32"/>
+<area shape="rect" id="node3" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="105,5,187,32"/>
+</map>

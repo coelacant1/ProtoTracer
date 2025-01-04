@@ -1,0 +1,12 @@
+<map id="BoundaryMotionSimulator" name="BoundaryMotionSimulator">
+<area shape="rect" id="node1" title="Simulates motion and collision interactions between a BoundaryCube and multiple BoundarySpheres." alt="" coords="600,451,792,477"/>
+<area shape="rect" id="node2" href="$classBoundaryCube.html" title="Represents an axis&#45;aligned bounding cube for collision detection and physics." alt="" coords="665,153,783,180"/>
+<area shape="rect" id="node3" href="$classQuaternion.html" title="A mathematical construct representing a rotation in 3D space." alt="" coords="581,5,675,32"/>
+<area shape="rect" id="node5" href="$classBoundarySphere.html" title="Represents a spherical boundary object for motion and collision simulations." alt="" coords="531,361,661,388"/>
+<area shape="rect" id="node10" href="$classTransform.html" title="Represents a 3D transformation including position, rotation, and scale." alt="" coords="475,153,562,180"/>
+<area shape="rect" id="node4" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="189,5,270,32"/>
+<area shape="rect" id="node6" href="$classObject3D.html" title="Represents a 3D object with geometry, material, and transformation data." alt="" coords="336,272,419,299"/>
+<area shape="rect" id="node7" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="58,153,134,180"/>
+<area shape="rect" id="node8" href="$classIStaticTriangleGroup.html" title="Interface for managing a static group of 3D triangles and associated data." alt="" coords="158,153,311,180"/>
+<area shape="rect" id="node9" href="$classITriangleGroup.html" title="Interface for managing a dynamic group of 3D triangles and associated data." alt="" coords="335,153,451,180"/>
+</map>

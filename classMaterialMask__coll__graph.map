@@ -1,0 +1,6 @@
+<map id="MaterialMask" name="MaterialMask">
+<area shape="rect" id="node1" title="Combines two materials using a shape as a mask." alt="" coords="11,213,121,240"/>
+<area shape="rect" id="node2" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="5,109,81,136"/>
+<area shape="rect" id="node3" href="$classShape.html" title="Abstract base class for 2D geometric shapes." alt="" coords="161,109,224,136"/>
+<area shape="rect" id="node4" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="152,5,233,32"/>
+</map>

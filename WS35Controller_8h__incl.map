@@ -1,0 +1,32 @@
+<map id="WS35Controller.h" name="WS35Controller.h">
+<area shape="rect" id="node1" title="Declares the WS35Controller class for managing WS2812&#45;based displays on the Delta,..." alt="" coords="459,5,594,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="241,80,311,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="336,80,453,107"/>
+<area shape="rect" id="node4" href="$Controller_8h.html" title="Declares the Controller base class for managing lighting controllers." alt="" coords="478,80,575,107"/>
+<area shape="rect" id="node11" href="$CameraManager_8h.html" title="Declares the CameraManager class for managing multiple camera instances." alt="" coords="515,155,712,196"/>
+<area shape="rect" id="node29" href="$PixelGroup_8h.html" title="Declares the PixelGroup template class for managing a collection of pixels." alt="" coords="727,80,940,107"/>
+<area shape="rect" id="node5" title=" " alt="" coords="406,162,490,189"/>
+<area shape="rect" id="node6" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="672,781,875,808"/>
+<area shape="rect" id="node7" title=" " alt="" coords="602,856,665,883"/>
+<area shape="rect" id="node8" title=" " alt="" coords="689,856,757,883"/>
+<area shape="rect" id="node9" title=" " alt="" coords="781,856,867,883"/>
+<area shape="rect" id="node10" href="$Mathematics_8tpp.html" title=" " alt="" coords="891,856,1023,883"/>
+<area shape="rect" id="node12" href="$CameraBase_8h.html" title="Declares the CameraBase class for defining camera functionality." alt="" coords="549,244,678,271"/>
+<area shape="rect" id="node13" href="$CameraLayout_8h.html" title="Declares the CameraLayout class for managing camera orientation and axis alignment." alt="" coords="549,319,678,345"/>
+<area shape="rect" id="node14" href="$Transform_8h.html" title="Defines the Transform class for managing position, rotation, and scale of objects." alt="" coords="419,401,602,427"/>
+<area shape="rect" id="node26" href="$IPixelGroup_8h.html" title="Declares the IPixelGroup interface for managing collections of pixels." alt="" coords="875,319,1026,345"/>
+<area shape="rect" id="node15" href="$Rotation_8h.html" title="Defines the Rotation class for handling 3D rotations using various representations." alt="" coords="466,483,555,509"/>
+<area shape="rect" id="node17" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="531,707,624,733"/>
+<area shape="rect" id="node16" href="$AxisAngle_8h.html" title="Represents a rotation defined by an axis and an angle." alt="" coords="528,632,627,659"/>
+<area shape="rect" id="node18" href="$DirectionAngle_8h.html" title="Represents a rotation defined by a direction vector and an angle." alt="" coords="701,632,832,659"/>
+<area shape="rect" id="node19" href="$EulerAngles_8h.html" title="Represents rotations in 3D space using Euler angles." alt="" coords="353,557,463,584"/>
+<area shape="rect" id="node21" href="$EulerConstants_8h.html" title="Provides predefined constants for common Euler rotation orders." alt="" coords="197,557,329,584"/>
+<area shape="rect" id="node22" href="$Quaternion_8h.html" title="Defines the Quaternion class for 3D rotations and transformations." alt="" coords="907,557,1013,584"/>
+<area shape="rect" id="node24" href="$RotationMatrix_8h.html" title="Defines the RotationMatrix class for representing and manipulating 3D rotation matrices." alt="" coords="93,632,224,659"/>
+<area shape="rect" id="node25" href="$YawPitchRoll_8h.html" title="Represents an orientation using yaw, pitch, and roll angles." alt="" coords="602,557,718,584"/>
+<area shape="rect" id="node20" href="$EulerOrder_8h.html" title="Defines the EulerOrder class for specifying rotation orders in 3D space." alt="" coords="299,632,402,659"/>
+<area shape="rect" id="node23" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="1008,632,1101,659"/>
+<area shape="rect" id="node27" href="$RGBColor_8h.html" title="Defines the RGBColor class for managing and manipulating RGB color values." alt="" coords="881,483,1034,509"/>
+<area shape="rect" id="node28" href="$BoundingBox2D_8h.html" title="Defines the BoundingBox2D class for managing 2D bounding boxes." alt="" coords="1063,393,1206,435"/>
+<area shape="rect" id="node30" href="$PixelGroup_8tpp.html" title=" " alt="" coords="775,162,892,189"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="QuadTree" name="QuadTree">
+<area shape="rect" id="node1" title="Represents a quadtree for spatial partitioning of 2D entities." alt="" coords="49,332,131,359"/>
+<area shape="rect" id="node2" href="$classNode.html" title="Represents a node in a quadtree structure for spatial partitioning." alt="" coords="130,243,186,269"/>
+<area shape="rect" id="node3" href="$classBoundingBox2D.html" title="Represents a 2D axis&#45;aligned bounding box." alt="" coords="5,153,132,180"/>
+<area shape="rect" id="node4" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="44,5,125,32"/>
+<area shape="rect" id="node5" href="$classTriangle2D.html" title="Represents a 2D triangle with support for UV mapping, depth, and intersection testing." alt="" coords="157,153,247,180"/>
+<area shape="rect" id="node6" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="163,5,239,32"/>
+<area shape="rect" id="node7" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="263,5,344,32"/>
+</map>

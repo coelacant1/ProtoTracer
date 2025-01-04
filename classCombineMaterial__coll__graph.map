@@ -1,0 +1,4 @@
+<map id="CombineMaterial&lt; materialCount &gt;" name="CombineMaterial&lt; materialCount &gt;">
+<area shape="rect" id="node1" title="Combines multiple materials with specified blending methods and opacities." alt="" coords="5,95,209,136"/>
+<area shape="rect" id="node2" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="69,5,145,32"/>
+</map>

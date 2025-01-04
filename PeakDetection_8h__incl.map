@@ -1,0 +1,9 @@
+<map id="PeakDetection.h" name="PeakDetection.h">
+<area shape="rect" id="node1" title="Implements peak detection for time&#45;series data using a sliding window approach." alt="" coords="201,5,331,32"/>
+<area shape="rect" id="node2" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="93,80,261,107"/>
+<area shape="rect" id="node7" href="$PeakDetection_8tpp.html" title=" " alt="" coords="285,80,428,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,155,68,181"/>
+<area shape="rect" id="node4" title=" " alt="" coords="92,155,160,181"/>
+<area shape="rect" id="node5" title=" " alt="" coords="185,155,270,181"/>
+<area shape="rect" id="node6" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,155,427,181"/>
+</map>

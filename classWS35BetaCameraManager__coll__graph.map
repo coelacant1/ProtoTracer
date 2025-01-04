@@ -1,0 +1,12 @@
+<map id="WS35BetaCameraManager" name="WS35BetaCameraManager">
+<area shape="rect" id="node1" title=" " alt="" coords="163,436,360,463"/>
+<area shape="rect" id="node2" href="$classCameraManager.html" title="Manages multiple CameraBase objects." alt="" coords="196,332,327,359"/>
+<area shape="rect" id="node3" href="$classCameraBase.html" title="Base class for managing camera properties and transformations." alt="" coords="129,228,234,255"/>
+<area shape="rect" id="node8" href="$classCamera.html" title=" " alt="" coords="45,332,171,359"/>
+<area shape="rect" id="node4" href="$classCameraLayout.html" title="Manages camera orientation and axis alignment." alt="" coords="5,139,123,165"/>
+<area shape="rect" id="node5" href="$classQuaternion.html" title="A mathematical construct representing a rotation in 3D space." alt="" coords="134,5,229,32"/>
+<area shape="rect" id="node6" href="$classTransform.html" title="Represents a 3D transformation including position, rotation, and scale." alt="" coords="281,139,367,165"/>
+<area shape="rect" id="node7" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="345,5,426,32"/>
+<area shape="rect" id="node9" href="$classPixelGroup.html" title=" " alt="" coords="409,332,556,359"/>
+<area shape="rect" id="node10" href="$classIPixelGroup.html" title="Interface for managing and interacting with a collection of pixels." alt="" coords="441,228,537,255"/>
+</map>

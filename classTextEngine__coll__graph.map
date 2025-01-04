@@ -1,0 +1,7 @@
+<map id="TextEngine&lt; lineCount, characterWidth &gt;" name="TextEngine&lt; lineCount, characterWidth &gt;">
+<area shape="rect" id="node1" title=" " alt="" coords="108,231,283,272"/>
+<area shape="rect" id="node2" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="12,5,88,32"/>
+<area shape="rect" id="node5" href="$classSimpleMaterial.html" title="A material that applies a single, solid RGB color to surfaces." alt="" coords="135,111,256,137"/>
+<area shape="rect" id="node3" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="369,111,451,137"/>
+<area shape="rect" id="node4" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="213,5,297,32"/>
+</map>

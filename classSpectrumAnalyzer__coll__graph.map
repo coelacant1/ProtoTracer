@@ -1,0 +1,9 @@
+<map id="SpectrumAnalyzer" name="SpectrumAnalyzer">
+<area shape="rect" id="node1" title="A material that visualizes audio data as a spectrum." alt="" coords="255,213,396,240"/>
+<area shape="rect" id="node2" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="6,13,82,39"/>
+<area shape="rect" id="node5" href="$classGradientMaterial.html" title=" " alt="" coords="128,109,299,136"/>
+<area shape="rect" id="node3" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="324,109,405,136"/>
+<area shape="rect" id="node4" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="429,109,513,136"/>
+<area shape="rect" id="node6" href="$classBouncePhysics.html" title="Simulates bouncing physics with gravity and velocity damping." alt="" coords="549,109,668,136"/>
+<area shape="rect" id="node7" href="$classRunningAverageFilter.html" title=" " alt="" coords="528,5,689,47"/>
+</map>

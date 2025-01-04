@@ -1,0 +1,52 @@
+<map id="ProtogenProjectTemplate.h" name="ProtogenProjectTemplate.h">
+<area shape="rect" id="node1" title="Contains the class definition for ProtogenProject, a default project template for handling microphone..." alt="" coords="2007,5,2204,32"/>
+<area shape="rect" id="node2" href="$Project_8h.html" title="Declares the Project class for managing animations, rendering, and display operations." alt="" coords="552,191,715,218"/>
+<area shape="rect" id="node11" href="$UserConfiguration_8h.html" title="User&#45;configurable settings for the project." alt="" coords="1155,288,1317,315"/>
+<area shape="rect" id="node12" href="$KeyFrameTrack_8h.html" title="Declares the KeyFrameTrack template class for managing keyframe&#45;based animations." alt="" coords="4442,281,4625,322"/>
+<area shape="rect" id="node15" href="$EasyEaseAnimator_8h.html" title="Declares the EasyEaseAnimator template class for advanced animation easing." alt="" coords="2883,184,3061,225"/>
+<area shape="rect" id="node19" title=" " alt="" coords="3017,87,3159,129"/>
+<area shape="rect" id="node20" href="$Menu_8h.html" title="Provides the Menu class for controlling various parameters of the program." alt="" coords="2325,184,2528,225"/>
+<area shape="rect" id="node21" href="$RainbowNoise_8h.html" title="A dynamic material generating a rainbow effect using simplex noise." alt="" coords="1493,281,1691,322"/>
+<area shape="rect" id="node22" href="$FunctionGenerator_8h.html" title="Provides a generator for common mathematical wave functions." alt="" coords="1832,377,1989,419"/>
+<area shape="rect" id="node24" href="$SimpleMaterial_8h.html" title="A material class that applies a single RGB color to all surfaces." alt="" coords="3700,385,3911,411"/>
+<area shape="rect" id="node36" href="$APDS9960_8h.html" title="A class for interfacing with the Adafruit APDS9960 sensor." alt="" coords="5,87,165,129"/>
+<area shape="rect" id="node37" href="$TimeStep_8h.html" title="Utility class for timing operations based on a set frequency." alt="" coords="49,191,239,218"/>
+<area shape="rect" id="node38" href="$SSD1306_8h.html" title="Declares the HeadsUpDisplay class for rendering and displaying information on SSD1306/SH1106 displays..." alt="" coords="854,87,1010,129"/>
+<area shape="rect" id="node39" href="$MicrophoneFourier__MAX9814_8h.html" title="Extends the MicrophoneFourierBase class for real&#45;time FFT microphone analysis." alt="" coords="240,80,477,136"/>
+<area shape="rect" id="node40" href="$FanController_8h.html" title="Declares the FanController class for managing PWM&#45;based fan speed control." alt="" coords="851,377,1074,419"/>
+<area shape="rect" id="node41" href="$MaterialAnimator_8h.html" title="Provides functionality for animating transitions and blends between materials." alt="" coords="2705,87,2890,129"/>
+<area shape="rect" id="node42" href="$FlowNoise_8h.html" title="A dynamic simplex noise gradient material for a lava lamp effect." alt="" coords="1292,184,1465,225"/>
+<area shape="rect" id="node43" href="$RainbowSpiral_8h.html" title="A dynamic material that creates a colorful, animated rainbow spiral effect." alt="" coords="1490,184,1689,225"/>
+<area shape="rect" id="node44" href="$HorizontalRainbow_8h.html" title="A dynamic horizontal rainbow gradient material." alt="" coords="3184,87,3411,129"/>
+<area shape="rect" id="node45" href="$SpectrumAnalyzer_8h.html" title="A material for visualizing audio data as a colorful spectrum analyzer." alt="" coords="3435,87,3658,129"/>
+<area shape="rect" id="node46" href="$AudioReactiveGradient_8h.html" title="A material class for creating an audio&#45;reactive gradient effect." alt="" coords="2603,184,2858,225"/>
+<area shape="rect" id="node47" href="$Oscilloscope_8h.html" title="A dynamic oscilloscope material for visualizing audio signals." alt="" coords="3852,184,4039,225"/>
+<area shape="rect" id="node48" href="$BlinkTrack_8h.html" title="Declares the BlinkTrack template class for animating eye blinking." alt="" coords="3683,87,3867,129"/>
+<area shape="rect" id="node49" href="$FFTVoiceDetection_8h.html" title="Declares the FFTVoiceDetection template class for real&#45;time viseme detection based on FFT data." alt="" coords="1034,80,1225,136"/>
+<area shape="rect" id="node50" href="$ObjectAlign_8h.html" title="Provides the ObjectAlign class for aligning 3D objects within defined 2D camera bounds." alt="" coords="3891,87,4029,129"/>
+<area shape="rect" id="node3" title=" " alt="" coords="730,467,814,493"/>
+<area shape="rect" id="node4" href="$Engine_8h.html" title="Declares the RenderingEngine class for rendering and display operations." alt="" coords="313,288,463,315"/>
+<area shape="rect" id="node5" href="$CameraManager_8h.html" title="Declares the CameraManager class for managing multiple camera instances." alt="" coords="241,377,439,419"/>
+<area shape="rect" id="node6" href="$Scene_8h.html" title="Defines the Scene class for managing objects and effects in a 3D environment." alt="" coords="463,385,591,411"/>
+<area shape="rect" id="node7" href="$Controller_8h.html" title="Declares the Controller base class for managing lighting controllers." alt="" coords="539,288,728,315"/>
+<area shape="rect" id="node9" href="$RunningAverageFilter_8h.html" title="Implements a running average filter for smoothing data." alt="" coords="955,281,1131,322"/>
+<area shape="rect" id="node10" href="$Debug_8h.html" title="Utility class for debugging and monitoring system memory." alt="" coords="717,385,827,411"/>
+<area shape="rect" id="node8" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="2651,467,2770,493"/>
+<area shape="rect" id="node13" href="$KeyFrame_8h.html" title="Declares the KeyFrame class for representing individual animation keyframes." alt="" coords="4289,385,4388,411"/>
+<area shape="rect" id="node14" href="$KeyFrameTrack_8tpp.html" title=" " alt="" coords="4463,385,4609,411"/>
+<area shape="rect" id="node16" href="$IEasyEaseAnimator_8h.html" title="Declares the IEasyEaseAnimator interface for defining animation behaviors." alt="" coords="4066,288,4225,315"/>
+<area shape="rect" id="node18" href="$EasyEaseAnimator_8tpp.html" title=" " alt="" coords="4249,288,4417,315"/>
+<area shape="rect" id="node17" href="$DampedSpring_8h.html" title="Defines the DampedSpring class for simulating damped spring motion." alt="" coords="3985,385,4215,411"/>
+<area shape="rect" id="node23" href="$TextEngine_8h.html" title=" " alt="" coords="3722,273,3889,329"/>
+<area shape="rect" id="node25" href="$EffectChangeTrack_8h.html" title="Declares the EffectChangeTrack template class for animating effect changes." alt="" coords="2801,273,3025,329"/>
+<area shape="rect" id="node26" href="$Passthrough_8h.html" title="Defines the Passthrough effect class for applying no modifications to pixel groups." alt="" coords="3050,281,3233,322"/>
+<area shape="rect" id="node27" href="$GlitchX_8h.html" title="Defines the GlitchX effect class for applying glitch effects along the X&#45;axis to pixel groups." alt="" coords="2439,377,2622,419"/>
+<area shape="rect" id="node28" href="$Fisheye_8h.html" title="Defines the Fisheye effect class for applying fisheye distortions to pixel groups." alt="" coords="1715,281,1898,322"/>
+<area shape="rect" id="node29" href="$HorizontalBlur_8h.html" title="Defines the HorizontalBlur effect class for applying horizontal blur to pixel groups." alt="" coords="3191,377,3374,419"/>
+<area shape="rect" id="node30" href="$PhaseOffsetX_8h.html" title="Defines the PhaseOffsetX effect class for applying horizontal phase offsets to pixel groups." alt="" coords="2594,281,2777,322"/>
+<area shape="rect" id="node31" href="$PhaseOffsetY_8h.html" title="Defines the PhaseOffsetY effect class for applying vertical phase offsets to pixel groups." alt="" coords="3463,281,3646,322"/>
+<area shape="rect" id="node32" href="$PhaseOffsetR_8h.html" title="Defines the PhaseOffsetR effect class for applying rotational phase offsets to pixel groups." alt="" coords="2129,281,2311,322"/>
+<area shape="rect" id="node33" href="$Magnet_8h.html" title="Defines the Magnet effect class for creating magnetic distortion effects on pixel groups." alt="" coords="1922,281,2105,322"/>
+<area shape="rect" id="node34" href="$Overflow_8h.html" title="Defines the Overflow effect class for adding overflow distortion to pixel groups." alt="" coords="3257,281,3439,322"/>
+<area shape="rect" id="node35" href="$RadialBlur_8h.html" title="Defines the RadialBlur effect class for applying a radial blur to pixel groups." alt="" coords="2335,281,2518,322"/>
+</map>

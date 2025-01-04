@@ -1,0 +1,11 @@
+<map id="CameraBase" name="CameraBase">
+<area shape="rect" id="node1" title="Base class for managing camera properties and transformations." alt="" coords="5,183,111,209"/>
+<area shape="rect" id="node2" href="$classCamera.html" title=" " alt="" coords="181,5,308,32"/>
+<area shape="rect" id="node3" href="$classCamera.html" title=" " alt="" coords="185,56,304,83"/>
+<area shape="rect" id="node4" href="$classCamera.html" title=" " alt="" coords="185,107,304,133"/>
+<area shape="rect" id="node5" href="$classCamera.html" title=" " alt="" coords="177,157,312,184"/>
+<area shape="rect" id="node6" href="$classCamera.html" title=" " alt="" coords="185,208,304,235"/>
+<area shape="rect" id="node7" href="$classCamera.html" title=" " alt="" coords="185,259,304,285"/>
+<area shape="rect" id="node8" href="$classCamera.html" title=" " alt="" coords="181,309,308,336"/>
+<area shape="rect" id="node9" href="$classCamera.html" title="Manages camera behavior and pixel groups." alt="" coords="159,360,331,387"/>
+</map>

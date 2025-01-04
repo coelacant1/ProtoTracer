@@ -1,0 +1,12 @@
+<map id="DerivativeFilter.h" name="DerivativeFilter.h">
+<area shape="rect" id="node1" title="Provides a DerivativeFilter class for calculating the rate of change of input values." alt="" coords="232,5,367,32"/>
+<area shape="rect" id="node2" href="$RunningAverageFilter_8h.html" title="Implements a running average filter for smoothing data." alt="" coords="89,80,261,107"/>
+<area shape="rect" id="node3" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="215,155,383,181"/>
+<area shape="rect" id="node9" href="$MinFilter_8h.html" title="Implements a moving minimum filter for processing data streams." alt="" coords="337,80,427,107"/>
+<area shape="rect" id="node8" href="$RunningAverageFilter_8tpp.html" title=" " alt="" coords="5,155,191,181"/>
+<area shape="rect" id="node4" title=" " alt="" coords="128,229,191,256"/>
+<area shape="rect" id="node5" title=" " alt="" coords="215,229,283,256"/>
+<area shape="rect" id="node6" title=" " alt="" coords="307,229,393,256"/>
+<area shape="rect" id="node7" href="$Mathematics_8tpp.html" title=" " alt="" coords="417,229,549,256"/>
+<area shape="rect" id="node10" href="$MinFilter_8tpp.html" title=" " alt="" coords="408,155,511,181"/>
+</map>

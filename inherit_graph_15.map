@@ -1,0 +1,9 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classCameraManager.html" title="Manages multiple CameraBase objects." alt="" coords="5,132,136,159"/>
+<area shape="rect" id="node2" href="$classAPA102CamerasV1.html" title=" " alt="" coords="221,5,368,32"/>
+<area shape="rect" id="node3" href="$classDualP3HUB75CameraManager.html" title=" " alt="" coords="184,56,405,83"/>
+<area shape="rect" id="node4" href="$classHUB75DeltaCameraManager.html" title=" " alt="" coords="189,107,400,133"/>
+<area shape="rect" id="node5" href="$classWS35BetaCameraManager.html" title=" " alt="" coords="196,157,393,184"/>
+<area shape="rect" id="node6" href="$classWS35CameraManager.html" title=" " alt="" coords="211,208,378,235"/>
+<area shape="rect" id="node7" href="$classWS35SplitCameraManager.html" title=" " alt="" coords="197,259,393,285"/>
+</map>

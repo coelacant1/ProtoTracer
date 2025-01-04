@@ -1,0 +1,15 @@
+<map id="ProtogenProject" name="ProtogenProject">
+<area shape="rect" id="node1" title="A default project template that includes functionality for an analog microphone, APDS9960 boop sensor..." alt="" coords="120,259,245,285"/>
+<area shape="rect" id="node3" href="$classAceAnimation.html" title=" " alt="" coords="329,5,442,32"/>
+<area shape="rect" id="node4" href="$classArrowAnimation.html" title=" " alt="" coords="322,56,449,83"/>
+<area shape="rect" id="node5" href="$classBetaProject.html" title=" " alt="" coords="337,107,434,133"/>
+<area shape="rect" id="node6" href="$classDrGonzoProject.html" title=" " alt="" coords="324,157,447,184"/>
+<area shape="rect" id="node7" href="$classDrGonzoTest.html" title=" " alt="" coords="333,208,437,235"/>
+<area shape="rect" id="node8" href="$classFursuitEyesV1.html" title=" " alt="" coords="328,259,443,285"/>
+<area shape="rect" id="node9" href="$classProtogenHUB75Project.html" title=" " alt="" coords="300,309,471,336"/>
+<area shape="rect" id="node10" href="$classProtogenWS35Project.html" title=" " alt="" coords="304,360,467,387"/>
+<area shape="rect" id="node11" href="$classSageAnimation.html" title=" " alt="" coords="325,411,446,437"/>
+<area shape="rect" id="node12" href="$classSplatAnimation.html" title=" " alt="" coords="324,461,447,488"/>
+<area shape="rect" id="node13" href="$classUnicornZhenjaAnimation.html" title=" " alt="" coords="293,512,477,539"/>
+<area shape="rect" id="node2" href="$classProject.html" title="Manages animations, rendering, and display operations." alt="" coords="5,259,72,285"/>
+</map>

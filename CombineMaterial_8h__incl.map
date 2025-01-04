@@ -1,0 +1,14 @@
+<map id="CombineMaterial.h" name="CombineMaterial.h">
+<area shape="rect" id="node1" title="Combines multiple materials with different blending methods and opacities." alt="" coords="291,5,438,32"/>
+<area shape="rect" id="node2" href="$Material_8h.html" title="Base class for materials defining shading and rendering behavior." alt="" coords="281,80,369,107"/>
+<area shape="rect" id="node10" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="73,304,166,331"/>
+<area shape="rect" id="node11" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="249,379,342,405"/>
+<area shape="rect" id="node12" href="$CombineMaterial_8tpp.html" title=" " alt="" coords="444,80,603,107"/>
+<area shape="rect" id="node3" href="$RGBColor_8h.html" title="Defines the RGBColor class for managing and manipulating RGB color values." alt="" coords="141,155,295,181"/>
+<area shape="rect" id="node4" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="99,453,255,480"/>
+<area shape="rect" id="node9" href="$Quaternion_8h.html" title="Defines the Quaternion class for 3D rotations and transformations." alt="" coords="124,229,267,256"/>
+<area shape="rect" id="node5" title=" " alt="" coords="5,528,68,555"/>
+<area shape="rect" id="node6" title=" " alt="" coords="92,528,160,555"/>
+<area shape="rect" id="node7" title=" " alt="" coords="185,528,270,555"/>
+<area shape="rect" id="node8" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,528,427,555"/>
+</map>

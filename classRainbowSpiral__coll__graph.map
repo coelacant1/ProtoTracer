@@ -1,0 +1,9 @@
+<map id="RainbowSpiral" name="RainbowSpiral">
+<area shape="rect" id="node1" title="A dynamic material creating a colorful rainbow spiral animation." alt="" coords="284,199,399,225"/>
+<area shape="rect" id="node2" href="$classAnimatedMaterial.html" title="Base class for dynamically updating materials." alt="" coords="5,109,144,136"/>
+<area shape="rect" id="node3" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="13,5,89,32"/>
+<area shape="rect" id="node6" href="$classSpiralMaterial.html" title="Generates a spiral pattern with configurable properties." alt="" coords="190,109,303,136"/>
+<area shape="rect" id="node4" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="279,5,363,32"/>
+<area shape="rect" id="node5" href="$classFunctionGenerator.html" title="A class to generate various waveform functions with customizable parameters." alt="" coords="542,109,685,136"/>
+<area shape="rect" id="node7" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="113,5,194,32"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="SpyroRotateAnimation" name="SpyroRotateAnimation">
+<area shape="rect" id="node1" title=" " alt="" coords="105,199,275,225"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,109,95,136"/>
+<area shape="rect" id="node3" href="$classFunctionGenerator.html" title="A class to generate various waveform functions with customizable parameters." alt="" coords="119,109,261,136"/>
+<area shape="rect" id="node4" href="$classSimpleMaterial.html" title="A material that applies a single, solid RGB color to surfaces." alt="" coords="285,109,407,136"/>
+<area shape="rect" id="node5" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="256,5,332,32"/>
+<area shape="rect" id="node6" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="356,5,440,32"/>
+</map>

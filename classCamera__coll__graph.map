@@ -1,0 +1,9 @@
+<map id="Camera&lt; pixelCount &gt;" name="Camera&lt; pixelCount &gt;">
+<area shape="rect" id="node1" title="Manages camera behavior and pixel groups." alt="" coords="127,332,299,359"/>
+<area shape="rect" id="node2" href="$classCameraBase.html" title="Base class for managing camera properties and transformations." alt="" coords="102,228,207,255"/>
+<area shape="rect" id="node3" href="$classCameraLayout.html" title="Manages camera orientation and axis alignment." alt="" coords="97,139,214,165"/>
+<area shape="rect" id="node4" href="$classQuaternion.html" title="A mathematical construct representing a rotation in 3D space." alt="" coords="52,5,147,32"/>
+<area shape="rect" id="node5" href="$classTransform.html" title="Represents a 3D transformation including position, rotation, and scale." alt="" coords="239,139,326,165"/>
+<area shape="rect" id="node6" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="306,5,387,32"/>
+<area shape="rect" id="node7" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="231,228,312,255"/>
+</map>

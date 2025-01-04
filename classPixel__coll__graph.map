@@ -1,0 +1,5 @@
+<map id="Pixel" name="Pixel">
+<area shape="rect" id="node1" title="Represents a pixel in a 2D grid with positional, color, and neighbor information." alt="" coords="73,111,126,137"/>
+<area shape="rect" id="node2" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="5,5,87,32"/>
+<area shape="rect" id="node3" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="111,5,195,32"/>
+</map>

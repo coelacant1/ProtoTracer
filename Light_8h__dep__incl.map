@@ -1,0 +1,8 @@
+<map id="Light.h" name="Light.h">
+<area shape="rect" id="node1" title="Defines the Light class for managing light sources in a 3D scene." alt="" coords="189,5,256,32"/>
+<area shape="rect" id="node2" href="$PhysicsSimulator_8h.html" title="Defines the PhysicsSimulator class for managing physics simulations within a scene." alt="" coords="13,80,158,107"/>
+<area shape="rect" id="node4" href="$Light_8cpp.html" title=" " alt="" coords="182,80,263,107"/>
+<area shape="rect" id="node5" href="$LightMaterial_8h.html" title="A material class that incorporates multiple light sources for advanced lighting effects." alt="" coords="288,80,408,107"/>
+<area shape="rect" id="node3" href="$PhysicsSimulator_8cpp.html" title=" " alt="" coords="5,155,165,181"/>
+<area shape="rect" id="node6" href="$Boot_8h.html" title=" " alt="" coords="316,155,380,181"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="BouncePhysics" name="BouncePhysics">
+<area shape="rect" id="node1" title="Simulates bouncing physics with gravity and velocity damping." alt="" coords="27,109,145,136"/>
+<area shape="rect" id="node2" href="$classRunningAverageFilter.html" title=" " alt="" coords="5,5,167,47"/>
+</map>

@@ -1,0 +1,13 @@
+<map id="MouthTrack.h" name="MouthTrack.h">
+<area shape="rect" id="node1" title="Declares the MouthTrack template class for animating mouth movements." alt="" coords="260,5,369,32"/>
+<area shape="rect" id="node2" href="$AnimationTrack_8h.html" title="Declares the AnimationTrack template class for managing animation tracks with keyframes." alt="" coords="247,80,382,107"/>
+<area shape="rect" id="node3" href="$KeyFrameTrack_8h.html" title="Declares the KeyFrameTrack template class for managing keyframe&#45;based animations." alt="" coords="157,155,302,181"/>
+<area shape="rect" id="node11" href="$AnimationTrack_8tpp.html" title=" " alt="" coords="326,155,474,181"/>
+<area shape="rect" id="node4" href="$KeyFrame_8h.html" title="Declares the KeyFrame class for representing individual animation keyframes." alt="" coords="5,229,104,256"/>
+<area shape="rect" id="node5" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="128,229,331,256"/>
+<area shape="rect" id="node10" href="$KeyFrameTrack_8tpp.html" title=" " alt="" coords="355,229,501,256"/>
+<area shape="rect" id="node6" title=" " alt="" coords="58,304,121,331"/>
+<area shape="rect" id="node7" title=" " alt="" coords="145,304,213,331"/>
+<area shape="rect" id="node8" title=" " alt="" coords="237,304,323,331"/>
+<area shape="rect" id="node9" href="$Mathematics_8tpp.html" title=" " alt="" coords="347,304,479,331"/>
+</map>

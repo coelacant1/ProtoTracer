@@ -1,0 +1,14 @@
+<map id="MorphTransform.h" name="MorphTransform.h">
+<area shape="rect" id="node1" title="Declares the MorphTransform template class for handling 3D transformations." alt="" coords="501,5,641,32"/>
+<area shape="rect" id="node2" href="$IEasyEaseAnimator_8h.html" title="Declares the IEasyEaseAnimator interface for defining animation behaviors." alt="" coords="214,80,373,107"/>
+<area shape="rect" id="node11" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="483,80,659,107"/>
+<area shape="rect" id="node12" href="$MorphTransform_8tpp.html" title=" " alt="" coords="683,80,837,107"/>
+<area shape="rect" id="node3" href="$KeyFrame_8h.html" title="Declares the KeyFrame class for representing individual animation keyframes." alt="" coords="5,155,104,181"/>
+<area shape="rect" id="node4" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="308,229,511,256"/>
+<area shape="rect" id="node9" href="$DampedSpring_8h.html" title="Defines the DampedSpring class for simulating damped spring motion." alt="" coords="179,155,408,181"/>
+<area shape="rect" id="node10" href="$RampFilter_8h.html" title="Provides a class for smooth value transitions using a ramp filter." alt="" coords="432,155,619,181"/>
+<area shape="rect" id="node5" title=" " alt="" coords="238,304,301,331"/>
+<area shape="rect" id="node6" title=" " alt="" coords="325,304,393,331"/>
+<area shape="rect" id="node7" title=" " alt="" coords="417,304,503,331"/>
+<area shape="rect" id="node8" href="$Mathematics_8tpp.html" title=" " alt="" coords="527,304,659,331"/>
+</map>

@@ -1,0 +1,17 @@
+<map id="Fisheye.h" name="Fisheye.h">
+<area shape="rect" id="node1" title="Defines the Fisheye effect class for applying fisheye distortions to pixel groups." alt="" coords="343,5,427,32"/>
+<area shape="rect" id="node2" href="$Effect_8h.html" title="Defines the base Effect class for applying transformations or effects to pixel groups." alt="" coords="349,87,420,114"/>
+<area shape="rect" id="node11" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="94,423,187,449"/>
+<area shape="rect" id="node14" href="$FunctionGenerator_8h.html" title="Provides a generator for common mathematical wave functions." alt="" coords="495,80,653,121"/>
+<area shape="rect" id="node3" href="$IPixelGroup_8h.html" title="Declares the IPixelGroup interface for managing collections of pixels." alt="" coords="265,169,403,211"/>
+<area shape="rect" id="node5" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="337,572,493,599"/>
+<area shape="rect" id="node4" href="$RGBColor_8h.html" title="Defines the RGBColor class for managing and manipulating RGB color values." alt="" coords="257,259,411,285"/>
+<area shape="rect" id="node13" href="$BoundingBox2D_8h.html" title="Defines the BoundingBox2D class for managing 2D bounding boxes." alt="" coords="44,333,187,375"/>
+<area shape="rect" id="node10" href="$Quaternion_8h.html" title="Defines the Quaternion class for 3D rotations and transformations." alt="" coords="263,341,405,367"/>
+<area shape="rect" id="node12" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="223,497,317,524"/>
+<area shape="rect" id="node6" title=" " alt="" coords="244,647,307,673"/>
+<area shape="rect" id="node7" title=" " alt="" coords="331,647,399,673"/>
+<area shape="rect" id="node8" title=" " alt="" coords="423,647,509,673"/>
+<area shape="rect" id="node9" href="$Mathematics_8tpp.html" title=" " alt="" coords="533,647,665,673"/>
+<area shape="rect" id="node15" title=" " alt="" coords="532,177,616,203"/>
+</map>

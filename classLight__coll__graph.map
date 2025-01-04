@@ -1,0 +1,4 @@
+<map id="Light" name="Light">
+<area shape="rect" id="node1" title="Represents a light source with position, intensity, and falloff properties." alt="" coords="19,109,73,136"/>
+<area shape="rect" id="node2" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="5,5,87,32"/>
+</map>

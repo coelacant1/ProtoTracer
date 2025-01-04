@@ -1,0 +1,52 @@
+<map id="Menu.cpp" name="Menu.cpp">
+<area shape="rect" id="node1" title=" " alt="" coords="2135,5,2220,32"/>
+<area shape="rect" id="node2" href="$Menu_8h.html" title="Provides the Menu class for controlling various parameters of the program." alt="" coords="2142,80,2213,107"/>
+<area shape="rect" id="node3" href="$DampedSpring_8h.html" title="Defines the DampedSpring class for simulating damped spring motion." alt="" coords="32,601,173,643"/>
+<area shape="rect" id="node9" href="$RainbowNoise_8h.html" title="A dynamic material generating a rainbow effect using simplex noise." alt="" coords="650,162,849,203"/>
+<area shape="rect" id="node26" href="$TextEngine_8h.html" title=" " alt="" coords="1169,259,1335,315"/>
+<area shape="rect" id="node31" href="$EffectChangeTrack_8h.html" title="Declares the EffectChangeTrack template class for animating effect changes." alt="" coords="3651,155,3875,211"/>
+<area shape="rect" id="node33" href="$Passthrough_8h.html" title="Defines the Passthrough effect class for applying no modifications to pixel groups." alt="" coords="2810,162,2993,203"/>
+<area shape="rect" id="node35" href="$GlitchX_8h.html" title="Defines the GlitchX effect class for applying glitch effects along the X&#45;axis to pixel groups." alt="" coords="3017,162,3199,203"/>
+<area shape="rect" id="node36" href="$Fisheye_8h.html" title="Defines the Fisheye effect class for applying fisheye distortions to pixel groups." alt="" coords="950,162,1133,203"/>
+<area shape="rect" id="node37" href="$HorizontalBlur_8h.html" title="Defines the HorizontalBlur effect class for applying horizontal blur to pixel groups." alt="" coords="3223,162,3406,203"/>
+<area shape="rect" id="node38" href="$PhaseOffsetX_8h.html" title="Defines the PhaseOffsetX effect class for applying horizontal phase offsets to pixel groups." alt="" coords="1157,162,1339,203"/>
+<area shape="rect" id="node39" href="$PhaseOffsetY_8h.html" title="Defines the PhaseOffsetY effect class for applying vertical phase offsets to pixel groups." alt="" coords="1363,162,1546,203"/>
+<area shape="rect" id="node40" href="$PhaseOffsetR_8h.html" title="Defines the PhaseOffsetR effect class for applying rotational phase offsets to pixel groups." alt="" coords="1570,162,1753,203"/>
+<area shape="rect" id="node41" href="$Magnet_8h.html" title="Defines the Magnet effect class for creating magnetic distortion effects on pixel groups." alt="" coords="1777,162,1959,203"/>
+<area shape="rect" id="node42" href="$Overflow_8h.html" title="Defines the Overflow effect class for adding overflow distortion to pixel groups." alt="" coords="2190,162,2373,203"/>
+<area shape="rect" id="node43" href="$RadialBlur_8h.html" title="Defines the RadialBlur effect class for applying a radial blur to pixel groups." alt="" coords="1983,162,2166,203"/>
+<area shape="rect" id="node44" href="$ShiftR_8h.html" title="Defines the ShiftR effect class for shifting color channels radially." alt="" coords="2397,162,2579,203"/>
+<area shape="rect" id="node45" href="$VerticalBlur_8h.html" title="Defines the VerticalBlur effect class for applying a vertical blur effect." alt="" coords="2603,162,2786,203"/>
+<area shape="rect" id="node46" href="$UserConfiguration_8h.html" title="User&#45;configurable settings for the project." alt="" coords="3899,169,4154,196"/>
+<area shape="rect" id="node47" href="$NeoTrellisMenuHandler_8h.html" title="Declares the MenuHandler template class for managing menu interactions using Adafruit NeoTrellis." alt="" coords="3430,169,3626,196"/>
+<area shape="rect" id="node4" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="1597,691,1811,717"/>
+<area shape="rect" id="node5" title=" " alt="" coords="1533,765,1595,792"/>
+<area shape="rect" id="node6" title=" " alt="" coords="1619,765,1687,792"/>
+<area shape="rect" id="node7" title=" " alt="" coords="1712,765,1797,792"/>
+<area shape="rect" id="node8" href="$Mathematics_8tpp.html" title=" " alt="" coords="1822,765,1954,792"/>
+<area shape="rect" id="node10" href="$AnimatedMaterial_8h.html" title="Declares the AnimatedMaterial class for time&#45;based material updates." alt="" coords="668,363,831,389"/>
+<area shape="rect" id="node14" href="$FunctionGenerator_8h.html" title="Provides a generator for common mathematical wave functions." alt="" coords="1817,266,1975,307"/>
+<area shape="rect" id="node16" href="$GradientMaterial_8h.html" title="Defines a material for creating gradient color effects in 3D rendering." alt="" coords="447,363,644,389"/>
+<area shape="rect" id="node23" href="$SimplexNoise_8h.html" title="A material class that generates and applies Simplex Noise." alt="" coords="270,273,447,300"/>
+<area shape="rect" id="node11" href="$Material_8h.html" title="Base class for materials defining shading and rendering behavior." alt="" coords="684,445,772,471"/>
+<area shape="rect" id="node12" href="$RGBColor_8h.html" title="Defines the RGBColor class for managing and manipulating RGB color values." alt="" coords="462,527,615,553"/>
+<area shape="rect" id="node13" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="964,609,1057,635"/>
+<area shape="rect" id="node15" title=" " alt="" coords="2050,363,2134,389"/>
+<area shape="rect" id="node17" href="$Rotation_8h.html" title="Defines the Rotation class for handling 3D rotations using various representations." alt="" coords="971,437,1096,479"/>
+<area shape="rect" id="node21" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="1168,445,1261,471"/>
+<area shape="rect" id="node22" href="$GradientMaterial_8tpp.html" title=" " alt="" coords="503,445,660,471"/>
+<area shape="rect" id="node18" href="$AxisAngle_8h.html" title="Represents a rotation defined by an axis and an angle." alt="" coords="749,527,848,553"/>
+<area shape="rect" id="node19" href="$DirectionAngle_8h.html" title="Represents a rotation defined by a direction vector and an angle." alt="" coords="872,527,1003,553"/>
+<area shape="rect" id="node20" href="$EulerAngles_8h.html" title="Represents rotations in 3D space using Euler angles." alt="" coords="1027,527,1138,553"/>
+<area shape="rect" id="node24" title=" " alt="" coords="43,363,109,389"/>
+<area shape="rect" id="node25" href="$SimplexNoise_8tpp.html" title=" " alt="" coords="133,363,270,389"/>
+<area shape="rect" id="node27" href="$Characters_8h.html" title=" " alt="" coords="1436,363,1540,389"/>
+<area shape="rect" id="node29" href="$SimpleMaterial_8h.html" title="A material class that applies a single RGB color to all surfaces." alt="" coords="905,363,1116,389"/>
+<area shape="rect" id="node30" href="$TextEngine_8tpp.html" title=" " alt="" coords="1242,363,1361,389"/>
+<area shape="rect" id="node28" title=" " alt="" coords="1455,445,1521,471"/>
+<area shape="rect" id="node32" href="$AnimationTrack_8h.html" title="Declares the AnimationTrack template class for managing animation tracks with keyframes." alt="" coords="3774,273,3909,300"/>
+<area shape="rect" id="node34" href="$Effect_8h.html" title="Defines the base Effect class for applying transformations or effects to pixel groups." alt="" coords="2137,273,2207,300"/>
+<area shape="rect" id="node48" title=" " alt="" coords="3257,273,3346,300"/>
+<area shape="rect" id="node49" title=" " alt="" coords="3371,273,3528,300"/>
+<area shape="rect" id="node50" href="$NeoTrellisMenuHandler_8tpp.html" title=" " alt="" coords="3552,273,3749,300"/>
+</map>

@@ -1,0 +1,16 @@
+<map id="ProtoV2Controller" name="ProtoV2Controller">
+<area shape="rect" id="node1" title=" " alt="" coords="667,839,805,865"/>
+<area shape="rect" id="node2" href="$classController.html" title="Base class for managing brightness and display operations of lighting controllers." alt="" coords="855,594,942,621"/>
+<area shape="rect" id="node3" href="$classCameraManager.html" title="Manages multiple CameraBase objects." alt="" coords="847,392,977,419"/>
+<area shape="rect" id="node4" href="$classCameraBase.html" title="Base class for managing camera properties and transformations." alt="" coords="706,228,811,255"/>
+<area shape="rect" id="node9" href="$classCamera.html" title="Manages camera behavior and pixel groups." alt="" coords="650,392,822,419"/>
+<area shape="rect" id="node5" href="$classCameraLayout.html" title="Manages camera orientation and axis alignment." alt="" coords="583,139,700,165"/>
+<area shape="rect" id="node6" href="$classQuaternion.html" title="A mathematical construct representing a rotation in 3D space." alt="" coords="711,5,806,32"/>
+<area shape="rect" id="node7" href="$classTransform.html" title="Represents a 3D transformation including position, rotation, and scale." alt="" coords="863,139,950,165"/>
+<area shape="rect" id="node8" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="922,5,1003,32"/>
+<area shape="rect" id="node10" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="293,228,374,255"/>
+<area shape="rect" id="node11" href="$classPixelGroup.html" title="Manages a collection of pixels with positions, colors, and spatial relationships." alt="" coords="374,594,565,621"/>
+<area shape="rect" id="node14" href="$classBoundingBox2D.html" title="Represents a 2D axis&#45;aligned bounding box." alt="" coords="270,392,397,419"/>
+<area shape="rect" id="node12" href="$classIPixelGroup.html" title="Interface for managing and interacting with a collection of pixels." alt="" coords="421,392,517,419"/>
+<area shape="rect" id="node13" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="542,392,626,419"/>
+</map>

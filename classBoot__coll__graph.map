@@ -1,0 +1,32 @@
+<map id="Boot" name="Boot">
+<area shape="rect" id="node1" title=" " alt="" coords="1912,681,1964,708"/>
+<area shape="rect" id="node2" href="$classProject.html" title="Manages animations, rendering, and display operations." alt="" coords="1693,513,1759,540"/>
+<area shape="rect" id="node3" href="$classCameraManager.html" title="Manages multiple CameraBase objects." alt="" coords="887,361,1017,388"/>
+<area shape="rect" id="node16" href="$classController.html" title="Base class for managing brightness and display operations of lighting controllers." alt="" coords="1286,400,1373,427"/>
+<area shape="rect" id="node19" href="$classHUB75DeltaCameraManager.html" title=" " alt="" coords="1224,260,1435,287"/>
+<area shape="rect" id="node4" href="$classCameraBase.html" title="Base class for managing camera properties and transformations." alt="" coords="564,335,669,361"/>
+<area shape="rect" id="node20" href="$classCamera.html" title=" " alt="" coords="893,260,1011,287"/>
+<area shape="rect" id="node21" href="$classCamera.html" title=" " alt="" coords="885,311,1019,337"/>
+<area shape="rect" id="node5" href="$classCameraLayout.html" title="Manages camera orientation and axis alignment." alt="" coords="277,81,395,108"/>
+<area shape="rect" id="node6" href="$classQuaternion.html" title="A mathematical construct representing a rotation in 3D space." alt="" coords="5,444,100,471"/>
+<area shape="rect" id="node7" href="$classTransform.html" title="Represents a 3D transformation including position, rotation, and scale." alt="" coords="293,444,379,471"/>
+<area shape="rect" id="node10" href="$classObject3D.html" title="Represents a 3D object with geometry, material, and transformation data." alt="" coords="911,536,993,563"/>
+<area shape="rect" id="node8" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="12,668,93,695"/>
+<area shape="rect" id="node18" href="$classPlane.html" title="Represents a plane in 3D space defined by a centroid and a normal vector." alt="" coords="438,844,497,871"/>
+<area shape="rect" id="node9" href="$classScene.html" title="Manages a collection of 3D objects and applies optional screen&#45;space effects." alt="" coords="1299,513,1360,540"/>
+<area shape="rect" id="node28" href="$classObjectDeformer.html" title="Applies geometric transformations to one or more 3D objects." alt="" coords="1481,625,1608,652"/>
+<area shape="rect" id="node11" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="579,705,655,732"/>
+<area shape="rect" id="node26" href="$classSimpleMaterial.html" title="A material that applies a single, solid RGB color to surfaces." alt="" coords="891,809,1013,836"/>
+<area shape="rect" id="node29" href="$classLightMaterial.html" title=" " alt="" coords="1053,681,1200,708"/>
+<area shape="rect" id="node30" href="$classCombineMaterial.html" title=" " alt="" coords="1459,739,1631,765"/>
+<area shape="rect" id="node12" href="$classIStaticTriangleGroup.html" title="Interface for managing a static group of 3D triangles and associated data." alt="" coords="540,400,693,427"/>
+<area shape="rect" id="node13" href="$classITriangleGroup.html" title="Interface for managing a dynamic group of 3D triangles and associated data." alt="" coords="559,451,675,477"/>
+<area shape="rect" id="node14" href="$classEffect.html" title="Abstract base class for applying visual effects to pixel groups." alt="" coords="923,485,981,512"/>
+<area shape="rect" id="node15" href="$classRunningAverageFilter.html" title=" " alt="" coords="1249,565,1410,606"/>
+<area shape="rect" id="node17" href="$classHUB75Controller.html" title="Manages HUB75 LED matrices with camera integration." alt="" coords="1661,403,1791,429"/>
+<area shape="rect" id="node22" href="$classPixelGroup.html" title=" " alt="" coords="883,207,1021,233"/>
+<area shape="rect" id="node23" href="$classIPixelGroup.html" title="Interface for managing and interacting with a collection of pixels." alt="" coords="569,191,665,217"/>
+<area shape="rect" id="node24" href="$classPixelGroup.html" title=" " alt="" coords="875,156,1029,183"/>
+<area shape="rect" id="node25" href="$classFunctionGenerator.html" title="A class to generate various waveform functions with customizable parameters." alt="" coords="1655,911,1797,937"/>
+<area shape="rect" id="node27" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="575,809,659,836"/>
+</map>

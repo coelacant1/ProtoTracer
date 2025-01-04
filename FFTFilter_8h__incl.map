@@ -1,0 +1,10 @@
+<map id="FFTFilter.h" name="FFTFilter.h">
+<area shape="rect" id="node1" title="Provides the FFTFilter class for processing and normalizing FFT data." alt="" coords="193,5,283,32"/>
+<area shape="rect" id="node2" href="$RunningAverageFilter_8h.html" title="Implements a running average filter for smoothing data." alt="" coords="215,80,387,107"/>
+<area shape="rect" id="node3" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="93,155,261,181"/>
+<area shape="rect" id="node8" href="$RunningAverageFilter_8tpp.html" title=" " alt="" coords="285,155,471,181"/>
+<area shape="rect" id="node4" title=" " alt="" coords="5,229,68,256"/>
+<area shape="rect" id="node5" title=" " alt="" coords="92,229,160,256"/>
+<area shape="rect" id="node6" title=" " alt="" coords="185,229,270,256"/>
+<area shape="rect" id="node7" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,229,427,256"/>
+</map>

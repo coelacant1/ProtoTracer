@@ -1,0 +1,5 @@
+<map id="PhaseOffsetY" name="PhaseOffsetY">
+<area shape="rect" id="node1" title="Applies vertical phase offsets to pixel groups." alt="" coords="43,95,151,121"/>
+<area shape="rect" id="node2" href="$classEffect.html" title="Abstract base class for applying visual effects to pixel groups." alt="" coords="5,5,64,32"/>
+<area shape="rect" id="node3" href="$classFunctionGenerator.html" title="A class to generate various waveform functions with customizable parameters." alt="" coords="89,5,231,32"/>
+</map>

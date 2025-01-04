@@ -1,0 +1,5 @@
+<map id="EulerAngles" name="EulerAngles">
+<area shape="rect" id="node1" title="Encapsulates a 3D rotation using Euler angles and a specific order of application." alt="" coords="15,184,114,211"/>
+<area shape="rect" id="node2" href="$classEulerOrder.html" title="Specifies the order and frame of reference for Euler rotations." alt="" coords="98,95,189,121"/>
+<area shape="rect" id="node3" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="5,5,87,32"/>
+</map>

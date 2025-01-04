@@ -1,0 +1,4 @@
+<map id="FFTVoiceDetection&lt; peakCount &gt;" name="FFTVoiceDetection&lt; peakCount &gt;">
+<area shape="rect" id="node1" title="Detects visemes based on FFT voice analysis." alt="" coords="5,80,160,121"/>
+<area shape="rect" id="node2" href="$classViseme.html" title="Defines the available mouth shapes (visemes)." alt="" coords="47,5,118,32"/>
+</map>

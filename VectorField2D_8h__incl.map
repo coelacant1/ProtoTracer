@@ -1,0 +1,34 @@
+<map id="VectorField2D.h" name="VectorField2D.h">
+<area shape="rect" id="node1" title="Represents a 2D vector field with various dynamic field effects and rendering capabilities." alt="" coords="270,5,394,32"/>
+<area shape="rect" id="node2" href="$Material_8h.html" title="Base class for materials defining shading and rendering behavior." alt="" coords="395,333,495,360"/>
+<area shape="rect" id="node4" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="222,721,378,748"/>
+<area shape="rect" id="node10" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="97,572,191,599"/>
+<area shape="rect" id="node12" href="$Triangle2D_8h.html" title="Defines the Triangle2D class for representing and manipulating 2D triangles." alt="" coords="257,244,407,285"/>
+<area shape="rect" id="node24" href="$Object3D_8h.html" title="Defines the Object3D class, representing a 3D object with geometry, material, and transformation data..." alt="" coords="640,80,811,107"/>
+<area shape="rect" id="node3" href="$RGBColor_8h.html" title="Defines the RGBColor class for managing and manipulating RGB color values." alt="" coords="311,415,465,442"/>
+<area shape="rect" id="node11" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="684,647,777,673"/>
+<area shape="rect" id="node9" href="$Quaternion_8h.html" title="Defines the Quaternion class for 3D rotations and transformations." alt="" coords="317,497,459,524"/>
+<area shape="rect" id="node5" title=" " alt="" coords="129,796,191,823"/>
+<area shape="rect" id="node6" title=" " alt="" coords="215,796,283,823"/>
+<area shape="rect" id="node7" title=" " alt="" coords="308,796,393,823"/>
+<area shape="rect" id="node8" href="$Mathematics_8tpp.html" title=" " alt="" coords="418,796,550,823"/>
+<area shape="rect" id="node13" href="$Transform_8h.html" title="Defines the Transform class for managing position, rotation, and scale of objects." alt="" coords="628,333,823,360"/>
+<area shape="rect" id="node22" href="$BoundingBox2D_8h.html" title="Defines the BoundingBox2D class for managing 2D bounding boxes." alt="" coords="145,408,287,449"/>
+<area shape="rect" id="node23" href="$Triangle3D_8h.html" title="Defines the Triangle3D class for representing and manipulating 3D triangles." alt="" coords="1171,415,1274,442"/>
+<area shape="rect" id="node14" href="$Rotation_8h.html" title="Defines the Rotation class for handling 3D rotations using various representations." alt="" coords="695,415,785,442"/>
+<area shape="rect" id="node15" href="$AxisAngle_8h.html" title="Represents a rotation defined by an axis and an angle." alt="" coords="997,572,1096,599"/>
+<area shape="rect" id="node16" href="$DirectionAngle_8h.html" title="Represents a rotation defined by a direction vector and an angle." alt="" coords="512,572,643,599"/>
+<area shape="rect" id="node17" href="$EulerAngles_8h.html" title="Represents rotations in 3D space using Euler angles." alt="" coords="934,497,1045,524"/>
+<area shape="rect" id="node19" href="$EulerConstants_8h.html" title="Provides predefined constants for common Euler rotation orders." alt="" coords="778,497,910,524"/>
+<area shape="rect" id="node20" href="$RotationMatrix_8h.html" title="Defines the RotationMatrix class for representing and manipulating 3D rotation matrices." alt="" coords="1171,572,1301,599"/>
+<area shape="rect" id="node21" href="$YawPitchRoll_8h.html" title="Represents an orientation using yaw, pitch, and roll angles." alt="" coords="586,497,702,524"/>
+<area shape="rect" id="node18" href="$EulerOrder_8h.html" title="Defines the EulerOrder class for specifying rotation orders in 3D space." alt="" coords="819,572,922,599"/>
+<area shape="rect" id="node25" href="$TriangleGroup_8h.html" title="Defines the TriangleGroup class for dynamic manipulation of triangles in 3D space." alt="" coords="1027,155,1165,196"/>
+<area shape="rect" id="node31" href="$StaticTriangleGroup_8h.html" title="Defines the StaticTriangleGroup class for managing 3D triangle geometry." alt="" coords="1405,244,1571,285"/>
+<area shape="rect" id="node26" href="$ITriangleGroup_8h.html" title="Defines the ITriangleGroup interface for managing a collection of mutable 3D triangles." alt="" coords="1111,251,1239,278"/>
+<area shape="rect" id="node27" href="$IndexGroup_8h.html" title="Defines the IndexGroup class for handling a group of three unsigned integer indices." alt="" coords="1313,415,1423,442"/>
+<area shape="rect" id="node29" href="$IStaticTriangleGroup_8h.html" title="Defines the IStaticTriangleGroup interface for managing a collection of static 3D triangles." alt="" coords="1165,333,1331,360"/>
+<area shape="rect" id="node30" href="$TriangleGroup_8tpp.html" title=" " alt="" coords="949,251,1086,278"/>
+<area shape="rect" id="node28" title=" " alt="" coords="1377,497,1461,524"/>
+<area shape="rect" id="node32" href="$StaticTriangleGroup_8tpp.html" title=" " alt="" coords="1457,333,1631,360"/>
+</map>

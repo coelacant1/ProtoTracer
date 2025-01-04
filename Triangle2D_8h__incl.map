@@ -1,0 +1,24 @@
+<map id="Triangle2D.h" name="Triangle2D.h">
+<area shape="rect" id="node1" title="Defines the Triangle2D class for representing and manipulating 2D triangles." alt="" coords="230,5,333,32"/>
+<area shape="rect" id="node2" href="$Material_8h.html" title="Base class for materials defining shading and rendering behavior." alt="" coords="206,80,357,121"/>
+<area shape="rect" id="node10" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="29,319,123,345"/>
+<area shape="rect" id="node12" href="$Transform_8h.html" title="Defines the Transform class for managing position, rotation, and scale of objects." alt="" coords="433,87,628,114"/>
+<area shape="rect" id="node21" href="$BoundingBox2D_8h.html" title="Defines the BoundingBox2D class for managing 2D bounding boxes." alt="" coords="39,80,182,121"/>
+<area shape="rect" id="node22" href="$Triangle3D_8h.html" title="Defines the Triangle3D class for representing and manipulating 3D triangles." alt="" coords="375,169,478,196"/>
+<area shape="rect" id="node3" href="$RGBColor_8h.html" title="Defines the RGBColor class for managing and manipulating RGB color values." alt="" coords="198,169,351,196"/>
+<area shape="rect" id="node11" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="535,393,628,420"/>
+<area shape="rect" id="node4" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="293,468,449,495"/>
+<area shape="rect" id="node9" href="$Quaternion_8h.html" title="Defines the Quaternion class for 3D rotations and transformations." alt="" coords="299,244,442,271"/>
+<area shape="rect" id="node5" title=" " alt="" coords="199,543,262,569"/>
+<area shape="rect" id="node6" title=" " alt="" coords="286,543,354,569"/>
+<area shape="rect" id="node7" title=" " alt="" coords="379,543,464,569"/>
+<area shape="rect" id="node8" href="$Mathematics_8tpp.html" title=" " alt="" coords="489,543,621,569"/>
+<area shape="rect" id="node13" href="$Rotation_8h.html" title="Defines the Rotation class for handling 3D rotations using various representations." alt="" coords="714,169,803,196"/>
+<area shape="rect" id="node14" href="$AxisAngle_8h.html" title="Represents a rotation defined by an axis and an angle." alt="" coords="619,319,717,345"/>
+<area shape="rect" id="node15" href="$DirectionAngle_8h.html" title="Represents a rotation defined by a direction vector and an angle." alt="" coords="741,319,872,345"/>
+<area shape="rect" id="node16" href="$EulerAngles_8h.html" title="Represents rotations in 3D space using Euler angles." alt="" coords="797,244,907,271"/>
+<area shape="rect" id="node18" href="$EulerConstants_8h.html" title="Provides predefined constants for common Euler rotation orders." alt="" coords="931,244,1063,271"/>
+<area shape="rect" id="node19" href="$RotationMatrix_8h.html" title="Defines the RotationMatrix class for representing and manipulating 3D rotation matrices." alt="" coords="1176,319,1307,345"/>
+<area shape="rect" id="node20" href="$YawPitchRoll_8h.html" title="Represents an orientation using yaw, pitch, and roll angles." alt="" coords="1087,244,1203,271"/>
+<area shape="rect" id="node17" href="$EulerOrder_8h.html" title="Defines the EulerOrder class for specifying rotation orders in 3D space." alt="" coords="947,319,1050,345"/>
+</map>

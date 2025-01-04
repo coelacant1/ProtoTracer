@@ -1,0 +1,17 @@
+<map id="MMC56X3.h" name="MMC56X3.h">
+<area shape="rect" id="node1" title="A class for interfacing with the Adafruit MMC56x3 magnetometer sensor." alt="" coords="467,5,567,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,87,164,114"/>
+<area shape="rect" id="node3" href="$MinFilter_8h.html" title="Implements a moving minimum filter for processing data streams." alt="" coords="188,80,301,121"/>
+<area shape="rect" id="node10" href="$RunningAverageFilter_8h.html" title="Implements a running average filter for smoothing data." alt="" coords="326,80,502,121"/>
+<area shape="rect" id="node12" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="527,87,715,114"/>
+<area shape="rect" id="node13" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="658,169,751,196"/>
+<area shape="rect" id="node14" href="$TimeStep_8h.html" title="Utility class for timing operations based on a set frequency." alt="" coords="791,87,981,114"/>
+<area shape="rect" id="node4" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="406,244,574,271"/>
+<area shape="rect" id="node9" href="$MinFilter_8tpp.html" title=" " alt="" coords="219,169,321,196"/>
+<area shape="rect" id="node5" title=" " alt="" coords="319,319,381,345"/>
+<area shape="rect" id="node6" title=" " alt="" coords="405,319,473,345"/>
+<area shape="rect" id="node7" title=" " alt="" coords="498,319,583,345"/>
+<area shape="rect" id="node8" href="$Mathematics_8tpp.html" title=" " alt="" coords="608,319,740,345"/>
+<area shape="rect" id="node11" href="$RunningAverageFilter_8tpp.html" title=" " alt="" coords="397,169,583,196"/>
+<area shape="rect" id="node15" title=" " alt="" coords="844,169,928,196"/>
+</map>

@@ -1,0 +1,10 @@
+<map id="BoundingBox2D.h" name="BoundingBox2D.h">
+<area shape="rect" id="node1" title="Defines the BoundingBox2D class for managing 2D bounding boxes." alt="" coords="107,5,246,32"/>
+<area shape="rect" id="node2" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="83,80,271,107"/>
+<area shape="rect" id="node3" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="117,229,236,256"/>
+<area shape="rect" id="node8" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="173,155,266,181"/>
+<area shape="rect" id="node4" title=" " alt="" coords="5,304,68,331"/>
+<area shape="rect" id="node5" title=" " alt="" coords="92,304,160,331"/>
+<area shape="rect" id="node6" title=" " alt="" coords="185,304,270,331"/>
+<area shape="rect" id="node7" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,304,427,331"/>
+</map>

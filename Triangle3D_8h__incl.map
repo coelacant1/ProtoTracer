@@ -1,0 +1,11 @@
+<map id="Triangle3D.h" name="Triangle3D.h">
+<area shape="rect" id="node1" title="Defines the Triangle3D class for representing and manipulating 3D triangles." alt="" coords="192,5,295,32"/>
+<area shape="rect" id="node2" href="$Quaternion_8h.html" title="Defines the Quaternion class for 3D rotations and transformations." alt="" coords="73,80,275,107"/>
+<area shape="rect" id="node9" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="214,229,307,256"/>
+<area shape="rect" id="node3" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="117,304,236,331"/>
+<area shape="rect" id="node8" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="130,155,223,181"/>
+<area shape="rect" id="node4" title=" " alt="" coords="5,379,68,405"/>
+<area shape="rect" id="node5" title=" " alt="" coords="92,379,160,405"/>
+<area shape="rect" id="node6" title=" " alt="" coords="185,379,270,405"/>
+<area shape="rect" id="node7" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,379,427,405"/>
+</map>

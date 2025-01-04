@@ -1,0 +1,11 @@
+<map id="TVStatic" name="TVStatic">
+<area shape="rect" id="node1" title="Simulates a TV static effect with noise, scanlines, and color variations." alt="" coords="475,153,551,180"/>
+<area shape="rect" id="node2" href="$classAnimatedMaterial.html" title="Base class for dynamically updating materials." alt="" coords="151,5,289,32"/>
+<area shape="rect" id="node3" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="5,107,81,133"/>
+<area shape="rect" id="node4" href="$classGradientMaterial.html" title=" " alt="" coords="135,56,305,83"/>
+<area shape="rect" id="node6" href="$classGradientMaterial.html" title=" " alt="" coords="131,107,309,133"/>
+<area shape="rect" id="node7" href="$classSimplexNoise.html" title=" " alt="" coords="145,157,295,184"/>
+<area shape="rect" id="node9" href="$classCombineMaterial.html" title=" " alt="" coords="134,208,306,235"/>
+<area shape="rect" id="node5" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="178,259,262,285"/>
+<area shape="rect" id="node8" href="$classFunctionGenerator.html" title="A class to generate various waveform functions with customizable parameters." alt="" coords="149,333,291,360"/>
+</map>

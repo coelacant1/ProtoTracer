@@ -1,0 +1,4 @@
+<map id="QuaternionKalmanFilter" name="QuaternionKalmanFilter">
+<area shape="rect" id="node1" title="A Kalman filter for quaternion smoothing." alt="" coords="5,95,183,121"/>
+<area shape="rect" id="node2" href="$classQuaternion.html" title="A mathematical construct representing a rotation in 3D space." alt="" coords="47,5,141,32"/>
+</map>

@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['radialblur_2ecpp_3112',['RadialBlur.cpp',['../RadialBlur_8cpp.html',1,'']]],
+  ['radialblur_2eh_3113',['RadialBlur.h',['../RadialBlur_8h.html',1,'']]],
+  ['rainbownoise_2ecpp_3114',['RainbowNoise.cpp',['../RainbowNoise_8cpp.html',1,'']]],
+  ['rainbownoise_2eh_3115',['RainbowNoise.h',['../RainbowNoise_8h.html',1,'']]],
+  ['rainbownoise2_2ecpp_3116',['RainbowNoise2.cpp',['../RainbowNoise2_8cpp.html',1,'']]],
+  ['rainbownoise2_2eh_3117',['RainbowNoise2.h',['../RainbowNoise2_8h.html',1,'']]],
+  ['rainbowspiral_2ecpp_3118',['RainbowSpiral.cpp',['../RainbowSpiral_8cpp.html',1,'']]],
+  ['rainbowspiral_2eh_3119',['RainbowSpiral.h',['../RainbowSpiral_8h.html',1,'']]],
+  ['rampfilter_2ecpp_3120',['RampFilter.cpp',['../RampFilter_8cpp.html',1,'']]],
+  ['rampfilter_2eh_3121',['RampFilter.h',['../RampFilter_8h.html',1,'']]],
+  ['rasterizer_2ecpp_3122',['Rasterizer.cpp',['../Rasterizer_8cpp.html',1,'']]],
+  ['rasterizer_2eh_3123',['Rasterizer.h',['../Rasterizer_8h.html',1,'']]],
+  ['readme_2emd_3124',['README.md',['../README_8md.html',1,'']]],
+  ['rectangle_2ecpp_3125',['Rectangle.cpp',['../Rectangle_8cpp.html',1,'']]],
+  ['rectangle_2eh_3126',['Rectangle.h',['../Rectangle_8h.html',1,'']]],
+  ['rgbcolor_2ecpp_3127',['RGBColor.cpp',['../RGBColor_8cpp.html',1,'']]],
+  ['rgbcolor_2eh_3128',['RGBColor.h',['../RGBColor_8h.html',1,'']]],
+  ['rgbcolor565_2eh_3129',['RGBColor565.h',['../RGBColor565_8h.html',1,'']]],
+  ['rocksanimation_2eh_3130',['RocksAnimation.h',['../RocksAnimation_8h.html',1,'']]],
+  ['rotation_2ecpp_3131',['Rotation.cpp',['../Rotation_8cpp.html',1,'']]],
+  ['rotation_2eh_3132',['Rotation.h',['../Rotation_8h.html',1,'']]],
+  ['rotationmatrix_2ecpp_3133',['RotationMatrix.cpp',['../RotationMatrix_8cpp.html',1,'']]],
+  ['rotationmatrix_2eh_3134',['RotationMatrix.h',['../RotationMatrix_8h.html',1,'']]],
+  ['runningaveragefilter_2eh_3135',['RunningAverageFilter.h',['../RunningAverageFilter_8h.html',1,'']]],
+  ['runningaveragefilter_2etpp_3136',['RunningAverageFilter.tpp',['../RunningAverageFilter_8tpp.html',1,'']]]
+];

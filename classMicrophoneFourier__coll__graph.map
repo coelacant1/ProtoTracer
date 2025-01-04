@@ -1,0 +1,11 @@
+<map id="MicrophoneFourier" name="MicrophoneFourier">
+<area shape="rect" id="node1" title="Provides real&#45;time FFT analysis of microphone signals." alt="" coords="141,288,284,315"/>
+<area shape="rect" id="node2" href="$classMicrophoneFourierBase.html" title="Base class for FFT&#45;based microphone signal processing." alt="" coords="125,199,300,225"/>
+<area shape="rect" id="node3" href="$classFFTFilter.html" title="Processes and normalizes FFT data." alt="" coords="47,109,125,136"/>
+<area shape="rect" id="node4" href="$classRunningAverageFilter.html" title=" " alt="" coords="5,5,167,47"/>
+<area shape="rect" id="node5" href="$classFFT.html" title=" " alt="" coords="150,109,275,136"/>
+<area shape="rect" id="node6" href="$classDerivativeFilter.html" title="Calculates the derivative (rate of change) of input values with filtering for stability." alt="" coords="299,109,422,136"/>
+<area shape="rect" id="node7" href="$classMinFilter.html" title=" " alt="" coords="245,13,370,39"/>
+<area shape="rect" id="node8" href="$classRunningAverageFilter.html" title=" " alt="" coords="395,5,556,47"/>
+<area shape="rect" id="node9" href="$classTimeStep.html" title="Provides a mechanism to trigger actions at a specified frequency." alt="" coords="324,199,408,225"/>
+</map>

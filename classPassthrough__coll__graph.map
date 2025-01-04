@@ -1,0 +1,4 @@
+<map id="Passthrough" name="Passthrough">
+<area shape="rect" id="node1" title="A no&#45;operation effect that leaves pixel groups unchanged." alt="" coords="5,80,107,107"/>
+<area shape="rect" id="node2" href="$classEffect.html" title="Abstract base class for applying visual effects to pixel groups." alt="" coords="27,5,85,32"/>
+</map>
