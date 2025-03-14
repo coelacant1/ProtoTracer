@@ -84,15 +84,13 @@ void MenuHandler<menuCount>::Update() {
             switch (val) {
                 case 5:
                     // E (short press) is used to advance selection in non-face menu, to keep it similar to default menu navigation
-                    val = currentValue[currentMenu] + 1;
-                    if (maxValue[currentMenu] > 0) val = val % maxValue[currentMenu];
-                    currentValue[currentMenu] = val;
+                    currentValue[currentMenu] = (currentValue[currentMenu] + 1) % maxValue[currentMenu];
                     break;
                 case 9:
                     // I (2 short presses) is used to go back a selection in non-face menu
-                    val = currentValue[currentMenu] - 1;
-                    if (maxValue[currentMenu] < 0) val += maxValue[currentMenu];
-                    currentValue[currentMenu] = val;
+                    val = currentValue[currentMenu];
+                    if (val == 0) val += maxValue[currentMenu];
+                    currentValue[currentMenu] = val - 1;
                     break;
                 case 13:
                     // M (2 long presses) is used to go back a menu
