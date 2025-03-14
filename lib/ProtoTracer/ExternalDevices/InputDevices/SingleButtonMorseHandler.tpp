@@ -116,7 +116,7 @@ void MenuHandler<menuCount>::Update() {
 
     if (pinState == previousState) return;
 
-    if (!pinState) {
+    if (!pinState && inputCount < 4) {
         inputStream[inputCount] = timeOn;
         inputCount += 1;
     }
