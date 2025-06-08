@@ -1,0 +1,12 @@
+<map id="PixelGroup&lt; pixelCount &gt;" name="PixelGroup&lt; pixelCount &gt;">
+<area shape="rect" id="Node000001" title="Manages a collection of pixels with positions, colors, and spatial relationships." alt="" coords="110,259,301,284"/>
+<area shape="rect" id="Node000002" href="$classIPixelGroup.html" title="Interface for managing and interacting with a collection of pixels." alt="" coords="5,139,101,165"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,174,99,204,132,232,176,256,174,261,129,237,96,207,69,177"/>
+<area shape="rect" id="Node000003" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="130,5,211,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="168,44,159,107,159,144,164,181,180,224,200,257,195,260,176,226,159,182,154,145,154,107,162,44"/>
+<area shape="rect" id="Node000004" href="$classBoundingBox2D.html" title="Represents a 2D axis&#45;aligned bounding box." alt="" coords="269,139,395,165"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="197,37,320,137,316,141,194,42"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="311,176,220,260,216,256,308,172"/>
+<area shape="rect" id="Node000005" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="419,139,503,165"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="437,175,389,206,332,237,259,261,257,256,330,232,386,202,434,171"/>
+</map>

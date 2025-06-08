@@ -1,0 +1,27 @@
+var classProject =
+[
+    [ "Project", "classProject.html#a1d13b651e0b82fd2ecaf87997fb8fa26", null ],
+    [ "Animate", "classProject.html#a1c42e65779c1181d53a4d7ff708acb3c", null ],
+    [ "Display", "classProject.html#a5d3fb9b91b5c167b70a1a0557e67f271", null ],
+    [ "GetAnimationTime", "classProject.html#a18269e72d71852f712cbc2b7445fe7d6", null ],
+    [ "GetDisplayTime", "classProject.html#af6ca1c375abeb6ec3daa029eab581680", null ],
+    [ "GetFrameRate", "classProject.html#aa6a7d1bcb0543b8320c02514c9610379", null ],
+    [ "GetRenderTime", "classProject.html#a40c4492bde0c027a34885230b3a05dff", null ],
+    [ "Initialize", "classProject.html#aa0cf5c283daec45b691ab4af731601db", null ],
+    [ "PrintStats", "classProject.html#a67e65ea88cda76607ee65f3f0552ef32", null ],
+    [ "Render", "classProject.html#a436830dff9fbce05c931c5a6d8d5366d", null ],
+    [ "RenderEndTimer", "classProject.html#a09b32fb5662296bb5b6bfd587b3509bf", null ],
+    [ "RenderStartTimer", "classProject.html#a8d15b5cc201c462a7389b53e218dbc09", null ],
+    [ "Update", "classProject.html#ad77ea62cb13f6e79f7903a9e05756cd7", null ],
+    [ "animationTime", "classProject.html#ade496371cf2d5cfd9869104b54ca8917", null ],
+    [ "avgFPS", "classProject.html#afcb683f44203ba35e6d05098c3e37cbb", null ],
+    [ "cameras", "classProject.html#abba713db1d123fc017f2ff9ac27be4af", null ],
+    [ "controller", "classProject.html#acaf0644c14bf7a45d314781c4168cb83", null ],
+    [ "displayTime", "classProject.html#af74de834d655a545f55f01435b2067a5", null ],
+    [ "fade", "classProject.html#a4a67cfd76d94f75c28419fe71aeb684f", null ],
+    [ "previousAnimationTime", "classProject.html#a9218e920a2fc332ce758002312360021", null ],
+    [ "previousDisplayTime", "classProject.html#a43a01ae74c12ced2fce24ef7a4e58b3e", null ],
+    [ "previousRenderTime", "classProject.html#a4523de762c963320c87f8abe50b984cf", null ],
+    [ "renderTime", "classProject.html#af2cd6a7dd412f9272b47388c3b0ff0ba", null ],
+    [ "scene", "classProject.html#a316ef80f2dad1200569390e1dc3ce5e8", null ]
+];

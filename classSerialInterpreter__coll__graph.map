@@ -1,0 +1,7 @@
+<map id="SerialInterpreter" name="SerialInterpreter">
+<area shape="rect" id="Node000001" title=" " alt="" coords="49,93,177,119"/>
+<area shape="rect" id="Node000002" href="$classQuaternion.html" title="A mathematical construct representing a rotation in 3D space." alt="" coords="5,5,100,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="51,44,56,68,68,81,83,91,80,95,64,85,52,71,46,45"/>
+<area shape="rect" id="Node000003" href="$structSerialInterpreter_1_1ESP32Data.html" title=" " alt="" coords="127,5,221,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="164,45,147,71,127,95,123,91,143,68,159,42"/>
+</map>

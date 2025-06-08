@@ -1,0 +1,27 @@
+<map id="HUB75Controller.h" name="HUB75Controller.h">
+<area shape="rect" id="Node000001" title="Declares the HUB75Controller class for managing HUB75 LED matrices." alt="" coords="837,5,979,31"/>
+<area shape="rect" id="Node000002" href="$ArrowAnimation_8h.html" title=" " alt="" coords="5,79,144,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="823,27,528,48,156,81,145,83,144,77,156,76,527,42,823,22"/>
+<area shape="rect" id="Node000003" href="$Boot_8h.html" title=" " alt="" coords="168,79,232,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="823,25,563,42,404,58,244,81,233,84,232,78,244,76,403,53,563,37,823,20"/>
+<area shape="rect" id="Node000004" href="$CreeperAnimation_8h.html" title=" " alt="" coords="256,79,408,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="823,32,420,81,409,83,408,77,420,76,823,27"/>
+<area shape="rect" id="Node000005" href="$DrGonzoProject_8h.html" title=" " alt="" coords="433,79,567,104"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="830,36,566,81,565,76,829,30"/>
+<area shape="rect" id="Node000006" href="$DrGonzoTest_8h.html" title=" " alt="" coords="591,79,707,104"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="854,37,692,81,691,76,853,32"/>
+<area shape="rect" id="Node000007" href="$HUB75Controller_8cpp.html" title=" " alt="" coords="732,79,889,104"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="883,41,828,81,825,76,880,37"/>
+<area shape="rect" id="Node000008" href="$ProtogenHUB75Project_8h.html" title=" " alt="" coords="914,79,1097,104"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="936,37,991,76,988,81,933,41"/>
+<area shape="rect" id="Node000009" href="$SageAnimation_8h.html" title=" " alt="" coords="1121,79,1255,104"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="967,31,1143,76,1142,81,965,37"/>
+<area shape="rect" id="Node000010" href="$SplatAnimation_8h.html" title=" " alt="" coords="1279,79,1414,104"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="992,30,1280,77,1279,82,992,36"/>
+<area shape="rect" id="Node000011" href="$SpyroAnimation_8h.html" title=" " alt="" coords="1439,79,1577,104"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="993,26,1427,76,1439,78,1438,83,1426,81,992,31"/>
+<area shape="rect" id="Node000012" href="$UnicornZhenjaAnimation_8h.html" title=" " alt="" coords="1602,79,1798,104"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="993,24,1590,76,1602,77,1601,83,1589,81,993,29"/>
+<area shape="rect" id="Node000013" href="$VerifyEngine_8h.html" title="Implementation of a test project to verify the engine functionality." alt="" coords="1823,79,1937,104"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="993,20,1350,37,1579,54,1811,76,1823,78,1822,83,1810,81,1579,59,1350,42,993,25"/>
+</map>

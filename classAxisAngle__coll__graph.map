@@ -1,0 +1,5 @@
+<map id="AxisAngle" name="AxisAngle">
+<area shape="rect" id="Node000001" title="Defines a rotation in 3D space using an axis and an angle." alt="" coords="5,93,92,119"/>
+<area shape="rect" id="Node000002" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="8,5,89,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="51,45,51,93,46,93,46,45"/>
+</map>

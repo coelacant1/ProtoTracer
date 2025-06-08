@@ -1,0 +1,19 @@
+<map id="Scene" name="Scene">
+<area shape="rect" id="Node000001" title="Manages a collection of 3D objects and applies optional screen&#45;space effects." alt="" coords="373,313,434,339"/>
+<area shape="rect" id="Node000002" href="$classObject3D.html" title="Represents a 3D object with geometry, material, and transformation data." alt="" coords="310,225,393,251"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="358,264,367,288,389,311,385,315,362,291,353,265"/>
+<area shape="rect" id="Node000003" href="$classTransform.html" title="Represents a 3D transformation including position, rotation, and scale." alt="" coords="89,137,176,163"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="159,169,207,199,260,217,311,228,309,233,259,222,205,204,156,174"/>
+<area shape="rect" id="Node000004" href="$classQuaternion.html" title="A mathematical construct representing a rotation in 3D space." alt="" coords="5,5,100,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="49,44,46,78,49,96,56,112,71,127,90,137,88,141,68,131,52,115,44,97,41,79,44,44"/>
+<area shape="rect" id="Node000005" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="172,5,253,31"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="212,45,203,80,186,115,172,129,157,139,154,135,169,125,181,112,198,78,207,44"/>
+<area shape="rect" id="Node000006" href="$classIStaticTriangleGroup.html" title="Interface for managing a static group of 3D triangles and associated data." alt="" coords="200,137,353,163"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="280,175,288,200,302,213,319,223,316,228,299,217,284,203,274,177"/>
+<area shape="rect" id="Node000007" href="$classITriangleGroup.html" title="Interface for managing a dynamic group of 3D triangles and associated data." alt="" coords="377,137,493,163"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="423,176,400,203,370,227,367,223,396,199,418,172"/>
+<area shape="rect" id="Node000008" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="540,137,616,163"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="566,176,553,191,537,204,502,218,473,223,443,224,405,228,394,230,393,225,404,223,442,218,472,217,501,213,534,199,549,187,562,173"/>
+<area shape="rect" id="Node000009" href="$classEffect.html" title="Abstract base class for applying visual effects to pixel groups." alt="" coords="417,225,475,251"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="437,264,412,314,407,312,432,262"/>
+</map>

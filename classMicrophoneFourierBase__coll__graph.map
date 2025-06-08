@@ -1,0 +1,15 @@
+<map id="MicrophoneFourierBase" name="MicrophoneFourierBase">
+<area shape="rect" id="Node000001" title="Base class for FFT&#45;based microphone signal processing." alt="" coords="325,196,500,221"/>
+<area shape="rect" id="Node000002" href="$classDerivativeFilter.html" title="Calculates the derivative (rate of change) of input values with filtering for stability." alt="" coords="193,108,315,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="274,141,309,170,337,183,366,193,364,198,335,188,306,174,271,145"/>
+<area shape="rect" id="Node000003" href="$classRunningAverageFilter.html" title=" " alt="" coords="5,5,167,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="133,50,235,106,232,110,130,54"/>
+<area shape="rect" id="Node000004" href="$classMinFilter.html" title=" " alt="" coords="191,13,317,38"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="257,52,257,108,251,108,251,52"/>
+<area shape="rect" id="Node000005" href="$classFFTFilter.html" title="Processes and normalizes FFT data." alt="" coords="373,108,452,133"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="415,147,415,195,410,195,410,147"/>
+<area shape="rect" id="Node000006" href="$classRunningAverageFilter.html" title=" " alt="" coords="341,5,503,45"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="421,59,416,108,411,107,416,58"/>
+<area shape="rect" id="Node000007" href="$classFFT.html" title=" " alt="" coords="477,108,602,133"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="518,144,478,174,437,198,434,194,475,170,514,140"/>
+</map>

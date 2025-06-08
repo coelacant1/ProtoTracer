@@ -1,0 +1,23 @@
+<map id="DerivativeFilter.h" name="DerivativeFilter.h">
+<area shape="rect" id="Node000001" title="Provides a DerivativeFilter class for calculating the rate of change of input values." alt="" coords="232,5,367,31"/>
+<area shape="rect" id="Node000002" href="$RunningAverageFilter_8h.html" title="Implements a running average filter for smoothing data." alt="" coords="89,79,261,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="281,33,209,74,206,69,278,28"/>
+<area shape="rect" id="Node000003" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="215,152,383,177"/>
+<area shape="poly" id="edge11_Node000001_Node000003" title=" " alt="" coords="302,31,302,138,297,138,297,31"/>
+<area shape="rect" id="Node000009" href="$MinFilter_8h.html" title="Implements a moving minimum filter for processing data streams." alt="" coords="337,79,427,104"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="314,29,360,67,356,72,311,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="197,102,269,143,266,147,194,106"/>
+<area shape="rect" id="Node000008" href="$RunningAverageFilter_8tpp.html" title=" " alt="" coords="5,152,191,177"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="165,106,123,144,119,141,161,102"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="128,225,191,251"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="278,180,195,221,193,217,276,175"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="215,225,283,251"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="293,179,267,216,263,213,289,176"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="307,225,393,251"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="310,176,336,213,332,216,306,179"/>
+<area shape="rect" id="Node000007" href="$Mathematics_8tpp.html" title=" " alt="" coords="417,225,549,251"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="330,175,441,218,439,223,328,180"/>
+<area shape="poly" id="edge9_Node000009_Node000003" title=" " alt="" coords="370,106,325,145,322,141,367,102"/>
+<area shape="rect" id="Node000010" href="$MinFilter_8tpp.html" title=" " alt="" coords="408,152,511,177"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="396,102,438,141,435,144,393,106"/>
+</map>

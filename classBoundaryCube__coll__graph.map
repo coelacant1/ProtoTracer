@@ -1,0 +1,7 @@
+<map id="BoundaryCube" name="BoundaryCube">
+<area shape="rect" id="Node000001" title="Represents an axis&#45;aligned bounding cube for collision detection and physics." alt="" coords="67,152,185,177"/>
+<area shape="rect" id="Node000002" href="$classQuaternion.html" title="A mathematical construct representing a rotation in 3D space." alt="" coords="5,5,100,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="49,44,45,85,48,107,56,127,69,140,85,150,83,154,66,144,52,129,43,108,40,85,43,44"/>
+<area shape="rect" id="Node000003" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="159,5,240,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="200,45,191,86,172,130,147,154,144,150,168,126,186,84,194,44"/>
+</map>

@@ -1,0 +1,35 @@
+<map id="MMC56X3.h" name="MMC56X3.h">
+<area shape="rect" id="Node000001" title="A class for interfacing with the Adafruit MMC56x3 magnetometer sensor." alt="" coords="467,5,567,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,86,164,111"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="467,30,176,81,152,86,151,81,175,76,466,25"/>
+<area shape="rect" id="Node000003" href="$MinFilter_8h.html" title="Implements a moving minimum filter for processing data streams." alt="" coords="188,79,301,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="478,33,316,80,314,75,476,28"/>
+<area shape="rect" id="Node000010" href="$RunningAverageFilter_8h.html" title="Implements a running average filter for smoothing data." alt="" coords="326,79,502,119"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="503,33,451,73,448,68,500,29"/>
+<area shape="rect" id="Node000012" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="527,86,715,111"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="534,29,596,76,593,80,530,33"/>
+<area shape="rect" id="Node000013" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="658,167,751,192"/>
+<area shape="poly" id="edge16_Node000001_Node000013" title=" " alt="" coords="568,24,661,44,702,59,728,77,736,96,736,117,722,155,717,153,731,116,731,97,724,80,700,64,659,49,567,29"/>
+<area shape="rect" id="Node000014" href="$TimeStep_8h.html" title="Utility class for timing operations based on a set frequency." alt="" coords="791,86,981,111"/>
+<area shape="poly" id="edge17_Node000001_Node000014" title=" " alt="" coords="567,27,820,81,819,86,566,33"/>
+<area shape="rect" id="Node000004" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="406,240,574,265"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="228,121,215,137,205,156,202,174,208,190,219,200,236,209,281,223,336,234,393,241,392,247,336,239,280,228,234,214,216,204,204,194,197,174,200,154,211,134,224,117"/>
+<area shape="rect" id="Node000009" href="$MinFilter_8tpp.html" title=" " alt="" coords="219,167,321,192"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="253,118,265,153,260,154,248,120"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="319,313,381,339"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="469,268,386,309,384,305,466,263"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="405,313,473,339"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="484,267,458,304,453,301,479,264"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="498,313,583,339"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="501,264,527,301,522,304,496,267"/>
+<area shape="rect" id="Node000008" href="$Mathematics_8tpp.html" title=" " alt="" coords="608,313,740,339"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="521,263,632,306,630,311,519,268"/>
+<area shape="poly" id="edge10_Node000010_Node000004" title=" " alt="" coords="402,120,384,155,382,173,387,191,409,215,439,232,436,237,406,219,382,193,377,174,379,153,397,118"/>
+<area shape="rect" id="Node000011" href="$RunningAverageFilter_8tpp.html" title=" " alt="" coords="397,167,583,192"/>
+<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="434,117,471,155,467,158,430,121"/>
+<area shape="poly" id="edge13_Node000012_Node000004" title=" " alt="" coords="623,112,616,150,608,173,596,194,569,219,537,237,535,232,565,215,592,190,604,171,611,149,617,111"/>
+<area shape="poly" id="edge14_Node000012_Node000013" title=" " alt="" coords="635,110,684,155,680,159,631,113"/>
+<area shape="poly" id="edge15_Node000013_Node000004" title=" " alt="" coords="671,195,539,238,537,233,669,189"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="844,167,928,192"/>
+<area shape="poly" id="edge18_Node000014_Node000015" title=" " alt="" coords="889,112,889,153,883,153,883,112"/>
+</map>

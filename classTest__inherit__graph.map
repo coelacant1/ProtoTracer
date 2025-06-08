@@ -1,0 +1,5 @@
+<map id="Test" name="Test">
+<area shape="rect" id="Node000001" title="A debugging effect used to identify memory issues in pixel rendering." alt="" coords="11,79,59,104"/>
+<area shape="rect" id="Node000002" href="$classEffect.html" title="Abstract base class for applying visual effects to pixel groups." alt="" coords="5,5,64,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="37,44,37,79,32,79,32,44"/>
+</map>

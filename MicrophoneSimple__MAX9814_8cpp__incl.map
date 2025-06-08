@@ -1,0 +1,27 @@
+<map id="MicrophoneSimple_MAX9814.cpp" name="MicrophoneSimple_MAX9814.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="145,5,384,31"/>
+<area shape="rect" id="Node000002" href="$MicrophoneSimple__MAX9814_8h.html" title="A simple microphone processing class for analog input." alt="" coords="153,79,377,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="267,31,267,65,262,65,262,31"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,159,89,185"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="234,107,93,157,91,152,232,101"/>
+<area shape="rect" id="Node000004" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="265,240,390,280"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="276,103,290,124,304,151,317,189,325,226,320,227,312,191,300,153,286,127,271,106"/>
+<area shape="rect" id="Node000009" href="$RunningAverageFilter_8h.html" title="Implements a running average filter for smoothing data." alt="" coords="114,152,290,192"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="257,106,228,143,224,139,253,103"/>
+<area shape="rect" id="Node000011" href="$MinFilter_8h.html" title="Implements a moving minimum filter for processing data streams." alt="" coords="365,152,490,192"/>
+<area shape="poly" id="edge11_Node000002_Node000011" title=" " alt="" coords="289,102,377,144,375,148,287,106"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="156,328,219,353"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="295,282,221,323,219,319,293,278"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="243,328,311,353"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="317,282,294,318,289,315,313,279"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="335,328,421,353"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="342,279,365,315,361,318,337,282"/>
+<area shape="rect" id="Node000008" href="$Mathematics_8tpp.html" title=" " alt="" coords="445,328,577,353"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="372,278,473,320,471,325,370,282"/>
+<area shape="poly" id="edge9_Node000009_Node000004" title=" " alt="" coords="231,190,290,230,287,234,228,194"/>
+<area shape="rect" id="Node000010" href="$RunningAverageFilter_8tpp.html" title=" " alt="" coords="55,247,240,273"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="192,194,164,237,160,234,188,191"/>
+<area shape="poly" id="edge12_Node000011_Node000004" title=" " alt="" coords="407,194,361,233,358,229,403,190"/>
+<area shape="rect" id="Node000012" href="$MinFilter_8tpp.html" title=" " alt="" coords="415,247,517,273"/>
+<area shape="poly" id="edge13_Node000011_Node000012" title=" " alt="" coords="438,191,457,233,453,235,433,193"/>
+</map>

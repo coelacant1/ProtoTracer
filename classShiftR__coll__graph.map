@@ -1,0 +1,7 @@
+<map id="ShiftR" name="ShiftR">
+<area shape="rect" id="Node000001" title="Radially shifts the red, green, and blue channels of the pixels." alt="" coords="67,123,127,148"/>
+<area shape="rect" id="Node000002" href="$classEffect.html" title="Abstract base class for applying visual effects to pixel groups." alt="" coords="5,5,64,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="50,41,93,121,89,124,45,44"/>
+<area shape="rect" id="Node000003" href="$classFunctionGenerator.html" title="A class to generate various waveform functions with customizable parameters." alt="" coords="89,5,231,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="150,44,106,124,101,121,145,41"/>
+</map>

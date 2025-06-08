@@ -1,0 +1,15 @@
+<map id="TriangleGroup&lt; vertexCount, triangleCount &gt;" name="TriangleGroup&lt; vertexCount, triangleCount &gt;">
+<area shape="rect" id="Node000001" title="Represents a dynamic group of 3D triangles." alt="" coords="191,269,402,309"/>
+<area shape="rect" id="Node000002" href="$classITriangleGroup.html" title="Interface for managing a dynamic group of 3D triangles and associated data." alt="" coords="5,167,121,192"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="88,199,118,222,153,243,215,267,213,272,150,248,115,226,85,203"/>
+<area shape="rect" id="Node000003" href="$classTriangle3D.html" title="Represents a 3D triangle with support for UV mapping and ray intersection testing." alt="" coords="251,167,342,192"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="299,206,299,269,294,269,294,206"/>
+<area shape="rect" id="Node000004" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="173,5,255,31"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="204,44,190,74,179,112,175,152,178,172,184,191,199,215,219,235,262,267,259,271,215,239,195,218,180,193,173,173,170,153,174,111,185,73,199,42"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="220,44,233,91,243,117,256,141,280,165,277,168,252,144,238,119,228,93,215,45"/>
+<area shape="rect" id="Node000005" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="289,5,371,31"/>
+<area shape="poly" id="edge7_Node000001_Node000005" title=" " alt="" coords="360,39,370,53,389,106,396,152,389,196,366,247,355,260,341,271,338,267,351,257,361,244,384,195,391,152,384,108,365,56,355,42"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="327,45,302,167,297,166,322,44"/>
+<area shape="rect" id="Node000006" href="$classIndexGroup.html" title="Represents a group of three unsigned integer indices." alt="" coords="488,167,585,192"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="505,201,410,248,351,272,349,267,408,243,503,196"/>
+</map>

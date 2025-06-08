@@ -1,0 +1,39 @@
+<map id="MicrophoneFourierBase.h" name="MicrophoneFourierBase.h">
+<area shape="rect" id="Node000001" title="Provides a base class for FFT&#45;based microphone signal processing." alt="" coords="194,5,381,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="41,167,125,192"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="273,33,208,81,110,160,106,155,204,77,269,29"/>
+<area shape="rect" id="Node000003" href="$DerivativeFilter_8h.html" title="Provides a DerivativeFilter class for calculating the rate of change of input values." alt="" coords="218,79,357,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="290,31,290,65,285,65,285,31"/>
+<area shape="rect" id="Node000013" href="$FFTFilter_8h.html" title="Provides the FFTFilter class for processing and normalizing FFT data." alt="" coords="381,79,519,119"/>
+<area shape="poly" id="edge14_Node000001_Node000013" title=" " alt="" coords="312,28,400,70,397,75,310,33"/>
+<area shape="rect" id="Node000014" href="$TimeStep_8h.html" title="Utility class for timing operations based on a set frequency." alt="" coords="5,79,143,119"/>
+<area shape="poly" id="edge17_Node000001_Node000014" title=" " alt="" coords="257,33,139,76,137,71,255,28"/>
+<area shape="rect" id="Node000015" href="$FFT_8h.html" title="Provides an implementation of the Radix&#45;2 FFT algorithm and related utilities." alt="" coords="543,79,693,119"/>
+<area shape="poly" id="edge19_Node000001_Node000015" title=" " alt="" coords="336,28,530,74,529,79,335,33"/>
+<area shape="rect" id="Node000004" href="$RunningAverageFilter_8h.html" title="Implements a running average filter for smoothing data." alt="" coords="325,167,497,192"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="319,117,383,157,380,161,316,121"/>
+<area shape="rect" id="Node000005" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="303,240,471,265"/>
+<area shape="poly" id="edge13_Node000003_Node000005" title=" " alt="" coords="292,118,299,153,315,191,334,213,357,230,354,235,331,216,310,193,294,155,286,119"/>
+<area shape="rect" id="Node000011" href="$MinFilter_8h.html" title="Implements a moving minimum filter for processing data streams." alt="" coords="159,167,250,192"/>
+<area shape="poly" id="edge10_Node000003_Node000011" title=" " alt="" coords="269,121,229,159,225,155,265,117"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="410,193,398,228,393,226,405,191"/>
+<area shape="rect" id="Node000010" href="$RunningAverageFilter_8tpp.html" title=" " alt="" coords="496,240,681,265"/>
+<area shape="poly" id="edge9_Node000004_Node000010" title=" " alt="" coords="441,190,548,232,546,237,439,194"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="216,313,279,339"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="366,268,283,309,281,305,364,263"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="303,313,371,339"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="381,267,355,304,351,301,377,264"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="395,313,481,339"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="398,264,424,301,420,304,394,267"/>
+<area shape="rect" id="Node000009" href="$Mathematics_8tpp.html" title=" " alt="" coords="505,313,637,339"/>
+<area shape="poly" id="edge8_Node000005_Node000009" title=" " alt="" coords="418,263,529,306,527,311,416,268"/>
+<area shape="poly" id="edge11_Node000011_Node000005" title=" " alt="" coords="235,190,346,232,344,237,233,195"/>
+<area shape="rect" id="Node000012" href="$MinFilter_8tpp.html" title=" " alt="" coords="153,240,256,265"/>
+<area shape="poly" id="edge12_Node000011_Node000012" title=" " alt="" coords="207,192,207,226,202,226,202,192"/>
+<area shape="poly" id="edge15_Node000013_Node000004" title=" " alt="" coords="443,120,426,155,421,153,438,118"/>
+<area shape="poly" id="edge16_Node000013_Node000005" title=" " alt="" coords="478,117,495,133,509,152,516,172,511,193,485,220,453,238,450,233,482,216,506,191,511,173,504,154,491,136,474,121"/>
+<area shape="poly" id="edge18_Node000014_Node000002" title=" " alt="" coords="79,119,83,152,78,153,74,119"/>
+<area shape="poly" id="edge20_Node000015_Node000005" title=" " alt="" coords="606,121,574,157,532,194,486,220,440,238,438,233,484,215,528,190,570,153,602,117"/>
+<area shape="rect" id="Node000016" href="$FFT_8tpp.html" title=" " alt="" coords="623,167,693,192"/>
+<area shape="poly" id="edge21_Node000015_Node000016" title=" " alt="" coords="630,118,648,153,643,155,625,120"/>
+</map>

@@ -1,0 +1,18 @@
+<map id="Clock" name="Clock">
+<area shape="rect" id="Node000001" title="Renders a real&#45;time clock and date as a material." alt="" coords="5,317,64,343"/>
+<area shape="rect" id="Node000002" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="43,5,119,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="70,44,65,55,48,132,40,208,37,317,32,317,34,208,43,131,60,54,65,42"/>
+<area shape="rect" id="Node000003" href="$classTextEngine.html" title=" " alt="" coords="124,229,279,255"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="77,45,71,80,69,122,75,166,83,186,95,204,111,217,130,227,128,232,108,222,91,207,79,188,70,167,63,123,66,79,72,44"/>
+<area shape="poly" id="edge7_Node000003_Node000002" title=" " alt="" coords="90,43,105,87,126,136,161,188,193,227,188,230,156,191,122,139,100,89,85,45"/>
+<area shape="rect" id="Node000004" href="$classSimpleMaterial.html" title="A material that applies a single, solid RGB color to surfaces." alt="" coords="197,110,318,135"/>
+<area shape="poly" id="edge5_Node000004_Node000002" title=" " alt="" coords="114,35,239,107,236,112,112,40"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="168,263,59,319,56,315,165,259"/>
+<area shape="poly" id="edge10_Node000001_Node000004" title=" " alt="" coords="216,143,149,178,114,203,83,231,67,253,55,277,40,318,35,316,50,275,63,250,79,228,111,198,146,174,214,138"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="247,149,240,162,209,230,204,228,235,160,242,146"/>
+<area shape="rect" id="Node000005" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="342,5,426,31"/>
+<area shape="poly" id="edge8_Node000003_Node000005" title=" " alt="" coords="407,39,435,74,460,118,468,141,471,164,467,187,455,207,443,216,427,224,383,234,279,243,279,238,382,229,425,219,441,212,451,204,462,185,466,164,463,142,455,120,430,77,403,43"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="361,42,273,112,270,108,357,37"/>
+<area shape="rect" id="Node000006" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="342,110,423,135"/>
+<area shape="poly" id="edge9_Node000003_Node000006" title=" " alt="" coords="369,148,328,207,303,222,275,232,273,227,300,217,325,203,365,145"/>
+</map>

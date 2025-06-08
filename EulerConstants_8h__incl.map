@@ -1,0 +1,18 @@
+<map id="EulerConstants.h" name="EulerConstants.h">
+<area shape="rect" id="Node000001" title="Provides predefined constants for common Euler rotation orders." alt="" coords="111,5,243,31"/>
+<area shape="rect" id="Node000002" href="$EulerOrder_8h.html" title="Defines the EulerOrder class for specifying rotation orders in 3D space." alt="" coords="81,79,184,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="172,32,149,68,145,66,167,30"/>
+<area shape="rect" id="Node000003" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="130,152,223,177"/>
+<area shape="poly" id="edge8_Node000001_Node000003" title=" " alt="" coords="184,30,199,78,198,111,190,140,185,139,193,110,194,79,179,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="142,103,165,139,160,142,138,106"/>
+<area shape="rect" id="Node000004" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="117,225,236,251"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="179,178,179,212,174,212,174,178"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="5,299,68,324"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="155,253,73,295,70,290,153,248"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="92,299,160,324"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="170,253,144,289,140,286,166,249"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="185,299,270,324"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="187,249,213,286,209,289,183,253"/>
+<area shape="rect" id="Node000008" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,299,427,324"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="207,248,319,291,317,296,205,253"/>
+</map>

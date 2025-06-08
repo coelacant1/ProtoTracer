@@ -1,0 +1,5 @@
+<map id="HUB75ControllerSquare" name="HUB75ControllerSquare">
+<area shape="rect" id="Node000001" title="Manages a square display composed of two vertical HUB75 panels." alt="" coords="5,79,181,104"/>
+<area shape="rect" id="Node000002" href="$classController.html" title="Base class for managing brightness and display operations of lighting controllers." alt="" coords="50,5,137,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,44,96,79,91,79,91,44"/>
+</map>

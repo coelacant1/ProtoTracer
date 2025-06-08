@@ -1,0 +1,27 @@
+var classRGBColor =
+[
+    [ "RGBColor", "classRGBColor.html#a243e7d2507e5a95ed2790b572dc45651", null ],
+    [ "RGBColor", "classRGBColor.html#a2283eb2aa8b0994b1dcefc5f603a5587", null ],
+    [ "RGBColor", "classRGBColor.html#ad13a8382f5970267919eb7c96d968295", null ],
+    [ "RGBColor", "classRGBColor.html#af0e8605668f27ff9ca6745c73b166ecc", null ],
+    [ "RGBColor", "classRGBColor.html#a243e7d2507e5a95ed2790b572dc45651", null ],
+    [ "RGBColor", "classRGBColor.html#aa3456fb985b9c71158e9793e81bdaf4d", null ],
+    [ "RGBColor", "classRGBColor.html#ad13a8382f5970267919eb7c96d968295", null ],
+    [ "RGBColor", "classRGBColor.html#a80ce2b05a1533f24d6568c867be80a7e", null ],
+    [ "Add", "classRGBColor.html#ad1195c88830bb9147486c7fb7993d35a", null ],
+    [ "Add", "classRGBColor.html#ad4edcca860703dc654799928aefb0afb", null ],
+    [ "HueShift", "classRGBColor.html#a4290fe42f60b5f805944650820e56873", null ],
+    [ "HueShift", "classRGBColor.html#ace7143be8bc16428c821a2380753f4a3", null ],
+    [ "InterpolateColors", "classRGBColor.html#a700c113b563e0448dfc2a5c095af3081", null ],
+    [ "InterpolateColors", "classRGBColor.html#a070bfc11176037ca65824964a947d3e4", null ],
+    [ "Scale", "classRGBColor.html#a6da57fc688a39907fe5854615c8e221d", null ],
+    [ "Scale", "classRGBColor.html#aef2c8a2d3b41fa9ba5f984f9c17ff064", null ],
+    [ "SetColor", "classRGBColor.html#a5bb1927dd456a6e371a311e9ddbabf67", null ],
+    [ "SetColor", "classRGBColor.html#a3d77d89ed3c38084dae58abc108c0761", null ],
+    [ "ToString", "classRGBColor.html#a001d21b09a3d49654c46c18549f86f83", null ],
+    [ "ToString", "classRGBColor.html#a001d21b09a3d49654c46c18549f86f83", null ],
+    [ "B", "classRGBColor.html#a7c7fb36d372d349a62c14f1e6c7337ea", null ],
+    [ "color", "classRGBColor.html#a0b10c5b0fa8e65e009263b93ba2671ae", null ],
+    [ "G", "classRGBColor.html#aae2a690e4df0bce516938666009b5ea6", null ],
+    [ "R", "classRGBColor.html#ad6dca68b61d96e60ca0062e00390ba9f", null ]
+];

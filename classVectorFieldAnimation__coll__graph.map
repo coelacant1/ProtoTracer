@@ -1,0 +1,20 @@
+<map id="VectorFieldAnimation" name="VectorFieldAnimation">
+<area shape="rect" id="Node000001" title=" " alt="" coords="229,273,391,299"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,117,95,143"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="69,151,114,200,143,226,175,247,206,261,239,271,238,276,205,266,173,252,140,230,110,204,65,155"/>
+<area shape="rect" id="Node000003" href="$classFunctionGenerator.html" title="A class to generate various waveform functions with customizable parameters." alt="" coords="119,117,261,143"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="186,156,182,202,185,226,196,248,211,262,230,272,228,276,208,266,192,251,180,228,176,202,181,156"/>
+<area shape="rect" id="Node000004" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="307,5,391,31"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="342,45,325,108,314,203,313,273,307,273,309,203,319,108,337,43"/>
+<area shape="rect" id="Node000005" href="$classGradientMaterial.html" title="Creates a customizable gradient material for rendering." alt="" coords="407,117,639,143"/>
+<area shape="poly" id="edge6_Node000005_Node000004" title=" " alt="" coords="364,41,380,62,401,82,436,101,473,115,471,120,434,106,398,86,376,66,360,44"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="498,153,328,275,325,271,495,149"/>
+<area shape="rect" id="Node000006" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="696,5,772,31"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="729,45,718,67,701,86,682,96,655,105,592,120,590,115,654,100,680,91,698,82,713,64,724,43"/>
+<area shape="rect" id="Node000008" href="$classVectorField2D.html" title="A class for managing and rendering 2D vector fields." alt="" coords="663,117,775,143"/>
+<area shape="poly" id="edge9_Node000008_Node000006" title=" " alt="" coords="738,45,735,84,726,118,721,116,730,84,732,44"/>
+<area shape="rect" id="Node000007" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="524,5,605,31"/>
+<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="530,41,518,56,513,71,513,87,521,116,516,118,508,88,508,70,513,53,526,37"/>
+<area shape="poly" id="edge10_Node000008_Node000007" title=" " alt="" coords="594,37,704,115,701,119,591,41"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="700,154,642,205,603,231,562,252,519,266,475,276,391,286,391,281,474,271,518,261,560,247,600,226,638,200,697,150"/>
+</map>

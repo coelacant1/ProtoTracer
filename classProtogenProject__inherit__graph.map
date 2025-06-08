@@ -1,0 +1,27 @@
+<map id="ProtogenProject" name="ProtogenProject">
+<area shape="rect" id="Node000001" title="A default project template that includes functionality for an analog microphone, APDS9960 boop sensor..." alt="" coords="120,252,245,277"/>
+<area shape="rect" id="Node000003" href="$classAceAnimation.html" title=" " alt="" coords="329,5,442,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="187,238,199,195,219,141,250,87,269,62,292,40,309,29,328,22,330,27,311,34,295,44,273,65,254,90,224,143,204,196,192,239"/>
+<area shape="rect" id="Node000004" href="$classArrowAnimation.html" title=" " alt="" coords="322,55,449,80"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="191,238,205,204,227,164,256,123,292,89,320,75,323,80,295,94,260,127,232,167,210,206,196,240"/>
+<area shape="rect" id="Node000005" href="$classBetaProject.html" title=" " alt="" coords="337,104,434,129"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="197,239,236,188,262,161,292,138,313,128,335,121,337,126,315,133,295,143,266,165,240,191,201,242"/>
+<area shape="rect" id="Node000006" href="$classDrGonzoProject.html" title=" " alt="" coords="324,153,447,179"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="208,241,246,214,292,188,323,176,325,181,294,192,249,218,211,246"/>
+<area shape="rect" id="Node000007" href="$classDrGonzoTest.html" title=" " alt="" coords="333,203,437,228"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="248,246,332,225,334,230,249,251"/>
+<area shape="rect" id="Node000008" href="$classFursuitEyesV1.html" title=" " alt="" coords="328,252,443,277"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="259,262,328,262,328,267,259,267"/>
+<area shape="rect" id="Node000009" href="$classProtogenHUB75Project.html" title=" " alt="" coords="300,301,471,327"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="249,278,333,299,332,304,248,283"/>
+<area shape="rect" id="Node000010" href="$classProtogenWS35Project.html" title=" " alt="" coords="304,351,467,376"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="211,284,249,311,294,337,325,348,323,353,292,342,246,316,208,288"/>
+<area shape="rect" id="Node000011" href="$classSageAnimation.html" title=" " alt="" coords="325,400,446,425"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="201,287,240,338,266,364,295,386,325,400,323,405,292,391,262,368,236,342,197,291"/>
+<area shape="rect" id="Node000012" href="$classSplatAnimation.html" title=" " alt="" coords="324,449,447,475"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="196,289,210,323,232,363,260,402,295,436,325,450,322,455,292,440,256,406,227,365,205,325,191,291"/>
+<area shape="rect" id="Node000013" href="$classUnicornZhenjaAnimation.html" title=" " alt="" coords="293,499,477,524"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="192,290,204,333,224,386,254,440,273,464,295,485,313,496,310,501,292,489,269,468,250,443,219,388,199,335,187,292"/>
+<area shape="rect" id="Node000002" href="$classProject.html" title="Manages animations, rendering, and display operations." alt="" coords="5,252,72,277"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="86,262,120,262,120,267,86,267"/>
+</map>

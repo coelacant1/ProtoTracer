@@ -1,0 +1,7 @@
+<map id="MorphTransform&lt; maxMorphs &gt;" name="MorphTransform&lt; maxMorphs &gt;">
+<area shape="rect" id="Node000001" title="A template class for managing 3D transformations using morph targets." alt="" coords="31,123,266,148"/>
+<area shape="rect" id="Node000002" href="$classIEasyEaseAnimator.html" title="Interface for defining animation behaviors with easing and interpolation." alt="" coords="5,5,153,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,41,144,121,140,124,91,44"/>
+<area shape="rect" id="Node000003" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="177,5,259,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="206,44,158,124,153,121,202,41"/>
+</map>

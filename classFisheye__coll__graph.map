@@ -1,0 +1,9 @@
+<map id="Fisheye" name="Fisheye">
+<area shape="rect" id="Node000001" title="Implements a fisheye distortion effect for pixel groups." alt="" coords="93,137,165,163"/>
+<area shape="rect" id="Node000002" href="$classEffect.html" title="Abstract base class for applying visual effects to pixel groups." alt="" coords="5,5,64,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="53,40,123,135,119,139,49,43"/>
+<area shape="rect" id="Node000003" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="89,5,170,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="132,44,132,137,127,137,127,44"/>
+<area shape="rect" id="Node000004" href="$classFunctionGenerator.html" title="A class to generate various waveform functions with customizable parameters." alt="" coords="194,5,337,31"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="248,43,178,115,147,139,144,135,174,111,244,39"/>
+</map>

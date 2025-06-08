@@ -1,0 +1,14 @@
+<map id="SimplexNoise&lt; colors &gt;" name="SimplexNoise&lt; colors &gt;">
+<area shape="rect" id="Node000001" title="A material class for rendering Simplex Noise." alt="" coords="74,211,255,236"/>
+<area shape="rect" id="Node000002" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="5,5,81,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="42,44,42,87,45,110,54,132,72,157,95,178,142,208,139,213,91,183,68,161,49,135,40,112,36,88,37,44"/>
+<area shape="rect" id="Node000003" href="$classGradientMaterial.html" title=" " alt="" coords="64,108,265,133"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="69,37,153,106,149,110,66,41"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="167,147,167,211,162,211,162,147"/>
+<area shape="rect" id="Node000004" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="113,5,197,31"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="157,44,159,84,164,107,159,108,154,84,152,45"/>
+<area shape="rect" id="Node000005" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="251,5,332,31"/>
+<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="288,45,279,66,264,86,243,100,220,110,218,105,241,96,260,82,274,64,283,43"/>
+<area shape="rect" id="Node000006" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="289,108,371,133"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="320,147,305,169,285,189,259,203,231,213,229,208,257,198,282,185,301,166,316,144"/>
+</map>

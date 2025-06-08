@@ -1,0 +1,14 @@
+<map id="MaterialAnimator&lt; materialCount &gt;" name="MaterialAnimator&lt; materialCount &gt;">
+<area shape="rect" id="Node000001" title="Animates transitions and blends between multiple materials." alt="" coords="8,196,215,236"/>
+<area shape="rect" id="Node000002" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="29,101,105,126"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="77,139,88,171,101,194,96,197,84,173,72,140"/>
+<area shape="poly" id="edge6_Node000001_Node000002" title=" " alt="" coords="80,138,105,195,101,197,75,140"/>
+<area shape="rect" id="Node000003" href="$classEasyEaseAnimator.html" title=" " alt="" coords="129,93,344,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="206,144,169,174,138,198,135,194,166,170,202,140"/>
+<area shape="rect" id="Node000004" href="$classIEasyEaseAnimator.html" title="Interface for defining animation behaviors with easing and interpolation." alt="" coords="5,5,153,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="112,35,206,91,203,95,109,40"/>
+<area shape="rect" id="Node000005" href="$classDampedSpring.html" title="Simulates the motion of a damped spring." alt="" coords="177,5,296,31"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="239,44,239,93,234,93,234,44"/>
+<area shape="rect" id="Node000006" href="$classRampFilter.html" title="Smooths transitions between values using a linear ramp approach." alt="" coords="321,5,414,31"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="360,45,340,71,300,96,297,91,336,67,355,42"/>
+</map>

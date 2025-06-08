@@ -1,0 +1,7 @@
+<map id="RainbowNoise2" name="RainbowNoise2">
+<area shape="rect" id="Node000001" title="A dynamic material that creates a rainbow effect using simplex noise with black&#45;to&#45;color transitions." alt="" coords="13,152,136,177"/>
+<area shape="rect" id="Node000002" href="$classAnimatedMaterial.html" title="Base class for dynamically updating materials." alt="" coords="5,79,144,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="77,118,77,152,72,152,72,118"/>
+<area shape="rect" id="Node000003" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="37,5,113,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="77,44,77,79,72,79,72,44"/>
+</map>

@@ -1,0 +1,52 @@
+<map id="Transform.cpp" name="Transform.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="742,5,857,31"/>
+<area shape="rect" id="Node000002" href="$Transform_8h.html" title="Defines the Transform class for managing position, rotation, and scale of objects." alt="" coords="461,79,560,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="754,33,571,78,570,73,753,28"/>
+<area shape="rect" id="Node000006" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="772,445,891,471"/>
+<area shape="poly" id="edge32_Node000001_Node000006" title=" " alt="" coords="858,26,916,41,975,68,1000,86,1021,107,1035,133,1040,163,1040,313,1036,338,1025,361,1010,381,990,399,943,426,895,444,893,439,941,421,987,394,1006,378,1021,359,1031,337,1034,312,1034,164,1030,135,1017,110,997,90,972,72,914,46,856,31"/>
+<area shape="rect" id="Node000003" href="$Rotation_8h.html" title="Defines the Rotation class for handling 3D rotations using various representations." alt="" coords="466,152,555,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="513,104,513,138,508,138,508,104"/>
+<area shape="rect" id="Node000005" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="437,372,530,397"/>
+<area shape="poly" id="edge31_Node000002_Node000005" title=" " alt="" coords="461,100,314,122,227,141,143,165,72,195,45,212,25,231,12,251,8,273,15,296,32,322,51,332,87,341,193,357,423,377,423,382,192,363,85,347,49,337,29,326,10,298,3,273,7,249,20,227,42,208,70,190,141,160,225,135,313,117,460,95"/>
+<area shape="rect" id="Node000004" href="$AxisAngle_8h.html" title="Represents a rotation defined by an axis and an angle." alt="" coords="477,299,576,324"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="520,177,531,198,540,225,541,257,536,286,531,285,536,256,534,226,526,200,515,179"/>
+<area shape="poly" id="edge28_Node000003_Node000005" title=" " alt="" coords="526,176,553,202,581,239,591,260,597,282,598,304,590,325,567,351,537,369,534,364,563,347,585,323,592,303,592,283,586,262,576,242,549,206,522,179"/>
+<area shape="rect" id="Node000011" href="$DirectionAngle_8h.html" title="Represents a rotation defined by a direction vector and an angle." alt="" coords="42,299,173,324"/>
+<area shape="poly" id="edge10_Node000003_Node000011" title=" " alt="" coords="466,168,376,170,268,178,216,186,169,196,132,210,108,227,101,240,99,254,102,285,97,286,93,254,96,238,104,224,130,205,168,191,215,180,267,173,376,165,466,163"/>
+<area shape="rect" id="Node000012" href="$EulerAngles_8h.html" title="Represents rotations in 3D space using Euler angles." alt="" coords="258,225,368,251"/>
+<area shape="poly" id="edge12_Node000003_Node000012" title=" " alt="" coords="480,180,359,223,357,218,478,175"/>
+<area shape="rect" id="Node000014" href="$EulerConstants_8h.html" title="Provides predefined constants for common Euler rotation orders." alt="" coords="392,225,524,251"/>
+<area shape="poly" id="edge16_Node000003_Node000014" title=" " alt="" coords="504,179,477,216,473,213,500,176"/>
+<area shape="rect" id="Node000015" href="$Quaternion_8h.html" title="Defines the Quaternion class for 3D rotations and transformations." alt="" coords="673,225,780,251"/>
+<area shape="poly" id="edge19_Node000003_Node000015" title=" " alt="" coords="546,175,679,218,678,223,544,180"/>
+<area shape="rect" id="Node000017" href="$RotationMatrix_8h.html" title="Defines the RotationMatrix class for representing and manipulating 3D rotation matrices." alt="" coords="869,299,1000,324"/>
+<area shape="poly" id="edge25_Node000003_Node000017" title=" " alt="" coords="556,168,665,187,730,202,793,223,857,255,909,288,906,293,854,259,791,228,728,207,664,192,555,174"/>
+<area shape="rect" id="Node000018" href="$YawPitchRoll_8h.html" title="Represents an orientation using yaw, pitch, and roll angles." alt="" coords="118,225,234,251"/>
+<area shape="poly" id="edge29_Node000003_Node000018" title=" " alt="" coords="466,178,243,225,242,220,465,173"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="522,326,500,362,495,359,517,323"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="531,393,763,440,762,445,530,398"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="660,519,723,544"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="810,473,728,515,725,510,808,468"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="747,519,815,544"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="825,473,799,509,795,506,821,469"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="840,519,925,544"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="842,469,868,506,864,509,838,473"/>
+<area shape="rect" id="Node000010" href="$Mathematics_8tpp.html" title=" " alt="" coords="950,519,1082,544"/>
+<area shape="poly" id="edge9_Node000006_Node000010" title=" " alt="" coords="862,468,974,511,972,516,860,473"/>
+<area shape="poly" id="edge11_Node000011_Node000005" title=" " alt="" coords="169,321,424,369,423,375,168,327"/>
+<area shape="poly" id="edge15_Node000012_Node000005" title=" " alt="" coords="306,252,287,286,284,305,290,323,317,348,351,365,388,375,424,380,423,386,387,381,349,370,314,352,285,325,279,306,282,285,301,250"/>
+<area shape="rect" id="Node000013" href="$EulerOrder_8h.html" title="Defines the EulerOrder class for specifying rotation orders in 3D space." alt="" coords="299,299,402,324"/>
+<area shape="poly" id="edge13_Node000012_Node000013" title=" " alt="" coords="322,250,340,285,336,288,317,252"/>
+<area shape="poly" id="edge14_Node000013_Node000005" title=" " alt="" coords="373,322,451,363,449,368,371,326"/>
+<area shape="poly" id="edge18_Node000014_Node000005" title=" " alt="" coords="461,251,463,284,468,323,477,358,472,360,462,325,457,284,456,251"/>
+<area shape="poly" id="edge17_Node000014_Node000013" title=" " alt="" coords="442,253,381,293,378,289,440,248"/>
+<area shape="poly" id="edge24_Node000015_Node000005" title=" " alt="" coords="718,253,682,288,633,326,584,351,536,370,534,365,582,347,630,322,679,284,714,249"/>
+<area shape="poly" id="edge20_Node000015_Node000006" title=" " alt="" coords="752,249,782,268,809,297,824,331,832,368,836,431,831,432,827,369,819,333,804,300,779,272,749,253"/>
+<area shape="rect" id="Node000016" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="701,299,794,324"/>
+<area shape="poly" id="edge21_Node000015_Node000016" title=" " alt="" coords="732,250,743,285,738,286,727,252"/>
+<area shape="poly" id="edge23_Node000016_Node000005" title=" " alt="" coords="706,327,540,371,539,366,705,321"/>
+<area shape="poly" id="edge22_Node000016_Node000006" title=" " alt="" coords="757,323,820,432,816,435,752,326"/>
+<area shape="poly" id="edge27_Node000017_Node000005" title=" " alt="" coords="869,326,545,376,544,371,868,320"/>
+<area shape="poly" id="edge26_Node000017_Node000006" title=" " alt="" coords="928,326,850,436,846,433,924,323"/>
+<area shape="poly" id="edge30_Node000018_Node000005" title=" " alt="" coords="188,249,225,285,277,322,313,338,352,352,424,371,423,376,350,357,311,343,274,326,222,289,184,253"/>
+</map>

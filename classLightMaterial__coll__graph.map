@@ -1,0 +1,9 @@
+<map id="LightMaterial&lt; lightCount &gt;" name="LightMaterial&lt; lightCount &gt;">
+<area shape="rect" id="Node000001" title="A material class that incorporates multiple light sources for rendering." alt="" coords="5,196,211,221"/>
+<area shape="rect" id="Node000002" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="37,108,113,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,145,106,194,101,196,82,147"/>
+<area shape="rect" id="Node000003" href="$classLight.html" title="Represents a light source with position, intensity, and falloff properties." alt="" coords="137,108,191,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="151,146,118,197,114,194,147,143"/>
+<area shape="rect" id="Node000004" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="123,5,205,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="167,45,167,108,161,108,161,45"/>
+</map>

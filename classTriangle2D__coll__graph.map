@@ -1,0 +1,9 @@
+<map id="Triangle2D" name="Triangle2D">
+<area shape="rect" id="Node000001" title="Represents a 2D triangle with support for UV mapping, depth, and intersection testing." alt="" coords="106,152,197,177"/>
+<area shape="rect" id="Node000002" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="5,5,87,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="60,42,82,83,112,126,138,150,134,154,108,130,77,86,55,45"/>
+<area shape="rect" id="Node000003" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="111,5,192,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="154,45,154,152,149,152,149,45"/>
+<area shape="rect" id="Node000004" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="216,5,292,31"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="251,45,236,87,209,130,194,144,177,154,175,150,191,139,205,126,231,84,246,43"/>
+</map>

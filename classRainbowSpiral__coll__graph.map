@@ -1,0 +1,17 @@
+<map id="RainbowSpiral" name="RainbowSpiral">
+<area shape="rect" id="Node000001" title="A dynamic material creating a colorful rainbow spiral animation." alt="" coords="284,196,399,221"/>
+<area shape="rect" id="Node000002" href="$classAnimatedMaterial.html" title="Base class for dynamically updating materials." alt="" coords="5,108,144,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="124,135,306,193,305,198,123,140"/>
+<area shape="rect" id="Node000003" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="13,5,89,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="59,43,75,107,69,109,54,45"/>
+<area shape="rect" id="Node000006" href="$classSpiralMaterial.html" title="Generates a spiral pattern with configurable properties." alt="" coords="190,108,303,133"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="77,37,109,60,145,82,206,105,204,110,143,86,106,64,74,41"/>
+<area shape="rect" id="Node000004" href="$classFunctionGenerator.html" title="A class to generate various waveform functions with customizable parameters." alt="" coords="542,108,685,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="565,140,379,198,377,193,563,135"/>
+<area shape="rect" id="Node000005" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="279,5,363,31"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="367,36,382,53,396,85,400,113,395,141,382,173,373,187,361,198,358,194,369,184,378,171,390,139,395,112,391,86,378,56,363,40"/>
+<area shape="poly" id="edge7_Node000006_Node000005" title=" " alt="" coords="293,41,277,56,261,83,252,109,247,107,256,81,273,53,289,37"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="264,143,287,170,321,194,318,198,284,174,260,147"/>
+<area shape="rect" id="Node000007" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="113,5,194,31"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="152,44,152,64,160,83,174,96,191,106,189,110,170,100,155,85,147,65,146,44"/>
+</map>

@@ -1,0 +1,16 @@
+<map id="Vector2D.h" name="Vector2D.h">
+<area shape="rect" id="Node000001" title="Defines a 2D vector and various related operations." alt="" coords="130,5,223,31"/>
+<area shape="rect" id="Node000002" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="117,152,236,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="175,32,163,79,164,110,170,138,165,139,159,110,158,78,170,30"/>
+<area shape="rect" id="Node000007" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="173,79,266,104"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="186,30,208,66,203,68,181,32"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,225,68,251"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="155,180,73,221,70,217,153,175"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="92,225,160,251"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="170,179,144,216,140,213,166,176"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="185,225,270,251"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="187,176,213,213,209,216,183,179"/>
+<area shape="rect" id="Node000006" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,225,427,251"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="207,175,319,218,317,223,205,180"/>
+<area shape="poly" id="edge7_Node000007_Node000002" title=" " alt="" coords="215,106,193,142,188,139,210,103"/>
+</map>

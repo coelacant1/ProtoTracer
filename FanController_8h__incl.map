@@ -1,0 +1,15 @@
+<map id="FanController.h" name="FanController.h">
+<area shape="rect" id="Node000001" title="Declares the FanController class for managing PWM&#45;based fan speed control." alt="" coords="75,5,193,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,89,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="122,33,74,72,70,68,118,29"/>
+<area shape="rect" id="Node000003" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="113,79,328,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="150,29,198,68,194,72,146,33"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="49,152,112,177"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="199,106,117,148,114,143,197,102"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="136,152,204,177"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="214,106,188,142,184,139,210,103"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="229,152,314,177"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="231,103,257,139,253,142,227,106"/>
+<area shape="rect" id="Node000007" href="$Mathematics_8tpp.html" title=" " alt="" coords="339,152,471,177"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="251,102,363,144,361,149,249,107"/>
+</map>

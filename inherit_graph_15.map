@@ -1,0 +1,15 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classCameraManager.html" title="Manages multiple CameraBase objects." alt="" coords="5,129,136,155"/>
+<area shape="rect" id="Node000001" href="$classAPA102CamerasV1.html" title=" " alt="" coords="221,5,368,31"/>
+<area shape="poly" id="edge56_Node000000_Node000001" title=" " alt="" coords="89,117,129,77,155,57,183,40,220,26,222,31,185,44,158,61,133,81,93,121"/>
+<area shape="rect" id="Node000002" href="$classDualP3HUB75CameraManager.html" title=" " alt="" coords="184,55,405,80"/>
+<area shape="poly" id="edge57_Node000000_Node000002" title=" " alt="" coords="108,121,183,89,224,77,226,83,185,94,110,125"/>
+<area shape="rect" id="Node000003" href="$classHUB75DeltaCameraManager.html" title=" " alt="" coords="189,104,400,129"/>
+<area shape="poly" id="edge58_Node000000_Node000003" title=" " alt="" coords="149,130,189,126,189,131,150,136"/>
+<area shape="rect" id="Node000004" href="$classWS35BetaCameraManager.html" title=" " alt="" coords="196,153,393,179"/>
+<area shape="poly" id="edge59_Node000000_Node000004" title=" " alt="" coords="150,148,196,153,195,158,149,153"/>
+<area shape="rect" id="Node000005" href="$classWS35CameraManager.html" title=" " alt="" coords="211,203,378,228"/>
+<area shape="poly" id="edge60_Node000000_Node000005" title=" " alt="" coords="112,158,185,187,230,200,229,205,183,193,110,163"/>
+<area shape="rect" id="Node000006" href="$classWS35SplitCameraManager.html" title=" " alt="" coords="197,252,393,277"/>
+<area shape="poly" id="edge61_Node000000_Node000006" title=" " alt="" coords="94,163,134,202,159,221,185,237,217,249,215,254,183,242,156,225,130,206,90,167"/>
+</map>

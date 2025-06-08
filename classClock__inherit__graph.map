@@ -1,0 +1,5 @@
+<map id="Clock" name="Clock">
+<area shape="rect" id="Node000001" title="Renders a real&#45;time clock and date as a material." alt="" coords="14,79,73,104"/>
+<area shape="rect" id="Node000002" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="5,5,81,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="46,44,46,79,41,79,41,44"/>
+</map>

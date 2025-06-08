@@ -1,0 +1,25 @@
+<map id="EasyEaseAnimator.h" name="EasyEaseAnimator.h">
+<area shape="rect" id="Node000001" title="Declares the EasyEaseAnimator template class for advanced animation easing." alt="" coords="233,5,388,31"/>
+<area shape="rect" id="Node000002" href="$IEasyEaseAnimator_8h.html" title="Declares the IEasyEaseAnimator interface for defining animation behaviors." alt="" coords="138,79,297,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="297,33,245,72,242,68,294,29"/>
+<area shape="rect" id="Node000011" href="$EasyEaseAnimator_8tpp.html" title=" " alt="" coords="321,79,489,104"/>
+<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="327,29,380,68,377,72,324,33"/>
+<area shape="rect" id="Node000003" href="$KeyFrame_8h.html" title="Declares the KeyFrame class for representing individual animation keyframes." alt="" coords="5,152,104,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="192,106,95,149,93,144,190,102"/>
+<area shape="rect" id="Node000004" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="192,225,395,251"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="204,106,187,121,173,138,165,158,165,167,169,176,194,201,226,218,224,223,191,206,164,179,160,168,160,157,168,136,184,117,200,102"/>
+<area shape="rect" id="Node000009" href="$DampedSpring_8h.html" title="Defines the DampedSpring class for simulating damped spring motion." alt="" coords="179,152,408,177"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="231,102,273,141,269,144,228,106"/>
+<area shape="rect" id="Node000010" href="$RampFilter_8h.html" title="Provides a class for smooth value transitions using a ramp filter." alt="" coords="432,152,619,177"/>
+<area shape="poly" id="edge10_Node000002_Node000010" title=" " alt="" coords="267,101,463,146,462,152,266,107"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="122,299,185,324"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="272,253,189,295,187,290,270,248"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="209,299,277,324"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="287,253,261,289,257,286,283,249"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="301,299,387,324"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="304,249,330,286,326,289,300,253"/>
+<area shape="rect" id="Node000008" href="$Mathematics_8tpp.html" title=" " alt="" coords="411,299,543,324"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="324,248,435,291,433,296,322,253"/>
+<area shape="poly" id="edge9_Node000009_Node000004" title=" " alt="" coords="296,178,296,212,291,212,291,178"/>
+<area shape="poly" id="edge11_Node000010_Node000004" title=" " alt="" coords="489,180,345,224,343,219,487,175"/>
+</map>

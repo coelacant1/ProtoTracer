@@ -1,0 +1,5 @@
+<map id="StaticTriangleGroup&lt; vertexCount, triangleCount &gt;" name="StaticTriangleGroup&lt; vertexCount, triangleCount &gt;">
+<area shape="rect" id="Node000001" title="Represents a static collection of 3D triangles and associated vertex/UV data." alt="" coords="5,79,233,119"/>
+<area shape="rect" id="Node000002" href="$classIStaticTriangleGroup.html" title="Interface for managing a static group of 3D triangles and associated data." alt="" coords="43,5,196,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="122,44,122,79,117,79,117,44"/>
+</map>

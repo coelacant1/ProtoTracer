@@ -1,0 +1,15 @@
+<map id="HorizontalRainbow" name="HorizontalRainbow">
+<area shape="rect" id="Node000001" title="A dynamic horizontal rainbow gradient material." alt="" coords="181,196,326,221"/>
+<area shape="rect" id="Node000002" href="$classAnimatedMaterial.html" title="Base class for dynamically updating materials." alt="" coords="5,108,144,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="112,137,230,193,228,198,110,142"/>
+<area shape="rect" id="Node000003" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="37,5,113,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="77,45,77,108,72,108,72,45"/>
+<area shape="rect" id="Node000005" href="$classGradientMaterial.html" title=" " alt="" coords="168,108,339,133"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="101,37,167,82,221,105,218,110,164,86,98,42"/>
+<area shape="rect" id="Node000004" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="325,5,409,31"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="401,38,413,53,417,69,413,85,399,115,383,137,335,174,289,198,287,194,332,170,379,133,394,113,408,83,412,69,408,56,397,41"/>
+<area shape="poly" id="edge6_Node000005_Node000004" title=" " alt="" coords="331,40,307,57,282,84,263,109,259,106,277,80,304,53,328,35"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="256,147,256,195,251,195,251,147"/>
+<area shape="rect" id="Node000006" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="137,5,218,31"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="175,44,175,64,181,83,194,96,210,106,208,110,190,100,176,85,169,65,169,44"/>
+</map>

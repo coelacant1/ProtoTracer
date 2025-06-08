@@ -1,0 +1,35 @@
+<map id="DualP3HUB75CameraManager" name="DualP3HUB75CameraManager">
+<area shape="rect" id="Node000001" title=" " alt="" coords="238,493,459,519"/>
+<area shape="rect" id="Node000002" href="$classCameraManager.html" title="Manages multiple CameraBase objects." alt="" coords="185,391,315,416"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="266,425,333,491,330,495,262,428"/>
+<area shape="poly" id="edge9_Node000001_Node000002" title=" " alt="" coords="280,423,345,491,342,495,276,427"/>
+<area shape="rect" id="Node000003" href="$classCameraBase.html" title="Base class for managing camera properties and transformations." alt="" coords="264,271,369,297"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="306,310,259,392,254,389,301,307"/>
+<area shape="rect" id="Node000013" href="$classCamera.html" title=" " alt="" coords="340,391,475,416"/>
+<area shape="poly" id="edge19_Node000013_Node000003" title=" " alt="" coords="336,306,400,389,396,392,332,309"/>
+<area shape="rect" id="Node000004" href="$classTransform.html" title="Represents a 3D transformation including position, rotation, and scale." alt="" coords="120,137,207,163"/>
+<area shape="poly" id="edge11_Node000001_Node000004" title=" " alt="" coords="158,177,147,226,140,289,141,322,147,355,158,386,175,414,203,442,236,463,271,479,304,491,302,496,269,484,234,468,199,446,171,418,153,389,142,356,136,323,135,289,142,225,153,175"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="181,173,203,201,230,229,262,251,294,269,291,274,259,256,227,233,199,204,177,176"/>
+<area shape="rect" id="Node000005" href="$classQuaternion.html" title="A mathematical construct representing a rotation in 3D space." alt="" coords="269,5,364,31"/>
+<area shape="poly" id="edge8_Node000003_Node000005" title=" " alt="" coords="319,45,319,271,314,271,314,45"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="256,29,204,40,183,48,171,56,161,76,158,98,163,137,157,138,153,98,156,74,167,53,181,43,202,35,255,24"/>
+<area shape="rect" id="Node000007" href="$classCameraLayout.html" title="Manages camera orientation and axis alignment." alt="" coords="413,137,530,163"/>
+<area shape="poly" id="edge7_Node000007_Node000005" title=" " alt="" coords="343,38,459,135,456,139,339,42"/>
+<area shape="rect" id="Node000006" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="5,5,87,31"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="42,45,39,79,42,96,49,112,64,125,81,135,120,145,119,150,79,140,61,130,45,115,37,98,33,79,36,44"/>
+<area shape="poly" id="edge10_Node000001_Node000007" title=" " alt="" coords="491,173,497,186,507,220,515,264,512,327,490,417,477,448,454,471,431,486,405,496,403,491,428,481,451,467,473,445,485,415,507,326,510,265,502,222,491,188,486,175"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="428,171,398,189,375,210,355,233,326,273,322,270,351,229,372,206,395,185,426,166"/>
+<area shape="rect" id="Node000008" href="$classPixelGroup.html" title=" " alt="" coords="754,391,909,416"/>
+<area shape="poly" id="edge12_Node000001_Node000008" title=" " alt="" coords="767,422,532,472,410,496,409,491,531,467,766,416"/>
+<area shape="rect" id="Node000009" href="$classIPixelGroup.html" title="Interface for managing and interacting with a collection of pixels." alt="" coords="950,271,1046,297"/>
+<area shape="poly" id="edge13_Node000008_Node000009" title=" " alt="" coords="972,307,849,393,846,388,969,303"/>
+<area shape="rect" id="Node000010" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="791,137,872,163"/>
+<area shape="poly" id="edge14_Node000008_Node000010" title=" " alt="" coords="834,176,834,391,829,391,829,176"/>
+<area shape="rect" id="Node000011" href="$classBoundingBox2D.html" title="Represents a 2D axis&#45;aligned bounding box." alt="" coords="1071,271,1197,297"/>
+<area shape="poly" id="edge16_Node000011_Node000010" title=" " alt="" coords="871,166,1109,269,1106,274,869,171"/>
+<area shape="poly" id="edge20_Node000013_Node000010" title=" " alt="" coords="781,170,746,184,710,203,675,227,645,256,637,271,633,285,632,313,631,341,625,355,613,369,590,381,556,390,475,401,475,395,555,385,588,376,610,365,620,352,625,340,627,313,627,284,632,269,641,253,672,223,707,198,744,179,779,165"/>
+<area shape="poly" id="edge15_Node000008_Node000011" title=" " alt="" coords="1093,304,862,393,860,388,1091,299"/>
+<area shape="rect" id="Node000012" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="697,271,781,297"/>
+<area shape="poly" id="edge17_Node000008_Node000012" title=" " alt="" coords="735,310,732,339,734,353,740,365,754,379,771,388,769,393,751,383,736,368,729,354,727,339,729,310"/>
+<area shape="poly" id="edge18_Node000001_Node000013" title=" " alt="" coords="396,430,358,495,353,492,391,427"/>
+</map>

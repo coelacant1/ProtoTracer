@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['badappleface_0',['BadAppleFace',['../classBroookAnimation.html#a21196970ca97c9d0654b41227029bdfd',1,'BroookAnimation']]],
+  ['basilgardenanimation_1',['BasilGardenAnimation',['../classBasilGardenAnimation.html#ac433a65c914bc196cb8207cf09192476',1,'BasilGardenAnimation']]],
+  ['battery_2',['Battery',['../classXenraxAnimation.html#aa291984c9c7a84f49cf1ca6c751f0d09',1,'XenraxAnimation']]],
+  ['beeanimation_3',['BeeAnimation',['../classBeeAnimation.html#aae90f3c7343cfc23cb794f315b0a167f',1,'BeeAnimation']]],
+  ['begin_4',['begin',['../classMenuHandler.html#a7af58ea142d081a335193acf0345ebd0',1,'MenuHandler::Begin()'],['../classMenuHandler.html#a7af58ea142d081a335193acf0345ebd0',1,'MenuHandler::Begin()']]],
+  ['betaproject_5',['BetaProject',['../classBetaProject.html#a9365a6c5912db5bd24686452cd309536',1,'BetaProject']]],
+  ['betaprotocontroller_6',['BetaProtoController',['../classBetaProtoController.html#a8b3d4f31f02bf02ecbf0e7c6ddb92487',1,'BetaProtoController']]],
+  ['bilinearinterpolation_7',['BilinearInterpolation',['../classMathematics.html#a05655aa9eea96ebae0935a8359f3345d',1,'Mathematics']]],
+  ['bitreverseorder_8',['BitReverseOrder',['../classFFT.html#a83d1c77ade72a2daeedbb12b2b4839d9',1,'FFT']]],
+  ['blink_9',['blink',['../classHardwareTest.html#a3a112bdf45273ab3cdb2a0835cfa23fb',1,'HardwareTest::blink()'],['../classMenuHandler.html#a3a112bdf45273ab3cdb2a0835cfa23fb',1,'MenuHandler::blink()']]],
+  ['blinktrack_10',['BlinkTrack',['../classBlinkTrack.html#a7c75c13dca876efe5540f39215407fe7',1,'BlinkTrack']]],
+  ['blush_11',['blush',['../classWarzone2Animation.html#a0ee2a57b631a80a50c5701fc2c720b9c',1,'Warzone2Animation::Blush()'],['../classStrawberryAnimation.html#a0ee2a57b631a80a50c5701fc2c720b9c',1,'StrawberryAnimation::Blush()'],['../classSageAnimation.html#a0ee2a57b631a80a50c5701fc2c720b9c',1,'SageAnimation::Blush()'],['../classGalaxyAnimation.html#a0ee2a57b631a80a50c5701fc2c720b9c',1,'GalaxyAnimation::Blush()'],['../classAphoriAnimation.html#a0ee2a57b631a80a50c5701fc2c720b9c',1,'AphoriAnimation::Blush()'],['../classAceAnimation.html#a0ee2a57b631a80a50c5701fc2c720b9c',1,'AceAnimation::Blush()'],['../classHertzzAnimation.html#a0ee2a57b631a80a50c5701fc2c720b9c',1,'HertzzAnimation::Blush()']]],
+  ['bno055_12',['BNO055',['../classBNO055.html#a609b714688a47c960ca7d1a4e15d155d',1,'BNO055']]],
+  ['boop_13',['boop',['../classAphoriAnimation.html#ac9751c218560991086dffcc3554bf32b',1,'AphoriAnimation::Boop()'],['../classDrGonzoProject.html#ac9751c218560991086dffcc3554bf32b',1,'DrGonzoProject::Boop()'],['../classTamamoAnimation.html#ac9751c218560991086dffcc3554bf32b',1,'TamamoAnimation::Boop()'],['../classXenraxAnimation.html#ac9751c218560991086dffcc3554bf32b',1,'XenraxAnimation::Boop()']]],
+  ['boot_14',['Boot',['../classBoot.html#ab01c5cf398e9feb815b19c6493a154c1',1,'Boot']]],
+  ['bounceinterpolation_15',['BounceInterpolation',['../classMathematics.html#ad0b498ff7aba64737252523057b2e5e5',1,'Mathematics']]],
+  ['bouncephysics_16',['BouncePhysics',['../classBouncePhysics.html#a3f77de27038d1ac2c816e02ccb54a337',1,'BouncePhysics']]],
+  ['boundary_17',['Boundary',['../classVectorField2D.html#abd5de932669768839f589c69d7fe4144',1,'VectorField2D']]],
+  ['boundarycube_18',['boundarycube',['../classBoundaryCube.html#ab966e26e39ad8db795d3e91e555e1cb0',1,'BoundaryCube::BoundaryCube(Object3D *object)'],['../classBoundaryCube.html#aebf08d3a44920e764bcd9b74fe4365a4',1,'BoundaryCube::BoundaryCube(Vector3D centerPosition, Vector3D objectSize)']]],
+  ['boundarymotionsimulator_19',['BoundaryMotionSimulator',['../classBoundaryMotionSimulator.html#a2a60ff1816fc6c2976414162d283998b',1,'BoundaryMotionSimulator']]],
+  ['boundarysphere_20',['boundarysphere',['../classBoundarySphere.html#a289927007672a9daad0aaccbc40fb549',1,'BoundarySphere::BoundarySphere(Object3D *object, float radius)'],['../classBoundarySphere.html#a0ffdc34947ba0f4c4d36812844e86b5d',1,'BoundarySphere::BoundarySphere(Object3D *object, Vector3D position, float radius)']]],
+  ['boundingbox2d_21',['boundingbox2d',['../classBoundingBox2D.html#a2abbf54e7b31af75773d13e4f37f6b4b',1,'BoundingBox2D::BoundingBox2D()'],['../classBoundingBox2D.html#a704f2b0e386ea332222cde7121ba2a67',1,'BoundingBox2D::BoundingBox2D(const Vector2D &amp;min, const Vector2D &amp;max)']]],
+  ['broookanimation_22',['BroookAnimation',['../classBroookAnimation.html#a6408d75869850e0cd44c3faec00373bb',1,'BroookAnimation']]],
+  ['bsod_23',['bsod',['../classSergaliciousAnimation.html#a80b21625d6b9ee0505d955f8db0f950e',1,'SergaliciousAnimation::BSOD()'],['../classXenraxAnimation.html#a80b21625d6b9ee0505d955f8db0f950e',1,'XenraxAnimation::BSOD()']]]
+];

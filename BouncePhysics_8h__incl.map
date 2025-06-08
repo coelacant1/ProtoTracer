@@ -1,0 +1,18 @@
+<map id="BouncePhysics.h" name="BouncePhysics.h">
+<area shape="rect" id="Node000001" title="Defines the BouncePhysics class for simulating basic bouncing physics with velocity and gravity." alt="" coords="174,5,305,31"/>
+<area shape="rect" id="Node000002" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="69,167,284,192"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="233,32,204,80,192,118,183,153,178,152,186,116,200,78,228,30"/>
+<area shape="rect" id="Node000007" href="$RunningAverageFilter_8h.html" title="Implements a running average filter for smoothing data." alt="" coords="214,79,390,119"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="251,29,280,66,276,69,247,33"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,240,68,265"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="155,194,73,236,70,231,153,190"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="92,240,160,265"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="170,194,144,230,140,227,166,191"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="185,240,270,265"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="187,191,213,227,209,230,183,194"/>
+<area shape="rect" id="Node000006" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,240,427,265"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="207,190,319,232,317,237,205,195"/>
+<area shape="poly" id="edge7_Node000007_Node000002" title=" " alt="" coords="273,121,208,162,205,157,270,117"/>
+<area shape="rect" id="Node000008" href="$RunningAverageFilter_8tpp.html" title=" " alt="" coords="308,167,493,192"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="328,117,377,156,374,160,324,121"/>
+</map>

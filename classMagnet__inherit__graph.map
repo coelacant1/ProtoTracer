@@ -1,0 +1,5 @@
+<map id="Magnet" name="Magnet">
+<area shape="rect" id="Node000001" title="Implements a magnetic distortion effect for pixel groups." alt="" coords="5,79,76,104"/>
+<area shape="rect" id="Node000002" href="$classEffect.html" title="Abstract base class for applying visual effects to pixel groups." alt="" coords="11,5,70,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="43,44,43,79,38,79,38,44"/>
+</map>

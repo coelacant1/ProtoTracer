@@ -1,0 +1,19 @@
+<map id="HUB75ControllerSplit" name="HUB75ControllerSplit">
+<area shape="rect" id="Node000001" title="Manages HUB75 LED matrices and secondary LED displays or strips." alt="" coords="237,476,397,501"/>
+<area shape="rect" id="Node000002" href="$classController.html" title="Base class for managing brightness and display operations of lighting controllers." alt="" coords="273,401,360,427"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="319,441,319,476,314,476,314,441"/>
+<area shape="rect" id="Node000003" href="$classCameraManager.html" title="Manages multiple CameraBase objects." alt="" coords="251,313,382,339"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="319,353,319,401,314,401,314,353"/>
+<area shape="rect" id="Node000004" href="$classCameraBase.html" title="Base class for managing camera properties and transformations." alt="" coords="264,225,369,251"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="319,265,319,313,314,313,314,265"/>
+<area shape="rect" id="Node000005" href="$classTransform.html" title="Represents a 3D transformation including position, rotation, and scale." alt="" coords="124,137,211,163"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="191,170,230,199,282,223,280,228,227,204,188,174"/>
+<area shape="rect" id="Node000006" href="$classQuaternion.html" title="A mathematical construct representing a rotation in 3D space." alt="" coords="269,5,364,31"/>
+<area shape="poly" id="edge9_Node000004_Node000006" title=" " alt="" coords="319,45,319,225,314,225,314,45"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="256,29,204,40,183,48,171,56,162,75,159,97,166,136,161,137,154,97,156,74,167,53,181,43,202,35,255,24"/>
+<area shape="rect" id="Node000008" href="$classCameraLayout.html" title="Manages camera orientation and axis alignment." alt="" coords="413,137,530,163"/>
+<area shape="poly" id="edge8_Node000008_Node000006" title=" " alt="" coords="343,38,459,135,456,139,339,42"/>
+<area shape="rect" id="Node000007" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="5,5,87,31"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="42,45,39,79,42,96,49,112,64,126,83,136,124,145,123,151,81,141,61,130,45,115,37,98,33,79,36,44"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="440,172,339,227,336,223,437,167"/>
+</map>

@@ -1,0 +1,32 @@
+<map id="MaterialMask.h" name="MaterialMask.h">
+<area shape="rect" id="Node000001" title="Defines the MaterialMask class, which blends materials with a mask defined by a shape." alt="" coords="98,5,221,31"/>
+<area shape="rect" id="Node000002" href="$Material_8h.html" title="Base class for materials defining shading and rendering behavior." alt="" coords="65,79,165,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="154,32,132,68,127,66,150,30"/>
+<area shape="rect" id="Node000012" href="$Shape_8h.html" title="Defines the Shape base class for representing geometric shapes in 2D space." alt="" coords="226,152,413,192"/>
+<area shape="poly" id="edge17_Node000001_Node000012" title=" " alt="" coords="173,29,291,141,288,144,170,33"/>
+<area shape="rect" id="Node000003" href="$RGBColor_8h.html" title="Defines the RGBColor class for managing and manipulating RGB color values." alt="" coords="39,159,192,185"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="118,104,118,145,113,145,113,104"/>
+<area shape="rect" id="Node000011" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="89,387,182,412"/>
+<area shape="poly" id="edge16_Node000002_Node000011" title=" " alt="" coords="86,106,54,125,39,138,28,153,24,171,29,191,47,245,71,296,121,374,116,376,67,298,42,247,23,193,19,171,24,151,35,134,51,121,83,102"/>
+<area shape="rect" id="Node000004" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="99,460,255,485"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="111,186,91,226,71,283,65,316,63,349,67,381,79,411,101,435,129,452,126,457,97,439,74,413,62,382,58,349,59,315,66,282,87,223,106,184"/>
+<area shape="rect" id="Node000009" href="$Quaternion_8h.html" title="Defines the Quaternion class for 3D rotations and transformations." alt="" coords="144,240,287,265"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="132,183,191,229,188,233,128,187"/>
+<area shape="poly" id="edge15_Node000003_Node000011" title=" " alt="" coords="119,185,136,372,130,373,114,185"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="5,533,68,559"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="155,488,73,529,70,525,153,483"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="92,533,160,559"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="170,487,144,524,140,521,166,484"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="185,533,270,559"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="187,484,213,521,209,524,183,487"/>
+<area shape="rect" id="Node000008" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,533,427,559"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="207,483,319,526,317,531,205,488"/>
+<area shape="poly" id="edge9_Node000009_Node000004" title=" " alt="" coords="217,266,210,329,197,413,187,447,182,446,191,411,205,328,212,265"/>
+<area shape="rect" id="Node000010" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="257,313,350,339"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="231,263,280,302,277,307,228,267"/>
+<area shape="poly" id="edge14_Node000009_Node000011" title=" " alt="" coords="211,267,151,376,146,373,206,264"/>
+<area shape="poly" id="edge11_Node000010_Node000004" title=" " alt="" coords="297,340,240,414,202,452,198,448,236,410,293,337"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="277,341,176,384,174,379,275,336"/>
+<area shape="poly" id="edge13_Node000011_Node000004" title=" " alt="" coords="144,411,165,447,161,449,140,414"/>
+<area shape="poly" id="edge18_Node000012_Node000010" title=" " alt="" coords="320,193,309,300,303,299,315,192"/>
+</map>

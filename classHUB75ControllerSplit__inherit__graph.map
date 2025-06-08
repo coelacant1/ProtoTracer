@@ -1,0 +1,5 @@
+<map id="HUB75ControllerSplit" name="HUB75ControllerSplit">
+<area shape="rect" id="Node000001" title="Manages HUB75 LED matrices and secondary LED displays or strips." alt="" coords="5,79,165,104"/>
+<area shape="rect" id="Node000002" href="$classController.html" title="Base class for managing brightness and display operations of lighting controllers." alt="" coords="42,5,129,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="88,44,88,79,83,79,83,44"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="HUB75Controller" name="HUB75Controller">
+<area shape="rect" id="Node000001" title="Manages HUB75 LED matrices with camera integration." alt="" coords="5,79,136,104"/>
+<area shape="rect" id="Node000002" href="$classController.html" title="Base class for managing brightness and display operations of lighting controllers." alt="" coords="27,5,114,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,44,73,79,68,79,68,44"/>
+</map>

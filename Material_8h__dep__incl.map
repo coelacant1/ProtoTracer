@@ -1,0 +1,146 @@
+<map id="Material.h" name="Material.h">
+<area shape="rect" id="Node000001" title="Base class for materials defining shading and rendering behavior." alt="" coords="2020,5,2108,31"/>
+<area shape="rect" id="Node000002" href="$AnimatedMaterial_8h.html" title="Declares the AnimatedMaterial class for time&#45;based material updates." alt="" coords="752,152,903,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="2006,22,1794,25,1502,33,1211,51,1091,64,1000,81,955,97,912,116,846,154,843,150,910,112,953,92,999,76,1090,59,1211,46,1502,28,1794,19,2006,17"/>
+<area shape="rect" id="Node000033" href="$AudioReactiveGradient_8h.html" title="A material class for creating an audio&#45;reactive gradient effect." alt="" coords="301,152,485,177"/>
+<area shape="poly" id="edge13_Node000001_Node000033" title=" " alt="" coords="2006,23,1740,27,1356,37,966,54,804,66,681,81,608,97,536,117,424,155,422,149,534,112,606,92,681,76,803,61,966,49,1356,31,1740,21,2006,17"/>
+<area shape="rect" id="Node000035" href="$Clock_8h.html" title="A material class for rendering a real&#45;time clock with date and time overlays." alt="" coords="3252,225,3323,251"/>
+<area shape="poly" id="edge16_Node000001_Node000035" title=" " alt="" coords="2122,17,2348,18,2662,26,2825,33,2978,43,3109,58,3207,76,3254,87,3292,97,3324,115,3354,151,3358,162,3358,174,3347,195,3329,213,3309,227,3306,223,3325,209,3343,191,3353,172,3353,163,3349,153,3321,119,3290,102,3253,92,3206,81,3108,63,2977,49,2825,38,2662,31,2348,23,2122,22"/>
+<area shape="rect" id="Node000037" href="$CombineMaterial_8h.html" title="Combines multiple materials with different blending methods and opacities." alt="" coords="1833,79,1980,104"/>
+<area shape="poly" id="edge18_Node000001_Node000037" title=" " alt="" coords="2027,39,1933,81,1931,76,2025,34"/>
+<area shape="rect" id="Node000039" href="$MaterialAnimator_8h.html" title="Provides functionality for animating transitions and blends between materials." alt="" coords="2088,152,2234,177"/>
+<area shape="poly" id="edge56_Node000001_Node000039" title=" " alt="" coords="2097,37,2119,55,2138,77,2155,116,2162,151,2157,152,2150,118,2133,80,2115,59,2093,41"/>
+<area shape="rect" id="Node000040" href="$DepthMaterial_8h.html" title="Defines a material that maps depth along a specified axis to RGB values." alt="" coords="1355,152,1482,177"/>
+<area shape="poly" id="edge25_Node000001_Node000040" title=" " alt="" coords="2007,34,1784,81,1467,155,1466,149,1783,76,2006,29"/>
+<area shape="rect" id="Node000042" href="$GradientMaterial_8h.html" title="Defines a material for creating gradient color effects in 3D rendering." alt="" coords="1012,79,1156,104"/>
+<area shape="poly" id="edge27_Node000001_Node000042" title=" " alt="" coords="2006,26,1156,87,1156,82,2006,21"/>
+<area shape="rect" id="Node000043" href="$NormalMaterial_8h.html" title="A material class that visualizes surface normals." alt="" coords="1664,152,1800,177"/>
+<area shape="poly" id="edge59_Node000001_Node000043" title=" " alt="" coords="2006,28,1917,45,1868,60,1822,81,1798,97,1775,117,1743,153,1739,150,1772,113,1794,93,1820,76,1866,55,1915,40,2005,22"/>
+<area shape="rect" id="Node000047" href="$Oscilloscope_8h.html" title="A dynamic oscilloscope material for visualizing audio signals." alt="" coords="510,152,626,177"/>
+<area shape="poly" id="edge79_Node000001_Node000047" title=" " alt="" coords="2005,22,1751,23,1389,30,1199,37,1022,48,870,62,756,81,707,96,660,116,588,154,585,150,658,112,705,91,755,76,870,57,1022,42,1199,32,1388,24,1751,17,2005,16"/>
+<area shape="rect" id="Node000049" href="$SimplexNoise_8h.html" title="A material class that generates and applies Simplex Noise." alt="" coords="1030,152,1154,177"/>
+<area shape="poly" id="edge86_Node000001_Node000049" title=" " alt="" coords="2006,31,1154,157,1153,152,2005,25"/>
+<area shape="rect" id="Node000050" href="$SpectrumAnalyzer_8h.html" title="A material for visualizing audio data as a colorful spectrum analyzer." alt="" coords="125,152,277,177"/>
+<area shape="poly" id="edge87_Node000001_Node000050" title=" " alt="" coords="2006,23,1306,39,882,57,705,68,572,81,478,97,386,117,241,154,239,149,384,112,477,92,571,76,705,63,882,51,1306,34,2006,18"/>
+<area shape="rect" id="Node000052" href="$Image_8h.html" title="Defines an Image material for rendering images as textures in 3D rendering." alt="" coords="3420,79,3494,104"/>
+<area shape="poly" id="edge51_Node000001_Node000052" title=" " alt="" coords="2122,16,2331,17,2645,25,3017,43,3209,57,3397,76,3419,79,3419,85,3397,81,3209,62,3017,48,2645,30,2331,23,2122,22"/>
+<area shape="rect" id="Node000056" href="$LightMaterial_8h.html" title="A material class that incorporates multiple light sources for advanced lighting effects." alt="" coords="2004,79,2124,104"/>
+<area shape="poly" id="edge54_Node000001_Node000056" title=" " alt="" coords="2066,44,2066,79,2061,79,2061,44"/>
+<area shape="rect" id="Node000057" href="$MaterialMask_8h.html" title="Defines the MaterialMask class, which blends materials with a mask defined by a shape." alt="" coords="3518,79,3641,104"/>
+<area shape="poly" id="edge57_Node000001_Node000057" title=" " alt="" coords="2122,17,2345,19,2687,27,3092,45,3301,58,3507,76,3518,77,3518,83,3506,81,3301,64,3091,50,2686,32,2345,24,2122,22"/>
+<area shape="rect" id="Node000059" href="$Object3D_8h.html" title="Defines the Object3D class, representing a 3D object with geometry, material, and transformation data..." alt="" coords="2379,79,2474,104"/>
+<area shape="poly" id="edge60_Node000001_Node000059" title=" " alt="" coords="2121,28,2379,78,2378,83,2120,33"/>
+<area shape="rect" id="Node000083" href="$VectorField2D_8h.html" title="Represents a 2D vector field with various dynamic field effects and rendering capabilities." alt="" coords="2811,152,2935,177"/>
+<area shape="poly" id="edge94_Node000001_Node000083" title=" " alt="" coords="2122,23,2286,45,2485,76,2675,114,2827,149,2825,154,2674,120,2485,81,2285,50,2121,29"/>
+<area shape="rect" id="Node000085" href="$SimpleMaterial_8h.html" title="A material class that applies a single RGB color to all surfaces." alt="" coords="3018,79,3152,104"/>
+<area shape="poly" id="edge80_Node000001_Node000085" title=" " alt="" coords="2122,21,3018,83,3018,88,2122,26"/>
+<area shape="rect" id="Node000087" href="$TextEngine_8h.html" title=" " alt="" coords="3235,152,3340,177"/>
+<area shape="poly" id="edge91_Node000001_Node000087" title=" " alt="" coords="2122,18,2686,36,2989,54,3100,64,3164,76,3199,92,3231,112,3278,150,3274,154,3228,116,3197,96,3163,81,3099,69,2989,59,2686,42,2122,23"/>
+<area shape="rect" id="Node000088" href="$SpiralMaterial_8h.html" title="A material class for generating spiral effects." alt="" coords="768,79,893,104"/>
+<area shape="poly" id="edge88_Node000001_Node000088" title=" " alt="" coords="2006,24,1564,43,1256,60,941,81,894,86,893,80,941,76,1255,55,1563,38,2005,19"/>
+<area shape="rect" id="Node000090" href="$StripeMaterial_8h.html" title="A material class for generating striped patterns with configurable properties." alt="" coords="3666,79,3792,104"/>
+<area shape="poly" id="edge90_Node000001_Node000090" title=" " alt="" coords="2122,17,2365,18,2741,25,3191,43,3425,58,3653,76,3666,77,3665,83,3653,81,3424,63,3191,49,2741,31,2364,23,2121,22"/>
+<area shape="rect" id="Node000091" href="$Triangle2D_8h.html" title="Defines the Triangle2D class for representing and manipulating 2D triangles." alt="" coords="2767,79,2870,104"/>
+<area shape="poly" id="edge92_Node000001_Node000091" title=" " alt="" coords="2122,22,2767,83,2766,88,2121,27"/>
+<area shape="rect" id="Node000003" href="$FlowNoise_8h.html" title="A dynamic simplex noise gradient material for a lava lamp effect." alt="" coords="776,225,879,251"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="830,191,830,225,825,225,825,191"/>
+<area shape="rect" id="Node000018" href="$HorizontalRainbow_8h.html" title="A dynamic horizontal rainbow gradient material." alt="" coords="1054,225,1210,251"/>
+<area shape="poly" id="edge5_Node000002_Node000018" title=" " alt="" coords="890,178,1083,223,1082,228,889,183"/>
+<area shape="rect" id="Node000020" href="$RainbowNoise_8h.html" title="A dynamic material generating a rainbow effect using simplex noise." alt="" coords="903,225,1030,251"/>
+<area shape="poly" id="edge7_Node000002_Node000020" title=" " alt="" coords="863,181,945,223,942,227,861,186"/>
+<area shape="rect" id="Node000026" href="$RainbowNoise2_8h.html" title="A dynamic material generating a rainbow effect using simplex noise with a black&#45;to&#45;color gradient." alt="" coords="618,225,752,251"/>
+<area shape="poly" id="edge9_Node000002_Node000026" title=" " alt="" coords="794,186,710,227,707,223,791,181"/>
+<area shape="rect" id="Node000028" href="$RainbowSpiral_8h.html" title="A dynamic material that creates a colorful, animated rainbow spiral effect." alt="" coords="467,225,594,251"/>
+<area shape="poly" id="edge10_Node000002_Node000028" title=" " alt="" coords="767,183,579,228,578,223,766,178"/>
+<area shape="rect" id="Node000031" href="$TVStatic_8h.html" title="A dynamic material for simulating TV static with various noise effects." alt="" coords="1234,225,1322,251"/>
+<area shape="poly" id="edge12_Node000002_Node000031" title=" " alt="" coords="917,176,1221,223,1234,225,1233,230,1221,228,916,181"/>
+<area shape="rect" id="Node000005" href="$ProtogenProjectTemplate_8h.html" title="Contains the class definition for ProtogenProject, a default project template for handling microphone..." alt="" coords="868,299,1065,324"/>
+<area shape="poly" id="edge3_Node000003_Node000005" title=" " alt="" coords="863,254,945,296,942,301,861,259"/>
+<area shape="rect" id="Node000006" href="$AceAnimation_8h.html" title=" " alt="" coords="1510,372,1636,397"/>
+<area shape="poly" id="edge4_Node000005_Node000006" title=" " alt="" coords="1078,323,1510,373,1510,379,1077,328"/>
+<area shape="poly" id="edge6_Node000018_Node000005" title=" " alt="" coords="1094,258,994,301,992,296,1092,254"/>
+<area shape="poly" id="edge8_Node000020_Node000005" title=" " alt="" coords="969,264,969,299,964,299,964,264"/>
+<area shape="poly" id="edge11_Node000028_Node000005" title=" " alt="" coords="607,249,897,296,896,301,606,254"/>
+<area shape="poly" id="edge15_Node000033_Node000005" title=" " alt="" coords="292,182,123,206,57,218,28,227,23,238,28,249,62,259,137,269,369,285,868,305,867,310,369,291,136,274,60,264,25,253,18,238,25,223,56,213,122,201,291,177"/>
+<area shape="rect" id="Node000034" href="$AudioReactiveGradient_8cpp.html" title=" " alt="" coords="39,225,238,251"/>
+<area shape="poly" id="edge14_Node000033_Node000034" title=" " alt="" coords="339,184,180,228,179,223,338,179"/>
+<area shape="rect" id="Node000036" href="$Clock_8cpp.html" title=" " alt="" coords="3245,299,3330,324"/>
+<area shape="poly" id="edge17_Node000035_Node000036" title=" " alt="" coords="3290,264,3290,299,3285,299,3285,264"/>
+<area shape="poly" id="edge24_Node000037_Node000031" title=" " alt="" coords="1844,110,1323,229,1322,224,1843,105"/>
+<area shape="rect" id="Node000038" href="$Boot_8h.html" title=" " alt="" coords="2028,225,2092,251"/>
+<area shape="poly" id="edge19_Node000037_Node000038" title=" " alt="" coords="1932,111,1975,150,2050,223,2046,227,1971,154,1928,115"/>
+<area shape="poly" id="edge20_Node000037_Node000039" title=" " alt="" coords="1961,105,2120,149,2119,154,1960,110"/>
+<area shape="poly" id="edge23_Node000039_Node000005" title=" " alt="" coords="2154,192,2135,225,2122,240,2105,253,2081,262,2045,270,1941,284,1805,294,1649,301,1325,310,1065,313,1065,307,1324,305,1648,296,1804,289,1940,278,2044,265,2079,257,2102,248,2118,237,2131,222,2149,189"/>
+<area shape="poly" id="edge21_Node000039_Node000006" title=" " alt="" coords="2163,192,2156,223,2148,239,2137,253,2100,277,2046,299,1981,319,1908,336,1760,362,1636,379,1636,374,1759,357,1907,331,1980,314,2045,294,2098,273,2134,249,2144,236,2151,221,2157,191"/>
+<area shape="poly" id="edge22_Node000039_Node000038" title=" " alt="" coords="2135,187,2078,227,2075,223,2132,183"/>
+<area shape="rect" id="Node000041" href="$DepthMaterial_8cpp.html" title=" " alt="" coords="1347,225,1490,251"/>
+<area shape="poly" id="edge26_Node000040_Node000041" title=" " alt="" coords="1421,191,1421,225,1416,225,1416,191"/>
+<area shape="poly" id="edge30_Node000042_Node000003" title=" " alt="" coords="1053,113,849,228,847,223,1050,109"/>
+<area shape="poly" id="edge31_Node000042_Node000018" title=" " alt="" coords="1124,109,1148,126,1167,151,1172,172,1166,193,1145,226,1140,223,1161,191,1166,172,1163,153,1145,130,1121,113"/>
+<area shape="poly" id="edge40_Node000042_Node000020" title=" " alt="" coords="1059,115,1019,154,992,192,974,226,970,224,988,190,1015,150,1056,111"/>
+<area shape="poly" id="edge41_Node000042_Node000026" title=" " alt="" coords="998,102,852,121,786,136,741,154,723,170,709,190,691,226,687,224,704,187,719,167,738,150,784,131,851,116,998,97"/>
+<area shape="poly" id="edge50_Node000042_Node000031" title=" " alt="" coords="1120,108,1188,150,1234,189,1269,223,1265,227,1230,193,1185,154,1117,113"/>
+<area shape="poly" id="edge28_Node000042_Node000033" title=" " alt="" coords="998,104,497,155,486,156,485,151,497,149,998,98"/>
+<area shape="poly" id="edge29_Node000042_Node000040" title=" " alt="" coords="1151,104,1365,149,1364,154,1150,109"/>
+<area shape="poly" id="edge32_Node000042_Node000043" title=" " alt="" coords="1170,99,1664,153,1663,159,1169,105"/>
+<area shape="poly" id="edge37_Node000042_Node000047" title=" " alt="" coords="998,107,626,158,626,153,997,102"/>
+<area shape="poly" id="edge42_Node000042_Node000049" title=" " alt="" coords="1089,117,1093,152,1088,152,1084,118"/>
+<area shape="poly" id="edge48_Node000042_Node000050" title=" " alt="" coords="998,101,628,127,289,155,278,156,277,151,289,149,628,122,998,96"/>
+<area shape="poly" id="edge33_Node000043_Node000038" title=" " alt="" coords="1804,177,2016,223,2028,226,2027,231,2015,228,1803,183"/>
+<area shape="rect" id="Node000044" href="$CreeperAnimation_8h.html" title=" " alt="" coords="1852,225,2004,251"/>
+<area shape="poly" id="edge34_Node000043_Node000044" title=" " alt="" coords="1777,179,1896,223,1895,228,1775,184"/>
+<area shape="rect" id="Node000045" href="$NormalMaterial_8cpp.html" title=" " alt="" coords="1514,225,1664,251"/>
+<area shape="poly" id="edge35_Node000043_Node000045" title=" " alt="" coords="1698,186,1614,227,1611,223,1695,181"/>
+<area shape="rect" id="Node000046" href="$SpyroAnimation_8h.html" title=" " alt="" coords="1689,225,1828,251"/>
+<area shape="poly" id="edge36_Node000043_Node000046" title=" " alt="" coords="1743,189,1756,224,1752,226,1738,191"/>
+<area shape="poly" id="edge39_Node000047_Node000005" title=" " alt="" coords="517,185,487,198,462,213,450,231,451,239,456,249,475,259,511,268,618,284,747,295,867,303,867,308,747,301,618,289,510,274,473,264,452,253,446,241,445,229,459,210,485,193,515,180"/>
+<area shape="rect" id="Node000048" href="$Oscilloscope_8cpp.html" title=" " alt="" coords="261,225,392,251"/>
+<area shape="poly" id="edge38_Node000047_Node000048" title=" " alt="" coords="516,184,366,228,365,223,515,179"/>
+<area shape="poly" id="edge43_Node000049_Node000003" title=" " alt="" coords="1037,183,871,228,870,223,1035,178"/>
+<area shape="poly" id="edge44_Node000049_Node000018" title=" " alt="" coords="1107,188,1127,224,1123,227,1103,191"/>
+<area shape="poly" id="edge45_Node000049_Node000020" title=" " alt="" coords="1061,186,988,227,986,223,1058,182"/>
+<area shape="poly" id="edge46_Node000049_Node000026" title=" " alt="" coords="1017,182,751,228,750,223,1016,176"/>
+<area shape="poly" id="edge47_Node000049_Node000031" title=" " alt="" coords="1135,180,1249,223,1247,228,1133,185"/>
+<area shape="poly" id="edge49_Node000050_Node000005" title=" " alt="" coords="112,181,65,192,27,207,15,216,9,226,9,236,17,249,51,259,128,269,363,285,867,305,867,310,363,291,127,274,50,264,14,253,4,238,4,224,11,212,25,202,64,187,111,175"/>
+<area shape="rect" id="Node000053" href="$Image_8cpp.html" title=" " alt="" coords="3416,152,3506,177"/>
+<area shape="poly" id="edge52_Node000052_Node000053" title=" " alt="" coords="3461,118,3463,152,3458,152,3456,118"/>
+<area shape="rect" id="Node000054" href="$UVMap_8h.html" title="A material class for mapping UV texture coordinates to RGB colors." alt="" coords="3531,152,3612,177"/>
+<area shape="poly" id="edge53_Node000052_Node000054" title=" " alt="" coords="3488,109,3554,150,3551,154,3485,113"/>
+<area shape="poly" id="edge55_Node000056_Node000038" title=" " alt="" coords="2066,118,2063,225,2057,225,2060,118"/>
+<area shape="rect" id="Node000058" href="$MaterialMask_8cpp.html" title=" " alt="" coords="3637,152,3776,177"/>
+<area shape="poly" id="edge58_Node000057_Node000058" title=" " alt="" coords="3613,108,3687,149,3684,154,3611,113"/>
+<area shape="rect" id="Node000060" href="$BoundaryCube_8h.html" title="Defines the BoundaryCube class for representing and managing axis&#45;aligned bounding cubes." alt="" coords="2519,225,2648,251"/>
+<area shape="poly" id="edge61_Node000059_Node000060" title=" " alt="" coords="2488,103,2530,121,2549,134,2566,150,2577,169,2583,189,2587,225,2581,225,2578,190,2572,171,2562,154,2546,138,2527,126,2486,108"/>
+<area shape="rect" id="Node000062" href="$BoundaryMotionSimulator_8h.html" title="Defines the BoundaryMotionSimulator class for simulating motion and collisions of boundary objects." alt="" coords="2401,299,2604,324"/>
+<area shape="poly" id="edge64_Node000059_Node000062" title=" " alt="" coords="2413,117,2401,146,2398,161,2401,177,2419,214,2443,248,2491,297,2487,300,2439,251,2414,217,2396,178,2393,161,2395,144,2408,115"/>
+<area shape="rect" id="Node000064" href="$PhysicsSimulator_8h.html" title="Defines the PhysicsSimulator class for managing physics simulations within a scene." alt="" coords="2430,372,2575,397"/>
+<area shape="poly" id="edge75_Node000059_Node000064" title=" " alt="" coords="2412,116,2394,153,2380,201,2370,241,2372,279,2391,323,2404,339,2421,352,2458,370,2456,374,2418,356,2400,342,2387,325,2367,280,2365,241,2374,200,2389,151,2407,114"/>
+<area shape="rect" id="Node000066" href="$BoundarySphere_8h.html" title="Defines the BoundarySphere class for simulating spherical boundary objects." alt="" coords="2410,152,2552,177"/>
+<area shape="poly" id="edge65_Node000059_Node000066" title=" " alt="" coords="2446,113,2474,150,2470,154,2442,117"/>
+<area shape="rect" id="Node000068" href="$Object3D_8cpp.html" title=" " alt="" coords="2626,152,2736,177"/>
+<area shape="poly" id="edge68_Node000059_Node000068" title=" " alt="" coords="2481,105,2640,149,2639,154,2480,110"/>
+<area shape="rect" id="Node000069" href="$ObjectAlign_8h.html" title="Provides the ObjectAlign class for aligning 3D objects within defined 2D camera bounds." alt="" coords="2217,225,2326,251"/>
+<area shape="poly" id="edge69_Node000059_Node000069" title=" " alt="" coords="2373,111,2337,129,2306,154,2294,171,2285,191,2276,225,2271,224,2280,189,2289,168,2302,150,2334,124,2371,106"/>
+<area shape="rect" id="Node000071" href="$ObjectDeformer_8h.html" title="Defines the ObjectDeformer class for deforming 3D objects using various transformations." alt="" coords="1824,152,1962,177"/>
+<area shape="poly" id="edge71_Node000059_Node000071" title=" " alt="" coords="2365,103,1962,157,1962,152,2365,98"/>
+<area shape="rect" id="Node000073" href="$Scene_8h.html" title="Defines the Scene class for managing objects and effects in a 3D environment." alt="" coords="2683,299,2756,324"/>
+<area shape="poly" id="edge76_Node000059_Node000073" title=" " alt="" coords="2488,102,2631,113,2702,125,2730,136,2750,150,2760,169,2765,189,2760,232,2745,271,2730,300,2725,297,2740,269,2755,230,2760,189,2755,171,2746,154,2728,140,2701,130,2631,118,2487,108"/>
+<area shape="poly" id="edge78_Node000059_Node000083" title=" " alt="" coords="2488,100,2811,151,2810,156,2487,105"/>
+<area shape="poly" id="edge62_Node000060_Node000062" title=" " alt="" coords="2562,262,2517,300,2514,296,2559,258"/>
+<area shape="poly" id="edge63_Node000062_Node000064" title=" " alt="" coords="2505,338,2505,372,2500,372,2500,338"/>
+<area shape="poly" id="edge66_Node000066_Node000060" title=" " alt="" coords="2510,183,2568,223,2565,227,2507,187"/>
+<area shape="poly" id="edge67_Node000066_Node000062" title=" " alt="" coords="2487,191,2503,298,2498,299,2482,192"/>
+<area shape="poly" id="edge70_Node000069_Node000005" title=" " alt="" coords="2203,249,2148,253,1532,289,1065,309,1065,304,1532,284,2147,248,2203,243"/>
+<area shape="poly" id="edge72_Node000071_Node000038" title=" " alt="" coords="1933,180,2033,223,2031,228,1931,185"/>
+<area shape="poly" id="edge73_Node000071_Node000044" title=" " alt="" coords="1907,189,1924,224,1920,226,1902,191"/>
+<area shape="poly" id="edge74_Node000071_Node000046" title=" " alt="" coords="1861,186,1782,227,1779,223,1858,181"/>
+<area shape="poly" id="edge77_Node000073_Node000064" title=" " alt="" coords="2672,331,2538,374,2537,369,2671,326"/>
+<area shape="poly" id="edge82_Node000085_Node000005" title=" " alt="" coords="3060,114,3009,148,2947,180,2870,210,2807,229,2743,241,2660,253,2515,269,2324,281,1863,298,1403,308,1065,312,1065,307,1403,303,1863,293,2323,276,2515,263,2659,248,2742,236,2806,224,2868,205,2945,175,3006,143,3057,110"/>
+<area shape="poly" id="edge81_Node000085_Node000035" title=" " alt="" coords="3115,110,3172,150,3273,223,3270,227,3169,154,3112,114"/>
+<area shape="rect" id="Node000086" href="$SimpleMaterial_8cpp.html" title=" " alt="" coords="3011,152,3159,177"/>
+<area shape="poly" id="edge83_Node000085_Node000086" title=" " alt="" coords="3088,118,3088,152,3082,152,3082,118"/>
+<area shape="poly" id="edge84_Node000085_Node000087" title=" " alt="" coords="3131,106,3256,149,3254,154,3129,111"/>
+<area shape="poly" id="edge85_Node000087_Node000035" title=" " alt="" coords="3290,191,3290,225,3285,225,3285,191"/>
+<area shape="poly" id="edge89_Node000088_Node000028" title=" " alt="" coords="792,112,697,154,553,228,550,223,695,150,790,107"/>
+<area shape="poly" id="edge93_Node000091_Node000083" title=" " alt="" coords="2838,113,2866,150,2862,154,2834,117"/>
+</map>

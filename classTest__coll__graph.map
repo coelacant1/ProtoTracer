@@ -1,0 +1,7 @@
+<map id="Test" name="Test">
+<area shape="rect" id="Node000001" title="A debugging effect used to identify memory issues in pixel rendering." alt="" coords="73,93,121,119"/>
+<area shape="rect" id="Node000002" href="$classEffect.html" title="Abstract base class for applying visual effects to pixel groups." alt="" coords="5,5,64,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="53,40,91,91,86,94,49,43"/>
+<area shape="rect" id="Node000003" href="$classFunctionGenerator.html" title="A class to generate various waveform functions with customizable parameters." alt="" coords="89,5,231,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="146,43,108,94,104,91,141,40"/>
+</map>

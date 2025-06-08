@@ -1,0 +1,22 @@
+<map id="SerialSync.cpp" name="SerialSync.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="81,5,199,31"/>
+<area shape="rect" id="Node000002" href="$SerialSync_8h.html" title=" " alt="" coords="89,79,191,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="143,31,143,65,137,65,137,31"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,159,128,185"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="131,106,89,151,85,147,127,102"/>
+<area shape="rect" id="Node000004" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="152,152,277,192"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="153,102,189,140,185,144,149,106"/>
+<area shape="rect" id="Node000005" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="154,313,273,339"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="210,193,201,227,200,265,208,300,203,301,195,266,196,226,205,192"/>
+<area shape="rect" id="Node000010" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="209,240,303,265"/>
+<area shape="poly" id="edge9_Node000004_Node000010" title=" " alt="" coords="227,191,246,226,241,229,222,193"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="42,387,105,412"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="192,341,109,383,107,378,190,336"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="129,387,197,412"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="207,341,181,377,177,374,203,337"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="221,387,307,412"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="224,337,250,374,246,377,220,341"/>
+<area shape="rect" id="Node000009" href="$Mathematics_8tpp.html" title=" " alt="" coords="331,387,463,412"/>
+<area shape="poly" id="edge8_Node000005_Node000009" title=" " alt="" coords="244,336,355,379,353,384,242,341"/>
+<area shape="poly" id="edge10_Node000010_Node000005" title=" " alt="" coords="251,267,229,303,225,300,247,264"/>
+</map>

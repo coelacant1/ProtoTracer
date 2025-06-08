@@ -1,0 +1,25 @@
+<map id="MicrophoneSimple_MAX9814.h" name="MicrophoneSimple_MAX9814.h">
+<area shape="rect" id="Node000001" title="A simple microphone processing class for analog input." alt="" coords="153,5,377,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,86,89,111"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="234,33,93,84,91,79,232,28"/>
+<area shape="rect" id="Node000003" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="265,167,390,207"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="276,29,290,51,304,78,317,116,325,152,320,154,312,117,300,80,286,54,271,32"/>
+<area shape="rect" id="Node000008" href="$RunningAverageFilter_8h.html" title="Implements a running average filter for smoothing data." alt="" coords="114,79,290,119"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="257,33,228,69,224,66,253,29"/>
+<area shape="rect" id="Node000010" href="$MinFilter_8h.html" title="Implements a moving minimum filter for processing data streams." alt="" coords="365,79,490,119"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="289,28,377,70,375,75,287,33"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="156,255,219,280"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="295,209,221,250,219,245,293,204"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="243,255,311,280"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="317,208,294,244,289,242,313,205"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="335,255,421,280"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="342,205,365,242,361,244,337,208"/>
+<area shape="rect" id="Node000007" href="$Mathematics_8tpp.html" title=" " alt="" coords="445,255,577,280"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="372,204,473,247,471,252,370,209"/>
+<area shape="poly" id="edge8_Node000008_Node000003" title=" " alt="" coords="231,117,290,157,287,161,228,121"/>
+<area shape="rect" id="Node000009" href="$RunningAverageFilter_8tpp.html" title=" " alt="" coords="55,174,240,199"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="192,120,164,164,160,161,188,117"/>
+<area shape="poly" id="edge11_Node000010_Node000003" title=" " alt="" coords="407,121,361,160,358,156,403,117"/>
+<area shape="rect" id="Node000011" href="$MinFilter_8tpp.html" title=" " alt="" coords="415,174,517,199"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="438,118,457,160,453,162,433,120"/>
+</map>

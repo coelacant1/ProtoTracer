@@ -1,0 +1,9 @@
+<map id="UVMap" name="UVMap">
+<area shape="rect" id="Node000001" title="A material for mapping UV texture coordinates to image colors." alt="" coords="59,183,129,208"/>
+<area shape="rect" id="Node000002" href="$classImage.html" title="Represents an image&#45;based material with support for transformations and palette adjustments." alt="" coords="63,108,125,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="97,148,97,182,91,182,91,148"/>
+<area shape="rect" id="Node000003" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="5,5,81,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="58,42,91,107,86,109,53,44"/>
+<area shape="rect" id="Node000004" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="105,5,187,31"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="136,44,102,109,98,107,131,42"/>
+</map>

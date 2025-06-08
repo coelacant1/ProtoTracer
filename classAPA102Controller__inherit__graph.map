@@ -1,0 +1,5 @@
+<map id="APA102Controller" name="APA102Controller">
+<area shape="rect" id="Node000001" title="Manages APA102 LED strips with camera integration." alt="" coords="5,79,140,104"/>
+<area shape="rect" id="Node000002" href="$classController.html" title="Base class for managing brightness and display operations of lighting controllers." alt="" coords="29,5,116,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="75,44,75,79,70,79,70,44"/>
+</map>

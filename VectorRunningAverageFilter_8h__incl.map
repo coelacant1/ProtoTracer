@@ -1,0 +1,20 @@
+<map id="VectorRunningAverageFilter.h" name="VectorRunningAverageFilter.h">
+<area shape="rect" id="Node000001" title="Implements a running average filter for 3D vector smoothing." alt="" coords="161,5,374,31"/>
+<area shape="rect" id="Node000002" href="$RunningAverageFilter_8h.html" title="Implements a running average filter for smoothing data." alt="" coords="272,79,444,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="284,29,334,68,331,72,280,33"/>
+<area shape="rect" id="Node000009" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="105,79,248,104"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="254,33,204,72,201,68,251,29"/>
+<area shape="rect" id="Node000003" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="93,152,261,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="330,107,220,149,218,144,328,102"/>
+<area shape="rect" id="Node000008" href="$RunningAverageFilter_8tpp.html" title=" " alt="" coords="285,152,471,177"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="364,104,374,138,369,140,359,105"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,225,68,251"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="155,180,73,221,70,217,153,175"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="92,225,160,251"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="170,179,144,216,140,213,166,176"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="185,225,270,251"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="187,176,213,213,209,216,183,179"/>
+<area shape="rect" id="Node000007" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,225,427,251"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="207,175,319,218,317,223,205,180"/>
+<area shape="poly" id="edge9_Node000009_Node000003" title=" " alt="" coords="179,104,179,138,174,138,174,104"/>
+</map>

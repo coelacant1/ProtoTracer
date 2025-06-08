@@ -1,0 +1,37 @@
+<map id="HorizontalBlur.cpp" name="HorizontalBlur.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="281,5,423,31"/>
+<area shape="rect" id="Node000002" href="$HorizontalBlur_8h.html" title="Defines the HorizontalBlur effect class for applying horizontal blur to pixel groups." alt="" coords="289,79,415,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="355,31,355,65,349,65,349,31"/>
+<area shape="rect" id="Node000003" href="$Effect_8h.html" title="Defines the base Effect class for applying transformations or effects to pixel groups." alt="" coords="211,152,282,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="337,106,276,147,274,142,334,102"/>
+<area shape="rect" id="Node000006" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="219,621,375,647"/>
+<area shape="poly" id="edge21_Node000002_Node000006" title=" " alt="" coords="377,102,412,123,450,155,468,174,482,195,491,219,495,244,495,489,491,514,481,536,466,556,446,574,401,601,355,619,353,615,399,596,443,569,462,553,476,534,486,512,489,488,489,244,486,220,477,198,463,177,447,159,409,128,374,106"/>
+<area shape="rect" id="Node000004" href="$IPixelGroup_8h.html" title="Declares the IPixelGroup interface for managing collections of pixels." alt="" coords="177,225,316,265"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="249,178,249,212,244,212,244,178"/>
+<area shape="poly" id="edge20_Node000003_Node000006" title=" " alt="" coords="212,175,151,191,84,220,54,240,30,263,14,292,8,325,8,488,13,519,27,545,48,566,75,584,106,598,139,609,206,623,205,628,138,614,104,603,72,589,44,571,22,548,8,521,3,489,3,324,9,290,26,260,51,235,82,215,150,186,210,170"/>
+<area shape="rect" id="Node000005" href="$RGBColor_8h.html" title="Defines the RGBColor class for managing and manipulating RGB color values." alt="" coords="253,313,406,339"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="269,264,309,302,305,306,265,267"/>
+<area shape="rect" id="Node000014" href="$BoundingBox2D_8h.html" title="Defines the BoundingBox2D class for managing 2D bounding boxes." alt="" coords="43,387,186,427"/>
+<area shape="poly" id="edge18_Node000004_Node000014" title=" " alt="" coords="233,267,141,378,137,374,229,264"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="347,337,370,358,388,386,392,406,388,427,379,470,369,503,336,575,315,611,310,609,331,572,364,501,374,469,383,426,386,406,383,388,366,361,344,341"/>
+<area shape="rect" id="Node000011" href="$Quaternion_8h.html" title="Defines the Quaternion class for 3D rotations and transformations." alt="" coords="210,394,353,419"/>
+<area shape="poly" id="edge10_Node000005_Node000011" title=" " alt="" coords="325,340,298,384,293,381,320,337"/>
+<area shape="rect" id="Node000013" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="209,548,303,573"/>
+<area shape="poly" id="edge17_Node000005_Node000013" title=" " alt="" coords="341,337,356,359,368,386,372,407,368,428,351,462,329,493,283,541,279,537,325,490,347,459,363,426,367,407,363,387,351,361,337,340"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="126,695,189,720"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="276,649,193,691,191,686,274,644"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="213,695,281,720"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="291,649,265,685,261,682,287,645"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="305,695,391,720"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="308,645,334,682,330,685,304,649"/>
+<area shape="rect" id="Node000010" href="$Mathematics_8tpp.html" title=" " alt="" coords="415,695,547,720"/>
+<area shape="poly" id="edge9_Node000006_Node000010" title=" " alt="" coords="328,644,439,687,437,692,326,649"/>
+<area shape="poly" id="edge11_Node000011_Node000006" title=" " alt="" coords="289,419,310,484,318,528,317,574,309,609,304,608,312,573,313,529,305,485,284,420"/>
+<area shape="rect" id="Node000012" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="132,475,225,500"/>
+<area shape="poly" id="edge12_Node000011_Node000012" title=" " alt="" coords="268,422,207,468,203,464,265,417"/>
+<area shape="poly" id="edge16_Node000011_Node000013" title=" " alt="" coords="282,420,263,535,258,534,277,419"/>
+<area shape="poly" id="edge13_Node000012_Node000006" title=" " alt="" coords="181,500,185,535,190,554,199,572,224,596,253,613,251,618,221,600,195,575,185,556,179,536,176,501"/>
+<area shape="poly" id="edge14_Node000012_Node000013" title=" " alt="" coords="193,498,235,537,231,540,189,502"/>
+<area shape="poly" id="edge15_Node000013_Node000006" title=" " alt="" coords="265,572,286,608,281,611,261,575"/>
+<area shape="poly" id="edge19_Node000014_Node000012" title=" " alt="" coords="132,425,162,462,158,465,128,429"/>
+</map>

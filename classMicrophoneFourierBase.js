@@ -1,0 +1,27 @@
+var classMicrophoneFourierBase =
+[
+    [ "AverageMagnitude", "classMicrophoneFourierBase.html#ada732cca5ba10274ac78a510cca896c6", null ],
+    [ "GetCurrentMagnitude", "classMicrophoneFourierBase.html#a2eb25f00211225fb14360ddce439c347", null ],
+    [ "GetFourier", "classMicrophoneFourierBase.html#afbde660d850189d111fe72e987368212", null ],
+    [ "GetFourierFiltered", "classMicrophoneFourierBase.html#ae9cca6f02264e680280521592c68a3a3", null ],
+    [ "GetSampleRate", "classMicrophoneFourierBase.html#a8c54d2688eed1f643857758950fd42b2", null ],
+    [ "GetSamples", "classMicrophoneFourierBase.html#ae030415fff5480f1b10038bfd15ea688", null ],
+    [ "IsInitialized", "classMicrophoneFourierBase.html#a5d722e33d5e4075d4f0fc88c7cb54bd2", null ],
+    [ "currentValue", "classMicrophoneFourierBase.html#a7da287562c172070c69ed4ea3c49a034", null ],
+    [ "fft", "classMicrophoneFourierBase.html#a2b42693810a8f599f0bd2641fa7f515b", null ],
+    [ "fftFilters", "classMicrophoneFourierBase.html#a367833720313b22a3bf17b386faf80dc", null ],
+    [ "FFTSize", "classMicrophoneFourierBase.html#a22e215517270effab77442e758657bbf", null ],
+    [ "inputSamp", "classMicrophoneFourierBase.html#a1fec59325efe754dafad607c79ee8bed", null ],
+    [ "inputStorage", "classMicrophoneFourierBase.html#a9ce916ea0025b5263b8a74a897a65166", null ],
+    [ "isInitialized", "classMicrophoneFourierBase.html#a1fdc2bf5595c2e64dc06d987769834eb", null ],
+    [ "maxDB", "classMicrophoneFourierBase.html#a74adbd9711954c6ef3d6411b33d83ab2", null ],
+    [ "minDB", "classMicrophoneFourierBase.html#af1be2da2ea683a63789156af9241d004", null ],
+    [ "OutputBins", "classMicrophoneFourierBase.html#a529ff7fca1998df1e2aa2b0e14613542", null ],
+    [ "outputData", "classMicrophoneFourierBase.html#a49648b362545a8fbdf6367318ce862da", null ],
+    [ "outputDataFilt", "classMicrophoneFourierBase.html#ad0eeb4c0341d1b327347f0b52bb3ffae", null ],
+    [ "outputMagn", "classMicrophoneFourierBase.html#a6e8c50c0bab58f61a77d3801937d2bbe", null ],
+    [ "peakFilterRate", "classMicrophoneFourierBase.html#a68abbb5763d9b968be47c786a52b378b", null ],
+    [ "pin", "classMicrophoneFourierBase.html#ab40a673fb19c1e650e1f79de91788aa5", null ],
+    [ "sampleRate", "classMicrophoneFourierBase.html#ae37234c6194d1c44d002d58a905b2d08", null ],
+    [ "threshold", "classMicrophoneFourierBase.html#a376acef8954eadc70f4b55e8e0588e13", null ]
+];

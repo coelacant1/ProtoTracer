@@ -1,0 +1,21 @@
+<map id="AnimationTrack.h" name="AnimationTrack.h">
+<area shape="rect" id="Node000001" title="Declares the AnimationTrack template class for managing animation tracks with keyframes." alt="" coords="247,5,382,31"/>
+<area shape="rect" id="Node000002" href="$KeyFrameTrack_8h.html" title="Declares the KeyFrameTrack template class for managing keyframe&#45;based animations." alt="" coords="157,79,302,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="303,33,255,72,252,68,299,29"/>
+<area shape="rect" id="Node000010" href="$AnimationTrack_8tpp.html" title=" " alt="" coords="326,79,474,104"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="330,29,377,68,374,72,327,33"/>
+<area shape="rect" id="Node000003" href="$KeyFrame_8h.html" title="Declares the KeyFrame class for representing individual animation keyframes." alt="" coords="5,152,104,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="202,106,97,149,95,144,200,102"/>
+<area shape="rect" id="Node000004" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="128,152,331,177"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="232,104,232,138,227,138,227,104"/>
+<area shape="rect" id="Node000009" href="$KeyFrameTrack_8tpp.html" title=" " alt="" coords="355,152,501,177"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="262,102,383,145,382,150,260,107"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="58,225,121,251"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="208,180,125,221,123,217,206,175"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="145,225,213,251"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="223,179,197,216,193,213,219,176"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="237,225,323,251"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="240,176,266,213,262,216,236,179"/>
+<area shape="rect" id="Node000008" href="$Mathematics_8tpp.html" title=" " alt="" coords="347,225,479,251"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="260,175,371,218,369,223,258,180"/>
+</map>

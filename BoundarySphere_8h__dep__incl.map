@@ -1,0 +1,18 @@
+<map id="BoundarySphere.h" name="BoundarySphere.h">
+<area shape="rect" id="Node000001" title="Defines the BoundarySphere class for simulating spherical boundary objects." alt="" coords="204,5,345,31"/>
+<area shape="rect" id="Node000002" href="$BoundaryCube_8h.html" title="Defines the BoundaryCube class for representing and managing axis&#45;aligned bounding cubes." alt="" coords="107,79,237,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="248,41,190,81,187,76,245,36"/>
+<area shape="rect" id="Node000004" href="$BoundaryMotionSimulator_8h.html" title="Defines the BoundaryMotionSimulator class for simulating motion and collisions of boundary objects." alt="" coords="173,152,376,177"/>
+<area shape="poly" id="edge7_Node000001_Node000004" title=" " alt="" coords="277,45,277,152,272,152,272,45"/>
+<area shape="rect" id="Node000008" href="$BoundarySphere_8cpp.html" title=" " alt="" coords="313,79,469,104"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="306,35,373,76,370,81,303,40"/>
+<area shape="rect" id="Node000003" href="$BoundaryCube_8cpp.html" title=" " alt="" coords="5,152,149,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="147,114,94,154,91,150,144,110"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="201,110,259,150,256,154,198,114"/>
+<area shape="rect" id="Node000005" href="$BoundaryMotionSimulator_8cpp.html" title=" " alt="" coords="61,225,280,251"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="248,187,189,227,186,223,245,183"/>
+<area shape="rect" id="Node000006" href="$PhysicsSimulator_8h.html" title="Defines the PhysicsSimulator class for managing physics simulations within a scene." alt="" coords="305,225,450,251"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="304,183,362,223,359,227,301,187"/>
+<area shape="rect" id="Node000007" href="$PhysicsSimulator_8cpp.html" title=" " alt="" coords="297,299,457,324"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="380,264,380,299,375,299,375,264"/>
+</map>

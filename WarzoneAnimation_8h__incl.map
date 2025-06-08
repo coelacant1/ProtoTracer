@@ -1,0 +1,33 @@
+<map id="WarzoneAnimation.h" name="WarzoneAnimation.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="1355,5,1513,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,86,119,111"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1355,23,740,40,388,57,241,68,130,81,111,85,110,80,130,76,241,63,387,52,740,35,1355,18"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="143,86,288,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="1355,22,1168,23,906,31,605,49,450,63,300,81,274,86,273,80,299,76,450,58,604,44,905,26,1167,18,1355,16"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="312,86,479,111"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="1355,23,981,38,737,55,490,81,461,86,460,81,490,76,736,50,981,33,1355,18"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="503,86,691,111"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="1355,26,1067,45,886,61,704,81,669,86,669,81,703,76,886,56,1067,40,1355,21"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="715,86,897,111"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="1355,29,1153,50,909,81,878,86,877,81,908,76,1152,45,1355,24"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="921,86,1067,111"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="1360,33,1080,81,1058,86,1057,81,1079,76,1359,28"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="1092,86,1320,111"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="1402,33,1253,84,1251,79,1400,28"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="1344,79,1524,119"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="1437,31,1437,65,1431,65,1431,31"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="1549,86,1738,111"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="1465,28,1601,79,1599,84,1464,33"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="1763,79,1937,119"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="1495,28,1750,76,1749,81,1494,33"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="1961,79,2136,119"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="1513,24,1707,44,1948,76,1947,81,1706,50,1513,29"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="2160,79,2335,119"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="1513,21,1789,39,1966,55,2147,76,2146,81,1965,60,1789,44,1513,26"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="2359,79,2525,119"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="1513,18,1870,34,2105,50,2346,76,2345,81,2104,56,1870,39,1513,24"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="2549,79,2692,119"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="1513,16,1694,19,1945,27,2237,45,2388,59,2536,76,2536,81,2387,64,2236,50,1945,32,1694,24,1513,22"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="2716,86,2947,111"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="1513,18,1720,22,2015,32,2357,49,2705,76,2749,81,2749,87,2704,81,2357,54,2015,37,1720,27,1513,23"/>
+</map>

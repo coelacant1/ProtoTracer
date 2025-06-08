@@ -1,0 +1,18 @@
+<map id="QuadTree" name="QuadTree">
+<area shape="rect" id="Node000001" title="Represents a quadtree for spatial partitioning of 2D entities." alt="" coords="49,328,131,353"/>
+<area shape="rect" id="Node000002" href="$classBoundingBox2D.html" title="Represents a 2D axis&#45;aligned bounding box." alt="" coords="5,152,132,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="74,191,83,265,91,327,86,328,78,266,69,191"/>
+<area shape="rect" id="Node000004" href="$classNode.html" title="Represents a node in a quadtree structure for spatial partitioning." alt="" coords="130,240,186,265"/>
+<area shape="poly" id="edge9_Node000004_Node000002" title=" " alt="" coords="92,185,147,238,144,241,89,189"/>
+<area shape="rect" id="Node000003" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="43,5,124,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="77,44,74,55,69,109,70,152,65,152,64,109,69,54,71,43"/>
+<area shape="rect" id="Node000005" href="$classTriangle2D.html" title="Represents a 2D triangle with support for UV mapping, depth, and intersection testing." alt="" coords="157,152,247,177"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="100,41,127,82,163,126,188,150,185,154,159,130,123,85,95,44"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="142,278,102,329,97,326,138,275"/>
+<area shape="poly" id="edge4_Node000004_Node000004" title=" " alt="" coords="201,243,209,246,213,253,204,262,187,263,186,258,202,257,207,252,206,250,199,248"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="192,191,166,241,162,238,187,189"/>
+<area shape="rect" id="Node000006" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="160,5,241,31"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="204,45,205,152,199,152,198,45"/>
+<area shape="rect" id="Node000007" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="265,5,341,31"/>
+<area shape="poly" id="edge8_Node000005_Node000007" title=" " alt="" coords="300,45,286,87,260,130,245,143,229,154,226,149,242,139,256,126,281,84,295,43"/>
+</map>

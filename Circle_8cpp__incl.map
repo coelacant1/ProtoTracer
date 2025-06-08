@@ -1,0 +1,22 @@
+<map id="Circle.cpp" name="Circle.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="133,5,220,31"/>
+<area shape="rect" id="Node000002" href="$Circle_8h.html" title="Defines the Circle class for representing circular shapes in 2D space." alt="" coords="141,79,212,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="179,31,179,65,174,65,174,31"/>
+<area shape="rect" id="Node000003" href="$Shape_8h.html" title="Defines the Shape base class for representing geometric shapes in 2D space." alt="" coords="139,152,214,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="179,104,179,138,174,138,174,104"/>
+<area shape="rect" id="Node000004" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="114,225,239,265"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="179,178,179,212,174,212,174,178"/>
+<area shape="rect" id="Node000005" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="117,387,236,412"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="173,266,165,300,163,338,171,373,166,374,158,339,159,299,167,265"/>
+<area shape="rect" id="Node000010" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="173,313,266,339"/>
+<area shape="poly" id="edge9_Node000004_Node000010" title=" " alt="" coords="189,264,209,300,204,303,185,267"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="5,460,68,485"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="155,414,73,456,70,451,153,410"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="92,460,160,485"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="170,414,144,450,140,447,166,411"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="185,460,270,485"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="187,411,213,447,209,450,183,414"/>
+<area shape="rect" id="Node000009" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,460,427,485"/>
+<area shape="poly" id="edge8_Node000005_Node000009" title=" " alt="" coords="207,410,319,452,317,457,205,415"/>
+<area shape="poly" id="edge10_Node000010_Node000005" title=" " alt="" coords="215,340,193,376,188,374,210,338"/>
+</map>

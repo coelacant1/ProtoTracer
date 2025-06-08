@@ -1,0 +1,20 @@
+<map id="BouncePhysics.cpp" name="BouncePhysics.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="166,5,313,31"/>
+<area shape="rect" id="Node000002" href="$BouncePhysics_8h.html" title="Defines the BouncePhysics class for simulating basic bouncing physics with velocity and gravity." alt="" coords="174,79,305,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="242,31,242,65,237,65,237,31"/>
+<area shape="rect" id="Node000003" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="69,240,284,265"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="233,106,204,153,192,191,183,227,178,226,186,190,200,151,228,103"/>
+<area shape="rect" id="Node000008" href="$RunningAverageFilter_8h.html" title="Implements a running average filter for smoothing data." alt="" coords="214,152,390,192"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="251,103,280,139,276,143,247,106"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,313,68,339"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="155,268,73,309,70,305,153,263"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="92,313,160,339"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="170,267,144,304,140,301,166,264"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="185,313,270,339"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="187,264,213,301,209,304,183,267"/>
+<area shape="rect" id="Node000007" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,313,427,339"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="207,263,319,306,317,311,205,268"/>
+<area shape="poly" id="edge8_Node000008_Node000003" title=" " alt="" coords="273,194,208,235,205,231,270,190"/>
+<area shape="rect" id="Node000009" href="$RunningAverageFilter_8tpp.html" title=" " alt="" coords="308,240,493,265"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="328,190,377,229,374,233,324,194"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="ArrowAnimation" name="ArrowAnimation">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,152,132,177"/>
+<area shape="rect" id="Node000002" href="$classProtogenProject.html" title="A default project template that includes functionality for an analog microphone, APDS9960 boop sensor..." alt="" coords="6,79,131,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="71,118,71,152,66,152,66,118"/>
+<area shape="rect" id="Node000003" href="$classProject.html" title="Manages animations, rendering, and display operations." alt="" coords="35,5,102,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="71,44,71,79,66,79,66,44"/>
+</map>

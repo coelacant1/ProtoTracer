@@ -1,0 +1,5 @@
+<map id="BNO055.h" name="BNO055.h">
+<area shape="rect" id="Node000001" title="A class for interfacing with the Adafruit BNO055 sensor." alt="" coords="13,5,100,31"/>
+<area shape="rect" id="Node000002" href="$BNO055_8cpp.html" title=" " alt="" coords="5,79,108,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="59,44,59,79,54,79,54,44"/>
+</map>

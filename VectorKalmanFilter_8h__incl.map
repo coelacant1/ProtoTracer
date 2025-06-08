@@ -1,0 +1,19 @@
+<map id="VectorKalmanFilter.h" name="VectorKalmanFilter.h">
+<area shape="rect" id="Node000001" title="Implements a Kalman filter for 3D vector smoothing." alt="" coords="67,5,225,31"/>
+<area shape="rect" id="Node000002" href="$KalmanFilter_8h.html" title="Provides a template&#45;based implementation of a Kalman Filter." alt="" coords="12,79,128,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="136,33,94,71,91,67,132,29"/>
+<area shape="rect" id="Node000004" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="152,79,295,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="160,29,202,67,199,71,157,33"/>
+<area shape="rect" id="Node000003" href="$KalmanFilter_8tpp.html" title=" " alt="" coords="5,152,135,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="73,104,73,138,67,138,67,104"/>
+<area shape="rect" id="Node000005" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="164,152,283,177"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="226,104,226,138,221,138,221,104"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="52,225,115,251"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="202,180,119,221,117,217,200,175"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="139,225,207,251"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="217,179,191,216,187,213,213,176"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="231,225,317,251"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="234,176,260,213,256,216,230,179"/>
+<area shape="rect" id="Node000009" href="$Mathematics_8tpp.html" title=" " alt="" coords="341,225,473,251"/>
+<area shape="poly" id="edge8_Node000005_Node000009" title=" " alt="" coords="254,175,365,218,363,223,252,180"/>
+</map>

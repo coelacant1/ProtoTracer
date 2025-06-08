@@ -1,0 +1,5 @@
+<map id="UVMap.h" name="UVMap.h">
+<area shape="rect" id="Node000001" title="A material class for mapping UV texture coordinates to RGB colors." alt="" coords="13,5,94,31"/>
+<area shape="rect" id="Node000002" href="$UVMap_8cpp.html" title=" " alt="" coords="5,79,101,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="56,44,56,79,51,79,51,44"/>
+</map>

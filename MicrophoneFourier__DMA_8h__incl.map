@@ -1,0 +1,48 @@
+<map id="MicrophoneFourier_DMA.h" name="MicrophoneFourier_DMA.h">
+<area shape="rect" id="Node000001" title="Declares the MicrophoneFourier class for performing FFT on microphone input." alt="" coords="323,5,516,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="51,240,135,265"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="323,33,229,51,179,65,131,81,62,106,37,123,14,153,8,172,14,191,32,214,56,231,52,235,28,218,9,193,3,172,9,151,33,119,60,101,129,76,178,59,228,46,322,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="388,79,451,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="422,31,422,65,417,65,417,31"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="475,79,594,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="439,28,505,69,503,74,437,33"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="617,79,766,104"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="464,28,635,73,634,78,463,33"/>
+<area shape="rect" id="Node000006" href="$MicrophoneFourierBase_8h.html" title="Provides a base class for FFT&#45;based microphone signal processing." alt="" coords="142,79,364,104"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="394,33,294,76,292,71,392,28"/>
+<area shape="poly" id="edge6_Node000006_Node000002" title=" " alt="" coords="247,106,217,147,175,194,124,234,121,230,171,190,213,143,243,103"/>
+<area shape="rect" id="Node000007" href="$DerivativeFilter_8h.html" title="Provides a DerivativeFilter class for calculating the rate of change of input values." alt="" coords="237,152,376,192"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="263,103,288,139,284,142,259,106"/>
+<area shape="rect" id="Node000017" href="$FFTFilter_8h.html" title="Provides the FFTFilter class for processing and normalizing FFT data." alt="" coords="400,152,538,192"/>
+<area shape="poly" id="edge19_Node000006_Node000017" title=" " alt="" coords="285,102,405,145,403,150,284,107"/>
+<area shape="rect" id="Node000018" href="$TimeStep_8h.html" title="Utility class for timing operations based on a set frequency." alt="" coords="24,152,162,192"/>
+<area shape="poly" id="edge22_Node000006_Node000018" title=" " alt="" coords="231,106,145,148,143,143,229,102"/>
+<area shape="rect" id="Node000019" href="$FFT_8h.html" title="Provides an implementation of the Radix&#45;2 FFT algorithm and related utilities." alt="" coords="562,152,712,192"/>
+<area shape="poly" id="edge24_Node000006_Node000019" title=" " alt="" coords="311,101,549,149,548,154,310,107"/>
+<area shape="rect" id="Node000008" href="$RunningAverageFilter_8h.html" title="Implements a running average filter for smoothing data." alt="" coords="344,240,516,265"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="338,190,402,230,399,235,335,194"/>
+<area shape="rect" id="Node000009" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="322,313,490,339"/>
+<area shape="poly" id="edge18_Node000007_Node000009" title=" " alt="" coords="311,191,318,227,334,264,353,286,376,304,373,308,350,290,329,267,313,228,305,193"/>
+<area shape="rect" id="Node000015" href="$MinFilter_8h.html" title="Implements a moving minimum filter for processing data streams." alt="" coords="178,240,269,265"/>
+<area shape="poly" id="edge15_Node000007_Node000015" title=" " alt="" coords="288,194,248,232,244,229,285,190"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="429,267,417,301,412,299,424,265"/>
+<area shape="rect" id="Node000014" href="$RunningAverageFilter_8tpp.html" title=" " alt="" coords="515,313,700,339"/>
+<area shape="poly" id="edge14_Node000008_Node000014" title=" " alt="" coords="460,263,567,306,565,311,458,268"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="235,387,298,412"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="385,341,302,383,300,378,383,336"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="322,387,390,412"/>
+<area shape="poly" id="edge11_Node000009_Node000011" title=" " alt="" coords="400,341,374,377,370,374,396,337"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="414,387,500,412"/>
+<area shape="poly" id="edge12_Node000009_Node000012" title=" " alt="" coords="417,337,443,374,439,377,413,341"/>
+<area shape="rect" id="Node000013" href="$Mathematics_8tpp.html" title=" " alt="" coords="524,387,656,412"/>
+<area shape="poly" id="edge13_Node000009_Node000013" title=" " alt="" coords="437,336,548,379,546,384,435,341"/>
+<area shape="poly" id="edge16_Node000015_Node000009" title=" " alt="" coords="254,263,365,306,363,311,252,268"/>
+<area shape="rect" id="Node000016" href="$MinFilter_8tpp.html" title=" " alt="" coords="172,313,275,339"/>
+<area shape="poly" id="edge17_Node000015_Node000016" title=" " alt="" coords="226,266,226,300,221,300,221,266"/>
+<area shape="poly" id="edge20_Node000017_Node000008" title=" " alt="" coords="462,193,445,229,440,226,457,191"/>
+<area shape="poly" id="edge21_Node000017_Node000009" title=" " alt="" coords="497,190,514,206,528,225,535,246,530,267,504,293,472,311,469,306,501,289,525,264,530,246,523,228,510,210,493,194"/>
+<area shape="poly" id="edge23_Node000018_Node000002" title=" " alt="" coords="96,192,96,226,90,226,90,192"/>
+<area shape="poly" id="edge25_Node000019_Node000009" title=" " alt="" coords="625,194,593,231,551,268,505,293,459,311,457,306,503,288,547,263,589,227,621,190"/>
+<area shape="rect" id="Node000020" href="$FFT_8tpp.html" title=" " alt="" coords="642,240,712,265"/>
+<area shape="poly" id="edge26_Node000019_Node000020" title=" " alt="" coords="649,191,667,226,662,229,644,193"/>
+</map>

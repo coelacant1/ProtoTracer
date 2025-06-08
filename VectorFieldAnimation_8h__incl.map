@@ -1,0 +1,13 @@
+<map id="VectorFieldAnimation.h" name="VectorFieldAnimation.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="335,5,508,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,107,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="363,33,121,80,120,75,362,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="131,79,295,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="389,33,261,77,259,72,387,28"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="320,79,523,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="424,31,424,65,419,65,419,31"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="547,79,733,104"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="457,28,592,72,591,77,456,33"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="757,79,958,104"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="492,28,774,74,773,79,491,33"/>
+</map>

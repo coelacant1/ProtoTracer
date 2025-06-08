@@ -1,0 +1,5 @@
+<map id="BoundingBox2D" name="BoundingBox2D">
+<area shape="rect" id="Node000001" title="Represents a 2D axis&#45;aligned bounding box." alt="" coords="5,123,132,148"/>
+<area shape="rect" id="Node000002" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="28,5,109,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="71,44,71,123,66,123,66,44"/>
+</map>

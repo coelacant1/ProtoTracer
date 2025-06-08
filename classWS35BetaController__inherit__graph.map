@@ -1,0 +1,5 @@
+<map id="WS35BetaController" name="WS35BetaController">
+<area shape="rect" id="Node000001" title="Manages WS2812&#45;based displays for the Beta Protogen head." alt="" coords="5,79,159,104"/>
+<area shape="rect" id="Node000002" href="$classController.html" title="Base class for managing brightness and display operations of lighting controllers." alt="" coords="39,5,125,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="85,44,85,79,79,79,79,44"/>
+</map>

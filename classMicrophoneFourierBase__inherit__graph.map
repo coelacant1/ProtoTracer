@@ -1,0 +1,6 @@
+<map id="MicrophoneFourierBase" name="MicrophoneFourierBase">
+<area shape="rect" id="Node000001" title="Base class for FFT&#45;based microphone signal processing." alt="" coords="5,5,180,31"/>
+<area shape="rect" id="Node000002" href="$classMicrophoneFourier.html" title="Provides real&#45;time FFT analysis of microphone signals." alt="" coords="21,79,164,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,44,88,78,83,79,81,45"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="104,45,102,79,97,78,99,44"/>
+</map>

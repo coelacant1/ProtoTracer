@@ -1,0 +1,31 @@
+<map id="Controller" name="Controller">
+<area shape="rect" id="Node000001" title="Base class for managing brightness and display operations of lighting controllers." alt="" coords="5,327,92,352"/>
+<area shape="rect" id="Node000002" href="$classAPA102Controller.html" title="Manages APA102 LED strips with camera integration." alt="" coords="161,5,295,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="47,313,51,257,64,183,76,145,91,107,112,71,138,40,159,26,162,31,142,44,116,74,96,109,81,146,69,185,56,257,53,313"/>
+<area shape="rect" id="Node000003" href="$classBetaProtoController.html" title=" " alt="" coords="153,55,303,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="49,312,56,265,71,205,97,143,116,114,138,89,155,78,158,82,142,93,120,118,102,145,76,206,61,266,55,313"/>
+<area shape="rect" id="Node000004" href="$classESP32DevKitV1.html" title=" " alt="" coords="167,104,289,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="52,313,61,274,78,227,103,179,138,139,165,124,168,128,142,143,107,182,83,229,67,275,57,314"/>
+<area shape="rect" id="Node000005" href="$classGammaControllerBack.html" title=" " alt="" coords="143,153,313,179"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="56,312,86,250,109,216,138,188,159,176,161,181,142,192,113,220,91,253,61,315"/>
+<area shape="rect" id="Node000006" href="$classGammaControllerFront.html" title=" " alt="" coords="143,203,313,228"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="64,313,95,274,116,254,139,237,163,226,165,231,141,242,119,258,99,278,68,317"/>
+<area shape="rect" id="Node000007" href="$classHUB75Controller.html" title="Manages HUB75 LED matrices with camera integration." alt="" coords="163,252,293,277"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="80,317,139,286,172,275,174,280,141,291,82,322"/>
+<area shape="rect" id="Node000008" href="$classHUB75ControllerSplit.html" title="Manages HUB75 LED matrices and secondary LED displays or strips." alt="" coords="148,301,308,327"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="105,329,147,323,148,328,106,334"/>
+<area shape="rect" id="Node000009" href="$classHUB75ControllerSquare.html" title="Manages a square display composed of two vertical HUB75 panels." alt="" coords="140,351,316,376"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="106,344,140,349,140,354,105,350"/>
+<area shape="rect" id="Node000010" href="$classKaiborgV1Controller.html" title=" " alt="" coords="151,400,305,425"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="84,357,141,385,177,397,176,402,139,390,82,361"/>
+<area shape="rect" id="Node000011" href="$classKaiborgV1D1Controller.html" title=" " alt="" coords="143,449,313,475"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="68,362,100,399,141,434,168,447,166,452,139,439,96,403,64,365"/>
+<area shape="rect" id="Node000012" href="$classProtoDRController.html" title=" " alt="" coords="159,499,297,524"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="61,364,91,425,114,457,142,484,164,496,161,501,138,488,110,460,87,427,57,366"/>
+<area shape="rect" id="Node000013" href="$classProtoV2Controller.html" title=" " alt="" coords="159,548,297,573"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="57,365,67,403,84,448,108,494,142,533,162,546,159,550,138,537,104,497,79,450,62,404,52,366"/>
+<area shape="rect" id="Node000014" href="$classWS35BetaController.html" title="Manages WS2812&#45;based displays for the Beta Protogen head." alt="" coords="151,597,305,623"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="55,365,62,412,77,471,102,531,120,559,142,583,160,595,157,599,138,587,116,562,98,534,72,472,56,413,49,366"/>
+<area shape="rect" id="Node000015" href="$classWS35Controller.html" title="Manages WS2812&#45;based displays for the Delta, Epsilon, and Sigma Protogen heads." alt="" coords="167,647,289,672"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="53,366,57,421,70,493,81,530,97,567,117,602,142,632,168,648,165,652,138,636,112,605,92,570,76,532,65,494,52,422,47,366"/>
+</map>

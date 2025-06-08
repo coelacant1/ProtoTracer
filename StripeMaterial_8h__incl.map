@@ -1,0 +1,35 @@
+<map id="StripeMaterial.h" name="StripeMaterial.h">
+<area shape="rect" id="Node000001" title="A material class for generating striped patterns with configurable properties." alt="" coords="496,5,623,31"/>
+<area shape="rect" id="Node000002" href="$Material_8h.html" title="Base class for materials defining shading and rendering behavior." alt="" coords="271,86,371,111"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="525,33,369,84,368,79,524,28"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="394,79,554,119"/>
+<area shape="poly" id="edge17_Node000001_Node000012" title=" " alt="" coords="549,33,506,71,503,67,545,29"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="579,79,713,119"/>
+<area shape="poly" id="edge18_Node000001_Node000013" title=" " alt="" coords="574,29,617,67,613,71,570,33"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="738,79,869,119"/>
+<area shape="poly" id="edge19_Node000001_Node000014" title=" " alt="" coords="596,28,733,72,731,77,594,33"/>
+<area shape="rect" id="Node000003" href="$RGBColor_8h.html" title="Defines the RGBColor class for managing and manipulating RGB color values." alt="" coords="187,167,340,192"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="314,113,282,157,278,154,310,110"/>
+<area shape="rect" id="Node000011" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="265,387,358,412"/>
+<area shape="poly" id="edge16_Node000002_Node000011" title=" " alt="" coords="330,111,343,135,354,166,363,188,372,211,371,255,351,340,332,377,327,374,346,338,366,254,367,212,358,190,349,168,338,137,326,113"/>
+<area shape="rect" id="Node000004" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="99,460,255,485"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="223,195,186,213,170,226,158,241,139,285,136,322,144,362,155,411,167,447,162,449,150,413,139,363,131,323,134,283,153,239,167,222,184,208,220,190"/>
+<area shape="rect" id="Node000009" href="$Quaternion_8h.html" title="Defines the Quaternion class for 3D rotations and transformations." alt="" coords="168,240,311,265"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="262,193,250,228,245,226,257,191"/>
+<area shape="poly" id="edge15_Node000003_Node000011" title=" " alt="" coords="282,190,305,211,324,239,333,275,334,312,322,374,317,373,328,311,328,275,320,241,301,214,279,194"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="5,533,68,559"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="155,488,73,529,70,525,153,483"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="92,533,160,559"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="170,487,144,524,140,521,166,484"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="185,533,270,559"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="187,484,213,521,209,524,183,487"/>
+<area shape="rect" id="Node000008" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,533,427,559"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="207,483,319,526,317,531,205,488"/>
+<area shape="poly" id="edge9_Node000009_Node000004" title=" " alt="" coords="219,268,192,287,171,315,161,349,160,384,165,418,171,446,166,448,159,419,155,385,156,348,166,312,189,283,216,263"/>
+<area shape="rect" id="Node000010" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="181,313,274,339"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="240,266,234,300,229,299,235,265"/>
+<area shape="poly" id="edge14_Node000009_Node000011" title=" " alt="" coords="252,264,271,285,288,312,301,343,309,372,304,374,296,345,284,315,266,288,248,267"/>
+<area shape="poly" id="edge11_Node000010_Node000004" title=" " alt="" coords="226,340,188,448,183,446,221,338"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="243,337,289,375,285,380,239,341"/>
+<area shape="poly" id="edge13_Node000011_Node000004" title=" " alt="" coords="291,414,212,456,210,451,288,410"/>
+</map>

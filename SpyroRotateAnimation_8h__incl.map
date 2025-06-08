@@ -1,0 +1,11 @@
+<map id="SpyroRotateAnimation.h" name="SpyroRotateAnimation.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="237,5,419,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,107,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="285,33,114,78,112,73,284,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="131,79,333,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="314,33,260,72,257,68,311,29"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="357,79,493,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="345,29,400,68,397,72,342,33"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="518,79,725,104"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="376,28,561,73,560,78,375,33"/>
+</map>

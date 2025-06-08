@@ -1,0 +1,6 @@
+<map id="CombineMaterial&lt; materialCount &gt;" name="CombineMaterial&lt; materialCount &gt;">
+<area shape="rect" id="Node000001" title="Combines multiple materials with specified blending methods and opacities." alt="" coords="5,93,209,133"/>
+<area shape="rect" id="Node000002" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="69,5,145,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="108,45,107,55,108,93,103,93,102,55,103,44"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="110,44,110,93,105,93,105,44"/>
+</map>

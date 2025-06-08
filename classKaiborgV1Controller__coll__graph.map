@@ -1,0 +1,37 @@
+<map id="KaiborgV1Controller" name="KaiborgV1Controller">
+<area shape="rect" id="Node000001" title=" " alt="" coords="749,585,902,611"/>
+<area shape="rect" id="Node000002" href="$classController.html" title="Base class for managing brightness and display operations of lighting controllers." alt="" coords="711,481,798,506"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="773,516,820,584,815,587,768,519"/>
+<area shape="rect" id="Node000003" href="$classCameraManager.html" title="Manages multiple CameraBase objects." alt="" coords="680,359,811,385"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="750,398,756,480,751,481,745,398"/>
+<area shape="rect" id="Node000004" href="$classCameraBase.html" title="Base class for managing camera properties and transformations." alt="" coords="717,225,822,251"/>
+<area shape="poly" id="edge21_Node000001_Node000004" title=" " alt="" coords="815,256,832,273,841,301,846,339,845,431,837,523,830,585,824,585,832,522,840,431,840,339,836,302,827,276,812,260"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="767,265,750,360,745,359,762,264"/>
+<area shape="rect" id="Node000014" href="$classCamera.html" title=" " alt="" coords="529,359,655,385"/>
+<area shape="poly" id="edge19_Node000014_Node000004" title=" " alt="" coords="744,261,609,361,606,357,741,257"/>
+<area shape="rect" id="Node000005" href="$classTransform.html" title="Represents a 3D transformation including position, rotation, and scale." alt="" coords="1014,137,1101,163"/>
+<area shape="poly" id="edge11_Node000001_Node000005" title=" " alt="" coords="1066,176,1073,237,1073,495,1069,521,1057,543,1038,560,1015,573,960,590,903,598,902,593,958,585,1012,568,1035,556,1052,539,1064,519,1068,494,1068,237,1061,176"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="1014,170,913,204,820,228,819,223,911,199,1013,165"/>
+<area shape="rect" id="Node000006" href="$classQuaternion.html" title="A mathematical construct representing a rotation in 3D space." alt="" coords="815,5,910,31"/>
+<area shape="poly" id="edge9_Node000004_Node000006" title=" " alt="" coords="843,42,808,85,791,111,779,138,773,162,770,186,771,225,765,225,765,185,767,161,773,136,787,108,804,81,839,39"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="902,36,922,53,931,69,934,84,938,98,947,111,979,131,1014,141,1013,146,977,136,944,115,933,100,929,85,926,71,918,56,899,40"/>
+<area shape="rect" id="Node000008" href="$classCameraLayout.html" title="Manages camera orientation and axis alignment." alt="" coords="860,137,977,163"/>
+<area shape="poly" id="edge8_Node000008_Node000006" title=" " alt="" coords="860,45,858,79,860,96,866,112,877,125,892,135,889,139,874,129,862,115,855,97,852,79,854,45"/>
+<area shape="rect" id="Node000007" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="1069,5,1150,31"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="1106,44,1096,78,1082,114,1068,138,1064,135,1078,112,1091,76,1101,43"/>
+<area shape="poly" id="edge10_Node000001_Node000008" title=" " alt="" coords="924,176,928,237,928,495,920,526,900,552,875,573,851,588,848,583,872,568,897,548,915,524,923,494,923,237,919,177"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="851,169,811,189,792,207,778,227,774,224,788,204,808,184,848,165"/>
+<area shape="rect" id="Node000009" href="$classPixelGroup.html" title=" " alt="" coords="224,481,371,506"/>
+<area shape="poly" id="edge12_Node000001_Node000009" title=" " alt="" coords="339,509,413,535,499,559,630,580,748,590,748,596,630,585,498,564,411,540,337,514"/>
+<area shape="rect" id="Node000010" href="$classIPixelGroup.html" title="Interface for managing and interacting with a collection of pixels." alt="" coords="5,359,101,385"/>
+<area shape="poly" id="edge13_Node000009_Node000010" title=" " alt="" coords="82,390,132,421,190,452,259,478,257,483,188,457,129,426,80,395"/>
+<area shape="rect" id="Node000011" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="369,225,450,251"/>
+<area shape="poly" id="edge14_Node000009_Node000011" title=" " alt="" coords="412,265,409,305,400,355,384,408,357,456,341,471,324,483,321,478,338,467,353,453,379,406,395,354,404,304,406,265"/>
+<area shape="rect" id="Node000012" href="$classBoundingBox2D.html" title="Represents a 2D axis&#45;aligned bounding box." alt="" coords="234,359,361,385"/>
+<area shape="poly" id="edge16_Node000012_Node000011" title=" " alt="" coords="378,260,359,276,326,321,305,360,300,358,322,318,355,273,375,256"/>
+<area shape="poly" id="edge20_Node000014_Node000011" title=" " alt="" coords="438,257,578,357,575,361,435,261"/>
+<area shape="poly" id="edge15_Node000009_Node000012" title=" " alt="" coords="300,398,300,480,295,480,295,398"/>
+<area shape="rect" id="Node000013" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="126,359,210,385"/>
+<area shape="poly" id="edge17_Node000009_Node000013" title=" " alt="" coords="180,396,196,425,219,453,240,467,263,478,260,483,237,472,216,457,192,428,176,399"/>
+<area shape="poly" id="edge18_Node000001_Node000014" title=" " alt="" coords="598,398,611,452,624,481,642,506,673,534,709,555,746,571,780,583,778,588,744,576,706,560,670,538,638,510,619,483,606,453,593,399"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="ObjectAlign" name="ObjectAlign">
+<area shape="rect" id="Node000001" title="Handles aligning and transforming 3D objects to fit within specified 2D camera bounds." alt="" coords="152,123,249,148"/>
+<area shape="rect" id="Node000002" href="$classQuaternion.html" title="A mathematical construct representing a rotation in 3D space." alt="" coords="5,5,100,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="57,44,64,72,80,97,96,109,114,118,152,128,151,133,112,123,93,113,76,100,59,74,52,45"/>
+<area shape="rect" id="Node000003" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="160,5,241,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="203,44,203,123,198,123,198,44"/>
+<area shape="rect" id="Node000004" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="287,5,368,31"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="326,46,317,74,300,101,276,117,250,128,248,123,274,113,296,97,312,72,321,44"/>
+</map>

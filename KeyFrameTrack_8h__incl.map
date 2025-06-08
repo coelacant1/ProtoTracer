@@ -1,0 +1,17 @@
+<map id="KeyFrameTrack.h" name="KeyFrameTrack.h">
+<area shape="rect" id="Node000001" title="Declares the KeyFrameTrack template class for managing keyframe&#45;based animations." alt="" coords="163,5,296,31"/>
+<area shape="rect" id="Node000002" href="$KeyFrame_8h.html" title="Declares the KeyFrame class for representing individual animation keyframes." alt="" coords="5,79,104,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="202,33,97,76,95,71,200,28"/>
+<area shape="rect" id="Node000003" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="128,79,331,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="232,31,232,65,227,65,227,31"/>
+<area shape="rect" id="Node000008" href="$KeyFrameTrack_8tpp.html" title=" " alt="" coords="355,79,501,104"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="262,28,383,71,382,76,260,33"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="58,152,121,177"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="208,106,125,148,123,143,206,102"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="145,152,213,177"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="223,106,197,142,193,139,219,103"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="237,152,323,177"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="240,103,266,139,262,142,236,106"/>
+<area shape="rect" id="Node000007" href="$Mathematics_8tpp.html" title=" " alt="" coords="347,152,479,177"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="260,102,371,144,369,149,258,107"/>
+</map>

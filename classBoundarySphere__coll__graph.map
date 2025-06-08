@@ -1,0 +1,19 @@
+<map id="BoundarySphere" name="BoundarySphere">
+<area shape="rect" id="Node000001" title="Represents a spherical boundary object for motion and collision simulations." alt="" coords="301,343,430,368"/>
+<area shape="rect" id="Node000002" href="$classObject3D.html" title="Represents a 3D object with geometry, material, and transformation data." alt="" coords="324,255,407,280"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="368,294,368,342,363,342,363,294"/>
+<area shape="rect" id="Node000003" href="$classTransform.html" title="Represents a 3D transformation including position, rotation, and scale." alt="" coords="489,137,575,163"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="527,177,514,206,492,233,472,246,451,255,407,265,406,260,449,250,470,241,489,229,510,203,523,175"/>
+<area shape="rect" id="Node000004" href="$classQuaternion.html" title="A mathematical construct representing a rotation in 3D space." alt="" coords="50,5,145,31"/>
+<area shape="poly" id="edge9_Node000001_Node000004" title=" " alt="" coords="79,43,49,80,21,129,12,155,8,181,11,206,22,229,49,260,81,285,116,305,154,320,232,340,301,349,300,355,231,346,153,325,114,309,78,289,45,263,18,232,6,207,3,181,7,154,17,127,45,77,75,39"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="143,33,253,70,386,111,489,136,487,142,384,116,251,75,141,38"/>
+<area shape="rect" id="Node000005" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="541,5,622,31"/>
+<area shape="poly" id="edge8_Node000001_Node000005" title=" " alt="" coords="611,39,621,53,637,103,639,146,625,188,597,232,577,254,555,274,506,306,455,330,410,345,409,340,453,325,503,302,552,270,574,251,592,229,620,185,633,146,632,104,616,56,606,42"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="544,40,530,56,524,76,523,98,530,136,525,137,518,99,518,76,526,53,540,37"/>
+<area shape="rect" id="Node000006" href="$classIStaticTriangleGroup.html" title="Interface for managing a static group of 3D triangles and associated data." alt="" coords="63,137,217,163"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="143,176,149,204,155,218,164,229,191,242,233,251,324,261,323,267,232,256,189,247,161,233,151,220,144,206,138,177"/>
+<area shape="rect" id="Node000007" href="$classITriangleGroup.html" title="Interface for managing a dynamic group of 3D triangles and associated data." alt="" coords="241,137,357,163"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="289,176,283,204,284,217,289,229,304,245,325,255,322,259,301,249,284,232,279,218,278,203,284,175"/>
+<area shape="rect" id="Node000008" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="389,137,465,163"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="429,177,425,204,414,232,402,246,388,257,385,252,399,242,410,229,420,203,424,176"/>
+</map>

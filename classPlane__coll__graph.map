@@ -1,0 +1,5 @@
+<map id="Plane" name="Plane">
+<area shape="rect" id="Node000001" title="Represents a plane in 3D space defined by a centroid and a normal vector." alt="" coords="17,108,75,133"/>
+<area shape="rect" id="Node000002" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="5,5,87,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="49,45,49,108,43,108,43,45"/>
+</map>

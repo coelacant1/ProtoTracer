@@ -1,0 +1,9 @@
+<map id="SingleButtonMorseHandler.h" name="SingleButtonMorseHandler.h">
+<area shape="rect" id="Node000001" title="Declares the MenuHandler template class for managing single&#45;button menu interactions with Morse code ..." alt="" coords="55,5,261,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,89,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="142,33,79,73,76,69,139,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="113,79,203,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="161,31,161,65,155,65,155,31"/>
+<area shape="rect" id="Node000004" href="$SingleButtonMorseHandler_8tpp.html" title=" " alt="" coords="227,79,447,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="188,28,296,71,294,76,186,33"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="DirectionAngle" name="DirectionAngle">
+<area shape="rect" id="Node000001" title="Defines a rotation in 3D space using a direction vector and a rotation angle." alt="" coords="5,93,124,119"/>
+<area shape="rect" id="Node000002" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="24,5,105,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="67,45,67,93,62,93,62,45"/>
+</map>
