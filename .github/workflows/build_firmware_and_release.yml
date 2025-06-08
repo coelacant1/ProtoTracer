@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
     paths-ignore:
-      - '.github/**'
+      - '.github/FUNDING.yml'
       - '.site/**'
       - '.docs/**'
       - '.pio/**'
@@ -22,10 +22,10 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
 
-      - name: Set up Python
+      - name: Set up Python 3.11
         uses: actions/setup-python@v4
         with:
-          python-version: '3.x'
+          python-version: '3.11'
 
       - name: Cache PlatformIO
         uses: actions/cache@v4
@@ -62,25 +62,22 @@ jobs:
 
           mkdir -p firmware_builds
 
-          build_env() {
-            local env=$1
+          for env in "${environments[@]}"; do
             echo "[$(date +%T)] Building environment: $env"
-            platformio run -e "$env"
+            # let PIO use all cores *within* the build
+            platformio run -e "$env" -j 4
 
-            source_hex=".pio/build/$env/firmware.hex"
-            if [ -f "$source_hex" ]; then
-              dest_hex="firmware_builds/${env}.hex"
-              cp "$source_hex" "$dest_hex"
-              echo "[$(date +%T)] Collected HEX file for $env at $dest_hex"
+            src=".pio/build/$env/firmware.hex"
+            dst="firmware_builds/${env}.hex"
+            if [[ -f "$src" ]]; then
+              cp "$src" "$dst"
+              echo "[$(date +%T)] Collected HEX → $dst"
             else
-              echo "[$(date +%T)] Error: HEX file not found for $env at $source_hex"
+              echo "[$(date +%T)] ERROR: $src not found"
               exit 1
             fi
-          }
-
-          export -f build_env
-          printf "%s\n" "${environments[@]}" | parallel -j 4 build_env {}
-          echo "[$(date +%T)] All build environments completed."
+          done
+          echo "[$(date +%T)] All environments built."
 
       - name: Upload Firmware Builds as Artifact
         uses: actions/upload-artifact@v4
@@ -89,11 +86,12 @@ jobs:
           path: firmware_builds/
 
   release:
+    env:
+      VERSION_NUMBER: v1.${{ github.run_number }}
+      ZIP_NAME:    firmware_build_${{ github.run_number }}.zip
     needs: build
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    env:
-      VERSION_NUMBER: "v1.${{ github.run_number }}"
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
 
     steps:
       - name: Checkout repository
@@ -108,16 +106,14 @@ jobs:
       - name: Zip Firmware Builds with Version Number
         run: |
           cd firmware_builds
-          VERSION_NUM_ONLY="${{ env.VERSION_NUMBER }}"
-          VERSION_NUM_ONLY="${VERSION_NUM_ONLY#v}"
-          zip ../firmware_build_${VERSION_NUM_ONLY}.zip *.hex
-          echo "ZIP_NAME=firmware_build_${VERSION_NUM_ONLY}.zip" >> $GITHUB_ENV
+          VERSION_NUM_ONLY="${VERSION_NUMBER#v}"
+          zip ../"$ZIP_NAME" *.hex
 
       - name: Verify ZIP file exists
         run: |
           ls -la
-          echo "Looking for file: ${{ env.ZIP_NAME }}"
-          if [ ! -f "${{ env.ZIP_NAME }}" ]; then
+          echo "Looking for file: $ZIP_NAME"
+          if [ ! -f "$ZIP_NAME" ]; then
             echo "Error: ZIP file not found!"
             exit 1
           fi
@@ -127,7 +123,7 @@ jobs:
           # Create a directory for individual hex files
           mkdir -p release_assets
           cp firmware_builds/*.hex release_assets/
-          cp ${{ env.ZIP_NAME }} release_assets/
+          cp "$ZIP_NAME" release_assets/
 
       - name: Create GitHub Release with All Assets
         uses: ncipollo/release-action@v1
