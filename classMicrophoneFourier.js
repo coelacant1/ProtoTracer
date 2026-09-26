@@ -1,0 +1,25 @@
+var classMicrophoneFourier =
+[
+    [ "Initialize", "classMicrophoneFourier.html#ae8196a9a0d508293f58edd3f3b56f9cd", null ],
+    [ "Initialize", "classMicrophoneFourier.html#ac2c7155658057b14b58ee5bc862a95a0", null ],
+    [ "Initialize", "classMicrophoneFourier.html#a692d165f5a213ad7e13a8b931a306b88", null ],
+    [ "Reset", "classMicrophoneFourier.html#a372de693ad40b3f42839c8ec6ac845f4", null ],
+    [ "SamplerCallback", "classMicrophoneFourier.html#ad3e6e0bc73a272ee3ada1bfd9fab2276", null ],
+    [ "SamplerCallback", "classMicrophoneFourier.html#aaff8214a52cb4862238720ef227c2bfc", null ],
+    [ "setMicGain", "classMicrophoneFourier.html#a02ab0331339203f8ea8f6018087a6e01", null ],
+    [ "setSamplingRate", "classMicrophoneFourier.html#a3ba63b0df2811288ee8ebba34c6b2f08", null ],
+    [ "StartSampler", "classMicrophoneFourier.html#a6a9bae5d97e05cc2fd19a59f41b57fe1", null ],
+    [ "Update", "classMicrophoneFourier.html#aec0783b5a136e042adcc47bae4fe5291", null ],
+    [ "UpdateDMA", "classMicrophoneFourier.html#a7ccb26f35a6fbc8ddc88030c0b5270e4", null ],
+    [ "window_raw_fft_data", "classMicrophoneFourier.html#ae0b9a3439ad3f203d4c35851cb9a7b6a", null ],
+    [ "frequencyBins", "classMicrophoneFourier.html#a89ecfbc360e1d1abf9bbc3705aca0599", null ],
+    [ "gain_pin", "classMicrophoneFourier.html#a017896dce1b42e03620a4cd5ba1ae624", null ],
+    [ "Hanning256", "classMicrophoneFourier.html#a9d92bd2cca7ef684f386e45e9807f255", null ],
+    [ "microphoneGain_50db", "classMicrophoneFourier.html#afea876eef1da052238de80f4772c3f08", null ],
+    [ "refreshRate", "classMicrophoneFourier.html#a8d2dee94459105e68841839ad2b49520", null ],
+    [ "samples", "classMicrophoneFourier.html#a73d6beaf86923e792fa9182ee67af213", null ],
+    [ "samplesReady", "classMicrophoneFourier.html#ad192d1b07b8fa873514a3489ab82d7c3", null ],
+    [ "samplesStorage", "classMicrophoneFourier.html#ac3ee1bdbce3190d7a809cbb3c52c4bbc", null ],
+    [ "sampleTimer", "classMicrophoneFourier.html#aaf192ed4c3403c6381b5c68b91d687a0", null ],
+    [ "timeStep", "classMicrophoneFourier.html#a77efe5b639ab89a0a1f7b8445c01309e", null ]
+];

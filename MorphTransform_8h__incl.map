@@ -1,0 +1,28 @@
+<map id="MorphTransform.h" name="MorphTransform.h">
+<area shape="rect" id="Node000001" title="Declares the MorphTransform template class for handling 3D transformations." alt="" coords="501,5,641,31"/>
+<area shape="rect" id="Node000002" href="$IEasyEaseAnimator_8h.html" title="Declares the IEasyEaseAnimator interface for defining animation behaviors." alt="" coords="214,79,373,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="527,33,352,78,351,73,525,28"/>
+<area shape="rect" id="Node000011" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="483,79,659,104"/>
+<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="573,31,573,65,568,65,568,31"/>
+<area shape="rect" id="Node000012" href="$MorphTransform_8tpp.html" title=" " alt="" coords="683,79,837,104"/>
+<area shape="poly" id="edge14_Node000001_Node000012" title=" " alt="" coords="602,28,717,71,715,76,600,33"/>
+<area shape="rect" id="Node000003" href="$KeyFrame_8h.html" title="Declares the KeyFrame class for representing individual animation keyframes." alt="" coords="5,152,104,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="256,107,107,151,106,145,254,101"/>
+<area shape="rect" id="Node000004" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="308,225,511,251"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="248,107,212,119,181,135,170,144,164,154,163,164,169,176,188,190,219,202,300,221,299,226,218,207,185,195,165,179,158,165,159,152,166,141,178,131,210,114,246,101"/>
+<area shape="rect" id="Node000009" href="$DampedSpring_8h.html" title="Defines the DampedSpring class for simulating damped spring motion." alt="" coords="179,152,408,177"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="296,104,296,138,291,138,291,104"/>
+<area shape="rect" id="Node000010" href="$RampFilter_8h.html" title="Provides a class for smooth value transitions using a ramp filter." alt="" coords="432,152,619,177"/>
+<area shape="poly" id="edge10_Node000002_Node000010" title=" " alt="" coords="331,101,476,145,474,151,330,107"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="238,299,301,324"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="388,253,305,295,303,290,386,248"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="325,299,393,324"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="403,253,377,289,373,286,399,249"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="417,299,503,324"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="420,249,446,286,442,289,416,253"/>
+<area shape="rect" id="Node000008" href="$Mathematics_8tpp.html" title=" " alt="" coords="527,299,659,324"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="440,248,551,291,549,296,438,253"/>
+<area shape="poly" id="edge9_Node000009_Node000004" title=" " alt="" coords="313,175,380,216,377,220,311,180"/>
+<area shape="poly" id="edge11_Node000010_Node000004" title=" " alt="" coords="508,180,441,220,439,216,505,175"/>
+<area shape="poly" id="edge13_Node000011_Node000004" title=" " alt="" coords="591,102,610,117,628,136,638,157,638,168,633,179,613,194,582,207,505,226,504,220,580,202,610,190,629,176,633,167,633,158,624,139,607,121,587,106"/>
+</map>

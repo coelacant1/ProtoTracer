@@ -1,0 +1,19 @@
+<map id="SpectrumAnalyzer" name="SpectrumAnalyzer">
+<area shape="rect" id="Node000001" title="A material that visualizes audio data as a spectrum." alt="" coords="244,215,385,240"/>
+<area shape="rect" id="Node000002" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="7,13,83,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="35,51,20,84,10,122,11,159,17,175,28,189,43,198,64,205,120,215,244,223,244,229,119,221,63,210,41,202,25,193,12,178,6,160,5,121,15,82,30,49"/>
+<area shape="poly" id="edge10_Node000001_Node000002" title=" " alt="" coords="43,52,41,102,47,128,59,150,88,170,135,187,244,212,243,217,133,192,86,175,55,154,42,129,36,102,37,52"/>
+<area shape="rect" id="Node000007" href="$classGradientMaterial.html" title=" " alt="" coords="129,125,300,150"/>
+<area shape="poly" id="edge7_Node000007_Node000002" title=" " alt="" coords="76,43,198,122,195,127,73,48"/>
+<area shape="rect" id="Node000003" href="$classBouncePhysics.html" title="Simulates bouncing physics with gravity and velocity damping." alt="" coords="655,125,774,150"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="667,157,531,193,386,219,385,214,530,188,665,151"/>
+<area shape="rect" id="Node000004" href="$classRunningAverageFilter.html" title=" " alt="" coords="634,5,795,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="717,59,717,125,712,125,712,59"/>
+<area shape="rect" id="Node000005" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="209,13,290,38"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="299,42,314,53,326,68,335,87,339,108,339,150,331,188,322,215,317,214,326,186,333,149,334,108,330,89,322,71,311,57,296,46"/>
+<area shape="poly" id="edge9_Node000007_Node000005" title=" " alt="" coords="239,51,231,70,219,125,213,124,225,69,234,49"/>
+<area shape="rect" id="Node000006" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="407,13,491,38"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="479,46,496,68,500,84,496,100,482,122,465,142,425,175,383,200,347,217,345,212,381,195,422,170,461,138,478,119,491,98,495,84,491,70,475,49"/>
+<area shape="poly" id="edge8_Node000007_Node000006" title=" " alt="" coords="423,48,380,75,330,101,258,127,257,122,328,96,378,70,420,43"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="240,157,303,212,300,216,237,161"/>
+</map>

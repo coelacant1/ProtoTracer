@@ -1,0 +1,9 @@
+<map id="RocksAnimation.h" name="RocksAnimation.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="162,5,302,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,107,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="205,33,99,76,97,71,203,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="131,79,333,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="235,31,235,65,229,65,229,31"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="357,79,496,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="264,28,383,71,381,76,262,33"/>
+</map>

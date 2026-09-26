@@ -1,0 +1,15 @@
+<map id="ProtogenHardwareTest.h" name="ProtogenHardwareTest.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="347,5,529,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,89,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="371,33,104,81,103,76,370,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="114,79,274,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="400,33,247,77,246,72,398,28"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="298,79,418,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="427,33,383,72,379,68,423,29"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="443,79,593,104"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="453,29,497,68,493,72,449,33"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="618,79,719,104"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="476,28,619,72,618,77,474,33"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="743,79,901,104"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="500,28,747,73,746,79,499,33"/>
+</map>

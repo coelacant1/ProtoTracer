@@ -1,0 +1,37 @@
+<map id="PhysicsSimulator" name="PhysicsSimulator">
+<area shape="rect" id="Node000001" title="Manages physics simulations for objects within a scene." alt="" coords="512,548,647,573"/>
+<area shape="rect" id="Node000002" href="$classBoundaryCube.html" title="Represents an axis&#45;aligned bounding cube for collision detection and physics." alt="" coords="108,215,225,240"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="170,254,173,334,173,474,175,485,182,495,208,514,248,528,298,539,410,552,512,556,512,562,409,557,297,544,247,533,206,518,178,499,170,487,168,474,168,334,165,254"/>
+<area shape="rect" id="Node000005" href="$classBoundaryMotionSimulator.html" title="Simulates motion and collision interactions between a BoundaryCube and multiple BoundarySpheres." alt="" coords="330,460,522,485"/>
+<area shape="poly" id="edge5_Node000005_Node000002" title=" " alt="" coords="181,251,212,304,242,346,282,382,327,414,403,457,401,462,324,418,279,387,238,350,208,307,177,254"/>
+<area shape="rect" id="Node000003" href="$classQuaternion.html" title="A mathematical construct representing a rotation in 3D space." alt="" coords="235,5,330,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="221,21,164,23,104,29,53,39,34,47,21,56,11,73,8,90,13,107,22,127,44,156,73,180,105,199,134,212,132,217,102,204,70,185,40,160,17,129,8,109,3,90,6,72,18,53,31,42,51,34,104,23,164,18,221,16"/>
+<area shape="rect" id="Node000006" href="$classBoundarySphere.html" title="Represents a spherical boundary object for motion and collision simulations." alt="" coords="362,372,491,397"/>
+<area shape="poly" id="edge15_Node000006_Node000003" title=" " alt="" coords="282,44,274,153,275,209,282,248,307,289,341,323,376,351,407,370,404,374,373,355,337,327,303,292,277,250,269,210,269,153,277,44"/>
+<area shape="rect" id="Node000008" href="$classTransform.html" title="Represents a 3D transformation including position, rotation, and scale." alt="" coords="467,154,554,179"/>
+<area shape="poly" id="edge9_Node000008_Node000003" title=" " alt="" coords="313,36,494,152,491,156,310,41"/>
+<area shape="rect" id="Node000004" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="487,5,568,31"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="474,26,382,38,340,47,311,57,286,74,263,94,223,139,193,183,174,216,170,213,189,180,219,136,259,90,283,70,309,52,339,42,381,33,473,21"/>
+<area shape="poly" id="edge14_Node000006_Node000004" title=" " alt="" coords="475,35,460,44,447,56,424,96,411,141,404,188,404,234,413,317,425,371,420,372,408,317,398,234,399,187,405,140,419,94,443,53,456,40,473,30"/>
+<area shape="poly" id="edge10_Node000008_Node000004" title=" " alt="" coords="582,34,603,53,613,73,617,92,613,110,603,130,582,144,550,156,549,151,580,139,599,126,608,108,611,92,608,75,599,56,579,38"/>
+<area shape="rect" id="Node000014" href="$classLight.html" title="Represents a light source with position, intensity, and falloff properties." alt="" coords="928,323,983,348"/>
+<area shape="poly" id="edge20_Node000014_Node000004" title=" " alt="" coords="582,25,686,43,810,70,870,87,923,106,967,127,996,150,1012,174,1017,197,1015,221,1007,250,989,292,967,324,963,321,984,289,1002,248,1009,221,1012,197,1007,176,992,154,964,132,921,111,868,92,809,75,685,48,582,30"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="460,490,560,545,557,550,458,495"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="429,411,429,459,424,459,424,411"/>
+<area shape="rect" id="Node000007" href="$classObject3D.html" title="Represents a 3D object with geometry, material, and transformation data." alt="" coords="592,273,674,299"/>
+<area shape="poly" id="edge21_Node000001_Node000007" title=" " alt="" coords="623,312,600,361,581,422,577,457,576,493,581,548,575,548,571,493,571,457,576,421,595,359,618,309"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="578,303,517,325,475,349,442,374,439,369,472,345,514,320,577,298"/>
+<area shape="rect" id="Node000012" href="$classScene.html" title="Manages a collection of 3D objects and applies optional screen&#45;space effects." alt="" coords="621,372,682,397"/>
+<area shape="poly" id="edge17_Node000012_Node000007" title=" " alt="" coords="640,311,652,371,647,372,635,312"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="525,190,543,219,568,247,606,271,603,276,564,251,539,223,520,193"/>
+<area shape="rect" id="Node000009" href="$classIStaticTriangleGroup.html" title="Interface for managing a static group of 3D triangles and associated data." alt="" coords="578,154,731,179"/>
+<area shape="poly" id="edge11_Node000007_Node000009" title=" " alt="" coords="652,193,638,274,632,273,647,192"/>
+<area shape="rect" id="Node000010" href="$classITriangleGroup.html" title="Interface for managing a dynamic group of 3D triangles and associated data." alt="" coords="755,154,871,179"/>
+<area shape="poly" id="edge12_Node000007_Node000010" title=" " alt="" coords="804,193,785,227,766,251,731,264,675,278,674,273,730,259,763,247,781,224,799,191"/>
+<area shape="rect" id="Node000011" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="906,154,982,179"/>
+<area shape="poly" id="edge13_Node000007_Node000011" title=" " alt="" coords="945,194,938,224,931,239,920,251,900,262,873,268,806,273,738,273,686,276,675,278,674,273,686,271,738,268,806,268,872,263,898,257,917,247,926,236,933,222,940,193"/>
+<area shape="poly" id="edge16_Node000001_Node000012" title=" " alt="" coords="646,411,601,525,588,549,584,547,596,523,641,409"/>
+<area shape="rect" id="Node000013" href="$classEffect.html" title="Abstract base class for applying visual effects to pixel groups." alt="" coords="698,273,757,299"/>
+<area shape="poly" id="edge18_Node000012_Node000013" title=" " alt="" coords="721,313,700,350,672,374,669,370,696,346,717,310"/>
+<area shape="poly" id="edge19_Node000001_Node000014" title=" " alt="" coords="926,357,600,550,598,545,923,353"/>
+</map>

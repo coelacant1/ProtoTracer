@@ -1,0 +1,5 @@
+<map id="Rasterizer" name="Rasterizer">
+<area shape="rect" id="Node000001" title="Provides static methods for rasterizing 3D scenes into 2D camera views." alt="" coords="9,93,97,119"/>
+<area shape="rect" id="Node000002" href="$classQuaternion.html" title="A mathematical construct representing a rotation in 3D space." alt="" coords="5,5,100,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="55,45,55,93,50,93,50,45"/>
+</map>

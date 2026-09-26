@@ -1,0 +1,29 @@
+<map id="Pixel.cpp" name="Pixel.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="48,5,128,31"/>
+<area shape="rect" id="Node000002" href="$Pixel_8h.html" title="Declares the Pixel class for managing pixel data and relationships in a 2D grid." alt="" coords="55,79,121,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,31,91,65,85,65,85,31"/>
+<area shape="rect" id="Node000003" href="$RGBColor_8h.html" title="Defines the RGBColor class for managing and manipulating RGB color values." alt="" coords="121,152,274,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="107,102,169,142,166,147,104,106"/>
+<area shape="rect" id="Node000010" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="5,299,99,324"/>
+<area shape="poly" id="edge16_Node000002_Node000010" title=" " alt="" coords="87,105,73,157,59,226,55,285,49,285,53,225,67,156,82,104"/>
+<area shape="rect" id="Node000004" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="99,445,255,471"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="210,176,241,214,274,270,287,302,294,335,292,367,281,399,258,424,229,442,226,437,255,420,276,396,287,366,288,335,282,304,269,273,236,217,206,179"/>
+<area shape="rect" id="Node000009" href="$Quaternion_8h.html" title="Defines the Quaternion class for 3D rotations and transformations." alt="" coords="69,225,211,251"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="190,179,160,216,156,213,186,176"/>
+<area shape="rect" id="Node000011" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="173,372,267,397"/>
+<area shape="poly" id="edge15_Node000003_Node000011" title=" " alt="" coords="206,176,217,198,225,225,230,261,231,297,226,359,221,358,226,297,225,261,220,226,212,200,201,179"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="6,519,69,544"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="156,473,73,515,71,510,154,468"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="93,519,161,544"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="171,473,145,509,141,506,167,469"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="185,519,271,544"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="188,469,214,506,210,509,184,473"/>
+<area shape="rect" id="Node000008" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,519,427,544"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="208,468,319,511,317,516,206,473"/>
+<area shape="poly" id="edge9_Node000009_Node000004" title=" " alt="" coords="144,251,151,313,164,397,173,431,167,433,159,398,145,314,138,251"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="128,253,79,292,75,288,124,249"/>
+<area shape="poly" id="edge14_Node000009_Node000011" title=" " alt="" coords="149,250,209,359,205,361,144,252"/>
+<area shape="poly" id="edge11_Node000010_Node000004" title=" " alt="" coords="62,322,119,396,157,434,153,438,115,399,58,326"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="80,322,181,364,179,369,78,326"/>
+<area shape="poly" id="edge13_Node000011_Node000004" title=" " alt="" coords="215,399,193,435,189,432,211,396"/>
+</map>

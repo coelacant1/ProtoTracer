@@ -1,0 +1,5 @@
+<map id="Wait.h" name="Wait.h">
+<area shape="rect" id="Node000001" title="Utility class for handling non&#45;blocking wait operations." alt="" coords="16,5,79,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,89,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="50,31,50,65,45,65,45,31"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="RotationMatrix" name="RotationMatrix">
+<area shape="rect" id="Node000001" title="Represents a 3D rotation matrix and provides operations for rotation and matrix manipulation." alt="" coords="5,137,124,163"/>
+<area shape="rect" id="Node000002" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="24,5,105,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="67,44,67,137,62,137,62,44"/>
+</map>

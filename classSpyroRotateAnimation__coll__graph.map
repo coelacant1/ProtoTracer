@@ -1,0 +1,13 @@
+<map id="SpyroRotateAnimation" name="SpyroRotateAnimation">
+<area shape="rect" id="Node000001" title=" " alt="" coords="105,196,275,221"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,108,95,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="82,138,172,193,170,198,79,143"/>
+<area shape="rect" id="Node000003" href="$classFunctionGenerator.html" title="A class to generate various waveform functions with customizable parameters." alt="" coords="119,108,261,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="193,147,193,195,187,195,187,147"/>
+<area shape="rect" id="Node000004" href="$classSimpleMaterial.html" title="A material that applies a single, solid RGB color to surfaces." alt="" coords="285,108,407,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="319,143,267,174,218,198,216,193,265,170,317,138"/>
+<area shape="rect" id="Node000005" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="256,5,332,31"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="309,42,342,107,338,109,304,44"/>
+<area shape="rect" id="Node000006" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="356,5,440,31"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="388,44,354,109,350,107,383,42"/>
+</map>

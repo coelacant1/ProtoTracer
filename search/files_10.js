@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['radialblur_2ecpp_0',['RadialBlur.cpp',['../RadialBlur_8cpp.html',1,'']]],
+  ['radialblur_2eh_1',['RadialBlur.h',['../RadialBlur_8h.html',1,'']]],
+  ['rainbownoise_2ecpp_2',['RainbowNoise.cpp',['../RainbowNoise_8cpp.html',1,'']]],
+  ['rainbownoise_2eh_3',['RainbowNoise.h',['../RainbowNoise_8h.html',1,'']]],
+  ['rainbownoise2_2ecpp_4',['RainbowNoise2.cpp',['../RainbowNoise2_8cpp.html',1,'']]],
+  ['rainbownoise2_2eh_5',['RainbowNoise2.h',['../RainbowNoise2_8h.html',1,'']]],
+  ['rainbowspiral_2ecpp_6',['RainbowSpiral.cpp',['../RainbowSpiral_8cpp.html',1,'']]],
+  ['rainbowspiral_2eh_7',['RainbowSpiral.h',['../RainbowSpiral_8h.html',1,'']]],
+  ['rampfilter_2ecpp_8',['RampFilter.cpp',['../RampFilter_8cpp.html',1,'']]],
+  ['rampfilter_2eh_9',['RampFilter.h',['../RampFilter_8h.html',1,'']]],
+  ['rasterizer_2ecpp_10',['Rasterizer.cpp',['../Rasterizer_8cpp.html',1,'']]],
+  ['rasterizer_2eh_11',['Rasterizer.h',['../Rasterizer_8h.html',1,'']]],
+  ['readme_2emd_12',['README.md',['../README_8md.html',1,'']]],
+  ['rectangle_2ecpp_13',['Rectangle.cpp',['../Rectangle_8cpp.html',1,'']]],
+  ['rectangle_2eh_14',['Rectangle.h',['../Rectangle_8h.html',1,'']]],
+  ['rgbcolor_2ecpp_15',['RGBColor.cpp',['../RGBColor_8cpp.html',1,'']]],
+  ['rgbcolor_2eh_16',['RGBColor.h',['../RGBColor_8h.html',1,'']]],
+  ['rgbcolor565_2eh_17',['RGBColor565.h',['../RGBColor565_8h.html',1,'']]],
+  ['rocksanimation_2eh_18',['RocksAnimation.h',['../RocksAnimation_8h.html',1,'']]],
+  ['rotation_2ecpp_19',['Rotation.cpp',['../Rotation_8cpp.html',1,'']]],
+  ['rotation_2eh_20',['Rotation.h',['../Rotation_8h.html',1,'']]],
+  ['rotationmatrix_2ecpp_21',['RotationMatrix.cpp',['../RotationMatrix_8cpp.html',1,'']]],
+  ['rotationmatrix_2eh_22',['RotationMatrix.h',['../RotationMatrix_8h.html',1,'']]],
+  ['runningaveragefilter_2eh_23',['RunningAverageFilter.h',['../RunningAverageFilter_8h.html',1,'']]],
+  ['runningaveragefilter_2etpp_24',['RunningAverageFilter.tpp',['../RunningAverageFilter_8tpp.html',1,'']]]
+];

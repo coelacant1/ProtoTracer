@@ -1,0 +1,20 @@
+<map id="EulerConstants.cpp" name="EulerConstants.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="103,5,250,31"/>
+<area shape="rect" id="Node000002" href="$EulerConstants_8h.html" title="Provides predefined constants for common Euler rotation orders." alt="" coords="111,79,243,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="179,31,179,65,174,65,174,31"/>
+<area shape="rect" id="Node000003" href="$EulerOrder_8h.html" title="Defines the EulerOrder class for specifying rotation orders in 3D space." alt="" coords="81,152,184,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="172,106,149,142,145,139,167,103"/>
+<area shape="rect" id="Node000004" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="130,225,223,251"/>
+<area shape="poly" id="edge9_Node000002_Node000004" title=" " alt="" coords="184,103,199,152,198,184,190,214,185,212,193,183,194,152,179,105"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="142,176,165,212,160,215,138,179"/>
+<area shape="rect" id="Node000005" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="117,299,236,324"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="179,251,179,285,174,285,174,251"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="5,372,68,397"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="155,326,73,368,70,363,153,322"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="92,372,160,397"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="170,326,144,362,140,359,166,323"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="185,372,270,397"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="187,323,213,359,209,362,183,326"/>
+<area shape="rect" id="Node000009" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,372,427,397"/>
+<area shape="poly" id="edge8_Node000005_Node000009" title=" " alt="" coords="207,322,319,364,317,369,205,327"/>
+</map>

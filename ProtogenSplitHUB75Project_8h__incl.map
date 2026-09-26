@@ -1,0 +1,74 @@
+<map id="ProtogenSplitHUB75Project.h" name="ProtogenSplitHUB75Project.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="1748,5,1959,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,86,107,111"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1748,22,1402,26,933,35,466,52,273,65,126,81,106,85,105,80,125,76,272,60,466,47,933,30,1402,21,1748,17"/>
+<area shape="rect" id="Node000003" href="$KeyFrameTrack_8h.html" title="Declares the KeyFrameTrack template class for managing keyframe&#45;based animations." alt="" coords="77,240,211,265"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="1748,22,1358,24,846,32,600,40,390,50,240,64,194,72,171,81,158,96,149,113,139,153,138,193,142,226,136,227,133,193,134,152,144,111,154,93,168,76,192,67,239,58,390,45,600,34,846,27,1358,19,1748,17"/>
+<area shape="rect" id="Node000011" href="$EasyEaseAnimator_8h.html" title="Declares the EasyEaseAnimator template class for advanced animation easing." alt="" coords="419,86,573,111"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="1748,21,1534,23,1245,31,917,49,750,63,586,81,557,86,557,81,585,76,749,58,917,44,1245,25,1534,18,1748,16"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="597,86,773,111"/>
+<area shape="poly" id="edge19_Node000001_Node000016" title=" " alt="" coords="1748,23,1566,28,1327,38,1058,55,787,81,754,86,753,81,786,76,1057,50,1326,33,1566,23,1748,18"/>
+<area shape="rect" id="Node000017" title=" " alt="" coords="798,86,1029,111"/>
+<area shape="poly" id="edge20_Node000001_Node000017" title=" " alt="" coords="1748,27,1431,47,1237,62,1042,81,999,87,998,81,1041,76,1236,57,1431,42,1747,22"/>
+<area shape="rect" id="Node000018" title=" " alt="" coords="1053,86,1222,111"/>
+<area shape="poly" id="edge21_Node000001_Node000018" title=" " alt="" coords="1748,29,1513,49,1235,81,1205,86,1205,81,1234,76,1512,44,1748,24"/>
+<area shape="rect" id="Node000019" title=" " alt="" coords="1246,86,1381,111"/>
+<area shape="poly" id="edge22_Node000001_Node000019" title=" " alt="" coords="1748,33,1581,53,1394,81,1372,86,1371,80,1393,76,1580,47,1748,27"/>
+<area shape="rect" id="Node000020" title=" " alt="" coords="1405,86,1621,111"/>
+<area shape="poly" id="edge23_Node000001_Node000020" title=" " alt="" coords="1804,33,1576,86,1575,80,1803,28"/>
+<area shape="rect" id="Node000021" title=" " alt="" coords="1645,86,1851,111"/>
+<area shape="poly" id="edge24_Node000001_Node000021" title=" " alt="" coords="1839,33,1776,80,1773,76,1836,29"/>
+<area shape="rect" id="Node000022" title=" " alt="" coords="1875,86,2043,111"/>
+<area shape="poly" id="edge25_Node000001_Node000022" title=" " alt="" coords="1870,29,1934,76,1931,80,1867,33"/>
+<area shape="rect" id="Node000023" title=" " alt="" coords="2067,79,2229,119"/>
+<area shape="poly" id="edge26_Node000001_Node000023" title=" " alt="" coords="1897,28,2065,73,2063,78,1895,33"/>
+<area shape="rect" id="Node000024" title=" " alt="" coords="2253,79,2416,119"/>
+<area shape="poly" id="edge27_Node000001_Node000024" title=" " alt="" coords="1935,28,2240,76,2239,81,1934,33"/>
+<area shape="rect" id="Node000025" title=" " alt="" coords="2440,79,2603,119"/>
+<area shape="poly" id="edge28_Node000001_Node000025" title=" " alt="" coords="1959,25,2171,44,2427,76,2426,81,2171,49,1959,30"/>
+<area shape="rect" id="Node000026" title=" " alt="" coords="2627,79,2815,119"/>
+<area shape="poly" id="edge29_Node000001_Node000026" title=" " alt="" coords="1959,22,2250,40,2430,56,2614,76,2614,81,2429,61,2250,46,1959,27"/>
+<area shape="rect" id="Node000027" title=" " alt="" coords="2840,79,3003,119"/>
+<area shape="poly" id="edge30_Node000001_Node000027" title=" " alt="" coords="1959,18,2124,23,2338,33,2580,50,2827,76,2826,81,2579,55,2338,39,2123,29,1959,24"/>
+<area shape="rect" id="Node000028" title=" " alt="" coords="3027,86,3251,111"/>
+<area shape="poly" id="edge31_Node000001_Node000028" title=" " alt="" coords="1959,19,2418,34,2715,51,3015,76,3058,81,3057,87,3014,81,2715,57,2418,40,1959,24"/>
+<area shape="rect" id="Node000029" href="$BlinkTrack_8h.html" title="Declares the BlinkTrack template class for animating eye blinking." alt="" coords="181,86,395,111"/>
+<area shape="poly" id="edge32_Node000001_Node000029" title=" " alt="" coords="1748,22,1508,25,1175,34,794,51,598,65,407,81,366,86,365,81,406,76,598,59,793,46,1175,28,1508,20,1748,17"/>
+<area shape="rect" id="Node000032" title=" " alt="" coords="3275,86,3493,111"/>
+<area shape="poly" id="edge36_Node000001_Node000032" title=" " alt="" coords="1959,17,2193,20,2517,29,2887,47,3263,76,3306,81,3305,87,3262,81,2887,52,2517,35,2193,26,1959,22"/>
+<area shape="rect" id="Node000033" title=" " alt="" coords="3517,79,3728,119"/>
+<area shape="poly" id="edge37_Node000001_Node000033" title=" " alt="" coords="1959,16,2227,17,2607,25,3050,43,3279,57,3504,76,3503,81,3278,62,3049,48,2607,30,2227,22,1959,21"/>
+<area shape="rect" id="Node000034" title=" " alt="" coords="3752,86,3923,111"/>
+<area shape="poly" id="edge38_Node000001_Node000034" title=" " alt="" coords="1959,18,2334,23,2848,34,3363,51,3578,63,3740,76,3773,81,3773,86,3740,81,3577,68,3363,56,2848,39,2333,28,1959,23"/>
+<area shape="rect" id="Node000004" href="$KeyFrame_8h.html" title="Declares the KeyFrame class for representing individual animation keyframes." alt="" coords="308,313,407,339"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="179,263,311,306,309,311,177,268"/>
+<area shape="rect" id="Node000005" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="433,313,636,339"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="207,263,459,308,458,313,206,268"/>
+<area shape="rect" id="Node000010" href="$KeyFrameTrack_8tpp.html" title=" " alt="" coords="71,313,217,339"/>
+<area shape="poly" id="edge9_Node000003_Node000010" title=" " alt="" coords="147,266,147,300,141,300,141,266"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="363,387,426,412"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="513,341,431,383,428,378,511,336"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="450,387,518,412"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="528,341,502,377,498,374,524,337"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="543,387,628,412"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="545,337,571,374,567,377,541,341"/>
+<area shape="rect" id="Node000009" href="$Mathematics_8tpp.html" title=" " alt="" coords="653,387,785,412"/>
+<area shape="poly" id="edge8_Node000005_Node000009" title=" " alt="" coords="565,336,677,379,675,384,563,341"/>
+<area shape="rect" id="Node000012" href="$IEasyEaseAnimator_8h.html" title="Declares the IEasyEaseAnimator interface for defining animation behaviors." alt="" coords="405,167,563,192"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="497,112,490,154,485,153,492,111"/>
+<area shape="rect" id="Node000015" href="$EasyEaseAnimator_8tpp.html" title=" " alt="" coords="588,167,756,192"/>
+<area shape="poly" id="edge18_Node000011_Node000015" title=" " alt="" coords="523,109,635,159,633,164,521,114"/>
+<area shape="poly" id="edge12_Node000012_Node000004" title=" " alt="" coords="476,194,378,305,374,301,472,191"/>
+<area shape="poly" id="edge13_Node000012_Node000005" title=" " alt="" coords="487,192,490,225,500,264,520,301,515,303,495,266,485,226,482,193"/>
+<area shape="rect" id="Node000013" href="$DampedSpring_8h.html" title="Defines the DampedSpring class for simulating damped spring motion." alt="" coords="509,240,739,265"/>
+<area shape="poly" id="edge14_Node000012_Node000013" title=" " alt="" coords="508,190,590,231,588,236,505,194"/>
+<area shape="rect" id="Node000014" href="$RampFilter_8h.html" title="Provides a class for smooth value transitions using a ramp filter." alt="" coords="763,240,949,265"/>
+<area shape="poly" id="edge16_Node000012_Node000014" title=" " alt="" coords="544,189,783,235,782,240,543,195"/>
+<area shape="poly" id="edge15_Node000013_Node000005" title=" " alt="" coords="611,267,562,307,558,302,608,263"/>
+<area shape="poly" id="edge17_Node000014_Node000005" title=" " alt="" coords="805,268,600,313,599,308,804,263"/>
+<area shape="rect" id="Node000030" href="$AnimationTrack_8h.html" title="Declares the AnimationTrack template class for managing animation tracks with keyframes." alt="" coords="221,167,355,192"/>
+<area shape="poly" id="edge33_Node000029_Node000030" title=" " alt="" coords="291,112,291,153,285,153,285,112"/>
+<area shape="poly" id="edge34_Node000030_Node000003" title=" " alt="" coords="266,194,181,236,179,231,264,190"/>
+<area shape="rect" id="Node000031" href="$AnimationTrack_8tpp.html" title=" " alt="" coords="235,240,383,265"/>
+<area shape="poly" id="edge35_Node000030_Node000031" title=" " alt="" coords="294,192,305,226,299,228,289,193"/>
+</map>

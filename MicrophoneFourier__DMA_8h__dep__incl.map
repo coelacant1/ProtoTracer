@@ -1,0 +1,5 @@
+<map id="MicrophoneFourier_DMA.h" name="MicrophoneFourier_DMA.h">
+<area shape="rect" id="Node000001" title="Declares the MicrophoneFourier class for performing FFT on microphone input." alt="" coords="13,5,206,31"/>
+<area shape="rect" id="Node000002" href="$MicrophoneFourier__DMA_8cpp.html" title=" " alt="" coords="5,79,213,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="112,44,112,79,107,79,107,44"/>
+</map>

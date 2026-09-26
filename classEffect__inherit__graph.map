@@ -1,0 +1,31 @@
+<map id="Effect" name="Effect">
+<area shape="rect" id="Node000001" title="Abstract base class for applying visual effects to pixel groups." alt="" coords="5,327,64,352"/>
+<area shape="rect" id="Node000002" href="$classFisheye.html" title="Implements a fisheye distortion effect for pixel groups." alt="" coords="141,5,213,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="32,312,34,257,44,185,54,146,68,108,86,72,110,40,124,29,140,22,142,27,127,34,114,44,91,75,73,110,59,148,50,186,40,257,38,313"/>
+<area shape="rect" id="Node000003" href="$classGlitchX.html" title="Implements a glitch effect along the X&#45;axis for pixel groups." alt="" coords="143,55,212,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="34,313,39,266,51,207,73,145,90,116,110,89,125,78,141,71,143,76,127,83,114,93,94,118,78,147,56,208,44,267,39,313"/>
+<area shape="rect" id="Node000004" href="$classHeadsUpDisplay.html" title="Renders and displays information on an SSD1306/SH1106 display." alt="" coords="112,104,243,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="37,312,44,274,57,228,79,181,110,139,126,127,129,132,114,143,83,183,62,230,49,275,42,313"/>
+<area shape="rect" id="Node000005" href="$classHorizontalBlur.html" title="Implements a horizontal blur effect for pixel groups." alt="" coords="120,153,235,179"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="40,313,65,251,84,217,110,188,127,177,130,181,114,192,89,221,69,253,45,315"/>
+<area shape="rect" id="Node000006" href="$classMagnet.html" title="Implements a magnetic distortion effect for pixel groups." alt="" coords="142,203,213,228"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="47,313,73,274,110,237,140,222,143,227,114,241,78,278,52,316"/>
+<area shape="rect" id="Node000007" href="$classOverflow.html" title="Implements an overflow distortion effect for pixel groups." alt="" coords="137,252,217,277"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="62,316,111,286,137,275,139,280,113,291,65,321"/>
+<area shape="rect" id="Node000008" href="$classPassthrough.html" title="A no&#45;operation effect that leaves pixel groups unchanged." alt="" coords="127,301,228,327"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="77,329,126,320,127,326,78,334"/>
+<area shape="rect" id="Node000009" href="$classPhaseOffsetR.html" title="Applies rotational phase offsets to pixel groups." alt="" coords="123,351,232,376"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="78,344,123,351,122,357,77,349"/>
+<area shape="rect" id="Node000010" href="$classPhaseOffsetX.html" title="Applies horizontal phase offsets to pixel groups." alt="" coords="123,400,232,425"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="67,357,113,385,141,397,139,402,111,390,64,362"/>
+<area shape="rect" id="Node000011" href="$classPhaseOffsetY.html" title="Applies vertical phase offsets to pixel groups." alt="" coords="123,449,231,475"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="52,362,78,399,114,435,136,447,133,452,110,439,74,403,48,366"/>
+<area shape="rect" id="Node000012" href="$classRadialBlur.html" title="Applies a radial blur effect to pixel groups." alt="" coords="133,499,222,524"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="46,364,70,424,89,456,114,484,134,497,131,501,110,488,85,459,65,427,41,366"/>
+<area shape="rect" id="Node000013" href="$classShiftR.html" title="Radially shifts the red, green, and blue channels of the pixels." alt="" coords="147,548,207,573"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="42,365,49,402,63,447,84,493,114,533,130,545,148,552,146,557,127,549,110,537,79,496,58,449,44,403,37,366"/>
+<area shape="rect" id="Node000014" href="$classTest.html" title="A debugging effect used to identify memory issues in pixel rendering." alt="" coords="153,597,201,623"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="40,366,44,412,56,469,79,530,94,558,114,583,133,596,154,604,152,609,130,601,110,587,90,561,74,532,51,471,39,412,34,366"/>
+<area shape="rect" id="Node000015" href="$classVerticalBlur.html" title="An effect that applies a vertical blur to a pixel group." alt="" coords="129,647,226,672"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="38,366,40,420,50,491,60,529,73,566,91,601,114,632,130,645,127,649,110,636,87,604,68,568,55,530,45,492,35,421,33,366"/>
+</map>

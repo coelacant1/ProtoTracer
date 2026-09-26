@@ -1,0 +1,28 @@
+<map id="APDS9960.cpp" name="APDS9960.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="136,5,252,31"/>
+<area shape="rect" id="Node000002" href="$APDS9960_8h.html" title="A class for interfacing with the Adafruit APDS9960 sensor." alt="" coords="143,79,245,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="197,31,197,65,191,65,191,31"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="163,240,247,265"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="144,103,91,115,41,134,23,146,11,159,9,174,16,190,43,216,77,233,114,243,149,248,148,253,112,248,75,238,40,220,12,194,3,174,7,157,19,142,39,129,89,110,142,98"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="26,159,90,185"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="175,106,91,155,89,150,173,102"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="114,159,274,185"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="197,104,197,145,191,145,191,104"/>
+<area shape="rect" id="Node000006" href="$MinFilter_8h.html" title="Implements a moving minimum filter for processing data streams." alt="" coords="513,152,627,192"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="245,99,359,119,501,149,500,154,358,125,244,104"/>
+<area shape="rect" id="Node000013" href="$TimeStep_8h.html" title="Utility class for timing operations based on a set frequency." alt="" coords="299,159,489,185"/>
+<area shape="poly" id="edge12_Node000002_Node000013" title=" " alt="" coords="224,102,353,152,351,157,222,106"/>
+<area shape="rect" id="Node000007" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="406,240,574,265"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="552,194,514,232,510,228,549,190"/>
+<area shape="rect" id="Node000012" href="$MinFilter_8tpp.html" title=" " alt="" coords="599,240,701,265"/>
+<area shape="poly" id="edge11_Node000006_Node000012" title=" " alt="" coords="591,190,630,228,626,232,587,194"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="319,313,381,339"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="469,268,386,309,384,305,466,263"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="405,313,473,339"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="484,267,458,304,453,301,479,264"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="498,313,583,339"/>
+<area shape="poly" id="edge9_Node000007_Node000010" title=" " alt="" coords="500,264,527,301,522,304,496,267"/>
+<area shape="rect" id="Node000011" href="$Mathematics_8tpp.html" title=" " alt="" coords="608,313,740,339"/>
+<area shape="poly" id="edge10_Node000007_Node000011" title=" " alt="" coords="520,263,632,306,630,311,519,268"/>
+<area shape="poly" id="edge13_Node000013_Node000003" title=" " alt="" coords="367,187,246,237,244,232,365,182"/>
+</map>

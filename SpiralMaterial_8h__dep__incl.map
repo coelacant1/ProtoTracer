@@ -1,0 +1,37 @@
+<map id="SpiralMaterial.h" name="SpiralMaterial.h">
+<area shape="rect" id="Node000001" title="A material class for generating spiral effects." alt="" coords="1113,5,1239,31"/>
+<area shape="rect" id="Node000002" href="$RainbowSpiral_8h.html" title="A dynamic material that creates a colorful, animated rainbow spiral effect." alt="" coords="1034,79,1161,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1155,42,1112,80,1108,76,1151,38"/>
+<area shape="rect" id="Node000018" href="$StripeMaterial_8cpp.html" title=" " alt="" coords="1185,79,1327,104"/>
+<area shape="poly" id="edge17_Node000001_Node000018" title=" " alt="" coords="1201,38,1245,76,1241,80,1197,42"/>
+<area shape="rect" id="Node000003" href="$ProtogenProjectTemplate_8h.html" title="Contains the class definition for ProtogenProject, a default project template for handling microphone..." alt="" coords="804,152,1001,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="1054,111,935,154,934,149,1053,106"/>
+<area shape="rect" id="Node000016" href="$RainbowSpiral_8cpp.html" title=" " alt="" coords="1026,152,1169,177"/>
+<area shape="poly" id="edge15_Node000002_Node000016" title=" " alt="" coords="1100,118,1100,152,1095,152,1095,118"/>
+<area shape="rect" id="Node000017" href="$VerifyEngine_8h.html" title="Implementation of a test project to verify the engine functionality." alt="" coords="1193,152,1308,177"/>
+<area shape="poly" id="edge16_Node000002_Node000017" title=" " alt="" coords="1135,107,1227,149,1224,154,1133,112"/>
+<area shape="rect" id="Node000004" href="$AceAnimation_8h.html" title=" " alt="" coords="5,225,131,251"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="790,175,497,195,143,228,131,229,130,224,142,223,496,190,790,170"/>
+<area shape="rect" id="Node000005" href="$ArrowAnimation_8h.html" title=" " alt="" coords="155,225,293,251"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="790,178,566,200,306,228,294,229,293,224,305,223,566,194,790,173"/>
+<area shape="rect" id="Node000006" href="$BetaProject_8h.html" title=" " alt="" coords="317,225,427,251"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="792,182,439,228,427,230,426,225,438,223,791,176"/>
+<area shape="rect" id="Node000007" href="$DrGonzoProject_8h.html" title=" " alt="" coords="451,225,586,251"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="828,182,581,228,580,223,827,177"/>
+<area shape="rect" id="Node000008" href="$DrGonzoTest_8h.html" title=" " alt="" coords="610,225,726,251"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="853,184,707,228,705,223,851,179"/>
+<area shape="rect" id="Node000009" href="$FursuitEyesV1_8h.html" title=" " alt="" coords="750,225,877,251"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="879,188,830,227,826,223,876,184"/>
+<area shape="rect" id="Node000010" href="$ProtogenHUB75Project_8h.html" title=" " alt="" coords="901,225,1083,251"/>
+<area shape="poly" id="edge9_Node000003_Node000010" title=" " alt="" coords="929,184,979,223,976,227,926,188"/>
+<area shape="rect" id="Node000011" href="$ProtogenProjectTemplate_8cpp.html" title=" " alt="" coords="1107,225,1319,251"/>
+<area shape="poly" id="edge10_Node000003_Node000011" title=" " alt="" coords="966,178,1164,223,1162,228,965,183"/>
+<area shape="rect" id="Node000012" href="$ProtogenWS35Project_8h.html" title=" " alt="" coords="1343,225,1518,251"/>
+<area shape="poly" id="edge11_Node000003_Node000012" title=" " alt="" coords="1001,177,1346,223,1345,228,1001,182"/>
+<area shape="rect" id="Node000013" href="$SageAnimation_8h.html" title=" " alt="" coords="1543,225,1676,251"/>
+<area shape="poly" id="edge12_Node000003_Node000013" title=" " alt="" coords="1015,175,1276,197,1531,223,1543,224,1542,229,1530,228,1275,202,1015,180"/>
+<area shape="rect" id="Node000014" href="$SplatAnimation_8h.html" title=" " alt="" coords="1701,225,1835,251"/>
+<area shape="poly" id="edge13_Node000003_Node000014" title=" " alt="" coords="1015,175,1206,189,1354,197,1501,206,1688,223,1701,224,1700,229,1688,228,1501,211,1354,202,1206,194,1015,180"/>
+<area shape="rect" id="Node000015" href="$UnicornZhenjaAnimation_8h.html" title=" " alt="" coords="1859,225,2055,251"/>
+<area shape="poly" id="edge14_Node000003_Node000015" title=" " alt="" coords="1015,175,1251,190,1434,199,1616,207,1848,223,1859,224,1859,229,1848,228,1616,212,1434,204,1250,196,1015,180"/>
+</map>

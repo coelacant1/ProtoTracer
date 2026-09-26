@@ -1,0 +1,15 @@
+<map id="AxisAngle.h" name="AxisAngle.h">
+<area shape="rect" id="Node000001" title="Represents a rotation defined by an axis and an angle." alt="" coords="127,5,226,31"/>
+<area shape="rect" id="Node000002" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="130,79,223,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="179,31,179,65,174,65,174,31"/>
+<area shape="rect" id="Node000003" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="117,152,236,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="179,104,179,138,174,138,174,104"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,225,68,251"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="155,180,73,221,70,217,153,175"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="92,225,160,251"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="170,179,144,216,140,213,166,176"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="185,225,270,251"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="187,176,213,213,209,216,183,179"/>
+<area shape="rect" id="Node000007" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,225,427,251"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="207,175,319,218,317,223,205,180"/>
+</map>

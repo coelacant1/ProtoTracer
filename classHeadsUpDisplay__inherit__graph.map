@@ -1,0 +1,5 @@
+<map id="HeadsUpDisplay" name="HeadsUpDisplay">
+<area shape="rect" id="Node000001" title="Renders and displays information on an SSD1306/SH1106 display." alt="" coords="5,79,136,104"/>
+<area shape="rect" id="Node000002" href="$classEffect.html" title="Abstract base class for applying visual effects to pixel groups." alt="" coords="41,5,100,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,44,73,79,68,79,68,44"/>
+</map>

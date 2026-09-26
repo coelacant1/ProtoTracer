@@ -1,0 +1,5 @@
+<map id="GlitchX" name="GlitchX">
+<area shape="rect" id="Node000001" title="Implements a glitch effect along the X&#45;axis for pixel groups." alt="" coords="5,79,75,104"/>
+<area shape="rect" id="Node000002" href="$classEffect.html" title="Abstract base class for applying visual effects to pixel groups." alt="" coords="11,5,69,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="43,44,43,79,37,79,37,44"/>
+</map>

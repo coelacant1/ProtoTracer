@@ -1,0 +1,27 @@
+var classFullScreenAnimation =
+[
+    [ "FullScreenAnimation", "classFullScreenAnimation.html#a805ffd9d5e0e27ecbc9430231b5a144c", null ],
+    [ "FadeIn", "classFullScreenAnimation.html#aa33127d0a9ea1f8c1a15748241eaf648", null ],
+    [ "FadeOut", "classFullScreenAnimation.html#aa423aeb04808473025af461f8587e179", null ],
+    [ "GetAccentBrightness", "classFullScreenAnimation.html#af02b9c61f33b15dafc9d661864ba59df", null ],
+    [ "GetBrightness", "classFullScreenAnimation.html#ae90ed68a606b1c7b64a31a91e694facc", null ],
+    [ "Initialize", "classFullScreenAnimation.html#a1e31712c2a61a69e7a81a983bb7692f5", null ],
+    [ "Reset", "classFullScreenAnimation.html#a372de693ad40b3f42839c8ec6ac845f4", null ],
+    [ "Update", "classFullScreenAnimation.html#ab62e7b3735f20c02fd813b0697223ef4", null ],
+    [ "cube", "classFullScreenAnimation.html#a66fe3cc2d9cddf77d51bc16c87c58fa5", null ],
+    [ "fGenMatAmplitude", "classFullScreenAnimation.html#af34973c22bde1fd9973b2e8beaf024df", null ],
+    [ "fGenMatBend", "classFullScreenAnimation.html#ac8f0bc3e33c60bb0b48fcd2e992b3176", null ],
+    [ "fGenMatOpacity", "classFullScreenAnimation.html#a75484db4bdbf831f28cd25d2d399819f", null ],
+    [ "fGenMatPeriod", "classFullScreenAnimation.html#a792cb3f54b2070ab1c6716c21fb8ef99", null ],
+    [ "fGenMatPos", "classFullScreenAnimation.html#a7decbcbbb8e64f659855e8393a39e427", null ],
+    [ "fGenMatRot", "classFullScreenAnimation.html#acb627043e3cd04793c7c92268e819625", null ],
+    [ "fGenMatSize", "classFullScreenAnimation.html#ae2ed31bbcc54abcdee09fb80fadcb4ae", null ],
+    [ "fGenMatWidth", "classFullScreenAnimation.html#ae0ab69322406968c4270c872ad7484e9", null ],
+    [ "fGenSelection", "classFullScreenAnimation.html#af692fce0e1a1adf44e447ed341edfda6", null ],
+    [ "spectrum1", "classFullScreenAnimation.html#ab4c815833c9118c41c38235d909066e2", null ],
+    [ "spectrum2", "classFullScreenAnimation.html#abc1b501749cb1df3cdea831db04b33af", null ],
+    [ "spectrum3", "classFullScreenAnimation.html#ace4c00e1e56b7ff5b025cee780090a79", null ],
+    [ "spiral", "classFullScreenAnimation.html#af2f76b8478f4335cea940bf6381086a5", null ],
+    [ "stripe1", "classFullScreenAnimation.html#aae30c0ba0b2d7e3abf26838207c7710f", null ],
+    [ "stripe2", "classFullScreenAnimation.html#ac39e05b9d6f375d06733d71d67939a51", null ]
+];

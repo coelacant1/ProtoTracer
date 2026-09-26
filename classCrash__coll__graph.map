@@ -1,0 +1,25 @@
+<map id="Crash" name="Crash">
+<area shape="rect" id="Node000001" title=" " alt="" coords="134,504,193,529"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,370,95,395"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="65,406,87,442,116,478,145,502,142,506,112,482,82,445,60,409"/>
+<area shape="rect" id="Node000003" href="$classLight.html" title="Represents a light source with position, intensity, and falloff properties." alt="" coords="105,187,160,212"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="137,226,161,480,164,503,159,504,155,480,132,226"/>
+<area shape="rect" id="Node000004" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="139,5,220,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="144,40,131,56,121,91,120,127,125,161,131,186,126,187,120,162,115,128,115,90,126,53,140,37"/>
+<area shape="rect" id="Node000006" href="$classTransform.html" title="Represents a 3D transformation including position, rotation, and scale." alt="" coords="191,137,277,163"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="193,42,198,54,232,136,227,138,193,56,188,44"/>
+<area shape="rect" id="Node000005" href="$classObject3D.html" title="Represents a 3D object with geometry, material, and transformation data." alt="" coords="342,236,425,261"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="329,262,298,271,266,284,235,302,209,326,195,347,183,371,170,423,165,470,165,504,160,504,160,470,165,422,178,370,190,345,205,322,232,298,263,279,296,266,328,257"/>
+<area shape="rect" id="Node000011" href="$classObjectDeformer.html" title="Applies geometric transformations to one or more 3D objects." alt="" coords="344,370,471,395"/>
+<area shape="poly" id="edge12_Node000011_Node000005" title=" " alt="" coords="390,274,408,369,403,370,385,275"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="256,170,306,210,354,233,351,238,303,214,253,174"/>
+<area shape="rect" id="Node000007" href="$classQuaternion.html" title="A mathematical construct representing a rotation in 3D space." alt="" coords="299,5,393,31"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="346,45,338,81,330,99,319,115,300,130,279,140,276,136,297,126,315,112,325,96,333,79,341,44"/>
+<area shape="rect" id="Node000008" href="$classIStaticTriangleGroup.html" title="Interface for managing a static group of 3D triangles and associated data." alt="" coords="301,137,455,163"/>
+<area shape="poly" id="edge8_Node000005_Node000008" title=" " alt="" coords="382,176,385,236,380,236,377,177"/>
+<area shape="rect" id="Node000009" href="$classITriangleGroup.html" title="Interface for managing a dynamic group of 3D triangles and associated data." alt="" coords="479,137,595,163"/>
+<area shape="poly" id="edge9_Node000005_Node000009" title=" " alt="" coords="529,177,517,196,500,214,463,234,425,244,424,239,461,229,496,210,512,193,524,174"/>
+<area shape="rect" id="Node000010" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="641,137,717,163"/>
+<area shape="poly" id="edge10_Node000005_Node000010" title=" " alt="" coords="674,177,663,197,646,214,605,230,546,240,425,249,425,243,545,234,604,224,643,210,659,194,669,174"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="383,406,326,444,255,480,193,506,191,502,253,475,323,439,380,401"/>
+</map>

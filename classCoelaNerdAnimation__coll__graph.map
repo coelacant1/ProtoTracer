@@ -1,0 +1,7 @@
+<map id="CoelaNerdAnimation" name="CoelaNerdAnimation">
+<area shape="rect" id="Node000001" title=" " alt="" coords="41,152,198,177"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,95,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="64,42,116,151,111,153,59,45"/>
+<area shape="rect" id="Node000003" href="$classFunctionGenerator.html" title="A class to generate various waveform functions with customizable parameters." alt="" coords="119,5,261,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="181,45,127,153,123,151,176,42"/>
+</map>

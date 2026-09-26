@@ -1,0 +1,14 @@
+<map id="TextEngine&lt; lineCount, characterWidth &gt;" name="TextEngine&lt; lineCount, characterWidth &gt;">
+<area shape="rect" id="Node000001" title=" " alt="" coords="108,229,283,269"/>
+<area shape="rect" id="Node000002" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="12,5,88,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="39,44,34,56,18,99,9,135,8,152,12,169,20,186,33,203,45,212,62,219,108,232,107,237,60,224,42,216,30,207,15,189,7,171,3,153,4,135,13,97,29,54,34,41"/>
+<area shape="poly" id="edge5_Node000001_Node000002" title=" " alt="" coords="50,44,51,89,56,113,65,136,84,165,109,190,161,227,158,231,106,194,80,168,60,139,51,115,46,90,45,45"/>
+<area shape="rect" id="Node000003" href="$classSimpleMaterial.html" title="A material that applies a single, solid RGB color to surfaces." alt="" coords="135,110,256,135"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="79,37,181,108,177,112,76,41"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="198,149,198,229,193,229,193,149"/>
+<area shape="rect" id="Node000004" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="213,5,297,31"/>
+<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="281,40,289,54,304,96,311,132,307,167,288,207,276,221,261,231,258,227,273,217,284,204,302,166,306,132,299,97,284,56,276,42"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="235,42,224,56,210,85,201,111,196,109,205,83,220,53,231,39"/>
+<area shape="rect" id="Node000005" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="369,110,451,135"/>
+<area shape="poly" id="edge7_Node000001_Node000005" title=" " alt="" coords="394,148,363,178,325,208,271,232,269,227,322,203,360,174,390,144"/>
+</map>

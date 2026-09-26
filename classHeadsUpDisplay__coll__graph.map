@@ -1,0 +1,12 @@
+<map id="HeadsUpDisplay" name="HeadsUpDisplay">
+<area shape="rect" id="Node000001" title="Renders and displays information on an SSD1306/SH1106 display." alt="" coords="88,108,219,133"/>
+<area shape="rect" id="Node000002" href="$classEffect.html" title="Abstract base class for applying visual effects to pixel groups." alt="" coords="5,5,64,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="29,45,28,65,34,82,58,102,89,113,87,118,56,107,30,86,23,65,24,44"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="48,41,62,63,79,82,99,95,120,105,117,110,96,100,76,86,57,66,44,44"/>
+<area shape="rect" id="Node000003" href="$classTimeStep.html" title="Provides a mechanism to trigger actions at a specified frequency." alt="" coords="105,5,189,31"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="151,44,155,108,150,108,146,45"/>
+<area shape="rect" id="Node000004" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="213,5,294,31"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="247,45,237,66,222,86,204,100,185,110,182,106,201,95,218,82,232,63,242,43"/>
+<area shape="rect" id="Node000005" href="$classIPixelGroup.html" title="Interface for managing and interacting with a collection of pixels." alt="" coords="319,5,415,31"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="353,44,333,66,307,86,264,105,220,115,218,110,262,100,304,82,329,62,349,40"/>
+</map>

@@ -1,0 +1,13 @@
+<map id="DepthMaterial" name="DepthMaterial">
+<area shape="rect" id="Node000001" title="Maps depth along a specified axis to an RGB color using a gradient." alt="" coords="109,196,223,221"/>
+<area shape="rect" id="Node000002" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="5,5,81,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="47,44,53,87,60,110,71,132,87,152,106,169,144,194,141,198,103,173,83,155,66,135,55,112,48,88,41,45"/>
+<area shape="rect" id="Node000004" href="$classGradientMaterial.html" title=" " alt="" coords="81,108,251,133"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="70,37,154,106,150,110,66,41"/>
+<area shape="rect" id="Node000003" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="293,5,377,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="370,38,382,53,386,69,382,85,367,108,348,128,304,160,257,183,214,198,212,193,255,178,301,156,344,124,362,105,377,83,381,69,377,56,366,41"/>
+<area shape="poly" id="edge5_Node000004_Node000003" title=" " alt="" coords="302,40,276,57,261,72,245,86,198,110,196,106,242,82,257,68,272,53,299,35"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="169,147,169,195,163,195,163,147"/>
+<area shape="rect" id="Node000005" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="105,5,187,31"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="146,44,150,83,160,106,156,109,145,85,141,45"/>
+</map>

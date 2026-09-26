@@ -1,0 +1,28 @@
+var classRotation =
+[
+    [ "Rotation", "classRotation.html#aac8a569afc15308dac89f775076a4d35", null ],
+    [ "Rotation", "classRotation.html#ab35609c57bc84dca69ef6b87306ffdb2", null ],
+    [ "Rotation", "classRotation.html#ab1af23513c9114ea7547e479933da083", null ],
+    [ "Rotation", "classRotation.html#a3d4cbfe888b124f80390727f5aca7f4c", null ],
+    [ "Rotation", "classRotation.html#a6c3ce49b9a788945f612576d89050b3b", null ],
+    [ "Rotation", "classRotation.html#a1e97677dab15b3b3e83cafa52c75e5fb", null ],
+    [ "Rotation", "classRotation.html#add3f93b5eaade4fb8d071ec60f94e864", null ],
+    [ "Rotation", "classRotation.html#ab80e85d8a8ef9b4ddf352029e783391d", null ],
+    [ "Rotation", "classRotation.html#ad2e960d3e6d229b9707c74aa784a7e60", null ],
+    [ "AxisAngleToQuaternion", "classRotation.html#afeaf795aa6adbb1f5c075c87241b1a5c", null ],
+    [ "DirectionAngleToQuaternion", "classRotation.html#afa2d08a26386cbb2d4ddfbe39aba2bf4", null ],
+    [ "EulerAnglesToQuaternion", "classRotation.html#a50f49d74e3873c0d2866891014e7d3b7", null ],
+    [ "EulerAnglesToRotationMatrix", "classRotation.html#a3d204ed36f55c715b757531fe8a715be", null ],
+    [ "GetAxisAngle", "classRotation.html#a82980e2bb9242a86e9d03a9dbc0f04d7", null ],
+    [ "GetDirectionAngle", "classRotation.html#ae0bc1f791a2558a2bbf7399e443ad0b7", null ],
+    [ "GetEulerAngles", "classRotation.html#aa879fefc479d6ad3aaa6d693cc9349c9", null ],
+    [ "GetQuaternion", "classRotation.html#ac6d3cbe02e7328e25cfd76e78e385dae", null ],
+    [ "GetRotationMatrix", "classRotation.html#a9030c6e785d993e00e78255df5a6132f", null ],
+    [ "GetYawPitchRoll", "classRotation.html#a39561975c10b56c7ec394ecca45d67b9", null ],
+    [ "QuaternionFromDirectionVectors", "classRotation.html#aff0cdb4b50c844b202eb668a0e1247ba", null ],
+    [ "RotationMatrixToEulerAngles", "classRotation.html#a2a3aec054075eac01767383b1dd4c4b8", null ],
+    [ "RotationMatrixToQuaternion", "classRotation.html#ae7533773b1fa9046f68980e29e5319e8", null ],
+    [ "RotationMatrixToQuaternion", "classRotation.html#a00aa1fcb4a1a5e2449971bc39a5e0c32", null ],
+    [ "YawPitchRollToQuaternion", "classRotation.html#a76b7e440ab24be2ca33eb79e4484f190", null ],
+    [ "quaternionRotation", "classRotation.html#af002cb8e9d9c5f0918d945017cf86c19", null ]
+];

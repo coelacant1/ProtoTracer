@@ -1,0 +1,20 @@
+<map id="FFTFilter.cpp" name="FFTFilter.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="186,5,290,31"/>
+<area shape="rect" id="Node000002" href="$FFTFilter_8h.html" title="Provides the FFTFilter class for processing and normalizing FFT data." alt="" coords="193,79,283,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="241,31,241,65,235,65,235,31"/>
+<area shape="rect" id="Node000003" href="$RunningAverageFilter_8h.html" title="Implements a running average filter for smoothing data." alt="" coords="215,152,387,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="250,103,283,140,279,143,246,106"/>
+<area shape="rect" id="Node000004" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="93,225,261,251"/>
+<area shape="poly" id="edge9_Node000002_Node000004" title=" " alt="" coords="232,105,204,153,185,212,180,211,200,151,228,103"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="282,180,210,221,207,216,279,175"/>
+<area shape="rect" id="Node000009" href="$RunningAverageFilter_8tpp.html" title=" " alt="" coords="285,225,471,251"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="315,175,357,214,353,218,311,179"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="5,299,68,324"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="155,253,73,295,70,290,153,248"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="92,299,160,324"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="170,253,144,289,140,286,166,249"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="185,299,270,324"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="187,249,213,286,209,289,183,253"/>
+<area shape="rect" id="Node000008" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,299,427,324"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="207,248,319,291,317,296,205,253"/>
+</map>

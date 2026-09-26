@@ -1,0 +1,24 @@
+<map id="QuaternionKalmanFilter.cpp" name="QuaternionKalmanFilter.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="93,5,295,31"/>
+<area shape="rect" id="Node000002" href="$QuaternionKalmanFilter_8h.html" title="Implements a Kalman filter for smoothing quaternion data." alt="" coords="100,79,288,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="197,31,197,65,191,65,191,31"/>
+<area shape="rect" id="Node000003" href="$Quaternion_8h.html" title="Defines the Quaternion class for 3D rotations and transformations." alt="" coords="117,152,271,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="197,104,197,138,191,138,191,104"/>
+<area shape="rect" id="Node000004" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="117,372,236,397"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="179,179,156,199,138,226,131,261,137,298,149,331,164,359,159,361,144,333,132,299,126,261,133,224,152,196,175,175"/>
+<area shape="rect" id="Node000009" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="147,225,241,251"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="197,178,197,212,191,212,191,178"/>
+<area shape="rect" id="Node000010" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="214,299,307,324"/>
+<area shape="poly" id="edge12_Node000003_Node000010" title=" " alt="" coords="212,176,235,196,255,224,264,255,265,285,260,285,258,256,250,226,231,200,209,180"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="5,445,68,471"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="155,400,73,441,70,437,153,395"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="92,445,160,471"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="170,399,144,436,140,433,166,396"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="185,445,270,471"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="187,396,213,433,209,436,183,399"/>
+<area shape="rect" id="Node000008" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,445,427,471"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="207,395,319,438,317,443,205,400"/>
+<area shape="poly" id="edge9_Node000009_Node000004" title=" " alt="" coords="195,251,182,359,177,358,190,251"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="207,249,242,287,239,290,203,253"/>
+<area shape="poly" id="edge11_Node000010_Node000004" title=" " alt="" coords="249,326,203,365,199,361,245,322"/>
+</map>

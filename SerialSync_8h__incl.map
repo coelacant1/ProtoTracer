@@ -1,0 +1,20 @@
+<map id="SerialSync.h" name="SerialSync.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="89,5,191,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,86,128,111"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="131,33,89,77,85,74,127,29"/>
+<area shape="rect" id="Node000003" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="152,79,277,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="153,29,189,67,185,70,149,33"/>
+<area shape="rect" id="Node000004" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="154,240,273,265"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="210,120,201,153,200,192,208,226,203,227,195,192,196,152,205,118"/>
+<area shape="rect" id="Node000009" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="209,167,303,192"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="227,118,246,153,241,155,222,120"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="42,313,105,339"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="192,268,109,309,107,305,190,263"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="129,313,197,339"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="207,267,181,304,177,301,203,264"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="221,313,307,339"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="224,264,250,301,246,304,220,267"/>
+<area shape="rect" id="Node000008" href="$Mathematics_8tpp.html" title=" " alt="" coords="331,313,463,339"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="244,263,355,306,353,311,242,268"/>
+<area shape="poly" id="edge9_Node000009_Node000004" title=" " alt="" coords="251,194,229,230,225,227,247,191"/>
+</map>

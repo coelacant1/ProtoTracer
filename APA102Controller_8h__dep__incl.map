@@ -1,0 +1,7 @@
+<map id="APA102Controller.h" name="APA102Controller.h">
+<area shape="rect" id="Node000001" title="Declares the APA102Controller class for managing APA102 LED strips." alt="" coords="97,5,243,31"/>
+<area shape="rect" id="Node000002" href="$APA102Controller_8cpp.html" title=" " alt="" coords="5,79,167,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="148,42,101,80,98,76,144,38"/>
+<area shape="rect" id="Node000003" href="$FursuitEyesV1_8h.html" title=" " alt="" coords="191,79,317,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="196,38,242,76,239,80,192,42"/>
+</map>

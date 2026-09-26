@@ -1,0 +1,25 @@
+<map id="BoundaryMotionSimulator" name="BoundaryMotionSimulator">
+<area shape="rect" id="Node000001" title="Simulates motion and collision interactions between a BoundaryCube and multiple BoundarySpheres." alt="" coords="12,445,204,471"/>
+<area shape="rect" id="Node000002" href="$classBoundaryCube.html" title="Represents an axis&#45;aligned bounding cube for collision detection and physics." alt="" coords="5,152,123,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="70,190,109,445,104,445,65,191"/>
+<area shape="rect" id="Node000003" href="$classQuaternion.html" title="A mathematical construct representing a rotation in 3D space." alt="" coords="575,5,670,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="562,33,528,43,495,57,470,75,454,94,437,114,410,131,123,160,123,155,408,125,434,109,450,91,466,71,492,52,526,38,561,27"/>
+<area shape="rect" id="Node000005" href="$classBoundarySphere.html" title="Represents a spherical boundary object for motion and collision simulations." alt="" coords="218,357,347,383"/>
+<area shape="poly" id="edge13_Node000005_Node000003" title=" " alt="" coords="684,26,727,37,744,44,755,53,762,70,764,95,758,158,748,217,738,247,711,268,670,288,566,321,449,346,348,362,347,357,448,340,564,315,669,283,708,264,734,244,742,215,753,157,758,95,757,71,751,56,742,49,725,42,683,31"/>
+<area shape="rect" id="Node000007" href="$classTransform.html" title="Represents a 3D transformation including position, rotation, and scale." alt="" coords="619,152,706,177"/>
+<area shape="poly" id="edge7_Node000007_Node000003" title=" " alt="" coords="620,44,618,84,620,106,626,127,635,140,646,150,643,154,631,143,622,129,615,107,612,85,615,44"/>
+<area shape="rect" id="Node000004" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="119,5,201,31"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="107,25,73,35,58,44,46,56,37,73,36,89,47,127,58,150,53,153,41,129,31,90,32,72,42,53,55,40,71,30,105,19"/>
+<area shape="poly" id="edge12_Node000005_Node000004" title=" " alt="" coords="158,45,153,85,150,135,155,191,169,244,189,280,216,311,267,355,264,359,212,315,185,283,164,246,149,192,145,135,147,84,153,44"/>
+<area shape="poly" id="edge8_Node000007_Node000004" title=" " alt="" coords="184,38,242,84,280,107,320,126,361,138,397,145,461,147,526,144,608,149,620,151,619,156,608,155,526,149,461,152,397,150,360,143,318,130,277,112,239,89,180,42"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="248,391,133,447,131,443,246,386"/>
+<area shape="rect" id="Node000006" href="$classObject3D.html" title="Represents a 3D object with geometry, material, and transformation data." alt="" coords="337,269,420,295"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="357,306,298,359,294,355,354,302"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="666,192,661,221,654,235,644,247,628,257,604,265,545,276,421,283,420,278,544,271,603,260,626,253,641,243,650,232,656,219,661,191"/>
+<area shape="rect" id="Node000008" href="$classIStaticTriangleGroup.html" title="Interface for managing a static group of 3D triangles and associated data." alt="" coords="302,152,455,177"/>
+<area shape="poly" id="edge9_Node000006_Node000008" title=" " alt="" coords="381,191,381,269,376,269,376,191"/>
+<area shape="rect" id="Node000009" href="$classITriangleGroup.html" title="Interface for managing a dynamic group of 3D triangles and associated data." alt="" coords="479,152,595,177"/>
+<area shape="poly" id="edge10_Node000006_Node000009" title=" " alt="" coords="528,191,511,224,494,247,458,267,421,278,420,273,456,262,490,243,507,221,524,189"/>
+<area shape="rect" id="Node000010" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="202,152,278,177"/>
+<area shape="poly" id="edge11_Node000006_Node000010" title=" " alt="" coords="259,186,284,215,315,243,354,267,351,271,312,247,280,219,255,190"/>
+</map>

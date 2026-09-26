@@ -1,0 +1,27 @@
+<map id="RainbowNoise2" name="RainbowNoise2">
+<area shape="rect" id="Node000001" title="A dynamic material that creates a rainbow effect using simplex noise with black&#45;to&#45;color transitions." alt="" coords="313,299,436,324"/>
+<area shape="rect" id="Node000002" href="$classAnimatedMaterial.html" title="Base class for dynamically updating materials." alt="" coords="5,159,144,185"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="90,195,104,216,123,234,169,261,219,280,268,294,314,302,313,307,267,299,217,285,166,266,120,238,100,219,85,199"/>
+<area shape="rect" id="Node000003" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="143,5,219,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="160,42,147,56,109,114,83,160,78,158,104,111,143,53,157,38"/>
+<area shape="rect" id="Node000006" href="$classGradientMaterial.html" title=" " alt="" coords="533,108,704,133"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="234,22,286,33,340,52,359,68,377,82,437,93,534,106,533,112,436,98,375,86,356,72,337,57,285,38,233,28"/>
+<area shape="rect" id="Node000008" href="$classSimplexNoise.html" title=" " alt="" coords="299,211,450,236"/>
+<area shape="poly" id="edge10_Node000008_Node000003" title=" " alt="" coords="180,44,180,88,184,111,193,132,216,160,247,182,280,197,314,208,312,213,278,202,244,186,213,164,188,135,179,112,174,88,175,44"/>
+<area shape="rect" id="Node000009" href="$classGradientMaterial.html" title=" " alt="" coords="307,108,509,133"/>
+<area shape="poly" id="edge12_Node000009_Node000003" title=" " alt="" coords="204,38,232,61,265,82,300,95,337,105,335,110,299,101,263,86,229,65,201,42"/>
+<area shape="rect" id="Node000004" href="$classFunctionGenerator.html" title="A class to generate various waveform functions with customizable parameters." alt="" coords="133,211,275,236"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="223,245,253,272,283,286,314,296,312,301,281,291,251,277,219,249"/>
+<area shape="rect" id="Node000005" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="622,5,706,31"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="721,26,742,36,760,53,764,69,760,85,736,132,702,173,660,207,614,236,567,259,519,277,435,301,434,296,517,272,564,254,612,231,657,203,698,169,731,129,755,83,759,69,755,56,739,41,718,31"/>
+<area shape="poly" id="edge7_Node000006_Node000005" title=" " alt="" coords="655,45,626,109,621,107,651,42"/>
+<area shape="poly" id="edge13_Node000009_Node000005" title=" " alt="" coords="609,28,566,39,526,57,513,71,500,86,476,100,450,110,448,105,473,95,497,82,509,67,522,53,565,33,608,23"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="597,144,524,205,431,277,395,301,392,296,428,272,520,201,593,140"/>
+<area shape="rect" id="Node000007" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="302,5,383,31"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="363,40,399,82,449,93,534,106,533,111,448,99,396,86,359,43"/>
+<area shape="poly" id="edge14_Node000009_Node000007" title=" " alt="" coords="295,39,278,56,273,70,278,82,300,95,336,105,335,111,298,100,274,86,268,70,274,53,291,36"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="377,250,377,298,372,298,372,250"/>
+<area shape="poly" id="edge11_Node000008_Node000009" title=" " alt="" coords="402,148,381,212,376,210,397,146"/>
+<area shape="rect" id="Node000010" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="202,108,283,133"/>
+<area shape="poly" id="edge15_Node000008_Node000010" title=" " alt="" coords="264,141,312,185,352,208,349,213,309,189,260,145"/>
+</map>

@@ -1,0 +1,17 @@
+<map id="Camera&lt; pixelCount &gt;" name="Camera&lt; pixelCount &gt;">
+<area shape="rect" id="Node000001" title="Manages camera behavior and pixel groups." alt="" coords="289,328,461,353"/>
+<area shape="rect" id="Node000002" href="$classCameraBase.html" title="Base class for managing camera properties and transformations." alt="" coords="264,225,369,251"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="333,262,371,327,366,329,328,264"/>
+<area shape="rect" id="Node000003" href="$classTransform.html" title="Represents a 3D transformation including position, rotation, and scale." alt="" coords="124,137,211,163"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="191,170,230,199,282,223,280,228,227,204,188,174"/>
+<area shape="rect" id="Node000004" href="$classQuaternion.html" title="A mathematical construct representing a rotation in 3D space." alt="" coords="269,5,364,31"/>
+<area shape="poly" id="edge7_Node000002_Node000004" title=" " alt="" coords="319,45,319,225,314,225,314,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="256,29,204,40,183,48,171,56,162,75,159,97,166,136,161,137,154,97,156,74,167,53,181,43,202,35,255,24"/>
+<area shape="rect" id="Node000006" href="$classCameraLayout.html" title="Manages camera orientation and axis alignment." alt="" coords="413,137,530,163"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="343,38,459,135,456,139,339,42"/>
+<area shape="rect" id="Node000005" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="5,5,87,31"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="42,45,39,79,42,96,49,112,64,126,83,136,124,145,123,151,81,141,61,130,45,115,37,98,33,79,36,44"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="440,172,339,227,336,223,437,167"/>
+<area shape="rect" id="Node000007" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="393,225,475,251"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="422,264,384,329,380,327,418,262"/>
+</map>

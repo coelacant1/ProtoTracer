@@ -1,0 +1,5 @@
+<map id="ITriangleGroup" name="ITriangleGroup">
+<area shape="rect" id="Node000001" title="Interface for managing a dynamic group of 3D triangles and associated data." alt="" coords="53,5,169,31"/>
+<area shape="rect" id="Node000002" href="$classTriangleGroup.html" title="Represents a dynamic group of 3D triangles." alt="" coords="5,79,216,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,44,113,79,108,79,108,44"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="SimpleMaterial" name="SimpleMaterial">
+<area shape="rect" id="Node000001" title="A material that applies a single, solid RGB color to surfaces." alt="" coords="5,79,127,104"/>
+<area shape="rect" id="Node000002" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="28,5,104,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="69,44,69,79,63,79,63,44"/>
+</map>

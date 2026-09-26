@@ -1,0 +1,7 @@
+<map id="SmartMatrixHUB75.h" name="SmartMatrixHUB75.h">
+<area shape="rect" id="Node000001" title="Configuration file for SmartMatrix library with HUB75 panels and APA102 support." alt="" coords="105,5,265,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,192,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="174,33,132,71,128,67,171,29"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="216,86,331,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="200,29,252,75,249,79,197,33"/>
+</map>

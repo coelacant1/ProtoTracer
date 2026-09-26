@@ -1,0 +1,9 @@
+<map id="WS35Controller.h" name="WS35Controller.h">
+<area shape="rect" id="Node000001" title="Declares the WS35Controller class for managing WS2812&#45;based displays on the Delta,..." alt="" coords="175,5,310,31"/>
+<area shape="rect" id="Node000002" href="$AceAnimation_8h.html" title=" " alt="" coords="5,79,131,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="203,38,98,81,96,76,201,33"/>
+<area shape="rect" id="Node000003" href="$ProtogenWS35Project_8h.html" title=" " alt="" coords="155,79,330,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="245,44,245,79,240,79,240,44"/>
+<area shape="rect" id="Node000004" href="$WS35Controller_8cpp.html" title=" " alt="" coords="355,79,504,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="286,33,400,76,398,81,284,38"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="ProtogenHUB75Project" name="ProtogenHUB75Project">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,152,176,177"/>
+<area shape="rect" id="Node000002" href="$classProtogenProject.html" title="A default project template that includes functionality for an analog microphone, APDS9960 boop sensor..." alt="" coords="28,79,153,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="93,118,93,152,88,152,88,118"/>
+<area shape="rect" id="Node000003" href="$classProject.html" title="Manages animations, rendering, and display operations." alt="" coords="57,5,124,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="93,44,93,79,88,79,88,44"/>
+</map>

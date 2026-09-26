@@ -1,0 +1,36 @@
+<map id="TVStatic" name="TVStatic">
+<area shape="rect" id="Node000001" title="Simulates a TV static effect with noise, scanlines, and color variations." alt="" coords="943,295,1019,321"/>
+<area shape="rect" id="Node000002" href="$classAnimatedMaterial.html" title="Base class for dynamically updating materials." alt="" coords="468,17,607,42"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="620,13,692,9,771,14,812,22,851,35,887,53,921,77,933,93,944,118,961,181,980,295,975,296,956,182,939,120,928,96,917,81,885,57,849,40,810,28,771,20,692,15,621,19"/>
+<area shape="rect" id="Node000003" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="9,125,85,150"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="58,111,80,78,94,62,112,50,157,30,204,17,253,8,302,4,394,6,471,14,470,19,394,11,302,9,254,14,205,22,159,35,115,54,98,66,84,81,62,114"/>
+<area shape="rect" id="Node000006" href="$classGradientMaterial.html" title=" " alt="" coords="258,447,429,473"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="65,161,87,190,115,217,143,229,170,231,196,236,208,242,221,254,235,278,239,302,237,325,232,348,227,370,226,391,231,413,245,434,260,446,256,450,241,438,226,415,221,392,222,369,227,347,232,324,234,302,230,280,217,258,205,247,194,241,169,236,142,234,112,221,83,193,61,164"/>
+<area shape="rect" id="Node000008" href="$classSimplexNoise.html" title=" " alt="" coords="631,351,781,377"/>
+<area shape="poly" id="edge10_Node000008_Node000003" title=" " alt="" coords="99,138,198,148,328,171,399,188,471,210,542,238,608,271,635,290,660,311,696,349,692,353,656,315,632,294,605,276,539,243,469,215,398,193,327,176,197,154,99,143"/>
+<area shape="rect" id="Node000009" href="$classGradientMaterial.html" title=" " alt="" coords="243,398,444,423"/>
+<area shape="poly" id="edge12_Node000009_Node000003" title=" " alt="" coords="75,157,115,183,144,193,171,196,196,202,221,221,234,243,238,265,232,306,227,346,232,365,245,385,258,396,255,400,241,389,227,368,222,346,227,305,232,265,229,245,217,225,194,206,170,201,143,198,112,188,72,161"/>
+<area shape="rect" id="Node000011" href="$classGradientMaterial.html" title=" " alt="" coords="254,239,433,265"/>
+<area shape="poly" id="edge17_Node000011_Node000003" title=" " alt="" coords="100,148,158,165,220,187,275,212,321,237,319,242,273,217,218,192,156,170,98,153"/>
+<area shape="rect" id="Node000012" href="$classCombineMaterial.html" title=" " alt="" coords="257,74,429,99"/>
+<area shape="poly" id="edge21_Node000012_Node000003" title=" " alt="" coords="65,112,86,91,112,75,160,63,208,61,255,64,295,71,294,77,254,70,208,66,160,68,114,80,89,95,68,116"/>
+<area shape="poly" id="edge22_Node000012_Node000003" title=" " alt="" coords="98,123,113,120,257,96,258,101,114,125,99,128"/>
+<area shape="rect" id="Node000004" href="$classFunctionGenerator.html" title="A class to generate various waveform functions with customizable parameters." alt="" coords="635,509,777,534"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="761,535,799,541,840,543,881,536,917,518,928,505,938,484,956,427,975,321,980,322,961,428,943,486,933,508,920,522,882,541,840,548,798,547,760,540"/>
+<area shape="rect" id="Node000005" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="5,343,89,369"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="103,347,242,335,653,315,942,306,943,312,653,320,243,340,103,353"/>
+<area shape="poly" id="edge7_Node000006_Node000005" title=" " alt="" coords="65,379,86,406,115,429,149,443,186,453,258,461,257,466,185,458,147,448,112,433,83,410,61,382"/>
+<area shape="poly" id="edge13_Node000009_Node000005" title=" " alt="" coords="95,371,114,376,179,389,243,399,242,404,178,395,113,381,93,376"/>
+<area shape="poly" id="edge18_Node000011_Node000005" title=" " alt="" coords="77,333,112,314,198,283,278,262,279,267,199,288,114,319,79,338"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="442,449,601,431,781,402,852,390,882,382,917,365,946,342,968,319,972,323,950,346,920,369,884,387,853,395,782,407,602,436,443,454"/>
+<area shape="rect" id="Node000007" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="7,547,88,573"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="68,581,89,601,114,616,143,626,167,630,190,627,217,616,240,603,260,585,294,545,319,504,334,472,339,474,324,506,299,548,264,589,243,607,220,621,191,632,167,636,142,631,112,621,86,605,65,585"/>
+<area shape="poly" id="edge14_Node000009_Node000007" title=" " alt="" coords="102,573,131,577,162,577,191,571,217,557,228,544,232,530,230,500,226,467,230,450,241,434,258,422,261,426,245,438,235,453,231,468,235,499,238,531,233,546,220,561,193,576,162,583,130,583,101,578"/>
+<area shape="poly" id="edge19_Node000011_Node000007" title=" " alt="" coords="85,539,112,527,144,519,171,517,194,511,217,493,229,474,234,456,232,419,228,381,231,359,240,336,257,313,277,292,318,263,321,267,281,296,261,316,245,339,236,360,234,381,238,419,240,456,234,476,221,497,196,516,172,522,145,524,114,532,87,544"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="795,360,856,353,918,339,959,319,962,323,920,344,857,358,795,365"/>
+<area shape="poly" id="edge11_Node000008_Node000009" title=" " alt="" coords="458,401,606,384,655,374,656,379,607,389,458,406"/>
+<area shape="rect" id="Node000010" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="303,349,384,374"/>
+<area shape="poly" id="edge15_Node000008_Node000010" title=" " alt="" coords="398,362,468,364,607,364,630,364,630,369,607,369,468,369,398,367"/>
+<area shape="poly" id="edge16_Node000001_Node000011" title=" " alt="" coords="446,249,665,257,792,268,919,287,943,293,942,298,918,292,792,274,664,262,446,254"/>
+<area shape="poly" id="edge20_Node000001_Node000012" title=" " alt="" coords="444,89,524,99,607,116,700,145,770,174,837,209,920,259,966,293,963,297,917,264,834,214,768,179,698,150,606,121,523,104,443,94"/>
+</map>

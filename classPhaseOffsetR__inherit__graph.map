@@ -1,0 +1,5 @@
+<map id="PhaseOffsetR" name="PhaseOffsetR">
+<area shape="rect" id="Node000001" title="Applies rotational phase offsets to pixel groups." alt="" coords="5,79,115,104"/>
+<area shape="rect" id="Node000002" href="$classEffect.html" title="Abstract base class for applying visual effects to pixel groups." alt="" coords="31,5,89,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="63,44,63,79,57,79,57,44"/>
+</map>

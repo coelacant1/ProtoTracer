@@ -1,0 +1,5 @@
+<map id="VerticalBlur" name="VerticalBlur">
+<area shape="rect" id="Node000001" title="An effect that applies a vertical blur to a pixel group." alt="" coords="5,79,103,104"/>
+<area shape="rect" id="Node000002" href="$classEffect.html" title="Abstract base class for applying visual effects to pixel groups." alt="" coords="25,5,83,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="57,44,57,79,51,79,51,44"/>
+</map>

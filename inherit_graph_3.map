@@ -1,0 +1,9 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classAnimationTrack.html" title=" " alt="" coords="5,63,249,88"/>
+<area shape="rect" id="Node000001" href="$classEffectChangeTrack.html" title=" " alt="" coords="309,5,489,31"/>
+<area shape="poly" id="edge45_Node000000_Node000001" title=" " alt="" coords="201,57,337,28,338,33,202,62"/>
+<area shape="rect" id="Node000002" href="$classEffectChangeTrack.html" title="A template class for animating effect transitions using keyframes." alt="" coords="322,55,475,95"/>
+<area shape="poly" id="edge46_Node000000_Node000002" title=" " alt="" coords="263,73,322,73,322,78,263,78"/>
+<area shape="rect" id="Node000003" href="$classMouthTrack.html" title="A template class for animating mouth movements using keyframes." alt="" coords="297,120,500,145"/>
+<area shape="poly" id="edge47_Node000000_Node000003" title=" " alt="" coords="202,88,338,117,337,123,201,94"/>
+</map>

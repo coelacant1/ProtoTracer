@@ -1,0 +1,5 @@
+<map id="Ellipse" name="Ellipse">
+<area shape="rect" id="Node000001" title="Represents an ellipse in 2D space." alt="" coords="5,79,71,104"/>
+<area shape="rect" id="Node000002" href="$classShape.html" title="Abstract base class for 2D geometric shapes." alt="" coords="7,5,69,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="41,44,41,79,35,79,35,44"/>
+</map>

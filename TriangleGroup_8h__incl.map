@@ -1,0 +1,40 @@
+<map id="TriangleGroup.h" name="TriangleGroup.h">
+<area shape="rect" id="Node000001" title="Defines the TriangleGroup class for dynamic manipulation of triangles in 3D space." alt="" coords="403,5,527,31"/>
+<area shape="rect" id="Node000002" href="$Triangle3D_8h.html" title="Defines the Triangle3D class for representing and manipulating 3D triangles." alt="" coords="192,225,295,251"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="403,31,344,48,315,62,289,81,266,110,253,145,247,181,245,212,240,212,241,180,248,144,262,107,285,77,312,58,342,43,402,25"/>
+<area shape="rect" id="Node000011" href="$ITriangleGroup_8h.html" title="Defines the ITriangleGroup interface for managing a collection of mutable 3D triangles." alt="" coords="299,79,427,104"/>
+<area shape="poly" id="edge14_Node000001_Node000011" title=" " alt="" coords="450,33,393,73,390,68,447,28"/>
+<area shape="rect" id="Node000012" href="$IndexGroup_8h.html" title="Defines the IndexGroup class for handling a group of three unsigned integer indices." alt="" coords="429,225,538,251"/>
+<area shape="poly" id="edge21_Node000001_Node000012" title=" " alt="" coords="469,31,478,83,486,152,487,212,482,212,481,152,473,84,464,31"/>
+<area shape="rect" id="Node000014" href="$IStaticTriangleGroup_8h.html" title="Defines the IStaticTriangleGroup interface for managing a collection of static 3D triangles." alt="" coords="281,152,446,177"/>
+<area shape="poly" id="edge22_Node000001_Node000014" title=" " alt="" coords="466,31,459,66,442,105,421,129,398,147,394,142,417,125,437,103,454,64,461,30"/>
+<area shape="rect" id="Node000015" href="$TriangleGroup_8tpp.html" title=" " alt="" coords="572,79,709,104"/>
+<area shape="poly" id="edge23_Node000001_Node000015" title=" " alt="" coords="494,28,600,71,598,76,492,33"/>
+<area shape="rect" id="Node000003" href="$Quaternion_8h.html" title="Defines the Quaternion class for 3D rotations and transformations." alt="" coords="73,299,275,324"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="234,253,197,291,193,287,230,249"/>
+<area shape="rect" id="Node000010" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="214,445,307,471"/>
+<area shape="poly" id="edge13_Node000002_Node000010" title=" " alt="" coords="257,249,274,270,289,298,294,335,292,372,283,406,274,434,269,432,278,404,286,371,289,335,283,299,270,273,253,252"/>
+<area shape="rect" id="Node000004" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="117,519,236,544"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="160,326,138,346,120,373,118,384,121,397,141,457,165,506,160,508,136,459,115,398,113,384,116,371,134,343,156,322"/>
+<area shape="rect" id="Node000009" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="130,372,223,397"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="177,324,178,358,173,359,172,324"/>
+<area shape="poly" id="edge12_Node000003_Node000010" title=" " alt="" coords="192,322,215,343,238,371,251,401,259,431,254,432,246,403,233,373,211,347,188,326"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="5,592,68,617"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="155,546,73,588,70,583,153,542"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="92,592,160,617"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="170,546,144,582,140,579,166,543"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="185,592,270,617"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="187,543,213,579,209,582,183,546"/>
+<area shape="rect" id="Node000008" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,592,427,617"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="207,542,319,584,317,589,205,547"/>
+<area shape="poly" id="edge9_Node000009_Node000004" title=" " alt="" coords="179,398,179,505,174,505,174,398"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="192,395,238,434,235,438,188,399"/>
+<area shape="poly" id="edge11_Node000010_Node000004" title=" " alt="" coords="249,473,203,512,199,507,245,469"/>
+<area shape="poly" id="edge15_Node000011_Node000002" title=" " alt="" coords="336,106,302,126,271,154,256,182,249,212,243,211,251,181,267,150,298,121,333,102"/>
+<area shape="poly" id="edge16_Node000011_Node000012" title=" " alt="" coords="393,102,428,121,460,150,476,181,483,211,478,212,471,182,456,154,425,126,391,106"/>
+<area shape="poly" id="edge18_Node000011_Node000014" title=" " alt="" coords="366,104,366,138,361,138,361,104"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="441,299,525,324"/>
+<area shape="poly" id="edge17_Node000012_Node000013" title=" " alt="" coords="486,251,486,285,481,285,481,251"/>
+<area shape="poly" id="edge19_Node000014_Node000002" title=" " alt="" coords="345,180,276,220,274,216,343,175"/>
+<area shape="poly" id="edge20_Node000014_Node000012" title=" " alt="" coords="384,175,453,216,450,220,381,180"/>
+</map>

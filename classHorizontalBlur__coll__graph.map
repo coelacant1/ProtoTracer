@@ -1,0 +1,5 @@
+<map id="HorizontalBlur" name="HorizontalBlur">
+<area shape="rect" id="Node000001" title="Implements a horizontal blur effect for pixel groups." alt="" coords="5,79,120,104"/>
+<area shape="rect" id="Node000002" href="$classEffect.html" title="Abstract base class for applying visual effects to pixel groups." alt="" coords="33,5,92,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="65,44,65,79,60,79,60,44"/>
+</map>

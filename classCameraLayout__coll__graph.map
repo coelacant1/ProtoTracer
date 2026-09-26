@@ -1,0 +1,5 @@
+<map id="CameraLayout" name="CameraLayout">
+<area shape="rect" id="Node000001" title="Manages camera orientation and axis alignment." alt="" coords="5,93,123,119"/>
+<area shape="rect" id="Node000002" href="$classQuaternion.html" title="A mathematical construct representing a rotation in 3D space." alt="" coords="17,5,111,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="67,45,67,93,61,93,61,45"/>
+</map>

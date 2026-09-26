@@ -1,0 +1,33 @@
+<map id="PixelGroup.h" name="PixelGroup.h">
+<area shape="rect" id="Node000001" title="Declares the PixelGroup template class for managing a collection of pixels." alt="" coords="231,5,335,31"/>
+<area shape="rect" id="Node000002" href="$IPixelGroup_8h.html" title="Declares the IPixelGroup interface for managing collections of pixels." alt="" coords="161,79,269,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="274,33,238,70,234,67,270,29"/>
+<area shape="rect" id="Node000013" href="$PixelGroup_8tpp.html" title=" " alt="" coords="294,79,411,104"/>
+<area shape="poly" id="edge18_Node000001_Node000013" title=" " alt="" coords="297,29,334,67,330,71,293,33"/>
+<area shape="rect" id="Node000003" href="$RGBColor_8h.html" title="Defines the RGBColor class for managing and manipulating RGB color values." alt="" coords="221,152,375,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="230,102,276,141,272,145,227,106"/>
+<area shape="rect" id="Node000012" href="$BoundingBox2D_8h.html" title="Defines the BoundingBox2D class for managing 2D bounding boxes." alt="" coords="5,225,148,265"/>
+<area shape="poly" id="edge16_Node000002_Node000012" title=" " alt="" coords="207,106,105,217,101,213,203,102"/>
+<area shape="rect" id="Node000004" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="203,460,359,485"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="313,176,333,197,351,224,378,275,397,319,402,340,402,363,397,387,384,413,361,439,332,457,330,452,358,435,380,411,392,385,397,362,397,341,392,320,373,277,346,227,329,200,309,179"/>
+<area shape="rect" id="Node000009" href="$Quaternion_8h.html" title="Defines the Quaternion class for 3D rotations and transformations." alt="" coords="172,233,315,258"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="292,179,261,223,257,220,288,176"/>
+<area shape="rect" id="Node000011" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="277,387,370,412"/>
+<area shape="poly" id="edge15_Node000003_Node000011" title=" " alt="" coords="308,176,320,198,330,225,336,265,337,306,330,373,325,373,331,306,331,266,325,226,315,200,303,179"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="109,533,172,559"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="259,488,177,529,174,525,257,483"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="196,533,264,559"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="274,487,248,524,244,521,270,484"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="289,533,374,559"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="291,484,317,521,313,524,287,487"/>
+<area shape="rect" id="Node000008" href="$Mathematics_8tpp.html" title=" " alt="" coords="399,533,531,559"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="311,483,423,526,421,531,309,488"/>
+<area shape="poly" id="edge9_Node000009_Node000004" title=" " alt="" coords="247,258,254,324,267,411,276,446,271,447,262,413,248,324,242,259"/>
+<area shape="rect" id="Node000010" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="109,313,202,339"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="232,260,180,306,177,302,229,256"/>
+<area shape="poly" id="edge14_Node000009_Node000011" title=" " alt="" coords="252,257,313,373,309,376,247,259"/>
+<area shape="poly" id="edge11_Node000010_Node000004" title=" " alt="" coords="165,337,223,410,260,449,257,453,219,414,161,340"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="183,336,284,379,282,384,181,341"/>
+<area shape="poly" id="edge13_Node000011_Node000004" title=" " alt="" coords="319,414,297,450,292,447,314,411"/>
+<area shape="poly" id="edge17_Node000012_Node000010" title=" " alt="" coords="98,264,136,302,132,305,94,267"/>
+</map>

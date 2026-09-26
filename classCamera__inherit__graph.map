@@ -1,0 +1,5 @@
+<map id="Camera&lt; pixelCount &gt;" name="Camera&lt; pixelCount &gt;">
+<area shape="rect" id="Node000001" title="Manages camera behavior and pixel groups." alt="" coords="5,79,177,104"/>
+<area shape="rect" id="Node000002" href="$classCameraBase.html" title="Base class for managing camera properties and transformations." alt="" coords="39,5,144,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="94,44,94,79,89,79,89,44"/>
+</map>

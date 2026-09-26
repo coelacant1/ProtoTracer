@@ -1,0 +1,9 @@
+<map id="GradientMaterial&lt; colorCount &gt;" name="GradientMaterial&lt; colorCount &gt;">
+<area shape="rect" id="Node000001" title="Creates a customizable gradient material for rendering." alt="" coords="31,108,263,133"/>
+<area shape="rect" id="Node000002" href="$classMaterial.html" title="Abstract base class for rendering materials." alt="" coords="5,5,81,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="67,39,137,106,134,110,64,42"/>
+<area shape="rect" id="Node000003" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="105,5,189,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="150,45,150,108,145,108,145,45"/>
+<area shape="rect" id="Node000004" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="243,5,324,31"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="280,45,271,67,256,86,235,101,211,110,209,105,232,96,252,82,266,64,275,43"/>
+</map>

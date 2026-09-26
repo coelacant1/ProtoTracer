@@ -1,0 +1,8 @@
+<map id="Pixel" name="Pixel">
+<area shape="rect" id="Node000001" title="Represents a pixel in a 2D grid with positional, color, and neighbor information." alt="" coords="73,110,126,135"/>
+<area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="141,110,149,115,153,123,144,134,127,136,126,131,142,129,147,122,145,118,139,115"/>
+<area shape="rect" id="Node000002" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="5,5,87,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="57,42,68,68,93,108,89,111,64,71,52,45"/>
+<area shape="rect" id="Node000003" href="$classRGBColor.html" title="Represents an RGB color and provides methods for manipulation." alt="" coords="111,5,195,31"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="142,45,108,111,103,109,138,42"/>
+</map>

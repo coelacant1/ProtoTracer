@@ -1,0 +1,20 @@
+<map id="Circle.h" name="Circle.h">
+<area shape="rect" id="Node000001" title="Defines the Circle class for representing circular shapes in 2D space." alt="" coords="141,5,212,31"/>
+<area shape="rect" id="Node000002" href="$Shape_8h.html" title="Defines the Shape base class for representing geometric shapes in 2D space." alt="" coords="139,79,214,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="179,31,179,65,174,65,174,31"/>
+<area shape="rect" id="Node000003" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="114,152,239,192"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="179,104,179,138,174,138,174,104"/>
+<area shape="rect" id="Node000004" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="117,313,236,339"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="173,193,165,227,163,265,171,300,166,301,158,266,159,226,167,192"/>
+<area shape="rect" id="Node000009" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="173,240,266,265"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="189,191,209,227,204,229,185,193"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="5,387,68,412"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="155,341,73,383,70,378,153,336"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="92,387,160,412"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="170,341,144,377,140,374,166,337"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="185,387,270,412"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="187,337,213,374,209,377,183,341"/>
+<area shape="rect" id="Node000008" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,387,427,412"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="207,336,319,379,317,384,205,341"/>
+<area shape="poly" id="edge9_Node000009_Node000004" title=" " alt="" coords="215,267,193,303,188,300,210,264"/>
+</map>

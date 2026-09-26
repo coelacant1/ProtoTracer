@@ -1,0 +1,33 @@
+<map id="VesperAnimation.h" name="VesperAnimation.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="1361,5,1507,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,86,119,111"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1361,23,747,40,390,57,242,68,130,81,111,85,110,80,130,76,242,63,390,52,746,34,1361,18"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="143,86,288,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="1361,22,1175,23,912,31,608,49,452,63,300,81,274,86,273,80,299,76,452,58,608,44,912,26,1175,18,1361,16"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="312,86,479,111"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="1361,23,987,38,740,55,490,81,461,86,460,81,490,76,740,50,987,33,1361,18"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="503,86,691,111"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="1361,26,1073,45,889,61,704,81,669,86,669,81,703,76,889,55,1073,39,1361,20"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="715,86,897,111"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="1361,29,1157,50,909,81,878,86,877,81,908,76,1157,44,1361,23"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="921,86,1067,111"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="1362,33,1080,81,1058,86,1057,81,1079,76,1361,28"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="1092,86,1320,111"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="1402,33,1253,84,1251,79,1400,28"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="1344,79,1524,119"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="1437,31,1437,65,1431,65,1431,31"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="1549,86,1738,111"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="1465,28,1601,79,1599,84,1464,33"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="1763,79,1937,119"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="1495,28,1750,76,1749,81,1494,33"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="1961,79,2136,119"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="1507,23,1702,44,1948,76,1947,81,1702,49,1507,29"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="2160,79,2335,119"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="1507,20,1784,38,1963,55,2147,76,2146,81,1962,60,1784,44,1507,26"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="2359,86,2594,111"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="1507,19,1869,38,2107,54,2348,76,2392,81,2391,87,2347,81,2106,60,1868,43,1507,25"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="2617,79,2760,119"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="1507,16,1696,17,1966,24,2280,43,2443,57,2604,76,2603,81,2443,62,2280,48,1966,30,1696,22,1507,21"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="2784,86,3015,111"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="1507,17,1722,21,2035,30,2400,48,2773,76,2818,81,2817,87,2772,81,2400,53,2035,36,1722,26,1507,23"/>
+</map>

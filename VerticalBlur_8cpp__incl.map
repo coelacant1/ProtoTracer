@@ -1,0 +1,36 @@
+<map id="VerticalBlur.cpp" name="VerticalBlur.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="71,5,194,31"/>
+<area shape="rect" id="Node000002" href="$VerticalBlur_8h.html" title="Defines the VerticalBlur effect class for applying a vertical blur effect." alt="" coords="79,79,187,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="135,31,135,65,130,65,130,31"/>
+<area shape="rect" id="Node000003" href="$Effect_8h.html" title="Defines the base Effect class for applying transformations or effects to pixel groups." alt="" coords="97,152,168,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="135,104,135,138,130,138,130,104"/>
+<area shape="rect" id="Node000004" href="$IPixelGroup_8h.html" title="Declares the IPixelGroup interface for managing collections of pixels." alt="" coords="139,225,278,265"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="146,176,183,214,179,217,142,179"/>
+<area shape="rect" id="Node000006" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="99,621,255,647"/>
+<area shape="poly" id="edge20_Node000003_Node000006" title=" " alt="" coords="128,179,97,240,84,281,78,325,78,488,85,526,104,559,128,588,152,611,148,614,124,592,99,562,80,527,73,489,73,324,78,280,92,238,123,176"/>
+<area shape="rect" id="Node000005" href="$RGBColor_8h.html" title="Defines the RGBColor class for managing and manipulating RGB color values." alt="" coords="132,313,285,339"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="211,266,211,299,206,299,206,266"/>
+<area shape="rect" id="Node000014" href="$BoundingBox2D_8h.html" title="Defines the BoundingBox2D class for managing 2D bounding boxes." alt="" coords="413,387,556,427"/>
+<area shape="poly" id="edge18_Node000004_Node000014" title=" " alt="" coords="243,263,442,378,439,382,240,268"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="210,339,182,608,177,607,205,339"/>
+<area shape="rect" id="Node000011" href="$Quaternion_8h.html" title="Defines the Quaternion class for 3D rotations and transformations." alt="" coords="247,394,389,419"/>
+<area shape="poly" id="edge10_Node000005_Node000011" title=" " alt="" coords="226,337,292,384,289,388,223,341"/>
+<area shape="rect" id="Node000013" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="222,548,315,573"/>
+<area shape="poly" id="edge17_Node000005_Node000013" title=" " alt="" coords="214,338,237,426,265,534,260,535,231,427,209,340"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="5,695,68,720"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="155,649,73,691,70,686,153,644"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="92,695,160,720"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="170,649,144,685,140,682,166,645"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="185,695,270,720"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="187,645,213,682,209,685,183,649"/>
+<area shape="rect" id="Node000010" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,695,427,720"/>
+<area shape="poly" id="edge9_Node000006_Node000010" title=" " alt="" coords="207,644,319,687,317,692,205,649"/>
+<area shape="poly" id="edge11_Node000011_Node000006" title=" " alt="" coords="309,421,264,475,212,549,187,609,182,607,208,547,260,471,305,418"/>
+<area shape="rect" id="Node000012" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="315,475,409,500"/>
+<area shape="poly" id="edge12_Node000011_Node000012" title=" " alt="" coords="327,418,351,461,346,464,322,421"/>
+<area shape="poly" id="edge16_Node000011_Node000013" title=" " alt="" coords="317,420,279,536,274,534,312,419"/>
+<area shape="poly" id="edge13_Node000012_Node000006" title=" " alt="" coords="363,501,353,537,343,557,329,575,291,602,249,620,247,615,289,598,325,571,339,554,348,535,358,499"/>
+<area shape="poly" id="edge14_Node000012_Node000013" title=" " alt="" coords="349,502,296,542,293,537,345,498"/>
+<area shape="poly" id="edge15_Node000013_Node000006" title=" " alt="" coords="256,575,204,615,201,611,252,571"/>
+<area shape="poly" id="edge19_Node000014_Node000012" title=" " alt="" coords="456,429,393,469,390,465,454,425"/>
+</map>

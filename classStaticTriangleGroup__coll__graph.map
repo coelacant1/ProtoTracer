@@ -1,0 +1,15 @@
+<map id="StaticTriangleGroup&lt; vertexCount, triangleCount &gt;" name="StaticTriangleGroup&lt; vertexCount, triangleCount &gt;">
+<area shape="rect" id="Node000001" title="Represents a static collection of 3D triangles and associated vertex/UV data." alt="" coords="220,269,448,309"/>
+<area shape="rect" id="Node000002" href="$classIStaticTriangleGroup.html" title="Interface for managing a static group of 3D triangles and associated data." alt="" coords="5,167,159,192"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="111,198,147,221,190,243,257,267,256,272,188,248,145,225,108,202"/>
+<area shape="rect" id="Node000003" href="$classTriangle3D.html" title="Represents a 3D triangle with support for UV mapping and ray intersection testing." alt="" coords="289,167,379,192"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="337,206,337,269,331,269,331,206"/>
+<area shape="rect" id="Node000004" href="$classVector3D.html" title="Represents a 3D vector (X, Y, Z) and provides methods for vector arithmetic." alt="" coords="211,5,292,31"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="241,44,227,74,216,112,213,152,215,172,222,191,237,215,256,235,299,267,296,271,253,239,232,218,217,193,210,173,207,153,211,111,222,73,236,42"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="258,44,270,91,280,117,293,141,318,165,314,168,289,144,275,119,265,93,253,45"/>
+<area shape="rect" id="Node000005" href="$classVector2D.html" title="Represents a 2D vector (X, Y) and provides methods for vector arithmetic." alt="" coords="327,5,408,31"/>
+<area shape="poly" id="edge7_Node000001_Node000005" title=" " alt="" coords="397,39,407,53,427,106,434,152,426,196,403,247,392,260,378,271,375,267,388,257,398,244,421,195,428,152,422,108,402,56,393,42"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="365,45,339,167,334,166,360,44"/>
+<area shape="rect" id="Node000006" href="$classIndexGroup.html" title="Represents a group of three unsigned integer indices." alt="" coords="525,167,623,192"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="542,201,447,248,388,272,386,267,445,243,540,196"/>
+</map>

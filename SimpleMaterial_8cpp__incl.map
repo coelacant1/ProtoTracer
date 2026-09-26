@@ -1,0 +1,32 @@
+<map id="SimpleMaterial.cpp" name="SimpleMaterial.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="148,5,296,31"/>
+<area shape="rect" id="Node000002" href="$SimpleMaterial_8h.html" title="A material class that applies a single RGB color to all surfaces." alt="" coords="155,79,289,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="225,31,225,65,219,65,219,31"/>
+<area shape="rect" id="Node000003" href="$Material_8h.html" title="Base class for materials defining shading and rendering behavior." alt="" coords="65,152,165,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="206,106,146,147,143,142,203,102"/>
+<area shape="rect" id="Node000011" href="$Vector2D_8h.html" title="Defines a 2D vector and various related operations." alt="" coords="257,372,350,397"/>
+<area shape="poly" id="edge18_Node000002_Node000011" title=" " alt="" coords="230,103,265,183,285,239,301,298,306,358,301,358,295,299,280,241,260,185,225,105"/>
+<area shape="rect" id="Node000004" href="$RGBColor_8h.html" title="Defines the RGBColor class for managing and manipulating RGB color values." alt="" coords="39,225,192,251"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="118,178,118,212,113,212,113,178"/>
+<area shape="rect" id="Node000012" href="$Vector3D_8h.html" title="Defines a 3D vector and various related operations." alt="" coords="89,445,182,471"/>
+<area shape="poly" id="edge17_Node000003_Node000012" title=" " alt="" coords="86,180,54,198,39,211,28,226,26,238,29,250,47,304,71,354,121,432,116,435,67,357,42,306,23,251,20,238,24,224,35,208,51,194,83,175"/>
+<area shape="rect" id="Node000005" href="$Mathematics_8h.html" title="Provides a collection of mathematical utility functions and constants." alt="" coords="99,519,255,544"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="111,252,92,291,72,347,65,378,63,410,68,440,79,469,101,494,129,511,126,515,97,498,74,472,62,442,58,410,60,377,66,345,87,289,106,250"/>
+<area shape="rect" id="Node000010" href="$Quaternion_8h.html" title="Defines the Quaternion class for 3D rotations and transformations." alt="" coords="144,299,287,324"/>
+<area shape="poly" id="edge9_Node000004_Node000010" title=" " alt="" coords="133,249,189,288,186,293,130,253"/>
+<area shape="poly" id="edge16_Node000004_Node000012" title=" " alt="" coords="119,251,136,431,130,431,114,251"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="5,592,68,617"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="155,546,73,588,70,583,153,542"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="92,592,160,617"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="170,546,144,582,140,579,166,543"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="185,592,270,617"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="187,543,213,579,209,582,183,546"/>
+<area shape="rect" id="Node000009" href="$Mathematics_8tpp.html" title=" " alt="" coords="295,592,427,617"/>
+<area shape="poly" id="edge8_Node000005_Node000009" title=" " alt="" coords="207,542,319,584,317,589,205,547"/>
+<area shape="poly" id="edge10_Node000010_Node000005" title=" " alt="" coords="217,325,210,387,197,471,187,506,182,505,191,470,205,387,212,324"/>
+<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="231,322,280,361,277,365,228,326"/>
+<area shape="poly" id="edge15_Node000010_Node000012" title=" " alt="" coords="211,326,151,435,146,432,206,323"/>
+<area shape="poly" id="edge12_Node000011_Node000005" title=" " alt="" coords="297,399,240,472,202,511,198,507,236,469,293,396"/>
+<area shape="poly" id="edge13_Node000011_Node000012" title=" " alt="" coords="277,400,176,442,174,437,275,395"/>
+<area shape="poly" id="edge14_Node000012_Node000005" title=" " alt="" coords="144,470,165,505,161,508,140,472"/>
+</map>

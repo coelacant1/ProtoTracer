@@ -1,0 +1,7 @@
+<map id="KeyFrameTrack&lt; maxParameters, maxKeyFrames &gt;" name="KeyFrameTrack&lt; maxParameters, maxKeyFrames &gt;">
+<area shape="rect" id="Node000001" title="A template class for managing animations with multiple parameters and keyframes." alt="" coords="45,93,288,133"/>
+<area shape="rect" id="Node000002" href="$classKeyFrameInterpolation.html" title="Base class providing interpolation methods for keyframe animations." alt="" coords="5,5,176,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="111,39,153,91,149,95,106,43"/>
+<area shape="rect" id="Node000003" href="$classKeyFrame.html" title="Represents a single keyframe in an animation." alt="" coords="201,5,287,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="228,43,184,95,180,91,224,39"/>
+</map>
