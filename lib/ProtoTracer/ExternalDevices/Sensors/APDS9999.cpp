@@ -25,16 +25,12 @@ bool APDS9999::Initialize(uint8_t threshold)
     Wire.setSDA(18);
     Wire.setSCL(19);
 #endif
-
-    Wire.beginTransmission(0x39);
+    Wire.beginTransmission(0x52);
     uint8_t error = Wire.endTransmission();
 
     if (error == 0)
-    { // SSD1306 Found
+    { // APDS9999 Found
         didBegin = apds.begin();
-
-        // apds.setLED(APDS9960_LEDDRIVE_12MA, APDS9960_LEDBOOST_100PCNT);
-        // apds.setProxGain(APDS9960_PGAIN_1X);
     }
     else
     {
