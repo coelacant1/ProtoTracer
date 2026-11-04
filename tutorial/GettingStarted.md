@@ -80,7 +80,7 @@ Full guide on compiling and uploading ProtoTracer: \subpage CompilingUploading
 
 1. **Connect Your LEDs**:
    - For HUB75: Connect the panel to the appropriate pins on the Teensy as per the documentation.
-   - For WS2812/WS2811: Connect the data line to the designated pins.
+   - For WS2812/WS2811: Connect the data line to the designated pins (Teensy pins: 6, 20, 21, 5). When using the OctoWS2811      Adapter, the default connections are the bottom RJ-45 Jack, where each solid color wire are data, and the same color striped  wire is GND.
 
 2. **Power Supply**:
    - Ensure your LEDs have a sufficient and stable power supply.
@@ -88,6 +88,11 @@ Full guide on compiling and uploading ProtoTracer: \subpage CompilingUploading
 
 3. **Sensor Connections**:
    - Refer to the Adafruit documentation for wiring details on the BNO055, APDS9960, or other sensors.
+   - Other sensor and button default pins are:
+      22: Button
+      23: Microphone
+      15: Fan control
+      19, 18: I2C pins
 
 ---
 
