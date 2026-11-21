@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['kapabackgroundlayeroptions_0',['kApaBackgroundLayerOptions',['../SmartMatrixAPA102_8h.html#aa3e8413e239b18d1f09cc8fb3d7ffe2c',1,'kApaBackgroundLayerOptions:&#160;SmartMatrixAPA102.h'],['../SmartMatrixHUB75_8h.html#aa3e8413e239b18d1f09cc8fb3d7ffe2c',1,'kApaBackgroundLayerOptions:&#160;SmartMatrixHUB75.h']]],
+  ['kapadmabufferrows_1',['kApaDmaBufferRows',['../SmartMatrixAPA102_8h.html#a7b49d5f72a281ae001a947592f1f21f1',1,'kApaDmaBufferRows:&#160;SmartMatrixAPA102.h'],['../SmartMatrixHUB75_8h.html#a7b49d5f72a281ae001a947592f1f21f1',1,'kApaDmaBufferRows:&#160;SmartMatrixHUB75.h']]],
+  ['kapamatrixheight_2',['kApaMatrixHeight',['../SmartMatrixAPA102_8h.html#a161c6178d457de9298e4a82a8509c75a',1,'kApaMatrixHeight:&#160;SmartMatrixAPA102.h'],['../SmartMatrixHUB75_8h.html#a161c6178d457de9298e4a82a8509c75a',1,'kApaMatrixHeight:&#160;SmartMatrixHUB75.h']]],
+  ['kapamatrixoptions_3',['kApaMatrixOptions',['../SmartMatrixAPA102_8h.html#a5e9931613b220adfc7fc17ffc5b8f742',1,'kApaMatrixOptions:&#160;SmartMatrixAPA102.h'],['../SmartMatrixHUB75_8h.html#a5e9931613b220adfc7fc17ffc5b8f742',1,'kApaMatrixOptions:&#160;SmartMatrixHUB75.h']]],
+  ['kapamatrixwidth_4',['kApaMatrixWidth',['../SmartMatrixAPA102_8h.html#afc99104de464a01d62ee4decdfea703e',1,'kApaMatrixWidth:&#160;SmartMatrixAPA102.h'],['../SmartMatrixHUB75_8h.html#afc99104de464a01d62ee4decdfea703e',1,'kApaMatrixWidth:&#160;SmartMatrixHUB75.h']]],
+  ['kapapaneltype_5',['kApaPanelType',['../SmartMatrixAPA102_8h.html#a3ddd9f38a90ea4c48ea5785a3de6470d',1,'kApaPanelType:&#160;SmartMatrixAPA102.h'],['../SmartMatrixHUB75_8h.html#a3ddd9f38a90ea4c48ea5785a3de6470d',1,'kApaPanelType:&#160;SmartMatrixHUB75.h']]],
+  ['kaparefreshdepth_6',['kApaRefreshDepth',['../SmartMatrixAPA102_8h.html#a777bc1f343abd1c295287f88c95c8f58',1,'kApaRefreshDepth:&#160;SmartMatrixAPA102.h'],['../SmartMatrixHUB75_8h.html#a777bc1f343abd1c295287f88c95c8f58',1,'kApaRefreshDepth:&#160;SmartMatrixHUB75.h']]],
+  ['kbackgroundlayeroptions_7',['kBackgroundLayerOptions',['../SmartMatrixHUB75_8h.html#a9b8db62d9dc164e8ee6a5948c6643e91',1,'SmartMatrixHUB75.h']]],
+  ['kd_8',['kd',['../classPID.html#ae7a5c6018507bb1361fcca170e069b9c',1,'PID']]],
+  ['kdmabufferrows_9',['kDmaBufferRows',['../SmartMatrixHUB75_8h.html#ad261e0efd3fb08f56e561edf4eb2b508',1,'SmartMatrixHUB75.h']]],
+  ['keyframes_10',['keyFrames',['../classKeyFrameTrack.html#a7586d5f1d8a57b671b559f17c951f2fe',1,'KeyFrameTrack']]],
+  ['ki_11',['ki',['../classPID.html#a050993b7ca6c97e62c1020017f716b91',1,'PID']]],
+  ['kmatrixheight_12',['kMatrixHeight',['../SmartMatrixHUB75_8h.html#a4ccadf2438e8bd053cbf6d747f3f013a',1,'SmartMatrixHUB75.h']]],
+  ['kmatrixoptions_13',['kMatrixOptions',['../SmartMatrixHUB75_8h.html#a670367277639db20d1c02e3fb2cb2ab9',1,'SmartMatrixHUB75.h']]],
+  ['kmatrixwidth_14',['kMatrixWidth',['../SmartMatrixHUB75_8h.html#ad24b70c371cfc220a05025f34466f546',1,'SmartMatrixHUB75.h']]],
+  ['kp_15',['kp',['../classPID.html#a1f7add0f84d583bc2eceb290d6c4cc06',1,'PID']]],
+  ['kpaneltype_16',['kPanelType',['../SmartMatrixHUB75_8h.html#a6894549b04da95e86cf5dec942fa677d',1,'SmartMatrixHUB75.h']]],
+  ['krefreshdepth_17',['kRefreshDepth',['../SmartMatrixHUB75_8h.html#af7602f929051baad7f0e9f443493e086',1,'SmartMatrixHUB75.h']]]
+];

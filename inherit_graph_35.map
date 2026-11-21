@@ -1,0 +1,19 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classIPixelGroup.html" title="Interface for managing and interacting with a collection of pixels." alt="" coords="5,188,101,216"/>
+<area shape="rect" id="Node000001" href="$classPixelGroup.html" title=" " alt="" coords="175,5,312,33"/>
+<area shape="poly" id="edge97_Node000000_Node000001" title=" " alt="" coords="62,172,93,108,117,73,147,44,177,30,173,34,150,48,121,77,97,110,66,174"/>
+<area shape="rect" id="Node000002" href="$classPixelGroup.html" title=" " alt="" coords="171,57,316,85"/>
+<area shape="poly" id="edge98_Node000000_Node000002" title=" " alt="" coords="70,173,103,133,124,113,147,96,176,84,173,88,150,100,127,117,107,137,74,176"/>
+<area shape="rect" id="Node000003" href="$classPixelGroup.html" title=" " alt="" coords="167,109,320,137"/>
+<area shape="poly" id="edge99_Node000000_Node000003" title=" " alt="" coords="88,178,148,147,186,136,182,139,150,152,91,182"/>
+<area shape="rect" id="Node000004" href="$classPixelGroup.html" title=" " alt="" coords="175,161,312,189"/>
+<area shape="poly" id="edge100_Node000000_Node000004" title=" " alt="" coords="115,191,177,183,173,187,118,195"/>
+<area shape="rect" id="Node000005" href="$classPixelGroup.html" title=" " alt="" coords="175,213,312,241"/>
+<area shape="poly" id="edge101_Node000000_Node000005" title=" " alt="" coords="116,208,177,217,173,220,117,213"/>
+<area shape="rect" id="Node000006" href="$classPixelGroup.html" title=" " alt="" coords="171,265,316,293"/>
+<area shape="poly" id="edge102_Node000000_Node000006" title=" " alt="" coords="90,221,150,250,187,264,182,266,148,255,91,226"/>
+<area shape="rect" id="Node000007" href="$classPixelGroup.html" title=" " alt="" coords="175,317,312,345"/>
+<area shape="poly" id="edge103_Node000000_Node000007" title=" " alt="" coords="73,226,107,266,127,286,150,302,178,316,172,317,147,307,124,290,103,270,72,231"/>
+<area shape="rect" id="Node000008" href="$classPixelGroup.html" title="Manages a collection of pixels with positions, colors, and spatial relationships." alt="" coords="149,369,339,397"/>
+<area shape="poly" id="edge104_Node000000_Node000008" title=" " alt="" coords="65,228,98,293,121,326,150,354,173,369,167,369,147,359,117,330,93,296,63,233"/>
+</map>

@@ -1,0 +1,17 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classIEasyEaseAnimator.html" title="Interface for defining animation behaviors with easing and interpolation." alt="" coords="5,178,153,206"/>
+<area shape="rect" id="Node000001" href="$classEasyEaseAnimator.html" title=" " alt="" coords="232,5,446,50"/>
+<area shape="poly" id="edge90_Node000000_Node000001" title=" " alt="" coords="96,163,139,110,167,83,199,60,234,46,230,50,202,65,171,87,143,114,100,166"/>
+<area shape="rect" id="Node000002" href="$classEasyEaseAnimator.html" title=" " alt="" coords="244,74,434,102"/>
+<area shape="poly" id="edge91_Node000000_Node000002" title=" " alt="" coords="108,166,150,138,200,112,246,99,242,103,202,117,153,142,112,170"/>
+<area shape="rect" id="Node000003" href="$classEasyEaseAnimator.html" title=" " alt="" coords="244,126,434,154"/>
+<area shape="poly" id="edge92_Node000000_Node000003" title=" " alt="" coords="161,172,200,164,264,153,260,156,201,169,164,177"/>
+<area shape="rect" id="Node000004" href="$classEasyEaseAnimator.html" title=" " alt="" coords="244,178,434,206"/>
+<area shape="poly" id="edge93_Node000000_Node000004" title=" " alt="" coords="168,189,246,190,242,193,169,194"/>
+<area shape="rect" id="Node000005" href="$classEasyEaseAnimator.html" title=" " alt="" coords="244,230,434,258"/>
+<area shape="poly" id="edge94_Node000000_Node000005" title=" " alt="" coords="162,207,201,214,265,228,260,230,200,220,163,212"/>
+<area shape="rect" id="Node000006" href="$classEasyEaseAnimator.html" title=" " alt="" coords="244,282,434,310"/>
+<area shape="poly" id="edge95_Node000000_Node000006" title=" " alt="" coords="110,212,153,241,202,267,246,282,241,283,200,271,150,246,109,218"/>
+<area shape="rect" id="Node000007" href="$classEasyEaseAnimator.html" title="A template class for implementing advanced animation easing." alt="" coords="201,334,477,362"/>
+<area shape="poly" id="edge96_Node000000_Node000007" title=" " alt="" coords="98,216,142,270,170,297,202,319,232,333,226,333,199,323,167,301,138,273,97,221"/>
+</map>

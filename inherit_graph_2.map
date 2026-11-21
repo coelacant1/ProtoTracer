@@ -1,0 +1,13 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classAnimationTrack.html" title=" " alt="" coords="5,101,222,146"/>
+<area shape="rect" id="Node000001" href="$classBlinkTrack.html" title=" " alt="" coords="317,5,443,33"/>
+<area shape="poly" id="edge40_Node000000_Node000001" title=" " alt="" coords="166,91,215,66,269,43,319,31,314,33,271,48,218,71,169,95"/>
+<area shape="rect" id="Node000002" href="$classBlinkTrack.html" title=" " alt="" coords="317,57,443,85"/>
+<area shape="poly" id="edge41_Node000000_Node000002" title=" " alt="" coords="236,97,318,82,314,85,238,102"/>
+<area shape="rect" id="Node000003" href="$classEyeMoveTrack.html" title=" " alt="" coords="303,109,456,137"/>
+<area shape="poly" id="edge42_Node000000_Node000003" title=" " alt="" coords="236,121,305,122,300,124,237,126"/>
+<area shape="rect" id="Node000004" href="$classBlinkTrack.html" title="A template class for animating eye blinking using keyframes." alt="" coords="283,161,476,189"/>
+<area shape="poly" id="edge43_Node000000_Node000004" title=" " alt="" coords="237,145,308,160,303,161,237,150"/>
+<area shape="rect" id="Node000005" href="$classEyeMoveTrack.html" title="A template class for animating eye movements using keyframes." alt="" coords="270,213,490,241"/>
+<area shape="poly" id="edge44_Node000000_Node000005" title=" " alt="" coords="168,151,218,176,271,198,312,213,307,213,269,203,215,180,167,156"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classShape.html" title="Abstract base class for 2D geometric shapes." alt="" coords="5,57,67,85"/>
+<area shape="rect" id="Node000001" href="$classCircle.html" title="Represents a circle in 2D space." alt="" coords="129,5,187,33"/>
+<area shape="poly" id="edge179_Node000000_Node000001" title=" " alt="" coords="79,50,130,30,126,33,82,55"/>
+<area shape="rect" id="Node000002" href="$classEllipse.html" title="Represents an ellipse in 2D space." alt="" coords="126,57,190,85"/>
+<area shape="poly" id="edge180_Node000000_Node000002" title=" " alt="" coords="81,69,128,70,123,73,82,74"/>
+<area shape="rect" id="Node000003" href="$classRectangle.html" title="Represents a rectangle in 2D space." alt="" coords="115,109,201,137"/>
+<area shape="poly" id="edge181_Node000000_Node000003" title=" " alt="" coords="81,87,126,108,121,110,80,93"/>
+</map>

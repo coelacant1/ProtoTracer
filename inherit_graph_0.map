@@ -1,0 +1,81 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,993,94,1021"/>
+<area shape="rect" id="Node000001" href="$classAlphaAnimation.html" title=" " alt="" coords="175,5,300,33"/>
+<area shape="poly" id="edge1_Node000000_Node000001" title=" " alt="" coords="49,978,56,778,73,482,85,332,100,200,118,100,128,66,140,44,155,31,176,23,173,27,158,36,144,48,133,68,123,101,105,201,90,333,78,482,62,778,54,978"/>
+<area shape="rect" id="Node000002" href="$classAphoriAnimation.html" title=" " alt="" coords="173,57,303,85"/>
+<area shape="poly" id="edge2_Node000000_Node000002" title=" " alt="" coords="49,977,57,787,74,507,87,367,101,243,119,149,129,116,140,96,154,84,174,76,171,80,157,88,144,100,134,118,124,150,107,244,92,367,80,508,63,787,55,978"/>
+<area shape="rect" id="Node000003" href="$classArtisansAnimation.html" title=" " alt="" coords="167,109,308,137"/>
+<area shape="poly" id="edge3_Node000000_Node000003" title=" " alt="" coords="49,978,58,797,76,534,88,402,103,286,120,197,129,167,140,148,152,137,168,130,166,134,155,142,144,151,134,169,125,199,108,287,94,403,81,535,64,797,55,978"/>
+<area shape="rect" id="Node000004" href="$classArtleckAnimationV2.html" title=" " alt="" coords="162,161,314,189"/>
+<area shape="poly" id="edge4_Node000000_Node000004" title=" " alt="" coords="50,978,59,807,78,561,90,437,104,329,121,246,130,218,140,200,163,184,161,189,144,204,135,220,126,248,110,330,95,438,83,561,64,807,55,978"/>
+<area shape="rect" id="Node000005" href="$classBasilGardenAnimation.html" title=" " alt="" coords="154,213,322,241"/>
+<area shape="poly" id="edge5_Node000000_Node000005" title=" " alt="" coords="48,978,48,827,57,610,68,498,84,396,108,311,123,278,140,252,158,239,155,244,144,256,127,280,113,313,89,397,73,499,62,611,53,827,53,978"/>
+<area shape="rect" id="Node000006" href="$classBeeAnimation.html" title=" " alt="" coords="181,265,294,293"/>
+<area shape="poly" id="edge6_Node000000_Node000006" title=" " alt="" coords="48,977,49,836,60,635,71,531,87,437,110,358,124,328,140,304,158,290,182,282,179,286,161,294,144,308,128,330,115,360,92,438,76,532,65,635,55,836,53,977"/>
+<area shape="rect" id="Node000007" href="$classBroookAnimation.html" title=" " alt="" coords="171,317,305,345"/>
+<area shape="poly" id="edge7_Node000000_Node000007" title=" " alt="" coords="48,978,51,847,63,661,74,565,90,478,112,406,125,378,140,356,153,345,172,337,169,341,156,349,144,360,129,380,117,408,95,479,79,566,68,661,56,847,53,978"/>
+<area shape="rect" id="Node000008" href="$classClockAnimation.html" title=" " alt="" coords="176,369,300,397"/>
+<area shape="poly" id="edge8_Node000000_Node000008" title=" " alt="" coords="49,977,53,855,66,685,78,598,93,519,114,453,126,428,140,408,156,395,177,387,173,392,158,400,144,412,130,430,119,455,98,520,83,599,71,685,58,855,54,978"/>
+<area shape="rect" id="Node000009" href="$classCoelaBonkAnimation.html" title=" " alt="" coords="159,421,317,449"/>
+<area shape="poly" id="edge9_Node000000_Node000009" title=" " alt="" coords="49,978,55,865,69,710,81,632,96,560,116,501,140,460,159,447,157,451,144,464,120,503,101,561,86,633,75,711,60,865,54,978"/>
+<area shape="rect" id="Node000010" href="$classCoelaNerdAnimation.html" title=" " alt="" coords="160,473,316,501"/>
+<area shape="poly" id="edge10_Node000000_Node000010" title=" " alt="" coords="50,978,57,875,73,736,84,665,99,601,118,549,140,512,160,498,158,503,144,516,122,551,104,603,90,666,78,737,62,875,55,978"/>
+<area shape="rect" id="Node000011" href="$classCrash.html" title=" " alt="" coords="209,525,267,553"/>
+<area shape="poly" id="edge11_Node000000_Node000011" title=" " alt="" coords="50,978,59,885,76,761,88,699,102,643,119,596,140,564,155,552,172,544,210,538,206,542,174,549,158,557,144,568,124,599,107,644,93,700,81,762,64,886,56,979"/>
+<area shape="rect" id="Node000012" href="$classCubeAnimation.html" title=" " alt="" coords="177,577,298,605"/>
+<area shape="poly" id="edge12_Node000000_Node000012" title=" " alt="" coords="51,978,62,895,80,787,105,684,121,644,140,616,156,603,178,596,175,600,159,608,144,620,126,646,111,686,85,788,67,895,56,978"/>
+<area shape="rect" id="Node000013" href="$classElGatoAnimation.html" title=" " alt="" coords="172,629,304,657"/>
+<area shape="poly" id="edge13_Node000000_Node000013" title=" " alt="" coords="47,978,49,914,61,831,72,787,89,744,111,704,140,668,154,657,173,649,170,654,157,661,144,672,115,707,94,746,77,789,66,832,54,915,52,978"/>
+<area shape="rect" id="Node000014" href="$classFullScreenAnimation.html" title=" " alt="" coords="160,681,316,709"/>
+<area shape="poly" id="edge14_Node000000_Node000014" title=" " alt="" coords="49,978,54,923,68,854,79,818,95,782,115,749,140,720,161,707,158,712,143,724,119,752,100,785,84,819,73,855,59,924,54,978"/>
+<area shape="rect" id="Node000015" href="$classGalaxyAnimation.html" title=" " alt="" coords="171,733,305,761"/>
+<area shape="poly" id="edge15_Node000000_Node000015" title=" " alt="" coords="51,978,59,932,75,877,101,821,119,795,140,772,172,755,169,760,143,776,123,798,106,823,80,879,64,934,57,978"/>
+<area shape="rect" id="Node000016" href="$classGammaAnimation.html" title=" " alt="" coords="168,785,308,813"/>
+<area shape="poly" id="edge16_Node000000_Node000016" title=" " alt="" coords="55,978,66,942,83,901,107,859,140,824,169,809,166,813,143,828,112,862,88,903,71,944,60,979"/>
+<area shape="rect" id="Node000017" href="$classHUB75AnimationSplit.html" title=" " alt="" coords="157,837,319,865"/>
+<area shape="poly" id="edge17_Node000000_Node000017" title=" " alt="" coords="61,978,92,925,114,899,140,876,166,863,163,868,143,880,118,902,97,929,66,980"/>
+<area shape="rect" id="Node000018" href="$classHertzzAnimation.html" title=" " alt="" coords="173,889,303,917"/>
+<area shape="poly" id="edge18_Node000000_Node000018" title=" " alt="" coords="72,981,103,953,140,927,174,915,171,919,143,932,106,957,77,983"/>
+<area shape="rect" id="Node000019" href="$classInfraredAnimation.html" title=" " alt="" coords="168,941,308,969"/>
+<area shape="poly" id="edge19_Node000000_Node000019" title=" " alt="" coords="107,989,186,968,183,972,110,993"/>
+<area shape="rect" id="Node000020" href="$classLeonHuskyAnimation.html" title=" " alt="" coords="158,993,318,1021"/>
+<area shape="poly" id="edge20_Node000000_Node000020" title=" " alt="" coords="107,1005,160,1005,156,1009,110,1009"/>
+<area shape="rect" id="Node000021" href="$classMyntAnimation.html" title=" " alt="" coords="177,1045,298,1073"/>
+<area shape="poly" id="edge21_Node000000_Node000021" title=" " alt="" coords="107,1021,187,1043,183,1046,110,1026"/>
+<area shape="rect" id="Node000022" href="$classNukudeFaceAnimation.html" title=" " alt="" coords="155,1097,321,1125"/>
+<area shape="poly" id="edge22_Node000000_Node000022" title=" " alt="" coords="73,1030,106,1057,143,1082,173,1095,168,1098,140,1087,103,1062,75,1035"/>
+<area shape="rect" id="Node000023" href="$classPikachuAnimation.html" title=" " alt="" coords="169,1149,307,1177"/>
+<area shape="poly" id="edge23_Node000000_Node000023" title=" " alt="" coords="63,1033,97,1086,118,1112,143,1134,170,1149,166,1151,140,1139,114,1116,92,1089,64,1038"/>
+<area shape="rect" id="Node000024" href="$classProtobottAnimation.html" title=" " alt="" coords="164,1201,312,1229"/>
+<area shape="poly" id="edge24_Node000000_Node000024" title=" " alt="" coords="57,1033,71,1070,88,1111,112,1152,143,1186,166,1200,161,1203,140,1191,107,1155,83,1114,66,1072,58,1039"/>
+<area shape="rect" id="Node000025" href="$classProtogenArtleckAnimation.html" title=" " alt="" coords="142,1253,334,1281"/>
+<area shape="poly" id="edge25_Node000000_Node000025" title=" " alt="" coords="54,1034,64,1081,80,1135,106,1191,123,1216,143,1238,163,1252,158,1254,140,1243,119,1220,101,1194,75,1137,59,1082,54,1039"/>
+<area shape="rect" id="Node000026" href="$classRocksAnimation.html" title=" " alt="" coords="174,1305,302,1333"/>
+<area shape="poly" id="edge26_Node000000_Node000026" title=" " alt="" coords="51,1034,59,1091,73,1159,84,1195,100,1230,119,1262,143,1291,158,1301,176,1310,171,1312,155,1306,140,1294,115,1265,95,1232,79,1197,68,1161,54,1091,51,1039"/>
+<area shape="rect" id="Node000027" href="$classSammyAnimation.html" title=" " alt="" coords="169,1357,307,1385"/>
+<area shape="poly" id="edge27_Node000000_Node000027" title=" " alt="" coords="50,1034,54,1100,66,1182,77,1226,94,1268,115,1308,143,1343,170,1360,166,1362,140,1346,111,1311,89,1270,72,1227,61,1183,49,1100,50,1039"/>
+<area shape="rect" id="Node000028" href="$classSergaliciousAnimation.html" title=" " alt="" coords="154,1409,322,1437"/>
+<area shape="poly" id="edge28_Node000000_Node000028" title=" " alt="" coords="54,1034,67,1119,85,1227,111,1329,126,1368,144,1395,160,1408,155,1410,140,1398,121,1371,105,1330,80,1228,62,1120,54,1039"/>
+<area shape="rect" id="Node000029" href="$classSpyroRotateAnimation.html" title=" " alt="" coords="154,1461,322,1489"/>
+<area shape="poly" id="edge29_Node000000_Node000029" title=" " alt="" coords="53,1033,64,1129,81,1252,93,1314,107,1370,124,1416,144,1447,160,1460,155,1462,140,1450,119,1418,102,1372,88,1315,76,1253,59,1129,53,1039"/>
+<area shape="rect" id="Node000030" href="$classStrawberryAnimation.html" title=" " alt="" coords="158,1513,318,1541"/>
+<area shape="poly" id="edge30_Node000000_Node000030" title=" " alt="" coords="52,1034,62,1139,78,1278,90,1348,104,1411,122,1463,144,1499,160,1512,155,1514,140,1502,118,1466,99,1413,84,1349,73,1279,57,1139,52,1039"/>
+<area shape="rect" id="Node000031" href="$classTamamoAnimation.html" title=" " alt="" coords="166,1565,310,1593"/>
+<area shape="poly" id="edge31_Node000000_Node000031" title=" " alt="" coords="52,1034,60,1149,75,1303,86,1382,101,1453,120,1511,144,1551,167,1568,163,1570,140,1554,116,1513,96,1454,81,1383,69,1304,55,1150,52,1039"/>
+<area shape="rect" id="Node000032" href="$classTechSaneAnimation.html" title=" " alt="" coords="163,1617,312,1645"/>
+<area shape="poly" id="edge32_Node000000_Node000032" title=" " alt="" coords="51,1034,58,1159,71,1329,83,1415,98,1494,119,1559,130,1584,144,1603,165,1619,160,1621,140,1606,126,1587,114,1561,93,1496,78,1416,66,1330,53,1160,51,1040"/>
+<area shape="rect" id="Node000033" href="$classVectorFieldAnimation.html" title=" " alt="" coords="158,1669,318,1697"/>
+<area shape="poly" id="edge33_Node000000_Node000033" title=" " alt="" coords="51,1034,56,1168,68,1353,79,1448,95,1535,117,1606,129,1634,144,1655,160,1668,154,1670,140,1658,125,1637,112,1608,90,1536,74,1449,63,1354,51,1168,51,1039"/>
+<area shape="rect" id="Node000034" href="$classVesperAnimation.html" title=" " alt="" coords="172,1721,304,1749"/>
+<area shape="poly" id="edge34_Node000000_Node000034" title=" " alt="" coords="51,1034,55,1178,65,1379,76,1482,92,1577,115,1654,128,1684,144,1707,157,1718,174,1727,169,1729,154,1722,140,1710,124,1687,110,1656,87,1578,71,1483,60,1380,49,1178,50,1040"/>
+<area shape="rect" id="Node000035" href="$classWS35AnimationSplit.html" title=" " alt="" coords="161,1773,315,1801"/>
+<area shape="poly" id="edge35_Node000000_Node000035" title=" " alt="" coords="50,1034,53,1187,62,1404,73,1515,89,1618,113,1702,127,1734,144,1759,163,1774,157,1775,140,1762,123,1737,108,1703,84,1619,68,1516,57,1404,48,1187,50,1039"/>
+<area shape="rect" id="Node000036" href="$classWaffleDaProtoAnimation.html" title=" " alt="" coords="147,1825,328,1853"/>
+<area shape="poly" id="edge36_Node000000_Node000036" title=" " alt="" coords="52,1034,64,1207,83,1453,95,1576,110,1685,126,1767,135,1794,144,1811,159,1824,154,1825,140,1814,130,1796,121,1768,104,1686,90,1577,78,1454,59,1207,52,1039"/>
+<area shape="rect" id="Node000037" href="$classWarzone2Animation.html" title=" " alt="" coords="162,1877,314,1905"/>
+<area shape="poly" id="edge37_Node000000_Node000037" title=" " alt="" coords="52,1034,64,1217,81,1480,94,1612,108,1728,125,1816,134,1845,144,1863,164,1879,159,1880,140,1866,129,1847,120,1817,103,1728,88,1612,76,1480,58,1217,52,1039"/>
+<area shape="rect" id="Node000038" href="$classWarzoneAnimation.html" title=" " alt="" coords="166,1929,310,1957"/>
+<area shape="poly" id="edge38_Node000000_Node000038" title=" " alt="" coords="52,1034,63,1227,80,1506,92,1647,107,1771,124,1864,134,1896,144,1915,168,1933,162,1934,140,1918,129,1898,119,1866,101,1771,87,1647,74,1507,57,1228,52,1040"/>
+<area shape="rect" id="Node000039" href="$classXenraxAnimation.html" title=" " alt="" coords="171,1981,305,2009"/>
+<area shape="poly" id="edge39_Node000000_Node000039" title=" " alt="" coords="52,1034,62,1237,78,1532,90,1682,105,1813,123,1913,133,1947,144,1967,156,1978,173,1988,168,1987,153,1982,140,1970,128,1949,118,1914,100,1814,85,1682,73,1533,56,1237,52,1039"/>
+</map>
